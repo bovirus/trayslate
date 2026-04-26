@@ -1635,7 +1635,6 @@ begin
       pnl.BevelOuter := bvNone;
       pnl.AutoSize := True;
       pnl.BorderSpacing.Right := 12;
-      pnl.BorderSpacing.Bottom := 3;
 
       if not TryStrToInt(FConfigImages.Values[FLangPairs.Names[i]], ServiceIcon) then
         ServiceIcon := -1;
@@ -1664,6 +1663,7 @@ begin
       lbl.Layout := tlCenter;
       if ServiceIcon >= 0 then
         lbl.BorderSpacing.Left := 20;
+      lbl.BorderSpacing.Bottom := 5;
       lbl.Top := 0;
       lbl.Left := 0;
       lbl.Tag := i;
