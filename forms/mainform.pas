@@ -1333,9 +1333,7 @@ begin
   // Check if current ComboSource text is still valid
   if ComboSource.Items.IndexOf(ComboSource.Text) < 0 then
   begin
-    Id := Trans.Languages.IndexOfName(LangSource);
-    if Id < 0 then
-      Id := GetIndexByValue(Trans.Languages, LangSource);
+    Id := FindSubstringIndex(Trans.Languages, LangSource);
     if (Id >= 0) and (Id < FLanguages.Count) then
     begin
       ComboSource.Text := FLanguages.ValueFromIndex[Id];
@@ -1385,9 +1383,7 @@ begin
     // If there are target languages
     if Trans.LanguagesTarget.Count > 0 then
     begin
-      Id := Trans.LanguagesTarget.IndexOfName(LangTarget);
-      if Id < 0 then
-        Id := GetIndexByValue(Trans.LanguagesTarget, LangTarget);
+      Id := FindSubstringIndex(Trans.LanguagesTarget, LangTarget);
       if (Id >= 0) and (Id < FLanguagesTarget.Count) then
       begin
         ComboTarget.Text := FLanguagesTarget.ValueFromIndex[Id];
@@ -1403,9 +1399,7 @@ begin
     else
     begin
       // If the languages are identical to sources
-      Id := Trans.Languages.IndexOfName(LangTarget);
-      if Id < 0 then
-        Id := GetIndexByValue(Trans.Languages, LangTarget);
+      Id := FindSubstringIndex(Trans.Languages, LangTarget);
       if (Id >= 0) and (Id < FLanguages.Count) then
       begin
         ComboTarget.Text := FLanguages.ValueFromIndex[Id];

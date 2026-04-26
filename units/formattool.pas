@@ -68,6 +68,8 @@ function DarkThemeColor(BaseColor: TColor; Delta: integer = 60): TColor;
 
 function PosExReverse(const SubStr, S: unicodestring; Offset: SizeInt = -1): SizeInt;
 
+function FindSubstringIndex(Strings: TStringList; const AValue: string): integer;
+
 implementation
 
 function ColorToHtml(AColor: TColor): string;
@@ -654,7 +656,7 @@ begin
   if Offset < 0 then Offset := Length(S);
 
   // Check if the substring is not empty and Offset is valid
-  if (SubLen > 0) and (Offset > 0) and (Offset <= SizeUint(Length(S))) then
+  if (SubLen > 0) and (Offset > 0) and (Offset <= Length(S)) then
   begin
     MaxLen := Length(S) - SubLen + 1; // Adjust max starting index to include end of the string
     // SubFirst := SubStr[1]; // Get the first character of the substring
@@ -676,6 +678,48 @@ begin
       end;
     end;
   end;
+end;
+
+function FindSubstringIndex(Strings: TStringList; const AValue: string): integer;
+var
+  Parts: TStringArray;
+  Part: string;
+begin
+  Result := -1;
+
+  if (Strings = nil) or (AValue = string.Empty) then
+    Exit;
+
+  // Search by Name
+  Result := Strings.IndexOfName(AValue);
+  if Result >= 0 then
+    Exit;
+
+  // Search by Value
+  Result := GetIndexByValue(Strings, AValue);
+  if Result >= 0 then
+    Exit;
+
+  // Try split by string symbols
+  Parts := AValue.Split(['-', '_', ':', ',', ';']);
+
+  for Part in Parts do
+  begin
+    if Part = string.Empty then
+      Continue;
+
+    // Search split part by Name
+    Result := Strings.IndexOfName(Part);
+    if Result >= 0 then
+      Exit;
+
+    // Search split part by Value
+    Result := GetIndexByValue(Strings, Part);
+    if Result >= 0 then
+      Exit;
+  end;
+
+  Result := -1;
 end;
 
 end.
