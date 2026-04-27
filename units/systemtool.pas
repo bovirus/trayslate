@@ -34,6 +34,7 @@ uses
   FPWriteBMP,
   FPImgCanv,
   IntfGraphics,
+  fphttpclient,
   base64,
   {$IFDEF WINDOWS}
   Windows,
@@ -55,6 +56,16 @@ uses
   {$ENDIF}
   fpjson,
   jsonparser;
+
+type
+  TCheckUpdateThread = class(TThread)
+  private
+    FLatestVersion: string;
+  protected
+    procedure Execute; override;
+    procedure UpdateAvailable;
+    procedure Finish;
+  end;
 
 function GetOSLanguage: string;
 
@@ -78,9 +89,11 @@ function IsSystemKey(Key: word): boolean;
 
 function GetAppVersion: string;
 
-function CheckGithubLatestVersion(const Silent: boolean = False; const Repo: string = 'plaintool/trayslate'): boolean;
-
 procedure RegAutoStart(const AEnable: boolean; const AppName: string = 'Trayslate');
+
+{ Check Github Version }
+
+function CheckGithubLatestVersion(out Version: string; const Repo: string; const Silent: boolean = False): boolean;
 
 { Gzip }
 
@@ -104,7 +117,7 @@ function AddBase64ToImageList(const Base64Str: string; AList: TImageList): integ
 
 {Win version}
 
-function IsWindows11: Boolean;
+function IsWindows11: boolean;
 
 var
   Language: string;
@@ -114,7 +127,34 @@ resourcestring
   newversionuptodate = 'Your version is up to date.';
   newversioncheckerror = 'Error checking version:';
 
+const
+  REPO = 'plaintool/trayslate';
+
 implementation
+
+procedure TCheckUpdateThread.Execute;
+begin
+  try
+    if CheckGithubLatestVersion(FLatestVersion, REPO, True) then
+    begin
+      Synchronize(@Finish);
+      Synchronize(@UpdateAvailable);
+    end;
+  finally
+    Synchronize(@Finish);
+  end;
+end;
+
+procedure TCheckUpdateThread.UpdateAvailable;
+begin
+  if MessageDlg(Format(newversion, [FLatestVersion]), mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    OpenURL(Format('https://github.com/%s/releases/latest', [REPO]));
+end;
+
+procedure TCheckUpdateThread.Finish;
+begin
+  Screen.Cursor := crDefault;
+end;
 
 function GetOSLanguage: string;
   {platform-independent method to read the language of the user interface}
@@ -592,7 +632,33 @@ begin
   end;
 end;
 
-function CheckGithubLatestVersion(const Silent: boolean = False; const Repo: string = 'plaintool/trayslate'): boolean;
+procedure RegAutoStart(const AEnable: boolean; const AppName: string = 'Trayslate');
+var
+  Reg: TRegistry;
+  ExeName: string;
+begin
+  ExeName := '"' + ParamStr(0) + '"';
+
+  Reg := TRegistry.Create;
+  try
+    Reg.RootKey := HKEY_CURRENT_USER;
+
+    if Reg.OpenKey('Software\Microsoft\Windows\CurrentVersion\Run', True) then
+    begin
+      if AEnable then
+        Reg.WriteString(AppName, ExeName)
+      else
+      if Reg.ValueExists(AppName) then
+        Reg.DeleteValue(AppName);
+    end;
+  finally
+    Reg.Free;
+  end;
+end;
+
+{ Check Github Version }
+
+function CheckGithubLatestVersion(out Version: string; const Repo: string; const Silent: boolean = False): boolean;
 var
   JsonData: TJSONData;
   LatestVersion, Msg: string;
@@ -602,6 +668,7 @@ var
   ErrorMsg: string;
 
 {$IFDEF WINDOWS}
+
   function HttpGetWinInet(const AUrl: string): string;
   var
     hInet, hUrl: HINTERNET;
@@ -636,6 +703,33 @@ var
       InternetCloseHandle(hInet);
     end;
   end;
+
+  function HttpClientGet(const AUrl: string): string;
+  var
+    HttpClient: TFPHTTPClient;
+  begin
+    try
+      HttpClient := TFPHTTPClient.Create(nil);
+      try
+        // Set request headers and options
+        HttpClient.AddHeader('User-Agent', 'TrayslateVersionChecker');
+        HttpClient.AllowRedirect := True;
+
+        // Set connection and IO timeouts in milliseconds
+        HttpClient.ConnectTimeout := 5000;
+        HttpClient.IOTimeout := 5000;
+
+        // Execute the GET request
+        // Exceptions are handled by the caller
+        Result := HttpClient.Get(AUrl);
+      finally
+        HttpClient.Free;
+      end;
+    except
+      Result:=string.Empty;
+    end;
+  end;
+
 {$ELSE}
 
   function HttpGetCurl(const AUrl: string): string;
@@ -780,12 +874,15 @@ var
 {$ENDIF}
 begin
   Result := False;
+  Version := string.Empty;
   try
     CurrentVersion := GetAppVersion;
     Url := Format('https://api.github.com/repos/%s/releases/latest', [Repo]);
 
     {$IFDEF WINDOWS}
-    ResponseContent := HttpGetWinInet(Url);
+    ResponseContent := HttpClientGet(Url);
+    if ResponseContent = string.Empty then
+      ResponseContent := HttpGetWinInet(Url);
     {$ELSE}
     try
       with TFPHttpClient.Create(nil) do
@@ -826,7 +923,7 @@ begin
             ErrorMsg := JsonData.GetPath('message').AsString;
             if not Silent then
             begin
-              if ErrorMsg <> '' then
+              if ErrorMsg <> string.Empty then
                 ShowMessage(newversioncheckerror + LineEnding + Url + LineEnding + 'GitHub API: ' + ErrorMsg)
               else
                 ShowMessage(newversioncheckerror + LineEnding + Url);
@@ -843,17 +940,20 @@ begin
         if AnsiLowerCase(StringReplace(LatestVersion, 'v', '', [rfReplaceAll])) <> AnsiLowerCase(
           StringReplace(CurrentVersion, 'v', '', [rfReplaceAll])) then
         begin
-          Msg := Format(newversion, [LatestVersion]);
-          if MessageDlg(Msg, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-            OpenURL(Format('https://github.com/%s/releases/latest', [Repo]));
+          Version := LatestVersion;
+          if not Silent then
+          begin
+            Msg := Format(newversion, [LatestVersion]);
+            if MessageDlg(Msg, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+              OpenURL(Format('https://github.com/%s/releases/latest', [Repo]));
+          end;
+          Result := True;
         end
         else
         begin
           if not Silent then
             ShowMessage(newversionuptodate);
         end;
-
-        Result := True;
       finally
         JsonData.Free;
       end;
@@ -870,30 +970,6 @@ begin
       if not Silent then
         ShowMessage(newversioncheckerror + LineEnding + Url + LineEnding + E.Message);
     end;
-  end;
-end;
-
-procedure RegAutoStart(const AEnable: boolean; const AppName: string = 'Trayslate');
-var
-  Reg: TRegistry;
-  ExeName: string;
-begin
-  ExeName := '"' + ParamStr(0) + '"';
-
-  Reg := TRegistry.Create;
-  try
-    Reg.RootKey := HKEY_CURRENT_USER;
-
-    if Reg.OpenKey('Software\Microsoft\Windows\CurrentVersion\Run', True) then
-    begin
-      if AEnable then
-        Reg.WriteString(AppName, ExeName)
-      else
-      if Reg.ValueExists(AppName) then
-        Reg.DeleteValue(AppName);
-    end;
-  finally
-    Reg.Free;
   end;
 end;
 
@@ -1209,7 +1285,7 @@ end;
 
 {Win version}
 
-function IsWindows11: Boolean;
+function IsWindows11: boolean;
 begin
   Result := (Win32MajorVersion >= 10) and (Win32BuildNumber >= 22000);
 end;

@@ -852,8 +852,10 @@ begin
 end;
 
 procedure TformTrayslate.aCheckForUpdatesExecute(Sender: TObject);
+var
+  LatestVersion: string;
 begin
-  CheckGithubLatestVersion();
+  CheckGithubLatestVersion(LatestVersion, REPO);
   FUpdatesChecked := True;
 end;
 
@@ -1933,13 +1935,12 @@ begin
 end;
 
 procedure TformTrayslate.DoCheckUpdates(Data: PtrInt);
+var
+  Th: TCheckUpdateThread;
 begin
   Screen.Cursor := crHourGlass;
-  try
-    CheckGithubLatestVersion(True);
-  finally
-    Screen.Cursor := crDefault;
-  end;
+  Th := TCheckUpdateThread.Create(False);
+  Th.FreeOnTerminate := True;
 end;
 
 procedure TformTrayslate.ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
@@ -2371,7 +2372,10 @@ begin
 
   // Swap if needed
   if (LowerCase(langSrc) <> LowerCase(langDetect)) and (LowerCase(langTar) = LowerCase(langDetect)) then
+  begin
     SwapLanguages;
+    ShowCustomHint(TrayIcon.Hint);
+  end;
 end;
 
 procedure TformTrayslate.TranslateMemo(ADetectLanguage: boolean = True);
