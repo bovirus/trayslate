@@ -405,7 +405,10 @@ begin
   // Default values
   FConfigFile := string.Empty;
   FConfigLangDetect := DEF_LANGDETECT;
-  FIconBackgroundColor := clNone;
+  if IsWindows7 then
+    FIconBackgroundColor := $00905000
+  else
+    FIconBackgroundColor := clNone;
   {$IFDEF WINDOWS}
   if IsTaskbarDark then
     FIconFontColor := clWhite
@@ -1938,7 +1941,6 @@ procedure TformTrayslate.DoCheckUpdates(Data: PtrInt);
 var
   Th: TCheckUpdateThread;
 begin
-  Screen.Cursor := crHourGlass;
   Th := TCheckUpdateThread.Create(False);
   Th.FreeOnTerminate := True;
 end;

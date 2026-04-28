@@ -64,7 +64,6 @@ type
   protected
     procedure Execute; override;
     procedure UpdateAvailable;
-    procedure Finish;
   end;
 
 function GetOSLanguage: string;
@@ -117,6 +116,8 @@ function AddBase64ToImageList(const Base64Str: string; AList: TImageList): integ
 
 {Win version}
 
+function IsWindows7: boolean;
+
 function IsWindows11: boolean;
 
 var
@@ -134,14 +135,9 @@ implementation
 
 procedure TCheckUpdateThread.Execute;
 begin
-  try
-    if CheckGithubLatestVersion(FLatestVersion, REPO, True) then
-    begin
-      Synchronize(@Finish);
-      Synchronize(@UpdateAvailable);
-    end;
-  finally
-    Synchronize(@Finish);
+  if CheckGithubLatestVersion(FLatestVersion, REPO, True) then
+  begin
+    Synchronize(@UpdateAvailable);
   end;
 end;
 
@@ -149,11 +145,6 @@ procedure TCheckUpdateThread.UpdateAvailable;
 begin
   if MessageDlg(Format(newversion, [FLatestVersion]), mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     OpenURL(Format('https://github.com/%s/releases/latest', [REPO]));
-end;
-
-procedure TCheckUpdateThread.Finish;
-begin
-  Screen.Cursor := crDefault;
 end;
 
 function GetOSLanguage: string;
@@ -1285,9 +1276,22 @@ end;
 
 {Win version}
 
+function IsWindows7: boolean;
+begin
+  {$IFDEF WINDOWS}
+  Result := (Win32MajorVersion = 6) and (Win32MinorVersion = 1);
+  {$ELSE}
+  Result := False;
+  {$ENDIF}
+end;
+
 function IsWindows11: boolean;
 begin
+  {$IFDEF WINDOWS}
   Result := (Win32MajorVersion >= 10) and (Win32BuildNumber >= 22000);
+  {$ELSE}
+  Result := False;
+  {$ENDIF}
 end;
 
 end.
