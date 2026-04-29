@@ -1665,7 +1665,7 @@ begin
       lbl.Layout := tlCenter;
       if ServiceIcon >= 0 then
         lbl.BorderSpacing.Left := 20;
-      lbl.BorderSpacing.Bottom := 5;
+      lbl.BorderSpacing.Bottom := 3;
       lbl.Top := 0;
       lbl.Left := 0;
       lbl.Tag := i;
