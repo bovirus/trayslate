@@ -51,6 +51,8 @@ uses systemtool;
 
 procedure TformAboutTrayslate.FormCreate(Sender: TObject);
 begin
+  ApplicationTranslate(language, self);
+
   labelName.Caption := 'Trayslate © ' + GetAppVersion;
   LabelLicUrl.Font.Color := ThemeColor(clBlue, clSkyBlue);
 end;

@@ -2546,6 +2546,7 @@ begin
   if (aLanguage <> string.Empty) then
   begin
     Language := aLanguage;
+    ApplicationTranslate('en');
     if not ApplicationTranslate(Language) then
       Language := 'en';
   end;
