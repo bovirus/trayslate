@@ -15,7 +15,7 @@ uses
   StdCtrls,
   ExtCtrls,
   Graphics,
-  LCLIntf;
+  LCLIntf, Classes;
 
 type
 
@@ -24,13 +24,15 @@ type
   TformAboutTrayslate = class(TForm)
     buttonOk: TButton;
     imageLogo: TImage;
+    LblAbout: TLabel;
     labelBy: TLabel;
     labelName: TLabel;
     labelLic: TLabel;
     LabelLicUrl: TLabel;
-    Memo1: TMemo;
+    MemoAbout: TMemo;
     labelBy1: TLabel;
     procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
     procedure LabelLicUrlClick(Sender: TObject);
   private
 
@@ -43,7 +45,7 @@ var
 
 implementation
 
-uses systemtool;
+uses systemtool, mainform;
 
   {$R *.lfm}
 
@@ -53,8 +55,15 @@ procedure TformAboutTrayslate.FormCreate(Sender: TObject);
 begin
   ApplicationTranslate(language, self);
 
+  MemoAbout.Text := LblAbout.Caption;
   labelName.Caption := 'Trayslate © ' + GetAppVersion;
   LabelLicUrl.Font.Color := ThemeColor(clBlue, clSkyBlue);
+end;
+
+procedure TformAboutTrayslate.FormResize(Sender: TObject);
+begin
+  formTrayslate.FormAboutWidth := Width;
+  formTrayslate.FormAboutHeight := Height;
 end;
 
 procedure TformAboutTrayslate.LabelLicUrlClick(Sender: TObject);

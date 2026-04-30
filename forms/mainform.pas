@@ -276,6 +276,8 @@ type
     FFormConfigTop: integer;
     FFormConfigWidth: integer;
     FFormConfigHeight: integer;
+    FFormAboutWidth: integer;
+    FFormAboutHeight: integer;
     FHotKeyApp: THotKeyData;
     FHotKeyTransSwap: THotKeyData;
     FHotKeyTransFromClipboard: THotKeyData;
@@ -365,6 +367,8 @@ type
     property FormConfigTop: integer read FFormConfigTop write FFormConfigTop;
     property FormConfigWidth: integer read FFormConfigWidth write FFormConfigWidth;
     property FormConfigHeight: integer read FFormConfigHeight write FFormConfigHeight;
+    property FormAboutWidth: integer read FFormAboutWidth write FFormAboutWidth;
+    property FormAboutHeight: integer read FFormAboutHeight write FFormAboutHeight;
 
     property HotKeyApp: THotKeyData read FHotKeyApp write FHotKeyApp;
     property HotKeyTransSwap: THotKeyData read FHotKeyTransSwap write FHotKeyTransSwap;
@@ -433,6 +437,8 @@ begin
   FFormConfigTop := 0;
   FFormConfigWidth := 0;
   FFormConfigHeight := 0;
+  FFormAboutWidth := 0;
+  FFormAboutHeight := 0;
   FLastEnterTime := 0;
   FLastHotkeyTime := 0;
   FTranslateThread := nil;
@@ -875,10 +881,16 @@ end;
 procedure TformTrayslate.aAboutExecute(Sender: TObject);
 begin
   formAboutTrayslate := TformAboutTrayslate.Create(Application);
+
+  if FormAboutWidth > 0 then
+    formAboutTrayslate.Width := FormAboutWidth;
+  if FormAboutHeight > 0 then
+    formAboutTrayslate.Height := FormAboutHeight;
+
   try
     formAboutTrayslate.ShowModal;
   finally
-    formAboutTrayslate.Free;
+    FreeAndNil(formAboutTrayslate);
   end;
 end;
 
@@ -1738,6 +1750,9 @@ begin
   aSwap.Hint := Format(rswap, [HotKeyToText(HotKeyTransSwap), MIDDLE_MOUSE]).Replace('() ', string.Empty);
 
   FlowPairs.Hint := MIDDLE_MOUSE + rtoremovepair;
+
+  if Assigned(formAboutTrayslate) then
+    formAboutTrayslate.MemoAbout.Text := formAboutTrayslate.LblAbout.Caption;
 end;
 
 procedure TformTrayslate.SetAnimate(Angle: integer);

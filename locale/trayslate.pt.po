@@ -85,15 +85,15 @@ msgstr "Sobre"
 
 #: tformabouttrayslate.labelby.caption
 msgid "by Alexander Tverskoy is licensed under"
-msgstr ""
+msgstr "por Alexander Tverskoy está licenciado sob"
 
 #: tformabouttrayslate.labelby1.caption
 msgid "the GNU General Public License, Version 3 "
-msgstr ""
+msgstr "GNU General Public License, Versão 3"
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
-msgstr ""
+msgstr "para dúvidas ou feedback contacte-me em"
 
 #: tformabouttrayslate.labellicurl.caption
 msgid "mailto:astverskoy@gmail.com"
@@ -102,6 +102,40 @@ msgstr ""
 #: tformabouttrayslate.labelname.caption
 msgid "Trayslate © 2026"
 msgstr ""
+
+#: tformabouttrayslate.lblabout.caption
+msgid ""
+"Trayslate is a tray-based client for translation services. You can enter text directly, translate clipboard content, or translate selected text in any application. You can also replace text in another app with its translation using a hotkey. The app lets you choose and fully configure the translation service you use.\n"
+"\n"
+"This application uses third-party resources under the following licenses:\n"
+"\n"
+"1. OpenSSL libraries (compiled from source, 32-bit and 64-bit versions)\n"
+"   License: Apache License 2.0\n"
+"   https://www.openssl.org\n"
+"\n"
+"2. Dark theme support modules from Double Commander\n"
+"   Modules used: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n"
+"   License: GNU General Public License v2.0 (GPL-2.0)\n"
+"   https://github.com/doublecmd/doublecmd\n"
+"\n"
+"3. Main icon designed by Flaticon\n"
+"   https://www.flaticon.com/ru/free-icon/translator_682045"
+msgstr ""
+"Trayslate é um cliente na bandeja do sistema para serviços de tradução. Você pode inserir texto diretamente, traduzir o conteúdo da área de transferência ou texto selecionado em qualquer aplicação. Também pode substituir texto noutra aplicação pela sua tradução usando uma tecla de atalho. A aplicação permite escolher e configurar totalmente o serviço de tradução usado.\n"
+"\n"
+"Esta aplicação usa recursos de terceiros sob as seguintes licenças:\n"
+"\n"
+"1. Bibliotecas OpenSSL (compiladas a partir do código-fonte, versões 32 e 64 bits)\n"
+"   Licença: Apache License 2.0\n"
+"   https://www.openssl.org\n"
+"\n"
+"2. Módulos de tema escuro do Double Commander\n"
+"   Módulos: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n"
+"   Licença: GNU General Public License v2.0 (GPL-2.0)\n"
+"   https://github.com/doublecmd/doublecmd\n"
+"\n"
+"3. Ícone principal desenhado por Flaticon\n"
+"   https://www.flaticon.com/ru/free-icon/translator_682045"
 
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"

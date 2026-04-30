@@ -85,15 +85,15 @@ msgstr "关于"
 
 #: tformabouttrayslate.labelby.caption
 msgid "by Alexander Tverskoy is licensed under"
-msgstr ""
+msgstr "由 Alexander Tverskoy 授权"
 
 #: tformabouttrayslate.labelby1.caption
 msgid "the GNU General Public License, Version 3 "
-msgstr ""
+msgstr "GNU 通用公共许可证，第3版"
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
-msgstr ""
+msgstr "如有问题或反馈请联系"
 
 #: tformabouttrayslate.labellicurl.caption
 msgid "mailto:astverskoy@gmail.com"
@@ -102,6 +102,40 @@ msgstr ""
 #: tformabouttrayslate.labelname.caption
 msgid "Trayslate © 2026"
 msgstr ""
+
+#: tformabouttrayslate.lblabout.caption
+msgid ""
+"Trayslate is a tray-based client for translation services. You can enter text directly, translate clipboard content, or translate selected text in any application. You can also replace text in another app with its translation using a hotkey. The app lets you choose and fully configure the translation service you use.\n"
+"\n"
+"This application uses third-party resources under the following licenses:\n"
+"\n"
+"1. OpenSSL libraries (compiled from source, 32-bit and 64-bit versions)\n"
+"   License: Apache License 2.0\n"
+"   https://www.openssl.org\n"
+"\n"
+"2. Dark theme support modules from Double Commander\n"
+"   Modules used: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n"
+"   License: GNU General Public License v2.0 (GPL-2.0)\n"
+"   https://github.com/doublecmd/doublecmd\n"
+"\n"
+"3. Main icon designed by Flaticon\n"
+"   https://www.flaticon.com/ru/free-icon/translator_682045"
+msgstr ""
+"Trayslate 是一个托盘中的翻译服务客户端。你可以直接输入文本、翻译剪贴板内容，或翻译任何应用中的选中文本。也可以使用快捷键将其他应用中的文本替换为其翻译结果。该应用允许你完全选择并配置所使用的翻译服务。\n"
+"\n"
+"本应用使用以下第三方资源：\n"
+"\n"
+"1. OpenSSL 库（从源码编译，32位和64位版本）\n"
+"   许可证：Apache License 2.0\n"
+"   https://www.openssl.org\n"
+"\n"
+"2. Double Commander 的深色主题模块\n"
+"   模块：udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n"
+"   许可证：GNU General Public License v2.0 (GPL-2.0)\n"
+"   https://github.com/doublecmd/doublecmd\n"
+"\n"
+"3. 主图标由 Flaticon 设计\n"
+"   https://www.flaticon.com/ru/free-icon/translator_682045"
 
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"

@@ -131,6 +131,8 @@ begin
     JSONObj.Add('FormConfigTop', Round(Form.FormConfigTop * 96 / DPI));
     JSONObj.Add('FormConfigWidth', Round(Form.FormConfigWidth * 96 / DPI));
     JSONObj.Add('FormConfigHeight', Round(Form.FormConfigHeight * 96 / DPI));
+    JSONObj.Add('FormAboutWidth', Round(Form.FormAboutWidth * 96 / DPI));
+    JSONObj.Add('FormAboutHeight', Round(Form.FormAboutHeight * 96 / DPI));
 
     // Save language
     JSONObj.Add('Language', Language);
@@ -264,6 +266,12 @@ begin
 
         if JSONObj.FindPath('FormConfigHeight') <> nil then
           Form.FormConfigHeight := Round(JSONObj.FindPath('FormConfigHeight').AsInteger * DPI / 96);
+
+        if JSONObj.FindPath('FormAboutWidth') <> nil then
+          Form.FormAboutWidth := Round(JSONObj.FindPath('FormAboutWidth').AsInteger * DPI / 96);
+
+        if JSONObj.FindPath('FormAboutHeight') <> nil then
+          Form.FormAboutHeight := Round(JSONObj.FindPath('FormAboutHeight').AsInteger * DPI / 96);
 
         // Load language
         if JSONObj.FindPath('Language') <> nil then
