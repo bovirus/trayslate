@@ -1,91 +1,78 @@
-#define MyAppName "Trayslate"
-#define FileHandle FileOpen("..\VERSION")
-#define MyAppVersion Trim(FileRead(FileHandle))
+#define MyAppName      "Trayslate"
+#define FileHandle     FileOpen("..\VERSION")
+#define MyAppVersion   Trim(FileRead(FileHandle))
 #if FileHandle
   #expr FileClose(FileHandle)
 #endif
 #define MyAppPublisher "Alexander Tverskoy"
-#define MyAppURL "https://github.com/plaintool/trayslate"
-#define MyAppExeName "trayslate.exe"
+#define MyAppURL       "https://github.com/plaintool/trayslate"
+#define MyAppExeName   "trayslate.exe"
+#define CurrentYear     GetDateTimeString('yyyy','','')
 
 [Setup]
 AppId={{D1E4B5C2-8F9A-4B6D-AB12-3F7C9E4D8A21}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
+AppVerName={#MyAppName} {#MyAppVersion}
+
+VersionInfoDescription={#MyAppName} installer
+VersionInfoProductName={#MyAppName}
+VersionInfoVersion={#MyAppVersion}
+
+AppCopyright={#CurrentYear} {#MyAppPublisher}
+
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-VersionInfoVersion={#MyAppVersion}.0
-VersionInfoProductVersion={#MyAppVersion}
-VersionInfoDescription=Trayslate Installer
-VersionInfoCopyright=© 2026 Alexander Tverskoy
+
+UninstallDisplayName={#MyAppName} {#MyAppVersion}
 UninstallDisplayIcon={app}\trayslate.exe
+
+ShowLanguageDialog=yes
+UsePreviousLanguage=no
+LanguageDetectionMethod=uilanguage
+
+LicenseFile=.\LICENSE.rtf
+
+WizardStyle=modern
+
 DefaultDirName={autopf}\{#MyAppName}
 ArchitecturesAllowed=x64compatible x86 arm64
 ArchitecturesInstallIn64BitMode=x64compatible arm64
 DisableProgramGroupPage=yes
-LicenseFile=.\LICENSE.rtf
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=.\
 OutputBaseFilename=trayslate-{#MyAppVersion}-any-x86-x64
 Compression=lzma
 SolidCompression=yes
-WizardStyle=modern
 
 [Languages]
-Name: "arabic"; MessagesFile: "compiler:Languages\Arabic.isl"
+Name: "arabic";     MessagesFile: "compiler:Languages\Arabic.isl"
 Name: "belarusian"; MessagesFile: "compiler:Languages\Belarusian.isl"
-Name: "chinese"; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
-Name: "czech"; MessagesFile: "compiler:Languages\Czech.isl"
-Name: "danish"; MessagesFile: "compiler:Languages\Danish.isl"
-Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
-Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "finnish"; MessagesFile: "compiler:Languages\Finnish.isl"
-Name: "french"; MessagesFile: "compiler:Languages\French.isl"
-Name: "german"; MessagesFile: "compiler:Languages\German.isl"
-Name: "greek"; MessagesFile: "compiler:Languages\Greek.isl"
-Name: "hebrew"; MessagesFile: "compiler:Languages\Hebrew.isl"
-Name: "hindi"; MessagesFile: "compiler:Languages\Hindi.isl"
+Name: "chinese";    MessagesFile: "compiler:Languages\ChineseSimplified.isl"
+Name: "czech";      MessagesFile: "compiler:Languages\Czech.isl"
+Name: "danish";     MessagesFile: "compiler:Languages\Danish.isl"
+Name: "dutch";      MessagesFile: "compiler:Languages\Dutch.isl"
+Name: "english";    MessagesFile: "compiler:Default.isl"
+Name: "finnish";    MessagesFile: "compiler:Languages\Finnish.isl"
+Name: "french";     MessagesFile: "compiler:Languages\French.isl"
+Name: "german";     MessagesFile: "compiler:Languages\German.isl"
+Name: "greek";      MessagesFile: "compiler:Languages\Greek.isl"
+Name: "hebrew";     MessagesFile: "compiler:Languages\Hebrew.isl"
+Name: "hindi";      MessagesFile: "compiler:Languages\Hindi.isl"
 Name: "indonesian"; MessagesFile: "compiler:Languages\Indonesian.isl"
-Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
-Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
-Name: "korean"; MessagesFile: "compiler:Languages\Korean.isl"
-Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
+Name: "italian";    MessagesFile: "compiler:Languages\Italian.isl"
+Name: "japanese";   MessagesFile: "compiler:Languages\Japanese.isl"
+Name: "korean";     MessagesFile: "compiler:Languages\Korean.isl"
+Name: "polish";     MessagesFile: "compiler:Languages\Polish.isl"
 Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
-Name: "romanian"; MessagesFile: "compiler:Languages\Romanian.isl"
-Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
-Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
-Name: "swedish"; MessagesFile: "compiler:Languages\Swedish.isl"
-Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
-Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
-
-[Messages]
-arabic.SetupWindowTitle=تثبيت {#MyAppName} {#MyAppVersion}
-belarusian.SetupWindowTitle=Усталёўка {#MyAppName} {#MyAppVersion}
-chinese.SetupWindowTitle=安装 {#MyAppName} {#MyAppVersion}
-czech.SetupWindowTitle=Instalace {#MyAppName} {#MyAppVersion}
-danish.SetupWindowTitle=Installation af {#MyAppName} {#MyAppVersion}
-dutch.SetupWindowTitle=Installatie van {#MyAppName} {#MyAppVersion}
-english.SetupWindowTitle=Installing {#MyAppName} {#MyAppVersion}
-finnish.SetupWindowTitle={#MyAppName} {#MyAppVersion} asennus
-french.SetupWindowTitle=Installation de {#MyAppName} {#MyAppVersion}
-german.SetupWindowTitle=Installation von {#MyAppName} {#MyAppVersion}
-greek.SetupWindowTitle=Εγκατάσταση του {#MyAppName} {#MyAppVersion}
-hebrew.SetupWindowTitle=התקנת {#MyAppName} {#MyAppVersion}
-hindi.SetupWindowTitle={#MyAppName} {#MyAppVersion} की स्थापना
-indonesian.SetupWindowTitle=Instalasi {#MyAppName} {#MyAppVersion}
-italian.SetupWindowTitle=Installazione di {#MyAppName} {#MyAppVersion}
-japanese.SetupWindowTitle={#MyAppName} {#MyAppVersion} のインストール
-korean.SetupWindowTitle={#MyAppName} {#MyAppVersion} 설치
-polish.SetupWindowTitle=Instalacja {#MyAppName} {#MyAppVersion}
-portuguese.SetupWindowTitle=Instalação do {#MyAppName} {#MyAppVersion}
-romanian.SetupWindowTitle=Instalarea {#MyAppName} {#MyAppVersion}
-russian.SetupWindowTitle=Установка {#MyAppName} {#MyAppVersion}
-spanish.SetupWindowTitle=Instalación de {#MyAppName} {#MyAppVersion}
-swedish.SetupWindowTitle=Installation av {#MyAppName} {#MyAppVersion}
-turkish.SetupWindowTitle={#MyAppName} {#MyAppVersion} kurulumu
-ukrainian.SetupWindowTitle=Встановлення {#MyAppName} {#MyAppVersion}
+Name: "romanian";   MessagesFile: "compiler:Languages\Romanian.isl"
+Name: "russian";    MessagesFile: "compiler:Languages\Russian.isl"
+Name: "spanish";    MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "swedish";    MessagesFile: "compiler:Languages\Swedish.isl"
+Name: "turkish";    MessagesFile: "compiler:Languages\Turkish.isl"
+Name: "ukrainian";  MessagesFile: "compiler:Languages\Ukrainian.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
