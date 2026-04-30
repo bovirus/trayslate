@@ -12,10 +12,11 @@ interface
 
 uses
   Forms,
+  Classes,
   StdCtrls,
   ExtCtrls,
   Graphics,
-  LCLIntf, Classes;
+  LCLIntf;
 
 type
 

@@ -42,13 +42,15 @@ function IsJson(const S: string): boolean;
 
 procedure PasteWithLineEnding(AMemo: TMemo);
 
+procedure RemoveSameNameValueFromMemo(Memo: TMemo);
+
 function FindInStringList(Strings: TStringList; const SubText: string): integer;
 
 function GetIndexByValue(Strings: TStringList; const AValue: string; CaseSensitive: boolean = True): integer;
 
 procedure RemoveEmptyValues(Strings: TStringList);
 
-procedure RemoveSameNameValueFromMemo(Memo: TMemo);
+procedure ReplaceInStrings(AList: TStrings; const AFrom, ATo: string; AReplaceAll: Boolean = False);
 
 function RemoveEmptyParams(const AInput: string): string;
 
@@ -219,6 +221,29 @@ begin
   end;
 end;
 
+procedure RemoveSameNameValueFromMemo(Memo: TMemo);
+var
+  i: integer;
+  EqualPos: integer;
+  KeyPart, ValuePart: string;
+begin
+  for i := Memo.Lines.Count - 1 downto 0 do
+  begin
+    EqualPos := Pos('=', Memo.Lines[i]);
+
+    // Skip lines without '='
+    if EqualPos <= 0 then
+      Continue;
+
+    KeyPart := Copy(Memo.Lines[i], 1, EqualPos - 1);
+    ValuePart := Copy(Memo.Lines[i], EqualPos + 1, MaxInt);
+
+    // Case-sensitive сравнение
+    if (KeyPart = ValuePart) and (Length(KeyPart) > 10) then
+      Memo.Lines[i] := KeyPart;
+  end;
+end;
+
 function FindInStringList(Strings: TStringList; const SubText: string): integer;
 var
   i: integer;
@@ -263,26 +288,29 @@ begin
   end;
 end;
 
-procedure RemoveSameNameValueFromMemo(Memo: TMemo);
+procedure ReplaceInStrings(AList: TStrings; const AFrom, ATo: string; AReplaceAll: Boolean = False);
 var
-  i: integer;
-  EqualPos: integer;
-  KeyPart, ValuePart: string;
+  i: Integer;
+  Flags: TReplaceFlags;
 begin
-  for i := Memo.Lines.Count - 1 downto 0 do
+  if (AFrom = string.Empty) or (AList.Count = 0) then Exit;
+
+  if AReplaceAll then
+    Flags := [rfReplaceAll]
+  else
+    Flags := []; // replace only first occurrence
+
+  for i := 0 to AList.Count - 1 do
   begin
-    EqualPos := Pos('=', Memo.Lines[i]);
+    // Check first to avoid unnecessary StringReplace
+    if Pos(AFrom, AList[i]) > 0 then
+    begin
+      AList[i] := StringReplace(AList[i], AFrom, ATo, Flags);
 
-    // Skip lines without '='
-    if EqualPos <= 0 then
-      Continue;
-
-    KeyPart := Copy(Memo.Lines[i], 1, EqualPos - 1);
-    ValuePart := Copy(Memo.Lines[i], EqualPos + 1, MaxInt);
-
-    // Case-sensitive сравнение
-    if (KeyPart = ValuePart) and (Length(KeyPart) > 10) then
-      Memo.Lines[i] := KeyPart;
+      // If only one replacement needed — exit after first match
+      if not AReplaceAll then
+        Exit;
+    end;
   end;
 end;
 

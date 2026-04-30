@@ -41,6 +41,10 @@ msgstr "設定が変更されました。変更を保存しますか？"
 msgid "Default"
 msgstr ""
 
+#: languages.rautodetect
+msgid "Auto Detect"
+msgstr "自動検出"
+
 #: mainform.rnoconfig
 msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."

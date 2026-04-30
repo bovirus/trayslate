@@ -402,7 +402,7 @@ uses formdonate, formabout, formsettings, formconfig, settings, languages, syste
 
   { TformTrayslate }
 
-  {Form Events}
+  { Form Events }
 
 procedure TformTrayslate.FormCreate(Sender: TObject);
 begin
@@ -708,7 +708,7 @@ end;
 
 {$ENDIF}
 
-{Application Events}
+{ Application Events }
 
 procedure TformTrayslate.ApplicationOnActivate(Sender: TObject);
 begin
@@ -738,7 +738,7 @@ begin
     formConfigTrayslate.Invalidate;
 end;
 
-{Actions Events}
+{ Actions Events }
 
 procedure TformTrayslate.aShowExecute(Sender: TObject);
 begin
@@ -899,7 +899,7 @@ begin
   Application.Terminate;
 end;
 
-{Control Events}
+{ Control Events }
 
 procedure TformTrayslate.ComboSourceCloseUp(Sender: TObject);
 var
@@ -1297,7 +1297,7 @@ begin
   MenuLangPairs.Visible := True;
 end;
 
-{Methods}
+{ Methods }
 
 procedure TformTrayslate.LoadConfig(SetDefault: boolean = True);
 var
@@ -2312,7 +2312,7 @@ begin
   KeyInput.Unapply([ssCtrl]);
 end;
 
-{Methods Translate}
+{ Methods Translate }
 
 function TformTrayslate.TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
 var
@@ -2528,9 +2528,11 @@ begin
   end;
 end;
 
-{Action Languages}
+{ Action Languages }
 
 procedure TformTrayslate.SetLanguage(aLanguage: string = string.Empty);
+var
+  OldAutoDetect: string = string.Empty;
 begin
   aLangArabic.Checked := False;
   aLangBelarusian.Checked := False;
@@ -2560,12 +2562,23 @@ begin
 
   if (aLanguage <> string.Empty) then
   begin
+    OldAutoDetect := rautodetect;
     Language := aLanguage;
     ApplicationTranslate('en');
     if not ApplicationTranslate(Language) then
       Language := 'en';
   end;
 
+  // Update Language Names
+  if OldAutoDetect <> string.Empty then
+  begin
+    ReplaceInStrings(FLanguages, OldAutoDetect, rautodetect);
+    ReplaceInStrings(FLanguagesTarget, OldAutoDetect, rautodetect);
+    ReplaceInStrings(ComboSource.Items, OldAutoDetect, rautodetect);
+    ReplaceInStrings(ComboTarget.Items, OldAutoDetect, rautodetect);
+  end;
+
+  // Update form text
   SetHints;
 
   case Language of

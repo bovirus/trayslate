@@ -41,6 +41,10 @@ msgstr "Yapılandırma değiştirildi. Değişiklikler kaydedilsin mi?"
 msgid "Default"
 msgstr ""
 
+#: languages.rautodetect
+msgid "Auto Detect"
+msgstr "Otomatik algıla"
+
 #: mainform.rnoconfig
 msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."

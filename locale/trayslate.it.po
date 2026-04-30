@@ -46,6 +46,10 @@ msgstr ""
 msgid "Default"
 msgstr "Predefinito"
 
+#: languages.rautodetect
+msgid "Auto Detect"
+msgstr "Auto rileva"
+
 #: mainform.rnoconfig
 msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."

@@ -25,6 +25,10 @@ type
 
 const
   SpecialCodes: array[0..1] of string = ('auto', 'empty');
+  AUTO_DETECT_NAME = 'Auto Detect';
+
+resourcestring
+  rautodetect = 'Auto Detect';
 
 function GetLanguages: TValueArray;
 
@@ -50,8 +54,8 @@ function GetLanguages: TValueArray;
 const
   Languages: array[0..267] of TAppValue = (
     // Languages
-    (Code: 'auto'; DisplayName: 'Auto detect'),
-    (Code: 'empty'; DisplayName: 'Auto detect'),
+    (Code: 'auto'; DisplayName: rautodetect),
+    (Code: 'empty'; DisplayName: rautodetect),
     (Code: 'ab'; DisplayName: 'Abkhazian'),
     (Code: 'awa'; DisplayName: 'Awadhi'),
     (Code: 'av'; DisplayName: 'Avar'),

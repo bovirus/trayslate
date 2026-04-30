@@ -41,6 +41,10 @@ msgstr "Konfigurationen er ændret. Gemme ændringer?"
 msgid "Default"
 msgstr ""
 
+#: languages.rautodetect
+msgid "Auto Detect"
+msgstr "Auto registrer"
+
 #: mainform.rnoconfig
 msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
