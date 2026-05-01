@@ -38,6 +38,7 @@ LicenseFile=.\LICENSE.rtf
 WizardStyle=modern
 
 SetupIconFile=..\trayslate.ico
+WizardSmallImageFile=.\wizardsmallimagefile.png
 
 DefaultDirName={autopf}\{#MyAppName}
 ArchitecturesAllowed=x64compatible x86 arm64
