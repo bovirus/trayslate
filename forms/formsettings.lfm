@@ -1,635 +1,744 @@
 object formSettingsTrayslate: TformSettingsTrayslate
   Left = 318
-  Height = 510
+  Height = 560
   Top = 250
-  Width = 410
-  BorderStyle = bsDialog
+  Width = 700
+  BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Settings'
-  ClientHeight = 510
-  ClientWidth = 410
+  ClientHeight = 560
+  ClientWidth = 700
   Position = poDesktopCenter
   LCLVersion = '4.4.0.0'
   OnCreate = FormCreate
+  OnResize = FormResize
   OnShow = FormShow
   object PagesSettings: TPageControl
-    Left = 5
-    Height = 465
+    Left = 217
+    Height = 515
     Top = 5
-    Width = 400
+    Width = 483
     ActivePage = PageGeneral
     Align = alClient
-    BorderSpacing.Bottom = 35
-    BorderSpacing.Around = 5
+    BorderSpacing.Left = 2
+    BorderSpacing.Top = 5
+    BorderSpacing.Bottom = 5
     TabIndex = 0
     TabOrder = 0
     OnChange = PagesSettingsChange
     object PageGeneral: TTabSheet
       Caption = 'General'
-      ClientHeight = 437
-      ClientWidth = 392
-      object GroupRealTime: TGroupBox
-        Left = 5
-        Height = 99
-        Top = 173
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Real-Time Translation'
-        ClientHeight = 79
-        ClientWidth = 378
-        TabOrder = 2
-        object CheckRealTime: TCheckBox
-          Left = 21
-          Height = 19
-          Hint = 'Automatically translate text while typing'
-          Top = 8
-          Width = 133
-          Caption = 'Translate As You Type'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          OnChange = SettingChange
-        end
-        object LabelRealTimeDelay: TLabel
-          Left = 8
-          Height = 32
-          Top = 40
-          Width = 136
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Translation Delay, ms'
-          WordWrap = True
-        end
-        object SpinRealTimeDelay: TSpinEdit
-          Left = 152
-          Height = 23
-          Hint = 'Translation Delay in milliseconds'
-          Top = 40
-          Width = 203
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 1
-          Value = 1000
-          OnChange = SettingChange
-        end
-      end
-      object GroupAutoSwap: TGroupBox
-        Left = 5
-        Height = 99
-        Top = 69
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Auto-Swap Languages'
-        ClientHeight = 79
-        ClientWidth = 378
-        TabOrder = 1
-        object ComboLangDetect: TComboBox
-          Left = 152
-          Height = 23
-          Hint = 'Config that auto-detects the target language for the selected language pair'
-          Top = 40
-          Width = 203
-          DropDownCount = 15
-          ItemHeight = 15
-          ParentShowHint = False
-          ShowHint = True
-          Style = csDropDownList
-          TabOrder = 1
-          OnChange = SettingChange
-        end
-        object LabelIconBackground1: TLabel
-          Left = 8
-          Height = 32
-          Top = 40
-          Width = 136
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Lang Detect Config'
-          WordWrap = True
-        end
-        object CheckAutoSwap: TCheckBox
-          Left = 21
-          Height = 19
-          Hint = 'Automatically detect input language and swap pair if needed, does not work during Real-Time Translation'
-          Top = 8
-          Width = 155
-          Caption = 'Auto-Swap Language Pair'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          OnChange = SettingChange
-        end
-      end
-      object GroupAutostart: TGroupBox
-        Left = 5
-        Height = 59
-        Top = 5
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Autostart'
-        ClientHeight = 39
-        ClientWidth = 378
+      ClientHeight = 487
+      ClientWidth = 475
+      object ScrollGeneral: TScrollBox
+        Left = 0
+        Height = 487
+        Top = 0
+        Width = 475
+        HorzScrollBar.Increment = 19
+        HorzScrollBar.Page = 190
+        HorzScrollBar.Smooth = True
+        HorzScrollBar.Tracking = True
+        VertScrollBar.Increment = 27
+        VertScrollBar.Page = 277
+        VertScrollBar.Smooth = True
+        VertScrollBar.Tracking = True
+        Align = alClient
+        BorderStyle = bsNone
+        ClientHeight = 487
+        ClientWidth = 475
         TabOrder = 0
-        object CheckAutostart: TCheckBox
-          Left = 21
-          Height = 19
-          Hint = 'Start the application automatically when the computer boots'
-          Top = 8
-          Width = 154
-          Caption = 'Launch At System Startup'
-          ParentShowHint = False
-          ShowHint = True
+        object GroupRealTime: TGroupBox
+          Left = 5
+          Height = 99
+          Top = 173
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Real-Time Translation'
+          ClientHeight = 79
+          ClientWidth = 461
           TabOrder = 0
-          OnChange = SettingChange
+          object CheckRealTime: TCheckBox
+            Left = 21
+            Height = 19
+            Hint = 'Automatically translate text while typing'
+            Top = 8
+            Width = 133
+            Caption = 'Translate As You Type'
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnChange = SettingChange
+          end
+          object LabelRealTimeDelay: TLabel
+            Left = 8
+            Height = 32
+            Top = 40
+            Width = 136
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Translation Delay, ms'
+            WordWrap = True
+          end
+          object SpinRealTimeDelay: TSpinEdit
+            Left = 152
+            Height = 23
+            Hint = 'Translation Delay in milliseconds'
+            Top = 40
+            Width = 286
+            Anchors = [akTop, akLeft, akRight]
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            Value = 1000
+            OnChange = SettingChange
+          end
+        end
+        object GroupAutoSwap: TGroupBox
+          Left = 5
+          Height = 99
+          Top = 69
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Auto-Swap Languages'
+          ClientHeight = 79
+          ClientWidth = 461
+          TabOrder = 1
+          object ComboLangDetect: TComboBox
+            Left = 152
+            Height = 23
+            Hint = 'Config that auto-detects the target language for the selected language pair'
+            Top = 40
+            Width = 286
+            Anchors = [akTop, akLeft, akRight]
+            DropDownCount = 15
+            ItemHeight = 15
+            ParentShowHint = False
+            ShowHint = True
+            Style = csDropDownList
+            TabOrder = 1
+            OnChange = SettingChange
+          end
+          object LabelIconBackground1: TLabel
+            Left = 8
+            Height = 32
+            Top = 40
+            Width = 136
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Lang Detect Config'
+            WordWrap = True
+          end
+          object CheckAutoSwap: TCheckBox
+            Left = 21
+            Height = 19
+            Hint = 'Automatically detect input language and swap pair if needed, does not work during Real-Time Translation'
+            Top = 8
+            Width = 155
+            Caption = 'Auto-Swap Language Pair'
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnChange = SettingChange
+          end
+        end
+        object GroupAutostart: TGroupBox
+          Left = 5
+          Height = 59
+          Top = 5
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Autostart'
+          ClientHeight = 39
+          ClientWidth = 461
+          TabOrder = 2
+          object CheckAutostart: TCheckBox
+            Left = 21
+            Height = 19
+            Hint = 'Start the application automatically when the computer boots'
+            Top = 8
+            Width = 154
+            Caption = 'Launch At System Startup'
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnChange = SettingChange
+          end
         end
       end
     end
     object PageInterface: TTabSheet
       Caption = 'Interface'
-      ClientHeight = 437
-      ClientWidth = 392
-      object GroupFont: TGroupBox
-        Left = 5
-        Height = 99
-        Top = 5
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Font'
-        ClientHeight = 79
-        ClientWidth = 378
-        TabOrder = 0
-        object PanelFont: TPanel
-          Left = 16
-          Height = 57
-          Top = 8
-          Width = 240
-          Anchors = [akTop, akLeft, akRight]
-          BevelOuter = bvNone
-          Caption = 'Default, 0'
-          Color = clBtnFace
-          ParentBackground = False
-          ParentColor = False
-          ParentFont = False
-          TabOrder = 0
-        end
-        object BtnFont: TButton
-          Left = 264
-          Height = 25
-          Top = 8
-          Width = 91
-          Anchors = [akTop, akRight]
-          Caption = 'Font...'
-          TabOrder = 1
-          OnClick = BtnFontClick
-        end
-        object BtnReset: TButton
-          Left = 264
-          Height = 25
-          Top = 40
-          Width = 91
-          Anchors = [akTop, akRight]
-          Caption = 'Reset'
-          Enabled = False
-          TabOrder = 2
-          OnClick = BtnResetClick
-        end
-      end
-      object GroupTrayIcon: TGroupBox
-        Left = 5
-        Height = 155
-        Top = 109
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Tray Icon'
-        ClientHeight = 135
-        ClientWidth = 378
-        TabOrder = 1
-        object CheckTwoLang: TCheckBox
-          Left = 24
-          Height = 19
-          Hint = 'Display source and/or target language on the tray icon'
-          Top = 104
-          Width = 125
-          Caption = 'Show Language Pair'
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
-          OnChange = SettingChange
-        end
-        object ColorIconBackground: TColorBox
-          Left = 152
-          Height = 22
-          Top = 8
-          Width = 203
-          Style = [cbIncludeNone, cbCustomColor, cbPrettyNames, cbCustomColors]
-          ColorDialog = ColorDialog
-          Anchors = [akTop, akLeft, akRight]
-          DropDownCount = 15
-          ItemHeight = 16
-          TabOrder = 0
-          OnChange = SettingChange
-        end
-        object LabelIconBackground: TLabel
-          Left = 8
-          Height = 32
-          Top = 8
-          Width = 136
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Background Color'
-          WordWrap = True
-        end
-        object LabelIconFont: TLabel
-          Left = 8
-          Height = 32
-          Top = 40
-          Width = 136
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Font Color'
-          WordWrap = True
-        end
-        object ColorIconFont: TColorBox
-          Left = 152
-          Height = 22
-          Top = 40
-          Width = 203
-          Style = [cbCustomColor, cbPrettyNames, cbCustomColors]
-          ColorDialog = ColorDialog
-          Anchors = [akTop, akLeft, akRight]
-          DropDownCount = 15
-          ItemHeight = 16
-          TabOrder = 1
-          OnChange = SettingChange
-        end
-        object LabelIconFont1: TLabel
-          Left = 8
-          Height = 32
-          Top = 72
-          Width = 136
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Font Name'
-          WordWrap = True
-        end
-        object ComboIconFontName: TComboBox
-          Left = 152
-          Height = 23
-          Top = 72
-          Width = 203
-          DropDownCount = 15
-          ItemHeight = 15
-          Style = csDropDownList
-          TabOrder = 2
-          OnChange = SettingChange
-        end
-      end
-      object GroupLangPairs: TGroupBox
+      ClientHeight = 487
+      ClientWidth = 475
+      object ScrollInterface: TScrollBox
         Left = 0
-        Height = 123
-        Top = 269
-        Width = 392
-        Align = alTop
-        Caption = 'Recent Language Pairs'
-        ClientHeight = 103
-        ClientWidth = 388
-        TabOrder = 2
-        object SpinMaxLangPairs: TSpinEdit
-          Left = 157
-          Height = 23
-          Hint = 'Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel'
-          Top = 9
-          Width = 203
-          MaxValue = 100
-          ParentShowHint = False
-          ShowHint = True
+        Height = 487
+        Top = 0
+        Width = 475
+        HorzScrollBar.Increment = 27
+        HorzScrollBar.Page = 275
+        HorzScrollBar.Smooth = True
+        HorzScrollBar.Tracking = True
+        VertScrollBar.Increment = 39
+        VertScrollBar.Page = 392
+        VertScrollBar.Smooth = True
+        VertScrollBar.Tracking = True
+        Align = alClient
+        BorderStyle = bsNone
+        ClientHeight = 487
+        ClientWidth = 475
+        TabOrder = 0
+        object GroupFont: TGroupBox
+          Left = 5
+          Height = 99
+          Top = 5
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Font'
+          ClientHeight = 79
+          ClientWidth = 461
           TabOrder = 0
-          Value = 10
-          OnChange = SettingChange
+          object PanelFont: TPanel
+            Left = 16
+            Height = 57
+            Top = 8
+            Width = 323
+            Anchors = [akTop, akLeft, akRight]
+            BevelOuter = bvNone
+            Caption = 'Default, 0'
+            Color = clBtnFace
+            ParentBackground = False
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 0
+          end
+          object BtnFont: TButton
+            Left = 347
+            Height = 25
+            Top = 8
+            Width = 91
+            Anchors = [akTop, akRight]
+            Caption = 'Font...'
+            TabOrder = 1
+            OnClick = BtnFontClick
+          end
+          object BtnReset: TButton
+            Left = 347
+            Height = 25
+            Top = 40
+            Width = 91
+            Anchors = [akTop, akRight]
+            Caption = 'Reset'
+            Enabled = False
+            TabOrder = 2
+            OnClick = BtnResetClick
+          end
         end
-        object LabelMaxLangPairs: TLabel
-          Left = 13
-          Height = 32
-          Top = 9
-          Width = 136
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Max Pairs'
-          WordWrap = True
-        end
-        object CheckAutoAddLangPairs: TCheckBox
-          Left = 29
-          Height = 19
-          Hint = 'Automatically adds a new language pair when you switch languages'
-          Top = 40
-          Width = 157
-          Caption = 'Auto-Add On Pair Change'
-          ParentShowHint = False
-          ShowHint = True
+        object GroupTrayIcon: TGroupBox
+          Left = 5
+          Height = 155
+          Top = 109
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Tray Icon'
+          ClientHeight = 135
+          ClientWidth = 461
           TabOrder = 1
-          OnChange = SettingChange
+          object CheckTwoLang: TCheckBox
+            Left = 24
+            Height = 19
+            Hint = 'Display source and/or target language on the tray icon'
+            Top = 104
+            Width = 125
+            Caption = 'Show Language Pair'
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 3
+            OnChange = SettingChange
+          end
+          object ColorIconBackground: TColorBox
+            Left = 152
+            Height = 22
+            Top = 8
+            Width = 286
+            Style = [cbIncludeNone, cbCustomColor, cbPrettyNames, cbCustomColors]
+            ColorDialog = ColorDialog
+            Anchors = [akTop, akLeft, akRight]
+            DropDownCount = 15
+            ItemHeight = 16
+            TabOrder = 0
+            OnChange = SettingChange
+          end
+          object LabelIconBackground: TLabel
+            Left = 8
+            Height = 32
+            Top = 8
+            Width = 136
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Background Color'
+            WordWrap = True
+          end
+          object LabelIconFont: TLabel
+            Left = 8
+            Height = 32
+            Top = 40
+            Width = 136
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Font Color'
+            WordWrap = True
+          end
+          object ColorIconFont: TColorBox
+            Left = 152
+            Height = 22
+            Top = 40
+            Width = 286
+            Style = [cbCustomColor, cbPrettyNames, cbCustomColors]
+            ColorDialog = ColorDialog
+            Anchors = [akTop, akLeft, akRight]
+            DropDownCount = 15
+            ItemHeight = 16
+            TabOrder = 1
+            OnChange = SettingChange
+          end
+          object LabelIconFont1: TLabel
+            Left = 8
+            Height = 32
+            Top = 72
+            Width = 136
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Font Name'
+            WordWrap = True
+          end
+          object ComboIconFontName: TComboBox
+            Left = 152
+            Height = 23
+            Top = 72
+            Width = 286
+            Anchors = [akTop, akLeft, akRight]
+            DropDownCount = 15
+            ItemHeight = 15
+            Style = csDropDownList
+            TabOrder = 2
+            OnChange = SettingChange
+          end
         end
-        object CheckRecentPairHotkeys: TCheckBox
-          Left = 29
-          Height = 19
-          Hint = 'When enabled, Ctrl+Shift+Number switches recent language pairs'
-          Top = 72
-          Width = 242
-          Caption = 'Enable Global Ctrl+Shift+Number Hotkeys'
-          ParentShowHint = False
-          ShowHint = True
+        object GroupLangPairs: TGroupBox
+          Left = 0
+          Height = 123
+          Top = 269
+          Width = 475
+          Align = alTop
+          Caption = 'Recent Language Pairs'
+          ClientHeight = 103
+          ClientWidth = 471
           TabOrder = 2
-          OnChange = SettingChange
+          object SpinMaxLangPairs: TSpinEdit
+            Left = 157
+            Height = 23
+            Hint = 'Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel'
+            Top = 9
+            Width = 286
+            Anchors = [akTop, akLeft, akRight]
+            MaxValue = 100
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            Value = 10
+            OnChange = SettingChange
+          end
+          object LabelMaxLangPairs: TLabel
+            Left = 13
+            Height = 32
+            Top = 9
+            Width = 136
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Max Pairs'
+            WordWrap = True
+          end
+          object CheckAutoAddLangPairs: TCheckBox
+            Left = 29
+            Height = 19
+            Hint = 'Automatically adds a new language pair when you switch languages'
+            Top = 40
+            Width = 157
+            Caption = 'Auto-Add On Pair Change'
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+            OnChange = SettingChange
+          end
+          object CheckRecentPairHotkeys: TCheckBox
+            Left = 29
+            Height = 19
+            Hint = 'When enabled, Ctrl+Shift+Number switches recent language pairs'
+            Top = 72
+            Width = 242
+            Caption = 'Enable Global Ctrl+Shift+Number Hotkeys'
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 2
+            OnChange = SettingChange
+          end
         end
       end
     end
     object PageHotkeys: TTabSheet
       Caption = 'Global Hotkeys'
-      ClientHeight = 437
-      ClientWidth = 392
-      object GroupApp: TGroupBox
-        Left = 5
-        Height = 67
-        Top = 5
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Toggle Application (Tray Icon Click)'
-        ClientHeight = 47
-        ClientWidth = 378
+      ClientHeight = 487
+      ClientWidth = 475
+      object ScrollHotkeys: TScrollBox
+        Left = 0
+        Height = 487
+        Top = 0
+        Width = 475
+        HorzScrollBar.Increment = 30
+        HorzScrollBar.Page = 307
+        HorzScrollBar.Smooth = True
+        HorzScrollBar.Tracking = True
+        VertScrollBar.Increment = 43
+        VertScrollBar.Page = 433
+        VertScrollBar.Smooth = True
+        VertScrollBar.Tracking = True
+        Align = alClient
+        BorderStyle = bsNone
+        ClientHeight = 487
+        ClientWidth = 475
         TabOrder = 0
-        object LabelApp: TLabel
-          Left = 8
-          Height = 32
-          Top = 8
-          Width = 224
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Shows or hides the main application window'
-          WordWrap = True
-        end
-        object EditApp: TEdit
-          Tag = 1
-          Left = 240
-          Height = 23
-          Hint = 'Default Ctrl+Shift+A'
-          Top = 9
-          Width = 122
-          Alignment = taCenter
-          Anchors = [akTop, akLeft, akRight]
-          Color = clWindow
-          ParentShowHint = False
-          ReadOnly = True
-          ShowHint = True
+        object GroupTransControl: TGroupBox
+          Left = 5
+          Height = 65
+          Top = 77
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Translate In Active Application Selection'
+          ClientHeight = 45
+          ClientWidth = 461
           TabOrder = 0
-          OnChange = SettingChange
-          OnKeyDown = EditKeyDown
-          OnMouseLeave = EditMouseLeave
-          OnMouseMove = EditMouseMove
+          object LabelTransControl: TLabel
+            Left = 8
+            Height = 31
+            Top = 8
+            Width = 298
+            Alignment = taRightJustify
+            Anchors = [akTop, akLeft, akRight]
+            AutoSize = False
+            Caption = 'Replaces the selected text in the active application with the translation'
+            WordWrap = True
+          end
+          object EditTransControl: TEdit
+            Tag = 6
+            Left = 314
+            Height = 23
+            Hint = 'Default Ctrl+Shift+V'
+            Top = 8
+            Width = 131
+            Alignment = taCenter
+            Anchors = [akTop, akRight]
+            Color = clWindow
+            ParentShowHint = False
+            ReadOnly = True
+            ShowHint = True
+            TabOrder = 0
+            OnChange = SettingChange
+            OnKeyDown = EditKeyDown
+            OnMouseLeave = EditMouseLeave
+            OnMouseMove = EditMouseMove
+          end
         end
-      end
-      object GroupTransSwap: TGroupBox
-        Left = 5
-        Height = 67
-        Top = 77
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Swap Languages (Tray Icon Middle-Click)'
-        ClientHeight = 47
-        ClientWidth = 378
-        TabOrder = 1
-        object LabelTransSwap: TLabel
-          Left = 8
-          Height = 31
-          Top = 8
-          Width = 224
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Swaps the source and target languages'
-          WordWrap = True
+        object GroupTransFromControl: TGroupBox
+          Left = 5
+          Height = 65
+          Top = 147
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Translate From Active Application Selection'
+          ClientHeight = 45
+          ClientWidth = 461
+          TabOrder = 1
+          object LabelTransFromControl: TLabel
+            Left = 8
+            Height = 31
+            Top = 8
+            Width = 298
+            Alignment = taRightJustify
+            Anchors = [akTop, akLeft, akRight]
+            AutoSize = False
+            Caption = 'Translates the selected text from the active application'
+            WordWrap = True
+          end
+          object EditTransFromControl: TEdit
+            Tag = 5
+            Left = 314
+            Height = 23
+            Hint = 'Default Ctrl+Shift+C'
+            Top = 8
+            Width = 131
+            Alignment = taCenter
+            Anchors = [akTop, akRight]
+            Color = clWindow
+            ParentShowHint = False
+            ReadOnly = True
+            ShowHint = True
+            TabOrder = 0
+            OnChange = SettingChange
+            OnKeyDown = EditKeyDown
+            OnMouseLeave = EditMouseLeave
+            OnMouseMove = EditMouseMove
+          end
         end
-        object EditTransSwap: TEdit
-          Tag = 2
-          Left = 240
-          Height = 23
-          Hint = 'Default Ctrl+Shift+S'
-          Top = 8
-          Width = 122
-          Alignment = taCenter
-          Anchors = [akTop, akLeft, akRight]
-          Color = clWindow
-          ParentShowHint = False
-          ReadOnly = True
-          ShowHint = True
-          TabOrder = 0
-          OnChange = SettingChange
-          OnKeyDown = EditKeyDown
-          OnMouseLeave = EditMouseLeave
-          OnMouseMove = EditMouseMove
+        object GroupTransClipboard: TGroupBox
+          Left = 5
+          Height = 67
+          Top = 289
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Translate Clipboard to Clipboard'
+          ClientHeight = 47
+          ClientWidth = 461
+          TabOrder = 2
+          object LabelTransClipboard: TLabel
+            Left = 8
+            Height = 31
+            Top = 8
+            Width = 298
+            Alignment = taRightJustify
+            Anchors = [akTop, akLeft, akRight]
+            AutoSize = False
+            Caption = 'Translates the current text in clipboard and copies the result to the clipboard'
+            WordWrap = True
+          end
+          object EditTransClipboard: TEdit
+            Tag = 4
+            Left = 314
+            Height = 23
+            Hint = 'Default Ctrl+Shift+R'
+            Top = 8
+            Width = 131
+            Alignment = taCenter
+            Anchors = [akTop, akRight]
+            Color = clWindow
+            ParentShowHint = False
+            ReadOnly = True
+            ShowHint = True
+            TabOrder = 0
+            OnChange = SettingChange
+            OnKeyDown = EditKeyDown
+            OnMouseLeave = EditMouseLeave
+            OnMouseMove = EditMouseMove
+          end
         end
-      end
-      object GroupTransFromClipboard: TGroupBox
-        Left = 5
-        Height = 67
-        Top = 149
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Translate From Clipboard (Tray Icon Double-Click)'
-        ClientHeight = 47
-        ClientWidth = 378
-        TabOrder = 2
-        object LabelTransFromClipboard: TLabel
-          Left = 8
-          Height = 31
-          Top = 8
-          Width = 224
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Translates the current text from the clipboard'
-          WordWrap = True
+        object GroupTransFromClipboard: TGroupBox
+          Left = 5
+          Height = 67
+          Top = 361
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Translate From Clipboard (Tray Icon Double-Click)'
+          ClientHeight = 47
+          ClientWidth = 461
+          TabOrder = 3
+          object LabelTransFromClipboard: TLabel
+            Left = 8
+            Height = 31
+            Top = 8
+            Width = 298
+            Alignment = taRightJustify
+            Anchors = [akTop, akLeft, akRight]
+            AutoSize = False
+            Caption = 'Translates the current text from the clipboard'
+            WordWrap = True
+          end
+          object EditTransFromClipboard: TEdit
+            Tag = 3
+            Left = 314
+            Height = 23
+            Hint = 'Default Ctrl+Shift+T'
+            Top = 8
+            Width = 131
+            Alignment = taCenter
+            Anchors = [akTop, akRight]
+            Color = clWindow
+            ParentShowHint = False
+            ReadOnly = True
+            ShowHint = True
+            TabOrder = 0
+            OnChange = SettingChange
+            OnKeyDown = EditKeyDown
+            OnMouseLeave = EditMouseLeave
+            OnMouseMove = EditMouseMove
+          end
         end
-        object EditTransFromClipboard: TEdit
-          Tag = 3
-          Left = 240
-          Height = 23
-          Hint = 'Default Ctrl+Shift+T'
-          Top = 8
-          Width = 122
-          Alignment = taCenter
-          Anchors = [akTop, akLeft, akRight]
-          Color = clWindow
-          ParentShowHint = False
-          ReadOnly = True
-          ShowHint = True
-          TabOrder = 0
-          OnChange = SettingChange
-          OnKeyDown = EditKeyDown
-          OnMouseLeave = EditMouseLeave
-          OnMouseMove = EditMouseMove
+        object GroupTransSwap: TGroupBox
+          Left = 5
+          Height = 67
+          Top = 217
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Swap Languages (Tray Icon Middle-Click)'
+          ClientHeight = 47
+          ClientWidth = 461
+          TabOrder = 4
+          object LabelTransSwap: TLabel
+            Left = 8
+            Height = 31
+            Top = 8
+            Width = 298
+            Alignment = taRightJustify
+            Anchors = [akTop, akLeft, akRight]
+            AutoSize = False
+            Caption = 'Swaps the source and target languages'
+            WordWrap = True
+          end
+          object EditTransSwap: TEdit
+            Tag = 2
+            Left = 314
+            Height = 23
+            Hint = 'Default Ctrl+Shift+S'
+            Top = 8
+            Width = 131
+            Alignment = taCenter
+            Anchors = [akTop, akRight]
+            Color = clWindow
+            ParentShowHint = False
+            ReadOnly = True
+            ShowHint = True
+            TabOrder = 0
+            OnChange = SettingChange
+            OnKeyDown = EditKeyDown
+            OnMouseLeave = EditMouseLeave
+            OnMouseMove = EditMouseMove
+          end
         end
-      end
-      object GroupTransClipboard: TGroupBox
-        Left = 5
-        Height = 67
-        Top = 221
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Translate Clipboard to Clipboard'
-        ClientHeight = 47
-        ClientWidth = 378
-        TabOrder = 3
-        object LabelTransClipboard: TLabel
-          Left = 8
-          Height = 31
-          Top = 8
-          Width = 224
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Translates the current text in clipboard and copies the result to the clipboard'
-          WordWrap = True
-        end
-        object EditTransClipboard: TEdit
-          Tag = 4
-          Left = 240
-          Height = 23
-          Hint = 'Default Ctrl+Shift+R'
-          Top = 8
-          Width = 122
-          Alignment = taCenter
-          Anchors = [akTop, akLeft, akRight]
-          Color = clWindow
-          ParentShowHint = False
-          ReadOnly = True
-          ShowHint = True
-          TabOrder = 0
-          OnChange = SettingChange
-          OnKeyDown = EditKeyDown
-          OnMouseLeave = EditMouseLeave
-          OnMouseMove = EditMouseMove
-        end
-      end
-      object GroupTransFromControl: TGroupBox
-        Left = 5
-        Height = 65
-        Top = 293
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Translate From Active Application Selection'
-        ClientHeight = 45
-        ClientWidth = 378
-        TabOrder = 4
-        object LabelTransFromControl: TLabel
-          Left = 8
-          Height = 31
-          Top = 8
-          Width = 224
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Translates the selected text from the active application'
-          WordWrap = True
-        end
-        object EditTransFromControl: TEdit
-          Tag = 5
-          Left = 240
-          Height = 23
-          Hint = 'Default Ctrl+Shift+C'
-          Top = 8
-          Width = 122
-          Alignment = taCenter
-          Anchors = [akTop, akLeft, akRight]
-          Color = clWindow
-          ParentShowHint = False
-          ReadOnly = True
-          ShowHint = True
-          TabOrder = 0
-          OnChange = SettingChange
-          OnKeyDown = EditKeyDown
-          OnMouseLeave = EditMouseLeave
-          OnMouseMove = EditMouseMove
-        end
-      end
-      object GroupTransControl: TGroupBox
-        Left = 5
-        Height = 65
-        Top = 363
-        Width = 382
-        Align = alTop
-        BorderSpacing.Around = 5
-        Caption = 'Translate In Active Application Selection'
-        ClientHeight = 45
-        ClientWidth = 378
-        TabOrder = 5
-        object LabelTransControl: TLabel
-          Left = 8
-          Height = 31
-          Top = 8
-          Width = 224
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Replaces the selected text in the active application with the translation'
-          WordWrap = True
-        end
-        object EditTransControl: TEdit
-          Tag = 6
-          Left = 240
-          Height = 23
-          Hint = 'Default Ctrl+Shift+V'
-          Top = 8
-          Width = 122
-          Alignment = taCenter
-          Anchors = [akTop, akLeft, akRight]
-          Color = clWindow
-          ParentShowHint = False
-          ReadOnly = True
-          ShowHint = True
-          TabOrder = 0
-          OnChange = SettingChange
-          OnKeyDown = EditKeyDown
-          OnMouseLeave = EditMouseLeave
-          OnMouseMove = EditMouseMove
+        object GroupApp: TGroupBox
+          Left = 5
+          Height = 67
+          Top = 5
+          Width = 465
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Toggle Application (Tray Icon Click)'
+          ClientHeight = 47
+          ClientWidth = 461
+          TabOrder = 5
+          object LabelApp: TLabel
+            Left = 8
+            Height = 32
+            Top = 8
+            Width = 298
+            Alignment = taRightJustify
+            Anchors = [akTop, akLeft, akRight]
+            AutoSize = False
+            Caption = 'Shows or hides the main application window'
+            WordWrap = True
+          end
+          object EditApp: TEdit
+            Tag = 1
+            Left = 314
+            Height = 23
+            Hint = 'Default Ctrl+Shift+A'
+            Top = 9
+            Width = 131
+            Alignment = taCenter
+            Anchors = [akTop, akRight]
+            Color = clWindow
+            ParentShowHint = False
+            ReadOnly = True
+            ShowHint = True
+            TabOrder = 0
+            OnChange = SettingChange
+            OnKeyDown = EditKeyDown
+            OnMouseLeave = EditMouseLeave
+            OnMouseMove = EditMouseMove
+          end
         end
       end
     end
   end
-  object BtnApply: TButton
-    Left = 328
-    Height = 25
-    Top = 476
-    Width = 75
-    Anchors = [akRight, akBottom]
-    Caption = 'Apply'
-    Enabled = False
-    TabOrder = 3
-    OnClick = BtnApplyClick
-  end
-  object BtnCancel: TButton
-    Left = 248
-    Height = 25
-    Top = 476
-    Width = 75
-    Anchors = [akRight, akBottom]
-    Cancel = True
-    Caption = 'Cancel'
-    TabOrder = 2
-    OnClick = BtnCancelClick
-  end
-  object BtnOk: TButton
-    Left = 168
-    Height = 25
-    Top = 476
-    Width = 75
-    Anchors = [akRight, akBottom]
-    Caption = 'OK'
+  object ListPages: TListBox
+    Left = 5
+    Height = 515
+    Top = 5
+    Width = 200
+    Align = alLeft
+    BorderSpacing.Left = 5
+    BorderSpacing.Top = 5
+    BorderSpacing.Bottom = 5
+    BorderStyle = bsNone
+    Constraints.MinWidth = 50
+    ExtendedSelect = False
+    ItemHeight = 48
+    Options = []
+    Style = lbOwnerDrawFixed
     TabOrder = 1
-    OnClick = BtnOkClick
+    OnClick = ListPagesClick
+    OnDrawItem = ListPagesDrawItem
+  end
+  object SplitterPages: TSplitter
+    Left = 205
+    Height = 525
+    Top = 0
+    Width = 10
+    AutoSnap = False
+    MinSize = 50
+    ResizeStyle = rsPattern
+    OnMoved = SplitterPagesMoved
+  end
+  object PanelBottom: TPanel
+    Left = 0
+    Height = 35
+    Top = 525
+    Width = 700
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 35
+    ClientWidth = 700
+    TabOrder = 3
+    object BtnOk: TButton
+      Left = 461
+      Height = 25
+      Top = 3
+      Width = 75
+      Anchors = [akRight, akBottom]
+      Caption = 'OK'
+      TabOrder = 0
+      OnClick = BtnOkClick
+    end
+    object BtnCancel: TButton
+      Left = 541
+      Height = 25
+      Top = 3
+      Width = 75
+      Anchors = [akRight, akBottom]
+      Cancel = True
+      Caption = 'Cancel'
+      TabOrder = 1
+      OnClick = BtnCancelClick
+    end
+    object BtnApply: TButton
+      Left = 621
+      Height = 25
+      Top = 3
+      Width = 75
+      Anchors = [akRight, akBottom]
+      Caption = 'Apply'
+      Enabled = False
+      TabOrder = 2
+      OnClick = BtnApplyClick
+    end
   end
   object ColorDialog: TColorDialog
     Color = clBlack
@@ -663,5 +772,213 @@ object formSettingsTrayslate: TformSettingsTrayslate
     MaxFontSize = 0
     Left = 104
     Top = 408
+  end
+  object ImagesPages: TImageList
+    Height = 32
+    Width = 32
+    Left = 32
+    Top = 344
+    Bitmap = {
+      4C7A030000002000000020000000E71800000000000078DAED5A075455C7D646
+      314D638A79C6C4DE8DA82896288A156BC08A8A62C702180BF68A6203A4DB409A
+      14059126458AF40E16AA4815907EE9F572B9F79C33DF3FF7602189EFFDE6ADF7
+      B2FE7FADCC5ADFDA3367E6CE377BCF9E3D056464FEFFA4DE8A464B571884B7AC
+      B17D5AAE62F5B472CA519F5A999EEA93FEDBBC43E71BCF9ABCDBDD72CE3EDF67
+      BBCB259814D988098F9A303BA20E3FADB57C3278A5F9EDFF1497D27EE7B08537
+      625E4F368F7EA560115334C6242A4FE15490C8AAB419971B3AA0260433E17C30
+      37E5883B37BC00AC5C1C8B295659E8B9D4B0B9EFC5D0BCEFCF0414FEA0175434
+      70AF5B4EEF09BFAEFC33DCF38F3AC72C4C1762C85360D9130EAA4F592827B198
+      6B95897B8078110B76400DD02FB59DF48D6C219F4703B26E60156E954886EFBC
+      43EDC1605E840463FC59F4F004FA1E0A60FF0CFF72BBF05AF90CE041A69005C7
+      711211C3821056D7E9395999508EC589D5647C7005867A579201F625E4C7AB2F
+      30D8280BBDF70661BF9E0D078665454209DB5CDFCAAD0A85B8A74936BE1CB47D
+      E9C7F2ABD83EAE5AF684A0B995E1001086824AE45634133DA77072CE2E909CB1
+      F225A72C3DC909B3FBE498892B8E9BB89223462E243E25878868FBDA768670AC
+      98DC79C9B03DE9D864BEDD39EF63F9D51C02AB97251354354A384A4CE8384853
+      4B3B44C246E938FE25A4631572200D1D8488C562629D26667B1967A3EFACCB2A
+      1FCD6FF7B0745902833A21B8F2EC4492EFA3494A020FE2459437292DCA23754D
+      ADA4A24A402A0435A4BCAA9AA2869451945656F3F275690529AB6D220CC390DB
+      A9ED6C6FB37C749F65FAD1F6DF70C7AF7A49AC18B51DE0F2436EA136781F69CB
+      F1448C850604E5C5A4E47509F27372487E6E2EDE222F2717B939B924373B9714
+      9756A0A2BE95481896DC4E11725F5B164266E1ED8FD67FAD9D4FF9E2E80E9E3F
+      3BC482C49FEA8794EBE39168F42D9A851CA9ABAF23D5D535A4BAA68608A8ACAA
+      AE4125B5056F0F6A83063AF7B5220291842176191D6C2F9B1AF4D488FCE8F95F
+      69EB5BBE289A416513C3B58B842879E64F4A93DD4865612AD83773CCBE81342F
+      A1E8A068A5ABA495EB2CB7904E792DAA8AEB77340063971C36FE687EBB4735F3
+      23C41034715C61431579901F4F1E14279247AFD249796303840C214D22318584
+      34B68BA9BE1254B788D0CC80D48B08F10B4D2431492924BD9A40E3B80BB25252
+      B9E49497D0D7376CFF18FE2536C1D54A8F45686C0577F79937D17876859C2FF6
+      23BA81D624A3F415292AAD4256DE2B64E5172233F715D2B30B9055F09AA41794
+      13434B27F238229184858442E3A005CC6C1FF276AA69E398E0E0307CF5496F6D
+      B5951B2C37A96FF1F867FCF3ACC3AA1483DBE9FA0767186B47941F1D275BE36C
+      20E7AC4E6D2224B9AFCB49665E11C92E2C21AFA8AFE7970948A50864A7CE29B8
+      38BAF0EBB08DCE455E4131A9A4EBA0A8B28164E59592DCFC62E2E5F9100909C9
+      487D9E0A2DCD3D191FE29F7C3DFAB5629008824670B16539644BC045A211A00F
+      E3A70F481DE5A968634903EDBF902E729F840278446490A8AC0AECD43A8425B3
+      6692C4F844D4D3205041F789BCB27A64E69722FD452E3232B3515C58C4A53F7D
+      CAE66566B4DFB5B5C6C81FFAEBFE9E7FE2CD2735D3033A505A2FE604ED405631
+      4B5229528A1994B552FFA7513138E535AE384523EE4505AE5D35C3D6AD5AB87A
+      D309CBE62F265EEE1EA4BE558CB49C62840485404B5D0D1B962E82F9E5CB880E
+      0B27C951115C5A621C96FDAC50F721FD7FBA955E3BF9613B042D2CE79A504566
+      7BD793DDCF25B07C9C8F84FC46129192478C690CA6C3202F9E25426DEE4C6CD2
+      D846CCAFDBC3E3BE170475CDE4456E3179969281F58BE6914FBFF89E7CF7DD60
+      32B4CF77C4E20A1D435000C94C8E83A5A161CBEECD5BE3A78D1DB7B02BFF08AB
+      EC86895E4234D0F87FDEBF0AAB821972395388E9E6E9C8AF9710079F08E21D14
+      C3CFB389FE39325751892C57DB41824363C8997D3AE4FE3D77F2B2A00C099161
+      905BB0997CBAFE367699FA10B9592B88D6966D242E3404517E5EE459640817E9
+      EF03D5D94ACE5DF9075B17344CF014A296EA6F9B584BFA1A959221164598EF54
+      4CCA8420D69EE1C4D5C39F348A38F23C2D939C3E759ED83979A2A64A807D1AEA
+      C4C1CA8AE4149490D8F070B2EF8A1D915962428EDC7B8A657B2F120B637312F1
+      C89744F979223EC84FF2D0D1068BA62ADCEDCA3FC0A6B86EA2871045B562AE8A
+      EE2329A5AD24BEA885BC148848762347AE5AB99288D0709294F49C64641749D7
+      176A1B9A101EE0874553E4C9E6356B48714939C2422348C8A34072E4C23572F8
+      CA6D62E3789F04FAF820D0C315098F1F913DAB55B95972A33176D0C0E35DF97F
+      B42F6B94F20B9A249C400C5245638A80C6B5A20E1ACF5C02C9436F5F121F190E
+      7F6F6F12E4E78788B008DC3436C43615658C1F319298995B91AC9C57E449D253
+      F238208004B8BBC2CFCD85F8B838122F473B12EA7197C405F94179EA64E9B964
+      DBEFFDAFDF9DCACABE0E6DF0CC14724DF4E0514663697EAD18B6CEC1E4A16F30
+      89090B252F5FE6E081BD35593A6D3C993C7614C6CBC9A3FFE0316489F252443F
+      7D81F897E5E449CA0B929E9282E8C7C124C4FB0189A073FD242A8C0BBAEF4CA2
+      7D1F88AD4D8C30E4DB6F2EFF9EFF3B5B41E3E7348C7C7EB1918CBBC741513F8A
+      281A7B935FFD9F91E8407F92999E491ED8DCE0E6CB8FE17A2B69719F6A38709F
+      1C8AE63E5D72811B3B7C2CA7A1BE897372F326EB57AEC6A92347494254247C5D
+      EC11E4E14636AB2CC655BDD370B434C1DC89E330B86F3FF5DFF3F738105FFAA5
+      551D64EE801DACEB091FE77DC4F7B93F991E9349C6D93D27D7CE9D24F3A74E42
+      4F157D7C6156869E1EC0977E404FFB56F45A750513E426417EC470D2BFCFB7C2
+      ED6A6A5C426438931C152E71303544BF5E9F164C1C39543879E4B0B62F7BF5DE
+      F8C1F3FDA6BBCB6596DF2E53DA658CC2A40B7499A712B4DBA3D07D0819B0D789
+      F49BF20BBE1F3AB9FE8B457A755F6DB84E71A3F69BF516755FAD35ADECB3E6B2
+      60B88252B3DCC87F048F1E352864E91C2568AAADC0AF9BD5A1A63C1B03460ED7
+      FC983D68C7FA55C185CF0CA967C7B26CAD2D698C1984D7C77AB0BAD3BF468FC1
+      33EC3F762F1D3D7290EDF0A1037D860CEAEF3B78C8A06B1FF39BEDEAEAAEEECE
+      B7F1D0CB99791E63445AA20722E7704FC668B62C147EE8E9F5DFBEE758DFB84E
+      8EEEDA427E1E3290DC77B42251DABD24160BBA6342BF9E817FC5FDEEB0F62EC6
+      DDDE0AD70DF4C5D7F44FB23B277F8E59833E0FFAABEE97A37FE87371FBAAA538
+      B2431DF3C60DC6C87FF4F2FCABEFB83D6564D67CFF4577C3817DBEDA28F377FA
+      CBD3B1A5A364F5568C953DB3FC27D9B35D7046750C9563DE7D9796A5F9D32AA3
+      65CFBEAB1BD3D9EE6D99973FC91E5B324A76DB9481DDFE15EF973232DDFEDBBA
+      CD18D4F7831C433FFFECDD778D596316ECFF65EA0A2D653955ED5F14966B2F9B
+      B85C7B91DCF2BDAAE397EB2C96A318D729E9376D9AD75AF8139FD7593496FFAE
+      4DA596F24F3CF628FFA44ACB2B36CF1EBD8476FD89B4FFB923FAFD610C8D7757
+      7497CA9B5BE56D5E5C9989020379E41BCFC2AB8B93F0EAF214E41BCD44DEB969
+      C83754449E140633906BA0885C9ACFA5F9CE72E7B73C8A57D2DFF250E2E5CBCB
+      8AB0D518ED23E540DDC6DFF0EF9939F26DF9D3D8535304E55717C1403340D270
+      7E1C7BC9DE8CB5B971862D3319CB1AFAAAB055460AACD8721A2BB4A0309FCA0A
+      CDA6B26D52984FA3721ADB4E659DA1029BAE3B82CD3C3C9247C6A1518CD8621A
+      A20F8C6DA11CDF48893629BCB7C1EE1923DEE4BFF92C74DFE8D72567C6E2FED6
+      8D5CC5C921703FBF0C4167E7A3E8EC40B81B0C47C999A1A83E370C557A1FC0D9
+      4E949D1E82DC433F228F229F22F7507F527B6E281E6B0EA89591E9CBF36FFF79
+      70B70FE8FF99CDAFAA253196DA8837DFC8859B6A21F1EA16C4534498EE458291
+      36953A0837D57E031D8451F90E269D90D6459AEF7D031D4498E99028CB7DB0DF
+      AF5A2F2B23F32DBFC72A0EFF207FAC9F7BA9F4BD852590BEBFF00F1B2CC7F192
+      EBF2D8F1B68EFBDF1E45F8DF77FE24392CB85EE60DBFE6ACD1EFF8B5BAF0C7F8
+      DC2D45F25588EFAFE024DE1A60BCD4C196A7801189C07608C175B4806BAF074B
+      412820AAA3DFE96551420FABCC87C1B4B712E96D3D31D09BDA5FE66B7EFEA70E
+      793FFF8A23DEF1477BB994C27703C401BB3936CE008CC30CB0798160E9659F93
+      F2D43E0557150B521D0F494D321AAB9E008D9920D446E27621446DAD10095BD1
+      21457B1B241D74DCE20E0256828440EFBAB7FEB7657A57FB77E1F7B9578A183D
+      74B82CE6241E6B21715D06B6EC291831034ED4044E100749431AE54CC2C3DC5C
+      4C8DE840475D3A68032485F822C2C31151DE77114DF1C8F1A654673A010C6FFF
+      67E14152FEEFA4441BA7BDE7DF39E33D7F9497139D7F31B56B0355A809E86802
+      DB560F86EA23B53D694C43478C0190E38EEAC65788AB2801A94F05C7485090F1
+      1C59C931C87E1A8FEC67F110B536F37E226A6D21AF9E87C3F3A6BE949FE7DAAE
+      D84FF63DFFF02EF6A7FC9216D4E63EE16A7392D156F50A9C90F2D3BE082B8638
+      C6108D7AFDD17A6B1E24A98E680F3C05B4E480A3F6CD7D9E84F4B87064264422
+      252A04AD0D753C7F72283D473BA6C2DF390C2E57773B4D9291E92F253BA43A86
+      8F793BDFCF45A7FE4C2B1A8B32B8A6A20CB4D714836DA53E46FD8FA929A4DC3F
+      A2E15C7F349DEF0FC1C9BE485C2583D23B3BD069DF00C4FABA22DEDF1D12513B
+      FFADA62C17414E8F706C27704A1B9CB793083EF6B6AFA4B14E4AA8B3784A37CD
+      E9C3DEF37B3AF2F6271D2D1C246D5436836DA9EDB4BFB0096DDEBA68B9B30E2D
+      CE1A68BBB70555377FC16B675D7EA1B5D456537FAC44537515EF8BFC981EBB23
+      22A101D7CF033AAA22728136F5B7B212BCE51F4AE7A3EBFC477B53FFA7735EF1
+      3C942B7F1A8CE6D72FE83A6BA22669943E0777AE678603CB7682F0CFB4F41B24
+      B48EE5230207E96261519B9F0E67AFC7500E068EC588E1E00984FB1571AEDE26
+      7038AE6BC2EF0540F71D5DED2FD59F745017A8E178BBD3B9675BA9FE6DD40E74
+      2DB5571543585E803629CA0AA89B56429C5B08B14F025DB3C9103F4C4047C813
+      302DCD48F373846B7A3366B901FD6FB3D89F08380459605D9E13F14B0F85E9D6
+      D53A7FF0FF37FC4C6B1DC7091B68AC69A07DBDE11709797EA6B581B787B85E00
+      517B2DD88054B0FBDDC09EF50173922AA9EF879AC478DC0D8D80663E60FA520C
+      DD04C02D3C0B57428CB1B0C88935A3EBF791AD65D21FFCFF1D7F2D27D55D3A06
+      A6A5E63DBFE035B5893406B68269AAA3B186F23F4AA5BC5E600C0220B9E407F6
+      C243A438DCC2D9EC767C1F0E8C886170A30C70F2D0C49517FBE1237CCD84F8D8
+      E1F4CA99A77FAF7FA487235DD0A2F7FA53B0BFD3BFA39EFA5743153AAAA9ABB4
+      D3390ACB84E4881B24E7BC808B8F50B4D3002FA21EF37B834391084B32009788
+      781887AD8267D11DE439ED61EBFCD5E16D63FE88DF0BDECFFF177CFC073FFF0C
+      DB56C749C134D77092E6068EE91071E2E67A4E542F78832A4EDCD2C0491AEB39
+      495129272E2EE3D8A23236D6D98E6B6D69A4BE51CBEF40AD1D0C92DC8F233BC9
+      1D39F7F671ED5E0324C85A425E84398865DEC482B7C9D7D6349F1A98C6D3B64E
+      48F3E2663EBEF2A071E6379074D0EF1D9D2FC1343552FB643D8BC38B9860E6C4
+      D271D277322E2F398289B1DECD08EE4F040AF5C1E498A286EE71017686A56FF7
+      23FD6DAA7C2CD251965F70DF42FF598083659AAF8D69AA9FAD699AEF6D93345F
+      3B8B343FFB6B697E76967CDED7F63DFCA47536E669010ED7D3DD4DCF3F73BC7C
+      ACB2BA381FE5B919103635E291D93E14049C417EA4191EBBDE2C7030327039BA
+      79C74EBA11F5EBAAFBCD633BFF53E7DF6F6CCF1DB48FF472A9B1D8BFB1F8FAA1
+      AD0F0C8F1CDFABD067DC785A27DBB5E19A493FFD86F3C23695EED298F0263674
+      FB33781B4FBA74D7EB6D9CEB9A8AB3D27A1869AFEFB1A3CB19E43F99D68DFBAE
+      5B7642F83B3D9FFB3ACADE38A1D3437BFEF8EEEA538674FBABEE51EAF23F7453
+      9F34A0DBDF37CABFD3DFE9DF4BE25301BF593FE29BF1DD5B2E077C704DB1D1E7
+      BAB311A7DED5710F7674E3DC77FCDBEB4F723E908F65ED7649DD189BE44F18B3
+      F0777DB5183DFAA7FD92C40BB2DCE3639FBC1B878766F77F5BFFD3FEBFF9DF8E
+      0EFBE4492D57837E90E6130E1B753FB162D6BBBED9788309922CA7AFBBE8DF9F
+      BBBFFDCBCEFCF6EE7F8E37E0B30E3DFF51CC994039AABB3C639DA82FB916F754
+      621E83D6F33ED17F68EFA9BD860B3F09127EB4928B3CE9CB46EA6992073B4673
+      9E3BE52966FF59BD5FAFBED49D18444CCD9CA935ACE552403D732D0E62F32888
+      ED12D17AC91F95F38F0D1BB1A24FAFB36B162CE3F9DD35EF718F8F838BBA0412
+      74008CDF5E08AE2CD045F0C1A1CCFD6D03DFD8E0A37D2176E25ABE6DC460E51F
+      047B6EB78A1D12489B4B2CDB661321693BEB8D766DC73D93153F1F755875AE93
+      D91C85DEC47D731E177402926427968B32E968B75D81C2FD729A78A23F40724F
+      434EDA97D0F5E3F8CF6F5B2D7B62DDD21E713A573E97960BD52E06B49DF186F0
+      A427D3A2ED446A775A237FB55EEADBF69587E4A737DF5481C4693558E73504EE
+      9BD060BE90C42EFD6A14FFE6F5656FD933EA0B64772D9929ABBB46B9C721B5C5
+      FFD417CE6D56FDC3182B169D51136CB244E50653B640F58CF0E58203E9C5F30E
+      6ABCAD4781DA179507C6B8559E54A8A8BB305DD26C3A0775E7A626FD2B1D4F6C
+      5AF9079E2B3BD7F2E3BAA4B96EF5C9F54B1E1D5939CFF7B0DA026F6B0DF588A8
+      459A0857D981071B3657E8AD98FF70FF2A2597331B7FF13DB26ABEFFC1E5733D
+      2F6E5C7CD7698B5262E8EEE9ED69FB272374AFD2EB83AAB33D0EAF9AE7777CDD
+      62DFFD2A4A0F29FC7457CD773BBE71C568FEAD7DEDD27776D05DB9801FCF0195
+      B93F9CD650E1BC6E5B202EC01BCEC61770FBEC61E4448723CACD1196C7B411E9
+      E98A503727181FDC8900A7DBF4CEE9819B27F6C2EB8611D22383E1637991B819
+      EB213EC00BF72C0C607E4C07115EAE146EB03A77043B17FEFC58CA65B467FDBB
+      33CAA1D5CA7C5E6BD1CFF32FEC52A7E7C606B1F45A971617C9C4053E945EEC50
+      F12A0FBE0EB7F82B201177B00F6E99B1ED4D0DD23A36C8F50E5B9495CE5F0693
+      1E072231C45FDA8E29C9C962039C6DF9361492B4D8086C9B37B960D4EA83BCEE
+      CBA78DE7F53EB5FE971E52B95F75CE1E7DCA9F1A1DCA14A43EC11DC373F0B865
+      868AFC6C04DFB3C7F55307F13A2B1D69D16130D8B703A951A128799981EBA775
+      F1C8D9169505397870D3048EF477A5D99988F5F784D9111DBC4C8A4576721C09
+      BC6B875D8B159B56CC98F40FFEFC39439EE7DFB27E1EAFFF81E5F32C2E696D82
+      9F932DF3D0C10ABE77ACE040FBBAB25F137E8EB7F190DEABAE505E47934B0870
+      B183DD153D181EDC055F476BF8D0BA8BDA5BE16C761981F71C607DE1248C7477
+      D3BADBF0B6BF055F271BB8981BE0D715F3B066C684F1FC5BEFDCC9BC1D82B4B4
+      3F7D63FF400F2B73FE4A2D94BE5F300C729F25C1D3E61ABD49302062115CAF19
+      A134EF257FDF789114076FBB1BFC3D477A3F93F62F9D27694A8D8D843FB58934
+      091BEB21696B41538D803DA6B102ABA68EF945CAA73A5D81D75B70F04C9F9AF3
+      E67DB497CD7CE9E7648DC6EA0AAE243F0BF582328479DFC3FD5BE668A8AA4265
+      5111AE9D3D86EC674FD04EC717EBE70927938B68AA2C47CDEB22DC3C770C1971
+      9168AD11203EC81777AEEAF375E579D9A82ACCA3C8674E6F5F07B5E972BF4A79
+      8DB72FE4F5C669833EA6EA6A4375572B3759EFD386BFFE65E27D5A0F7EFA9760
+      A5A305A31DAB1078753FFC2FED8293EE2A381CDF4EFD7A1FCC4EECA7F3A1092B
+      6AEB5BE74FE0A2CE3658525FB0BE781AA6C7F7E1D2AFDB69DD29DCD03B8A9BE7
+      8FE3BADE31E6A0DA626C9833F52AF0EC3381FDD6C13CBFE1BD6F7454E7CCBCA2
+      BE1275977C49877124DAAE3E86C4301CA5C7EEE1F9250D20642F3AFC0F029147
+      9069B21CFE76D7D1525F8B9A92626A9757A82A7E85BAF25208A81D2A0A0B505D
+      5284DAB2125A57C0A39CCE4BA3A08ABD49C7A2F6B39C279D964F9A5DB60FDBB7
+      72812C6E67F7DCAD3273A3F596AD905C0861DB2DC2D066150EF66A384A7E7540
+      FED5F540F03E88A3A81F04D17860B00809BEEE10B7B5A291DAB785DABB99A249
+      5089E6EAAACE32956FCBCDD595F46E5A0EB65DC8B953FF5A3B5DEE09322E7ECB
+      79EE197466832ABFF60EA8295FB0DEB8094DFBEE310D5A4EA8DB73076D7BDD90
+      BEE12232F51682735C8ED61B8B41EE2C47F2D19FE1636D8192EC17BC7FE6A53C
+      41FE1BE4BDC5F3E4F7A06569BB929799C489AE9DADF3A7541ED458FD7567EC53
+      E6F9B554E75EBFB05E154EAAEB44F75537B0F75536B06ECBD459EBE5ABD86BEA
+      8AACBDFA24D696C26EBD3C6BB66E3A7B64DD52F6A8BA0AC52FEC91F59DE8CC2F
+      FB0D0ED37687D72D630FAD5D2A85E4C0AA05D8B958B16DC2E001FC5BACCAA451
+      FC1A58326184D2DA99F2D8386F3234E6284063AE022F37CC9904752505AC9B35
+      09EB29D6BD81FA2C79AC551C8F758A13B076C6783E2F956AD3C7416DC6389A1F
+      D7997F07395EAEA1583A71A413FFF6316F22BFFE55E587F372DAE0EFC7CC1E39
+      70DDAC1103D6288D1CB8466914059FEF4FF163A71CF1E39A5952D03A2994DEC8
+      D96306D1FC80CEEF2307AC99C9A33F9F577ADF6EED8C11FD17BD8DFBD386FDF8
+      6E1F5C39654CF7BFF26C3D7DC41FFF1EB7587E64F7C51346F4583461780FA9E4
+      F3E387F758C86358677EDCB04ED0B2F29BBCF2B8A17C1BA9946281DC5B0CE9A1
+      2C37946FC7D749BF8D1B26BB68E2E8BFEFC57FA7FF13E97F0040C95898
+    }
   end
 end

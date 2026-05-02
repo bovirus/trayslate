@@ -25,7 +25,7 @@ uses
   Spin,
   Math,
   LCLType,
-  langtool;
+  langtool, Types;
 
 type
 
@@ -67,6 +67,7 @@ type
     GroupTransClipboard: TGroupBox;
     GroupTransControl: TGroupBox;
     GroupTrayIcon: TGroupBox;
+    ImagesPages: TImageList;
     LabelIconBackground1: TLabel;
     LabelIconFont1: TLabel;
     LabelMaxLangPairs: TLabel;
@@ -79,14 +80,21 @@ type
     LabelIconFont: TLabel;
     LabelApp: TLabel;
     LabelTransFromClipboard: TLabel;
+    ListPages: TListBox;
     PagesSettings: TPageControl;
+    PanelBottom: TPanel;
     PanelFont: TPanel;
     PageInterface: TTabSheet;
     PageHotkeys: TTabSheet;
+    ScrollHotkeys: TScrollBox;
+    ScrollInterface: TScrollBox;
+    ScrollGeneral: TScrollBox;
     SpinMaxLangPairs: TSpinEdit;
     PageGeneral: TTabSheet;
     SpinRealTimeDelay: TSpinEdit;
+    SplitterPages: TSplitter;
     procedure FormCreate(Sender: TObject);
+    procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BtnApplyClick(Sender: TObject);
     procedure BtnCancelClick(Sender: TObject);
@@ -95,9 +103,12 @@ type
     procedure BtnResetClick(Sender: TObject);
     procedure EditMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
     procedure EditMouseLeave(Sender: TObject);
+    procedure ListPagesClick(Sender: TObject);
+    procedure ListPagesDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
     procedure PagesSettingsChange(Sender: TObject);
     procedure SettingChange(Sender: TObject);
     procedure EditKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
+    procedure SplitterPagesMoved(Sender: TObject);
   private
     FOriginalAutoStart: boolean;
     FOriginalFont: TFont;
@@ -130,6 +141,7 @@ type
   public
     procedure Apply;
     procedure Reset;
+    procedure UpdateListPages;
   end;
 
 var
@@ -166,6 +178,13 @@ begin
   AddCustomColors(ColorIconFont);
   FillFontCombo(ComboIconFontName);
   Reset;
+  UpdateListPages;
+end;
+
+procedure TformSettingsTrayslate.FormResize(Sender: TObject);
+begin
+  formTrayslate.FormSettingsWidth := Width;
+  formTrayslate.FormSettingsHeight := Height;
 end;
 
 procedure TformSettingsTrayslate.FormShow(Sender: TObject);
@@ -202,6 +221,55 @@ procedure TformSettingsTrayslate.EditMouseLeave(Sender: TObject);
 begin
   PagesSettings.SetFocus;
   (Sender as TEdit).SelLength := 0;
+end;
+
+procedure TformSettingsTrayslate.ListPagesClick(Sender: TObject);
+begin
+  // Synchronize PageControl with the selected list item
+  if (ListPages.ItemIndex >= 0) and (ListPages.ItemIndex < PagesSettings.PageCount) then
+  begin
+    PagesSettings.ActivePageIndex := ListPages.ItemIndex;
+  end;
+end;
+
+procedure TformSettingsTrayslate.ListPagesDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
+var
+  ListBox: TListBox;
+  ImgY: integer;
+  TextOffset: integer;
+  TextRect: TRect;
+  TextStyle: TTextStyle;
+begin
+  ListBox := Control as TListBox;
+
+  // Draw item background
+  ListBox.Canvas.FillRect(ARect);
+
+  TextOffset := 4;
+
+  // Calculate vertical centering for the image
+  ImgY := ARect.Top + (ARect.Height - ImagesPages.Height) div 2;
+
+  // Draw image if index is valid
+  if (Index >= 0) and (Index < ImagesPages.Count) then
+  begin
+    ImagesPages.Draw(ListBox.Canvas, ARect.Left + TextOffset, ImgY, Index);
+  end;
+
+  // Prepare text rectangle
+  TextRect := ARect;
+  TextRect.Left := ARect.Left + ImagesPages.Width + (TextOffset * 2);
+  TextRect.Right := ARect.Right - TextOffset;
+
+  // Configure text style for LCL (Lazarus)
+  TextStyle := ListBox.Canvas.TextStyle;
+  TextStyle.Wordbreak := True;
+  TextStyle.SingleLine := False;
+  TextStyle.Layout := tlCenter; // In LCL use 'Layout' and 'tlCenter' for vertical centering
+
+  // Draw wrapped text
+  ListBox.Canvas.Brush.Style := bsClear;
+  ListBox.Canvas.TextRect(TextRect, TextRect.Left, TextRect.Top, ListBox.Items[Index], TextStyle);
 end;
 
 procedure TformSettingsTrayslate.PagesSettingsChange(Sender: TObject);
@@ -345,6 +413,11 @@ begin
   Edit.Text := HotKeyToText(HK);
 end;
 
+procedure TformSettingsTrayslate.SplitterPagesMoved(Sender: TObject);
+begin
+  formTrayslate.FormSettingsSplit := ListPages.Width;
+end;
+
 procedure TformSettingsTrayslate.BtnOkClick(Sender: TObject);
 begin
   Apply;
@@ -373,6 +446,17 @@ procedure TformSettingsTrayslate.SetPanelFont(const AFont: TFont);
 begin
   PanelFont.Caption := ifthen((Trim(AFont.Name) = string.Empty) or (LowerCase(AFont.Name) = 'default'), rdefaultfont, AFont.Name) +
     ',' + IntToStr(AFont.Size);
+end;
+
+procedure TformSettingsTrayslate.UpdateListPages;
+var
+  i: integer;
+begin
+  ListPages.Clear;
+  for i := 0 to PagesSettings.PageCount - 1 do
+    ListPages.Items.Add(PagesSettings.Pages[i].Caption);
+  ListPages.ItemIndex := PagesSettings.PageIndex;
+  PagesSettings.ShowTabs := False;
 end;
 
 procedure TformSettingsTrayslate.Apply;

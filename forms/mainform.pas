@@ -278,6 +278,9 @@ type
     FFormConfigHeight: integer;
     FFormAboutWidth: integer;
     FFormAboutHeight: integer;
+    FFormSettingsWidth: integer;
+    FFormSettingsHeight: integer;
+    FFormSettingsSplit: integer;
     FHotKeyApp: THotKeyData;
     FHotKeyTransSwap: THotKeyData;
     FHotKeyTransFromClipboard: THotKeyData;
@@ -367,6 +370,9 @@ type
     property FormConfigTop: integer read FFormConfigTop write FFormConfigTop;
     property FormConfigWidth: integer read FFormConfigWidth write FFormConfigWidth;
     property FormConfigHeight: integer read FFormConfigHeight write FFormConfigHeight;
+    property FormSettingsWidth: integer read FFormSettingsWidth write FFormSettingsWidth;
+    property FormSettingsHeight: integer read FFormSettingsHeight write FFormSettingsHeight;
+    property FormSettingsSplit: integer read FFormSettingsSplit write FFormSettingsSplit;
     property FormAboutWidth: integer read FFormAboutWidth write FFormAboutWidth;
     property FormAboutHeight: integer read FFormAboutHeight write FFormAboutHeight;
 
@@ -437,6 +443,9 @@ begin
   FFormConfigTop := 0;
   FFormConfigWidth := 0;
   FFormConfigHeight := 0;
+  FFormSettingsWidth := 0;
+  FFormSettingsHeight := 0;
+  FFormSettingsSplit := 0;
   FFormAboutWidth := 0;
   FFormAboutHeight := 0;
   FLastEnterTime := 0;
@@ -767,6 +776,13 @@ begin
 
   formSettingsTrayslate := TformSettingsTrayslate.Create(Application);
   try
+    if FormSettingsWidth > 0 then
+      formSettingsTrayslate.Width := FormSettingsWidth;
+    if FormSettingsHeight > 0 then
+      formSettingsTrayslate.Height := FormSettingsHeight;
+    if FormSettingsSplit > 0 then
+      formSettingsTrayslate.ListPages.Width := FormSettingsSplit;
+
     UnregisterHotKeys;
     formSettingsTrayslate.ShowModal;
   finally
@@ -1753,6 +1769,9 @@ begin
 
   if Assigned(formAboutTrayslate) then
     formAboutTrayslate.MemoAbout.Text := formAboutTrayslate.LblAbout.Caption;
+
+  if Assigned(formSettingsTrayslate) then
+    formSettingsTrayslate.UpdateListPages;
 end;
 
 procedure TformTrayslate.SetAnimate(Angle: integer);
