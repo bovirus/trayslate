@@ -38,8 +38,10 @@ const
   HOTKEY_TRANS_SWAP = 2;
   HOTKEY_TRANS_FROM_CLIPBOARD = 3;
   HOTKEY_TRANS_CLIPBOARD = 4;
-  HOTKEY_TRANS_FROM_CONTROL = 5;
-  HOTKEY_TRANS_CONTROL = 6;
+  HOTKEY_TRANS_CLIPBOARD_POPUP = 5;
+  HOTKEY_TRANS_FROM_CONTROL = 6;
+  HOTKEY_TRANS_CONTROL = 7;
+  HOTKEY_TRANS_CONTROL_POPUP = 8;
   HOTKEY_LANG_BASE = 10;
   {$ENDIF}
 
@@ -460,6 +462,7 @@ begin
 
   case AHotKey.Key of
     0: ; // no key
+
     VK_RETURN: Result := Result + 'Enter';
     VK_SPACE: Result := Result + 'Space';
     VK_TAB: Result := Result + 'Tab';
@@ -475,8 +478,36 @@ begin
     VK_RIGHT: Result := Result + 'Right';
     VK_UP: Result := Result + 'Up';
     VK_DOWN: Result := Result + 'Down';
+
+    // function keys
+    VK_F1..VK_F24:
+      Result := Result + 'F' + IntToStr(AHotKey.Key - VK_F1 + 1);
+
+    // numpad
+    VK_NUMPAD0..VK_NUMPAD9:
+      Result := Result + 'Num' + IntToStr(AHotKey.Key - VK_NUMPAD0);
+
+    VK_MULTIPLY: Result := Result + 'Num*';
+    VK_ADD: Result := Result + 'Num+';
+    VK_SUBTRACT: Result := Result + 'Num-';
+    VK_DIVIDE: Result := Result + 'Num/';
+    VK_DECIMAL: Result := Result + 'Num.';
+
+    // special symbols (важно)
+    VK_OEM_3: Result := Result + '`';       // ~ key (backtick)
+    VK_OEM_MINUS: Result := Result + '-';
+    VK_OEM_PLUS: Result := Result + '=';
+    VK_OEM_4: Result := Result + '[';
+    VK_OEM_6: Result := Result + ']';
+    VK_OEM_5: Result := Result + '\';
+    VK_OEM_1: Result := Result + ';';
+    VK_OEM_7: Result := Result + '''';
+    VK_OEM_COMMA: Result := Result + ',';
+    VK_OEM_PERIOD: Result := Result + '.';
+    VK_OEM_2: Result := Result + '/';
+
     else
-      // For printable ASCII symbols
+      // fallback
       if (AHotKey.Key >= 32) and (AHotKey.Key <= 126) then
         Result := Result + Chr(AHotKey.Key)
       else

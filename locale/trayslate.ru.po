@@ -71,6 +71,18 @@ msgctxt "formsettings.rtransclipboard"
 msgid "Translate Clipboard to Clipboard"
 msgstr "Перевести буфер обмена в буфер обмена"
 
+#: formsettings.rtransclipboardpopup
+msgid "Translate Clipboard to Popup Window"
+msgstr ""
+
+#: formsettings.rtransclipboardpopup_default
+msgid "Default: Ctrl+Shift+P"
+msgstr ""
+
+#: formsettings.rtransclipboardpopup_hint
+msgid "Translates clipboard text to a popup window near the mouse cursor"
+msgstr ""
+
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
 msgid "Default Ctrl+Shift+R"
@@ -85,6 +97,18 @@ msgstr "Переводит текущий текст в буфере обмен�
 msgctxt "formsettings.rtranscontrol"
 msgid "Translate In Active Application Selection"
 msgstr "Перевести в выделенном тексте активного приложения"
+
+#: formsettings.rtranscontrolpopup
+msgid "Translate Selected Text to Popup Window"
+msgstr ""
+
+#: formsettings.rtranscontrolpopup_default
+msgid "Default: Ctrl+Shift+X"
+msgstr ""
+
+#: formsettings.rtranscontrolpopup_hint
+msgid "Translates selected text from the active application to a popup window near the mouse cursor"
+msgstr ""
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -986,3 +1010,4 @@ msgstr "Недавние пары"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

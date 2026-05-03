@@ -18,12 +18,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
     Top = 5
     Width = 523
     TabStop = False
-    ActivePage = PageHotkeys
+    ActivePage = PageGeneral
     Align = alClient
     BorderSpacing.Left = 2
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 2
     object PageGeneral: TTabSheet
       Caption = 'General'
@@ -178,12 +178,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
         Height = 487
         Top = 0
         Width = 515
-        HorzScrollBar.Increment = 27
-        HorzScrollBar.Page = 275
+        HorzScrollBar.Increment = 28
+        HorzScrollBar.Page = 285
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
         VertScrollBar.Increment = 39
-        VertScrollBar.Page = 392
+        VertScrollBar.Page = 397
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
@@ -331,21 +331,22 @@ object formSettingsTrayslate: TformSettingsTrayslate
           end
         end
         object GroupLangPairs: TGroupBox
-          Left = 0
+          Left = 5
           Height = 123
           Top = 269
-          Width = 515
+          Width = 505
           Align = alTop
+          BorderSpacing.Around = 5
           Caption = 'Recent Language Pairs'
           ClientHeight = 103
-          ClientWidth = 511
+          ClientWidth = 501
           TabOrder = 2
           object SpinMaxLangPairs: TSpinEdit
             Left = 157
             Height = 23
             Hint = 'Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel'
             Top = 9
-            Width = 326
+            Width = 316
             Anchors = [akTop, akLeft, akRight]
             MaxValue = 100
             ParentShowHint = False
@@ -458,7 +459,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing, goEditing, goThumbTracking, goSmoothScroll, goHeaderHotTracking, goCellHints, goRowHighlight]
             ParentShowHint = False
             RowCount = 1
-            ScrollBars = ssAutoVertical
             ShowHint = True
             TabOrder = 0
             OnDrawCell = GridHotkeysDrawCell

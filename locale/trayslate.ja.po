@@ -71,6 +71,18 @@ msgctxt "formsettings.rtransclipboard"
 msgid "Translate Clipboard to Clipboard"
 msgstr "クリップボードをクリップボードに翻訳"
 
+#: formsettings.rtransclipboardpopup
+msgid "Translate Clipboard to Popup Window"
+msgstr ""
+
+#: formsettings.rtransclipboardpopup_default
+msgid "Default: Ctrl+Shift+P"
+msgstr ""
+
+#: formsettings.rtransclipboardpopup_hint
+msgid "Translates clipboard text to a popup window near the mouse cursor"
+msgstr ""
+
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
 msgid "Default Ctrl+Shift+R"
@@ -85,6 +97,18 @@ msgstr "クリップボード内の現在のテキストを翻訳し、結果を
 msgctxt "formsettings.rtranscontrol"
 msgid "Translate In Active Application Selection"
 msgstr "アクティブアプリケーションの選択範囲を翻訳"
+
+#: formsettings.rtranscontrolpopup
+msgid "Translate Selected Text to Popup Window"
+msgstr ""
+
+#: formsettings.rtranscontrolpopup_default
+msgid "Default: Ctrl+Shift+X"
+msgstr ""
+
+#: formsettings.rtranscontrolpopup_hint
+msgid "Translates selected text from the active application to a popup window near the mouse cursor"
+msgstr ""
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -986,3 +1010,4 @@ msgstr "最近のペア"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

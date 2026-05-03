@@ -285,8 +285,10 @@ type
     FHotKeyTransSwap: THotKeyData;
     FHotKeyTransFromClipboard: THotKeyData;
     FHotKeyTransClipboard: THotKeyData;
+    FHotKeyTransClipboardPopup: THotKeyData;
     FHotKeyTransFromControl: THotKeyData;
     FHotKeyTransControl: THotKeyData;
+    FHotKeyTransControlPopup: THotKeyData;
 
     // TrayIcon
     FAutoStart: boolean;
@@ -311,8 +313,10 @@ type
     procedure TranslateMemo(ADetectLanguage: boolean = True);
     procedure TranslateFromClipboard;
     procedure TranslateClipboard;
+    procedure TranslateClipboardPopup;
     procedure TranslateFromControl(Data: PtrInt);
     procedure TranslateControl(Data: PtrInt);
+    procedure TranslateControlPopup(Data: PtrInt);
     procedure SetLanguage(aLanguage: string = string.Empty);
   protected
     {$IFDEF WINDOWS}
@@ -380,8 +384,10 @@ type
     property HotKeyTransSwap: THotKeyData read FHotKeyTransSwap write FHotKeyTransSwap;
     property HotKeyTransFromClipboard: THotKeyData read FHotKeyTransFromClipboard write FHotKeyTransFromClipboard;
     property HotKeyTransClipboard: THotKeyData read FHotKeyTransClipboard write FHotKeyTransClipboard;
+    property HotKeyTransClipboardPopup: THotKeyData read FHotKeyTransClipboardPopup write FHotKeyTransClipboardPopup;
     property HotKeyTransFromControl: THotKeyData read FHotKeyTransFromControl write FHotKeyTransFromControl;
     property HotKeyTransControl: THotKeyData read FHotKeyTransControl write FHotKeyTransControl;
+    property HotKeyTransControlPopup: THotKeyData read FHotKeyTransControlPopup write FHotKeyTransControlPopup;
   end;
 
 var
@@ -454,6 +460,7 @@ begin
 
   // HotKeys Initialize
   // Ctrl+Shift+A
+  // Ctrl+Shift+A
   FHotKeyApp.Modifiers := MOD_CONTROL or MOD_SHIFT;
   FHotKeyApp.Key := Ord('A');
 
@@ -469,13 +476,21 @@ begin
   FHotKeyTransClipboard.Modifiers := MOD_CONTROL or MOD_SHIFT;
   FHotKeyTransClipboard.Key := Ord('R');
 
-  // Ctrl+Shift+Z
+  // Ctrl+Shift+P
+  FHotKeyTransClipboardPopup.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyTransClipboardPopup.Key := Ord('P');
+
+  // Ctrl+Shift+C
   FHotKeyTransFromControl.Modifiers := MOD_CONTROL or MOD_SHIFT;
   FHotKeyTransFromControl.Key := Ord('C');
 
-  // Ctrl+Shift+X
+  // Ctrl+Shift+V
   FHotKeyTransControl.Modifiers := MOD_CONTROL or MOD_SHIFT;
   FHotKeyTransControl.Key := Ord('V');
+
+  // Ctrl+Shift+X
+  FHotKeyTransControlPopup.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyTransControlPopup.Key := Ord('X');
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -688,6 +703,11 @@ begin
         TranslateClipboard;
       end;
 
+      HOTKEY_TRANS_CLIPBOARD_POPUP:
+      begin
+        TranslateClipboardPopup;
+      end;
+
       HOTKEY_TRANS_FROM_CONTROL:
       begin
         Application.QueueAsyncCall(@TranslateFromControl, 0);
@@ -696,6 +716,11 @@ begin
       HOTKEY_TRANS_CONTROL:
       begin
         Application.QueueAsyncCall(@TranslateControl, 0);
+      end;
+
+      HOTKEY_TRANS_CONTROL_POPUP:
+      begin
+        Application.QueueAsyncCall(@TranslateControlPopup, 0);
       end;
 
       else
@@ -2020,8 +2045,10 @@ begin
   UnregisterHotKey(Handle, HOTKEY_TRANS_SWAP);
   UnregisterHotKey(Handle, HOTKEY_TRANS_FROM_CLIPBOARD);
   UnregisterHotKey(Handle, HOTKEY_TRANS_CLIPBOARD);
+  UnregisterHotKey(Handle, HOTKEY_TRANS_CLIPBOARD_POPUP);
   UnregisterHotKey(Handle, HOTKEY_TRANS_FROM_CONTROL);
   UnregisterHotKey(Handle, HOTKEY_TRANS_CONTROL);
+  UnregisterHotKey(Handle, HOTKEY_TRANS_CONTROL_POPUP);
   for i := 1 to 9 do
     UnregisterHotKey(Handle, HOTKEY_LANG_BASE + i);
 end;
@@ -2046,11 +2073,17 @@ begin
   if FHotKeyTransClipboard.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_TRANS_CLIPBOARD, FHotKeyTransClipboard.Modifiers, FHotKeyTransClipboard.Key);
 
+  if FHotKeyTransClipboardPopup.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_TRANS_CLIPBOARD_POPUP, FHotKeyTransClipboardPopup.Modifiers, FHotKeyTransClipboardPopup.Key);
+
     if FHotKeyTransFromControl.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_TRANS_FROM_CONTROL, FHotKeyTransFromControl.Modifiers, FHotKeyTransFromControl.Key);
 
   if FHotKeyTransControl.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_TRANS_CONTROL, FHotKeyTransControl.Modifiers, FHotKeyTransControl.Key);
+
+  if FHotKeyTransControlPopup.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_TRANS_CONTROL_POPUP, FHotKeyTransControlPopup.Modifiers, FHotKeyTransControlPopup.Key);
 
   if FRecentPairHotKeys then
     for i := 1 to 9 do
@@ -2479,6 +2512,11 @@ begin
   end;
 end;
 
+procedure TformTrayslate.TranslateClipboardPopup;
+begin
+
+end;
+
 procedure TformTrayslate.TranslateFromControl(Data: PtrInt);
 var
   OriginalClip, SelectedText: string;
@@ -2548,6 +2586,11 @@ begin
     Screen.Cursor := crDefault;
     {$ENDIF}
   end;
+end;
+
+procedure TformTrayslate.TranslateControlPopup(Data: PtrInt);
+begin
+
 end;
 
 { Action Languages }

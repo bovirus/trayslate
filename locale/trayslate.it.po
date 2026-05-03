@@ -76,6 +76,18 @@ msgctxt "formsettings.rtransclipboard"
 msgid "Translate Clipboard to Clipboard"
 msgstr "Traduci dagli appunti negli appunti"
 
+#: formsettings.rtransclipboardpopup
+msgid "Translate Clipboard to Popup Window"
+msgstr ""
+
+#: formsettings.rtransclipboardpopup_default
+msgid "Default: Ctrl+Shift+P"
+msgstr ""
+
+#: formsettings.rtransclipboardpopup_hint
+msgid "Translates clipboard text to a popup window near the mouse cursor"
+msgstr ""
+
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
 msgid "Default Ctrl+Shift+R"
@@ -90,6 +102,18 @@ msgstr "Traduci il testo attuale negli appunti e copia il risultato negli appunt
 msgctxt "formsettings.rtranscontrol"
 msgid "Translate In Active Application Selection"
 msgstr "Traduci nella selezione dell'applicazione attiva"
+
+#: formsettings.rtranscontrolpopup
+msgid "Translate Selected Text to Popup Window"
+msgstr ""
+
+#: formsettings.rtranscontrolpopup_default
+msgid "Default: Ctrl+Shift+X"
+msgstr ""
+
+#: formsettings.rtranscontrolpopup_hint
+msgid "Translates selected text from the active application to a popup window near the mouse cursor"
+msgstr ""
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -1003,3 +1027,4 @@ msgstr "Coppie recenti"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr "Lingua"
+

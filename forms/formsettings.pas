@@ -112,15 +112,19 @@ type
     FOriginalHotKeyTransSwap: THotKeyData;
     FOriginalHotKeyTransFromClipboard: THotKeyData;
     FOriginalHotKeyTransClipboard: THotKeyData;
+    FOriginalHotKeyTransClipboardPopup: THotKeyData;
     FOriginalHotKeyTransFromControl: THotKeyData;
     FOriginalHotKeyTransControl: THotKeyData;
+    FOriginalHotKeyTransControlPopup: THotKeyData;
 
     FHotKeyApp: THotKeyData;
     FHotKeyTransSwap: THotKeyData;
     FHotKeyTransFromClipboard: THotKeyData;
     FHotKeyTransClipboard: THotKeyData;
+    FHotKeyTransClipboardPopup: THotKeyData;
     FHotKeyTransFromControl: THotKeyData;
     FHotKeyTransControl: THotKeyData;
+    FHotKeyTransControlPopup: THotKeyData;
 
     procedure SetPanelFont(const AFont: TFont);
   public
@@ -136,30 +140,44 @@ var
   formSettingsTrayslate: TformSettingsTrayslate;
 
 const
-  HeaderRows: set of byte = [1, 8];
+  HeaderRows: set of byte = [1, 10];
 
 resourcestring
   rdefaultfont = 'Default';
   rglobal = 'Global Hotkeys';
   rrecent = 'Recent Language Pairs';
+
   rapp = 'Toggle Application (Tray Icon Click)';
   rapp_hint = 'Shows or hides the main application window';
   rapp_default = 'Default Ctrl+Shift+A';
+
   rtransswap = 'Swap Languages (Tray Icon Middle-Click)';
   rtransswap_hint = 'Swaps the source and target languages';
   rtransswap_default = 'Default Ctrl+Shift+S';
+
   rtransfromclipboard = 'Translate From Clipboard (Tray Icon Double-Click)';
   rtransfromclipboard_hint = 'Translates the current text from the clipboard';
   rtransfromclipboard_default = 'Default Ctrl+Shift+T';
+
   rtransclipboard = 'Translate Clipboard to Clipboard';
   rtransclipboard_hint = 'Translates the current text in clipboard and copies the result to the clipboard';
   rtransclipboard_default = 'Default Ctrl+Shift+R';
+
+  rtransclipboardpopup = 'Translate Clipboard to Popup Window';
+  rtransclipboardpopup_hint = 'Translates clipboard text to a popup window near the mouse cursor';
+  rtransclipboardpopup_default = 'Default: Ctrl+Shift+P';
+
   rtransfromcontrol = 'Translate From Active Application Selection';
   rtransfromcontrol_hint = 'Translates the selected text from the active application';
   rtransfromcontrol_default = 'Default Ctrl+Shift+C';
+
   rtranscontrol = 'Translate In Active Application Selection';
   rtranscontrol_hint = 'Replaces the selected text in the active application with the translation';
   rtranscontrol_default = 'Default Ctrl+Shift+V';
+
+  rtranscontrolpopup = 'Translate Selected Text to Popup Window';
+  rtranscontrolpopup_hint = 'Translates selected text from the active application to a popup window near the mouse cursor';
+  rtranscontrolpopup_default = 'Default: Ctrl+Shift+X';
 
 implementation
 
@@ -467,8 +485,10 @@ begin
     3: FHotKeyTransSwap := HK;
     4: FHotKeyTransFromClipboard := HK;
     5: FHotKeyTransClipboard := HK;
-    6: FHotKeyTransFromControl := HK;
-    7: FHotKeyTransControl := HK;
+    6: FHotKeyTransClipboardPopup := HK;
+    7: FHotKeyTransFromControl := HK;
+    8: FHotKeyTransControl := HK;
+    9: FHotKeyTransControlPopup := HK;
   end;
 end;
 
@@ -479,8 +499,10 @@ begin
     3: Result := FOriginalHotKeyTransSwap;
     4: Result := FOriginalHotKeyTransFromClipboard;
     5: Result := FOriginalHotKeyTransClipboard;
-    6: Result := FOriginalHotKeyTransFromControl;
-    7: Result := FOriginalHotKeyTransControl;
+    6: Result := FOriginalHotKeyTransClipboardPopup;
+    7: Result := FOriginalHotKeyTransFromControl;
+    8: Result := FOriginalHotKeyTransControl;
+    9: Result := FOriginalHotKeyTransControlPopup;
     else
       Result := Default(THotKeyData);
   end;
@@ -507,12 +529,15 @@ begin
   GridHotkeys.InsertRowWithValues(3, [rtransswap, HotKeyToText(FHotKeyTransSwap), rtransswap_hint, rtransswap_default]);
   GridHotkeys.InsertRowWithValues(4, [rtransfromclipboard, HotKeyToText(FHotKeyTransFromClipboard),
     rtransfromclipboard_hint, rtransfromclipboard_default]);
-  GridHotkeys.InsertRowWithValues(5, [rtransclipboard, HotKeyToText(FHotKeyTransClipboard),
-    rtransclipboard_hint, rtransclipboard_default]);
-  GridHotkeys.InsertRowWithValues(6, [rtransfromcontrol, HotKeyToText(FHotKeyTransFromControl),
+  GridHotkeys.InsertRowWithValues(5, [rtransclipboard, HotKeyToText(FHotKeyTransClipboard), rtransclipboard_hint,
+    rtransclipboard_default]);
+  GridHotkeys.InsertRowWithValues(6, [rtransclipboardpopup, HotKeyToText(FHotKeyTransClipboardPopup),
+    rtransclipboardpopup_hint, rtransclipboardpopup_default]);
+  GridHotkeys.InsertRowWithValues(7, [rtransfromcontrol, HotKeyToText(FHotKeyTransFromControl),
     rtransfromcontrol_hint, rtransfromcontrol_default]);
-  GridHotkeys.InsertRowWithValues(7, [rtranscontrol, HotKeyToText(FHotKeyTransControl), rtranscontrol_hint,
-    rtranscontrol_default]);
+  GridHotkeys.InsertRowWithValues(8, [rtranscontrol, HotKeyToText(FHotKeyTransControl), rtranscontrol_hint, rtranscontrol_default]);
+  GridHotkeys.InsertRowWithValues(9, [rtranscontrolpopup, HotKeyToText(FHotKeyTransControlPopup),
+    rtranscontrolpopup_hint, rtranscontrolpopup_default]);
   //  GridHotkeys.InsertRowWithValues(8, [rrecent]);
 end;
 
@@ -540,8 +565,10 @@ begin
   formTrayslate.HotKeyTransSwap := FHotKeyTransSwap;
   formTrayslate.HotKeyTransFromClipboard := FHotKeyTransFromClipboard;
   formTrayslate.HotKeyTransClipboard := FHotKeyTransClipboard;
+  formTrayslate.HotKeyTransClipboardPopup := FHotKeyTransClipboardPopup;
   formTrayslate.HotKeyTransFromControl := FHotKeyTransFromControl;
   formTrayslate.HotKeyTransControl := FHotKeyTransControl;
+  formTrayslate.HotKeyTransControlPopup := FHotKeyTransControlPopup;
 
   formTrayslate.ComboSource.SelLength := 0;
   formTrayslate.ComboTarget.SelLength := 0;
@@ -572,14 +599,18 @@ begin
   FOriginalHotKeyTransSwap := formTrayslate.HotKeyTransSwap;
   FOriginalHotKeyTransFromClipboard := formTrayslate.HotKeyTransFromClipboard;
   FOriginalHotKeyTransClipboard := formTrayslate.HotKeyTransClipboard;
+  FOriginalHotKeyTransClipboardPopup := formTrayslate.HotKeyTransClipboardPopup;
   FOriginalHotKeyTransFromControl := formTrayslate.HotKeyTransFromControl;
   FOriginalHotKeyTransControl := formTrayslate.HotKeyTransControl;
+  FOriginalHotKeyTransControlPopup := formTrayslate.HotKeyTransControlPopup;
   FHotKeyApp := formTrayslate.HotKeyApp;
   FHotKeyTransSwap := formTrayslate.HotKeyTransSwap;
   FHotKeyTransFromClipboard := formTrayslate.HotKeyTransFromClipboard;
   FHotKeyTransClipboard := formTrayslate.HotKeyTransClipboard;
+  FHotKeyTransClipboardPopup := formTrayslate.HotKeyTransClipboardPopup;
   FHotKeyTransFromControl := formTrayslate.HotKeyTransFromControl;
   FHotKeyTransControl := formTrayslate.HotKeyTransControl;
+  FHotKeyTransControlPopup := formTrayslate.HotKeyTransControlPopup;
 
   CheckAutostart.Checked := FOriginalAutoStart;
   SpinMaxLangPairs.Value := FOriginalMaxLangPairs;

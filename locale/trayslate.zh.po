@@ -71,6 +71,18 @@ msgctxt "formsettings.rtransclipboard"
 msgid "Translate Clipboard to Clipboard"
 msgstr "剪贴板到剪贴板翻译"
 
+#: formsettings.rtransclipboardpopup
+msgid "Translate Clipboard to Popup Window"
+msgstr ""
+
+#: formsettings.rtransclipboardpopup_default
+msgid "Default: Ctrl+Shift+P"
+msgstr ""
+
+#: formsettings.rtransclipboardpopup_hint
+msgid "Translates clipboard text to a popup window near the mouse cursor"
+msgstr ""
+
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
 msgid "Default Ctrl+Shift+R"
@@ -85,6 +97,18 @@ msgstr "翻译剪贴板中的当前文本并将结果复制到剪贴板"
 msgctxt "formsettings.rtranscontrol"
 msgid "Translate In Active Application Selection"
 msgstr "在活动应用程序选择中翻译"
+
+#: formsettings.rtranscontrolpopup
+msgid "Translate Selected Text to Popup Window"
+msgstr ""
+
+#: formsettings.rtranscontrolpopup_default
+msgid "Default: Ctrl+Shift+X"
+msgstr ""
+
+#: formsettings.rtranscontrolpopup_hint
+msgid "Translates selected text from the active application to a popup window near the mouse cursor"
+msgstr ""
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -986,3 +1010,4 @@ msgstr "最近的对"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+
