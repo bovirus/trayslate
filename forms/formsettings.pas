@@ -24,7 +24,7 @@ uses
   ColorBox,
   Spin,
   Math,
-  LCLType,
+  LCLType, Grids,
   langtool, Types;
 
 type
@@ -48,38 +48,21 @@ type
     ColorDialog: TColorDialog;
     ComboIconFontName: TComboBox;
     ComboLangDetect: TComboBox;
-    EditApp: TEdit;
-    EditTransClipboard: TEdit;
-    EditTransFromControl: TEdit;
-    EditTransControl: TEdit;
-    EditTransSwap: TEdit;
-    EditTransFromClipboard: TEdit;
     FontDialog: TFontDialog;
     GroupAutoSwap: TGroupBox;
     GroupAutostart: TGroupBox;
     GroupLangPairs: TGroupBox;
-    GroupTransSwap: TGroupBox;
-    GroupTransFromControl: TGroupBox;
-    GroupTransFromClipboard: TGroupBox;
+    GroupTransFromClipboard1: TGroupBox;
     GroupRealTime: TGroupBox;
-    GroupApp: TGroupBox;
     GroupFont: TGroupBox;
-    GroupTransClipboard: TGroupBox;
-    GroupTransControl: TGroupBox;
     GroupTrayIcon: TGroupBox;
     ImagesPages: TImageList;
     LabelIconBackground1: TLabel;
     LabelIconFont1: TLabel;
     LabelMaxLangPairs: TLabel;
     LabelRealTimeDelay: TLabel;
-    LabelTransClipboard: TLabel;
-    LabelTransFromControl: TLabel;
-    LabelTransControl: TLabel;
-    LabelTransSwap: TLabel;
     LabelIconBackground: TLabel;
     LabelIconFont: TLabel;
-    LabelApp: TLabel;
-    LabelTransFromClipboard: TLabel;
     ListPages: TListBox;
     PagesSettings: TPageControl;
     PanelBottom: TPanel;
@@ -93,6 +76,7 @@ type
     PageGeneral: TTabSheet;
     SpinRealTimeDelay: TSpinEdit;
     SplitterPages: TSplitter;
+    GridHotkeys: TStringGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -101,13 +85,14 @@ type
     procedure BtnFontClick(Sender: TObject);
     procedure BtnOkClick(Sender: TObject);
     procedure BtnResetClick(Sender: TObject);
-    procedure EditMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
-    procedure EditMouseLeave(Sender: TObject);
+    procedure GridHotkeysDrawCell(Sender: TObject; aCol, aRow: integer; aRect: TRect; aState: TGridDrawState);
+    procedure GridHotkeysGetCellHint(Sender: TObject; ACol, ARow: integer; var HintText: string);
+    procedure GridHotkeysKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
+    procedure GridHotkeysSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);
+    procedure GridHotkeysSetEditText(Sender: TObject; ACol, ARow: integer; const Value: string);
     procedure ListPagesClick(Sender: TObject);
     procedure ListPagesDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
-    procedure PagesSettingsChange(Sender: TObject);
     procedure SettingChange(Sender: TObject);
-    procedure EditKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure SplitterPagesMoved(Sender: TObject);
   private
     FOriginalAutoStart: boolean;
@@ -141,14 +126,40 @@ type
   public
     procedure Apply;
     procedure Reset;
-    procedure UpdateListPages;
+    procedure SetHotKeyByRow(Row: integer; const HK: THotKeyData);
+    function GetOriginalHotKey(Row: integer): THotKeyData;
+    procedure FillListPages;
+    procedure FillGridHotkeys;
   end;
 
 var
   formSettingsTrayslate: TformSettingsTrayslate;
 
+const
+  HeaderRows: set of byte = [1, 8];
+
 resourcestring
   rdefaultfont = 'Default';
+  rglobal = 'Global Hotkeys';
+  rrecent = 'Recent Language Pairs';
+  rapp = 'Toggle Application (Tray Icon Click)';
+  rapp_hint = 'Shows or hides the main application window';
+  rapp_default = 'Default Ctrl+Shift+A';
+  rtransswap = 'Swap Languages (Tray Icon Middle-Click)';
+  rtransswap_hint = 'Swaps the source and target languages';
+  rtransswap_default = 'Default Ctrl+Shift+S';
+  rtransfromclipboard = 'Translate From Clipboard (Tray Icon Double-Click)';
+  rtransfromclipboard_hint = 'Translates the current text from the clipboard';
+  rtransfromclipboard_default = 'Default Ctrl+Shift+T';
+  rtransclipboard = 'Translate Clipboard to Clipboard';
+  rtransclipboard_hint = 'Translates the current text in clipboard and copies the result to the clipboard';
+  rtransclipboard_default = 'Default Ctrl+Shift+R';
+  rtransfromcontrol = 'Translate From Active Application Selection';
+  rtransfromcontrol_hint = 'Translates the selected text from the active application';
+  rtransfromcontrol_default = 'Default Ctrl+Shift+C';
+  rtranscontrol = 'Translate In Active Application Selection';
+  rtranscontrol_hint = 'Replaces the selected text in the active application with the translation';
+  rtranscontrol_default = 'Default Ctrl+Shift+V';
 
 implementation
 
@@ -178,7 +189,8 @@ begin
   AddCustomColors(ColorIconFont);
   FillFontCombo(ComboIconFontName);
   Reset;
-  UpdateListPages;
+  FillListPages;
+  FillGridHotkeys;
 end;
 
 procedure TformSettingsTrayslate.FormResize(Sender: TObject);
@@ -211,16 +223,14 @@ begin
   SettingChange(Self);
 end;
 
-procedure TformSettingsTrayslate.EditMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
+procedure TformSettingsTrayslate.GridHotkeysDrawCell(Sender: TObject; aCol, aRow: integer; aRect: TRect; aState: TGridDrawState);
 begin
-  if (Sender as TEdit).Visible and (Sender as TEdit).CanFocus and not (Sender as TEdit).Focused then
-    (Sender as TEdit).SetFocus;
-end;
+  if aRow in HeaderRows then
+    GridHotkeys.Canvas.Font.Style := [fsBold]
+  else
+    GridHotkeys.Canvas.Font.Style := [];
 
-procedure TformSettingsTrayslate.EditMouseLeave(Sender: TObject);
-begin
-  PagesSettings.SetFocus;
-  (Sender as TEdit).SelLength := 0;
+  GridHotkeys.DefaultDrawCell(aCol, aRow, aRect, aState);
 end;
 
 procedure TformSettingsTrayslate.ListPagesClick(Sender: TObject);
@@ -272,10 +282,126 @@ begin
   ListBox.Canvas.TextRect(TextRect, TextRect.Left, TextRect.Top, ListBox.Items[Index], TextStyle);
 end;
 
-procedure TformSettingsTrayslate.PagesSettingsChange(Sender: TObject);
+procedure TformSettingsTrayslate.GridHotkeysGetCellHint(Sender: TObject; ACol, ARow: integer; var HintText: string);
 begin
-  if PagesSettings.ActivePage = PageHotkeys then
-    PagesSettings.SetFocus;
+  if ACol = 0 then
+    HintText := GridHotkeys.Cells[2, ARow]  // hidden hint column
+  else
+  if ACol = 1 then
+    HintText := GridHotkeys.Cells[3, ARow]  // hidden default column
+  else
+    HintText := string.Empty;
+end;
+
+procedure TformSettingsTrayslate.GridHotkeysKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
+var
+  HK: THotKeyData;
+  HasRealKey: boolean;
+begin
+  // Enter outside editor → start editing column 1
+  if (Key = VK_RETURN) and (not GridHotkeys.EditorMode) then
+  begin
+    GridHotkeys.Col := 1;
+    GridHotkeys.EditorMode := True;
+    Key := 0;
+    Exit;
+  end;
+
+  // Enter inside editor → confirm input
+  if (Key = VK_RETURN) and GridHotkeys.EditorMode then
+  begin
+    GridHotkeys.EditorMode := False;
+    Key := 0;
+    Exit;
+  end;
+
+  // Safety guards
+  if (GridHotkeys.Col <> 1) or (not GridHotkeys.EditorMode) then Exit;
+
+  HK := Default(THotKeyData);
+
+  // Escape → restore original + exit editor
+  if (Key = VK_ESCAPE) then
+  begin
+    HK := GetOriginalHotKey(GridHotkeys.Row);
+    SetHotKeyByRow(GridHotkeys.Row, HK);
+
+    GridHotkeys.Cells[1, GridHotkeys.Row] := HotKeyToText(HK);
+
+    GridHotkeys.EditorMode := False;
+
+    Key := 0;
+    Exit;
+  end;
+
+  // Delete → clear hotkey
+  if (Key = VK_DELETE) and (Shift = []) then
+  begin
+    HK.Modifiers := 0;
+    HK.Key := 0;
+
+    SetHotKeyByRow(GridHotkeys.Row, HK);
+    GridHotkeys.Cells[1, GridHotkeys.Row] := string.Empty;
+
+    BtnApply.Enabled := True;
+
+    Key := 0;
+    Exit;
+  end;
+
+  // Build modifiers
+  HK.Modifiers := 0;
+  HK.Key := 0;
+
+  if ssCtrl in Shift then
+    HK.Modifiers := HK.Modifiers or HOTKEY_CTRL;
+
+  if ssShift in Shift then
+    HK.Modifiers := HK.Modifiers or HOTKEY_SHIFT;
+
+  if ssAlt in Shift then
+    HK.Modifiers := HK.Modifiers or HOTKEY_ALT;
+
+  if ssMeta in Shift then
+    HK.Modifiers := HK.Modifiers or HOTKEY_META;
+
+  // Detect real key
+  HasRealKey := not (Key in [VK_CONTROL, VK_SHIFT, VK_MENU, VK_LWIN, VK_RWIN]);
+
+  if HasRealKey then
+  begin
+    HK.Key := Key;
+    Key := 0;
+  end
+  else
+    HK.Key := 0;
+
+  // Apply hotkey
+  SetHotKeyByRow(GridHotkeys.Row, HK);
+
+  GridHotkeys.Cells[1, GridHotkeys.Row] := HotKeyToText(HK);
+
+  BtnApply.Enabled := True;
+end;
+
+procedure TformSettingsTrayslate.GridHotkeysSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);
+begin
+  if (ACol = 1) and (ARow in HeaderRows) then
+    Editor := nil;
+end;
+
+procedure TformSettingsTrayslate.GridHotkeysSetEditText(Sender: TObject; ACol, ARow: integer; const Value: string);
+var
+  OldValue: string;
+begin
+  if ACol <> 1 then Exit;
+
+  OldValue := GridHotkeys.Cells[ACol, ARow];
+
+  // only react if value really changed
+  if Value = OldValue then Exit;
+
+  SettingChange(Sender);
 end;
 
 procedure TformSettingsTrayslate.SettingChange(Sender: TObject);
@@ -297,120 +423,6 @@ begin
     formTrayslate.IconTwoLang := CheckTwoLang.Checked;
     formTrayslate.SetIcon;
   end;
-end;
-
-procedure TformSettingsTrayslate.EditKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
-var
-  HK: THotKeyData;
-  Edit: TEdit;
-begin
-  Edit := TEdit(Sender);
-  HK := Default(THotKeyData);
-
-  // If only DEL pressed → clear hotkey
-  if (Key = VK_DELETE) and (Shift = []) then
-  begin
-    HK.Modifiers := 0;
-    HK.Key := 0;
-
-    case Edit.Tag of
-      HOTKEY_APP: FHotKeyApp := HK;
-      HOTKEY_TRANS_SWAP: FHotKeyTransSwap := HK;
-      HOTKEY_TRANS_FROM_CLIPBOARD: FHotKeyTransFromClipboard := HK;
-      HOTKEY_TRANS_CLIPBOARD: FHotKeyTransClipboard := HK;
-      HOTKEY_TRANS_FROM_CONTROL: FHotKeyTransFromControl := HK;
-      HOTKEY_TRANS_CONTROL: FHotKeyTransControl := HK;
-    end;
-
-    Edit.Text := string.Empty;
-    Key := 0; // block default delete behavior
-    Exit;
-  end
-  else
-  if (Key = VK_ESCAPE) and (Shift = []) then
-  begin
-    case Edit.Tag of
-      HOTKEY_APP:
-      begin
-        FHotKeyApp := FOriginalHotKeyApp;
-        HK := FHotKeyApp;
-      end;
-
-      HOTKEY_TRANS_SWAP:
-      begin
-        FHotKeyTransSwap := FOriginalHotKeyTransSwap;
-        HK := FHotKeyTransSwap;
-      end;
-
-      HOTKEY_TRANS_FROM_CLIPBOARD:
-      begin
-        FHotKeyTransFromClipboard := FOriginalHotKeyTransFromClipboard;
-        HK := FHotKeyTransFromClipboard;
-      end;
-
-      HOTKEY_TRANS_CLIPBOARD:
-      begin
-        FHotKeyTransClipboard := FOriginalHotKeyTransClipboard;
-        HK := FHotKeyTransClipboard;
-      end;
-
-      HOTKEY_TRANS_FROM_CONTROL:
-      begin
-        FHotKeyTransFromControl := FOriginalHotKeyTransFromControl;
-        HK := FHotKeyTransFromControl;
-      end;
-
-      HOTKEY_TRANS_CONTROL:
-      begin
-        FHotKeyTransControl := FOriginalHotKeyTransControl;
-        HK := FHotKeyTransControl;
-      end;
-    end;
-
-    Edit.Text := HotKeyToText(HK);
-    Key := 0;
-    Exit;
-  end
-  else
-  if (Key = VK_TAB) and (Shift = []) then
-    Exit;
-
-  // Initialize
-  HK.Modifiers := 0;
-  HK.Key := 0;
-
-  // Set modifiers
-  if ssCtrl in Shift then
-    HK.Modifiers := HK.Modifiers or HOTKEY_CTRL;
-
-  if ssShift in Shift then
-    HK.Modifiers := HK.Modifiers or HOTKEY_SHIFT;
-
-  if ssAlt in Shift then
-    HK.Modifiers := HK.Modifiers or HOTKEY_ALT;
-
-  if ssMeta in Shift then
-    HK.Modifiers := HK.Modifiers or HOTKEY_META;
-
-  // Set key if not a pure modifier
-  if (Key <> VK_CONTROL) and (Key <> VK_SHIFT) and (Key <> VK_MENU) and (Key <> VK_LWIN) and (Key <> VK_RWIN) then
-  begin
-    HK.Key := Key;
-    Key := 0; // block default processing
-  end;
-
-  // Update hotkey
-  case Edit.Tag of
-    HOTKEY_APP: FHotKeyApp := HK;
-    HOTKEY_TRANS_SWAP: FHotKeyTransSwap := HK;
-    HOTKEY_TRANS_FROM_CLIPBOARD: FHotKeyTransFromClipboard := HK;
-    HOTKEY_TRANS_CLIPBOARD: FHotKeyTransClipboard := HK;
-    HOTKEY_TRANS_FROM_CONTROL: FHotKeyTransFromControl := HK;
-    HOTKEY_TRANS_CONTROL: FHotKeyTransControl := HK;
-  end;
-
-  // Update Edit text
-  Edit.Text := HotKeyToText(HK);
 end;
 
 procedure TformSettingsTrayslate.SplitterPagesMoved(Sender: TObject);
@@ -448,7 +460,33 @@ begin
     ',' + IntToStr(AFont.Size);
 end;
 
-procedure TformSettingsTrayslate.UpdateListPages;
+procedure TformSettingsTrayslate.SetHotKeyByRow(Row: integer; const HK: THotKeyData);
+begin
+  case Row of
+    2: FHotKeyApp := HK;
+    3: FHotKeyTransSwap := HK;
+    4: FHotKeyTransFromClipboard := HK;
+    5: FHotKeyTransClipboard := HK;
+    6: FHotKeyTransFromControl := HK;
+    7: FHotKeyTransControl := HK;
+  end;
+end;
+
+function TformSettingsTrayslate.GetOriginalHotKey(Row: integer): THotKeyData;
+begin
+  case Row of
+    2: Result := FOriginalHotKeyApp;
+    3: Result := FOriginalHotKeyTransSwap;
+    4: Result := FOriginalHotKeyTransFromClipboard;
+    5: Result := FOriginalHotKeyTransClipboard;
+    6: Result := FOriginalHotKeyTransFromControl;
+    7: Result := FOriginalHotKeyTransControl;
+    else
+      Result := Default(THotKeyData);
+  end;
+end;
+
+procedure TformSettingsTrayslate.FillListPages;
 var
   i: integer;
 begin
@@ -457,6 +495,25 @@ begin
     ListPages.Items.Add(PagesSettings.Pages[i].Caption);
   ListPages.ItemIndex := PagesSettings.PageIndex;
   PagesSettings.ShowTabs := False;
+end;
+
+procedure TformSettingsTrayslate.FillGridHotkeys;
+begin
+  while GridHotkeys.RowCount > GridHotkeys.FixedRows do
+    GridHotkeys.DeleteRow(GridHotkeys.RowCount - 1);
+
+  GridHotkeys.InsertRowWithValues(1, [rglobal]);
+  GridHotkeys.InsertRowWithValues(2, [rapp, HotKeyToText(FHotKeyApp), rapp_hint, rapp_default]);
+  GridHotkeys.InsertRowWithValues(3, [rtransswap, HotKeyToText(FHotKeyTransSwap), rtransswap_hint, rtransswap_default]);
+  GridHotkeys.InsertRowWithValues(4, [rtransfromclipboard, HotKeyToText(FHotKeyTransFromClipboard),
+    rtransfromclipboard_hint, rtransfromclipboard_default]);
+  GridHotkeys.InsertRowWithValues(5, [rtransclipboard, HotKeyToText(FHotKeyTransClipboard),
+    rtransclipboard_hint, rtransclipboard_default]);
+  GridHotkeys.InsertRowWithValues(6, [rtransfromcontrol, HotKeyToText(FHotKeyTransFromControl),
+    rtransfromcontrol_hint, rtransfromcontrol_default]);
+  GridHotkeys.InsertRowWithValues(7, [rtranscontrol, HotKeyToText(FHotKeyTransControl), rtranscontrol_hint,
+    rtranscontrol_default]);
+  //  GridHotkeys.InsertRowWithValues(8, [rrecent]);
 end;
 
 procedure TformSettingsTrayslate.Apply;
@@ -541,12 +598,6 @@ begin
   ColorIconFont.Selected := FOriginalIconFontColor;
   ComboIconFontName.Text := FOriginalIconFontName;
   CheckTwoLang.Checked := FOriginalIconTwoLang;
-  EditApp.Text := HotKeyToText(FOriginalHotKeyApp);
-  EditTransSwap.Text := HotKeyToText(FOriginalHotKeyTransSwap);
-  EditTransFromClipboard.Text := HotKeyToText(FOriginalHotKeyTransFromClipboard);
-  EditTransClipboard.Text := HotKeyToText(FOriginalHotKeyTransClipboard);
-  EditTransFromControl.Text := HotKeyToText(FOriginalHotKeyTransFromControl);
-  EditTransControl.Text := HotKeyToText(FOriginalHotKeyTransControl);
 
   BtnApply.Enabled := False;
 end;

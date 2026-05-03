@@ -37,9 +37,109 @@ msgstr "Indtast navn på ny konfigurationsfil:"
 msgid "The configuration was modified. Save changes?"
 msgstr "Konfigurationen er ændret. Gemme ændringer?"
 
+#: formsettings.rapp
+msgctxt "formsettings.rapp"
+msgid "Toggle Application (Tray Icon Click)"
+msgstr "Vis/skjul program (klik på systembakkeikon)"
+
+#: formsettings.rapp_default
+msgctxt "formsettings.rapp_default"
+msgid "Default Ctrl+Shift+A"
+msgstr "Standard Ctrl+Shift+A"
+
+#: formsettings.rapp_hint
+msgctxt "formsettings.rapp_hint"
+msgid "Shows or hides the main application window"
+msgstr "Viser eller skjuler programmets hovedvindue"
+
 #: formsettings.rdefaultfont
+msgctxt "formsettings.rdefaultfont"
 msgid "Default"
 msgstr ""
+
+#: formsettings.rglobal
+msgid "Global Hotkeys"
+msgstr ""
+
+#: formsettings.rrecent
+msgctxt "formsettings.rrecent"
+msgid "Recent Language Pairs"
+msgstr "Seneste sprogpar"
+
+#: formsettings.rtransclipboard
+msgctxt "formsettings.rtransclipboard"
+msgid "Translate Clipboard to Clipboard"
+msgstr "Oversæt udklipsholder til udklipsholder"
+
+#: formsettings.rtransclipboard_default
+msgctxt "formsettings.rtransclipboard_default"
+msgid "Default Ctrl+Shift+R"
+msgstr "Standard Ctrl+Shift+R"
+
+#: formsettings.rtransclipboard_hint
+msgctxt "formsettings.rtransclipboard_hint"
+msgid "Translates the current text in clipboard and copies the result to the clipboard"
+msgstr "Oversætter den aktuelle tekst i udklipsholderen og kopierer resultatet til udklipsholderen"
+
+#: formsettings.rtranscontrol
+msgctxt "formsettings.rtranscontrol"
+msgid "Translate In Active Application Selection"
+msgstr "Oversæt i markering i aktivt program"
+
+#: formsettings.rtranscontrol_default
+msgctxt "formsettings.rtranscontrol_default"
+msgid "Default Ctrl+Shift+V"
+msgstr "Standard Ctrl+Shift+V"
+
+#: formsettings.rtranscontrol_hint
+msgctxt "formsettings.rtranscontrol_hint"
+msgid "Replaces the selected text in the active application with the translation"
+msgstr "Erstatter den markerede tekst i det aktive program med oversættelsen"
+
+#: formsettings.rtransfromclipboard
+msgctxt "formsettings.rtransfromclipboard"
+msgid "Translate From Clipboard (Tray Icon Double-Click)"
+msgstr "Oversæt fra udklipsholder (dobbeltklik på systembakkeikon)"
+
+#: formsettings.rtransfromclipboard_default
+msgctxt "formsettings.rtransfromclipboard_default"
+msgid "Default Ctrl+Shift+T"
+msgstr "Standard Ctrl+Shift+T"
+
+#: formsettings.rtransfromclipboard_hint
+msgctxt "formsettings.rtransfromclipboard_hint"
+msgid "Translates the current text from the clipboard"
+msgstr "Oversætter den aktuelle tekst fra udklipsholderen"
+
+#: formsettings.rtransfromcontrol
+msgctxt "formsettings.rtransfromcontrol"
+msgid "Translate From Active Application Selection"
+msgstr "Oversæt markeret tekst fra aktivt program"
+
+#: formsettings.rtransfromcontrol_default
+msgctxt "formsettings.rtransfromcontrol_default"
+msgid "Default Ctrl+Shift+C"
+msgstr "Standard Ctrl+Shift+C"
+
+#: formsettings.rtransfromcontrol_hint
+msgctxt "formsettings.rtransfromcontrol_hint"
+msgid "Translates the selected text from the active application"
+msgstr "Oversætter den markerede tekst fra det aktive program"
+
+#: formsettings.rtransswap
+msgctxt "formsettings.rtransswap"
+msgid "Swap Languages (Tray Icon Middle-Click)"
+msgstr "Byt sprog (midterklik på systembakkeikon)"
+
+#: formsettings.rtransswap_default
+msgctxt "formsettings.rtransswap_default"
+msgid "Default Ctrl+Shift+S"
+msgstr "Standard Ctrl+Shift+S"
+
+#: formsettings.rtransswap_hint
+msgctxt "formsettings.rtransswap_hint"
+msgid "Swaps the source and target languages"
+msgstr "Bytter om på kilde- og målsprog"
 
 #: languages.rautodetect
 msgid "Auto Detect"
@@ -600,39 +700,25 @@ msgstr "Vis kilde- og/eller målsprog på systembakkeikonet"
 msgid "Config that auto-detects the target language for the selected language pair"
 msgstr "Konfiguration, der automatisk registrerer målsproget for det valgte sprogpar"
 
-#: tformsettingstrayslate.editapp.hint
-msgctxt "tformsettingstrayslate.editapp.hint"
-msgid "Default Ctrl+Shift+A"
-msgstr "Standard Ctrl+Shift+A"
+#: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
+msgid "Action"
+msgstr ""
 
-#: tformsettingstrayslate.edittransclipboard.hint
-msgctxt "tformsettingstrayslate.edittransclipboard.hint"
-msgid "Default Ctrl+Shift+R"
-msgstr "Standard Ctrl+Shift+R"
+#: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
+msgid "Hotkey"
+msgstr ""
 
-#: tformsettingstrayslate.edittranscontrol.hint
-msgctxt "tformsettingstrayslate.edittranscontrol.hint"
-msgid "Default Ctrl+Shift+V"
-msgstr "Standard Ctrl+Shift+V"
+#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
+msgid "Hint"
+msgstr ""
 
-#: tformsettingstrayslate.edittransfromclipboard.hint
-msgctxt "tformsettingstrayslate.edittransfromclipboard.hint"
-msgid "Default Ctrl+Shift+T"
-msgstr "Standard Ctrl+Shift+T"
-
-#: tformsettingstrayslate.edittransfromcontrol.hint
-msgctxt "tformsettingstrayslate.edittransfromcontrol.hint"
-msgid "Default Ctrl+Shift+C"
-msgstr "Standard Ctrl+Shift+C"
-
-#: tformsettingstrayslate.edittransswap.hint
-msgctxt "tformsettingstrayslate.edittransswap.hint"
-msgid "Default Ctrl+Shift+S"
-msgstr "Standard Ctrl+Shift+S"
-
-#: tformsettingstrayslate.groupapp.caption
-msgid "Toggle Application (Tray Icon Click)"
-msgstr "Vis/skjul program (klik på systembakkeikon)"
+#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
+msgid "Default"
+msgstr ""
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -656,35 +742,14 @@ msgstr "Seneste sprogpar"
 msgid "Real-Time Translation"
 msgstr "Realtidsoversættelse"
 
-#: tformsettingstrayslate.grouptransclipboard.caption
-msgid "Translate Clipboard to Clipboard"
-msgstr "Oversæt udklipsholder til udklipsholder"
-
-#: tformsettingstrayslate.grouptranscontrol.caption
-msgid "Translate In Active Application Selection"
-msgstr "Oversæt i markering i aktivt program"
-
-#: tformsettingstrayslate.grouptransfromclipboard.caption
-msgid "Translate From Clipboard (Tray Icon Double-Click)"
-msgstr "Oversæt fra udklipsholder (dobbeltklik på systembakkeikon)"
-
-#: tformsettingstrayslate.grouptransfromcontrol.caption
-msgid "Translate From Active Application Selection"
-msgstr "Oversæt markeret tekst fra aktivt program"
-
-#: tformsettingstrayslate.grouptransswap.caption
-msgctxt "tformsettingstrayslate.grouptransswap.caption"
-msgid "Swap Languages (Tray Icon Middle-Click)"
-msgstr "Byt sprog (midterklik på systembakkeikon)"
+#: tformsettingstrayslate.grouptransfromclipboard1.caption
+msgctxt "tformsettingstrayslate.grouptransfromclipboard1.caption"
+msgid "Hotkeys"
+msgstr "Genvejstaster"
 
 #: tformsettingstrayslate.grouptrayicon.caption
 msgid "Tray Icon"
 msgstr "Systembakkeikon"
-
-#: tformsettingstrayslate.labelapp.caption
-msgctxt "tformsettingstrayslate.labelapp.caption"
-msgid "Shows or hides the main application window"
-msgstr "Viser eller skjuler programmets hovedvindue"
 
 #: tformsettingstrayslate.labeliconbackground.caption
 msgid "Background Color"
@@ -712,38 +777,14 @@ msgstr "Maks. par"
 msgid "Translation Delay, ms"
 msgstr "Oversættelses- forsinkelse, ms"
 
-#: tformsettingstrayslate.labeltransclipboard.caption
-msgctxt "tformsettingstrayslate.labeltransclipboard.caption"
-msgid "Translates the current text in clipboard and copies the result to the clipboard"
-msgstr "Oversætter den aktuelle tekst i udklipsholderen og kopierer resultatet til udklipsholderen"
-
-#: tformsettingstrayslate.labeltranscontrol.caption
-msgctxt "tformsettingstrayslate.labeltranscontrol.caption"
-msgid "Replaces the selected text in the active application with the translation"
-msgstr "Erstatter den markerede tekst i det aktive program med oversættelsen"
-
-#: tformsettingstrayslate.labeltransfromclipboard.caption
-msgctxt "tformsettingstrayslate.labeltransfromclipboard.caption"
-msgid "Translates the current text from the clipboard"
-msgstr "Oversætter den aktuelle tekst fra udklipsholderen"
-
-#: tformsettingstrayslate.labeltransfromcontrol.caption
-msgctxt "tformsettingstrayslate.labeltransfromcontrol.caption"
-msgid "Translates the selected text from the active application"
-msgstr "Oversætter den markerede tekst fra det aktive program"
-
-#: tformsettingstrayslate.labeltransswap.caption
-msgctxt "tformsettingstrayslate.labeltransswap.caption"
-msgid "Swaps the source and target languages"
-msgstr "Bytter om på kilde- og målsprog"
-
 #: tformsettingstrayslate.pagegeneral.caption
 msgid "General"
 msgstr "Generelt"
 
 #: tformsettingstrayslate.pagehotkeys.caption
-msgid "Global Hotkeys"
-msgstr "Globale genvejstaster"
+msgctxt "tformsettingstrayslate.pagehotkeys.caption"
+msgid "Hotkeys"
+msgstr "Genvejstaster"
 
 #: tformsettingstrayslate.pageinterface.caption
 msgctxt "tformsettingstrayslate.pageinterface.caption"

@@ -37,9 +37,109 @@ msgstr "Voer de naam van het nieuwe configuratiebestand in:"
 msgid "The configuration was modified. Save changes?"
 msgstr "De configuratie is gewijzigd. Wijzigingen opslaan?"
 
+#: formsettings.rapp
+msgctxt "formsettings.rapp"
+msgid "Toggle Application (Tray Icon Click)"
+msgstr "Applicatie tonen/verbergen (klik op systeemvakpictogram)"
+
+#: formsettings.rapp_default
+msgctxt "formsettings.rapp_default"
+msgid "Default Ctrl+Shift+A"
+msgstr "Standaard Ctrl+Shift+A"
+
+#: formsettings.rapp_hint
+msgctxt "formsettings.rapp_hint"
+msgid "Shows or hides the main application window"
+msgstr "Toont of verbergt het hoofdvenster van de applicatie"
+
 #: formsettings.rdefaultfont
+msgctxt "formsettings.rdefaultfont"
 msgid "Default"
 msgstr ""
+
+#: formsettings.rglobal
+msgid "Global Hotkeys"
+msgstr ""
+
+#: formsettings.rrecent
+msgctxt "formsettings.rrecent"
+msgid "Recent Language Pairs"
+msgstr "Recente taalparen"
+
+#: formsettings.rtransclipboard
+msgctxt "formsettings.rtransclipboard"
+msgid "Translate Clipboard to Clipboard"
+msgstr "Klembord naar klembord vertalen"
+
+#: formsettings.rtransclipboard_default
+msgctxt "formsettings.rtransclipboard_default"
+msgid "Default Ctrl+Shift+R"
+msgstr "Standaard Ctrl+Shift+R"
+
+#: formsettings.rtransclipboard_hint
+msgctxt "formsettings.rtransclipboard_hint"
+msgid "Translates the current text in clipboard and copies the result to the clipboard"
+msgstr "Vertaal de huidige tekst in het klembord en kopieer het resultaat naar het klembord"
+
+#: formsettings.rtranscontrol
+msgctxt "formsettings.rtranscontrol"
+msgid "Translate In Active Application Selection"
+msgstr "Vertalen in geselecteerde tekst van actieve applicatie"
+
+#: formsettings.rtranscontrol_default
+msgctxt "formsettings.rtranscontrol_default"
+msgid "Default Ctrl+Shift+V"
+msgstr "Standaard Ctrl+Shift+V"
+
+#: formsettings.rtranscontrol_hint
+msgctxt "formsettings.rtranscontrol_hint"
+msgid "Replaces the selected text in the active application with the translation"
+msgstr "Vervangt de geselecteerde tekst in de actieve applicatie door de vertaling"
+
+#: formsettings.rtransfromclipboard
+msgctxt "formsettings.rtransfromclipboard"
+msgid "Translate From Clipboard (Tray Icon Double-Click)"
+msgstr "Vertalen vanuit klembord (dubbelklik op systeemvakpictogram)"
+
+#: formsettings.rtransfromclipboard_default
+msgctxt "formsettings.rtransfromclipboard_default"
+msgid "Default Ctrl+Shift+T"
+msgstr "Standaard Ctrl+Shift+T"
+
+#: formsettings.rtransfromclipboard_hint
+msgctxt "formsettings.rtransfromclipboard_hint"
+msgid "Translates the current text from the clipboard"
+msgstr "Vertaal de huidige tekst van het klembord"
+
+#: formsettings.rtransfromcontrol
+msgctxt "formsettings.rtransfromcontrol"
+msgid "Translate From Active Application Selection"
+msgstr "Vertalen van geselecteerde tekst in actieve applicatie"
+
+#: formsettings.rtransfromcontrol_default
+msgctxt "formsettings.rtransfromcontrol_default"
+msgid "Default Ctrl+Shift+C"
+msgstr "Standaard Ctrl+Shift+C"
+
+#: formsettings.rtransfromcontrol_hint
+msgctxt "formsettings.rtransfromcontrol_hint"
+msgid "Translates the selected text from the active application"
+msgstr "Vertaal de geselecteerde tekst uit de actieve applicatie"
+
+#: formsettings.rtransswap
+msgctxt "formsettings.rtransswap"
+msgid "Swap Languages (Tray Icon Middle-Click)"
+msgstr "Talen wisselen (middelklik op systeemvakpictogram)"
+
+#: formsettings.rtransswap_default
+msgctxt "formsettings.rtransswap_default"
+msgid "Default Ctrl+Shift+S"
+msgstr "Standaard Ctrl+Shift+S"
+
+#: formsettings.rtransswap_hint
+msgctxt "formsettings.rtransswap_hint"
+msgid "Swaps the source and target languages"
+msgstr "Wisselt de bron- en doeltaal om"
 
 #: languages.rautodetect
 msgid "Auto Detect"
@@ -600,39 +700,25 @@ msgstr "Toon bron- en/of doeltaal op het systeemvakpictogram"
 msgid "Config that auto-detects the target language for the selected language pair"
 msgstr "Configuratie die automatisch de doeltaal detecteert voor het geselecteerde taalpaar"
 
-#: tformsettingstrayslate.editapp.hint
-msgctxt "tformsettingstrayslate.editapp.hint"
-msgid "Default Ctrl+Shift+A"
-msgstr "Standaard Ctrl+Shift+A"
+#: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
+msgid "Action"
+msgstr ""
 
-#: tformsettingstrayslate.edittransclipboard.hint
-msgctxt "tformsettingstrayslate.edittransclipboard.hint"
-msgid "Default Ctrl+Shift+R"
-msgstr "Standaard Ctrl+Shift+R"
+#: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
+msgid "Hotkey"
+msgstr ""
 
-#: tformsettingstrayslate.edittranscontrol.hint
-msgctxt "tformsettingstrayslate.edittranscontrol.hint"
-msgid "Default Ctrl+Shift+V"
-msgstr "Standaard Ctrl+Shift+V"
+#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
+msgid "Hint"
+msgstr ""
 
-#: tformsettingstrayslate.edittransfromclipboard.hint
-msgctxt "tformsettingstrayslate.edittransfromclipboard.hint"
-msgid "Default Ctrl+Shift+T"
-msgstr "Standaard Ctrl+Shift+T"
-
-#: tformsettingstrayslate.edittransfromcontrol.hint
-msgctxt "tformsettingstrayslate.edittransfromcontrol.hint"
-msgid "Default Ctrl+Shift+C"
-msgstr "Standaard Ctrl+Shift+C"
-
-#: tformsettingstrayslate.edittransswap.hint
-msgctxt "tformsettingstrayslate.edittransswap.hint"
-msgid "Default Ctrl+Shift+S"
-msgstr "Standaard Ctrl+Shift+S"
-
-#: tformsettingstrayslate.groupapp.caption
-msgid "Toggle Application (Tray Icon Click)"
-msgstr "Applicatie tonen/verbergen (klik op systeemvakpictogram)"
+#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
+msgid "Default"
+msgstr ""
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -656,35 +742,14 @@ msgstr "Recente taalparen"
 msgid "Real-Time Translation"
 msgstr "Realtime vertaling"
 
-#: tformsettingstrayslate.grouptransclipboard.caption
-msgid "Translate Clipboard to Clipboard"
-msgstr "Klembord naar klembord vertalen"
-
-#: tformsettingstrayslate.grouptranscontrol.caption
-msgid "Translate In Active Application Selection"
-msgstr "Vertalen in geselecteerde tekst van actieve applicatie"
-
-#: tformsettingstrayslate.grouptransfromclipboard.caption
-msgid "Translate From Clipboard (Tray Icon Double-Click)"
-msgstr "Vertalen vanuit klembord (dubbelklik op systeemvakpictogram)"
-
-#: tformsettingstrayslate.grouptransfromcontrol.caption
-msgid "Translate From Active Application Selection"
-msgstr "Vertalen van geselecteerde tekst in actieve applicatie"
-
-#: tformsettingstrayslate.grouptransswap.caption
-msgctxt "tformsettingstrayslate.grouptransswap.caption"
-msgid "Swap Languages (Tray Icon Middle-Click)"
-msgstr "Talen wisselen (middelklik op systeemvakpictogram)"
+#: tformsettingstrayslate.grouptransfromclipboard1.caption
+msgctxt "tformsettingstrayslate.grouptransfromclipboard1.caption"
+msgid "Hotkeys"
+msgstr "Sneltoetsen"
 
 #: tformsettingstrayslate.grouptrayicon.caption
 msgid "Tray Icon"
 msgstr "Systeemvakpictogram"
-
-#: tformsettingstrayslate.labelapp.caption
-msgctxt "tformsettingstrayslate.labelapp.caption"
-msgid "Shows or hides the main application window"
-msgstr "Toont of verbergt het hoofdvenster van de applicatie"
 
 #: tformsettingstrayslate.labeliconbackground.caption
 msgid "Background Color"
@@ -712,38 +777,14 @@ msgstr "Max. paren"
 msgid "Translation Delay, ms"
 msgstr "Vertraging vertaling, ms"
 
-#: tformsettingstrayslate.labeltransclipboard.caption
-msgctxt "tformsettingstrayslate.labeltransclipboard.caption"
-msgid "Translates the current text in clipboard and copies the result to the clipboard"
-msgstr "Vertaal de huidige tekst in het klembord en kopieer het resultaat naar het klembord"
-
-#: tformsettingstrayslate.labeltranscontrol.caption
-msgctxt "tformsettingstrayslate.labeltranscontrol.caption"
-msgid "Replaces the selected text in the active application with the translation"
-msgstr "Vervangt de geselecteerde tekst in de actieve applicatie door de vertaling"
-
-#: tformsettingstrayslate.labeltransfromclipboard.caption
-msgctxt "tformsettingstrayslate.labeltransfromclipboard.caption"
-msgid "Translates the current text from the clipboard"
-msgstr "Vertaal de huidige tekst van het klembord"
-
-#: tformsettingstrayslate.labeltransfromcontrol.caption
-msgctxt "tformsettingstrayslate.labeltransfromcontrol.caption"
-msgid "Translates the selected text from the active application"
-msgstr "Vertaal de geselecteerde tekst uit de actieve applicatie"
-
-#: tformsettingstrayslate.labeltransswap.caption
-msgctxt "tformsettingstrayslate.labeltransswap.caption"
-msgid "Swaps the source and target languages"
-msgstr "Wisselt de bron- en doeltaal om"
-
 #: tformsettingstrayslate.pagegeneral.caption
 msgid "General"
 msgstr "Algemeen"
 
 #: tformsettingstrayslate.pagehotkeys.caption
-msgid "Global Hotkeys"
-msgstr "Globale sneltoetsen"
+msgctxt "tformsettingstrayslate.pagehotkeys.caption"
+msgid "Hotkeys"
+msgstr "Sneltoetsen"
 
 #: tformsettingstrayslate.pageinterface.caption
 msgctxt "tformsettingstrayslate.pageinterface.caption"

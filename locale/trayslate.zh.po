@@ -37,9 +37,109 @@ msgstr "输入新配置文件名："
 msgid "The configuration was modified. Save changes?"
 msgstr "配置已被修改。保存更改吗？"
 
+#: formsettings.rapp
+msgctxt "formsettings.rapp"
+msgid "Toggle Application (Tray Icon Click)"
+msgstr "切换应用程序（单击托盘图标）"
+
+#: formsettings.rapp_default
+msgctxt "formsettings.rapp_default"
+msgid "Default Ctrl+Shift+A"
+msgstr "默认 Ctrl+Shift+A"
+
+#: formsettings.rapp_hint
+msgctxt "formsettings.rapp_hint"
+msgid "Shows or hides the main application window"
+msgstr "显示或隐藏主应用程序窗口"
+
 #: formsettings.rdefaultfont
+msgctxt "formsettings.rdefaultfont"
 msgid "Default"
 msgstr ""
+
+#: formsettings.rglobal
+msgid "Global Hotkeys"
+msgstr ""
+
+#: formsettings.rrecent
+msgctxt "formsettings.rrecent"
+msgid "Recent Language Pairs"
+msgstr "最近的语言对"
+
+#: formsettings.rtransclipboard
+msgctxt "formsettings.rtransclipboard"
+msgid "Translate Clipboard to Clipboard"
+msgstr "剪贴板到剪贴板翻译"
+
+#: formsettings.rtransclipboard_default
+msgctxt "formsettings.rtransclipboard_default"
+msgid "Default Ctrl+Shift+R"
+msgstr "默认 Ctrl+Shift+R"
+
+#: formsettings.rtransclipboard_hint
+msgctxt "formsettings.rtransclipboard_hint"
+msgid "Translates the current text in clipboard and copies the result to the clipboard"
+msgstr "翻译剪贴板中的当前文本并将结果复制到剪贴板"
+
+#: formsettings.rtranscontrol
+msgctxt "formsettings.rtranscontrol"
+msgid "Translate In Active Application Selection"
+msgstr "在活动应用程序选择中翻译"
+
+#: formsettings.rtranscontrol_default
+msgctxt "formsettings.rtranscontrol_default"
+msgid "Default Ctrl+Shift+V"
+msgstr "默认 Ctrl+Shift+V"
+
+#: formsettings.rtranscontrol_hint
+msgctxt "formsettings.rtranscontrol_hint"
+msgid "Replaces the selected text in the active application with the translation"
+msgstr "用翻译替换活动应用程序中的选定文本"
+
+#: formsettings.rtransfromclipboard
+msgctxt "formsettings.rtransfromclipboard"
+msgid "Translate From Clipboard (Tray Icon Double-Click)"
+msgstr "从剪贴板翻译（双击托盘图标）"
+
+#: formsettings.rtransfromclipboard_default
+msgctxt "formsettings.rtransfromclipboard_default"
+msgid "Default Ctrl+Shift+T"
+msgstr "默认 Ctrl+Shift+T"
+
+#: formsettings.rtransfromclipboard_hint
+msgctxt "formsettings.rtransfromclipboard_hint"
+msgid "Translates the current text from the clipboard"
+msgstr "翻译来自剪贴板的当前文本"
+
+#: formsettings.rtransfromcontrol
+msgctxt "formsettings.rtransfromcontrol"
+msgid "Translate From Active Application Selection"
+msgstr "翻译活动应用程序中的选中文本"
+
+#: formsettings.rtransfromcontrol_default
+msgctxt "formsettings.rtransfromcontrol_default"
+msgid "Default Ctrl+Shift+C"
+msgstr "默认 Ctrl+Shift+C"
+
+#: formsettings.rtransfromcontrol_hint
+msgctxt "formsettings.rtransfromcontrol_hint"
+msgid "Translates the selected text from the active application"
+msgstr "翻译来自活动应用程序的选定文本"
+
+#: formsettings.rtransswap
+msgctxt "formsettings.rtransswap"
+msgid "Swap Languages (Tray Icon Middle-Click)"
+msgstr "交换语言（中键单击托盘图标）"
+
+#: formsettings.rtransswap_default
+msgctxt "formsettings.rtransswap_default"
+msgid "Default Ctrl+Shift+S"
+msgstr "默认 Ctrl+Shift+S"
+
+#: formsettings.rtransswap_hint
+msgctxt "formsettings.rtransswap_hint"
+msgid "Swaps the source and target languages"
+msgstr "交换源语言和目标语言"
 
 #: languages.rautodetect
 msgid "Auto Detect"
@@ -600,39 +700,25 @@ msgstr "在系统托盘图标上显示源语言和/或目标语言"
 msgid "Config that auto-detects the target language for the selected language pair"
 msgstr "自动检测所选语言对的目标语言的配置"
 
-#: tformsettingstrayslate.editapp.hint
-msgctxt "tformsettingstrayslate.editapp.hint"
-msgid "Default Ctrl+Shift+A"
-msgstr "默认 Ctrl+Shift+A"
+#: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
+msgid "Action"
+msgstr ""
 
-#: tformsettingstrayslate.edittransclipboard.hint
-msgctxt "tformsettingstrayslate.edittransclipboard.hint"
-msgid "Default Ctrl+Shift+R"
-msgstr "默认 Ctrl+Shift+R"
+#: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
+msgid "Hotkey"
+msgstr ""
 
-#: tformsettingstrayslate.edittranscontrol.hint
-msgctxt "tformsettingstrayslate.edittranscontrol.hint"
-msgid "Default Ctrl+Shift+V"
-msgstr "默认 Ctrl+Shift+V"
+#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
+msgid "Hint"
+msgstr ""
 
-#: tformsettingstrayslate.edittransfromclipboard.hint
-msgctxt "tformsettingstrayslate.edittransfromclipboard.hint"
-msgid "Default Ctrl+Shift+T"
-msgstr "默认 Ctrl+Shift+T"
-
-#: tformsettingstrayslate.edittransfromcontrol.hint
-msgctxt "tformsettingstrayslate.edittransfromcontrol.hint"
-msgid "Default Ctrl+Shift+C"
-msgstr "默认 Ctrl+Shift+C"
-
-#: tformsettingstrayslate.edittransswap.hint
-msgctxt "tformsettingstrayslate.edittransswap.hint"
-msgid "Default Ctrl+Shift+S"
-msgstr "默认 Ctrl+Shift+S"
-
-#: tformsettingstrayslate.groupapp.caption
-msgid "Toggle Application (Tray Icon Click)"
-msgstr "切换应用程序（单击托盘图标）"
+#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
+msgid "Default"
+msgstr ""
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -656,35 +742,14 @@ msgstr "最近的语言对"
 msgid "Real-Time Translation"
 msgstr "实时翻译"
 
-#: tformsettingstrayslate.grouptransclipboard.caption
-msgid "Translate Clipboard to Clipboard"
-msgstr "剪贴板到剪贴板翻译"
-
-#: tformsettingstrayslate.grouptranscontrol.caption
-msgid "Translate In Active Application Selection"
-msgstr "在活动应用程序选择中翻译"
-
-#: tformsettingstrayslate.grouptransfromclipboard.caption
-msgid "Translate From Clipboard (Tray Icon Double-Click)"
-msgstr "从剪贴板翻译（双击托盘图标）"
-
-#: tformsettingstrayslate.grouptransfromcontrol.caption
-msgid "Translate From Active Application Selection"
-msgstr "翻译活动应用程序中的选中文本"
-
-#: tformsettingstrayslate.grouptransswap.caption
-msgctxt "tformsettingstrayslate.grouptransswap.caption"
-msgid "Swap Languages (Tray Icon Middle-Click)"
-msgstr "交换语言（中键单击托盘图标）"
+#: tformsettingstrayslate.grouptransfromclipboard1.caption
+msgctxt "tformsettingstrayslate.grouptransfromclipboard1.caption"
+msgid "Hotkeys"
+msgstr "快捷键"
 
 #: tformsettingstrayslate.grouptrayicon.caption
 msgid "Tray Icon"
 msgstr "托盘图标"
-
-#: tformsettingstrayslate.labelapp.caption
-msgctxt "tformsettingstrayslate.labelapp.caption"
-msgid "Shows or hides the main application window"
-msgstr "显示或隐藏主应用程序窗口"
 
 #: tformsettingstrayslate.labeliconbackground.caption
 msgid "Background Color"
@@ -712,38 +777,14 @@ msgstr "最大对数"
 msgid "Translation Delay, ms"
 msgstr "翻译延迟（毫秒）"
 
-#: tformsettingstrayslate.labeltransclipboard.caption
-msgctxt "tformsettingstrayslate.labeltransclipboard.caption"
-msgid "Translates the current text in clipboard and copies the result to the clipboard"
-msgstr "翻译剪贴板中的当前文本并将结果复制到剪贴板"
-
-#: tformsettingstrayslate.labeltranscontrol.caption
-msgctxt "tformsettingstrayslate.labeltranscontrol.caption"
-msgid "Replaces the selected text in the active application with the translation"
-msgstr "用翻译替换活动应用程序中的选定文本"
-
-#: tformsettingstrayslate.labeltransfromclipboard.caption
-msgctxt "tformsettingstrayslate.labeltransfromclipboard.caption"
-msgid "Translates the current text from the clipboard"
-msgstr "翻译来自剪贴板的当前文本"
-
-#: tformsettingstrayslate.labeltransfromcontrol.caption
-msgctxt "tformsettingstrayslate.labeltransfromcontrol.caption"
-msgid "Translates the selected text from the active application"
-msgstr "翻译来自活动应用程序的选定文本"
-
-#: tformsettingstrayslate.labeltransswap.caption
-msgctxt "tformsettingstrayslate.labeltransswap.caption"
-msgid "Swaps the source and target languages"
-msgstr "交换源语言和目标语言"
-
 #: tformsettingstrayslate.pagegeneral.caption
 msgid "General"
 msgstr "常规"
 
 #: tformsettingstrayslate.pagehotkeys.caption
-msgid "Global Hotkeys"
-msgstr "全局热键"
+msgctxt "tformsettingstrayslate.pagehotkeys.caption"
+msgid "Hotkeys"
+msgstr "快捷键"
 
 #: tformsettingstrayslate.pageinterface.caption
 msgctxt "tformsettingstrayslate.pageinterface.caption"

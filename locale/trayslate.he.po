@@ -37,9 +37,109 @@ msgstr "הכנס שם לקובץ תצורה חדש:"
 msgid "The configuration was modified. Save changes?"
 msgstr "התצורה השתנתה. לשמור שינויים?"
 
+#: formsettings.rapp
+msgctxt "formsettings.rapp"
+msgid "Toggle Application (Tray Icon Click)"
+msgstr "הצג/הסתר יישום (לחיצה על סמל המגש)"
+
+#: formsettings.rapp_default
+msgctxt "formsettings.rapp_default"
+msgid "Default Ctrl+Shift+A"
+msgstr "ברירת מחדל Ctrl+Shift+A"
+
+#: formsettings.rapp_hint
+msgctxt "formsettings.rapp_hint"
+msgid "Shows or hides the main application window"
+msgstr "מציג או מסתיר את החלון הראשי של היישום"
+
 #: formsettings.rdefaultfont
+msgctxt "formsettings.rdefaultfont"
 msgid "Default"
 msgstr ""
+
+#: formsettings.rglobal
+msgid "Global Hotkeys"
+msgstr ""
+
+#: formsettings.rrecent
+msgctxt "formsettings.rrecent"
+msgid "Recent Language Pairs"
+msgstr "זוגות שפות אחרונים"
+
+#: formsettings.rtransclipboard
+msgctxt "formsettings.rtransclipboard"
+msgid "Translate Clipboard to Clipboard"
+msgstr "תרגם לוח גזירים ללוח גזירים"
+
+#: formsettings.rtransclipboard_default
+msgctxt "formsettings.rtransclipboard_default"
+msgid "Default Ctrl+Shift+R"
+msgstr "ברירת מחדל Ctrl+Shift+R"
+
+#: formsettings.rtransclipboard_hint
+msgctxt "formsettings.rtransclipboard_hint"
+msgid "Translates the current text in clipboard and copies the result to the clipboard"
+msgstr "מתרגם את הטקסט הנוכחי בלוח הגזירים ומעתיק את התוצאה ללוח הגזירים"
+
+#: formsettings.rtranscontrol
+msgctxt "formsettings.rtranscontrol"
+msgid "Translate In Active Application Selection"
+msgstr "תרגם בבחירת יישום פעיל"
+
+#: formsettings.rtranscontrol_default
+msgctxt "formsettings.rtranscontrol_default"
+msgid "Default Ctrl+Shift+V"
+msgstr "ברירת מחדל Ctrl+Shift+V"
+
+#: formsettings.rtranscontrol_hint
+msgctxt "formsettings.rtranscontrol_hint"
+msgid "Replaces the selected text in the active application with the translation"
+msgstr "מחליף את הטקסט הנבחר ביישום הפעיל בתרגום"
+
+#: formsettings.rtransfromclipboard
+msgctxt "formsettings.rtransfromclipboard"
+msgid "Translate From Clipboard (Tray Icon Double-Click)"
+msgstr "תרגם מלוח גזירים (לחיצה כפולה על סמל המגש)"
+
+#: formsettings.rtransfromclipboard_default
+msgctxt "formsettings.rtransfromclipboard_default"
+msgid "Default Ctrl+Shift+T"
+msgstr "ברירת מחדל Ctrl+Shift+T"
+
+#: formsettings.rtransfromclipboard_hint
+msgctxt "formsettings.rtransfromclipboard_hint"
+msgid "Translates the current text from the clipboard"
+msgstr "מתרגם את הטקסט הנוכחי מלוח הגזירים"
+
+#: formsettings.rtransfromcontrol
+msgctxt "formsettings.rtransfromcontrol"
+msgid "Translate From Active Application Selection"
+msgstr "תרגם טקסט נבחר מיישום פעיל"
+
+#: formsettings.rtransfromcontrol_default
+msgctxt "formsettings.rtransfromcontrol_default"
+msgid "Default Ctrl+Shift+C"
+msgstr "ברירת מחדל Ctrl+Shift+C"
+
+#: formsettings.rtransfromcontrol_hint
+msgctxt "formsettings.rtransfromcontrol_hint"
+msgid "Translates the selected text from the active application"
+msgstr "מתרגם את הטקסט הנבחר מהיישום הפעיל"
+
+#: formsettings.rtransswap
+msgctxt "formsettings.rtransswap"
+msgid "Swap Languages (Tray Icon Middle-Click)"
+msgstr "החלף שפות (לחיצה אמצעית על סמל המגש)"
+
+#: formsettings.rtransswap_default
+msgctxt "formsettings.rtransswap_default"
+msgid "Default Ctrl+Shift+S"
+msgstr "ברירת מחדל Ctrl+Shift+S"
+
+#: formsettings.rtransswap_hint
+msgctxt "formsettings.rtransswap_hint"
+msgid "Swaps the source and target languages"
+msgstr "מחליף בין שפת המקור לשפת היעד"
 
 #: languages.rautodetect
 msgid "Auto Detect"
@@ -600,39 +700,25 @@ msgstr "הצג שפת מקור ו/או יעד על סמל המגש"
 msgid "Config that auto-detects the target language for the selected language pair"
 msgstr "תצורה המזהה אוטומטית את שפת היעד עבור זוג השפות הנבחר"
 
-#: tformsettingstrayslate.editapp.hint
-msgctxt "tformsettingstrayslate.editapp.hint"
-msgid "Default Ctrl+Shift+A"
-msgstr "ברירת מחדל Ctrl+Shift+A"
+#: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
+msgid "Action"
+msgstr ""
 
-#: tformsettingstrayslate.edittransclipboard.hint
-msgctxt "tformsettingstrayslate.edittransclipboard.hint"
-msgid "Default Ctrl+Shift+R"
-msgstr "ברירת מחדל Ctrl+Shift+R"
+#: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
+msgid "Hotkey"
+msgstr ""
 
-#: tformsettingstrayslate.edittranscontrol.hint
-msgctxt "tformsettingstrayslate.edittranscontrol.hint"
-msgid "Default Ctrl+Shift+V"
-msgstr "ברירת מחדל Ctrl+Shift+V"
+#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
+msgid "Hint"
+msgstr ""
 
-#: tformsettingstrayslate.edittransfromclipboard.hint
-msgctxt "tformsettingstrayslate.edittransfromclipboard.hint"
-msgid "Default Ctrl+Shift+T"
-msgstr "ברירת מחדל Ctrl+Shift+T"
-
-#: tformsettingstrayslate.edittransfromcontrol.hint
-msgctxt "tformsettingstrayslate.edittransfromcontrol.hint"
-msgid "Default Ctrl+Shift+C"
-msgstr "ברירת מחדל Ctrl+Shift+C"
-
-#: tformsettingstrayslate.edittransswap.hint
-msgctxt "tformsettingstrayslate.edittransswap.hint"
-msgid "Default Ctrl+Shift+S"
-msgstr "ברירת מחדל Ctrl+Shift+S"
-
-#: tformsettingstrayslate.groupapp.caption
-msgid "Toggle Application (Tray Icon Click)"
-msgstr "הצג/הסתר יישום (לחיצה על סמל המגש)"
+#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
+msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
+msgid "Default"
+msgstr ""
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -656,35 +742,14 @@ msgstr "זוגות שפות אחרונים"
 msgid "Real-Time Translation"
 msgstr "תרגום בזמן אמת"
 
-#: tformsettingstrayslate.grouptransclipboard.caption
-msgid "Translate Clipboard to Clipboard"
-msgstr "תרגם לוח גזירים ללוח גזירים"
-
-#: tformsettingstrayslate.grouptranscontrol.caption
-msgid "Translate In Active Application Selection"
-msgstr "תרגם בבחירת יישום פעיל"
-
-#: tformsettingstrayslate.grouptransfromclipboard.caption
-msgid "Translate From Clipboard (Tray Icon Double-Click)"
-msgstr "תרגם מלוח גזירים (לחיצה כפולה על סמל המגש)"
-
-#: tformsettingstrayslate.grouptransfromcontrol.caption
-msgid "Translate From Active Application Selection"
-msgstr "תרגם טקסט נבחר מיישום פעיל"
-
-#: tformsettingstrayslate.grouptransswap.caption
-msgctxt "tformsettingstrayslate.grouptransswap.caption"
-msgid "Swap Languages (Tray Icon Middle-Click)"
-msgstr "החלף שפות (לחיצה אמצעית על סמל המגש)"
+#: tformsettingstrayslate.grouptransfromclipboard1.caption
+msgctxt "tformsettingstrayslate.grouptransfromclipboard1.caption"
+msgid "Hotkeys"
+msgstr "צירופי מקשים גלובלייםמקשי קיצור"
 
 #: tformsettingstrayslate.grouptrayicon.caption
 msgid "Tray Icon"
 msgstr "סמל מגש"
-
-#: tformsettingstrayslate.labelapp.caption
-msgctxt "tformsettingstrayslate.labelapp.caption"
-msgid "Shows or hides the main application window"
-msgstr "מציג או מסתיר את החלון הראשי של היישום"
 
 #: tformsettingstrayslate.labeliconbackground.caption
 msgid "Background Color"
@@ -712,38 +777,14 @@ msgstr "זוגות מקסימום"
 msgid "Translation Delay, ms"
 msgstr "עיכוב תרגום, ms"
 
-#: tformsettingstrayslate.labeltransclipboard.caption
-msgctxt "tformsettingstrayslate.labeltransclipboard.caption"
-msgid "Translates the current text in clipboard and copies the result to the clipboard"
-msgstr "מתרגם את הטקסט הנוכחי בלוח הגזירים ומעתיק את התוצאה ללוח הגזירים"
-
-#: tformsettingstrayslate.labeltranscontrol.caption
-msgctxt "tformsettingstrayslate.labeltranscontrol.caption"
-msgid "Replaces the selected text in the active application with the translation"
-msgstr "מחליף את הטקסט הנבחר ביישום הפעיל בתרגום"
-
-#: tformsettingstrayslate.labeltransfromclipboard.caption
-msgctxt "tformsettingstrayslate.labeltransfromclipboard.caption"
-msgid "Translates the current text from the clipboard"
-msgstr "מתרגם את הטקסט הנוכחי מלוח הגזירים"
-
-#: tformsettingstrayslate.labeltransfromcontrol.caption
-msgctxt "tformsettingstrayslate.labeltransfromcontrol.caption"
-msgid "Translates the selected text from the active application"
-msgstr "מתרגם את הטקסט הנבחר מהיישום הפעיל"
-
-#: tformsettingstrayslate.labeltransswap.caption
-msgctxt "tformsettingstrayslate.labeltransswap.caption"
-msgid "Swaps the source and target languages"
-msgstr "מחליף בין שפת המקור לשפת היעד"
-
 #: tformsettingstrayslate.pagegeneral.caption
 msgid "General"
 msgstr "כללי"
 
 #: tformsettingstrayslate.pagehotkeys.caption
-msgid "Global Hotkeys"
-msgstr "צירופי מקשים גלובליים"
+msgctxt "tformsettingstrayslate.pagehotkeys.caption"
+msgid "Hotkeys"
+msgstr "צירופי מקשים גלובלייםמקשי קיצור"
 
 #: tformsettingstrayslate.pageinterface.caption
 msgctxt "tformsettingstrayslate.pageinterface.caption"

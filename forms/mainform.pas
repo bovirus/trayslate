@@ -1771,7 +1771,10 @@ begin
     formAboutTrayslate.MemoAbout.Text := formAboutTrayslate.LblAbout.Caption;
 
   if Assigned(formSettingsTrayslate) then
-    formSettingsTrayslate.UpdateListPages;
+  begin
+    formSettingsTrayslate.FillListPages;
+    formSettingsTrayslate.FillGridHotkeys;
+  end;
 end;
 
 procedure TformTrayslate.SetAnimate(Angle: integer);
