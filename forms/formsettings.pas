@@ -13,6 +13,7 @@ interface
 uses
   Forms,
   Classes,
+  Types,
   SysUtils,
   StrUtils,
   Controls,
@@ -24,8 +25,10 @@ uses
   ColorBox,
   Spin,
   Math,
-  LCLType, Grids,
-  langtool, Types;
+  Grids,
+  LCLType,
+  LCLIntf,
+  langtool;
 
 type
 
@@ -65,6 +68,7 @@ type
     LabelIconFont: TLabel;
     ListPages: TListBox;
     PagesSettings: TPageControl;
+    PanelPages: TPanel;
     PanelBottom: TPanel;
     PanelFont: TPanel;
     PageInterface: TTabSheet;
@@ -141,6 +145,8 @@ var
 
 const
   HeaderRows: set of byte = [1, 10];
+  ColorBevel = $00D9D9D9;
+  ColorBevelDark = $00555555;
 
 resourcestring
   rdefaultfont = 'Default';
@@ -193,6 +199,7 @@ var
 begin
   ApplicationTranslate(language, self);
 
+  PanelPages.BevelColor := ThemeColor(ColorBevel, ColorBevelDark);
   PagesSettings.PageIndex := 0;
   BtnCancel.Cancel := True;
   BtnReset.Enabled := True;
@@ -247,6 +254,9 @@ begin
     GridHotkeys.Canvas.Font.Style := [fsBold]
   else
     GridHotkeys.Canvas.Font.Style := [];
+
+  if aRow = 0 then
+    GridHotkeys.Canvas.Brush.Color := clWindow;
 
   GridHotkeys.DefaultDrawCell(aCol, aRow, aRect, aState);
 end;
