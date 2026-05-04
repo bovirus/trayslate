@@ -761,155 +761,153 @@ begin
         else
           PointerValue := ParseJsonByPointer(content, PointerPath);
 
+        PointerValue := UnescapeUnicode(HTTPDecode(PointerValue));
+
         if IsInverted then
         begin
-          if PointerValue <> string.Empty then Continue
+          if PointerValue <> string.Empty then
+          begin
+            Segment := string.Empty; // Hide whole segment if data exists
+            PointerValue := string.Empty;
+          end
           else
-            PointerValue := ' ';
+            PointerValue := ' '; // Satisfaction of !
         end;
 
-        PointerValue := UnescapeUnicode(HTTPDecode(PointerValue));
-        if (not IsInverted) and (PointerValue = string.Empty) then Continue;
-        PointerFound := True;
+        if (not IsInverted) and (PointerValue = string.Empty) then
+          Segment := string.Empty;
+
+        PointerFound := (PointerPath <> string.Empty);
       end;
 
       // 4. Block processing
-      k := 1;
-      while k <= Length(Segment) do
+      if Segment <> string.Empty then
       begin
-        if Segment[k] = '{' then
+        k := 1;
+        while k <= Length(Segment) do
         begin
-          pStart := k;
-          pEnd := k + 1;
-          OpenBrackets := 1;
-          while (pEnd <= Length(Segment)) and (OpenBrackets > 0) do
+          if Segment[k] = '{' then
           begin
-            if Segment[pEnd] = '{' then Inc(OpenBrackets)
-            else if Segment[pEnd] = '}' then Dec(OpenBrackets);
-            if OpenBrackets > 0 then Inc(pEnd);
-          end;
-
-          if (pEnd <= Length(Segment)) and (Segment[pEnd] = '}') then
-          begin
-            BlockContent := Copy(Segment, pStart + 1, pEnd - pStart - 1);
-            HasAnyRegex := False;
-            HasAnyMatch := False;
-
-            innerStart := 1;
-            while innerStart <= Length(BlockContent) do
+            pStart := k;
+            pEnd := k + 1;
+            OpenBrackets := 1;
+            while (pEnd <= Length(Segment)) and (OpenBrackets > 0) do
             begin
-              if BlockContent[innerStart] = '{' then
-              begin
-                innerEnd := innerStart + 1;
-                OpenBrackets := 1;
-                while (innerEnd <= Length(BlockContent)) and (OpenBrackets > 0) do
-                begin
-                  if BlockContent[innerEnd] = '{' then Inc(OpenBrackets)
-                  else if BlockContent[innerEnd] = '}' then Dec(OpenBrackets);
-                  if OpenBrackets > 0 then Inc(innerEnd);
-                end;
-
-                if (innerEnd <= Length(BlockContent)) and (BlockContent[innerEnd] = '}') then
-                begin
-                  InnerBlock := Copy(BlockContent, innerStart + 1, innerEnd - innerStart - 1);
-                  MatchRes := string.Empty;
-
-                  if InnerBlock = '~' then
-                  begin
-                    MatchRes := content;
-                    HasAnyMatch := True;
-                  end
-                  else
-                  begin
-                    HasAnyRegex := True;
-                    MatchGlue := string.Empty;
-                    MatchIdx := -1;
-                    if (Length(InnerBlock) > 2) and (InnerBlock[Length(InnerBlock)] = ']') then
-                    begin
-                      rEnd := Length(InnerBlock) - 1;
-                      rStart := rEnd;
-                      while (rStart > 1) and (InnerBlock[rStart] <> '[') do Dec(rStart);
-                      if InnerBlock[rStart] = '[' then
-                      begin
-                        MatchIdxStr := Copy(InnerBlock, rStart + 1, rEnd - rStart);
-                        if MatchIdxStr = '*' then MatchGlue := ' '
-                        else if MatchIdxStr = '*#10' then MatchGlue := #10
-                        else if TryStrToInt(MatchIdxStr, MatchIdx) then
-                        begin
-                        end;
-
-                        if (MatchGlue <> string.Empty) or (MatchIdx <> -1) then
-                          InnerBlock := Copy(InnerBlock, 1, rStart - 1);
-                      end;
-                    end;
-
-                    try
-                      regex.Expression := InnerBlock;
-                      CurrentIdx := 0;
-                      if regex.Exec(content) then
-                      begin
-                        HasAnyMatch := True;
-                        repeat
-                          if regex.SubExprMatchCount > 0 then MatchResPart := regex.Match[1]
-                          else
-                            MatchResPart := regex.Match[0];
-
-                          if MatchIdx <> -1 then
-                          begin
-                            if CurrentIdx = MatchIdx then
-                            begin
-                              MatchRes := MatchResPart;
-                              Break;
-                            end;
-                          end
-                          else
-                          begin
-                            if MatchRes <> string.Empty then MatchRes := MatchRes + MatchGlue;
-                            MatchRes := MatchRes + MatchResPart;
-                            if MatchGlue = string.Empty then Break;
-                          end;
-                          Inc(CurrentIdx);
-                        until not regex.ExecNext;
-                      end;
-                    except
-                      on E: Exception do
-                      begin
-                        MatchRes := REGEXP_ERROR + E.Message;
-                        HasAnyMatch := True; // Show the error, don't hide the block
-                      end;
-                    end;
-                  end;
-
-                  MatchRes := UnescapeUnicode(HTTPDecode(MatchRes));
-                  Delete(BlockContent, innerStart, innerEnd - innerStart + 1);
-                  Insert(MatchRes, BlockContent, innerStart);
-                  innerStart := innerStart + Length(MatchRes);
-                  Continue;
-                end;
-              end;
-              Inc(innerStart);
+              if Segment[pEnd] = '{' then Inc(OpenBrackets)
+              else if Segment[pEnd] = '}' then Dec(OpenBrackets);
+              if OpenBrackets > 0 then Inc(pEnd);
             end;
 
-            // If we had regexes but none of them found anything (and no errors occurred), hide block
-            if HasAnyRegex and not HasAnyMatch then BlockContent := string.Empty;
-
-            Delete(Segment, pStart, pEnd - pStart + 1);
-            if BlockContent <> string.Empty then
+            if (pEnd <= Length(Segment)) and (Segment[pEnd] = '}') then
             begin
-              Insert(BlockContent, Segment, pStart);
-              k := pStart + Length(BlockContent);
+              BlockContent := Copy(Segment, pStart + 1, pEnd - pStart - 1);
+              HasAnyRegex := False;
+              HasAnyMatch := False;
+
+              innerStart := 1;
+              while innerStart <= Length(BlockContent) do
+              begin
+                if BlockContent[innerStart] = '{' then
+                begin
+                  innerEnd := innerStart + 1;
+                  OpenBrackets := 1;
+                  while (innerEnd <= Length(BlockContent)) and (OpenBrackets > 0) do
+                  begin
+                    if BlockContent[innerEnd] = '{' then Inc(OpenBrackets)
+                    else if BlockContent[innerEnd] = '}' then Dec(OpenBrackets);
+                    if OpenBrackets > 0 then Inc(innerEnd);
+                  end;
+
+                  if (innerEnd <= Length(BlockContent)) and (BlockContent[innerEnd] = '}') then
+                  begin
+                    InnerBlock := Copy(BlockContent, innerStart + 1, innerEnd - innerStart - 1);
+                    MatchRes := string.Empty;
+
+                    if InnerBlock = '~' then
+                    begin
+                      MatchRes := content;
+                      HasAnyMatch := True;
+                    end
+                    else
+                    begin
+                      HasAnyRegex := True;
+                      MatchGlue := string.Empty;
+                      MatchIdx := -1;
+
+                      if (Length(InnerBlock) > 2) and (InnerBlock[Length(InnerBlock)] = ']') then
+                      begin
+                        rEnd := Length(InnerBlock) - 1;
+                        rStart := rEnd;
+                        while (rStart > 1) and (InnerBlock[rStart] <> '[') do Dec(rStart);
+
+                        if (InnerBlock[rStart] = '[') and (InnerBlock[rStart - 1] <> '\') then
+                        begin
+                          MatchIdxStr := Copy(InnerBlock, rStart + 1, rEnd - rStart);
+                          PointerFound := False;
+                          if MatchIdxStr = '*' then begin MatchGlue := ' '; PointerFound := True; end
+                          else if MatchIdxStr = '*#10' then begin MatchGlue := #10; PointerFound := True; end
+                          else if TryStrToInt(MatchIdxStr, MatchIdx) then PointerFound := True;
+
+                          if PointerFound then InnerBlock := Copy(InnerBlock, 1, rStart - 1);
+                          PointerFound := (PointerPath <> string.Empty); // Restore state
+                        end;
+                      end;
+
+                      try
+                        regex.Expression := InnerBlock;
+                        CurrentIdx := 0;
+                        if regex.Exec(content) then
+                        begin
+                          HasAnyMatch := True;
+                          repeat
+                            if regex.SubExprMatchCount > 0 then MatchResPart := regex.Match[1]
+                            else MatchResPart := regex.Match[0];
+
+                            if MatchIdx <> -1 then
+                            begin
+                              if CurrentIdx = MatchIdx then begin MatchRes := MatchResPart; Break; end;
+                            end
+                            else
+                            begin
+                              if MatchRes <> string.Empty then MatchRes := MatchRes + MatchGlue;
+                              MatchRes := MatchRes + MatchResPart;
+                              if MatchGlue = string.Empty then Break;
+                            end;
+                            Inc(CurrentIdx);
+                          until not regex.ExecNext;
+                        end;
+                      except
+                        on E: Exception do begin MatchRes := REGEXP_ERROR + E.Message; HasAnyMatch := True; end;
+                      end;
+                    end;
+
+                    MatchRes := UnescapeUnicode(HTTPDecode(MatchRes));
+                    Delete(BlockContent, innerStart, innerEnd - innerStart + 1);
+                    Insert(MatchRes, BlockContent, innerStart);
+                    innerStart := innerStart + Length(MatchRes);
+                    Continue;
+                  end;
+                end;
+                Inc(innerStart);
+              end;
+
+              if HasAnyRegex and not HasAnyMatch then BlockContent := string.Empty;
+
+              Delete(Segment, pStart, pEnd - pStart + 1);
+              if BlockContent <> string.Empty then
+              begin
+                Insert(BlockContent, Segment, pStart);
+                k := pStart + Length(BlockContent);
+              end
+              else k := pStart;
             end
-            else
-              k := pStart;
+            else Inc(k);
           end
-          else
-            Inc(k);
-        end
-        else
-          Inc(k);
+          else Inc(k);
+        end;
       end;
 
-      if PointerFound and (PointerPath <> string.Empty) then
+      if (PointerPath <> string.Empty) and (Segment <> string.Empty) then
         Segment := StringReplace(Segment, PointerPath, PointerValue, [rfReplaceAll]);
 
       Segment := StringReplace(Segment, '#10', #10, [rfReplaceAll]);
