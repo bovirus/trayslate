@@ -59,12 +59,24 @@ msgstr ""
 
 #: formsettings.rglobal
 msgid "Global Hotkeys"
-msgstr ""
+msgstr "Глабальныя гарачыя клавішы"
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
 msgid "Recent Language Pairs"
 msgstr "Нядаўнія моўныя пары"
+
+#: formsettings.rrecentpair
+msgid "Recent Language Pair"
+msgstr "Апошняя моўная пара"
+
+#: formsettings.rrecentpair_default
+msgid "Default: Ctrl+Shift+"
+msgstr "Па змаўчанні: Ctrl+Shift+"
+
+#: formsettings.rrecentpair_hint
+msgid "Select Recent Language Pair"
+msgstr "Выбраць апошнюю моўную пару"
 
 #: formsettings.rtransclipboard
 msgctxt "formsettings.rtransclipboard"
@@ -73,15 +85,15 @@ msgstr "Перакласці буфер абмену ў буфер абмену"
 
 #: formsettings.rtransclipboardpopup
 msgid "Translate Clipboard to Popup Window"
-msgstr ""
+msgstr "Перакласці буфер абмену ў усплывальнае акно"
 
 #: formsettings.rtransclipboardpopup_default
 msgid "Default: Ctrl+Shift+P"
-msgstr ""
+msgstr "Па змаўчанні: Ctrl+Shift+P"
 
 #: formsettings.rtransclipboardpopup_hint
 msgid "Translates clipboard text to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Перакладае тэкст буфера абмену ў усплывальнае акно каля курсора мышы"
 
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
@@ -100,15 +112,15 @@ msgstr "Перакласці ў вылучаным тэксце актыўнаг
 
 #: formsettings.rtranscontrolpopup
 msgid "Translate Selected Text to Popup Window"
-msgstr ""
+msgstr "Перакласці выбраны тэкст у усплывальнае акно"
 
 #: formsettings.rtranscontrolpopup_default
 msgid "Default: Ctrl+Shift+X"
-msgstr ""
+msgstr "Па змаўчанні: Ctrl+Shift+X"
 
 #: formsettings.rtranscontrolpopup_hint
 msgid "Translates selected text from the active application to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Перакладае выбраны тэкст з актыўнага прыкладання ў усплывальнае акно каля курсора мышы"
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -669,6 +681,11 @@ msgctxt "tformsettingstrayslate.caption"
 msgid "Settings"
 msgstr "Налады"
 
+#: tformsettingstrayslate.checkallowhotkeys.caption
+msgctxt "tformsettingstrayslate.checkallowhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "Уключыць глабальныя гарачыя клавішы"
+
 #: tformsettingstrayslate.checkautoaddlangpairs.caption
 msgid "Auto-Add On Pair Change"
 msgstr "Аўтададаванне пры змене пары"
@@ -704,14 +721,6 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr "Аўтаматычна перакладаць тэкст пад час набору"
 
-#: tformsettingstrayslate.checkrecentpairhotkeys.caption
-msgid "Enable Global Ctrl+Shift+Number Hotkeys"
-msgstr "Уключыць глабальныя спалучэнні Ctrl+Shift+Number"
-
-#: tformsettingstrayslate.checkrecentpairhotkeys.hint
-msgid "When enabled, Ctrl+Shift+Number switches recent language pairs"
-msgstr "Пры ўключэнні Ctrl+Shift+Number пераключае апошнія моўныя пары"
-
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
 msgstr "Паказваць моўную пару"
@@ -727,22 +736,12 @@ msgstr "Канфігурацыя, якая аўтаматычна вызнача
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
 msgid "Action"
-msgstr ""
+msgstr "Дзеянне"
 
 #: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
-msgid "Hotkey"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
-msgid "Hint"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
-msgid "Default"
-msgstr ""
+msgid "Shortcut"
+msgstr "Спалучэнне клавіш"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1010,4 +1009,3 @@ msgstr "Нядаўнія пары"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
-

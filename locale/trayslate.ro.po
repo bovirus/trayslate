@@ -59,12 +59,24 @@ msgstr ""
 
 #: formsettings.rglobal
 msgid "Global Hotkeys"
-msgstr ""
+msgstr "Taste rapide globale"
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
 msgid "Recent Language Pairs"
 msgstr "Perechi de limbi recente"
+
+#: formsettings.rrecentpair
+msgid "Recent Language Pair"
+msgstr "Pereche de limbi recentă"
+
+#: formsettings.rrecentpair_default
+msgid "Default: Ctrl+Shift+"
+msgstr "Implicit: Ctrl+Shift+"
+
+#: formsettings.rrecentpair_hint
+msgid "Select Recent Language Pair"
+msgstr "Selectează perechea de limbi recentă"
 
 #: formsettings.rtransclipboard
 msgctxt "formsettings.rtransclipboard"
@@ -73,15 +85,15 @@ msgstr "Traduce clipboard în clipboard"
 
 #: formsettings.rtransclipboardpopup
 msgid "Translate Clipboard to Popup Window"
-msgstr ""
+msgstr "Tradu clipboard în fereastră pop-up"
 
 #: formsettings.rtransclipboardpopup_default
 msgid "Default: Ctrl+Shift+P"
-msgstr ""
+msgstr "Implicit: Ctrl+Shift+P"
 
 #: formsettings.rtransclipboardpopup_hint
 msgid "Translates clipboard text to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Traduce textul din clipboard într-o fereastră pop-up lângă cursorul mouse-ului"
 
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
@@ -100,15 +112,15 @@ msgstr "Traduce în selecția aplicației active"
 
 #: formsettings.rtranscontrolpopup
 msgid "Translate Selected Text to Popup Window"
-msgstr ""
+msgstr "Tradu textul selectat în fereastră pop-up"
 
 #: formsettings.rtranscontrolpopup_default
 msgid "Default: Ctrl+Shift+X"
-msgstr ""
+msgstr "Implicit: Ctrl+Shift+X"
 
 #: formsettings.rtranscontrolpopup_hint
 msgid "Translates selected text from the active application to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Traduce textul selectat din aplicația activă într-o fereastră pop-up lângă cursorul mouse-ului"
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -669,6 +681,11 @@ msgctxt "tformsettingstrayslate.caption"
 msgid "Settings"
 msgstr "Setări"
 
+#: tformsettingstrayslate.checkallowhotkeys.caption
+msgctxt "tformsettingstrayslate.checkallowhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "Activează tastele rapide globale"
+
 #: tformsettingstrayslate.checkautoaddlangpairs.caption
 msgid "Auto-Add On Pair Change"
 msgstr "Adăugare automată la schimbarea perechii"
@@ -704,14 +721,6 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr "Traduce automat textul în timp ce tastați"
 
-#: tformsettingstrayslate.checkrecentpairhotkeys.caption
-msgid "Enable Global Ctrl+Shift+Number Hotkeys"
-msgstr "Activează comenzile rapide globale Ctrl+Shift+Number"
-
-#: tformsettingstrayslate.checkrecentpairhotkeys.hint
-msgid "When enabled, Ctrl+Shift+Number switches recent language pairs"
-msgstr "Când este activat, Ctrl+Shift+Number comută între perechile de limbi recente"
-
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
 msgstr "Afișează perechea de limbi"
@@ -727,22 +736,12 @@ msgstr "Configurație care detectează automat limba țintă pentru perechea de 
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
 msgid "Action"
-msgstr ""
+msgstr "Acțiune"
 
 #: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
-msgid "Hotkey"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
-msgid "Hint"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
-msgid "Default"
-msgstr ""
+msgid "Shortcut"
+msgstr "Scurtătură"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1010,4 +1009,3 @@ msgstr "Perechi recente"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
-

@@ -59,12 +59,24 @@ msgstr ""
 
 #: formsettings.rglobal
 msgid "Global Hotkeys"
-msgstr ""
+msgstr "Globale sneltoetsen"
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
 msgid "Recent Language Pairs"
 msgstr "Recente taalparen"
+
+#: formsettings.rrecentpair
+msgid "Recent Language Pair"
+msgstr "Recente taalcombinatie"
+
+#: formsettings.rrecentpair_default
+msgid "Default: Ctrl+Shift+"
+msgstr "Standaard: Ctrl+Shift+"
+
+#: formsettings.rrecentpair_hint
+msgid "Select Recent Language Pair"
+msgstr "Selecteer recente taalcombinatie"
 
 #: formsettings.rtransclipboard
 msgctxt "formsettings.rtransclipboard"
@@ -73,15 +85,15 @@ msgstr "Klembord naar klembord vertalen"
 
 #: formsettings.rtransclipboardpopup
 msgid "Translate Clipboard to Popup Window"
-msgstr ""
+msgstr "Klembord vertalen naar pop-upvenster"
 
 #: formsettings.rtransclipboardpopup_default
 msgid "Default: Ctrl+Shift+P"
-msgstr ""
+msgstr "Standaard: Ctrl+Shift+P"
 
 #: formsettings.rtransclipboardpopup_hint
 msgid "Translates clipboard text to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Vertaalt klembordtekst naar een pop-upvenster nabij de muiscursor"
 
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
@@ -100,15 +112,15 @@ msgstr "Vertalen in geselecteerde tekst van actieve applicatie"
 
 #: formsettings.rtranscontrolpopup
 msgid "Translate Selected Text to Popup Window"
-msgstr ""
+msgstr "Geselecteerde tekst vertalen naar pop-upvenster"
 
 #: formsettings.rtranscontrolpopup_default
 msgid "Default: Ctrl+Shift+X"
-msgstr ""
+msgstr "Standaard: Ctrl+Shift+X"
 
 #: formsettings.rtranscontrolpopup_hint
 msgid "Translates selected text from the active application to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Vertaalt geselecteerde tekst van de actieve toepassing naar een pop-upvenster nabij de muiscursor"
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -669,6 +681,11 @@ msgctxt "tformsettingstrayslate.caption"
 msgid "Settings"
 msgstr "Instellingen"
 
+#: tformsettingstrayslate.checkallowhotkeys.caption
+msgctxt "tformsettingstrayslate.checkallowhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "Globale sneltoetsen inschakelen"
+
 #: tformsettingstrayslate.checkautoaddlangpairs.caption
 msgid "Auto-Add On Pair Change"
 msgstr "Automatisch toevoegen bij wisselen van paar"
@@ -704,14 +721,6 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr "Vertaal tekst automatisch tijdens het typen"
 
-#: tformsettingstrayslate.checkrecentpairhotkeys.caption
-msgid "Enable Global Ctrl+Shift+Number Hotkeys"
-msgstr "Globale Ctrl+Shift+Number-sneltoetsen inschakelen"
-
-#: tformsettingstrayslate.checkrecentpairhotkeys.hint
-msgid "When enabled, Ctrl+Shift+Number switches recent language pairs"
-msgstr "Wanneer ingeschakeld, schakelt Ctrl+Shift+Number tussen recente taalparen"
-
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
 msgstr "Toon taalpaar"
@@ -727,22 +736,12 @@ msgstr "Configuratie die automatisch de doeltaal detecteert voor het geselecteer
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
 msgid "Action"
-msgstr ""
+msgstr "Actie"
 
 #: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
-msgid "Hotkey"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
-msgid "Hint"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
-msgid "Default"
-msgstr ""
+msgid "Shortcut"
+msgstr "Sneltoets"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1010,4 +1009,3 @@ msgstr "Recente paren"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
-

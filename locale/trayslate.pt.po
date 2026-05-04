@@ -59,12 +59,24 @@ msgstr ""
 
 #: formsettings.rglobal
 msgid "Global Hotkeys"
-msgstr ""
+msgstr "Atalhos de teclado globais"
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
 msgid "Recent Language Pairs"
 msgstr "Pares de idiomas recentes"
+
+#: formsettings.rrecentpair
+msgid "Recent Language Pair"
+msgstr "Par de idiomas recente"
+
+#: formsettings.rrecentpair_default
+msgid "Default: Ctrl+Shift+"
+msgstr "Padrão: Ctrl+Shift+"
+
+#: formsettings.rrecentpair_hint
+msgid "Select Recent Language Pair"
+msgstr "Selecionar par de idiomas recente"
 
 #: formsettings.rtransclipboard
 msgctxt "formsettings.rtransclipboard"
@@ -73,15 +85,15 @@ msgstr "Traduzir área de transferência para área de transferência"
 
 #: formsettings.rtransclipboardpopup
 msgid "Translate Clipboard to Popup Window"
-msgstr ""
+msgstr "Traduzir área de transferência para janela pop-up"
 
 #: formsettings.rtransclipboardpopup_default
 msgid "Default: Ctrl+Shift+P"
-msgstr ""
+msgstr "Padrão: Ctrl+Shift+P"
 
 #: formsettings.rtransclipboardpopup_hint
 msgid "Translates clipboard text to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Traduz o texto da área de transferência para uma janela pop-up perto do cursor do mouse"
 
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
@@ -100,15 +112,15 @@ msgstr "Traduzir na seleção da aplicação ativa"
 
 #: formsettings.rtranscontrolpopup
 msgid "Translate Selected Text to Popup Window"
-msgstr ""
+msgstr "Traduzir texto selecionado para janela pop-up"
 
 #: formsettings.rtranscontrolpopup_default
 msgid "Default: Ctrl+Shift+X"
-msgstr ""
+msgstr "Padrão: Ctrl+Shift+X"
 
 #: formsettings.rtranscontrolpopup_hint
 msgid "Translates selected text from the active application to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Traduz o texto selecionado do aplicativo ativo para uma janela pop-up perto do cursor do mouse"
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -669,6 +681,11 @@ msgctxt "tformsettingstrayslate.caption"
 msgid "Settings"
 msgstr "Definições"
 
+#: tformsettingstrayslate.checkallowhotkeys.caption
+msgctxt "tformsettingstrayslate.checkallowhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "Ativar atalhos de teclado globais"
+
 #: tformsettingstrayslate.checkautoaddlangpairs.caption
 msgid "Auto-Add On Pair Change"
 msgstr "Adicionar automaticamente ao mudar de par"
@@ -704,14 +721,6 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr "Traduz automaticamente o texto enquanto escreve"
 
-#: tformsettingstrayslate.checkrecentpairhotkeys.caption
-msgid "Enable Global Ctrl+Shift+Number Hotkeys"
-msgstr "Ativar atalhos globais Ctrl+Shift+Number"
-
-#: tformsettingstrayslate.checkrecentpairhotkeys.hint
-msgid "When enabled, Ctrl+Shift+Number switches recent language pairs"
-msgstr "Quando ativado, Ctrl+Shift+Number alterna entre pares de idiomas recentes"
-
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
 msgstr "Mostrar par de idiomas"
@@ -727,22 +736,12 @@ msgstr "Configuração que deteta automaticamente o idioma de destino para o par
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
 msgid "Action"
-msgstr ""
+msgstr "Ação"
 
 #: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
-msgid "Hotkey"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
-msgid "Hint"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
-msgid "Default"
-msgstr ""
+msgid "Shortcut"
+msgstr "Atalho"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1010,4 +1009,3 @@ msgstr "Pares recentes"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
-

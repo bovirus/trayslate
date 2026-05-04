@@ -59,12 +59,24 @@ msgstr ""
 
 #: formsettings.rglobal
 msgid "Global Hotkeys"
-msgstr ""
+msgstr "Globální klávesové zkratky"
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
 msgid "Recent Language Pairs"
 msgstr "Nedávné jazykové páry"
+
+#: formsettings.rrecentpair
+msgid "Recent Language Pair"
+msgstr "Nedávná jazyková dvojice"
+
+#: formsettings.rrecentpair_default
+msgid "Default: Ctrl+Shift+"
+msgstr "Výchozí: Ctrl+Shift+"
+
+#: formsettings.rrecentpair_hint
+msgid "Select Recent Language Pair"
+msgstr "Vybrat nedávnou jazykovou dvojici"
 
 #: formsettings.rtransclipboard
 msgctxt "formsettings.rtransclipboard"
@@ -73,15 +85,15 @@ msgstr "Překlad schránky do schránky"
 
 #: formsettings.rtransclipboardpopup
 msgid "Translate Clipboard to Popup Window"
-msgstr ""
+msgstr "Přeložit schránku do vyskakovacího okna"
 
 #: formsettings.rtransclipboardpopup_default
 msgid "Default: Ctrl+Shift+P"
-msgstr ""
+msgstr "Výchozí: Ctrl+Shift+P"
 
 #: formsettings.rtransclipboardpopup_hint
 msgid "Translates clipboard text to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Přeloží text ze schránky do vyskakovacího okna poblíž kurzoru myši"
 
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
@@ -100,15 +112,15 @@ msgstr "Překlad ve vybraném textu aktivní aplikace"
 
 #: formsettings.rtranscontrolpopup
 msgid "Translate Selected Text to Popup Window"
-msgstr ""
+msgstr "Přeložit vybraný text do vyskakovacího okna"
 
 #: formsettings.rtranscontrolpopup_default
 msgid "Default: Ctrl+Shift+X"
-msgstr ""
+msgstr "Výchozí: Ctrl+Shift+X"
 
 #: formsettings.rtranscontrolpopup_hint
 msgid "Translates selected text from the active application to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Přeloží vybraný text z aktivní aplikace do vyskakovacího okna poblíž kurzoru myši"
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -669,6 +681,11 @@ msgctxt "tformsettingstrayslate.caption"
 msgid "Settings"
 msgstr "Nastavení"
 
+#: tformsettingstrayslate.checkallowhotkeys.caption
+msgctxt "tformsettingstrayslate.checkallowhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "Povolit globální klávesové zkratky"
+
 #: tformsettingstrayslate.checkautoaddlangpairs.caption
 msgid "Auto-Add On Pair Change"
 msgstr "Automatické přidání při změně páru"
@@ -704,14 +721,6 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr "Automaticky překládat text během psaní"
 
-#: tformsettingstrayslate.checkrecentpairhotkeys.caption
-msgid "Enable Global Ctrl+Shift+Number Hotkeys"
-msgstr "Povolit globální klávesové zkratky Ctrl+Shift+Number"
-
-#: tformsettingstrayslate.checkrecentpairhotkeys.hint
-msgid "When enabled, Ctrl+Shift+Number switches recent language pairs"
-msgstr "Po zapnutí Ctrl+Shift+Number přepíná nedávné jazykové páry"
-
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
 msgstr "Zobrazit jazykový pár"
@@ -727,22 +736,12 @@ msgstr "Konfigurace, která automaticky detekuje cílový jazyk pro vybraný jaz
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
 msgid "Action"
-msgstr ""
+msgstr "Akce"
 
 #: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
-msgid "Hotkey"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
-msgid "Hint"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
-msgid "Default"
-msgstr ""
+msgid "Shortcut"
+msgstr "Klávesová zkratka"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1010,4 +1009,3 @@ msgstr "Nedávné páry"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
-

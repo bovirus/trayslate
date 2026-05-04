@@ -1,11 +1,11 @@
 object formSettingsTrayslate: TformSettingsTrayslate
   Left = 318
-  Height = 560
+  Height = 570
   Top = 250
   Width = 740
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Settings'
-  ClientHeight = 560
+  ClientHeight = 570
   ClientWidth = 740
   Position = poDesktopCenter
   LCLVersion = '4.4.0.0'
@@ -14,7 +14,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
   OnShow = FormShow
   object PagesSettings: TPageControl
     Left = 186
-    Height = 515
+    Height = 525
     Top = 5
     Width = 554
     TabStop = False
@@ -26,11 +26,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
     TabOrder = 1
     object PageGeneral: TTabSheet
       Caption = 'General'
-      ClientHeight = 487
+      ClientHeight = 497
       ClientWidth = 546
       object ScrollGeneral: TScrollBox
         Left = 0
-        Height = 487
+        Height = 497
         Top = 0
         Width = 546
         HorzScrollBar.Increment = 19
@@ -43,7 +43,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 487
+        ClientHeight = 497
         ClientWidth = 546
         TabOrder = 0
         object GroupRealTime: TGroupBox
@@ -170,24 +170,24 @@ object formSettingsTrayslate: TformSettingsTrayslate
     end
     object PageInterface: TTabSheet
       Caption = 'Interface'
-      ClientHeight = 487
+      ClientHeight = 497
       ClientWidth = 546
       object ScrollInterface: TScrollBox
         Left = 0
-        Height = 487
+        Height = 497
         Top = 0
         Width = 546
-        HorzScrollBar.Increment = 28
-        HorzScrollBar.Page = 285
+        HorzScrollBar.Increment = 20
+        HorzScrollBar.Page = 200
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
-        VertScrollBar.Increment = 39
-        VertScrollBar.Page = 397
+        VertScrollBar.Increment = 36
+        VertScrollBar.Page = 365
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 487
+        ClientHeight = 497
         ClientWidth = 546
         TabOrder = 0
         object GroupFont: TGroupBox
@@ -331,13 +331,13 @@ object formSettingsTrayslate: TformSettingsTrayslate
         end
         object GroupLangPairs: TGroupBox
           Left = 5
-          Height = 123
+          Height = 91
           Top = 269
           Width = 536
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Recent Language Pairs'
-          ClientHeight = 103
+          ClientHeight = 71
           ClientWidth = 532
           TabOrder = 2
           object SpinMaxLangPairs: TSpinEdit
@@ -376,60 +376,50 @@ object formSettingsTrayslate: TformSettingsTrayslate
             TabOrder = 1
             OnChange = SettingChange
           end
-          object CheckRecentPairHotkeys: TCheckBox
-            Left = 29
-            Height = 19
-            Hint = 'When enabled, Ctrl+Shift+Number switches recent language pairs'
-            Top = 72
-            Width = 242
-            Caption = 'Enable Global Ctrl+Shift+Number Hotkeys'
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 2
-            OnChange = SettingChange
-          end
         end
       end
     end
     object PageHotkeys: TTabSheet
       Caption = 'Hotkeys'
-      ClientHeight = 487
+      ClientHeight = 497
       ClientWidth = 546
       object ScrollHotkeys: TScrollBox
         Left = 0
-        Height = 487
+        Height = 497
         Top = 0
         Width = 546
-        HorzScrollBar.Increment = 9
-        HorzScrollBar.Page = 95
+        HorzScrollBar.Increment = 17
+        HorzScrollBar.Page = 179
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
-        VertScrollBar.Page = 86
+        VertScrollBar.Increment = 12
+        VertScrollBar.Page = 120
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 487
+        ClientHeight = 497
         ClientWidth = 546
         TabOrder = 0
         object GroupTransFromClipboard1: TGroupBox
           Left = 5
-          Height = 477
+          Height = 487
           Top = 5
           Width = 536
           Align = alClient
           BorderSpacing.Around = 5
           Caption = 'Hotkeys'
-          ClientHeight = 457
+          ClientHeight = 467
           ClientWidth = 532
           TabOrder = 0
           object GridHotkeys: TStringGrid
-            Left = 3
-            Height = 451
-            Top = 3
-            Width = 526
+            Left = 5
+            Height = 427
+            Top = 35
+            Width = 522
             Align = alClient
-            BorderSpacing.Around = 3
+            BorderSpacing.Top = 30
+            BorderSpacing.Around = 5
             BorderStyle = bsNone
             ColCount = 4
             Columns = <            
@@ -439,16 +429,16 @@ object formSettingsTrayslate: TformSettingsTrayslate
                 Width = 370
               end            
               item
-                Title.Caption = 'Hotkey'
+                Title.Caption = 'Shortcut'
                 Width = 120
               end            
               item
                 ReadOnly = True
-                Title.Caption = 'Hint'
+                Title.Caption = ''
                 Visible = False
               end            
               item
-                Title.Caption = 'Default'
+                Title.Caption = ''
                 Visible = False
               end>
             FadeUnfocusedSelection = True
@@ -467,13 +457,22 @@ object formSettingsTrayslate: TformSettingsTrayslate
             OnSelectEditor = GridHotkeysSelectEditor
             OnSetEditText = GridHotkeysSetEditText
           end
+          object CheckAllowHotkeys: TCheckBox
+            Left = 29
+            Height = 19
+            Top = 8
+            Width = 136
+            Caption = 'Enable Global Hotkeys'
+            TabOrder = 1
+            OnChange = SettingChange
+          end
         end
       end
     end
   end
   object SplitterPages: TSplitter
     Left = 176
-    Height = 525
+    Height = 535
     Top = 0
     Width = 10
     AutoSnap = False
@@ -484,7 +483,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
   object PanelBottom: TPanel
     Left = 0
     Height = 35
-    Top = 525
+    Top = 535
     Width = 740
     Align = alBottom
     BevelOuter = bvNone
@@ -526,7 +525,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
   end
   object PanelPages: TPanel
     Left = 6
-    Height = 513
+    Height = 523
     Top = 6
     Width = 170
     Align = alLeft
@@ -536,12 +535,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
     BevelColor = clActiveBorder
     BevelInner = bvRaised
     BevelOuter = bvNone
-    ClientHeight = 513
+    ClientHeight = 523
     ClientWidth = 170
     TabOrder = 3
     object ListPages: TListBox
       Left = 1
-      Height = 511
+      Height = 521
       Top = 1
       Width = 168
       Align = alClient

@@ -40,7 +40,7 @@ type
     BtnApply: TButton;
     BtnCancel: TButton;
     BtnOk: TButton;
-    CheckRecentPairHotkeys: TCheckBox;
+    CheckAllowHotkeys: TCheckBox;
     CheckRealTime: TCheckBox;
     CheckAutoSwap: TCheckBox;
     CheckTwoLang: TCheckBox;
@@ -107,7 +107,7 @@ type
     FOriginalIconTwoLang: boolean;
     FOriginalMaxLangPairs: integer;
     FOriginalAutoAddLangPairs: boolean;
-    FOriginalRecentPairHotkeys: boolean;
+    FOriginalAllowHotkeys: boolean;
     FOriginalRealTime: boolean;
     FOriginalRealTimeDelay: integer;
     FOriginalAutoSwap: boolean;
@@ -120,6 +120,15 @@ type
     FOriginalHotKeyTransFromControl: THotKeyData;
     FOriginalHotKeyTransControl: THotKeyData;
     FOriginalHotKeyTransControlPopup: THotKeyData;
+    FOriginalHotKeyRecent1: THotKeyData;
+    FOriginalHotKeyRecent2: THotKeyData;
+    FOriginalHotKeyRecent3: THotKeyData;
+    FOriginalHotKeyRecent4: THotKeyData;
+    FOriginalHotKeyRecent5: THotKeyData;
+    FOriginalHotKeyRecent6: THotKeyData;
+    FOriginalHotKeyRecent7: THotKeyData;
+    FOriginalHotKeyRecent8: THotKeyData;
+    FOriginalHotKeyRecent9: THotKeyData;
 
     FHotKeyApp: THotKeyData;
     FHotKeyTransSwap: THotKeyData;
@@ -129,6 +138,15 @@ type
     FHotKeyTransFromControl: THotKeyData;
     FHotKeyTransControl: THotKeyData;
     FHotKeyTransControlPopup: THotKeyData;
+    FHotKeyRecent1: THotKeyData;
+    FHotKeyRecent2: THotKeyData;
+    FHotKeyRecent3: THotKeyData;
+    FHotKeyRecent4: THotKeyData;
+    FHotKeyRecent5: THotKeyData;
+    FHotKeyRecent6: THotKeyData;
+    FHotKeyRecent7: THotKeyData;
+    FHotKeyRecent8: THotKeyData;
+    FHotKeyRecent9: THotKeyData;
 
     procedure SetPanelFont(const AFont: TFont);
   public
@@ -184,6 +202,10 @@ resourcestring
   rtranscontrolpopup = 'Translate Selected Text to Popup Window';
   rtranscontrolpopup_hint = 'Translates selected text from the active application to a popup window near the mouse cursor';
   rtranscontrolpopup_default = 'Default: Ctrl+Shift+X';
+
+  rrecentpair = 'Recent Language Pair';
+  rrecentpair_hint = 'Select Recent Language Pair';
+  rrecentpair_default = 'Default: Ctrl+Shift+';
 
 implementation
 
@@ -327,12 +349,20 @@ var
   HasRealKey: boolean;
 begin
   // Enter outside editor → start editing column 1
-  if (Key = VK_RETURN) and (not GridHotkeys.EditorMode) then
+  if (not GridHotkeys.EditorMode) then
   begin
-    GridHotkeys.Col := 1;
-    GridHotkeys.EditorMode := True;
-    Key := 0;
-    Exit;
+    if (Key in [VK_RETURN, VK_F2]) then
+    begin
+      GridHotkeys.Col := 1;
+      GridHotkeys.EditorMode := True;
+      Key := 0;
+      Exit;
+    end;
+    if not IsSystemKey(Key) then
+    begin
+      Key := 0;
+      Exit;
+    end;
   end;
 
   // Enter inside editor → confirm input
@@ -499,6 +529,15 @@ begin
     7: FHotKeyTransFromControl := HK;
     8: FHotKeyTransControl := HK;
     9: FHotKeyTransControlPopup := HK;
+    11: FHotKeyRecent1 := HK;
+    12: FHotKeyRecent2 := HK;
+    13: FHotKeyRecent3 := HK;
+    14: FHotKeyRecent4 := HK;
+    15: FHotKeyRecent5 := HK;
+    16: FHotKeyRecent6 := HK;
+    17: FHotKeyRecent7 := HK;
+    18: FHotKeyRecent8 := HK;
+    19: FHotKeyRecent9 := HK;
   end;
 end;
 
@@ -513,6 +552,15 @@ begin
     7: Result := FOriginalHotKeyTransFromControl;
     8: Result := FOriginalHotKeyTransControl;
     9: Result := FOriginalHotKeyTransControlPopup;
+    11: Result := FOriginalHotKeyRecent1;
+    12: Result := FOriginalHotKeyRecent2;
+    13: Result := FOriginalHotKeyRecent3;
+    14: Result := FOriginalHotKeyRecent4;
+    15: Result := FOriginalHotKeyRecent5;
+    16: Result := FOriginalHotKeyRecent6;
+    17: Result := FOriginalHotKeyRecent7;
+    18: Result := FOriginalHotKeyRecent8;
+    19: Result := FOriginalHotKeyRecent9;
     else
       Result := Default(THotKeyData);
   end;
@@ -530,7 +578,13 @@ begin
 end;
 
 procedure TformSettingsTrayslate.FillGridHotkeys;
+var
+  SavedRow: integer;
 begin
+  // Save current position
+  SavedRow := GridHotkeys.Row;
+
+  // Clear grid
   while GridHotkeys.RowCount > GridHotkeys.FixedRows do
     GridHotkeys.DeleteRow(GridHotkeys.RowCount - 1);
 
@@ -548,7 +602,31 @@ begin
   GridHotkeys.InsertRowWithValues(8, [rtranscontrol, HotKeyToText(FHotKeyTransControl), rtranscontrol_hint, rtranscontrol_default]);
   GridHotkeys.InsertRowWithValues(9, [rtranscontrolpopup, HotKeyToText(FHotKeyTransControlPopup),
     rtranscontrolpopup_hint, rtranscontrolpopup_default]);
-  //  GridHotkeys.InsertRowWithValues(8, [rrecent]);
+  GridHotkeys.InsertRowWithValues(10, [rrecent]);
+  GridHotkeys.InsertRowWithValues(11, [rrecentpair + ' 1', HotKeyToText(FHotKeyRecent1), rrecentpair_hint +
+    ' 1', rrecentpair_default + '1']);
+  GridHotkeys.InsertRowWithValues(12, [rrecentpair + ' 2', HotKeyToText(FHotKeyRecent2), rrecentpair_hint +
+    ' 2', rrecentpair_default + '2']);
+  GridHotkeys.InsertRowWithValues(13, [rrecentpair + ' 3', HotKeyToText(FHotKeyRecent3), rrecentpair_hint +
+    ' 3', rrecentpair_default + '3']);
+  GridHotkeys.InsertRowWithValues(14, [rrecentpair + ' 4', HotKeyToText(FHotKeyRecent4), rrecentpair_hint +
+    ' 4', rrecentpair_default + '4']);
+  GridHotkeys.InsertRowWithValues(15, [rrecentpair + ' 5', HotKeyToText(FHotKeyRecent5), rrecentpair_hint +
+    ' 5', rrecentpair_default + '5']);
+  GridHotkeys.InsertRowWithValues(16, [rrecentpair + ' 6', HotKeyToText(FHotKeyRecent6), rrecentpair_hint +
+    ' 6', rrecentpair_default + '6']);
+  GridHotkeys.InsertRowWithValues(17, [rrecentpair + ' 7', HotKeyToText(FHotKeyRecent7), rrecentpair_hint +
+    ' 7', rrecentpair_default + '7']);
+  GridHotkeys.InsertRowWithValues(18, [rrecentpair + ' 8', HotKeyToText(FHotKeyRecent8), rrecentpair_hint +
+    ' 8', rrecentpair_default + '8']);
+  GridHotkeys.InsertRowWithValues(19, [rrecentpair + ' 9', HotKeyToText(FHotKeyRecent9), rrecentpair_hint +
+    ' 9', rrecentpair_default + '9']);
+
+  // Restore safely
+  if SavedRow < GridHotkeys.RowCount then
+    GridHotkeys.Row := SavedRow
+  else
+    GridHotkeys.Row := GridHotkeys.FixedRows;
 end;
 
 procedure TformSettingsTrayslate.Apply;
@@ -556,7 +634,7 @@ begin
   formTrayslate.AutoStart := CheckAutostart.Checked;
   formTrayslate.MaxLangPairs := SpinMaxLangPairs.Value;
   formTrayslate.AutoAddLangPairs := CheckAutoAddLangPairs.Checked;
-  formTrayslate.RecentPairHotKeys := CheckRecentPairHotkeys.Checked;
+  formTrayslate.AllowHotKeys := CheckAllowHotkeys.Checked;
   formTrayslate.RealTime := CheckRealTime.Checked;
   formTrayslate.RealTimeDelay := SpinRealTimeDelay.Value;
   formTrayslate.AutoSwap := CheckAutoSwap.Checked;
@@ -579,6 +657,15 @@ begin
   formTrayslate.HotKeyTransFromControl := FHotKeyTransFromControl;
   formTrayslate.HotKeyTransControl := FHotKeyTransControl;
   formTrayslate.HotKeyTransControlPopup := FHotKeyTransControlPopup;
+  formTrayslate.HotKeyRecent1 := FHotKeyRecent1;
+  formTrayslate.HotKeyRecent2 := FHotKeyRecent2;
+  formTrayslate.HotKeyRecent3 := FHotKeyRecent3;
+  formTrayslate.HotKeyRecent4 := FHotKeyRecent4;
+  formTrayslate.HotKeyRecent5 := FHotKeyRecent5;
+  formTrayslate.HotKeyRecent6 := FHotKeyRecent6;
+  formTrayslate.HotKeyRecent7 := FHotKeyRecent7;
+  formTrayslate.HotKeyRecent8 := FHotKeyRecent8;
+  formTrayslate.HotKeyRecent9 := FHotKeyRecent9;
 
   formTrayslate.ComboSource.SelLength := 0;
   formTrayslate.ComboTarget.SelLength := 0;
@@ -595,7 +682,7 @@ begin
   FOriginalAutoStart := formTrayslate.AutoStart;
   FOriginalMaxLangPairs := formTrayslate.MaxLangPairs;
   FOriginalAutoAddLangPairs := formTrayslate.AutoAddLangPairs;
-  FOriginalRecentPairHotkeys := formTrayslate.RecentPairHotKeys;
+  FOriginalAllowHotkeys := formTrayslate.AllowHotKeys;
   FOriginalRealTime := formTrayslate.RealTime;
   FOriginalRealTimeDelay := formTrayslate.RealTimeDelay;
   FOriginalAutoSwap := formTrayslate.AutoSwap;
@@ -613,6 +700,15 @@ begin
   FOriginalHotKeyTransFromControl := formTrayslate.HotKeyTransFromControl;
   FOriginalHotKeyTransControl := formTrayslate.HotKeyTransControl;
   FOriginalHotKeyTransControlPopup := formTrayslate.HotKeyTransControlPopup;
+  FOriginalHotKeyRecent1 := formTrayslate.HotKeyRecent1;
+  FOriginalHotKeyRecent2 := formTrayslate.HotKeyRecent2;
+  FOriginalHotKeyRecent3 := formTrayslate.HotKeyRecent3;
+  FOriginalHotKeyRecent4 := formTrayslate.HotKeyRecent4;
+  FOriginalHotKeyRecent5 := formTrayslate.HotKeyRecent5;
+  FOriginalHotKeyRecent6 := formTrayslate.HotKeyRecent6;
+  FOriginalHotKeyRecent7 := formTrayslate.HotKeyRecent7;
+  FOriginalHotKeyRecent8 := formTrayslate.HotKeyRecent8;
+  FOriginalHotKeyRecent9 := formTrayslate.HotKeyRecent9;
   FHotKeyApp := formTrayslate.HotKeyApp;
   FHotKeyTransSwap := formTrayslate.HotKeyTransSwap;
   FHotKeyTransFromClipboard := formTrayslate.HotKeyTransFromClipboard;
@@ -621,11 +717,19 @@ begin
   FHotKeyTransFromControl := formTrayslate.HotKeyTransFromControl;
   FHotKeyTransControl := formTrayslate.HotKeyTransControl;
   FHotKeyTransControlPopup := formTrayslate.HotKeyTransControlPopup;
-
+  FHotKeyRecent1 := formTrayslate.HotKeyRecent1;
+  FHotKeyRecent2 := formTrayslate.HotKeyRecent2;
+  FHotKeyRecent3 := formTrayslate.HotKeyRecent3;
+  FHotKeyRecent4 := formTrayslate.HotKeyRecent4;
+  FHotKeyRecent5 := formTrayslate.HotKeyRecent5;
+  FHotKeyRecent6 := formTrayslate.HotKeyRecent6;
+  FHotKeyRecent7 := formTrayslate.HotKeyRecent7;
+  FHotKeyRecent8 := formTrayslate.HotKeyRecent8;
+  FHotKeyRecent9 := formTrayslate.HotKeyRecent9;
   CheckAutostart.Checked := FOriginalAutoStart;
   SpinMaxLangPairs.Value := FOriginalMaxLangPairs;
   CheckAutoAddLangPairs.Checked := FOriginalAutoAddLangPairs;
-  CheckRecentPairHotkeys.Checked := FOriginalRecentPairHotkeys;
+  CheckAllowHotkeys.Checked := FOriginalAllowHotkeys;
   CheckRealTime.Checked := FOriginalRealTime;
   SpinRealTimeDelay.Value := FOriginalRealTimeDelay;
   CheckAutoSwap.Checked := FOriginalAutoSwap;

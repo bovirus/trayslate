@@ -17,6 +17,7 @@ uses
   Graphics,
   Types,
   Math,
+  Menus,
   SysUtils,
   StdCtrls,
   StrUtils,
@@ -42,7 +43,16 @@ const
   HOTKEY_TRANS_FROM_CONTROL = 6;
   HOTKEY_TRANS_CONTROL = 7;
   HOTKEY_TRANS_CONTROL_POPUP = 8;
-  HOTKEY_LANG_BASE = 10;
+
+  HOTKEY_RECENT1 = 11;
+  HOTKEY_RECENT2 = 12;
+  HOTKEY_RECENT3 = 13;
+  HOTKEY_RECENT4 = 14;
+  HOTKEY_RECENT5 = 15;
+  HOTKEY_RECENT6 = 16;
+  HOTKEY_RECENT7 = 17;
+  HOTKEY_RECENT8 = 18;
+  HOTKEY_RECENT9 = 19;
   {$ENDIF}
 
   HOTKEY_CTRL = 1 shl 1; // 2
@@ -68,6 +78,8 @@ function HeadersFromMemo(AMemo: TMemo): TStringList;
 function ParseJsonByPointer(const JsonStr, JsonPointer: string): string;
 
 function HotKeyToText(const AHotKey: THotKeyData): string;
+
+function HotKeyToShortCut(const HK: THotKeyData): TShortCut;
 
 implementation
 
@@ -513,6 +525,23 @@ begin
       else
         Result := Result + Format('VK_%d', [AHotKey.Key]);
   end;
+end;
+
+function HotKeyToShortCut(const HK: THotKeyData): TShortCut;
+var
+  Shift: TShiftState;
+begin
+  Shift := [];
+
+  // Convert MOD_* to ShiftState
+  if (HK.Modifiers and HOTKEY_CTRL) <> 0 then
+    Include(Shift, ssCtrl);
+  if (HK.Modifiers and HOTKEY_SHIFT) <> 0 then
+    Include(Shift, ssShift);
+  if (HK.Modifiers and HOTKEY_ALT) <> 0 then
+    Include(Shift, ssAlt);
+
+  Result := Menus.ShortCut(HK.Key, Shift);
 end;
 
 end.

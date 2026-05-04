@@ -66,6 +66,18 @@ msgctxt "formsettings.rrecent"
 msgid "Recent Language Pairs"
 msgstr ""
 
+#: formsettings.rrecentpair
+msgid "Recent Language Pair"
+msgstr ""
+
+#: formsettings.rrecentpair_default
+msgid "Default: Ctrl+Shift+"
+msgstr ""
+
+#: formsettings.rrecentpair_hint
+msgid "Select Recent Language Pair"
+msgstr ""
+
 #: formsettings.rtransclipboard
 msgctxt "formsettings.rtransclipboard"
 msgid "Translate Clipboard to Clipboard"
@@ -644,6 +656,11 @@ msgctxt "tformsettingstrayslate.caption"
 msgid "Settings"
 msgstr ""
 
+#: tformsettingstrayslate.checkallowhotkeys.caption
+msgctxt "tformsettingstrayslate.checkallowhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr ""
+
 #: tformsettingstrayslate.checkautoaddlangpairs.caption
 msgid "Auto-Add On Pair Change"
 msgstr ""
@@ -679,14 +696,6 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr ""
 
-#: tformsettingstrayslate.checkrecentpairhotkeys.caption
-msgid "Enable Global Ctrl+Shift+Number Hotkeys"
-msgstr ""
-
-#: tformsettingstrayslate.checkrecentpairhotkeys.hint
-msgid "When enabled, Ctrl+Shift+Number switches recent language pairs"
-msgstr ""
-
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
 msgstr ""
@@ -706,17 +715,7 @@ msgstr ""
 
 #: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
-msgid "Hotkey"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
-msgid "Hint"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
-msgid "Default"
+msgid "Shortcut"
 msgstr ""
 
 #: tformsettingstrayslate.groupautostart.caption

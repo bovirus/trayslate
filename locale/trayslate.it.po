@@ -64,12 +64,24 @@ msgstr "Predefinito"
 
 #: formsettings.rglobal
 msgid "Global Hotkeys"
-msgstr ""
+msgstr "Tasti di scelta rapida globali"
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
 msgid "Recent Language Pairs"
 msgstr "Coppie di lingue recenti"
+
+#: formsettings.rrecentpair
+msgid "Recent Language Pair"
+msgstr "Coppia di lingue recente"
+
+#: formsettings.rrecentpair_default
+msgid "Default: Ctrl+Shift+"
+msgstr "Predefinito: Ctrl+Shift+"
+
+#: formsettings.rrecentpair_hint
+msgid "Select Recent Language Pair"
+msgstr "Seleziona coppia di lingue recente"
 
 #: formsettings.rtransclipboard
 msgctxt "formsettings.rtransclipboard"
@@ -78,15 +90,15 @@ msgstr "Traduci dagli appunti negli appunti"
 
 #: formsettings.rtransclipboardpopup
 msgid "Translate Clipboard to Popup Window"
-msgstr ""
+msgstr "Traduci gli appunti in una finestra popup"
 
 #: formsettings.rtransclipboardpopup_default
 msgid "Default: Ctrl+Shift+P"
-msgstr ""
+msgstr "Predefinito: Ctrl+Shift+P"
 
 #: formsettings.rtransclipboardpopup_hint
 msgid "Translates clipboard text to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Traduce il testo degli appunti in una finestra popup vicino al cursore del mouse"
 
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
@@ -105,15 +117,15 @@ msgstr "Traduci nella selezione dell'applicazione attiva"
 
 #: formsettings.rtranscontrolpopup
 msgid "Translate Selected Text to Popup Window"
-msgstr ""
+msgstr "Traduci il testo selezionato in una finestra popup"
 
 #: formsettings.rtranscontrolpopup_default
 msgid "Default: Ctrl+Shift+X"
-msgstr ""
+msgstr "Predefinito: Ctrl+Shift+X"
 
 #: formsettings.rtranscontrolpopup_hint
 msgid "Translates selected text from the active application to a popup window near the mouse cursor"
-msgstr ""
+msgstr "Traduce il testo selezionato dall'applicazione attiva in una finestra popup vicino al cursore del mouse"
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -372,7 +384,7 @@ msgstr "Fai clic per selezionare l’icona di configurazione, clic centrale elim
 
 #: tformconfigtrayslate.labelaccept.caption
 msgid "Accept"
-msgstr "Accetta"
+msgstr "Accept"
 
 #: tformconfigtrayslate.labelcolorrecent.caption
 msgid "Recent Color"
@@ -381,7 +393,7 @@ msgstr "Colore recente"
 #: tformconfigtrayslate.labelcontenttype.caption
 msgctxt "tformconfigtrayslate.labelcontenttype.caption"
 msgid "Content Type"
-msgstr "Tipo contenuto"
+msgstr "Content Type"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
 msgid "Fill with default"
@@ -398,7 +410,7 @@ msgstr "Intestazioni aggiuntive della richiesta iniziale in formato 'key=value',
 #: tformconfigtrayslate.labelinitheaders2.caption
 msgctxt "tformconfigtrayslate.labelinitheaders2.caption"
 msgid "Headers"
-msgstr "Intestazioni"
+msgstr "Headers"
 
 #: tformconfigtrayslate.labelinitlivetime.caption
 msgctxt "tformconfigtrayslate.labelinitlivetime.caption"
@@ -468,10 +480,7 @@ msgstr "Lingue supportate, ad es. en=en-US (en - interno, en-US - servizio). \"e
 
 #: tformconfigtrayslate.labellanguages1.caption
 msgid "Value type for populating names. None keeps originals; None and Unit are case-sensitive."
-msgstr ""
-"Tipo di valore per popolare i nomi.\n"
-"'Nessuno' mantiene quelli originali.\n"
-"'Nessuno' e 'Unità' fanno distinzione tra maiuscole e minuscole."
+msgstr "Tipo di valore per popolare i nomi. 'Nessuno' mantiene quelli originali. 'Nessuno' e 'Unità' fanno distinzione tra maiuscole e minuscole."
 
 #: tformconfigtrayslate.labellanguagestarget.caption
 msgid ""
@@ -497,12 +506,12 @@ msgstr ""
 
 #: tformconfigtrayslate.labelpostdata.caption
 msgid "Post Data"
-msgstr "Dati post"
+msgstr "Post Data"
 
 #: tformconfigtrayslate.labelpostdata1.caption
 msgctxt "tformconfigtrayslate.labelpostdata1.caption"
 msgid "Headers"
-msgstr "Intestazioni"
+msgstr "Headers"
 
 #: tformconfigtrayslate.labelservicedescription.caption
 msgid "Description"
@@ -686,6 +695,11 @@ msgctxt "tformsettingstrayslate.caption"
 msgid "Settings"
 msgstr "Impostazioni"
 
+#: tformsettingstrayslate.checkallowhotkeys.caption
+msgctxt "tformsettingstrayslate.checkallowhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "Abilita tasti di scelta rapida globali"
+
 #: tformsettingstrayslate.checkautoaddlangpairs.caption
 msgid "Auto-Add On Pair Change"
 msgstr "Aggiunta automatica al cambio di coppia"
@@ -721,14 +735,6 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr "Traduci automaticamente il testo mentre scrivi"
 
-#: tformsettingstrayslate.checkrecentpairhotkeys.caption
-msgid "Enable Global Ctrl+Shift+Number Hotkeys"
-msgstr "Abilita tasti rapidi globali Ctrl+Maiusc+Numero"
-
-#: tformsettingstrayslate.checkrecentpairhotkeys.hint
-msgid "When enabled, Ctrl+Shift+Number switches recent language pairs"
-msgstr "Quando attivo, Ctrl+Maiusc+Numero passa tra le coppie di lingue recenti"
-
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
 msgstr "Visualizza coppia di lingue"
@@ -744,22 +750,12 @@ msgstr "Configurazione che rileva automaticamente la lingua destinazione per la 
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
 msgid "Action"
-msgstr ""
+msgstr "Azione"
 
 #: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
-msgid "Hotkey"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[2].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[2].title.caption"
-msgid "Hint"
-msgstr ""
-
-#: tformsettingstrayslate.gridhotkeys.columns[3].title.caption
-msgctxt "tformsettingstrayslate.gridhotkeys.columns[3].title.caption"
-msgid "Default"
-msgstr "Predefinito"
+msgid "Shortcut"
+msgstr "Scorciatoia"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1027,4 +1023,3 @@ msgstr "Coppie recenti"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr "Lingua"
-

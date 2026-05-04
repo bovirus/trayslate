@@ -163,7 +163,7 @@ begin
     JSONObj.Add('RealTimeDelay', Form.RealTimeDelay);
     JSONObj.Add('AutoSwap', Form.AutoSwap);
     JSONObj.Add('AutoAddLangPairs', Form.AutoAddLangPairs);
-    JSONObj.Add('RecentPairHotKeys', Form.RecentPairHotKeys);
+    JSONObj.Add('AllowHotKeys', Form.AllowHotKeys);
     JSONObj.Add('AutoCheckUpdates', Form.AutoCheckUpdates);
 
     // Save hotkeys
@@ -179,11 +179,36 @@ begin
     JSONObj.Add('HotKeyTransClipboard_Modifiers', Form.HotKeyTransClipboard.Modifiers);
     JSONObj.Add('HotKeyTransClipboard_Key', Form.HotKeyTransClipboard.Key);
 
+    JSONObj.Add('HotKeyTransClipboardPopup_Modifiers', Form.HotKeyTransClipboardPopup.Modifiers);
+    JSONObj.Add('HotKeyTransClipboardPopup_Key', Form.HotKeyTransClipboardPopup.Key);
+
     JSONObj.Add('HotKeyTransFromControl_Modifiers', Form.HotKeyTransFromControl.Modifiers);
     JSONObj.Add('HotKeyTransFromControl_Key', Form.HotKeyTransFromControl.Key);
 
     JSONObj.Add('HotKeyTransControl_Modifiers', Form.HotKeyTransControl.Modifiers);
     JSONObj.Add('HotKeyTransControl_Key', Form.HotKeyTransControl.Key);
+
+    JSONObj.Add('HotKeyTransControlPopup_Modifiers', Form.HotKeyTransControlPopup.Modifiers);
+    JSONObj.Add('HotKeyTransControlPopup_Key', Form.HotKeyTransControlPopup.Key);
+
+    JSONObj.Add('HotKeyRecent1_Modifiers', Form.HotKeyRecent1.Modifiers);
+    JSONObj.Add('HotKeyRecent1_Key', Form.HotKeyRecent1.Key);
+    JSONObj.Add('HotKeyRecent2_Modifiers', Form.HotKeyRecent2.Modifiers);
+    JSONObj.Add('HotKeyRecent2_Key', Form.HotKeyRecent2.Key);
+    JSONObj.Add('HotKeyRecent3_Modifiers', Form.HotKeyRecent3.Modifiers);
+    JSONObj.Add('HotKeyRecent3_Key', Form.HotKeyRecent3.Key);
+    JSONObj.Add('HotKeyRecent4_Modifiers', Form.HotKeyRecent4.Modifiers);
+    JSONObj.Add('HotKeyRecent4_Key', Form.HotKeyRecent4.Key);
+    JSONObj.Add('HotKeyRecent5_Modifiers', Form.HotKeyRecent5.Modifiers);
+    JSONObj.Add('HotKeyRecent5_Key', Form.HotKeyRecent5.Key);
+    JSONObj.Add('HotKeyRecent6_Modifiers', Form.HotKeyRecent6.Modifiers);
+    JSONObj.Add('HotKeyRecent6_Key', Form.HotKeyRecent6.Key);
+    JSONObj.Add('HotKeyRecent7_Modifiers', Form.HotKeyRecent7.Modifiers);
+    JSONObj.Add('HotKeyRecent7_Key', Form.HotKeyRecent7.Key);
+    JSONObj.Add('HotKeyRecent8_Modifiers', Form.HotKeyRecent8.Modifiers);
+    JSONObj.Add('HotKeyRecent8_Key', Form.HotKeyRecent8.Key);
+    JSONObj.Add('HotKeyRecent9_Modifiers', Form.HotKeyRecent9.Modifiers);
+    JSONObj.Add('HotKeyRecent9_Key', Form.HotKeyRecent9.Key);
 
     arrPairs := TJSONArray.Create;
     for i := 0 to Form.LangPairs.Count - 1 do
@@ -349,8 +374,8 @@ begin
         if (JSONObj.FindPath('AutoAddLangPairs') <> nil) then
           Form.AutoAddLangPairs := JSONObj.FindPath('AutoAddLangPairs').AsBoolean;
 
-        if (JSONObj.FindPath('RecentPairHotKeys') <> nil) then
-          Form.RecentPairHotKeys := JSONObj.FindPath('RecentPairHotKeys').AsBoolean;
+        if (JSONObj.FindPath('AllowHotKeys') <> nil) then
+          Form.AllowHotKeys := JSONObj.FindPath('AllowHotKeys').AsBoolean;
 
         if (JSONObj.FindPath('AutoCheckUpdates') <> nil) then
           Form.AutoCheckUpdates := JSONObj.FindPath('AutoCheckUpdates').AsBoolean;
@@ -388,6 +413,14 @@ begin
           HK.Key := JSONObj.FindPath('HotKeyTransClipboard_Key').AsInteger;
         Form.HotKeyTransClipboard := HK;
 
+        // HotKeyTransClipboardPopup;
+        HK := Form.HotKeyTransClipboardPopup;
+        if JSONObj.FindPath('HotKeyTransClipboardPopup_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyTransClipboardPopup_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyTransClipboardPopup_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyTransClipboardPopup_Key').AsInteger;
+        Form.HotKeyTransClipboardPopup := HK;
+
         // HotKeyTransFromControl
         HK := Form.HotKeyTransFromControl;
         if JSONObj.FindPath('HotKeyTransFromControl_Modifiers') <> nil then
@@ -403,6 +436,86 @@ begin
         if JSONObj.FindPath('HotKeyTransControl_Key') <> nil then
           HK.Key := JSONObj.FindPath('HotKeyTransControl_Key').AsInteger;
         Form.HotKeyTransControl := HK;
+
+        // HotKeyTransControlPopup
+        HK := Form.HotKeyTransControlPopup;
+        if JSONObj.FindPath('HotKeyTransControlPopup_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyTransControlPopup_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyTransControlPopup_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyTransControlPopup_Key').AsInteger;
+        Form.HotKeyTransControlPopup := HK;
+
+        // HotKeyRecent1
+        HK := Form.HotKeyRecent1;
+        if JSONObj.FindPath('HotKeyRecent1_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyRecent1_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyRecent1_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyRecent1_Key').AsInteger;
+        Form.HotKeyRecent1 := HK;
+
+        // HotKeyRecent2
+        HK := Form.HotKeyRecent2;
+        if JSONObj.FindPath('HotKeyRecent2_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyRecent2_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyRecent2_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyRecent2_Key').AsInteger;
+        Form.HotKeyRecent2 := HK;
+
+        // HotKeyRecent3
+        HK := Form.HotKeyRecent3;
+        if JSONObj.FindPath('HotKeyRecent3_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyRecent3_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyRecent3_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyRecent3_Key').AsInteger;
+        Form.HotKeyRecent3 := HK;
+
+        // HotKeyRecent4
+        HK := Form.HotKeyRecent4;
+        if JSONObj.FindPath('HotKeyRecent4_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyRecent4_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyRecent4_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyRecent4_Key').AsInteger;
+        Form.HotKeyRecent4 := HK;
+
+        // HotKeyRecent5
+        HK := Form.HotKeyRecent5;
+        if JSONObj.FindPath('HotKeyRecent5_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyRecent5_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyRecent5_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyRecent5_Key').AsInteger;
+        Form.HotKeyRecent5 := HK;
+
+        // HotKeyRecent6
+        HK := Form.HotKeyRecent6;
+        if JSONObj.FindPath('HotKeyRecent6_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyRecent6_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyRecent6_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyRecent6_Key').AsInteger;
+        Form.HotKeyRecent6 := HK;
+
+        // HotKeyRecent7
+        HK := Form.HotKeyRecent7;
+        if JSONObj.FindPath('HotKeyRecent7_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyRecent7_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyRecent7_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyRecent7_Key').AsInteger;
+        Form.HotKeyRecent7 := HK;
+
+        // HotKeyRecent8
+        HK := Form.HotKeyRecent8;
+        if JSONObj.FindPath('HotKeyRecent8_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyRecent8_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyRecent8_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyRecent8_Key').AsInteger;
+        Form.HotKeyRecent8 := HK;
+
+        // HotKeyRecent9
+        HK := Form.HotKeyRecent9;
+        if JSONObj.FindPath('HotKeyRecent9_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyRecent9_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyRecent9_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyRecent9_Key').AsInteger;
+        Form.HotKeyRecent9 := HK;
 
         // Load recent language pairs
         Form.LangPairs.Clear;

@@ -266,7 +266,7 @@ type
     FLangTarget: string;
     FMaxLangPairs: integer;
     FAutoAddLangPairs: boolean;
-    FRecentPairHotKeys: boolean;
+    FAllowHotKeys: boolean;
     FRealTime: boolean;
     FRealTimeDelay: integer;
     FAutoSwap: boolean;
@@ -289,6 +289,15 @@ type
     FHotKeyTransFromControl: THotKeyData;
     FHotKeyTransControl: THotKeyData;
     FHotKeyTransControlPopup: THotKeyData;
+    FHotKeyRecent1: THotKeyData;
+    FHotKeyRecent2: THotKeyData;
+    FHotKeyRecent3: THotKeyData;
+    FHotKeyRecent4: THotKeyData;
+    FHotKeyRecent5: THotKeyData;
+    FHotKeyRecent6: THotKeyData;
+    FHotKeyRecent7: THotKeyData;
+    FHotKeyRecent8: THotKeyData;
+    FHotKeyRecent9: THotKeyData;
 
     // TrayIcon
     FAutoStart: boolean;
@@ -365,7 +374,7 @@ type
     property LangPairs: TStringList read FLangPairs write FLangPairs;
     property MaxLangPairs: integer read FMaxLangPairs write FMaxLangPairs;
     property AutoAddLangPairs: boolean read FAutoAddLangPairs write FAutoAddLangPairs;
-    property RecentPairHotKeys: boolean read FRecentPairHotKeys write FRecentPairHotKeys;
+    property AllowHotKeys: boolean read FAllowHotKeys write FAllowHotKeys;
     property RealTime: boolean read FRealTime write FRealTime;
     property RealTimeDelay: integer read FRealTimeDelay write FRealTimeDelay;
     property AutoSwap: boolean read FAutoSwap write FAutoSwap;
@@ -388,6 +397,15 @@ type
     property HotKeyTransFromControl: THotKeyData read FHotKeyTransFromControl write FHotKeyTransFromControl;
     property HotKeyTransControl: THotKeyData read FHotKeyTransControl write FHotKeyTransControl;
     property HotKeyTransControlPopup: THotKeyData read FHotKeyTransControlPopup write FHotKeyTransControlPopup;
+    property HotKeyRecent1: THotKeyData read FHotKeyRecent1 write FHotKeyRecent1;
+    property HotKeyRecent2: THotKeyData read FHotKeyRecent2 write FHotKeyRecent2;
+    property HotKeyRecent3: THotKeyData read FHotKeyRecent3 write FHotKeyRecent3;
+    property HotKeyRecent4: THotKeyData read FHotKeyRecent4 write FHotKeyRecent4;
+    property HotKeyRecent5: THotKeyData read FHotKeyRecent5 write FHotKeyRecent5;
+    property HotKeyRecent6: THotKeyData read FHotKeyRecent6 write FHotKeyRecent6;
+    property HotKeyRecent7: THotKeyData read FHotKeyRecent7 write FHotKeyRecent7;
+    property HotKeyRecent8: THotKeyData read FHotKeyRecent8 write FHotKeyRecent8;
+    property HotKeyRecent9: THotKeyData read FHotKeyRecent9 write FHotKeyRecent9;
   end;
 
 var
@@ -437,7 +455,7 @@ begin
   FIconTwoLang := True;
   FMaxLangPairs := 10;
   FAutoAddLangPairs := True;
-  FRecentPairHotKeys := True;
+  FAllowHotKeys := True;
   FRealTime := False;
   FRealTimeDelay := 1000;
   FAutoSwap := False;
@@ -458,7 +476,7 @@ begin
   FLastHotkeyTime := 0;
   FTranslateThread := nil;
 
-  // HotKeys Initialize
+  // AllowHotKeys Initialize
   // Ctrl+Shift+A
   // Ctrl+Shift+A
   FHotKeyApp.Modifiers := MOD_CONTROL or MOD_SHIFT;
@@ -491,6 +509,42 @@ begin
   // Ctrl+Shift+X
   FHotKeyTransControlPopup.Modifiers := MOD_CONTROL or MOD_SHIFT;
   FHotKeyTransControlPopup.Key := Ord('X');
+
+  // Ctrl+Shift+1
+  FHotKeyRecent1.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyRecent1.Key := Ord('1');
+
+  // Ctrl+Shift+2
+  FHotKeyRecent2.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyRecent2.Key := Ord('2');
+
+  // Ctrl+Shift+3
+  FHotKeyRecent3.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyRecent3.Key := Ord('3');
+
+  // Ctrl+Shift+4
+  FHotKeyRecent4.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyRecent4.Key := Ord('4');
+
+  // Ctrl+Shift+5
+  FHotKeyRecent5.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyRecent5.Key := Ord('5');
+
+  // Ctrl+Shift+6
+  FHotKeyRecent6.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyRecent6.Key := Ord('6');
+
+  // Ctrl+Shift+7
+  FHotKeyRecent7.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyRecent7.Key := Ord('7');
+
+  // Ctrl+Shift+8
+  FHotKeyRecent8.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyRecent8.Key := Ord('8');
+
+  // Ctrl+Shift+9
+  FHotKeyRecent9.Modifiers := MOD_CONTROL or MOD_SHIFT;
+  FHotKeyRecent9.Key := Ord('9');
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -724,7 +778,7 @@ begin
       end;
 
       else
-        if (TheMessage.WParam > HOTKEY_LANG_BASE) and (TheMessage.WParam <= HOTKEY_LANG_BASE + 9) then
+        if (TheMessage.WParam >= HOTKEY_RECENT1) and (TheMessage.WParam <= HOTKEY_RECENT9) then
         begin
           LangIndex := TheMessage.WParam - 11;
 
@@ -1736,8 +1790,20 @@ begin
       mi := TMenuItem.Create(MenuLangPairs);
       mi.Caption := lbl.Caption + ' - ' + lbl.Hint;
       mi.Hint := FLangPairs[i];
-      if RecentPairHotKeys and (i < 9) then
-        mi.ShortCut := Menus.ShortCut(Ord('1') + i, [ssCtrl, ssShift]);
+      if AllowHotKeys and (i < 9) then
+      begin
+        case i of
+          0: mi.ShortCut := HotKeyToShortCut(HotKeyRecent1);
+          1: mi.ShortCut := HotKeyToShortCut(HotKeyRecent2);
+          2: mi.ShortCut := HotKeyToShortCut(HotKeyRecent3);
+          3: mi.ShortCut := HotKeyToShortCut(HotKeyRecent4);
+          4: mi.ShortCut := HotKeyToShortCut(HotKeyRecent5);
+          5: mi.ShortCut := HotKeyToShortCut(HotKeyRecent6);
+          6: mi.ShortCut := HotKeyToShortCut(HotKeyRecent7);
+          7: mi.ShortCut := HotKeyToShortCut(HotKeyRecent8);
+          8: mi.ShortCut := HotKeyToShortCut(HotKeyRecent9);
+        end;
+      end;
       mi.Tag := i;
       mi.OnClick := @MenuPairClick;
       mi.Checked := SameText(mi.Hint, LangSource + ':' + LangTarget);
@@ -2049,18 +2115,18 @@ begin
   UnregisterHotKey(Handle, HOTKEY_TRANS_FROM_CONTROL);
   UnregisterHotKey(Handle, HOTKEY_TRANS_CONTROL);
   UnregisterHotKey(Handle, HOTKEY_TRANS_CONTROL_POPUP);
-  for i := 1 to 9 do
-    UnregisterHotKey(Handle, HOTKEY_LANG_BASE + i);
+  for i := 0 to 8 do
+    UnregisterHotKey(Handle, HOTKEY_RECENT1 + i);
 end;
 
 procedure TformTrayslate.RegisterHotKeys;
-var
-  i:integer;
 begin
   // Unregister first to avoid duplicate registration
   UnregisterHotKeys;
 
-  // Register hotkeys if key is assigned
+  if not AllowHotKeys then Exit;
+
+  // Register AllowHotKeys if key is assigned
   if FHotKeyApp.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_APP, FHotKeyApp.Modifiers, FHotKeyApp.Key);
 
@@ -2085,9 +2151,24 @@ begin
   if FHotKeyTransControlPopup.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_TRANS_CONTROL_POPUP, FHotKeyTransControlPopup.Modifiers, FHotKeyTransControlPopup.Key);
 
-  if FRecentPairHotKeys then
-    for i := 1 to 9 do
-      RegisterHotKey(Handle, HOTKEY_LANG_BASE + i, MOD_CONTROL or MOD_SHIFT, Ord('0') + i);
+  if FHotKeyRecent1.Key <> 0 then
+      RegisterHotKey(Handle, HOTKEY_RECENT1, FHotKeyRecent1.Modifiers, FHotKeyRecent1.Key);
+  if FHotKeyRecent2.Key <> 0 then
+      RegisterHotKey(Handle, HOTKEY_RECENT2, FHotKeyRecent2.Modifiers, FHotKeyRecent2.Key);
+  if FHotKeyRecent3.Key <> 0 then
+      RegisterHotKey(Handle, HOTKEY_RECENT3, FHotKeyRecent3.Modifiers, FHotKeyRecent3.Key);
+  if FHotKeyRecent4.Key <> 0 then
+      RegisterHotKey(Handle, HOTKEY_RECENT4, FHotKeyRecent4.Modifiers, FHotKeyRecent4.Key);
+  if FHotKeyRecent5.Key <> 0 then
+      RegisterHotKey(Handle, HOTKEY_RECENT5, FHotKeyRecent5.Modifiers, FHotKeyRecent5.Key);
+  if FHotKeyRecent6.Key <> 0 then
+      RegisterHotKey(Handle, HOTKEY_RECENT6, FHotKeyRecent6.Modifiers, FHotKeyRecent6.Key);
+  if FHotKeyRecent7.Key <> 0 then
+      RegisterHotKey(Handle, HOTKEY_RECENT7, FHotKeyRecent7.Modifiers, FHotKeyRecent7.Key);
+  if FHotKeyRecent8.Key <> 0 then
+      RegisterHotKey(Handle, HOTKEY_RECENT8, FHotKeyRecent8.Modifiers, FHotKeyRecent8.Key);
+  if FHotKeyRecent9.Key <> 0 then
+      RegisterHotKey(Handle, HOTKEY_RECENT9, FHotKeyRecent9.Modifiers, FHotKeyRecent9.Key);
 end;
 
 {$ENDIF}
