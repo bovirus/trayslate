@@ -330,6 +330,10 @@ msgstr "번역 버튼으로만 번역 허용"
 msgid "Allow translate as you type"
 msgstr "입력 중 번역 허용"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "메뉴에 표시됨"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "대상 언어 (예: en=en-US, en - 내부, en-US - 서비스 코드).\n"
 "지정하지 않으면 소스 언어와 대상 언어 모두 언어 섹션에서 가져옵니다."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "최대 길이, 바이트"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

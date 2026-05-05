@@ -330,6 +330,10 @@ msgstr "Povolit překlad pouze pomocí tlačítka překladu"
 msgid "Allow translate as you type"
 msgstr "Povolit překlad při psaní"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "Viditelné v menu"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "Cílové jazyky např. en=en-US, en - interní, en-US - kód služby.\n"
 "Pokud není uvedeno, zdrojové i cílové jazyky se berou z části jazyky."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "Maximální délka, bajty"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

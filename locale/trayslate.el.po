@@ -330,6 +330,10 @@ msgstr "Να επιτρέπεται η μετάφραση μόνο μέσω το
 msgid "Allow translate as you type"
 msgstr "Να επιτρέπεται η μετάφραση κατά την πληκτρολόγηση"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "Ορατό στο μενού"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "Γλώσσες-στόχοι π.χ. en=en-US, en - εσωτερική, en-US - κωδικός υπηρεσίας.\n"
 "Εάν δεν προσδιοριστεί, τόσο η γλώσσα πηγής όσο και οι γλώσσες-στόχοι λαμβάνονται από την ενότητα γλωσσών."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "Μέγιστο μήκος, bytes"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

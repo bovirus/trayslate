@@ -44,10 +44,11 @@ type
     FLangSource: string;
     FLangTarget: string;
     FTextToTranslate: string;
-
+    FIsTruncated: boolean;
     FServiceName: string;
     FServiceIcon: string;
     FServiceOrder: integer;
+    FServiceVisible: boolean;
     FServiceAutoSwap: boolean;
     FServiceRealTime: boolean;
     FServiceOnlyButton: boolean;
@@ -58,6 +59,7 @@ type
     FServiceColorRecent: TColor;
     FServiceDescription: TStringList;
     FEncodeText: boolean;
+    FMaxLength: integer;
     FEncodeCustomParameters: boolean;
     FUrl: string;
     FContentType: string;
@@ -101,6 +103,7 @@ type
     property ServiceName: string read FServiceName write FServiceName;
     property ServiceIcon: string read FServiceIcon write FServiceIcon;
     property ServiceOrder: integer read FServiceOrder write FServiceOrder;
+    property ServiceVisible: boolean read FServiceVisible write FServiceVisible;
     property ServiceAutoSwap: boolean read FServiceAutoSwap write FServiceAutoSwap;
     property ServiceRealTime: boolean read FServiceRealTime write FServiceRealTime;
     property ServiceOnlyButton: boolean read FServiceOnlyButton write FServiceOnlyButton;
@@ -110,6 +113,7 @@ type
     property UserAgent: string read FUserAgent write FUserAgent;
     property Headers: TStringList read FHeaders write FHeaders;
     property EncodeText: boolean read FEncodeText write FEncodeText;
+    property MaxLength: integer read FMaxLength write FMaxLength;
     property Url: string read FUrl write FUrl;
     property ContentType: string read FContentType write FContentType;
     property PostData: string read FPostData write FPostData;
@@ -155,6 +159,7 @@ const
   DEFAULT_LANG = 'en';
   EMPTY_LANG = 'empty';
   REGEXP_ERROR = 'REGEX_ERROR: ';
+  CONNECT_TIMEOUT = 10000;
 
 implementation
 
@@ -168,6 +173,7 @@ begin
   FServiceName := 'default';
   FServiceIcon := string.Empty;
   FServiceColorRecent := clBlue;
+  FServiceVisible := True;
   FServiceAutoSwap := False;
   FServiceRealTime := False;
   FServiceOnlyButton := False;
@@ -183,6 +189,7 @@ begin
   FServiceDescription.TrailingLineBreak := False;
   FServiceDescription.SkipLastLineBreak := True;
   FEncodeText := True;
+  FMaxLength := 0;
   FUrl := string.Empty;
   FContentType := 'application/json';
   FPostData := string.Empty;
@@ -259,8 +266,17 @@ begin
     end;
   end;
 
+  FIsTruncated := False;
   if FTextToTranslate <> string.Empty then
-    FParameterValues.Values['text'] := FTextToTranslate
+  begin
+    if (FMaxLength > 0) then
+    begin
+      FParameterValues.Values['text'] := Utf8TruncateWithEncoding(FTextToTranslate, FMaxLength, FEncodeText);
+      FIsTruncated := Length(FParameterValues.Values['text']) < Length(FTextToTranslate);
+    end
+    else
+      FParameterValues.Values['text'] := FTextToTranslate;
+  end
   else
     FParameterValues.Values['text'] := string.Empty;
   FParameterEncode.Values['text'] := ifthen(FEncodeText, '1', '0');
@@ -387,6 +403,7 @@ begin
   FParameterValues.Clear;
 
   http := TFPHTTPClient.Create(nil);
+  http.ConnectTimeout := CONNECT_TIMEOUT;
   response := TMemoryStream.Create;
   try
     http.AllowRedirect := True;
@@ -456,6 +473,7 @@ begin
     GetParameters(GetInit);
 
     http := TFPHTTPClient.Create(nil);
+    http.ConnectTimeout := CONNECT_TIMEOUT;
     rawResponse := TMemoryStream.Create;
     try
       TempUrl := FUrl;
@@ -564,6 +582,7 @@ begin
     GetParameters(GetInit);
 
     http := TFPHTTPClient.Create(nil);
+    http.ConnectTimeout := CONNECT_TIMEOUT;
     rawResponse := TMemoryStream.Create;
     try
       TempUrl := FUrl;
@@ -844,8 +863,16 @@ begin
                         begin
                           MatchIdxStr := Copy(InnerBlock, rStart + 1, rEnd - rStart);
                           PointerFound := False;
-                          if MatchIdxStr = '*' then begin MatchGlue := ' '; PointerFound := True; end
-                          else if MatchIdxStr = '*#10' then begin MatchGlue := #10; PointerFound := True; end
+                          if MatchIdxStr = '*' then
+                          begin
+                            MatchGlue := ' ';
+                            PointerFound := True;
+                          end
+                          else if MatchIdxStr = '*#10' then
+                          begin
+                            MatchGlue := #10;
+                            PointerFound := True;
+                          end
                           else if TryStrToInt(MatchIdxStr, MatchIdx) then PointerFound := True;
 
                           if PointerFound then InnerBlock := Copy(InnerBlock, 1, rStart - 1);
@@ -861,11 +888,16 @@ begin
                           HasAnyMatch := True;
                           repeat
                             if regex.SubExprMatchCount > 0 then MatchResPart := regex.Match[1]
-                            else MatchResPart := regex.Match[0];
+                            else
+                              MatchResPart := regex.Match[0];
 
                             if MatchIdx <> -1 then
                             begin
-                              if CurrentIdx = MatchIdx then begin MatchRes := MatchResPart; Break; end;
+                              if CurrentIdx = MatchIdx then
+                              begin
+                                MatchRes := MatchResPart;
+                                Break;
+                              end;
                             end
                             else
                             begin
@@ -877,7 +909,11 @@ begin
                           until not regex.ExecNext;
                         end;
                       except
-                        on E: Exception do begin MatchRes := REGEXP_ERROR + E.Message; HasAnyMatch := True; end;
+                        on E: Exception do
+                        begin
+                          MatchRes := REGEXP_ERROR + E.Message;
+                          HasAnyMatch := True;
+                        end;
                       end;
                     end;
 
@@ -899,11 +935,14 @@ begin
                 Insert(BlockContent, Segment, pStart);
                 k := pStart + Length(BlockContent);
               end
-              else k := pStart;
+              else
+                k := pStart;
             end
-            else Inc(k);
+            else
+              Inc(k);
           end
-          else Inc(k);
+          else
+            Inc(k);
         end;
       end;
 
@@ -935,7 +974,9 @@ begin
     Result := ParseResponse(content);
 
   if (Trim(Result) = string.Empty) then
-    Result := content;
+    Result := content
+  else
+  if FIsTruncated then Result := Result + '...';
 end;
 
 { TTranslateThread }

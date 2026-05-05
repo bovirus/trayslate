@@ -330,6 +330,10 @@ msgstr "Izinkan penerjemahan hanya melalui tombol terjemahan"
 msgid "Allow translate as you type"
 msgstr "Izinkan penerjemahan saat mengetik"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "Tampil di menu"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "Bahasa sasaran misalnya en=en-US, en - internal, en-US - kode layanan.\n"
 "Jika tidak ditentukan, baik bahasa sumber maupun sasaran diambil dari bagian bahasa."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "Lunghezza massima, byte"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

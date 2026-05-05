@@ -330,6 +330,10 @@ msgstr "Übersetzung nur über die Übersetzungsschaltfläche erlauben"
 msgid "Allow translate as you type"
 msgstr "Übersetzung während der Eingabe erlauben"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "Im Menü sichtbar"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "Zielsprachen, z. B. en=en-US, en - intern, en-US - Dienstcode.\n"
 "Wenn nicht angegeben, werden sowohl Quell- als auch Zielsprachen aus dem Sprachenabschnitt übernommen."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "Maximale Länge, Bytes"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

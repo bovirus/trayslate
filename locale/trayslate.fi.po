@@ -330,6 +330,10 @@ msgstr "Salli käännös vain käännöspainikkeella"
 msgid "Allow translate as you type"
 msgstr "Salli käännös kirjoittaessasi"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "Näkyy valikossa"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "Kohdekielet, esim. en=en-US, en - sisäinen, en-US - palvelukoodi.\n"
 "Jos ei ole määritetty, sekä lähde- että kohdekielet otetaan kieliosiosta."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "Enimmäispituus, tavuja"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

@@ -330,6 +330,10 @@ msgstr "אפשר תרגום רק באמצעות כפתור התרגום"
 msgid "Allow translate as you type"
 msgstr "אפשר תרגום בזמן ההקלדה"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "גלוי בתפריט"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "שפות יעד לדוגמה en=en-US, en - פנימי, en-US - קוד שירות.\n"
 "אם לא צוין, גם שפת המקור וגם שפות היעד נלקחות מקטע השפות."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "אורך מקסימלי, בתים"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

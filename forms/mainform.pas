@@ -1616,9 +1616,7 @@ procedure TFormTrayslate.BuildConfigMenu;
 var
   i: integer;
   Item: TMenuItem;
-  FileName, ServiceName, FilePath: string;
-  ServiceColor: TColor;
-  ServiceIcon: integer;
+  FileName, FilePath: string;
   Ini: TIniFile;
   SL: TStringList;
   Data: PConfigData;
@@ -1628,6 +1626,7 @@ begin
 
   SL := TStringList.Create;
   ImageConfig.Clear;
+
   try
     for i := 0 to FConfigFiles.Count - 1 do
     begin
@@ -1635,55 +1634,61 @@ begin
 
       FilePath := FConfigFiles[i];
       FileName := ExtractFileName(FilePath);
-      ServiceName := '';
+
+      // defaults
+      Data^.Name := string.Empty;
+      Data^.Color := clBlue;
+      Data^.Visible := True;
+      Data^.Order := 0;
+      Data^.ImageIndex := -1;
+      Data^.PathOnly := ExtractFilePath(FilePath);
 
       if FileExists(FilePath) then
       begin
         Ini := TIniFile.Create(FilePath);
         try
-          ServiceName := Trim(Ini.ReadString('Service', 'Name', string.Empty));
-          ServiceColor := Ini.ReadInteger('Service', 'ColorRecent', clBlue);
+          Data^.Name := Trim(Ini.ReadString('Service', 'Name', string.Empty));
+          Data^.Color := Ini.ReadInteger('Service', 'ColorRecent', clBlue);
+          Data^.Visible := Ini.ReadBool('Service', 'Visible', True);
           Data^.Order := Ini.ReadInteger('Service', 'Order', 0);
-          Data^.ImageIndex := AddBase64ToImageList(Ini.ReadString('Service', 'Icon', string.Empty), ImageConfig);
+
+          Data^.ImageIndex := AddBase64ToImageList(Ini.ReadString('Service', 'Icon', string.Empty),
+            ImageConfig);
         finally
           Ini.Free;
         end;
-      end
-      else
-        Data^.Order := 0;
+      end;
 
-      Data^.Name := ServiceName;
-      Data^.Color := ServiceColor;
-      Data^.PathOnly := ExtractFilePath(FilePath); // second level of sorting
       SL.AddObject(FilePath, TObject(Data));
     end;
 
     SL.CustomSort(@ConfigSortByOrderPathName);
 
-    // Update FConfigFiles in a new order
+    // rebuild original list order
     FConfigFiles.Clear;
     for i := 0 to SL.Count - 1 do
       FConfigFiles.Add(SL[i]);
 
-    // Build menu
+    // clear caches
     FConfigTitles.Clear;
     FConfigColors.Clear;
     FConfigImages.Clear;
+
     for i := 0 to SL.Count - 1 do
     begin
       Data := PConfigData(SL.Objects[i]);
       FileName := ExtractFileName(SL[i]);
-      ServiceName := Data^.Name;
-      ServiceColor := Data^.Color;
-      ServiceIcon := Data^.ImageIndex;
 
-      FConfigTitles.Add(SL[i] + '=' + ServiceName);
-      FConfigColors.Add(SL[i] + '=' + IntToStr(ServiceColor));
-      FConfigImages.Add(SL[i] + '=' + IntToStr(ServiceIcon));
+      // caches
+      FConfigTitles.Add(SL[i] + '=' + Data^.Name);
+      FConfigColors.Add(SL[i] + '=' + IntToStr(Data^.Color));
+      FConfigImages.Add(SL[i] + '=' + IntToStr(Data^.ImageIndex));
 
+      // menu item
       Item := TMenuItem.Create(MenuConfig);
-      if ServiceName <> '' then
-        Item.Caption := ServiceName
+
+      if Data^.Name <> string.Empty then
+        Item.Caption := Data^.Name
       else
         Item.Caption := FileName;
 
@@ -1691,16 +1696,19 @@ begin
       Item.Tag := i;
       Item.OnClick := @MenuConfigItemClick;
       Item.Checked := SameText(SL[i], FConfigFile);
+      Item.Visible := Data^.Visible;
+
       if Item.Checked then
         Item.ImageIndex := -1
       else
-        Item.ImageIndex := ServiceIcon;
+        Item.ImageIndex := Data^.ImageIndex;
 
       MenuConfig.Add(Item);
 
       Dispose(Data);
       SL.Objects[i] := nil;
     end;
+
   finally
     SL.Free;
   end;

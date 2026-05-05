@@ -330,6 +330,10 @@ msgstr "仅允许通过翻译按钮进行翻译"
 msgid "Allow translate as you type"
 msgstr "允许在输入时进行翻译"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "在菜单中显示"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "目标语言，例如 en=en-US，en - 内部，en-US - 服务代码。\n"
 "如果未指定，源语言和目标语言均从语言部分获取。"
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "最大长度，字节"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

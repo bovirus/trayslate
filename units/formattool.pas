@@ -24,6 +24,7 @@ uses
   LCLIntf,
   LazUTF8,
   fpjson,
+  fphttpclient,
   jsonparser;
 
 function ColorToHtml(AColor: TColor): string;
@@ -50,7 +51,7 @@ function GetIndexByValue(Strings: TStringList; const AValue: string; CaseSensiti
 
 procedure RemoveEmptyValues(Strings: TStringList);
 
-procedure ReplaceInStrings(AList: TStrings; const AFrom, ATo: string; AReplaceAll: Boolean = False);
+procedure ReplaceInStrings(AList: TStrings; const AFrom, ATo: string; AReplaceAll: boolean = False);
 
 function RemoveEmptyParams(const AInput: string): string;
 
@@ -71,6 +72,10 @@ function DarkThemeColor(BaseColor: TColor; Delta: integer = 60): TColor;
 function PosExReverse(const SubStr, S: unicodestring; Offset: SizeInt = -1): SizeInt;
 
 function FindSubstringIndex(Strings: TStringList; const AValue: string): integer;
+
+function Utf8Truncate(const S: string; MaxBytes: integer; Encode: boolean): string;
+
+function Utf8TruncateWithEncoding(const S: string; MaxBytes: integer; Encode: boolean): string;
 
 implementation
 
@@ -288,9 +293,9 @@ begin
   end;
 end;
 
-procedure ReplaceInStrings(AList: TStrings; const AFrom, ATo: string; AReplaceAll: Boolean = False);
+procedure ReplaceInStrings(AList: TStrings; const AFrom, ATo: string; AReplaceAll: boolean = False);
 var
-  i: Integer;
+  i: integer;
   Flags: TReplaceFlags;
 begin
   if (AFrom = string.Empty) or (AList.Count = 0) then Exit;
@@ -748,6 +753,102 @@ begin
   end;
 
   Result := -1;
+end;
+
+function Utf8Truncate(const S: string; MaxBytes: integer; Encode: boolean): string;
+var
+  p, startPtr: pchar;
+  CharLen: integer;
+  PredictedSize: integer;
+  CurrentTotal: integer;
+begin
+  Result := '';
+  if (S = '') or (MaxBytes <= 0) then Exit;
+
+  p := PChar(S);
+  startPtr := p;
+  CurrentTotal := 0;
+
+  while (p^ <> #0) do
+  begin
+    // 1. Determine UTF-8 character length (1-4 bytes)
+    CharLen := UTF8CodepointSize(p);
+
+    // 2. Predict the size of the character after encoding/escaping
+    if Encode then
+    begin
+      // URL Encoding logic:
+      // Safe chars [A-Z, a-z, 0-9, -, _, ., ~] remain 1 byte.
+      // All other bytes are converted to %XX format (3 bytes per 1 input byte).
+      if (p^ in ['A'..'Z', 'a'..'z', '0'..'9', '-', '_', '.', '~']) then
+        PredictedSize := 1
+      else
+        PredictedSize := CharLen * 3;
+    end
+    else
+    begin
+      // Escaping logic:
+      // Control chars \, ", LF, CR, Tab are replaced with 2-byte sequences (e.g. \n).
+      // Other UTF-8 characters remain as-is (their original byte length).
+      if (p^ in ['\', '"', #10, #13, #9]) then
+        PredictedSize := 2
+      else
+        PredictedSize := CharLen;
+    end;
+
+    // 3. Check if the encoded character fits within the remaining byte budget
+    if CurrentTotal + PredictedSize <= MaxBytes then
+    begin
+      Inc(CurrentTotal, PredictedSize);
+      Inc(p, CharLen); // Move pointer to the start of the next UTF-8 character
+    end
+    else
+      Break; // Limit exceeded, stop processing
+  end;
+
+  // 4. Perform a single memory allocation and copy the resulting substring
+  if p > startPtr then
+    SetString(Result, startPtr, p - startPtr)
+  else
+    Result := '';
+end;
+
+function Utf8TruncateWithEncoding(const S: string; MaxBytes: integer; Encode: boolean): string;
+var
+  p, startPtr: pchar;
+  CharLen: integer;
+  CurrentChar, EncodedChar: string;
+  CurrentTotalBytes: integer;
+begin
+  Result := '';
+  if (S = '') or (MaxBytes <= 0) then Exit;
+
+  p := PChar(S);
+  startPtr := p;
+  CurrentTotalBytes := 0;
+
+  while (p^ <> #0) do
+  begin
+    CharLen := UTF8CodepointSize(p);
+    SetString(CurrentChar, p, CharLen);
+
+    if Encode then
+      EncodedChar := EncodeURLElement(CurrentChar)
+    else
+      EncodedChar := EscapeText(CurrentChar);
+
+    if CurrentTotalBytes + Length(EncodedChar) <= MaxBytes then
+    begin
+      Inc(CurrentTotalBytes, Length(EncodedChar));
+      Inc(p, CharLen);
+    end
+    else
+      Break;
+  end;
+
+  // Only allocate Result ONCE at the end
+  if p > startPtr then
+    SetString(Result, startPtr, p - startPtr);
 end;
 
 end.

@@ -330,6 +330,10 @@ msgstr "Tillåt endast översättning via översättningsknappen"
 msgid "Allow translate as you type"
 msgstr "Tillåt översättning medan du skriver"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "Synlig i meny"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "Målspråk t.ex. en=en-US, en - internt, en-US - tjänstekod.\n"
 "Om inte anges, hämtas både käll- och målspråk från språksektionen."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "Maxlängd, byte"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

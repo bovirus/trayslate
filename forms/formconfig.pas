@@ -26,7 +26,8 @@ uses
   ActnList,
   ComCtrls,
   Spin,
-  LCLType, ColorBox;
+  ColorBox,
+  LCLType;
 
 type
 
@@ -43,6 +44,7 @@ type
     CheckEncodeText: TCheckBox;
     CheckServiceAutoSwap: TCheckBox;
     CheckEncodeCustomParameters: TCheckBox;
+    CheckServiceVisible: TCheckBox;
     CheckServiceRealTime: TCheckBox;
     CheckServiceOnlyButton: TCheckBox;
     ColorDialog: TColorDialog;
@@ -78,6 +80,7 @@ type
     LabelLanguages: TLabel;
     LabelServiceDescription: TLabel;
     LabelColorRecent: TLabel;
+    LabelMaxLength: TLabel;
     LabelValueType: TLabel;
     LabelJsonPointer2: TLabel;
     LabelHeaders: TLabel;
@@ -123,6 +126,7 @@ type
     PageResponse: TTabSheet;
     SpinServiceOrder: TSpinEdit;
     PageRequest: TTabSheet;
+    SpinMaxLength: TSpinEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -559,6 +563,7 @@ begin
     FIconBase64 := ServiceIcon;
     UpdateIconPreview;
     SpinServiceOrder.Value := ServiceOrder;
+    CheckServiceVisible.Checked := ServiceVisible;
     CheckServiceAutoSwap.Checked := ServiceAutoSwap;
     CheckServiceRealTime.Checked := ServiceRealTime;
     CheckServiceOnlyButton.Checked := ServiceOnlyButton;
@@ -570,6 +575,7 @@ begin
     MemoHeaders.Lines.Assign(Headers);
     MemoCustomParameters.Lines.Assign(CustomParameters);
     CheckEncodeText.Checked := EncodeText;
+    SpinMaxLength.Value := MaxLength;
     CheckEncodeCustomParameters.Checked := EncodeCustomParameters;
     MemoUrl.Text := Url;
     EditContentType.Text := ContentType;
@@ -601,6 +607,7 @@ begin
     ServiceName := string.Empty;
     ServiceIcon := string.Empty;
     ServiceOrder := 0;
+    ServiceVisible := True;
     ServiceAutoSwap := False;
     ServiceRealTime := False;
     ServiceOnlyButton := False;
@@ -610,6 +617,7 @@ begin
     UserAgent := string.Empty;
     Headers.Clear;
     EncodeText := False;
+    MaxLength := 0;
     Url := string.Empty;
     ContentType := string.Empty;
     PostData := string.Empty;
@@ -629,6 +637,7 @@ begin
     // Clear controls
     EditServiceName.Text := string.Empty;
     SpinServiceOrder.Value := 0;
+    CheckServiceVisible.Checked := True;
     CheckServiceAutoSwap.Checked := False;
     CheckServiceRealTime.Checked := False;
     CheckServiceOnlyButton.Checked := False;
@@ -671,6 +680,7 @@ begin
       ServiceName := EditServiceName.Text;
       ServiceIcon := FIconBase64;
       ServiceOrder := SpinServiceOrder.Value;
+      ServiceVisible := CheckServiceVisible.Checked;
       ServiceAutoSwap := CheckServiceAutoSwap.Checked;
       ServiceRealTime := CheckServiceRealTime.Checked;
       ServiceOnlyButton := CheckServiceOnlyButton.Checked;
@@ -680,6 +690,7 @@ begin
       WebMethod := TWebMethod(ComboMethod.ItemIndex);
       UserAgent := EditUserAgent.Text;
       EncodeText := CheckEncodeText.Checked;
+      MaxLength := SpinMaxLength.Value;
 
       TempHeaders := HeadersFromMemo(MemoHeaders);
       try

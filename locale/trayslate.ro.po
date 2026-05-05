@@ -330,6 +330,10 @@ msgstr "Permite traducerea numai prin butonul de traducere"
 msgid "Allow translate as you type"
 msgstr "Permite traducerea în timp ce tastezi"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "Vizibil în meniu"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "Limbi țintă, de ex. en=en-US, en - intern, en-US - cod serviciu.\n"
 "Dacă nu este specificat, atât limbile sursă cât și cele țintă sunt preluate din secțiunea limbi."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "Lungime maximă, bytes"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

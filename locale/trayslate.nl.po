@@ -330,6 +330,10 @@ msgstr "Alleen vertaling via de vertaalknop toestaan"
 msgid "Allow translate as you type"
 msgstr "Vertaling tijdens het typen toestaan"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "Zichtbaar in menu"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "Doeltalen bijv. en=en-US, en - intern, en-US - servicecode.\n"
 "Als niet gespecificeerd, worden zowel bron- als doeltalen uit het talengedeelte gehaald."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "Maksymalna długość, bajty"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

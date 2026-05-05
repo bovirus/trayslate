@@ -330,6 +330,10 @@ msgstr "Sadece çeviri düğmesi ile çeviriye izin ver"
 msgid "Allow translate as you type"
 msgstr "Yazarken çeviriye izin ver"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "Menüde görünür"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "Hedef diller örn. en=en-US, en - dahili, en-US - hizmet kodu.\n"
 "Belirtilmemişse hem kaynak hem hedef diller diller bölümünden alınır."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "Maksimum uzunluk, bayt"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

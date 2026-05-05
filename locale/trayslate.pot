@@ -305,6 +305,10 @@ msgstr ""
 msgid "Allow translate as you type"
 msgstr ""
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr ""
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
 msgstr ""
@@ -446,6 +450,10 @@ msgstr ""
 msgid ""
 "Target languages e.g. en=en-US, en - internal, en-US - service code.\n"
 "If not specified, both source and target languages are taken from the languages section."
+msgstr ""
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
 msgstr ""
 
 #: tformconfigtrayslate.labelmethod.caption

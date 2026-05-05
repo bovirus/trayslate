@@ -31,6 +31,7 @@ type
     PathOnly: string;
     Name: string;
     Color: TColor;
+    Visible: boolean;
     ImageIndex: integer;
   end;
 
@@ -573,6 +574,7 @@ begin
     else
       Ini.DeleteKey('Service', 'Icon');
     Ini.WriteInteger('Service', 'Order', Translate.ServiceOrder);
+    Ini.WriteBool('Service', 'Visible', Translate.ServiceVisible);
     Ini.WriteBool('Service', 'AutoSwapLanguage', Translate.ServiceAutoSwap);
     Ini.WriteBool('Service', 'RealTimeTranslation', Translate.ServiceRealTime);
     Ini.WriteBool('Service', 'TranslateOnlyByButton', Translate.ServiceOnlyButton);
@@ -607,6 +609,7 @@ begin
       Ini.DeleteKey('Request', 'UserAgent');
 
     Ini.WriteBool('Request', 'EncodeText', Translate.EncodeText);
+    Ini.WriteInteger('Request', 'MaxLength', Translate.MaxLength);
 
     if Trim(Translate.Url) <> string.Empty then
       Ini.WriteString('Request', 'Url', Translate.Url)
@@ -762,6 +765,7 @@ begin
     Translate.ServiceName := Ini.ReadString('Service', 'Name', string.Empty);
     Translate.ServiceIcon := Ini.ReadString('Service', 'Icon', string.Empty);
     Translate.ServiceOrder := Ini.ReadInteger('Service', 'Order', 0);
+    Translate.ServiceVisible := Ini.ReadBool('Service', 'Visible', True);
     Translate.ServiceAutoSwap := Ini.ReadBool('Service', 'AutoSwapLanguage', False);
     Translate.ServiceRealTime := Ini.ReadBool('Service', 'RealTimeTranslation', False);
     Translate.ServiceOnlyButton := Ini.ReadBool('Service', 'TranslateOnlyByButton', False);
@@ -804,6 +808,8 @@ begin
 
     Translate.UserAgent := Ini.ReadString('Request', 'UserAgent', string.Empty);
     Translate.EncodeText := Ini.ReadBool('Request', 'EncodeText', True);
+    Translate.MaxLength := Ini.ReadInteger('Request', 'MaxLength', 0);
+
     Translate.Url := Ini.ReadString('Request', 'Url', string.Empty);
 
     Translate.ContentType := Ini.ReadString('Request', 'ContentType', string.Empty);

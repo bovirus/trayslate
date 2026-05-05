@@ -330,9 +330,13 @@ msgstr "Разрешаване на превод само чрез бутон з
 msgid "Allow translate as you type"
 msgstr "Позволете превод, докато пишете"
 
+#: tformconfigtrayslate.checkservicevisible.caption
+msgid "Visible in menu"
+msgstr "Видимо в меню"
+
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
-msgstr ""
+msgstr "GET"
 
 #: tformconfigtrayslate.combovaluetype.text
 msgid "None"
@@ -482,6 +486,10 @@ msgid ""
 msgstr ""
 "Целеви езици, например en=en-US, en - вътрешен, en-US - сервизен код.\n"
 "Ако не е посочено, и двата езика, изходният и целевият, се вземат от секцията за езици."
+
+#: tformconfigtrayslate.labelmaxlength.caption
+msgid "Max Length, bytes"
+msgstr "Максимална дължина, байтове"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"

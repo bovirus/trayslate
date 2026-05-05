@@ -1,10 +1,10 @@
 object formConfigTrayslate: TformConfigTrayslate
   Left = 318
-  Height = 649
+  Height = 926
   Top = 250
   Width = 600
   Caption = 'Config Editor'
-  ClientHeight = 649
+  ClientHeight = 926
   ClientWidth = 600
   ShowInTaskBar = stAlways
   LCLVersion = '4.4.0.0'
@@ -18,7 +18,7 @@ object formConfigTrayslate: TformConfigTrayslate
   object BtnClose: TButton
     Left = 520
     Height = 25
-    Top = 616
+    Top = 893
     Width = 75
     Anchors = [akRight, akBottom]
     Caption = 'Close'
@@ -153,7 +153,7 @@ object formConfigTrayslate: TformConfigTrayslate
   object BtnSave: TButton
     Left = 441
     Height = 25
-    Top = 616
+    Top = 893
     Width = 75
     Action = aSave
     Anchors = [akRight, akBottom]
@@ -161,7 +161,7 @@ object formConfigTrayslate: TformConfigTrayslate
   end
   object Pages: TPageControl
     Left = 5
-    Height = 568
+    Height = 845
     Top = 41
     Width = 590
     ActivePage = PageService
@@ -172,34 +172,34 @@ object formConfigTrayslate: TformConfigTrayslate
     TabOrder = 1
     object PageService: TTabSheet
       Caption = 'Service'
-      ClientHeight = 540
+      ClientHeight = 817
       ClientWidth = 582
       object ScrollBoxService: TScrollBox
         Left = 0
-        Height = 540
+        Height = 817
         Top = 0
         Width = 582
         HorzScrollBar.Page = 1
         HorzScrollBar.Visible = False
-        VertScrollBar.Increment = 24
-        VertScrollBar.Page = 245
+        VertScrollBar.Increment = 27
+        VertScrollBar.Page = 277
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 540
+        ClientHeight = 817
         ClientWidth = 582
         ParentBackground = False
         TabOrder = 0
         object GroupBoxService: TGroupBox
           Left = 5
-          Height = 530
+          Height = 807
           Top = 5
           Width = 572
           Align = alClient
           BorderSpacing.Around = 5
           Caption = 'Service'
-          ClientHeight = 510
+          ClientHeight = 787
           ClientWidth = 568
           ParentBackground = False
           TabOrder = 0
@@ -232,7 +232,7 @@ object formConfigTrayslate: TformConfigTrayslate
           object CheckServiceAutoSwap: TCheckBox
             Left = 120
             Height = 19
-            Top = 64
+            Top = 128
             Width = 182
             Caption = 'Allow auto-swap language pair'
             TabOrder = 2
@@ -258,8 +258,8 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object MemoServiceDescription: TMemo
             Left = 120
-            Height = 294
-            Top = 192
+            Height = 539
+            Top = 224
             Width = 423
             Anchors = [akTop, akLeft, akRight, akBottom]
             BorderSpacing.Top = 45
@@ -273,25 +273,25 @@ object formConfigTrayslate: TformConfigTrayslate
           object LabelServiceDescription: TLabel
             Left = 8
             Height = 23
-            Top = 192
+            Top = 224
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Description'
           end
           object LabelColorRecent: TLabel
-            Left = 8
+            Left = 9
             Height = 23
-            Top = 159
+            Top = 64
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Recent Color'
           end
           object ColorServiceColorRecent: TColorBox
-            Left = 120
+            Left = 121
             Height = 22
-            Top = 160
+            Top = 65
             Width = 423
             Style = [cbCustomColor, cbPrettyNames, cbCustomColors]
             ColorDialog = ColorDialog
@@ -318,7 +318,7 @@ object formConfigTrayslate: TformConfigTrayslate
           object CheckServiceRealTime: TCheckBox
             Left = 120
             Height = 19
-            Top = 96
+            Top = 160
             Width = 159
             Caption = 'Allow translate as you type'
             TabOrder = 3
@@ -327,10 +327,21 @@ object formConfigTrayslate: TformConfigTrayslate
           object CheckServiceOnlyButton: TCheckBox
             Left = 120
             Height = 19
-            Top = 128
+            Top = 192
             Width = 247
             Caption = 'Allow translation only by translation button'
             TabOrder = 4
+            OnChange = ValueChange
+          end
+          object CheckServiceVisible: TCheckBox
+            Left = 120
+            Height = 19
+            Top = 96
+            Width = 99
+            Caption = 'Visible in menu'
+            Checked = True
+            State = cbChecked
+            TabOrder = 7
             OnChange = ValueChange
           end
         end
@@ -338,30 +349,30 @@ object formConfigTrayslate: TformConfigTrayslate
     end
     object PageRequest: TTabSheet
       Caption = 'Request'
-      ClientHeight = 540
+      ClientHeight = 817
       ClientWidth = 582
       object ScrollBoxRequest: TScrollBox
         Left = 0
-        Height = 540
+        Height = 817
         Top = 0
         Width = 582
-        HorzScrollBar.Page = 520
-        VertScrollBar.Page = 540
+        HorzScrollBar.Page = 539
+        VertScrollBar.Page = 751
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 540
-        ClientWidth = 565
+        ClientHeight = 817
+        ClientWidth = 582
         TabOrder = 0
         object GroupRequest: TGroupBox
           Left = 5
           Height = 741
           Top = 5
-          Width = 555
+          Width = 572
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Request'
           ClientHeight = 721
-          ClientWidth = 551
+          ClientWidth = 568
           ParentBackground = False
           TabOrder = 0
           object LabelMethod: TLabel
@@ -377,7 +388,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 120
             Height = 23
             Top = 0
-            Width = 406
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             ItemHeight = 15
             ItemIndex = 0
@@ -394,7 +405,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 120
             Height = 23
             Top = 33
-            Width = 406
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             TabOrder = 1
             OnChange = ValueChange
@@ -409,37 +420,37 @@ object formConfigTrayslate: TformConfigTrayslate
             Caption = 'User Agent'
           end
           object LabelContentType: TLabel
-            Left = 11
+            Left = 8
             Height = 23
-            Top = 384
+            Top = 416
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Content Type'
           end
           object EditContentType: TEdit
-            Left = 123
+            Left = 120
             Height = 23
-            Top = 384
-            Width = 406
+            Top = 416
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             TabOrder = 6
             OnChange = ValueChange
           end
           object LabelUrl: TLabel
-            Left = 11
+            Left = 8
             Height = 23
-            Top = 280
+            Top = 313
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'URL'
           end
           object MemoURL: TMemo
-            Left = 123
+            Left = 120
             Height = 64
-            Top = 281
-            Width = 406
+            Top = 313
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             ScrollBars = ssAutoVertical
             TabOrder = 4
@@ -450,7 +461,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 8
             Height = 45
             Top = 192
-            Width = 518
+            Width = 535
             Anchors = [akTop, akLeft, akRight]
             Caption = 'Use parameters: {text} – input text, {source} – source language, {target} – target language. Prefix the name with ! for lowercase or ^ for uppercase value. Also supported {timestamp}, {rand}. Use {parameter} from the parameters page.'
             Color = clInfoBk
@@ -459,19 +470,19 @@ object formConfigTrayslate: TformConfigTrayslate
             WordWrap = True
           end
           object LabelPostData: TLabel
-            Left = 11
+            Left = 8
             Height = 23
-            Top = 417
+            Top = 449
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Post Data'
           end
           object MemoPostData: TMemo
-            Left = 123
+            Left = 120
             Height = 288
-            Top = 417
-            Width = 406
+            Top = 449
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             ScrollBars = ssAutoBoth
             TabOrder = 7
@@ -480,18 +491,18 @@ object formConfigTrayslate: TformConfigTrayslate
             OnKeyDown = MemoKeyDown
           end
           object EditAccept: TEdit
-            Left = 123
+            Left = 120
             Height = 23
-            Top = 352
-            Width = 406
+            Top = 384
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             TabOrder = 5
             OnChange = ValueChange
           end
           object LabelAccept: TLabel
-            Left = 11
+            Left = 8
             Height = 23
-            Top = 352
+            Top = 384
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
@@ -510,7 +521,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 120
             Height = 92
             Top = 88
-            Width = 406
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             BorderSpacing.Top = 45
             BorderSpacing.Right = 15
@@ -533,7 +544,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 8
             Height = 15
             Top = 64
-            Width = 518
+            Width = 535
             Anchors = [akTop, akLeft, akRight]
             Caption = 'Additional request headers in key=value format, key: value is also supported'
             Color = clInfoBk
@@ -541,10 +552,10 @@ object formConfigTrayslate: TformConfigTrayslate
             Transparent = False
           end
           object BtnUrlTest: TSpeedButton
-            Left = 528
+            Left = 545
             Height = 22
             Hint = 'Execute get request and view the result'
-            Top = 281
+            Top = 313
             Width = 23
             Anchors = [akTop, akRight]
             Flat = True
@@ -589,10 +600,10 @@ object formConfigTrayslate: TformConfigTrayslate
             OnClick = BtnUrlTestClick
           end
           object BtnPostDataTest: TSpeedButton
-            Left = 528
+            Left = 545
             Height = 22
             Hint = 'Execute post request and view the result'
-            Top = 417
+            Top = 449
             Width = 23
             Anchors = [akTop, akRight]
             Flat = True
@@ -636,16 +647,35 @@ object formConfigTrayslate: TformConfigTrayslate
             ParentShowHint = False
             OnClick = BtnPostDataTestClick
           end
+          object SpinMaxLength: TSpinEdit
+            Left = 120
+            Height = 23
+            Top = 280
+            Width = 423
+            Anchors = [akTop, akLeft, akRight]
+            TabOrder = 8
+            OnChange = ValueChange
+          end
+          object LabelMaxLength: TLabel
+            Left = 8
+            Height = 32
+            Top = 280
+            Width = 104
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Max Length, bytes'
+            WordWrap = True
+          end
         end
       end
     end
     object PageResponse: TTabSheet
       Caption = 'Response'
-      ClientHeight = 540
+      ClientHeight = 817
       ClientWidth = 582
       object ScrollBoxResponse: TScrollBox
         Left = 0
-        Height = 540
+        Height = 817
         Top = 0
         Width = 582
         HorzScrollBar.Page = 1
@@ -656,18 +686,18 @@ object formConfigTrayslate: TformConfigTrayslate
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 540
+        ClientHeight = 817
         ClientWidth = 582
         TabOrder = 0
         object GroupResponse: TGroupBox
           Left = 5
-          Height = 530
+          Height = 807
           Top = 5
           Width = 572
           Align = alClient
           BorderSpacing.Around = 5
           Caption = 'Response'
-          ClientHeight = 510
+          ClientHeight = 787
           ClientWidth = 568
           ParentBackground = False
           TabOrder = 0
@@ -688,7 +718,7 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object MemoJsonPointer: TMemo
             Left = 5
-            Height = 245
+            Height = 522
             Top = 260
             Width = 543
             Align = alClient
@@ -705,41 +735,41 @@ object formConfigTrayslate: TformConfigTrayslate
     end
     object PageParameters: TTabSheet
       Caption = 'Parameters'
-      ClientHeight = 540
+      ClientHeight = 817
       ClientWidth = 582
       object ScrollBoxParameters: TScrollBox
         Left = 0
-        Height = 540
+        Height = 817
         Top = 0
         Width = 582
         HorzScrollBar.Page = 1
         HorzScrollBar.Visible = False
-        VertScrollBar.Increment = 54
-        VertScrollBar.Page = 540
+        VertScrollBar.Increment = 73
+        VertScrollBar.Page = 733
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 540
-        ClientWidth = 565
+        ClientHeight = 817
+        ClientWidth = 582
         TabOrder = 0
         object GroupInitParameters: TGroupBox
           Left = 5
           Height = 491
           Top = 237
-          Width = 555
+          Width = 572
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Initial Request'
           ClientHeight = 471
-          ClientWidth = 551
+          ClientWidth = 568
           ParentBackground = False
           TabOrder = 1
           object EditInitUserAgent: TEdit
             Left = 120
             Height = 23
             Top = 32
-            Width = 406
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             TabOrder = 0
             OnChange = ValueChange
@@ -766,7 +796,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 120
             Height = 64
             Top = 199
-            Width = 406
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             ScrollBars = ssAutoVertical
             TabOrder = 2
@@ -786,7 +816,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 120
             Height = 100
             Top = 295
-            Width = 406
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             ScrollBars = ssAutoVertical
             TabOrder = 3
@@ -806,7 +836,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 120
             Height = 100
             Top = 87
-            Width = 406
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             BorderSpacing.Top = 45
             BorderSpacing.Right = 15
@@ -820,7 +850,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 8
             Height = 15
             Top = 63
-            Width = 518
+            Width = 535
             Anchors = [akTop, akLeft, akRight]
             Caption = 'Additional initial request headers in key=value format, key: value is also supported'
             Color = clInfoBk
@@ -831,7 +861,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 8
             Height = 15
             Top = 272
-            Width = 521
+            Width = 538
             Anchors = [akTop, akLeft, akRight]
             Caption = 'Parameters name=regexp are extracted from the response and used by name in requests'
             Color = clInfoBk
@@ -842,7 +872,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 120
             Height = 23
             Top = 432
-            Width = 406
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             TabOrder = 4
             OnChange = ValueChange
@@ -860,7 +890,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 8
             Height = 15
             Top = 408
-            Width = 518
+            Width = 535
             Anchors = [akTop, akLeft, akRight]
             Caption = 'Time in seconds to refresh parameters with a new request (0 = every request)'
             Color = clInfoBk
@@ -868,7 +898,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Transparent = False
           end
           object BtnInitUrlTest: TSpeedButton
-            Left = 528
+            Left = 545
             Height = 22
             Hint = 'Execute request and view the result'
             Top = 199
@@ -916,7 +946,7 @@ object formConfigTrayslate: TformConfigTrayslate
             OnClick = BtnInitUrlTestClick
           end
           object BtnInitParametersTest: TSpeedButton
-            Left = 528
+            Left = 545
             Height = 22
             Hint = 'Execute request and view the parameters'
             Top = 295
@@ -967,7 +997,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 8
             Height = 15
             Top = 8
-            Width = 518
+            Width = 535
             Anchors = [akTop, akLeft, akRight]
             Caption = 'Initial GET request to obtain required parameters.'
             Color = clInfoBk
@@ -979,18 +1009,18 @@ object formConfigTrayslate: TformConfigTrayslate
           Left = 5
           Height = 227
           Top = 5
-          Width = 555
+          Width = 572
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Custom Parameters'
           ClientHeight = 207
-          ClientWidth = 551
+          ClientWidth = 568
           TabOrder = 0
           object MemoCustomParameters: TMemo
             Left = 120
             Height = 128
             Top = 64
-            Width = 406
+            Width = 423
             Anchors = [akTop, akLeft, akRight]
             ScrollBars = ssAutoVertical
             TabOrder = 1
@@ -1010,7 +1040,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Left = 8
             Height = 15
             Top = 8
-            Width = 518
+            Width = 535
             Anchors = [akTop, akLeft, akRight]
             Caption = 'Parameters in the form key=value used by {key} in requests'
             Color = clInfoBk
@@ -1031,23 +1061,23 @@ object formConfigTrayslate: TformConfigTrayslate
     end
     object PageLanguages: TTabSheet
       Caption = 'Languages'
-      ClientHeight = 540
+      ClientHeight = 817
       ClientWidth = 582
       object GroupLanguages: TGroupBox
         Left = 5
-        Height = 530
+        Height = 807
         Top = 5
         Width = 572
         Align = alClient
         BorderSpacing.Around = 5
         Caption = 'Languages'
-        ClientHeight = 510
+        ClientHeight = 787
         ClientWidth = 568
         ParentBackground = False
         TabOrder = 0
         object MemoLanguages: TMemo
           Left = 5
-          Height = 400
+          Height = 677
           Top = 105
           Width = 543
           Align = alClient
@@ -1129,23 +1159,23 @@ object formConfigTrayslate: TformConfigTrayslate
     end
     object PageLanguagesTarget: TTabSheet
       Caption = 'Target Languages'
-      ClientHeight = 540
+      ClientHeight = 817
       ClientWidth = 582
       object GroupLanguagesTarget: TGroupBox
         Left = 5
-        Height = 530
+        Height = 807
         Top = 5
         Width = 572
         Align = alClient
         BorderSpacing.Around = 5
         Caption = 'Target Languages'
-        ClientHeight = 510
+        ClientHeight = 787
         ClientWidth = 568
         ParentBackground = False
         TabOrder = 0
         object MemoLanguagesTarget: TMemo
           Left = 5
-          Height = 455
+          Height = 732
           Top = 50
           Width = 543
           Align = alClient
