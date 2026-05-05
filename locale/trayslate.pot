@@ -836,6 +836,10 @@ msgstr ""
 msgid "Belarusian"
 msgstr ""
 
+#: tformtrayslate.alangbulgarian.caption
+msgid "Bulgarian"
+msgstr ""
+
 #: tformtrayslate.alangchinese.caption
 msgid "Chinese"
 msgstr ""

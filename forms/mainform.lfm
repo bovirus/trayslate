@@ -339,6 +339,9 @@ object formTrayslate: TformTrayslate
         object MenuBelarusian: TMenuItem
           Action = aLangBelarusian
         end
+        object MenuBulgarian: TMenuItem
+          Action = aLangBulgarian
+        end
         object MenuChinese: TMenuItem
           Action = aLangChinese
         end
@@ -492,6 +495,48 @@ object formTrayslate: TformTrayslate
       Caption = 'Belarusian'
       OnExecute = aLangBelarusianExecute
     end
+    object aAutoCheckUpdates: TAction
+      Category = 'Tray'
+      AutoCheck = True
+      Caption = 'Auto Check Updates'
+      Checked = True
+      OnExecute = aAutoCheckUpdatesExecute
+    end
+    object aCheckForUpdates: TAction
+      Category = 'Tray'
+      Caption = 'Check For Updates'
+      OnExecute = aCheckForUpdatesExecute
+    end
+    object aAbout: TAction
+      Category = 'Tray'
+      Caption = 'About...'
+      OnExecute = aAboutExecute
+    end
+    object aExit: TAction
+      Category = 'Tray'
+      Caption = 'Exit'
+      OnExecute = aExitExecute
+    end
+    object aMenu: TAction
+      Category = 'Form'
+      Hint = 'Display Menu'
+      OnExecute = aMenuExecute
+    end
+    object aCopySource: TAction
+      Category = 'Form'
+      Hint = 'Copy'
+      OnExecute = aCopySourceExecute
+    end
+    object aCopyTarget: TAction
+      Category = 'Form'
+      Hint = 'Copy Translation'
+      OnExecute = aCopyTargetExecute
+    end
+    object aLangBulgarian: TAction
+      Category = 'Language'
+      Caption = 'Bulgarian'
+      OnExecute = aLangBulgarianExecute
+    end
     object aLangChinese: TAction
       Category = 'Language'
       Caption = 'Chinese'
@@ -606,43 +651,6 @@ object formTrayslate: TformTrayslate
       Category = 'Language'
       Caption = 'Ukrainian'
       OnExecute = aLangUkrainianExecute
-    end
-    object aAutoCheckUpdates: TAction
-      Category = 'Tray'
-      AutoCheck = True
-      Caption = 'Auto Check Updates'
-      Checked = True
-      OnExecute = aAutoCheckUpdatesExecute
-    end
-    object aCheckForUpdates: TAction
-      Category = 'Tray'
-      Caption = 'Check For Updates'
-      OnExecute = aCheckForUpdatesExecute
-    end
-    object aAbout: TAction
-      Category = 'Tray'
-      Caption = 'About...'
-      OnExecute = aAboutExecute
-    end
-    object aExit: TAction
-      Category = 'Tray'
-      Caption = 'Exit'
-      OnExecute = aExitExecute
-    end
-    object aMenu: TAction
-      Category = 'Form'
-      Hint = 'Display Menu'
-      OnExecute = aMenuExecute
-    end
-    object aCopySource: TAction
-      Category = 'Form'
-      Hint = 'Copy'
-      OnExecute = aCopySourceExecute
-    end
-    object aCopyTarget: TAction
-      Category = 'Form'
-      Hint = 'Copy Translation'
-      OnExecute = aCopyTargetExecute
     end
   end
   object TimerClick: TTimer

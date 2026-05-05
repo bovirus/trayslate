@@ -14,6 +14,14 @@
 {"hash":30246626,"name":"tformtrayslate.aaddpair.hint","sourcebytes":[65,100,100,32,67,117,114,114,101,110,116,32,80,97,105,114],"value":"Add Current Pair"},
 {"hash":76052723,"name":"tformtrayslate.alangarabic.caption","sourcebytes":[65,114,97,98,105,99],"value":"Arabic"},
 {"hash":144184158,"name":"tformtrayslate.alangbelarusian.caption","sourcebytes":[66,101,108,97,114,117,115,105,97,110],"value":"Belarusian"},
+{"hash":17671891,"name":"tformtrayslate.aautocheckupdates.caption","sourcebytes":[65,117,116,111,32,67,104,101,99,107,32,85,112,100,97,116,101,115],"value":"Auto Check Updates"},
+{"hash":23856387,"name":"tformtrayslate.acheckforupdates.caption","sourcebytes":[67,104,101,99,107,32,70,111,114,32,85,112,100,97,116,101,115],"value":"Check For Updates"},
+{"hash":158102910,"name":"tformtrayslate.aabout.caption","sourcebytes":[65,98,111,117,116,46,46,46],"value":"About..."},
+{"hash":315140,"name":"tformtrayslate.aexit.caption","sourcebytes":[69,120,105,116],"value":"Exit"},
+{"hash":201694581,"name":"tformtrayslate.amenu.hint","sourcebytes":[68,105,115,112,108,97,121,32,77,101,110,117],"value":"Display Menu"},
+{"hash":304761,"name":"tformtrayslate.acopysource.hint","sourcebytes":[67,111,112,121],"value":"Copy"},
+{"hash":58166910,"name":"tformtrayslate.acopytarget.hint","sourcebytes":[67,111,112,121,32,84,114,97,110,115,108,97,116,105,111,110],"value":"Copy Translation"},
+{"hash":47761086,"name":"tformtrayslate.alangbulgarian.caption","sourcebytes":[66,117,108,103,97,114,105,97,110],"value":"Bulgarian"},
 {"hash":166743253,"name":"tformtrayslate.alangchinese.caption","sourcebytes":[67,104,105,110,101,115,101],"value":"Chinese"},
 {"hash":4918168,"name":"tformtrayslate.alangczech.caption","sourcebytes":[67,122,101,99,104],"value":"Czech"},
 {"hash":78139544,"name":"tformtrayslate.alangdanish.caption","sourcebytes":[68,97,110,105,115,104],"value":"Danish"},
@@ -36,12 +44,5 @@
 {"hash":174608584,"name":"tformtrayslate.alangspanish.caption","sourcebytes":[83,112,97,110,105,115,104],"value":"Spanish"},
 {"hash":182169800,"name":"tformtrayslate.alangswedish.caption","sourcebytes":[83,119,101,100,105,115,104],"value":"Swedish"},
 {"hash":197730504,"name":"tformtrayslate.alangturkish.caption","sourcebytes":[84,117,114,107,105,115,104],"value":"Turkish"},
-{"hash":142611294,"name":"tformtrayslate.alangukrainian.caption","sourcebytes":[85,107,114,97,105,110,105,97,110],"value":"Ukrainian"},
-{"hash":17671891,"name":"tformtrayslate.aautocheckupdates.caption","sourcebytes":[65,117,116,111,32,67,104,101,99,107,32,85,112,100,97,116,101,115],"value":"Auto Check Updates"},
-{"hash":23856387,"name":"tformtrayslate.acheckforupdates.caption","sourcebytes":[67,104,101,99,107,32,70,111,114,32,85,112,100,97,116,101,115],"value":"Check For Updates"},
-{"hash":158102910,"name":"tformtrayslate.aabout.caption","sourcebytes":[65,98,111,117,116,46,46,46],"value":"About..."},
-{"hash":315140,"name":"tformtrayslate.aexit.caption","sourcebytes":[69,120,105,116],"value":"Exit"},
-{"hash":201694581,"name":"tformtrayslate.amenu.hint","sourcebytes":[68,105,115,112,108,97,121,32,77,101,110,117],"value":"Display Menu"},
-{"hash":304761,"name":"tformtrayslate.acopysource.hint","sourcebytes":[67,111,112,121],"value":"Copy"},
-{"hash":58166910,"name":"tformtrayslate.acopytarget.hint","sourcebytes":[67,111,112,121,32,84,114,97,110,115,108,97,116,105,111,110],"value":"Copy Translation"}
+{"hash":142611294,"name":"tformtrayslate.alangukrainian.caption","sourcebytes":[85,107,114,97,105,110,105,97,110],"value":"Ukrainian"}
 ]}

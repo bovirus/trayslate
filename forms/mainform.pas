@@ -49,6 +49,7 @@ type
     aAutoCheckUpdates: TAction;
     aCopySource: TAction;
     aCopyTarget: TAction;
+    aLangBulgarian: TAction;
     aMenu: TAction;
     aNewTranslate: TAction;
     aSettings: TAction;
@@ -60,6 +61,7 @@ type
     aExit: TAction;
     ActionList: TActionList;
     ImageConfig: TImageList;
+    MenuBulgarian: TMenuItem;
     SbCopySource: TSpeedButton;
     SbCopyTarget: TSpeedButton;
     ComboSource: TComboBox;
@@ -154,6 +156,7 @@ type
     MenuUkrainian: TMenuItem;
     MenuBelarusian: TMenuItem;
     MenuHindi: TMenuItem;
+    procedure aLangBulgarianExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -2682,6 +2685,7 @@ var
 begin
   aLangArabic.Checked := False;
   aLangBelarusian.Checked := False;
+  aLangBulgarian.Checked := False;
   aLangChinese.Checked := False;
   aLangCzech.Checked := False;
   aLangDanish.Checked := False;
@@ -2730,6 +2734,7 @@ begin
   case Language of
     'ar': aLangArabic.Checked := True;
     'be': aLangBelarusian.Checked := True;
+    'bg': aLangBulgarian.Checked := True;
     'zh': aLangChinese.Checked := True;
     'cs': aLangCzech.Checked := True;
     'da': aLangDanish.Checked := True;
@@ -2766,6 +2771,11 @@ end;
 procedure TformTrayslate.aLangBelarusianExecute(Sender: TObject);
 begin
   SetLanguage('be');
+end;
+
+procedure TformTrayslate.aLangBulgarianExecute(Sender: TObject);
+begin
+  SetLanguage('bg');
 end;
 
 procedure TformTrayslate.aLangChineseExecute(Sender: TObject);

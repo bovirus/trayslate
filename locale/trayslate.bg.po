@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.8\n"
 
 #: formconfig.rcaption
 msgctxt "formconfig.rcaption"
@@ -332,7 +332,7 @@ msgstr "Позволете превод, докато пишете"
 
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
-msgstr "ПОЛУЧИ"
+msgstr ""
 
 #: tformconfigtrayslate.combovaluetype.text
 msgid "None"
@@ -377,7 +377,7 @@ msgstr "Щракнете, за да изберете иконата за кон�
 
 #: tformconfigtrayslate.labelaccept.caption
 msgid "Accept"
-msgstr "Приемам"
+msgstr "Accept"
 
 #: tformconfigtrayslate.labelcolorrecent.caption
 msgid "Recent Color"
@@ -386,7 +386,7 @@ msgstr "Последен цвят"
 #: tformconfigtrayslate.labelcontenttype.caption
 msgctxt "tformconfigtrayslate.labelcontenttype.caption"
 msgid "Content Type"
-msgstr "Тип съдържание"
+msgstr "Content Type"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
 msgid "Fill with default"
@@ -403,7 +403,7 @@ msgstr "Допълнителни заглавки за първоначална 
 #: tformconfigtrayslate.labelinitheaders2.caption
 msgctxt "tformconfigtrayslate.labelinitheaders2.caption"
 msgid "Headers"
-msgstr "Заглавки"
+msgstr "Headers"
 
 #: tformconfigtrayslate.labelinitlivetime.caption
 msgctxt "tformconfigtrayslate.labelinitlivetime.caption"
@@ -439,7 +439,7 @@ msgstr "Първоначална GET заявка за получаване на
 #: tformconfigtrayslate.labeliniturl.caption
 msgctxt "tformconfigtrayslate.labeliniturl.caption"
 msgid "URL"
-msgstr "URL адрес"
+msgstr "URL"
 
 #: tformconfigtrayslate.labelinituseragent.caption
 msgctxt "tformconfigtrayslate.labelinituseragent.caption"
@@ -495,12 +495,12 @@ msgstr "Използвайте параметри: {text} – въведен т�
 
 #: tformconfigtrayslate.labelpostdata.caption
 msgid "Post Data"
-msgstr "Данни за публикуване"
+msgstr "Post Data"
 
 #: tformconfigtrayslate.labelpostdata1.caption
 msgctxt "tformconfigtrayslate.labelpostdata1.caption"
 msgid "Headers"
-msgstr "Заглавки"
+msgstr "Headers"
 
 #: tformconfigtrayslate.labelservicedescription.caption
 msgid "Description"
@@ -517,7 +517,7 @@ msgstr "Поръчка"
 #: tformconfigtrayslate.labelurl.caption
 msgctxt "tformconfigtrayslate.labelurl.caption"
 msgid "URL"
-msgstr "URL адрес"
+msgstr "URL"
 
 #: tformconfigtrayslate.labeluseragent.caption
 msgctxt "tformconfigtrayslate.labeluseragent.caption"
@@ -870,6 +870,10 @@ msgstr "Арабски"
 #: tformtrayslate.alangbelarusian.caption
 msgid "Belarusian"
 msgstr "Белоруски"
+
+#: tformtrayslate.alangbulgarian.caption
+msgid "Bulgarian"
+msgstr "Български"
 
 #: tformtrayslate.alangchinese.caption
 msgid "Chinese"
