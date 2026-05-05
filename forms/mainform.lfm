@@ -411,6 +411,9 @@ object formTrayslate: TformTrayslate
         object MenuUkrainian: TMenuItem
           Action = aLangUkrainian
         end
+        object MenuItem1: TMenuItem
+          Action = aLangCustom
+        end
       end
       object Separator9: TMenuItem
         Caption = '-'
@@ -652,6 +655,11 @@ object formTrayslate: TformTrayslate
       Caption = 'Ukrainian'
       OnExecute = aLangUkrainianExecute
     end
+    object aLangCustom: TAction
+      Category = 'Language'
+      Caption = 'Custom File...'
+      OnExecute = aLangCustomExecute
+    end
   end
   object TimerClick: TTimer
     Enabled = False
@@ -723,5 +731,12 @@ object formTrayslate: TformTrayslate
   object ImageConfig: TImageList
     Left = 128
     Top = 384
+  end
+  object OpenPo: TOpenDialog
+    DefaultExt = '.po'
+    Filter = 'Language File (*.po)|*.po'
+    Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
+    Left = 40
+    Top = 248
   end
 end

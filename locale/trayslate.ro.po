@@ -879,6 +879,10 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
+#: tformtrayslate.alangcustom.caption
+msgid "Custom File..."
+msgstr "Fișier personalizat..."
+
 #: tformtrayslate.alangczech.caption
 msgid "Czech"
 msgstr ""
@@ -1013,4 +1017,3 @@ msgstr "Perechi recente"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
-

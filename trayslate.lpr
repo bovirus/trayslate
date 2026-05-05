@@ -31,8 +31,8 @@ uses
 begin
   RequireDerivedFormResource := True;
   Language := GetOSLanguage;
-  Application.Title:='Trayslate';
-  Application.Scaled:=True;
+  Application.Title := 'Trayslate';
+  Application.Scaled := True;
   Application.Initialize;
   InitSSLInterface;
   {$IFDEF WINDOWS}
@@ -40,6 +40,6 @@ begin
   {$ENDIF}
   Application.ShowMainForm := False;
   Application.CreateForm(TformTrayslate, formTrayslate);
-  ApplicationTranslate(Language);
+  ApplicationTranslate(Language, nil, formTrayslate.LoadCustomPoFile(formTrayslate.CustomPoFile));
   Application.Run;
 end.

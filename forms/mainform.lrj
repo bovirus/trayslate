@@ -44,5 +44,6 @@
 {"hash":174608584,"name":"tformtrayslate.alangspanish.caption","sourcebytes":[83,112,97,110,105,115,104],"value":"Spanish"},
 {"hash":182169800,"name":"tformtrayslate.alangswedish.caption","sourcebytes":[83,119,101,100,105,115,104],"value":"Swedish"},
 {"hash":197730504,"name":"tformtrayslate.alangturkish.caption","sourcebytes":[84,117,114,107,105,115,104],"value":"Turkish"},
-{"hash":142611294,"name":"tformtrayslate.alangukrainian.caption","sourcebytes":[85,107,114,97,105,110,105,97,110],"value":"Ukrainian"}
+{"hash":142611294,"name":"tformtrayslate.alangukrainian.caption","sourcebytes":[85,107,114,97,105,110,105,97,110],"value":"Ukrainian"},
+{"hash":6896878,"name":"tformtrayslate.alangcustom.caption","sourcebytes":[67,117,115,116,111,109,32,70,105,108,101,46,46,46],"value":"Custom File..."}
 ]}

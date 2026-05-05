@@ -181,7 +181,7 @@ uses mainform, translate, settings, formattool, langtool, languages, systemtool;
 
 procedure TformConfigTrayslate.FormCreate(Sender: TObject);
 begin
-  ApplicationTranslate(language, self);
+  ApplicationTranslate(language, self, formTrayslate.LoadCustomPoFile(formTrayslate.CustomPoFile));
 
   Pages.PageIndex := 0;
   BtnClose.Cancel := True;

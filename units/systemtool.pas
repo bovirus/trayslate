@@ -68,7 +68,7 @@ type
 
 function GetOSLanguage: string;
 
-function ApplicationTranslate(const Language: string; AForm: TCustomForm = nil): boolean;
+function ApplicationTranslate(const Language: string; AForm: TCustomForm = nil; PoText: string = string.Empty): boolean;
 
 function ThemeColor(LightColor, DarkColor: TColor): TColor;
 
@@ -190,7 +190,7 @@ begin
   Result := fbl;
 end;
 
-function ApplicationTranslate(const Language: string; AForm: TCustomForm = nil): boolean;
+function ApplicationTranslate(const Language: string; AForm: TCustomForm = nil; PoText: string = string.Empty): boolean;
 var
   Res: TResourceStream;
   PoStringStream: TStringStream;
@@ -211,25 +211,30 @@ begin
 
   try
     try
-      PoStringStream := TStringStream.Create('');
-
-      // Try to load the language resource file
-      try
-        Res := TResourceStream.Create(HInstance, 'trayslate.' + LangToUse, RT_RCDATA);
-        LangFound := True;
-      except
-        // If language resource not found, fall back to English
-        LangToUse := 'en';
-        Res := TResourceStream.Create(HInstance, 'trayslate.en', RT_RCDATA);
-        LangFound := False;
-      end;
-
-      // Save resource to string stream
-      Res.SaveToStream(PoStringStream);
-
-      // Read PO strings
       PoFile := TPOFile.Create(False);
-      PoFile.ReadPOText(PoStringStream.DataString);
+      if (PoText = string.Empty) then
+      begin
+        PoStringStream := TStringStream.Create('');
+
+        // Try to load the language resource file
+        try
+          Res := TResourceStream.Create(HInstance, 'trayslate.' + LangToUse, RT_RCDATA);
+          LangFound := True;
+        except
+          // If language resource not found, fall back to English
+          LangToUse := 'en';
+          Res := TResourceStream.Create(HInstance, 'trayslate.en', RT_RCDATA);
+          LangFound := False;
+        end;
+
+        // Save resource to string stream
+        Res.SaveToStream(PoStringStream);
+
+        // Read PO strings
+        PoFile.ReadPOText(PoStringStream.DataString);
+      end
+      else
+        PoFile.ReadPOText(PoText);
 
       // Apply translations to resource strings
       if not Assigned(AForm) then

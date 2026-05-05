@@ -893,6 +893,10 @@ msgstr "Bulgaro"
 msgid "Chinese"
 msgstr "Cinese"
 
+#: tformtrayslate.alangcustom.caption
+msgid "Custom File..."
+msgstr "File personalizzato..."
+
 #: tformtrayslate.alangczech.caption
 msgid "Czech"
 msgstr "Ceco"

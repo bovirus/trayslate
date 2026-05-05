@@ -1,7 +1,8 @@
-ar be cs da de el en es fi fr he hi id it ja ko nl pl pt ro ru sv tr uk zh
+ar be bg cs da de el en es fi fr he hi id it ja ko nl pl pt ro ru sv tr uk zh
 
 Arabic - ar
 Belarusian - be
+Bulgarian - bg
 Chinese - zh
 Czech - cs
 Danish - da

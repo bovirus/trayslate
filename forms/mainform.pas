@@ -49,6 +49,7 @@ type
     aAutoCheckUpdates: TAction;
     aCopySource: TAction;
     aCopyTarget: TAction;
+    aLangCustom: TAction;
     aLangBulgarian: TAction;
     aMenu: TAction;
     aNewTranslate: TAction;
@@ -62,6 +63,8 @@ type
     ActionList: TActionList;
     ImageConfig: TImageList;
     MenuBulgarian: TMenuItem;
+    MenuItem1: TMenuItem;
+    OpenPo: TOpenDialog;
     SbCopySource: TSpeedButton;
     SbCopyTarget: TSpeedButton;
     ComboSource: TComboBox;
@@ -157,6 +160,7 @@ type
     MenuBelarusian: TMenuItem;
     MenuHindi: TMenuItem;
     procedure aLangBulgarianExecute(Sender: TObject);
+    procedure aLangCustomExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -284,6 +288,7 @@ type
     FFormSettingsWidth: integer;
     FFormSettingsHeight: integer;
     FFormSettingsSplit: integer;
+    FCustomPoFile: string;
     FHotKeyApp: THotKeyData;
     FHotKeyTransSwap: THotKeyData;
     FHotKeyTransFromClipboard: THotKeyData;
@@ -350,6 +355,8 @@ type
     function UpdatePairLanguage(const Pair: string): string;
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
+    function GetLangCodeFromPoFile(const AFileName: string): string;
+    function LoadCustomPoFile(const AFileName: string): string;
     {$IFDEF WINDOWS}
     procedure RegisterHotKeys;
     procedure UnregisterHotKeys;
@@ -391,7 +398,7 @@ type
     property FormSettingsSplit: integer read FFormSettingsSplit write FFormSettingsSplit;
     property FormAboutWidth: integer read FFormAboutWidth write FFormAboutWidth;
     property FormAboutHeight: integer read FFormAboutHeight write FFormAboutHeight;
-
+    property CustomPoFile: string read FCustomPoFile write FCustomPoFile;
     property HotKeyApp: THotKeyData read FHotKeyApp write FHotKeyApp;
     property HotKeyTransSwap: THotKeyData read FHotKeyTransSwap write FHotKeyTransSwap;
     property HotKeyTransFromClipboard: THotKeyData read FHotKeyTransFromClipboard write FHotKeyTransFromClipboard;
@@ -478,6 +485,7 @@ begin
   FLastEnterTime := 0;
   FLastHotkeyTime := 0;
   FTranslateThread := nil;
+  FCustomPoFile := string.Empty;
 
   // AllowHotKeys Initialize
   // Ctrl+Shift+A
@@ -2682,7 +2690,12 @@ end;
 procedure TformTrayslate.SetLanguage(aLanguage: string = string.Empty);
 var
   OldAutoDetect: string = string.Empty;
+  LangCode: string;
+  PoText: string;
 begin
+  LangCode := aLanguage;
+  PoText := string.Empty;
+
   aLangArabic.Checked := False;
   aLangBelarusian.Checked := False;
   aLangBulgarian.Checked := False;
@@ -2709,14 +2722,27 @@ begin
   aLangSwedish.Checked := False;
   aLangTurkish.Checked := False;
   aLangUkrainian.Checked := False;
+  aLangCustom.Checked := False;
 
-  if (aLanguage <> string.Empty) then
+  if FCustomPoFile <> string.Empty then
+  begin
+    PoText := LoadCustomPoFile(FCustomPoFile);
+    if PoText = string.Empty then
+    begin
+      FCustomPoFile := string.Empty;
+      LangCode := GetOSLanguage;
+    end
+    else
+      LangCode := GetLangCodeFromPoFile(FCustomPoFile);
+  end;
+
+  if (LangCode <> string.Empty) then
   begin
     OldAutoDetect := rautodetect;
-    Language := aLanguage;
-    ApplicationTranslate('en');
-    if not ApplicationTranslate(Language) then
-      Language := 'en';
+    Language := LangCode;
+    ApplicationTranslate(DEFAULT_LANG);
+    if not ApplicationTranslate(Language, nil, PoText) then
+      Language := DEFAULT_LANG;
   end;
 
   // Update Language Names
@@ -2731,165 +2757,262 @@ begin
   // Update form text
   SetHints;
 
-  case Language of
-    'ar': aLangArabic.Checked := True;
-    'be': aLangBelarusian.Checked := True;
-    'bg': aLangBulgarian.Checked := True;
-    'zh': aLangChinese.Checked := True;
-    'cs': aLangCzech.Checked := True;
-    'da': aLangDanish.Checked := True;
-    'nl': aLangDutch.Checked := True;
-    'en': aLangEnglish.Checked := True;
-    'fi': aLangFinnish.Checked := True;
-    'fr': aLangFrench.Checked := True;
-    'de': aLangGerman.Checked := True;
-    'el': aLangGreek.Checked := True;
-    'he': aLangHebrew.Checked := True;
-    'hi': aLangHindi.Checked := True;
-    'id': aLangIndonesian.Checked := True;
-    'it': aLangItalian.Checked := True;
-    'ja': aLangJapanese.Checked := True;
-    'ko': aLangKorean.Checked := True;
-    'pl': aLangPolish.Checked := True;
-    'pt': aLangPortuguese.Checked := True;
-    'ro': aLangRomanian.Checked := True;
-    'ru': aLangRussian.Checked := True;
-    'es': aLangSpanish.Checked := True;
-    'sv': aLangSwedish.Checked := True;
-    'tr': aLangTurkish.Checked := True;
-    'uk': aLangUkrainian.Checked := True;
-    else
-    // nolang
+  if FCustomPoFile = string.Empty then
+  begin
+    case Language of
+      'ar': aLangArabic.Checked := True;
+      'be': aLangBelarusian.Checked := True;
+      'bg': aLangBulgarian.Checked := True;
+      'zh': aLangChinese.Checked := True;
+      'cs': aLangCzech.Checked := True;
+      'da': aLangDanish.Checked := True;
+      'nl': aLangDutch.Checked := True;
+      'en': aLangEnglish.Checked := True;
+      'fi': aLangFinnish.Checked := True;
+      'fr': aLangFrench.Checked := True;
+      'de': aLangGerman.Checked := True;
+      'el': aLangGreek.Checked := True;
+      'he': aLangHebrew.Checked := True;
+      'hi': aLangHindi.Checked := True;
+      'id': aLangIndonesian.Checked := True;
+      'it': aLangItalian.Checked := True;
+      'ja': aLangJapanese.Checked := True;
+      'ko': aLangKorean.Checked := True;
+      'pl': aLangPolish.Checked := True;
+      'pt': aLangPortuguese.Checked := True;
+      'ro': aLangRomanian.Checked := True;
+      'ru': aLangRussian.Checked := True;
+      'es': aLangSpanish.Checked := True;
+      'sv': aLangSwedish.Checked := True;
+      'tr': aLangTurkish.Checked := True;
+      'uk': aLangUkrainian.Checked := True;
+      else
+      // nolang
+    end;
+  end
+  else
+    aLangCustom.Checked := True;
+end;
+
+function TformTrayslate.GetLangCodeFromPoFile(const AFileName: string): string;
+var
+  BaseName: string;
+  ExtPos: integer;
+  c1, c2: char;
+begin
+  Result := DEFAULT_LANG;
+
+  if AFileName = string.Empty then
+    Exit;
+
+  BaseName := ExtractFileName(AFileName);
+
+  // Find ".po"
+  ExtPos := Pos('.po', LowerCase(BaseName));
+  if ExtPos = 0 then
+    Exit;
+
+  BaseName := Copy(BaseName, 1, ExtPos - 1);
+
+  if Length(BaseName) < 2 then
+    Exit;
+
+  // Take last 2 chars
+  c1 := BaseName[Length(BaseName) - 1];
+  c2 := BaseName[Length(BaseName)];
+
+  // Check if both are latin letters
+  if (c1 in ['a'..'z', 'A'..'Z']) and (c2 in ['a'..'z', 'A'..'Z']) then
+    Result := LowerCase(c1 + c2)
+  else
+    Result := DEFAULT_LANG;
+end;
+
+function TformTrayslate.LoadCustomPoFile(const AFileName: string): string;
+var
+  FileContent: TStringList;
+begin
+  Result := string.Empty;
+
+  if AFileName = string.Empty then
+    Exit;
+
+  FileContent := TStringList.Create;
+  try
+    try
+      FileContent.LoadFromFile(AFileName); // Unicode-safe
+      Result := FileContent.Text;
+    except
+      // On any error return empty string
+      Result := string.Empty;
+    end;
+  finally
+    FileContent.Free;
   end;
+end;
+
+procedure TformTrayslate.aLangCustomExecute(Sender: TObject);
+begin
+  if not OpenPo.Execute then
+    Exit;
+
+  FCustomPoFile := OpenPo.FileName;
+  SetLanguage;
 end;
 
 procedure TformTrayslate.aLangArabicExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('ar');
 end;
 
 procedure TformTrayslate.aLangBelarusianExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('be');
 end;
 
 procedure TformTrayslate.aLangBulgarianExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('bg');
 end;
 
 procedure TformTrayslate.aLangChineseExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('zh');
 end;
 
 procedure TformTrayslate.aLangCzechExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('cs');
 end;
 
 procedure TformTrayslate.aLangDanishExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('da');
 end;
 
 procedure TformTrayslate.aLangDutchExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('nl');
 end;
 
 procedure TformTrayslate.aLangEnglishExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('en');
 end;
 
 procedure TformTrayslate.aLangFinnishExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('fi');
 end;
 
 procedure TformTrayslate.aLangFrenchExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('fr');
 end;
 
 procedure TformTrayslate.aLangGermanExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('de');
 end;
 
 procedure TformTrayslate.aLangGreekExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('el');
 end;
 
 procedure TformTrayslate.aLangHebrewExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('he');
 end;
 
 procedure TformTrayslate.aLangHindiExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('hi');
 end;
 
 procedure TformTrayslate.aLangIndonesianExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('id');
 end;
 
 procedure TformTrayslate.aLangItalianExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('it');
 end;
 
 procedure TformTrayslate.aLangJapaneseExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('ja');
 end;
 
 procedure TformTrayslate.aLangKoreanExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('ko');
 end;
 
 procedure TformTrayslate.aLangPolishExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('pl');
 end;
 
 procedure TformTrayslate.aLangPortugueseExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('pt');
 end;
 
 procedure TformTrayslate.aLangRomanianExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('ro');
 end;
 
 procedure TformTrayslate.aLangRussianExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('ru');
 end;
 
 procedure TformTrayslate.aLangSpanishExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('es');
 end;
 
 procedure TformTrayslate.aLangSwedishExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('sv');
 end;
 
 procedure TformTrayslate.aLangTurkishExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('tr');
 end;
 
 procedure TformTrayslate.aLangUkrainianExecute(Sender: TObject);
 begin
+  FCustomPoFile := string.empty;
   SetLanguage('uk');
 end;
 

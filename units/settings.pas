@@ -165,6 +165,7 @@ begin
     JSONObj.Add('AutoAddLangPairs', Form.AutoAddLangPairs);
     JSONObj.Add('AllowHotKeys', Form.AllowHotKeys);
     JSONObj.Add('AutoCheckUpdates', Form.AutoCheckUpdates);
+    JSONObj.Add('CustomPoFile', Form.CustomPoFile);
 
     // Save hotkeys
     JSONObj.Add('HotKeyApp_Modifiers', Form.HotKeyApp.Modifiers);
@@ -379,6 +380,9 @@ begin
 
         if (JSONObj.FindPath('AutoCheckUpdates') <> nil) then
           Form.AutoCheckUpdates := JSONObj.FindPath('AutoCheckUpdates').AsBoolean;
+
+        if (JSONObj.FindPath('CustomPoFile') <> nil) then
+          Form.CustomPoFile := JSONObj.FindPath('CustomPoFile').AsString;
 
         // Load HotKeys
         // HotKeyApp

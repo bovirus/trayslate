@@ -219,7 +219,7 @@ procedure TformSettingsTrayslate.FormCreate(Sender: TObject);
 var
   i: integer;
 begin
-  ApplicationTranslate(language, self);
+  ApplicationTranslate(language, self, formTrayslate.LoadCustomPoFile(formTrayslate.CustomPoFile));
 
   PanelPages.BevelColor := ThemeColor(ColorBevel, ColorBevelDark);
   PagesSettings.PageIndex := 0;

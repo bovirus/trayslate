@@ -66,7 +66,7 @@ var
 
 implementation
 
-uses systemtool;
+uses mainform, systemtool;
 
   {$R *.lfm}
 
@@ -74,7 +74,7 @@ uses systemtool;
 
 procedure TformDonateTrayslate.FormCreate(Sender: TObject);
 begin
-  ApplicationTranslate(language, self);
+  ApplicationTranslate(language, self, formTrayslate.LoadCustomPoFile(formTrayslate.CustomPoFile));
 
   LabelUrl.Font.Color := ThemeColor(clBlue, clSkyBlue);
   LabelUrl1.Font.Color := ThemeColor(clBlue, clSkyBlue);

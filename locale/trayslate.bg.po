@@ -879,6 +879,10 @@ msgstr "Български"
 msgid "Chinese"
 msgstr "Китайски"
 
+#: tformtrayslate.alangcustom.caption
+msgid "Custom File..."
+msgstr "Потребителски файл..."
+
 #: tformtrayslate.alangczech.caption
 msgid "Czech"
 msgstr "Чешки"
