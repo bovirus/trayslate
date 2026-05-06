@@ -1,8 +1,10 @@
 #define MyAppName      "Trayslate"
 #define FileHandle     FileOpen("..\VERSION")
-#define MyAppVersion   Trim(FileRead(FileHandle))
 #if FileHandle
+  #define MyAppVersion Trim(FileRead(FileHandle))
   #expr FileClose(FileHandle)
+#else
+  #define MyAppVersion "0.0.0"
 #endif
 #define MyAppPublisher "Alexander Tverskoy"
 #define MyAppURL       "https://github.com/plaintool/trayslate"
@@ -41,8 +43,8 @@ SetupIconFile=..\trayslate.ico
 WizardSmallImageFile=.\wizardsmallimagefile.png
 
 DefaultDirName={autopf}\{#MyAppName}
-ArchitecturesAllowed=x64compatible x86 arm64
-ArchitecturesInstallIn64BitMode=x64compatible arm64
+ArchitecturesAllowed=x64compatible x86
+ArchitecturesInstallIn64BitMode=x64compatible
 DisableProgramGroupPage=yes
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=.\
