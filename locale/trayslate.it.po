@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Trayslate - Italian - 30.04.2026\n"
+"Project-Id-Version: Trayslate - Italian - 06.05.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: bovirus <bovirus@gmail.com>\n"
 "Language-Team: bovirus (bovirus@gmail.com)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: formconfig.rcaption
@@ -34,7 +34,7 @@ msgstr "Elimina configurazione"
 #: formconfig.rnamequestion
 msgctxt "formconfig.rnamequestion"
 msgid "Enter new config file name:"
-msgstr "Inserisci il nome del nuovo file configurazione:"
+msgstr "Inserisci nome nuovo file configurazione:"
 
 #: formconfig.rneedsave
 msgid "The configuration was modified. Save changes?"
@@ -45,7 +45,7 @@ msgstr ""
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
-msgstr "Visualizza/nascondi applicazione (clic sull'icona della barra delle applicazioni)"
+msgstr "Visualizza/nascondi applicazione (clic sull'icona barra applicazioni)"
 
 #: formsettings.rapp_default
 msgctxt "formsettings.rapp_default"
@@ -64,7 +64,7 @@ msgstr "Predefinito"
 
 #: formsettings.rglobal
 msgid "Global Hotkeys"
-msgstr "Tasti di scelta rapida globali"
+msgstr "Tasti scelta rapida globali"
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
@@ -77,7 +77,7 @@ msgstr "Coppia di lingue recente"
 
 #: formsettings.rrecentpair_default
 msgid "Default: Ctrl+Shift+"
-msgstr "Predefinito: Ctrl+Shift+"
+msgstr "Predefinito: Ctrl+Maiusc+"
 
 #: formsettings.rrecentpair_hint
 msgid "Select Recent Language Pair"
@@ -94,11 +94,11 @@ msgstr "Traduci gli appunti in una finestra popup"
 
 #: formsettings.rtransclipboardpopup_default
 msgid "Default: Ctrl+Shift+P"
-msgstr "Predefinito: Ctrl+Shift+P"
+msgstr "Predefinito: Ctrl+Maiusc+P"
 
 #: formsettings.rtransclipboardpopup_hint
 msgid "Translates clipboard text to a popup window near the mouse cursor"
-msgstr "Traduce il testo degli appunti in una finestra popup vicino al cursore del mouse"
+msgstr "Traduci il testo degli appunti in una finestra popup vicino al cursore del mouse"
 
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
@@ -121,11 +121,11 @@ msgstr "Traduci il testo selezionato in una finestra popup"
 
 #: formsettings.rtranscontrolpopup_default
 msgid "Default: Ctrl+Shift+X"
-msgstr "Predefinito: Ctrl+Shift+X"
+msgstr "Predefinito: Ctrl+Maiusc+X"
 
 #: formsettings.rtranscontrolpopup_hint
 msgid "Translates selected text from the active application to a popup window near the mouse cursor"
-msgstr "Traduce il testo selezionato dall'applicazione attiva in una finestra popup vicino al cursore del mouse"
+msgstr "Traduci il testo selezionato dall'applicazione attiva in una finestra popup vicino al cursore del mouse"
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -140,7 +140,7 @@ msgstr "Sostituisci nell'applicazione attiva il testo selezionato con la traduzi
 #: formsettings.rtransfromclipboard
 msgctxt "formsettings.rtransfromclipboard"
 msgid "Translate From Clipboard (Tray Icon Double-Click)"
-msgstr "Traduci dagli appunti (doppio clic sull'icona della barra delle applicazioni)"
+msgstr "Traduci dagli appunti (doppio clic sull'icona barra applicazioni)"
 
 #: formsettings.rtransfromclipboard_default
 msgctxt "formsettings.rtransfromclipboard_default"
@@ -150,7 +150,7 @@ msgstr "Predefinito Ctrl+Maiusc+T"
 #: formsettings.rtransfromclipboard_hint
 msgctxt "formsettings.rtransfromclipboard_hint"
 msgid "Translates the current text from the clipboard"
-msgstr "Traduce il testo attuale dagli appunti"
+msgstr "Traduci il testo attuale dagli appunti"
 
 #: formsettings.rtransfromcontrol
 msgctxt "formsettings.rtransfromcontrol"
@@ -170,7 +170,7 @@ msgstr "Traduci il testo selezionato nell'applicazione attiva"
 #: formsettings.rtransswap
 msgctxt "formsettings.rtransswap"
 msgid "Swap Languages (Tray Icon Middle-Click)"
-msgstr "Scambia le lingue (clic centrale sull'icona della barra delle applicazioni)"
+msgstr "Scambia le lingue (clic centrale sull'icona barra applicazioni)"
 
 #: formsettings.rtransswap_default
 msgctxt "formsettings.rtransswap_default"
@@ -184,7 +184,7 @@ msgstr "Scambia la lingua sorgente e destinazione"
 
 #: languages.rautodetect
 msgid "Auto Detect"
-msgstr "Auto rileva"
+msgstr "Rilevamento automatico"
 
 #: mainform.rnoconfig
 msgctxt "mainform.rnoconfig"
@@ -211,7 +211,7 @@ msgstr "Trayslate"
 msgid "New version available: %s. Open GitHub page to download?"
 msgstr ""
 "Nuova versione disponibile: %s.\n"
-"Vuoi aprire la pagina GitHub per il download?"
+"Per il download vuoi aprire la pagina GitHub?"
 
 #: systemtool.newversioncheckerror
 msgid "Error checking version:"
@@ -268,8 +268,10 @@ msgid ""
 "3. Main icon designed by Flaticon\n"
 "   https://www.flaticon.com/ru/free-icon/translator_682045"
 msgstr ""
-"Trayslate è un client nella system tray per servizi di traduzione. Puoi inserire testo direttamente, tradurre il contenuto degli appunti o il testo selezionato in qualsiasi applicazione. Puoi anche sostituire il testo in un’altra app con la sua traduzione tramite un tasto rapido. L’app ti permette di scegliere e configurare completamente il servizio di traduzione utilizzato.\n"
-"\n"
+"Trayslate è un client nella baarra di sistema per servizi di traduzione. \n"
+"Puoi inserire testo direttamente, tradurre il contenuto degli appunti o il testo selezionato in qualsiasi applicazione. \n"
+"Puoi anche sostituire in un’altra app tramite un tasto rapido il testo con la traduzione. \n"
+"L’app permette di scegliere/configurare completamente il servizio di traduzione usato.\n"
 "Questa applicazione utilizza risorse di terze parti con le seguenti licenze:\n"
 "\n"
 "1. Librerie OpenSSL (compilate da sorgente, versioni 32 e 64 bit)\n"
@@ -296,19 +298,19 @@ msgstr "Chiudi"
 
 #: tformconfigtrayslate.btninitparameterstest.hint
 msgid "Execute request and view the parameters"
-msgstr "Esegui la richiesta e visualizza i parametri"
+msgstr "Esegui richiesta e visualizza i parametri"
 
 #: tformconfigtrayslate.btniniturltest.hint
 msgid "Execute request and view the result"
-msgstr "Esegui la richiesta e visualizza il risultato"
+msgstr "Esegui richiesta e visualizza il risultato"
 
 #: tformconfigtrayslate.btnpostdatatest.hint
 msgid "Execute post request and view the result"
-msgstr "Esegui la richiesta POST e visualizza il risultato"
+msgstr "Esegui richiesta POST e visualizza il risultato"
 
 #: tformconfigtrayslate.btnurltest.hint
 msgid "Execute get request and view the result"
-msgstr "Esegui la richiesta GET e visualizza il risultato"
+msgstr "Esegui richiesta GET e visualizza il risultato"
 
 #: tformconfigtrayslate.caption
 msgctxt "tformconfigtrayslate.caption"
@@ -397,7 +399,7 @@ msgstr "Colore recente"
 #: tformconfigtrayslate.labelcontenttype.caption
 msgctxt "tformconfigtrayslate.labelcontenttype.caption"
 msgid "Content Type"
-msgstr "Content Type"
+msgstr "Tipo contenuto"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
 msgid "Fill with default"
@@ -414,7 +416,7 @@ msgstr "Intestazioni aggiuntive della richiesta iniziale in formato 'key=value',
 #: tformconfigtrayslate.labelinitheaders2.caption
 msgctxt "tformconfigtrayslate.labelinitheaders2.caption"
 msgid "Headers"
-msgstr "Headers"
+msgstr "Intestazioni"
 
 #: tformconfigtrayslate.labelinitlivetime.caption
 msgctxt "tformconfigtrayslate.labelinitlivetime.caption"
@@ -514,12 +516,12 @@ msgstr ""
 
 #: tformconfigtrayslate.labelpostdata.caption
 msgid "Post Data"
-msgstr "Post Data"
+msgstr "Dati post"
 
 #: tformconfigtrayslate.labelpostdata1.caption
 msgctxt "tformconfigtrayslate.labelpostdata1.caption"
 msgid "Headers"
-msgstr "Headers"
+msgstr "Intestazioni"
 
 #: tformconfigtrayslate.labelservicedescription.caption
 msgid "Description"
@@ -615,8 +617,8 @@ msgstr "TYSJJHjpu6aqr8UsGaCTLxDyh6HKWoNQ8k"
 #: tformdonatetrayslate.label1.caption
 msgid "Hey there! Fuel this passion project with a little caffeine boost! Every donation helps keep the code rolling and the coffee brewing. Thanks for supporting the work and the developer behind it!"
 msgstr ""
-"Ehilà! Dai una spinta di caffeina a questo progetto appassionato! \n"
-"Ogni donazione aiuta a mantenere il codice in movimento e il caffè in infusione.\n"
+"Dai una spinta di caffeina a questo progetto appassionato! \n"
+"Ogni donazione aiuta a migliorare il codice e il caffè in infusione.\n"
 "Grazie per sostenere il lavoro e lo sviluppatore che c'è dietro!"
 
 #: tformdonatetrayslate.label10.caption
@@ -706,7 +708,7 @@ msgstr "Impostazioni"
 #: tformsettingstrayslate.checkallowhotkeys.caption
 msgctxt "tformsettingstrayslate.checkallowhotkeys.caption"
 msgid "Enable Global Hotkeys"
-msgstr "Abilita tasti di scelta rapida globali"
+msgstr "Abilita tasti scelta rapida globali"
 
 #: tformsettingstrayslate.checkautoaddlangpairs.caption
 msgid "Auto-Add On Pair Change"
@@ -749,7 +751,7 @@ msgstr "Visualizza coppia di lingue"
 
 #: tformsettingstrayslate.checktwolang.hint
 msgid "Display source and/or target language on the tray icon"
-msgstr "Visualizza lingua sorgente e/o destinazione nell'icona nella barra delle applicazioni"
+msgstr "Visualizza lingua sorgente e/o destinazione nell'icona nella barra applicazioni"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects the target language for the selected language pair"
@@ -763,7 +765,7 @@ msgstr "Azione"
 #: tformsettingstrayslate.gridhotkeys.columns[1].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
-msgstr "Scorciatoia"
+msgstr "Tasto rapido"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -790,7 +792,7 @@ msgstr "Traduzione in tempo reale"
 #: tformsettingstrayslate.grouptransfromclipboard1.caption
 msgctxt "tformsettingstrayslate.grouptransfromclipboard1.caption"
 msgid "Hotkeys"
-msgstr "Tasti di scelta rapida"
+msgstr "Tasti scelta rapida"
 
 #: tformsettingstrayslate.grouptrayicon.caption
 msgid "Tray Icon"
@@ -829,7 +831,7 @@ msgstr "Generale"
 #: tformsettingstrayslate.pagehotkeys.caption
 msgctxt "tformsettingstrayslate.pagehotkeys.caption"
 msgid "Hotkeys"
-msgstr "Tasti di scelta rapida"
+msgstr "Tasti scelta rapida"
 
 #: tformsettingstrayslate.pageinterface.caption
 msgctxt "tformsettingstrayslate.pageinterface.caption"
@@ -855,7 +857,7 @@ msgstr "Info programma..."
 
 #: tformtrayslate.aaddpair.hint
 msgid "Add Current Pair"
-msgstr "Aggiungi coppia corrente"
+msgstr "Aggiungi coppia attuale"
 
 #: tformtrayslate.aautocheckupdates.caption
 msgid "Auto Check Updates"
@@ -1008,7 +1010,7 @@ msgstr "Impostazioni..."
 
 #: tformtrayslate.ashow.caption
 msgid "Show"
-msgstr "Visualizza"
+msgstr "Apri finestra Trayslate"
 
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
