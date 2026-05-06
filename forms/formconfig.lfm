@@ -657,10 +657,10 @@ object formConfigTrayslate: TformConfigTrayslate
             OnChange = ValueChange
           end
           object LabelMaxLength: TLabel
-            Left = 8
+            Left = 0
             Height = 32
             Top = 280
-            Width = 104
+            Width = 112
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Max Length, bytes'

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: formconfig.rcaption
@@ -508,11 +508,7 @@ msgstr "Metodo"
 #: tformconfigtrayslate.labelparemeters.caption
 msgctxt "tformconfigtrayslate.labelparemeters.caption"
 msgid "Use parameters: {text} – input text, {source} – source language, {target} – target language. Prefix the name with ! for lowercase or ^ for uppercase value. Also supported {timestamp}, {rand}. Use {parameter} from the parameters page."
-msgstr ""
-"Usa i parametri: {text} – testo sorgente, {source} – lingua sorgente, {target} – lingua destinazione.\n"
-"Anteponi '!' per il valore in minuscolo o '^' per il valore in maiuscolo.\n"
-"Sono supportati anche {timestamp}, {rand}.\n"
-"Usa {parameter} dalla pagina dei parametri."
+msgstr "Usa i parametri: {text} – testo sorgente, {source} – lingua sorgente, {target} – lingua destinazione. Anteponi '!' per il valore in minuscolo o '^' per il valore in maiuscolo. Sono supportati anche {timestamp}, {rand}. Usa {parameter} dalla pagina dei parametri."
 
 #: tformconfigtrayslate.labelpostdata.caption
 msgid "Post Data"
