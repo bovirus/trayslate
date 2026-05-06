@@ -67,21 +67,21 @@ if exist "trayslate.exe" (
         if exist "%CERTFILE%" (
             if exist "%SIGNTOOL%" (
                 echo Signing executable...
-                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "trayslate.exe"
+                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "trayslate.exe" < nul
                 IF %ERRORLEVEL% EQU 0 (
                     echo Signing completed successfully
                 ) else (
                     echo Signing failed
                 )
                 echo Signing libssl-1_1-x64.dll...
-                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "libssl-1_1-x64.dll"
+                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "libssl-1_1-x64.dll" < nul
                 IF %ERRORLEVEL% EQU 0 (
                     echo Signing completed successfully
                 ) else (
                     echo Signing failed
                 )
                 echo Signing libcrypto-1_1-x64.dll...
-                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "libcrypto-1_1-x64.dll"
+                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "libcrypto-1_1-x64.dll" < nul
                 IF %ERRORLEVEL% EQU 0 (
                     echo Signing completed successfully
                 ) else (

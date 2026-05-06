@@ -72,14 +72,14 @@ if not "%CERTFILE%"=="" (
     if exist "%CERTFILE%" (
         if exist "%SIGNTOOL%" (
             echo Signing MSI files...
-            "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "%SOURCE_DIR%\trayslate-%VERSION%-%PLATFORM%.msi"
+            "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "%SOURCE_DIR%\trayslate-%VERSION%-%PLATFORM%.msi" < nul
             IF %ERRORLEVEL% EQU 0 (
                 echo Signing of trayslate-%VERSION%-%PLATFORM%.msi completed successfully
             ) else (
                 echo Signing failed for trayslate-%VERSION%-%PLATFORM%.msi
             )
 
-            "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "%SOURCE_DIR%\trayslate-%VERSION%-%PLATFORM%-allusers.msi"
+            "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "%SOURCE_DIR%\trayslate-%VERSION%-%PLATFORM%-allusers.msi" < nul
             IF %ERRORLEVEL% EQU 0 (
                 echo Signing of trayslate-%VERSION%-%PLATFORM%-allusers.msi completed successfully
             ) else (

@@ -17,12 +17,12 @@ set "destination=C:\Program Files (x86)\Inno Setup 6\Languages"
 xcopy "%source%\*" "%destination%\" /y /i /s
 
 :: --- Build inno setup ---
-"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" "%SOURCE_DIR%\innosetup.iss"
+"C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /DMyVersion=%VERSION% "%SOURCE_DIR%\innosetup.iss"
 echo File created: trayslate-any-x86-x64.exe
 echo.
 
 ::Wait 2 seconds to ensure file is free
-timeout /t 2 /nobreak >nul
+ping 127.0.0.1 -n 3 >nul
 
 :: --- Sign installers ---
 IF "%SIGNTOOL%"=="" (
@@ -47,7 +47,7 @@ if not "%CERTFILE%"=="" (
     if exist "%CERTFILE%" (
         if exist "%SIGNTOOL%" (
             echo Signing file...
-            "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "%SOURCE_DIR%\trayslate-%VERSION%-any-x86-x64.exe"
+            "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "%SOURCE_DIR%\trayslate-%VERSION%-any-x86-x64.exe" < nul
             IF %ERRORLEVEL% EQU 0 (
                 echo Signing of trayslate-%VERSION%-any-x86-x64.exe completed successfully
             ) else (

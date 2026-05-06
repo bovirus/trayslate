@@ -1,15 +1,21 @@
 #define MyAppName      "Trayslate"
-#define FileHandle     FileOpen("..\VERSION")
-#if FileHandle
-  #define MyAppVersion Trim(FileRead(FileHandle))
-  #expr FileClose(FileHandle)
-#else
-  #define MyAppVersion "0.0.0"
+
+// --- Version resolving ---
+#ifndef MyVersion
+  #define FileHandle FileOpen("..\VERSION")
+  #if FileHandle
+    #define MyVersion Trim(FileRead(FileHandle))
+    #expr FileClose(FileHandle)
+  #else
+    #define MyVersion "0.0.0"
+  #endif
 #endif
+
+#define MyAppVersion   MyVersion
 #define MyAppPublisher "Alexander Tverskoy"
 #define MyAppURL       "https://github.com/plaintool/trayslate"
 #define MyAppExeName   "trayslate.exe"
-#define CurrentYear     GetDateTimeString('yyyy','','')
+#define CurrentYear    GetDateTimeString('yyyy','','')
 
 [Setup]
 AppId={{D1E4B5C2-8F9A-4B6D-AB12-3F7C9E4D8A21}

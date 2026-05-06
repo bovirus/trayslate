@@ -69,8 +69,8 @@ echo 32-bit build completed successfully
 copy /Y "%~dp0installer\redist\libcrypto-1_1.dll" "%~dp0"
 copy /Y "%~dp0installer\redist\libssl-1_1.dll" "%~dp0"
 
-::Wait 2 seconds to ensure file is free
-timeout /t 2 /nobreak >nul
+echo Wait 2 seconds to ensure file is free
+ping 127.0.0.1 -n 3 >nul
 
 ::Certificate settings (optional)
 IF "%SIGNTOOL%"=="" (
@@ -97,21 +97,21 @@ if exist "trayslate32.exe" (
         if exist "%CERTFILE%" (
             if exist "%SIGNTOOL%" (
                 echo Signing 32-bit executable...
-                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "trayslate32.exe"
+                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "trayslate32.exe" < nul
                 IF %ERRORLEVEL% EQU 0 (
                     echo Signing completed successfully
                 ) else (
                     echo Signing failed
                 )
                 echo Signing 32-bit libssl-1_1.dll...
-                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "libssl-1_1.dll"
+                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "libssl-1_1.dll" < nul
                 IF %ERRORLEVEL% EQU 0 (
                     echo Signing completed successfully
                 ) else (
                     echo Signing failed
                 )
                 echo Signing 32-bit libcrypto-1_1.dll...
-                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "libcrypto-1_1.dll"
+                "%SIGNTOOL%" sign /f "%CERTFILE%" /p "%CERTPASS%" /fd SHA256 /tr %TIMESTAMP_URL% /td SHA256 "libcrypto-1_1.dll" < nul
                 IF %ERRORLEVEL% EQU 0 (
                     echo Signing completed successfully
                 ) else (

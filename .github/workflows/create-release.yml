@@ -56,11 +56,11 @@ jobs:
                 "localization": {
                   "prefix": "### 🌐 Localization",
                   "labels": ["localization", "localization auto"]
-                }
+                },
                 "documentation": {
                   "prefix": "### 📝 Documentation",
                   "labels": ["localization", "localization auto"]
-                }
+                },
                 "bugfixes": {
                   "prefix": "### 🐛 Fixed Bugs",
                   "labels": ["bug", "bug auto"]
