@@ -214,10 +214,6 @@ msgstr "버전 확인 오류:"
 msgid "Your version is up to date."
 msgstr "현재 버전은 최신 버전입니다."
 
-#: tform1.caption
-msgid "Form1"
-msgstr ""
-
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -665,6 +661,10 @@ msgstr "쉽게 하는 방법"
 msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
+#: tformpopuptrayslate.caption
+msgid " Trayslate"
+msgstr ""
+
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
 msgstr "적용"
@@ -733,6 +733,14 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr "입력 중에 텍스트를 자동으로 번역합니다"
 
+#: tformsettingstrayslate.checkstayontop.caption
+msgid "Stay On Top"
+msgstr ""
+
+#: tformsettingstrayslate.checkstayontop.hint
+msgid "Keeps the window above all other windows"
+msgstr ""
+
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
 msgstr "언어 쌍 표시"
@@ -773,6 +781,10 @@ msgctxt "tformsettingstrayslate.grouplangpairs.caption"
 msgid "Recent Language Pairs"
 msgstr "최근 언어 쌍"
 
+#: tformsettingstrayslate.grouppopup.caption
+msgid "Popup Window"
+msgstr ""
+
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
 msgstr "실시간 번역"
@@ -808,6 +820,14 @@ msgctxt "tformsettingstrayslate.labelmaxlangpairs.caption"
 msgid "Max Pairs"
 msgstr "최대 쌍 수"
 
+#: tformsettingstrayslate.labelopacityhover.caption
+msgid "Opacity on Hover"
+msgstr ""
+
+#: tformsettingstrayslate.labelopacityidle.caption
+msgid "Opacity Idle"
+msgstr ""
+
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
 msgstr "번역 지연 시간(ms)"
@@ -838,6 +858,14 @@ msgstr "패널에 표시할 최근 쌍 수; 추가 시 쌍이 오른쪽으로 �
 #: tformsettingstrayslate.spinrealtimedelay.hint
 msgid "Translation Delay in milliseconds"
 msgstr "번역 지연 시간(밀리초)"
+
+#: tformsettingstrayslate.trackopacityhover.hint
+msgid "Window transparency when the mouse is over the window"
+msgstr ""
+
+#: tformsettingstrayslate.trackopacityidle.hint
+msgid "Window transparency when the mouse is not over the window"
+msgstr ""
 
 #: tformtrayslate.aabout.caption
 msgid "About..."

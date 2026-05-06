@@ -177,12 +177,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
         Height = 497
         Top = 0
         Width = 546
-        HorzScrollBar.Increment = 18
-        HorzScrollBar.Page = 187
+        HorzScrollBar.Increment = 51
+        HorzScrollBar.Page = 513
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
-        VertScrollBar.Increment = 36
-        VertScrollBar.Page = 365
+        VertScrollBar.Increment = 49
+        VertScrollBar.Page = 493
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
@@ -375,6 +375,78 @@ object formSettingsTrayslate: TformSettingsTrayslate
             ShowHint = True
             TabOrder = 1
             OnChange = SettingChange
+          end
+        end
+        object GroupPopup: TGroupBox
+          Left = 5
+          Height = 123
+          Top = 365
+          Width = 536
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Popup Window'
+          ClientHeight = 103
+          ClientWidth = 532
+          TabOrder = 3
+          object CheckStayOnTop: TCheckBox
+            Left = 16
+            Height = 19
+            Hint = 'Keeps the window above all other windows'
+            Top = 72
+            Width = 82
+            Caption = 'Stay On Top'
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnChange = SettingChange
+          end
+          object TrackOpacityHover: TTrackBar
+            Left = 152
+            Height = 25
+            Hint = 'Window transparency when the mouse is over the window'
+            Top = 8
+            Width = 347
+            Frequency = 5
+            Max = 100
+            Position = 0
+            OnChange = SettingChange
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 1
+          end
+          object LabelOpacityHover: TLabel
+            Left = 8
+            Height = 32
+            Top = 8
+            Width = 136
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Opacity on Hover'
+            WordWrap = True
+          end
+          object TrackOpacityIdle: TTrackBar
+            Left = 152
+            Height = 25
+            Hint = 'Window transparency when the mouse is not over the window'
+            Top = 40
+            Width = 347
+            Frequency = 5
+            Max = 100
+            Position = 0
+            OnChange = SettingChange
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 2
+          end
+          object LabelOpacityIdle: TLabel
+            Left = 8
+            Height = 32
+            Top = 40
+            Width = 136
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Opacity Idle'
+            WordWrap = True
           end
         end
       end

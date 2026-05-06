@@ -6,6 +6,7 @@ object formPopupTrayslate: TformPopupTrayslate
   AlphaBlend = True
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSizeToolWin
+  Caption = ' Trayslate'
   ClientHeight = 240
   ClientWidth = 480
   ParentFont = True
@@ -27,15 +28,15 @@ object formPopupTrayslate: TformPopupTrayslate
     TabOrder = 0
   end
   object FlowPairs: TFlowPanel
-    Left = 3
+    Left = 5
     Height = 0
     Top = 0
-    Width = 474
+    Width = 470
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
-    BorderSpacing.Left = 3
-    BorderSpacing.Right = 3
+    BorderSpacing.Left = 5
+    BorderSpacing.Right = 5
     BorderSpacing.Bottom = 3
     ControlList = <>
     FlowLayout = tlCenter
@@ -43,5 +44,11 @@ object formPopupTrayslate: TformPopupTrayslate
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
+  end
+  object Timer: TTimer
+    Interval = 100
+    OnTimer = TimerTimer
+    Left = 32
+    Top = 168
   end
 end

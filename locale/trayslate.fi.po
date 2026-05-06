@@ -214,10 +214,6 @@ msgstr "Virhe versiota tarkistaessa:"
 msgid "Your version is up to date."
 msgstr "Versiosi on ajan tasalla."
 
-#: tform1.caption
-msgid "Form1"
-msgstr ""
-
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -665,6 +661,10 @@ msgstr "Kuinka tehdä se helposti"
 msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
+#: tformpopuptrayslate.caption
+msgid " Trayslate"
+msgstr ""
+
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
 msgstr "Käytä"
@@ -733,6 +733,14 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr "Käännä teksti automaattisesti kirjoittaessasi"
 
+#: tformsettingstrayslate.checkstayontop.caption
+msgid "Stay On Top"
+msgstr ""
+
+#: tformsettingstrayslate.checkstayontop.hint
+msgid "Keeps the window above all other windows"
+msgstr ""
+
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
 msgstr "Näytä kielipari"
@@ -773,6 +781,10 @@ msgctxt "tformsettingstrayslate.grouplangpairs.caption"
 msgid "Recent Language Pairs"
 msgstr "Viimeisimmät kieliparit"
 
+#: tformsettingstrayslate.grouppopup.caption
+msgid "Popup Window"
+msgstr ""
+
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
 msgstr "Reaaliaikainen käännös"
@@ -808,6 +820,14 @@ msgctxt "tformsettingstrayslate.labelmaxlangpairs.caption"
 msgid "Max Pairs"
 msgstr "Maks. parit"
 
+#: tformsettingstrayslate.labelopacityhover.caption
+msgid "Opacity on Hover"
+msgstr ""
+
+#: tformsettingstrayslate.labelopacityidle.caption
+msgid "Opacity Idle"
+msgstr ""
+
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
 msgstr "Käännöksen viive, ms"
@@ -838,6 +858,14 @@ msgstr "Viimeisimpien parien määrä paneelissa; parit siirtyvät oikealle lis�
 #: tformsettingstrayslate.spinrealtimedelay.hint
 msgid "Translation Delay in milliseconds"
 msgstr "Käännöksen viive millisekunteina"
+
+#: tformsettingstrayslate.trackopacityhover.hint
+msgid "Window transparency when the mouse is over the window"
+msgstr ""
+
+#: tformsettingstrayslate.trackopacityidle.hint
+msgid "Window transparency when the mouse is not over the window"
+msgstr ""
 
 #: tformtrayslate.aabout.caption
 msgid "About..."

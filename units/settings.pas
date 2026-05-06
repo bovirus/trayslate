@@ -167,6 +167,9 @@ begin
     JSONObj.Add('RealTime', Form.RealTime);
     JSONObj.Add('RealTimeDelay', Form.RealTimeDelay);
     JSONObj.Add('AutoSwap', Form.AutoSwap);
+    JSONObj.Add('StayOnTop', Form.StayOnTop);
+    JSONObj.Add('OpacityHover', Form.OpacityHover);
+    JSONObj.Add('OpacityIdle', Form.OpacityIdle);
     JSONObj.Add('AutoAddLangPairs', Form.AutoAddLangPairs);
     JSONObj.Add('AllowHotKeys', Form.AllowHotKeys);
     JSONObj.Add('AutoCheckUpdates', Form.AutoCheckUpdates);
@@ -388,6 +391,15 @@ begin
 
         if (JSONObj.FindPath('AutoSwap') <> nil) then
           Form.AutoSwap := JSONObj.FindPath('AutoSwap').AsBoolean;
+
+        if (JSONObj.FindPath('StayOnTop') <> nil) then
+          Form.StayOnTop := JSONObj.FindPath('StayOnTop').AsBoolean;
+
+        if (JSONObj.FindPath('OpacityHover') <> nil) then
+          Form.OpacityHover := JSONObj.FindPath('OpacityHover').AsInteger;
+
+        if (JSONObj.FindPath('OpacityIdle') <> nil) then
+          Form.OpacityIdle := JSONObj.FindPath('OpacityIdle').AsInteger;
 
         if (JSONObj.FindPath('AutoAddLangPairs') <> nil) then
           Form.AutoAddLangPairs := JSONObj.FindPath('AutoAddLangPairs').AsBoolean;

@@ -214,10 +214,6 @@ msgstr "संस्करण जाँच में त्रुटि:"
 msgid "Your version is up to date."
 msgstr "आपका संस्करण नवीनतम है।"
 
-#: tform1.caption
-msgid "Form1"
-msgstr ""
-
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -665,6 +661,10 @@ msgstr "इसे आसानी से कैसे करें"
 msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
+#: tformpopuptrayslate.caption
+msgid " Trayslate"
+msgstr ""
+
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
 msgstr "लागू करें"
@@ -733,6 +733,14 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr "टाइप करते समय स्वचालित रूप से पाठ का अनुवाद करें"
 
+#: tformsettingstrayslate.checkstayontop.caption
+msgid "Stay On Top"
+msgstr ""
+
+#: tformsettingstrayslate.checkstayontop.hint
+msgid "Keeps the window above all other windows"
+msgstr ""
+
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
 msgstr "भाषा युग्म दिखाएँ"
@@ -773,6 +781,10 @@ msgctxt "tformsettingstrayslate.grouplangpairs.caption"
 msgid "Recent Language Pairs"
 msgstr "हाल के भाषा युग्म"
 
+#: tformsettingstrayslate.grouppopup.caption
+msgid "Popup Window"
+msgstr ""
+
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
 msgstr "रीयल-टाइम अनुवाद"
@@ -808,6 +820,14 @@ msgctxt "tformsettingstrayslate.labelmaxlangpairs.caption"
 msgid "Max Pairs"
 msgstr "अधिकतम युग्म"
 
+#: tformsettingstrayslate.labelopacityhover.caption
+msgid "Opacity on Hover"
+msgstr ""
+
+#: tformsettingstrayslate.labelopacityidle.caption
+msgid "Opacity Idle"
+msgstr ""
+
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
 msgstr "अनुवाद विलंब, ms"
@@ -838,6 +858,14 @@ msgstr "पैनल पर हाल के युग्मों की सं
 #: tformsettingstrayslate.spinrealtimedelay.hint
 msgid "Translation Delay in milliseconds"
 msgstr "मिलीसेकंड में अनुवाद विलंब"
+
+#: tformsettingstrayslate.trackopacityhover.hint
+msgid "Window transparency when the mouse is over the window"
+msgstr ""
+
+#: tformsettingstrayslate.trackopacityidle.hint
+msgid "Window transparency when the mouse is not over the window"
+msgstr ""
 
 #: tformtrayslate.aabout.caption
 msgid "About..."
