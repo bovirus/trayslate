@@ -80,6 +80,9 @@ jobs:
                 *"DOC:"*|*"DOCUMENTATION:"*)
                     type="Documentation"
                     ;;
+                *"LOCALIZATION:"*|*"LOCAL:"*|*"LOC:"*)
+                    type="Localization"
+                    ;;
                 *)
                     type="None"
                     ;;
@@ -89,7 +92,7 @@ jobs:
               echo "Creating $type issue for commit: $COMMIT_ID"
               
               # Remove commit type prefix from title for cleaner issue titles
-              TITLE=$(echo "$COMMIT_MSG" | sed -E 's/^(FIX|FIXED|FEATURE|FEAT|ENHANCEMENT|ENHANCE|DOC|DOCUMENTATION):\s*//i')
+              TITLE=$(echo "$COMMIT_MSG" | sed -E 's/^(FIX|FIXED|FEATURE|FEAT|ENHANCEMENT|ENHANCE|DOC|DOCUMENTATION|LOCALIZATION|LOCAL|LOC):\s*//i')
               BODY="**Commit:** https://github.com/$GITHUB_REPOSITORY/commit/$COMMIT_ID\n**Author:** $COMMIT_AUTHOR\n\nThis issue was automatically created from commit $COMMIT_ID"
               
               JSON="{\"title\":\"$TITLE\",\"body\":\"$BODY\",\"labels\":[\"$type\",\"Auto\"]}"
