@@ -204,6 +204,10 @@ msgstr ""
 msgid "Your version is up to date."
 msgstr ""
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -968,6 +972,10 @@ msgstr ""
 
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
+msgstr ""
+
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
 msgstr ""
 
 #: tformtrayslate.caption

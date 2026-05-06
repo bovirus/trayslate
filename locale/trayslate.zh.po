@@ -214,6 +214,10 @@ msgstr "检查版本时出错："
 msgid "Your version is up to date."
 msgstr "您的版本已是最新。"
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -1005,6 +1009,10 @@ msgstr "翻译（Ctrl ¦ Shift ¦ Enter + Enter）"
 msgid "Translate Clipboard"
 msgstr "翻译剪贴板"
 
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
+msgstr ""
+
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
@@ -1025,3 +1033,4 @@ msgstr "最近的对"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

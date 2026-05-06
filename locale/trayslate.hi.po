@@ -214,6 +214,10 @@ msgstr "संस्करण जाँच में त्रुटि:"
 msgid "Your version is up to date."
 msgstr "आपका संस्करण नवीनतम है।"
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -1005,6 +1009,10 @@ msgstr "अनुवाद करें (Ctrl ¦ Shift ¦ Enter + Enter)"
 msgid "Translate Clipboard"
 msgstr "क्लिपबोर्ड अनुवाद करें"
 
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
+msgstr ""
+
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
@@ -1025,3 +1033,4 @@ msgstr "हाल के युग्म"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

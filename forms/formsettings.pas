@@ -209,7 +209,7 @@ resourcestring
 
 implementation
 
-uses mainform, formattool, systemtool;
+uses mainform, formattool, formpopup, systemtool;
 
   {$R *.lfm}
 
@@ -643,6 +643,8 @@ begin
   else
     formTrayslate.ConfigLangDetect := string.Empty;
   formTrayslate.Font.Assign(PanelFont.Font);
+  if Assigned(formPopupTrayslate) then
+    formPopupTrayslate.Font.Assign(PanelFont.Font);
   formTrayslate.IconBackgroundColor := ColorIconBackground.Selected;
   formTrayslate.IconFontColor := ColorIconFont.Selected;
   formTrayslate.IconFontName := ComboIconFontName.Text;

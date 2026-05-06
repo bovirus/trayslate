@@ -214,6 +214,10 @@ msgstr "Sürüm kontrolünde hata:"
 msgid "Your version is up to date."
 msgstr "Sürümünüz güncel."
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -1005,6 +1009,10 @@ msgstr "Çevir (Ctrl ¦ Shift ¦ Enter + Enter)"
 msgid "Translate Clipboard"
 msgstr "Panoyu Çevir"
 
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
+msgstr ""
+
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
@@ -1025,3 +1033,4 @@ msgstr "Son Çiftler"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

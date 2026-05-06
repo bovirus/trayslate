@@ -197,6 +197,13 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uWin32WidgetSetDark"/>
       </Unit>
+      <Unit>
+        <Filename Value="forms\formpopup.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="formPopupTrayslate"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

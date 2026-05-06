@@ -214,6 +214,10 @@ msgstr "Erreur lors de la vérification de la version :"
 msgid "Your version is up to date."
 msgstr "Votre version est à jour."
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -1005,6 +1009,10 @@ msgstr "Traduire (Ctrl ¦ Shift ¦ Enter + Enter)"
 msgid "Translate Clipboard"
 msgstr "Traduire le presse-papiers"
 
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
+msgstr ""
+
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
@@ -1025,3 +1033,4 @@ msgstr "Paires récentes"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

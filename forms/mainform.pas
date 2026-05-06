@@ -49,6 +49,7 @@ type
     aAutoCheckUpdates: TAction;
     aCopySource: TAction;
     aCopyTarget: TAction;
+    aTranslatePopup: TAction;
     aLangCustom: TAction;
     aLangBulgarian: TAction;
     aMenu: TAction;
@@ -64,6 +65,7 @@ type
     ImageConfig: TImageList;
     MenuBulgarian: TMenuItem;
     MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
     OpenPo: TOpenDialog;
     SbCopySource: TSpeedButton;
     SbCopyTarget: TSpeedButton;
@@ -176,9 +178,10 @@ type
     procedure ScreenActiveFormChanged(Sender: TObject);
     procedure aConfigEditorExecute(Sender: TObject);
     procedure aSettingsExecute(Sender: TObject);
-    procedure aTranslateClipboardExecute(Sender: TObject);
     procedure aNewTranslateExecute(Sender: TObject);
     procedure aTranslateExecute(Sender: TObject);
+    procedure aTranslateClipboardExecute(Sender: TObject);
+    procedure aTranslatePopupExecute(Sender: TObject);
     procedure aSwapExecute(Sender: TObject);
     procedure aCopySourceExecute(Sender: TObject);
     procedure aCopyTargetExecute(Sender: TObject);
@@ -283,6 +286,10 @@ type
     FFormConfigTop: integer;
     FFormConfigWidth: integer;
     FFormConfigHeight: integer;
+    FFormPopupLeft: integer;
+    FFormPopupTop: integer;
+    FFormPopupWidth: integer;
+    FFormPopupHeight: integer;
     FFormAboutWidth: integer;
     FFormAboutHeight: integer;
     FFormSettingsWidth: integer;
@@ -330,7 +337,7 @@ type
     procedure TranslateMemo(ADetectLanguage: boolean = True);
     procedure TranslateFromClipboard;
     procedure TranslateClipboard;
-    procedure TranslateClipboardPopup;
+    procedure TranslateClipboardPopup(NearMouse: boolean = False);
     procedure TranslateFromControl(Data: PtrInt);
     procedure TranslateControl(Data: PtrInt);
     procedure TranslateControlPopup(Data: PtrInt);
@@ -355,6 +362,7 @@ type
     function UpdatePairLanguage(const Pair: string): string;
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
+    procedure ShowPopup(X: integer = 0; Y: integer = 0);
     function GetLangCodeFromPoFile(const AFileName: string): string;
     function LoadCustomPoFile(const AFileName: string): string;
     {$IFDEF WINDOWS}
@@ -393,6 +401,10 @@ type
     property FormConfigTop: integer read FFormConfigTop write FFormConfigTop;
     property FormConfigWidth: integer read FFormConfigWidth write FFormConfigWidth;
     property FormConfigHeight: integer read FFormConfigHeight write FFormConfigHeight;
+    property FormPopupLeft: integer read FFormPopupLeft write FFormPopupLeft;
+    property FormPopupTop: integer read FFormPopupTop write FFormPopupTop;
+    property FormPopupWidth: integer read FFormPopupWidth write FFormPopupWidth;
+    property FormPopupHeight: integer read FFormPopupHeight write FFormPopupHeight;
     property FormSettingsWidth: integer read FFormSettingsWidth write FFormSettingsWidth;
     property FormSettingsHeight: integer read FFormSettingsHeight write FFormSettingsHeight;
     property FormSettingsSplit: integer read FFormSettingsSplit write FFormSettingsSplit;
@@ -436,7 +448,7 @@ resourcestring
 
 implementation
 
-uses formdonate, formabout, formsettings, formconfig, settings, languages, systemtool, formattool;
+uses formdonate, formabout, formsettings, formconfig, settings, languages, systemtool, formattool, formpopup;
 
   {$R *.lfm}
 
@@ -477,6 +489,10 @@ begin
   FFormConfigTop := 0;
   FFormConfigWidth := 0;
   FFormConfigHeight := 0;
+  FFormPopupLeft := 0;
+  FFormPopupTop := 0;
+  FFormPopupWidth := 0;
+  FFormPopupHeight := 0;
   FFormSettingsWidth := 0;
   FFormSettingsHeight := 0;
   FFormSettingsSplit := 0;
@@ -770,7 +786,7 @@ begin
 
       HOTKEY_TRANS_CLIPBOARD_POPUP:
       begin
-        TranslateClipboardPopup;
+        TranslateClipboardPopup(True);
       end;
 
       HOTKEY_TRANS_FROM_CONTROL:
@@ -850,11 +866,6 @@ begin
     Show;
 end;
 
-procedure TformTrayslate.aTranslateClipboardExecute(Sender: TObject);
-begin
-  TranslateFromClipboard;
-end;
-
 procedure TformTrayslate.aSettingsExecute(Sender: TObject);
 begin
   if Assigned(formSettingsTrayslate) then
@@ -913,6 +924,16 @@ end;
 procedure TformTrayslate.aTranslateExecute(Sender: TObject);
 begin
   TranslateMemo;
+end;
+
+procedure TformTrayslate.aTranslateClipboardExecute(Sender: TObject);
+begin
+  TranslateFromClipboard;
+end;
+
+procedure TformTrayslate.aTranslatePopupExecute(Sender: TObject);
+begin
+  TranslateClipboardPopup;
 end;
 
 procedure TformTrayslate.aSwapExecute(Sender: TObject);
@@ -1652,8 +1673,7 @@ begin
           Data^.Visible := Ini.ReadBool('Service', 'Visible', True);
           Data^.Order := Ini.ReadInteger('Service', 'Order', 0);
 
-          Data^.ImageIndex := AddBase64ToImageList(Ini.ReadString('Service', 'Icon', string.Empty),
-            ImageConfig);
+          Data^.ImageIndex := AddBase64ToImageList(Ini.ReadString('Service', 'Icon', string.Empty), ImageConfig);
         finally
           Ini.Free;
         end;
@@ -1715,125 +1735,142 @@ begin
 end;
 
 procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
-var
-  pnl: TPanel;
-  lbl: TLabel;
-  img: TImage;
-  mi: TMenuItem;
-  totalWidth: integer;
-  ColorRecent: TColor;
-  ServiceIcon: integer;
-  i: integer;
-begin
-  FlowPairs.DisableAlign;
-  try
-    // Clear FlowPairs
-    for i := FlowPairs.ControlCount - 1 downto 0 do
-      FlowPairs.Controls[i].Free;
 
-    // Clear MenuLangPairs
-    MenuLangPairs.Clear;
+  procedure Build(Target: TFlowPanel; FillMenu: boolean = True);
+  var
+    pnl: TPanel;
+    lbl: TLabel;
+    img: TImage;
+    mi: TMenuItem;
+    totalWidth: integer;
+    ColorRecent: TColor;
+    ServiceIcon: integer;
+    i: integer;
+  begin
+    Target.DisableAlign;
+    try
+      // Clear FlowPairs
+      for i := Target.ControlCount - 1 downto 0 do
+        Target.Controls[i].Free;
 
-    // Hide panel and menu if no pairs
-    if (FMaxLangPairs <= 0) then
-    begin
-      FlowPairs.Visible := False;
-      MenuLangPairs.Visible := False;
-      Exit;
-    end
-    else
-    begin
-      FlowPairs.Visible := True;
-      MenuLangPairs.Visible := True;
-    end;
+      // Clear MenuLangPairs
+      if FillMenu then
+        MenuLangPairs.Clear;
 
-    // Calculate total width
-    totalWidth := 0;
-    for i := 0 to FLangPairs.Count - 1 do
-      totalWidth := totalWidth + FlowPairs.Canvas.TextWidth(FLangPairs.ValueFromIndex[i]) + 10;
-    FlowPairs.Width := totalWidth;
-
-    // Create Panels (with Image + Label) and Menu Items
-    for i := 0 to FLangPairs.Count - 1 do
-    begin
-      FlowPairs.BorderSpacing.Top := Max(0, Min(4, 13 - Font.Size));
-
-      pnl := TPanel.Create(FlowPairs);
-      pnl.Parent := FlowPairs;
-      pnl.BevelOuter := bvNone;
-      pnl.AutoSize := True;
-      pnl.BorderSpacing.Right := 12;
-
-      if not TryStrToInt(FConfigImages.Values[FLangPairs.Names[i]], ServiceIcon) then
-        ServiceIcon := -1;
-
-      if ServiceIcon >= 0 then
+      // Hide panel and menu if no pairs
+      if (FMaxLangPairs <= 0) then
       begin
-        // Image
-        img := TImage.Create(pnl);
-        img.Parent := pnl;
-        ImageConfig.GetBitmap(ServiceIcon, img.Picture.Bitmap);
-        img.Hint := FConfigTitles.Values[FLangPairs.Names[i]];
-        img.ShowHint := True;
-        img.Align := alLeft;
-        img.Width := 16;
-        img.Proportional := True;
-        img.Center := True;
+        Target.Visible := False;
+        if FillMenu then
+          MenuLangPairs.Visible := False;
+        Exit;
+      end
+      else
+      begin
+        Target.Visible := True;
+        if FillMenu then
+          MenuLangPairs.Visible := True;
       end;
 
-      // Label
-      lbl := TLabel.Create(pnl);
-      lbl.Parent := pnl;
-      lbl.Caption := FLangPairs.ValueFromIndex[i];
-      lbl.Hint := FConfigTitles.Values[FLangPairs.Names[i]];
-      lbl.ShowHint := True;
-      lbl.Cursor := crHandPoint;
-      lbl.Layout := tlCenter;
-      if ServiceIcon >= 0 then
-        lbl.BorderSpacing.Left := 20;
-      lbl.BorderSpacing.Bottom := 3;
-      lbl.Top := 0;
-      lbl.Left := 0;
-      lbl.Tag := i;
+      // Calculate total width
+      totalWidth := 0;
+      for i := 0 to FLangPairs.Count - 1 do
+        totalWidth := totalWidth + Target.Canvas.TextWidth(FLangPairs.ValueFromIndex[i]) + 10;
+      Target.Width := totalWidth;
 
-      if not TryStrToInt(FConfigColors.Values[FLangPairs.Names[i]], ColorRecent) then
-        ColorRecent := clBlue;
-      lbl.Font.Color := ThemeColor(ColorRecent, DarkThemeColor(ColorRecent));
-
-      // Events only on label
-      lbl.OnMouseEnter := @LabelMouseEnter;
-      lbl.OnMouseLeave := @LabelMouseLeave;
-      lbl.OnMouseDown := @LabelLangMouseDown;
-
-      // MenuLangPairs Item
-      mi := TMenuItem.Create(MenuLangPairs);
-      mi.Caption := lbl.Caption + ' - ' + lbl.Hint;
-      mi.Hint := FLangPairs[i];
-      if AllowHotKeys and (i < 9) then
+      // Create Panels (with Image + Label) and Menu Items
+      for i := 0 to FLangPairs.Count - 1 do
       begin
-        case i of
-          0: mi.ShortCut := HotKeyToShortCut(HotKeyRecent1);
-          1: mi.ShortCut := HotKeyToShortCut(HotKeyRecent2);
-          2: mi.ShortCut := HotKeyToShortCut(HotKeyRecent3);
-          3: mi.ShortCut := HotKeyToShortCut(HotKeyRecent4);
-          4: mi.ShortCut := HotKeyToShortCut(HotKeyRecent5);
-          5: mi.ShortCut := HotKeyToShortCut(HotKeyRecent6);
-          6: mi.ShortCut := HotKeyToShortCut(HotKeyRecent7);
-          7: mi.ShortCut := HotKeyToShortCut(HotKeyRecent8);
-          8: mi.ShortCut := HotKeyToShortCut(HotKeyRecent9);
+        Target.BorderSpacing.Top := Max(0, Min(4, 13 - Font.Size));
+
+        pnl := TPanel.Create(Target);
+        pnl.Parent := Target;
+        pnl.BevelOuter := bvNone;
+        pnl.AutoSize := True;
+        pnl.BorderSpacing.Right := 12;
+
+        if not TryStrToInt(FConfigImages.Values[FLangPairs.Names[i]], ServiceIcon) then
+          ServiceIcon := -1;
+
+        if ServiceIcon >= 0 then
+        begin
+          // Image
+          img := TImage.Create(pnl);
+          img.Parent := pnl;
+          ImageConfig.GetBitmap(ServiceIcon, img.Picture.Bitmap);
+          img.Hint := FConfigTitles.Values[FLangPairs.Names[i]];
+          img.ShowHint := True;
+          img.Align := alLeft;
+          img.Width := 16;
+          img.Proportional := True;
+          img.Center := True;
+        end;
+
+        // Label
+        lbl := TLabel.Create(pnl);
+        lbl.Parent := pnl;
+        lbl.Caption := FLangPairs.ValueFromIndex[i];
+        lbl.Hint := FConfigTitles.Values[FLangPairs.Names[i]];
+        lbl.ShowHint := True;
+        lbl.Cursor := crHandPoint;
+        lbl.Layout := tlCenter;
+        if ServiceIcon >= 0 then
+          lbl.BorderSpacing.Left := 20;
+        lbl.BorderSpacing.Bottom := 3;
+        lbl.Top := 0;
+        lbl.Left := 0;
+        lbl.Tag := i;
+
+        if not TryStrToInt(FConfigColors.Values[FLangPairs.Names[i]], ColorRecent) then
+          ColorRecent := clBlue;
+        lbl.Font.Color := ThemeColor(ColorRecent, DarkThemeColor(ColorRecent));
+
+        // Events only on label
+        lbl.OnMouseEnter := @LabelMouseEnter;
+        lbl.OnMouseLeave := @LabelMouseLeave;
+        lbl.OnMouseDown := @LabelLangMouseDown;
+
+        // MenuLangPairs Item
+        if FillMenu then
+        begin
+          mi := TMenuItem.Create(MenuLangPairs);
+          mi.Caption := lbl.Caption + ' - ' + lbl.Hint;
+          mi.Hint := FLangPairs[i];
+          if AllowHotKeys and (i < 9) then
+          begin
+            case i of
+              0: mi.ShortCut := HotKeyToShortCut(HotKeyRecent1);
+              1: mi.ShortCut := HotKeyToShortCut(HotKeyRecent2);
+              2: mi.ShortCut := HotKeyToShortCut(HotKeyRecent3);
+              3: mi.ShortCut := HotKeyToShortCut(HotKeyRecent4);
+              4: mi.ShortCut := HotKeyToShortCut(HotKeyRecent5);
+              5: mi.ShortCut := HotKeyToShortCut(HotKeyRecent6);
+              6: mi.ShortCut := HotKeyToShortCut(HotKeyRecent7);
+              7: mi.ShortCut := HotKeyToShortCut(HotKeyRecent8);
+              8: mi.ShortCut := HotKeyToShortCut(HotKeyRecent9);
+            end;
+          end;
+          mi.Tag := i;
+          mi.OnClick := @MenuPairClick;
+          mi.Checked := SameText(mi.Hint, LangSource + ':' + LangTarget);
+          if mi.Checked then
+            mi.ImageIndex := -1
+          else
+            mi.ImageIndex := ServiceIcon;
+          MenuLangPairs.Add(mi);
         end;
       end;
-      mi.Tag := i;
-      mi.OnClick := @MenuPairClick;
-      mi.Checked := SameText(mi.Hint, LangSource + ':' + LangTarget);
-      if mi.Checked then
-        mi.ImageIndex := -1
-      else
-        mi.ImageIndex := ServiceIcon;
-      MenuLangPairs.Add(mi);
+    finally
+      Target.EnableAlign;
     end;
+  end;
+
+begin
+  try
+    Build(FlowPairs);
+    if Assigned(formPopupTrayslate) then
+      Build(formPopupTrayslate.FlowPairs, False);
   finally
-    FlowPairs.EnableAlign;
     UpdateCheckMenuPair;
     Repaint;
   end;
@@ -1967,40 +2004,26 @@ end;
 
 procedure TformTrayslate.UpdateCheckMenuPair;
 var
-  i, j, k: integer;
   currentPair: string;
   lbl: TLabel;
   pnl: TPanel;
   targetTag: integer;
   ServiceIcon: integer;
-begin
-  if (FlowPairs = nil) or (MenuLangPairs = nil) then Exit;
+  i: integer;
 
-  // Format the current pair for comparison (e.g., "en:ru")
-  currentPair := UpdatePairLanguage(LangSource + ':' + LangTarget);
-
-  for i := 0 to MenuLangPairs.Count - 1 do
+  procedure UpdateLbl(Target: TFlowPanel);
+  var
+    j, k: integer;
   begin
-    // 1. Update menu item check state
-    MenuLangPairs.Items[i].Checked :=
-      SameText(MenuLangPairs.Items[i].Hint, FConfigFile + '=' + currentPair);
-
-    if not TryStrToInt(FConfigImages.Values[FLangPairs.Names[i]], ServiceIcon) then
-      ServiceIcon := -1;
-    if MenuLangPairs.Items[i].Checked then
-      MenuLangPairs.Items[i].ImageIndex := -1
-    else
-      MenuLangPairs.Items[i].ImageIndex := ServiceIcon;
-
     targetTag := i;
     lbl := nil;
 
-    // 2. Find Panel -> then Label inside it
-    for j := 0 to FlowPairs.ControlCount - 1 do
+    // Find Panel -> then Label inside it
+    for j := 0 to Target.ControlCount - 1 do
     begin
-      if FlowPairs.Controls[j] is TPanel then
+      if Target.Controls[j] is TPanel then
       begin
-        pnl := TPanel(FlowPairs.Controls[j]);
+        pnl := TPanel(Target.Controls[j]);
 
         for k := 0 to pnl.ControlCount - 1 do
         begin
@@ -2015,7 +2038,7 @@ begin
       end;
     end;
 
-    // 3. Update label font style
+    // Update label font style
     if Assigned(lbl) then
     begin
       if MenuLangPairs.Items[i].Checked then
@@ -2023,6 +2046,30 @@ begin
       else
         lbl.Font.Style := lbl.Font.Style - [fsBold];
     end;
+  end;
+
+begin
+  if (FlowPairs = nil) or (MenuLangPairs = nil) then Exit;
+
+  // Format the current pair for comparison (e.g., "en:ru")
+  currentPair := UpdatePairLanguage(LangSource + ':' + LangTarget);
+
+  for i := 0 to MenuLangPairs.Count - 1 do
+  begin
+    // Update menu item check state
+    MenuLangPairs.Items[i].Checked :=
+      SameText(MenuLangPairs.Items[i].Hint, FConfigFile + '=' + currentPair);
+
+    if not TryStrToInt(FConfigImages.Values[FLangPairs.Names[i]], ServiceIcon) then
+      ServiceIcon := -1;
+    if MenuLangPairs.Items[i].Checked then
+      MenuLangPairs.Items[i].ImageIndex := -1
+    else
+      MenuLangPairs.Items[i].ImageIndex := ServiceIcon;
+
+    UpdateLbl(FlowPairs);
+    if Assigned(formPopupTrayslate) and (formPopupTrayslate.FlowPairs <> nil) then
+      UpdateLbl(formPopupTrayslate.FlowPairs);
   end;
 end;
 
@@ -2118,6 +2165,31 @@ begin
   TimerHideHint.Enabled := False;
   TimerHideHint.Interval := Duration;
   TimerHideHint.Enabled := True;
+end;
+
+procedure TformTrayslate.ShowPopup(X: integer = 0; Y: integer = 0);
+begin
+  if not Assigned(formPopupTrayslate) then
+    formPopupTrayslate := TformPopupTrayslate.Create(Application);
+  if X > 0 then
+    formPopupTrayslate.Left := X
+  else
+  if FormPopupLeft > 0 then
+    formPopupTrayslate.Left := FormPopupLeft;
+  if Y > 0 then
+    formPopupTrayslate.Top := Y
+  else
+  if FormPopupTop > 0 then
+    formPopupTrayslate.Top := FormPopupTop;
+  if FormPopupWidth > 0 then
+    formPopupTrayslate.Width := FormPopupWidth;
+  if FormPopupHeight > 0 then
+    formPopupTrayslate.Height := FormPopupHeight;
+  formPopupTrayslate.Font.Assign(Font);
+  formPopupTrayslate.Caption := TrayIcon.Hint.Replace(LineEnding, ' - ');
+  Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
+  formPopupTrayslate.Show;
+  formPopupTrayslate.BringToFront;
 end;
 
 {$IFDEF WINDOWS}
@@ -2595,6 +2667,9 @@ begin
   Screen.Cursor := crAppStart;
   {$ENDIF}
   try
+    if TimerTranslate.Enabled then
+      TimerTranslate.Enabled := False;
+
     if Clipboard.AsText = string.Empty then Exit;
 
     DetectLanguage(Clipboard.AsText);
@@ -2612,9 +2687,39 @@ begin
   end;
 end;
 
-procedure TformTrayslate.TranslateClipboardPopup;
+procedure TformTrayslate.TranslateClipboardPopup(NearMouse: boolean = False);
+var
+  ClipboardText: string;
 begin
+  {$IFDEF WINDOWS}
+  SetSystemCursor(LoadCursor(0, IDC_APPSTARTING), OCR_IBEAM);
+  Application.ProcessMessages;
+  {$ELSE}
+  Screen.Cursor := crAppStart;
+  {$ENDIF}
+  try
+    if TimerTranslate.Enabled then
+      TimerTranslate.Enabled := False;
 
+    if NearMouse then
+      ShowPopup(Mouse.CursorPos.X, Mouse.CursorPos.Y)
+    else
+      ShowPopup;
+
+    ClipboardText := Trim(Clipboard.AsText);
+    if ClipboardText = string.Empty then Exit;
+
+    DetectLanguage(ClipboardText);
+
+    // Create translation thread (it will handle exceptions itself)
+    TranslateThread(Trans, ClipboardText, formPopupTrayslate.MemoTarget);
+  finally
+    {$IFDEF WINDOWS}
+    SystemParametersInfo(SPI_SETCURSORS, 0, nil, 0);
+    {$ELSE}
+    Screen.Cursor := crDefault;
+    {$ENDIF}
+  end;
 end;
 
 procedure TformTrayslate.TranslateFromControl(Data: PtrInt);
@@ -2627,21 +2732,22 @@ begin
   // Save current clipboard to restore later
   OriginalClip := Clipboard.AsText;
   Clipboard.AsText := string.Empty;
+  try
+    // Copy selection from active window (Ctrl+C)
+    GlobalCtrlC;
 
-  // Copy selection from active window (Ctrl+C)
-  GlobalCtrlC;
+    SelectedText := Clipboard.AsText;
 
-  SelectedText := Clipboard.AsText;
-
-  Show;
-  BringToFront;
-  FTopMost := True;
-  ProcessMessages;
-  MemoSource.Text := SelectedText;
-  TranslateMemo;
-
-  // Restore original clipboard
-  Clipboard.AsText := OriginalClip;
+    Show;
+    BringToFront;
+    FTopMost := True;
+    ProcessMessages;
+    MemoSource.Text := SelectedText;
+    TranslateMemo;
+  finally
+    // Restore original clipboard
+    Clipboard.AsText := OriginalClip;
+  end;
 end;
 
 procedure TformTrayslate.TranslateControl(Data: PtrInt);
@@ -2656,29 +2762,34 @@ begin
   Screen.Cursor := crAppStart;
   {$ENDIF}
   try
+    if TimerTranslate.Enabled then
+      TimerTranslate.Enabled := False;
+
     // Save current clipboard to restore later
     OriginalClip := Clipboard.AsText;
     Clipboard.AsText := string.Empty;
+    try
 
-    // Copy selection from active window (Ctrl+C)
-    GlobalCtrlC;
+      // Copy selection from active window (Ctrl+C)
+      GlobalCtrlC;
 
-    if Clipboard.AsText <> string.Empty then
-    begin
-      DetectLanguage(Clipboard.AsText);
-
-      TranslatedText := TranslateThread(Trans, Clipboard.AsText);
-      if Trim(TranslatedText) <> string.Empty then
+      if Clipboard.AsText <> string.Empty then
       begin
-        Clipboard.AsText := TranslatedText;
+        DetectLanguage(Clipboard.AsText);
 
-        // Paste clipboard to active window (Ctrl+V)
-        GlobalCtrlV;
+        TranslatedText := TranslateThread(Trans, Clipboard.AsText);
+        if Trim(TranslatedText) <> string.Empty then
+        begin
+          Clipboard.AsText := TranslatedText;
+
+          // Paste clipboard to active window (Ctrl+V)
+          GlobalCtrlV;
+        end;
       end;
+    finally
+      // Restore original clipboard
+      Clipboard.AsText := OriginalClip;
     end;
-
-    // Restore original clipboard
-    Clipboard.AsText := OriginalClip;
   finally
     {$IFDEF WINDOWS}
     SystemParametersInfo(SPI_SETCURSORS, 0, nil, 0);
@@ -2689,8 +2800,34 @@ begin
 end;
 
 procedure TformTrayslate.TranslateControlPopup(Data: PtrInt);
+var
+  OriginalClip, SelectedText: string;
 begin
+  Screen.Cursor := crAppStart;
+  TimerAnimate.Enabled := True;
 
+  // Save current clipboard to restore later
+  OriginalClip := Clipboard.AsText;
+  Clipboard.AsText := string.Empty;
+  try
+    if TimerTranslate.Enabled then
+      TimerTranslate.Enabled := False;
+
+    // Copy selection from active window (Ctrl+C)
+    GlobalCtrlC;
+
+    SelectedText := Clipboard.AsText;
+
+    ShowPopup(Mouse.CursorPos.X, Mouse.CursorPos.Y);
+
+    DetectLanguage(SelectedText);
+
+    // Create translation thread (it will handle exceptions itself)
+    TranslateThread(Trans, SelectedText, formPopupTrayslate.MemoTarget);
+  finally
+    // Restore original clipboard
+    Clipboard.AsText := OriginalClip;
+  end;
 end;
 
 { Action Languages }

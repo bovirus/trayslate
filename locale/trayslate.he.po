@@ -214,6 +214,10 @@ msgstr "שגיאה בבדיקת גרסה:"
 msgid "Your version is up to date."
 msgstr "הגרסה שלך מעודכנת."
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -1005,6 +1009,10 @@ msgstr "תרגם (Ctrl ¦ Shift ¦ Enter + Enter)"
 msgid "Translate Clipboard"
 msgstr "תרגם לוח גזירים"
 
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
+msgstr ""
+
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
@@ -1025,3 +1033,4 @@ msgstr "זוגות אחרונים"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

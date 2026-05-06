@@ -311,6 +311,9 @@ object formTrayslate: TformTrayslate
     object MenuShowTranslate: TMenuItem
       Action = aTranslateClipboard
     end
+    object MenuItem2: TMenuItem
+      Action = aTranslatePopup
+    end
     object MenuLangPairs: TMenuItem
       Caption = 'Recent Pairs'
     end
@@ -461,20 +464,10 @@ object formTrayslate: TformTrayslate
       Caption = 'Translate Clipboard'
       OnExecute = aTranslateClipboardExecute
     end
-    object aSettings: TAction
+    object aTranslatePopup: TAction
       Category = 'Tray'
-      Caption = 'Settings...'
-      OnExecute = aSettingsExecute
-    end
-    object aConfigEditor: TAction
-      Category = 'Tray'
-      Caption = 'Config Editor...'
-      OnExecute = aConfigEditorExecute
-    end
-    object aDonate: TAction
-      Category = 'Tray'
-      Caption = 'Buy Me a Coffee...'
-      OnExecute = aDonateExecute
+      Caption = 'Translate Popup'
+      OnExecute = aTranslatePopupExecute
     end
     object aNewTranslate: TAction
       Category = 'Form'
@@ -497,28 +490,6 @@ object formTrayslate: TformTrayslate
       Category = 'Language'
       Caption = 'Belarusian'
       OnExecute = aLangBelarusianExecute
-    end
-    object aAutoCheckUpdates: TAction
-      Category = 'Tray'
-      AutoCheck = True
-      Caption = 'Auto Check Updates'
-      Checked = True
-      OnExecute = aAutoCheckUpdatesExecute
-    end
-    object aCheckForUpdates: TAction
-      Category = 'Tray'
-      Caption = 'Check For Updates'
-      OnExecute = aCheckForUpdatesExecute
-    end
-    object aAbout: TAction
-      Category = 'Tray'
-      Caption = 'About...'
-      OnExecute = aAboutExecute
-    end
-    object aExit: TAction
-      Category = 'Tray'
-      Caption = 'Exit'
-      OnExecute = aExitExecute
     end
     object aMenu: TAction
       Category = 'Form'
@@ -659,6 +630,43 @@ object formTrayslate: TformTrayslate
       Category = 'Language'
       Caption = 'Custom File...'
       OnExecute = aLangCustomExecute
+    end
+    object aSettings: TAction
+      Category = 'Tray'
+      Caption = 'Settings...'
+      OnExecute = aSettingsExecute
+    end
+    object aConfigEditor: TAction
+      Category = 'Tray'
+      Caption = 'Config Editor...'
+      OnExecute = aConfigEditorExecute
+    end
+    object aDonate: TAction
+      Category = 'Tray'
+      Caption = 'Buy Me a Coffee...'
+      OnExecute = aDonateExecute
+    end
+    object aAutoCheckUpdates: TAction
+      Category = 'Tray'
+      AutoCheck = True
+      Caption = 'Auto Check Updates'
+      Checked = True
+      OnExecute = aAutoCheckUpdatesExecute
+    end
+    object aCheckForUpdates: TAction
+      Category = 'Tray'
+      Caption = 'Check For Updates'
+      OnExecute = aCheckForUpdatesExecute
+    end
+    object aAbout: TAction
+      Category = 'Tray'
+      Caption = 'About...'
+      OnExecute = aAboutExecute
+    end
+    object aExit: TAction
+      Category = 'Tray'
+      Caption = 'Exit'
+      OnExecute = aExitExecute
     end
   end
   object TimerClick: TTimer

@@ -214,6 +214,10 @@ msgstr "Fejl ved kontrol af version:"
 msgid "Your version is up to date."
 msgstr "Din version er opdateret."
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -1005,6 +1009,10 @@ msgstr "Oversæt (Ctrl ¦ Shift ¦ Enter + Enter)"
 msgid "Translate Clipboard"
 msgstr "Oversæt udklipsholder"
 
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
+msgstr ""
+
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
@@ -1025,3 +1033,4 @@ msgstr "Seneste par"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

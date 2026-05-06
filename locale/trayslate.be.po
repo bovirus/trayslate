@@ -214,6 +214,10 @@ msgstr "Памылка пры праверцы версіі:"
 msgid "Your version is up to date."
 msgstr "Ваша версія актуальная."
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -1005,6 +1009,10 @@ msgstr "Перакласці (Ctrl ¦ Shift ¦ Enter + Enter)"
 msgid "Translate Clipboard"
 msgstr "Перакласці буфер абмену"
 
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
+msgstr ""
+
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
@@ -1025,3 +1033,4 @@ msgstr "Нядаўнія пары"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

@@ -214,6 +214,10 @@ msgstr "버전 확인 오류:"
 msgid "Your version is up to date."
 msgstr "현재 버전은 최신 버전입니다."
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -1005,6 +1009,10 @@ msgstr "번역 (Ctrl ¦ Shift ¦ Enter + Enter)"
 msgid "Translate Clipboard"
 msgstr "클립보드 번역"
 
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
+msgstr ""
+
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
@@ -1025,3 +1033,4 @@ msgstr "최근 쌍"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

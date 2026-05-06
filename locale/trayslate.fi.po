@@ -214,6 +214,10 @@ msgstr "Virhe versiota tarkistaessa:"
 msgid "Your version is up to date."
 msgstr "Versiosi on ajan tasalla."
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -1005,6 +1009,10 @@ msgstr "Käännä (Ctrl ¦ Shift ¦ Enter + Enter)"
 msgid "Translate Clipboard"
 msgstr "Käännä leikepöytä"
 
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
+msgstr ""
+
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
@@ -1025,3 +1033,4 @@ msgstr "Viimeisimmät parit"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+

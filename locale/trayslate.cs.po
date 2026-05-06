@@ -214,6 +214,10 @@ msgstr "Chyba při kontrole verze:"
 msgid "Your version is up to date."
 msgstr "Vaše verze je aktuální."
 
+#: tform1.caption
+msgid "Form1"
+msgstr ""
+
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
@@ -1005,6 +1009,10 @@ msgstr "Přeložit (Ctrl ¦ Shift ¦ Enter + Enter)"
 msgid "Translate Clipboard"
 msgstr "Přeložit schránku"
 
+#: tformtrayslate.atranslatepopup.caption
+msgid "Translate Popup"
+msgstr ""
+
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
@@ -1025,3 +1033,4 @@ msgstr "Nedávné páry"
 #: tformtrayslate.menulanguage.caption
 msgid "Language"
 msgstr ""
+
