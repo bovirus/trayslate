@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Trayslate - Italian - 06.05.2026\n"
+"Project-Id-Version: Trayslate - Italian - 07.05.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -1051,7 +1051,7 @@ msgstr "Traduci dagli appunti"
 
 #: tformtrayslate.atranslatepopup.caption
 msgid "Translate Popup"
-msgstr ""
+msgstr "Popup traduzione"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
