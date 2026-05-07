@@ -2,11 +2,14 @@
 setlocal
 
 :: Skip kill in CI environments
-if not defined GITHUB_ACTIONS (
-    :: Kill App if running (local only)
-    taskkill /F /IM Trayslate.exe    
-)
+SET EXE-FILE=trayslate.exe
+TASKLIST | FINDSTR /I "trayslate.exe" >NUL
+IF ERRORLEVEL 1 GOTO :start.build
+:: Kill App if running (local only)
+ECHO Closing process 'trayslate.exe'
+taskkill /F /IM trayslate.exe >NUL
 
+:start.build
 ::Build Lazarus project "trayslate" using lazbuild
 SET "PROJECT_PATH=trayslate.lpi"
 SET "BUILD_MODE=Release"
@@ -36,8 +39,8 @@ IF %ERRORLEVEL% NEQ 0 (
 echo Build completed successfully
 
 :: Copy 64-bit OpenSSL DLLs to output folder
-copy /Y "%~dp0installer\redist\libcrypto-1_1-x64.dll" "%~dp0"
-copy /Y "%~dp0installer\redist\libssl-1_1-x64.dll" "%~dp0"
+copy /y "%~dp0installer\redist\libcrypto-1_1-x64.dll" "%~dp0" >NUL
+copy /Y "%~dp0installer\redist\libssl-1_1-x64.dll"    "%~dp0" >NUL
 
 echo Wait 2 seconds to ensure file is free
 ping 127.0.0.1 -n 3 >nul
