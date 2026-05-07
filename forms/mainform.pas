@@ -338,14 +338,6 @@ type
     procedure GlobalCtrlV;
     function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
     procedure ThreadDone(Sender: TObject);
-    procedure DetectLanguage(AText: string);
-    procedure TranslateMemo(ADetectLanguage: boolean = True);
-    procedure TranslateFromClipboard;
-    procedure TranslateClipboard;
-    procedure TranslateClipboardPopup(NearMouse: boolean = False);
-    procedure TranslateFromControl(Data: PtrInt);
-    procedure TranslateControl(Data: PtrInt);
-    procedure TranslateControlPopup(Data: PtrInt);
     procedure SetLanguage(aLanguage: string = string.Empty);
   protected
     {$IFDEF WINDOWS}
@@ -374,6 +366,16 @@ type
     procedure RegisterHotKeys;
     procedure UnregisterHotKeys;
     {$ENDIF}
+
+    procedure DetectLanguage(AText: string);
+    procedure TranslateMemo(ADetectLanguage: boolean = True);
+    procedure TranslatePopup(AText: string);
+    procedure TranslateFromClipboard;
+    procedure TranslateClipboard;
+    procedure TranslateClipboardPopup(NearMouse: boolean = False);
+    procedure TranslateFromControl(Data: PtrInt);
+    procedure TranslateControl(Data: PtrInt);
+    procedure TranslateControlPopup(Data: PtrInt);
 
     // Base properties
     property Trans: TTranslate read FTrans write FTrans;
@@ -2211,34 +2213,42 @@ begin
   if not Assigned(formPopupTrayslate) then
     formPopupTrayslate := TformPopupTrayslate.Create(Application);
 
-  if X > 0 then
-    formPopupTrayslate.Left := X
-  else
-  if FormPopupLeft > 0 then
-    formPopupTrayslate.Left := FormPopupLeft;
-  if Y > 0 then
-    formPopupTrayslate.Top := Y
-  else
-  if FormPopupTop > 0 then
-    formPopupTrayslate.Top := FormPopupTop;
-  if FormPopupWidth > 0 then
-    formPopupTrayslate.Width := FormPopupWidth;
-  if FormPopupHeight > 0 then
-    formPopupTrayslate.Height := FormPopupHeight;
+  if not formPopupTrayslate.Visible then
+  begin
+    formPopupTrayslate.Position := poDesigned;
+    if X > 0 then
+      formPopupTrayslate.Left := X
+    else
+    if FormPopupLeft > 0 then
+      formPopupTrayslate.Left := FormPopupLeft
+    else
+      formPopupTrayslate.Position := poDesktopCenter;
+    if Y > 0 then
+      formPopupTrayslate.Top := Y
+    else
+    if FormPopupTop > 0 then
+      formPopupTrayslate.Top := FormPopupTop
+    else
+      formPopupTrayslate.Position := poDesktopCenter;
+    if FormPopupWidth > 0 then
+      formPopupTrayslate.Width := FormPopupWidth;
+    if FormPopupHeight > 0 then
+      formPopupTrayslate.Height := FormPopupHeight;
 
-  formPopupTrayslate.Font.Assign(Font);
-  formPopupTrayslate.AlphaBlendValue := OpacityIdle;
-  if StayOnTop then
-    formPopupTrayslate.FormStyle := fsSystemStayOnTop
-  else
-    formPopupTrayslate.FormStyle := fsNormal;
+    formPopupTrayslate.Font.Assign(Font);
+    formPopupTrayslate.AlphaBlendValue := OpacityIdle;
+    if StayOnTop then
+      formPopupTrayslate.FormStyle := fsSystemStayOnTop
+    else
+      formPopupTrayslate.FormStyle := fsNormal;
 
-  formPopupTrayslate.SourceText := SourceText;
+    formPopupTrayslate.SourceText := SourceText;
 
-  SetIcon;
-  Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
-  formPopupTrayslate.Show;
-  formPopupTrayslate.BringToFront;
+    SetIcon;
+    Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
+    formPopupTrayslate.Show;
+    formPopupTrayslate.BringToFront;
+  end;
 end;
 
 {$IFDEF WINDOWS}
@@ -2642,7 +2652,7 @@ procedure TformTrayslate.ThreadDone(Sender: TObject);
 begin
   FTranslateThread := nil;
 
-  if not Visible then
+  if not Visible and (not Assigned(formPopupTrayslate) or not formPopupTrayslate.Visible) then
     ShowCustomHint(TrayIcon.Hint);
 end;
 
@@ -2706,6 +2716,22 @@ begin
     // Create translation thread
     TranslateThread(Trans, MemoSource.Text, MemoTarget);
   end;
+end;
+
+procedure TformTrayslate.TranslatePopup(AText: string);
+begin
+  Screen.Cursor := crAppStart;
+  TimerAnimate.Enabled := True;
+
+  if TimerTranslate.Enabled then
+    TimerTranslate.Enabled := False;
+
+  ShowPopup(AText, Mouse.CursorPos.X, Mouse.CursorPos.Y);
+
+  DetectLanguage(AText);
+
+  // Create translation thread (it will handle exceptions itself)
+  TranslateThread(Trans, AText, formPopupTrayslate.MemoTarget);
 end;
 
 procedure TformTrayslate.TranslateFromClipboard;

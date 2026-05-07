@@ -205,7 +205,7 @@ var
   Trimmed: string;
 begin
   Trimmed := TrimLeft(S);
-  // Check first character: { или [ — обычно JSON
+  // Check first character
   Result := (Trimmed <> string.Empty) and ((Trimmed[1] = '{') or (Trimmed[1] = '['));
 end;
 
@@ -243,7 +243,7 @@ begin
     KeyPart := Copy(Memo.Lines[i], 1, EqualPos - 1);
     ValuePart := Copy(Memo.Lines[i], EqualPos + 1, MaxInt);
 
-    // Case-sensitive сравнение
+    // Case-sensitive compare
     if (KeyPart = ValuePart) and (Length(KeyPart) > 10) then
       Memo.Lines[i] := KeyPart;
   end;

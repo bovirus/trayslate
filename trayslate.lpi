@@ -204,6 +204,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="units\textdroptarget.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TextDropTarget"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -505,7 +505,7 @@ begin
     VK_DIVIDE: Result := Result + 'Num/';
     VK_DECIMAL: Result := Result + 'Num.';
 
-    // special symbols (важно)
+    // special symbols
     VK_OEM_3: Result := Result + '`';       // ~ key (backtick)
     VK_OEM_MINUS: Result := Result + '-';
     VK_OEM_PLUS: Result := Result + '=';

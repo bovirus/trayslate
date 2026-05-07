@@ -14,8 +14,10 @@ object formPopupTrayslate: TformPopupTrayslate
   ShowInTaskBar = stNever
   LCLVersion = '4.4.0.0'
   OnChangeBounds = FormChangeBounds
+  OnCreate = FormCreate
   OnResize = FormResize
   OnShortCut = FormShortCut
+  OnShow = FormShow
   object MemoTarget: TMemo
     Left = 3
     Height = 234

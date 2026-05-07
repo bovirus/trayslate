@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------------
+//  Trayslate © 2026 by Alexander Tverskoy
+//  Licensed under the GNU General Public License, Version 3 (GPL-3.0)
+//  You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.html
+//-----------------------------------------------------------------------------------
+
 unit formpopup;
 
 {$mode ObjFPC}{$H+}
@@ -9,15 +15,15 @@ uses
   SysUtils,
   Forms,
   Controls,
+  ExtCtrls,
   Graphics,
   Dialogs,
   StdCtrls,
   Math,
-  ActnList,
   LCLType,
   LCLIntf,
   LMessages,
-  ExtCtrls;
+  textdroptarget;
 
 type
 
@@ -27,14 +33,18 @@ type
     FlowPairs: TFlowPanel;
     MemoTarget: TMemo;
     Timer: TTimer;
+
     procedure FormChangeBounds(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShortCut(var Msg: TLMKey; var Handled: boolean);
+    procedure FormShow(Sender: TObject);
     procedure TimerTimer(Sender: TObject);
+    procedure OnTextDroppedHandler(Sender: TObject; const AText: string);
   private
     FSourceText: string;
-    //procedure CMMouseEnter(var Message: TLMessage); message CM_MOUSEENTER;
-    //procedure CMMouseLeave(var Message: TLMessage); message CM_MOUSELEAVE;
+    FDropTarget: TTextDropTarget;
+
   public
     property SourceText: string read FSourceText write FSourceText;
   end;
@@ -49,6 +59,19 @@ uses mainform;
   {$R *.lfm}
 
   { TformPopupTrayslate }
+
+procedure TformPopupTrayslate.FormCreate(Sender: TObject);
+begin
+  FDropTarget := TTextDropTarget.Create(Self);
+  FDropTarget.Target := MemoTarget;
+  FDropTarget.InsertText := False;
+  FDropTarget.OnTextDropped := @OnTextDroppedHandler;
+end;
+
+procedure TformPopupTrayslate.FormShow(Sender: TObject);
+begin
+  FDropTarget.ForceRegister;
+end;
 
 procedure TformPopupTrayslate.FormShortCut(var Msg: TLMKey; var Handled: boolean);
 begin
@@ -74,13 +97,13 @@ end;
 procedure TformPopupTrayslate.TimerTimer(Sender: TObject);
 var
   CursorPos: TPoint;
-  TargetAlpha: Integer;
+  TargetAlpha: integer;
   DetectionRect: TRect;
 const
   // Individual margins for each side (in pixels)
-  MARGIN_LEFT   = 10;
-  MARGIN_RIGHT  = 5; // Increased to compensate for invisible borders
-  MARGIN_TOP    = 40; // Covers the caption bar
+  MARGIN_LEFT = 10;
+  MARGIN_RIGHT = 5; // Increased to compensate for invisible borders
+  MARGIN_TOP = 40; // Covers the caption bar
   MARGIN_BOTTOM = 5; // Increased for easier resizing
 begin
   // Exit early if the form is not visible or is being destroyed
@@ -98,9 +121,9 @@ begin
   DetectionRect := Self.ClientRect;
 
   // Manually expand the detection area to cover title bar and invisible borders
-  DetectionRect.Left   := DetectionRect.Left - MARGIN_LEFT;
-  DetectionRect.Top    := DetectionRect.Top - MARGIN_TOP;
-  DetectionRect.Right  := DetectionRect.Right + MARGIN_RIGHT;
+  DetectionRect.Left := DetectionRect.Left - MARGIN_LEFT;
+  DetectionRect.Top := DetectionRect.Top - MARGIN_TOP;
+  DetectionRect.Right := DetectionRect.Right + MARGIN_RIGHT;
   DetectionRect.Bottom := DetectionRect.Bottom + MARGIN_BOTTOM;
 
   // Check if the relative mouse position is within our expanded virtual rect
@@ -123,6 +146,11 @@ begin
 
     Self.AlphaBlendValue := TargetAlpha;
   end;
+end;
+
+procedure TformPopupTrayslate.OnTextDroppedHandler(Sender: TObject; const AText: string);
+begin
+  formTrayslate.TranslatePopup(AText);
 end;
 
 end.
