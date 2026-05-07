@@ -41,6 +41,7 @@ type
     BtnCancel: TButton;
     BtnOk: TButton;
     CheckAllowHotkeys: TCheckBox;
+    CheckStayOnTop: TCheckBox;
     CheckRealTime: TCheckBox;
     CheckAutoSwap: TCheckBox;
     CheckTwoLang: TCheckBox;
@@ -54,6 +55,7 @@ type
     FontDialog: TFontDialog;
     GroupAutoSwap: TGroupBox;
     GroupAutostart: TGroupBox;
+    GroupPopup: TGroupBox;
     GroupLangPairs: TGroupBox;
     GroupTransFromClipboard1: TGroupBox;
     GroupRealTime: TGroupBox;
@@ -63,6 +65,8 @@ type
     LabelIconBackground1: TLabel;
     LabelIconFont1: TLabel;
     LabelMaxLangPairs: TLabel;
+    LabelOpacityHover: TLabel;
+    LabelOpacityIdle: TLabel;
     LabelRealTimeDelay: TLabel;
     LabelIconBackground: TLabel;
     LabelIconFont: TLabel;
@@ -81,6 +85,9 @@ type
     SpinRealTimeDelay: TSpinEdit;
     SplitterPages: TSplitter;
     GridHotkeys: TStringGrid;
+    TrackOpacityHover: TTrackBar;
+    TrackOpacityIdle: TTrackBar;
+    procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -111,6 +118,9 @@ type
     FOriginalRealTime: boolean;
     FOriginalRealTimeDelay: integer;
     FOriginalAutoSwap: boolean;
+    FOriginalStayOnTop: boolean;
+    FOriginalOpacityHover: integer;
+    FOriginalOpacityIdle: integer;
     FOriginalConfigLangDetect: string;
     FOriginalHotKeyApp: THotKeyData;
     FOriginalHotKeyTransSwap: THotKeyData;
@@ -244,6 +254,12 @@ procedure TformSettingsTrayslate.FormResize(Sender: TObject);
 begin
   formTrayslate.FormSettingsWidth := Width;
   formTrayslate.FormSettingsHeight := Height;
+end;
+
+procedure TformSettingsTrayslate.FormChangeBounds(Sender: TObject);
+begin
+  formTrayslate.FormSettingsLeft := Left;
+  formTrayslate.FormSettingsTop := Top;
 end;
 
 procedure TformSettingsTrayslate.FormShow(Sender: TObject);
@@ -638,13 +654,15 @@ begin
   formTrayslate.RealTime := CheckRealTime.Checked;
   formTrayslate.RealTimeDelay := SpinRealTimeDelay.Value;
   formTrayslate.AutoSwap := CheckAutoSwap.Checked;
+  formTrayslate.StayOnTop := CheckStayOnTop.Checked;
+  formTrayslate.OpacityHover := TrackOpacityHover.Position;
+  formTrayslate.OpacityIdle := TrackOpacityIdle.Position;
+
   if ComboLangDetect.ItemIndex > 0 then
     formTrayslate.ConfigLangDetect := formTrayslate.ConfigFiles[ComboLangDetect.ItemIndex - 1]
   else
     formTrayslate.ConfigLangDetect := string.Empty;
   formTrayslate.Font.Assign(PanelFont.Font);
-  if Assigned(formPopupTrayslate) then
-    formPopupTrayslate.Font.Assign(PanelFont.Font);
   formTrayslate.IconBackgroundColor := ColorIconBackground.Selected;
   formTrayslate.IconFontColor := ColorIconFont.Selected;
   formTrayslate.IconFontName := ComboIconFontName.Text;
@@ -672,6 +690,15 @@ begin
   formTrayslate.ComboSource.SelLength := 0;
   formTrayslate.ComboTarget.SelLength := 0;
 
+  if Assigned(formPopupTrayslate) then
+  begin
+    formPopupTrayslate.Font.Assign(PanelFont.Font);
+    if formTrayslate.StayOnTop then
+      formPopupTrayslate.FormStyle := fsSystemStayOnTop
+    else
+      formPopupTrayslate.FormStyle := fsNormal;
+  end;
+
   Reset;
   formTrayslate.TimerTranslate.Interval := Max(formTrayslate.RealTimeDelay, 1);
   formTrayslate.LoadConfig;
@@ -688,6 +715,9 @@ begin
   FOriginalRealTime := formTrayslate.RealTime;
   FOriginalRealTimeDelay := formTrayslate.RealTimeDelay;
   FOriginalAutoSwap := formTrayslate.AutoSwap;
+  FOriginalStayOnTop := formTrayslate.StayOnTop;
+  FOriginalOpacityHover := formTrayslate.OpacityHover;
+  FOriginalOpacityIdle := formTrayslate.OpacityIdle;
   FOriginalConfigLangDetect := formTrayslate.ConfigLangDetect;
   FOriginalFont := formTrayslate.Font;
   FOriginalIconBackgroundColor := formTrayslate.IconBackgroundColor;
@@ -735,6 +765,9 @@ begin
   CheckRealTime.Checked := FOriginalRealTime;
   SpinRealTimeDelay.Value := FOriginalRealTimeDelay;
   CheckAutoSwap.Checked := FOriginalAutoSwap;
+  CheckStayOnTop.Checked := FOriginalStayOnTop;
+  TrackOpacityHover.Position := FOriginalOpacityHover;
+  TrackOpacityIdle.Position := FOriginalOpacityIdle;
   if FOriginalConfigLangDetect <> string.Empty then
     ComboLangDetect.ItemIndex := Max(formTrayslate.ConfigFiles.IndexOf(FOriginalConfigLangDetect) + 1, 0)
   else

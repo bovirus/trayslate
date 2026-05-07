@@ -280,6 +280,9 @@ type
     FRealTime: boolean;
     FRealTimeDelay: integer;
     FAutoSwap: boolean;
+    FStayOnTop: boolean;
+    FOpacityHover: integer;
+    FOpacityIdle: integer;
     FAutoCheckUpdates: boolean;
     FUpdatesChecked: boolean;
     FFormConfigLeft: integer;
@@ -292,6 +295,8 @@ type
     FFormPopupHeight: integer;
     FFormAboutWidth: integer;
     FFormAboutHeight: integer;
+    FFormSettingsLeft: integer;
+    FFormSettingsTop: integer;
     FFormSettingsWidth: integer;
     FFormSettingsHeight: integer;
     FFormSettingsSplit: integer;
@@ -362,7 +367,7 @@ type
     function UpdatePairLanguage(const Pair: string): string;
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
-    procedure ShowPopup(X: integer = 0; Y: integer = 0);
+    procedure ShowPopup(const SourceText: string; X: integer = 0; Y: integer = 0);
     function GetLangCodeFromPoFile(const AFileName: string): string;
     function LoadCustomPoFile(const AFileName: string): string;
     {$IFDEF WINDOWS}
@@ -396,6 +401,9 @@ type
     property RealTime: boolean read FRealTime write FRealTime;
     property RealTimeDelay: integer read FRealTimeDelay write FRealTimeDelay;
     property AutoSwap: boolean read FAutoSwap write FAutoSwap;
+    property StayOnTop: boolean read FStayOnTop write FStayOnTop;
+    property OpacityHover: integer read FOpacityHover write FOpacityHover;
+    property OpacityIdle: integer read FOpacityIdle write FOpacityIdle;
     property AutoCheckUpdates: boolean read FAutoCheckUpdates write FAutoCheckUpdates;
     property FormConfigLeft: integer read FFormConfigLeft write FFormConfigLeft;
     property FormConfigTop: integer read FFormConfigTop write FFormConfigTop;
@@ -405,6 +413,8 @@ type
     property FormPopupTop: integer read FFormPopupTop write FFormPopupTop;
     property FormPopupWidth: integer read FFormPopupWidth write FFormPopupWidth;
     property FormPopupHeight: integer read FFormPopupHeight write FFormPopupHeight;
+    property FormSettingsLeft: integer read FFormSettingsLeft write FFormSettingsLeft;
+    property FormSettingsTop: integer read FFormSettingsTop write FFormSettingsTop;
     property FormSettingsWidth: integer read FFormSettingsWidth write FFormSettingsWidth;
     property FormSettingsHeight: integer read FFormSettingsHeight write FFormSettingsHeight;
     property FormSettingsSplit: integer read FFormSettingsSplit write FFormSettingsSplit;
@@ -481,6 +491,9 @@ begin
   FRealTime := False;
   FRealTimeDelay := 1000;
   FAutoSwap := False;
+  FStayOnTop := True;
+  FOpacityHover := 80;
+  FOpacityIdle := 60;
   FAutoCheckUpdates := True;
   FUpdatesChecked := False;
   FAutoStart := True;
@@ -493,6 +506,8 @@ begin
   FFormPopupTop := 0;
   FFormPopupWidth := 0;
   FFormPopupHeight := 0;
+  FFormSettingsLeft := 0;
+  FFormSettingsTop := 0;
   FFormSettingsWidth := 0;
   FFormSettingsHeight := 0;
   FFormSettingsSplit := 0;
@@ -866,6 +881,33 @@ begin
     Show;
 end;
 
+procedure TformTrayslate.aConfigEditorExecute(Sender: TObject);
+begin
+  if not Assigned(formConfigTrayslate) then
+    formConfigTrayslate := TformConfigTrayslate.Create(Application);
+
+  formConfigTrayslate.Position := poDesigned;
+
+  if FormConfigLeft > 0 then
+    formConfigTrayslate.Left := FormConfigLeft
+  else
+    formConfigTrayslate.Position := poDesktopCenter;
+
+  if FormConfigTop > 0 then
+    formConfigTrayslate.Top := FormConfigTop
+  else
+    formConfigTrayslate.Position := poDesktopCenter;
+
+  if FormConfigWidth > 0 then
+    formConfigTrayslate.Width := FormConfigWidth;
+
+  if FormConfigHeight > 0 then
+    formConfigTrayslate.Height := FormConfigHeight;
+
+  formConfigTrayslate.Show;
+  formConfigTrayslate.BringToFront;
+end;
+
 procedure TformTrayslate.aSettingsExecute(Sender: TObject);
 begin
   if Assigned(formSettingsTrayslate) then
@@ -877,6 +919,15 @@ begin
 
   formSettingsTrayslate := TformSettingsTrayslate.Create(Application);
   try
+    formSettingsTrayslate.Position := poDesigned;
+    if FormSettingsLeft > 0 then
+      formSettingsTrayslate.Left := FormSettingsLeft
+    else
+      formSettingsTrayslate.Position := poDesktopCenter;
+    if FormSettingsTop > 0 then
+      formSettingsTrayslate.Top := FormSettingsTop
+    else
+      formSettingsTrayslate.Position := poDesktopCenter;
     if FormSettingsWidth > 0 then
       formSettingsTrayslate.Width := FormSettingsWidth;
     if FormSettingsHeight > 0 then
@@ -891,22 +942,6 @@ begin
     RegisterHotKeys;
     SetHints;
   end;
-end;
-
-procedure TformTrayslate.aConfigEditorExecute(Sender: TObject);
-begin
-  if not Assigned(formConfigTrayslate) then
-    formConfigTrayslate := TformConfigTrayslate.Create(Application);
-  if FormConfigLeft > 0 then
-    formConfigTrayslate.Left := FormConfigLeft;
-  if FormConfigTop > 0 then
-    formConfigTrayslate.Top := FormConfigTop;
-  if FormConfigWidth > 0 then
-    formConfigTrayslate.Width := FormConfigWidth;
-  if FormConfigHeight > 0 then
-    formConfigTrayslate.Height := FormConfigHeight;
-  formConfigTrayslate.Show;
-  formConfigTrayslate.BringToFront;
 end;
 
 procedure TformTrayslate.aNewTranslateExecute(Sender: TObject);
@@ -1900,6 +1935,10 @@ begin
   if FConfigTitles.Values[FConfigFile] <> string.Empty then
     hintText := hintText + sLineBreak + FConfigTitles.Values[FConfigFile];
   TrayIcon.Hint := hintText;
+
+  // Set popup window caption
+  if (Assigned(formPopupTrayslate)) then
+    formPopupTrayslate.Caption := hintText.Replace(LineEnding, ' - ');
 end;
 
 procedure TformTrayslate.SetHints;
@@ -2167,10 +2206,11 @@ begin
   TimerHideHint.Enabled := True;
 end;
 
-procedure TformTrayslate.ShowPopup(X: integer = 0; Y: integer = 0);
+procedure TformTrayslate.ShowPopup(const SourceText: string; X: integer = 0; Y: integer = 0);
 begin
   if not Assigned(formPopupTrayslate) then
     formPopupTrayslate := TformPopupTrayslate.Create(Application);
+
   if X > 0 then
     formPopupTrayslate.Left := X
   else
@@ -2185,8 +2225,16 @@ begin
     formPopupTrayslate.Width := FormPopupWidth;
   if FormPopupHeight > 0 then
     formPopupTrayslate.Height := FormPopupHeight;
+
   formPopupTrayslate.Font.Assign(Font);
-  formPopupTrayslate.Caption := TrayIcon.Hint.Replace(LineEnding, ' - ');
+  if StayOnTop then
+    formPopupTrayslate.FormStyle := fsSystemStayOnTop
+  else
+    formPopupTrayslate.FormStyle := fsNormal;
+
+  formPopupTrayslate.SourceText := SourceText;
+
+  SetIcon;
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
   formPopupTrayslate.Show;
   formPopupTrayslate.BringToFront;
@@ -2627,19 +2675,36 @@ begin
   if TimerTranslate.Enabled then
     TimerTranslate.Enabled := False;
 
-  if (Trim(MemoSource.Text) = string.Empty) then
+  if Assigned(formPopupTrayslate) and formPopupTrayslate.Visible and formPopupTrayslate.Active then
   begin
-    Screen.Cursor := crDefault;
-    TimerAnimate.Enabled := False;
-    MemoTarget.Clear;
-    Exit;
+    if Trim(formPopupTrayslate.SourceText) = string.Empty then
+    begin
+      formPopupTrayslate.MemoTarget.Clear;
+      Exit;
+    end;
+
+    if (ADetectLanguage) then
+      DetectLanguage(formPopupTrayslate.SourceText);
+
+    // Create translation thread for popup
+    TranslateThread(Trans, formPopupTrayslate.SourceText, formPopupTrayslate.MemoTarget);
+  end
+  else
+  begin
+    if (Trim(MemoSource.Text) = string.Empty) then
+    begin
+      Screen.Cursor := crDefault;
+      TimerAnimate.Enabled := False;
+      MemoTarget.Clear;
+      Exit;
+    end;
+
+    if (ADetectLanguage) then
+      DetectLanguage(MemoSource.Text);
+
+    // Create translation thread
+    TranslateThread(Trans, MemoSource.Text, MemoTarget);
   end;
-
-  if (ADetectLanguage) then
-    DetectLanguage(MemoSource.Text);
-
-  // Create translation thread (it will handle exceptions itself)
-  TranslateThread(Trans, MemoSource.Text, MemoTarget);
 end;
 
 procedure TformTrayslate.TranslateFromClipboard;
@@ -2701,12 +2766,12 @@ begin
     if TimerTranslate.Enabled then
       TimerTranslate.Enabled := False;
 
-    if NearMouse then
-      ShowPopup(Mouse.CursorPos.X, Mouse.CursorPos.Y)
-    else
-      ShowPopup;
-
     ClipboardText := Trim(Clipboard.AsText);
+
+    if NearMouse then
+      ShowPopup(ClipboardText, Mouse.CursorPos.X, Mouse.CursorPos.Y)
+    else
+      ShowPopup(ClipboardText);
     if ClipboardText = string.Empty then Exit;
 
     DetectLanguage(ClipboardText);
@@ -2818,7 +2883,7 @@ begin
 
     SelectedText := Clipboard.AsText;
 
-    ShowPopup(Mouse.CursorPos.X, Mouse.CursorPos.Y);
+    ShowPopup(SelectedText, Mouse.CursorPos.X, Mouse.CursorPos.Y);
 
     DetectLanguage(SelectedText);
 
