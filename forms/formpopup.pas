@@ -15,10 +15,12 @@ uses
   SysUtils,
   Forms,
   Controls,
+  Buttons,
   ExtCtrls,
   Graphics,
   Dialogs,
   StdCtrls,
+  Clipbrd,
   Math,
   LCLType,
   LCLIntf,
@@ -32,6 +34,8 @@ type
   TformPopupTrayslate = class(TForm)
     FlowPairs: TFlowPanel;
     MemoTarget: TMemo;
+    PanelButtonTarget: TPanel;
+    SbCopyTarget: TSpeedButton;
     Timer: TTimer;
 
     procedure FormChangeBounds(Sender: TObject);
@@ -39,6 +43,7 @@ type
     procedure FormResize(Sender: TObject);
     procedure FormShortCut(var Msg: TLMKey; var Handled: boolean);
     procedure FormShow(Sender: TObject);
+    procedure SbCopyTargetClick(Sender: TObject);
     procedure TimerTimer(Sender: TObject);
     procedure OnTextDroppedHandler(Sender: TObject; const AText: string);
   private
@@ -54,7 +59,7 @@ var
 
 implementation
 
-uses mainform;
+uses mainform, systemtool;
 
   {$R *.lfm}
 
@@ -66,6 +71,9 @@ begin
   FDropTarget.Target := MemoTarget;
   FDropTarget.InsertText := False;
   FDropTarget.OnTextDropped := @OnTextDroppedHandler;
+
+  SbCopyTarget.ImageIndex := ThemeValue(10, 11);
+  SbCopyTarget.PressedImageIndex := ThemeValue(12, 13);
 end;
 
 procedure TformPopupTrayslate.FormShow(Sender: TObject);
@@ -92,6 +100,11 @@ procedure TformPopupTrayslate.FormChangeBounds(Sender: TObject);
 begin
   formTrayslate.FormPopupLeft := Left;
   formTrayslate.FormPopupTop := Top;
+end;
+
+procedure TformPopupTrayslate.SbCopyTargetClick(Sender: TObject);
+begin
+  Clipboard.AsText := MemoTarget.Text;
 end;
 
 procedure TformPopupTrayslate.TimerTimer(Sender: TObject);

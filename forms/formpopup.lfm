@@ -47,6 +47,35 @@ object formPopupTrayslate: TformPopupTrayslate
     ShowHint = True
     TabOrder = 1
   end
+  object PanelButtonTarget: TPanel
+    Left = 433
+    Height = 16
+    Top = 205
+    Width = 16
+    Anchors = [akRight, akBottom]
+    BevelOuter = bvNone
+    ClientHeight = 16
+    ClientWidth = 16
+    Color = clNone
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 2
+    object SbCopyTarget: TSpeedButton
+      Left = 0
+      Height = 16
+      Top = 0
+      Width = 16
+      Align = alClient
+      Color = clNone
+      Flat = True
+      Images = formTrayslate.ImageButtons
+      ImageIndex = 10
+      PressedImageIndex = 12
+      ShowHint = True
+      ParentShowHint = False
+      OnClick = SbCopyTargetClick
+    end
+  end
   object Timer: TTimer
     Interval = 100
     OnTimer = TimerTimer
