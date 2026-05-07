@@ -87,6 +87,7 @@ type
     GridHotkeys: TStringGrid;
     TrackOpacityHover: TTrackBar;
     TrackOpacityIdle: TTrackBar;
+    procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -253,6 +254,12 @@ procedure TformSettingsTrayslate.FormResize(Sender: TObject);
 begin
   formTrayslate.FormSettingsWidth := Width;
   formTrayslate.FormSettingsHeight := Height;
+end;
+
+procedure TformSettingsTrayslate.FormChangeBounds(Sender: TObject);
+begin
+  formTrayslate.FormSettingsLeft := Left;
+  formTrayslate.FormSettingsTop := Top;
 end;
 
 procedure TformSettingsTrayslate.FormShow(Sender: TObject);

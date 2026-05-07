@@ -295,6 +295,8 @@ type
     FFormPopupHeight: integer;
     FFormAboutWidth: integer;
     FFormAboutHeight: integer;
+    FFormSettingsLeft: integer;
+    FFormSettingsTop: integer;
     FFormSettingsWidth: integer;
     FFormSettingsHeight: integer;
     FFormSettingsSplit: integer;
@@ -411,6 +413,8 @@ type
     property FormPopupTop: integer read FFormPopupTop write FFormPopupTop;
     property FormPopupWidth: integer read FFormPopupWidth write FFormPopupWidth;
     property FormPopupHeight: integer read FFormPopupHeight write FFormPopupHeight;
+    property FormSettingsLeft: integer read FFormSettingsLeft write FFormSettingsLeft;
+    property FormSettingsTop: integer read FFormSettingsTop write FFormSettingsTop;
     property FormSettingsWidth: integer read FFormSettingsWidth write FFormSettingsWidth;
     property FormSettingsHeight: integer read FFormSettingsHeight write FFormSettingsHeight;
     property FormSettingsSplit: integer read FFormSettingsSplit write FFormSettingsSplit;
@@ -502,6 +506,8 @@ begin
   FFormPopupTop := 0;
   FFormPopupWidth := 0;
   FFormPopupHeight := 0;
+  FFormSettingsLeft := 0;
+  FFormSettingsTop := 0;
   FFormSettingsWidth := 0;
   FFormSettingsHeight := 0;
   FFormSettingsSplit := 0;
@@ -875,6 +881,33 @@ begin
     Show;
 end;
 
+procedure TformTrayslate.aConfigEditorExecute(Sender: TObject);
+begin
+  if not Assigned(formConfigTrayslate) then
+    formConfigTrayslate := TformConfigTrayslate.Create(Application);
+
+  formConfigTrayslate.Position := poDesigned;
+
+  if FormConfigLeft > 0 then
+    formConfigTrayslate.Left := FormConfigLeft
+  else
+    formConfigTrayslate.Position := poDesktopCenter;
+
+  if FormConfigTop > 0 then
+    formConfigTrayslate.Top := FormConfigTop
+  else
+    formConfigTrayslate.Position := poDesktopCenter;
+
+  if FormConfigWidth > 0 then
+    formConfigTrayslate.Width := FormConfigWidth;
+
+  if FormConfigHeight > 0 then
+    formConfigTrayslate.Height := FormConfigHeight;
+
+  formConfigTrayslate.Show;
+  formConfigTrayslate.BringToFront;
+end;
+
 procedure TformTrayslate.aSettingsExecute(Sender: TObject);
 begin
   if Assigned(formSettingsTrayslate) then
@@ -886,6 +919,15 @@ begin
 
   formSettingsTrayslate := TformSettingsTrayslate.Create(Application);
   try
+    formSettingsTrayslate.Position := poDesigned;
+    if FormSettingsLeft > 0 then
+      formSettingsTrayslate.Left := FormSettingsLeft
+    else
+      formSettingsTrayslate.Position := poDesktopCenter;
+    if FormSettingsTop > 0 then
+      formSettingsTrayslate.Top := FormSettingsTop
+    else
+      formSettingsTrayslate.Position := poDesktopCenter;
     if FormSettingsWidth > 0 then
       formSettingsTrayslate.Width := FormSettingsWidth;
     if FormSettingsHeight > 0 then
@@ -900,22 +942,6 @@ begin
     RegisterHotKeys;
     SetHints;
   end;
-end;
-
-procedure TformTrayslate.aConfigEditorExecute(Sender: TObject);
-begin
-  if not Assigned(formConfigTrayslate) then
-    formConfigTrayslate := TformConfigTrayslate.Create(Application);
-  if FormConfigLeft > 0 then
-    formConfigTrayslate.Left := FormConfigLeft;
-  if FormConfigTop > 0 then
-    formConfigTrayslate.Top := FormConfigTop;
-  if FormConfigWidth > 0 then
-    formConfigTrayslate.Width := FormConfigWidth;
-  if FormConfigHeight > 0 then
-    formConfigTrayslate.Height := FormConfigHeight;
-  formConfigTrayslate.Show;
-  formConfigTrayslate.BringToFront;
 end;
 
 procedure TformTrayslate.aNewTranslateExecute(Sender: TObject);

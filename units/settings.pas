@@ -136,6 +136,8 @@ begin
     JSONObj.Add('FormPopupTop', Round(Form.FormPopupTop * 96 / DPI));
     JSONObj.Add('FormPopupWidth', Round(Form.FormPopupWidth * 96 / DPI));
     JSONObj.Add('FormPopupHeight', Round(Form.FormPopupHeight * 96 / DPI));
+    JSONObj.Add('FormSettingsLeft', Round(Form.FormSettingsLeft * 96 / DPI));
+    JSONObj.Add('FormSettingsTop', Round(Form.FormSettingsTop * 96 / DPI));
     JSONObj.Add('FormSettingsWidth', Round(Form.FormSettingsWidth * 96 / DPI));
     JSONObj.Add('FormSettingsHeight', Round(Form.FormSettingsHeight * 96 / DPI));
     JSONObj.Add('FormSettingsSplit', Round(Form.FormSettingsSplit * 96 / DPI));
@@ -315,6 +317,12 @@ begin
 
         if JSONObj.FindPath('FormPopupHeight') <> nil then
           Form.FormPopupHeight := Round(JSONObj.FindPath('FormPopupHeight').AsInteger * DPI / 96);
+
+        if JSONObj.FindPath('FormSettingsLeft') <> nil then
+          Form.FormSettingsLeft := Round(JSONObj.FindPath('FormSettingsLeft').AsInteger * DPI / 96);
+
+        if JSONObj.FindPath('FormSettingsTop') <> nil then
+          Form.FormSettingsTop := Round(JSONObj.FindPath('FormSettingsTop').AsInteger * DPI / 96);
 
         if JSONObj.FindPath('FormSettingsWidth') <> nil then
           Form.FormSettingsWidth := Round(JSONObj.FindPath('FormSettingsWidth').AsInteger * DPI / 96);
