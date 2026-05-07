@@ -2,7 +2,6 @@
 setlocal
 
 :: Skip kill in CI environments
-SET EXE-FILE=trayslate.exe
 TASKLIST | FINDSTR /I "trayslate.exe" >NUL
 IF ERRORLEVEL 1 GOTO :start.build
 :: Kill App if running (local only)
