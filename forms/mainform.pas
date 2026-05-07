@@ -2227,6 +2227,7 @@ begin
     formPopupTrayslate.Height := FormPopupHeight;
 
   formPopupTrayslate.Font.Assign(Font);
+  formPopupTrayslate.AlphaBlendValue := OpacityIdle;
   if StayOnTop then
     formPopupTrayslate.FormStyle := fsSystemStayOnTop
   else

@@ -18,11 +18,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
     Top = 5
     Width = 554
     TabStop = False
-    ActivePage = PageGeneral
+    ActivePage = PageInterface
     Align = alClient
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     object PageGeneral: TTabSheet
       Caption = 'General'
@@ -177,8 +177,8 @@ object formSettingsTrayslate: TformSettingsTrayslate
         Height = 497
         Top = 0
         Width = 546
-        HorzScrollBar.Increment = 51
-        HorzScrollBar.Page = 513
+        HorzScrollBar.Increment = 18
+        HorzScrollBar.Page = 187
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
         VertScrollBar.Increment = 49
@@ -405,11 +405,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Height = 25
             Hint = 'Window transparency when the mouse is over the window'
             Top = 8
-            Width = 347
+            Width = 275
             Frequency = 5
             Max = 100
             Position = 0
             OnChange = SettingChange
+            Anchors = [akTop, akLeft, akRight]
             ParentShowHint = False
             ShowHint = True
             TabOrder = 1
@@ -429,11 +430,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Height = 25
             Hint = 'Window transparency when the mouse is not over the window'
             Top = 40
-            Width = 347
+            Width = 275
             Frequency = 5
             Max = 100
             Position = 0
             OnChange = SettingChange
+            Anchors = [akTop, akLeft, akRight]
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
@@ -447,6 +449,26 @@ object formSettingsTrayslate: TformSettingsTrayslate
             AutoSize = False
             Caption = 'Opacity Idle'
             WordWrap = True
+          end
+          object SpinHover: TSpinEdit
+            Left = 432
+            Height = 23
+            Top = 8
+            Width = 67
+            Anchors = [akTop, akRight]
+            MaxValue = 100
+            TabOrder = 3
+            OnChange = SettingChange
+          end
+          object SpinIdle: TSpinEdit
+            Left = 432
+            Height = 23
+            Top = 40
+            Width = 67
+            Anchors = [akTop, akRight]
+            MaxValue = 100
+            TabOrder = 4
+            OnChange = SettingChange
           end
         end
       end

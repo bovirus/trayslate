@@ -80,6 +80,8 @@ type
     ScrollHotkeys: TScrollBox;
     ScrollInterface: TScrollBox;
     ScrollGeneral: TScrollBox;
+    SpinHover: TSpinEdit;
+    SpinIdle: TSpinEdit;
     SpinMaxLangPairs: TSpinEdit;
     PageGeneral: TTabSheet;
     SpinRealTimeDelay: TSpinEdit;
@@ -486,8 +488,8 @@ begin
   begin
     if (Sender as TSpinEdit).Value < 0 then
       (Sender as TSpinEdit).Value := 0;
-  end
-  else
+  end;
+
   if (Sender = ColorIconBackground) or (Sender = ColorIconFont) or (Sender = ComboIconFontName) or (Sender = CheckTwoLang) then
   begin
     // Apply real time properies
@@ -496,7 +498,19 @@ begin
     formTrayslate.IconFontName := ComboIconFontName.Text;
     formTrayslate.IconTwoLang := CheckTwoLang.Checked;
     formTrayslate.SetIcon;
-  end;
+  end
+  else
+  if Sender = TrackOpacityHover then
+    SpinHover.Value := TrackOpacityHover.Position
+  else
+  if Sender = TrackOpacityIdle then
+    SpinIdle.Value := TrackOpacityIdle.Position
+  else
+  if Sender = SpinHover then
+    TrackOpacityHover.Position := SpinHover.Value
+  else
+  if Sender = SpinIdle then
+    TrackOpacityIdle.Position := SpinIdle.Value;
 end;
 
 procedure TformSettingsTrayslate.SplitterPagesMoved(Sender: TObject);
