@@ -1,3 +1,4 @@
 {"version":1,"strings":[
-{"hash":151810853,"name":"tformpopuptrayslate.caption","sourcebytes":[32,84,114,97,121,115,108,97,116,101],"value":" Trayslate"}
+{"hash":151810853,"name":"tformpopuptrayslate.caption","sourcebytes":[32,84,114,97,121,115,108,97,116,101],"value":" Trayslate"},
+{"hash":36863013,"name":"tformpopuptrayslate.labelwatermark.caption","sourcebytes":[68,114,97,103,32,116,101,120,116,32,104,101,114,101,32,116,111,32,116,114,97,110,115,108,97,116,101],"value":"Drag text here to translate"}
 ]}

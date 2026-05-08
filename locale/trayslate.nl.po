@@ -665,6 +665,11 @@ msgstr ""
 msgid " Trayslate"
 msgstr ""
 
+#: tformpopuptrayslate.labelwatermark.caption
+msgctxt "tformpopuptrayslate.labelwatermark.caption"
+msgid "Drag text here to translate"
+msgstr ""
+
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
 msgstr "Toepassen"
@@ -1020,6 +1025,10 @@ msgstr "Menu weergeven"
 msgid "New Translate"
 msgstr "Nieuwe vertaling"
 
+#: tformtrayslate.apopuptranslate.caption
+msgid "Popup Translate"
+msgstr ""
+
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
 msgstr "Instellingen..."
@@ -1036,10 +1045,6 @@ msgstr "Vertalen (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Klembord vertalen"
-
-#: tformtrayslate.atranslatepopup.caption
-msgid "Translate Popup"
-msgstr ""
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

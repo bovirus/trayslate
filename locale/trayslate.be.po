@@ -665,6 +665,11 @@ msgstr ""
 msgid " Trayslate"
 msgstr ""
 
+#: tformpopuptrayslate.labelwatermark.caption
+msgctxt "tformpopuptrayslate.labelwatermark.caption"
+msgid "Drag text here to translate"
+msgstr ""
+
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
 msgstr "Прымяніць"
@@ -1020,6 +1025,10 @@ msgstr "Паказаць меню"
 msgid "New Translate"
 msgstr "Новы пераклад"
 
+#: tformtrayslate.apopuptranslate.caption
+msgid "Popup Translate"
+msgstr ""
+
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
 msgstr "Налады..."
@@ -1036,10 +1045,6 @@ msgstr "Перакласці (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Перакласці буфер абмену"
-
-#: tformtrayslate.atranslatepopup.caption
-msgid "Translate Popup"
-msgstr ""
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

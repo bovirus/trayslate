@@ -665,6 +665,11 @@ msgstr ""
 msgid " Trayslate"
 msgstr ""
 
+#: tformpopuptrayslate.labelwatermark.caption
+msgctxt "tformpopuptrayslate.labelwatermark.caption"
+msgid "Drag text here to translate"
+msgstr ""
+
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
 msgstr "Εφαρμογή"
@@ -1020,6 +1025,10 @@ msgstr "Εμφάνιση μενού"
 msgid "New Translate"
 msgstr "Νέα μετάφραση"
 
+#: tformtrayslate.apopuptranslate.caption
+msgid "Popup Translate"
+msgstr ""
+
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
 msgstr "Ρυθμίσεις..."
@@ -1036,10 +1045,6 @@ msgstr "Μετάφραση (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Μετάφραση πρόχειρου"
-
-#: tformtrayslate.atranslatepopup.caption
-msgid "Translate Popup"
-msgstr ""
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

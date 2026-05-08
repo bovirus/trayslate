@@ -33,7 +33,9 @@ type
 
   TformPopupTrayslate = class(TForm)
     FlowPairs: TFlowPanel;
+    LabelWatermark: TLabel;
     MemoTarget: TMemo;
+    PanelWatermark: TPanel;
     PanelButtonTarget: TPanel;
     SbCopyTarget: TSpeedButton;
     Timer: TTimer;
@@ -43,6 +45,8 @@ type
     procedure FormResize(Sender: TObject);
     procedure FormShortCut(var Msg: TLMKey; var Handled: boolean);
     procedure FormShow(Sender: TObject);
+    procedure MemoTargetChange(Sender: TObject);
+    procedure PanelWatermarkClick(Sender: TObject);
     procedure SbCopyTargetClick(Sender: TObject);
     procedure TimerTimer(Sender: TObject);
     procedure OnTextDroppedHandler(Sender: TObject; const AText: string);
@@ -50,6 +54,7 @@ type
     FSourceText: string;
     FDropTarget: TTextDropTarget;
 
+    procedure UpdateWatermarkVisibility;
   public
     property SourceText: string read FSourceText write FSourceText;
   end;
@@ -74,6 +79,8 @@ begin
 
   SbCopyTarget.ImageIndex := ThemeValue(10, 11);
   SbCopyTarget.PressedImageIndex := ThemeValue(12, 13);
+
+  UpdateWatermarkVisibility;
 end;
 
 procedure TformPopupTrayslate.FormShow(Sender: TObject);
@@ -94,12 +101,28 @@ procedure TformPopupTrayslate.FormResize(Sender: TObject);
 begin
   formTrayslate.FormPopupWidth := Width;
   formTrayslate.FormPopupHeight := Height;
+
+  PanelWatermark.Left := MemoTarget.Left + (MemoTarget.Width - PanelWatermark.Width) div 2;
+  PanelWatermark.Top := MemoTarget.Top + (MemoTarget.Height - PanelWatermark.Height) div 2;
+
+  UpdateWatermarkVisibility;
 end;
 
 procedure TformPopupTrayslate.FormChangeBounds(Sender: TObject);
 begin
   formTrayslate.FormPopupLeft := Left;
   formTrayslate.FormPopupTop := Top;
+end;
+
+procedure TformPopupTrayslate.MemoTargetChange(Sender: TObject);
+begin
+  UpdateWatermarkVisibility;
+end;
+
+procedure TformPopupTrayslate.PanelWatermarkClick(Sender: TObject);
+begin
+  if MemoTarget.Enabled and MemoTarget.Visible and MemoTarget.CanFocus then
+    MemoTarget.SetFocus;
 end;
 
 procedure TformPopupTrayslate.SbCopyTargetClick(Sender: TObject);
@@ -158,12 +181,24 @@ begin
       Self.AlphaBlend := True;
 
     Self.AlphaBlendValue := TargetAlpha;
+
+    UpdateWatermarkVisibility;
   end;
 end;
 
 procedure TformPopupTrayslate.OnTextDroppedHandler(Sender: TObject; const AText: string);
 begin
   formTrayslate.TranslatePopup(AText);
+end;
+
+procedure TformPopupTrayslate.UpdateWatermarkVisibility;
+begin
+  PanelWatermark.Visible := (MemoTarget.Text = string.Empty);
+
+  if (Width < PanelWatermark.Width) or (Height < PanelWatermark.Height + FlowPairs.Height) then
+    PanelWaterMark.Visible := False;
+
+  PanelButtonTarget.Visible := (Width > 100) and (Height > 50 + FlowPairs.Height);
 end;
 
 end.

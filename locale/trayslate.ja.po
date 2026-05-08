@@ -665,6 +665,11 @@ msgstr ""
 msgid " Trayslate"
 msgstr ""
 
+#: tformpopuptrayslate.labelwatermark.caption
+msgctxt "tformpopuptrayslate.labelwatermark.caption"
+msgid "Drag text here to translate"
+msgstr ""
+
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
 msgstr "適用"
@@ -1020,6 +1025,10 @@ msgstr "メニューを表示"
 msgid "New Translate"
 msgstr "新規翻訳"
 
+#: tformtrayslate.apopuptranslate.caption
+msgid "Popup Translate"
+msgstr ""
+
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
 msgstr "設定..."
@@ -1036,10 +1045,6 @@ msgstr "翻訳 (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "クリップボードを翻訳"
-
-#: tformtrayslate.atranslatepopup.caption
-msgid "Translate Popup"
-msgstr ""
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

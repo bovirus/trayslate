@@ -707,6 +707,9 @@ begin
   if Assigned(formPopupTrayslate) then
   begin
     formPopupTrayslate.Font.Assign(PanelFont.Font);
+    formPopupTrayslate.PanelWatermark.Font.Size := PanelFont.Font.Size;
+    formPopupTrayslate.PanelWatermark.Font.Name := PanelFont.Font.Name;
+
     if formTrayslate.StayOnTop then
       formPopupTrayslate.FormStyle := fsSystemStayOnTop
     else

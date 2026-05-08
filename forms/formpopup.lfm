@@ -28,29 +28,41 @@ object formPopupTrayslate: TformPopupTrayslate
     BorderStyle = bsNone
     ScrollBars = ssAutoBoth
     TabOrder = 0
+    OnChange = MemoTargetChange
   end
-  object FlowPairs: TFlowPanel
-    Left = 5
-    Height = 0
-    Top = 0
-    Width = 470
-    Align = alTop
+  object PanelWatermark: TPanel
+    Cursor = crIBeam
+    Left = 160
+    Height = 15
+    Top = 105
+    Width = 136
     AutoSize = True
     BevelOuter = bvNone
-    BorderSpacing.Left = 5
-    BorderSpacing.Right = 5
-    BorderSpacing.Bottom = 3
-    ControlList = <>
-    FlowLayout = tlCenter
-    FlowStyle = fsLeftRightTopBottom
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 1
+    ClientHeight = 15
+    ClientWidth = 136
+    Color = clWindow
+    Font.Color = clGrayText
+    ParentBackground = False
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 3
+    OnClick = PanelWatermarkClick
+    object LabelWatermark: TLabel
+      Cursor = crIBeam
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 136
+      Align = alClient
+      Alignment = taCenter
+      Caption = 'Drag text here to translate'
+      OnClick = PanelWatermarkClick
+    end
   end
   object PanelButtonTarget: TPanel
     Left = 433
     Height = 16
-    Top = 205
+    Top = 210
     Width = 16
     Anchors = [akRight, akBottom]
     BevelOuter = bvNone
@@ -75,6 +87,24 @@ object formPopupTrayslate: TformPopupTrayslate
       ParentShowHint = False
       OnClick = SbCopyTargetClick
     end
+  end
+  object FlowPairs: TFlowPanel
+    Left = 5
+    Height = 0
+    Top = 0
+    Width = 470
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    BorderSpacing.Left = 5
+    BorderSpacing.Right = 5
+    BorderSpacing.Bottom = 3
+    ControlList = <>
+    FlowLayout = tlCenter
+    FlowStyle = fsLeftRightTopBottom
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
   end
   object Timer: TTimer
     Interval = 100

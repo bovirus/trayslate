@@ -630,6 +630,11 @@ msgstr ""
 msgid " Trayslate"
 msgstr ""
 
+#: tformpopuptrayslate.labelwatermark.caption
+msgctxt "tformpopuptrayslate.labelwatermark.caption"
+msgid "Drag text here to translate"
+msgstr ""
+
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
 msgstr ""
@@ -985,6 +990,10 @@ msgstr ""
 msgid "New Translate"
 msgstr ""
 
+#: tformtrayslate.apopuptranslate.caption
+msgid "Popup Translate"
+msgstr ""
+
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
 msgstr ""
@@ -1000,10 +1009,6 @@ msgstr ""
 
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
-msgstr ""
-
-#: tformtrayslate.atranslatepopup.caption
-msgid "Translate Popup"
 msgstr ""
 
 #: tformtrayslate.caption

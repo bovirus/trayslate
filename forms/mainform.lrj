@@ -7,7 +7,7 @@
 {"hash":35036745,"name":"tformtrayslate.atranslate.hint","sourcebytes":[84,114,97,110,115,108,97,116,101,32,40,67,116,114,108,32,194,166,32,83,104,105,102,116,32,194,166,32,69,110,116,101,114,32,43,32,69,110,116,101,114,41],"value":"Translate (Ctrl \u00A6 Shift \u00A6 Enter + Enter)"},
 {"hash":368487,"name":"tformtrayslate.ashow.caption","sourcebytes":[83,104,111,119],"value":"Show"},
 {"hash":55069924,"name":"tformtrayslate.atranslateclipboard.caption","sourcebytes":[84,114,97,110,115,108,97,116,101,32,67,108,105,112,98,111,97,114,100],"value":"Translate Clipboard"},
-{"hash":252515552,"name":"tformtrayslate.atranslatepopup.caption","sourcebytes":[84,114,97,110,115,108,97,116,101,32,80,111,112,117,112],"value":"Translate Popup"},
+{"hash":27010117,"name":"tformtrayslate.apopuptranslate.caption","sourcebytes":[80,111,112,117,112,32,84,114,97,110,115,108,97,116,101],"value":"Popup Translate"},
 {"hash":76641141,"name":"tformtrayslate.anewtranslate.hint","sourcebytes":[78,101,119,32,84,114,97,110,115,108,97,116,101],"value":"New Translate"},
 {"hash":30246626,"name":"tformtrayslate.aaddpair.hint","sourcebytes":[65,100,100,32,67,117,114,114,101,110,116,32,80,97,105,114],"value":"Add Current Pair"},
 {"hash":76052723,"name":"tformtrayslate.alangarabic.caption","sourcebytes":[65,114,97,98,105,99],"value":"Arabic"},

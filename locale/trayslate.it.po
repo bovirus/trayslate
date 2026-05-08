@@ -677,6 +677,11 @@ msgstr "https://plaintool.github.io/notetask/donate.htm"
 msgid " Trayslate"
 msgstr ""
 
+#: tformpopuptrayslate.labelwatermark.caption
+msgctxt "tformpopuptrayslate.labelwatermark.caption"
+msgid "Drag text here to translate"
+msgstr ""
+
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
 msgstr "Applica"
@@ -1032,6 +1037,10 @@ msgstr "Visualizza menu"
 msgid "New Translate"
 msgstr "Nuova traduzione"
 
+#: tformtrayslate.apopuptranslate.caption
+msgid "Popup Translate"
+msgstr ""
+
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
 msgstr "Impostazioni..."
@@ -1048,10 +1057,6 @@ msgstr "Traduci (Ctrl ¦ Maiusc ¦ Inserisci + Invio)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Traduci dagli appunti"
-
-#: tformtrayslate.atranslatepopup.caption
-msgid "Translate Popup"
-msgstr "Popup traduzione"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

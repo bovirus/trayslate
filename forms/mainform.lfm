@@ -312,7 +312,7 @@ object formTrayslate: TformTrayslate
       Action = aTranslateClipboard
     end
     object MenuItem2: TMenuItem
-      Action = aTranslatePopup
+      Action = aPopupTranslate
     end
     object MenuLangPairs: TMenuItem
       Caption = 'Recent Pairs'
@@ -464,10 +464,10 @@ object formTrayslate: TformTrayslate
       Caption = 'Translate Clipboard'
       OnExecute = aTranslateClipboardExecute
     end
-    object aTranslatePopup: TAction
+    object aPopupTranslate: TAction
       Category = 'Tray'
-      Caption = 'Translate Popup'
-      OnExecute = aTranslatePopupExecute
+      Caption = 'Popup Translate'
+      OnExecute = aPopupTranslateExecute
     end
     object aNewTranslate: TAction
       Category = 'Form'

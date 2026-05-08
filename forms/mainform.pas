@@ -49,7 +49,7 @@ type
     aAutoCheckUpdates: TAction;
     aCopySource: TAction;
     aCopyTarget: TAction;
-    aTranslatePopup: TAction;
+    aPopupTranslate: TAction;
     aLangCustom: TAction;
     aLangBulgarian: TAction;
     aMenu: TAction;
@@ -181,7 +181,7 @@ type
     procedure aNewTranslateExecute(Sender: TObject);
     procedure aTranslateExecute(Sender: TObject);
     procedure aTranslateClipboardExecute(Sender: TObject);
-    procedure aTranslatePopupExecute(Sender: TObject);
+    procedure aPopupTranslateExecute(Sender: TObject);
     procedure aSwapExecute(Sender: TObject);
     procedure aCopySourceExecute(Sender: TObject);
     procedure aCopyTargetExecute(Sender: TObject);
@@ -968,7 +968,7 @@ begin
   TranslateFromClipboard;
 end;
 
-procedure TformTrayslate.aTranslatePopupExecute(Sender: TObject);
+procedure TformTrayslate.aPopupTranslateExecute(Sender: TObject);
 begin
   TranslateClipboardPopup;
 end;
@@ -2236,6 +2236,8 @@ begin
       formPopupTrayslate.Height := FormPopupHeight;
 
     formPopupTrayslate.Font.Assign(Font);
+    formPopupTrayslate.PanelWatermark.Font.Size := Font.Size;
+    formPopupTrayslate.PanelWatermark.Font.Name := Font.Name;
     formPopupTrayslate.AlphaBlendValue := OpacityIdle;
     if StayOnTop then
       formPopupTrayslate.FormStyle := fsSystemStayOnTop

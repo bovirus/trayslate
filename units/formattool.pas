@@ -772,7 +772,9 @@ begin
   while (p^ <> #0) do
   begin
     // 1. Determine UTF-8 character length (1-4 bytes)
+    {$NOTES OFF}
     CharLen := UTF8CodepointSize(p);
+    {$NOTES ON}
 
     // 2. Predict the size of the character after encoding/escaping
     if Encode then
@@ -829,7 +831,9 @@ begin
 
   while (p^ <> #0) do
   begin
+    {$NOTES OFF}
     CharLen := UTF8CodepointSize(p);
+    {$NOTES ON}
     SetString(CurrentChar, p, CharLen);
 
     if Encode then
