@@ -2241,14 +2241,14 @@ begin
       formPopupTrayslate.FormStyle := fsSystemStayOnTop
     else
       formPopupTrayslate.FormStyle := fsNormal;
-
-    formPopupTrayslate.SourceText := SourceText;
-
-    SetIcon;
-    Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
-    formPopupTrayslate.Show;
-    formPopupTrayslate.BringToFront;
   end;
+
+  formPopupTrayslate.SourceText := SourceText;
+
+  SetIcon;
+  Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
+  formPopupTrayslate.Show;
+  formPopupTrayslate.BringToFront;
 end;
 
 {$IFDEF WINDOWS}

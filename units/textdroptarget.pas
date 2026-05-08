@@ -136,6 +136,32 @@ begin
 end;
 
 {$IFDEF WINDOWS}
+
+var
+  // Registered clipboard formats for various text types
+  CF_HTML_FORMAT: UINT = 0;
+  CF_HTML_MIME:   UINT = 0;
+  CF_TEXT_PLAIN:  UINT = 0;
+
+// Simple HTML-to-text converter that strips all tags
+function StripHTMLTags(const HTML: string): string;
+var
+  i: Integer;
+  InTag: Boolean;
+begin
+  Result := '';
+  InTag := False;
+  for i := 1 to Length(HTML) do
+  begin
+    if HTML[i] = '<' then
+      InTag := True
+    else if HTML[i] = '>' then
+      InTag := False
+    else if not InTag then
+      Result := Result + HTML[i];
+  end;
+end;
+
 procedure TTextDropTarget.RegisterTarget;
 begin
   if not Assigned(FTarget) or not FTarget.HandleAllocated then Exit;
@@ -143,7 +169,7 @@ begin
 
   UnregisterTarget; // safety
 
-  FImpl := TTextDropTargetImpl.Create(Self, FTarget);   // store as interface
+  FImpl := TTextDropTargetImpl.Create(Self, FTarget);
   OleCheck(RegisterDragDrop(FTarget.Handle, FImpl));
   FRegisteredHandle := FTarget.Handle;
 end;
@@ -156,7 +182,6 @@ begin
       RevokeDragDrop(FRegisteredHandle);
     FRegisteredHandle := 0;
   end;
-  // Release our own interface reference – object will self-destroy if this was the last reference
   FImpl := nil;
 end;
 
@@ -164,8 +189,7 @@ procedure TTextDropTarget.ForceRegister;
 begin
   if Assigned(FTarget) and FTarget.HandleAllocated then
   begin
-    if FRegisteredHandle = FTarget.Handle then
-      Exit; // already registered for this handle
+    if FRegisteredHandle = FTarget.Handle then Exit;
     UnregisterTarget;
     RegisterTarget;
   end
@@ -186,16 +210,37 @@ function TTextDropTargetImpl.HasTextFormat(const dataObj: IDataObject): Boolean;
 var
   fmt: TFormatEtc;
 begin
-  fmt.cfFormat := CF_UNICODETEXT;
+  Result := False;
+
+  // Fill basic format fields once
   fmt.ptd := nil;
   fmt.dwAspect := DVASPECT_CONTENT;
   fmt.lindex := -1;
   fmt.tymed := TYMED_HGLOBAL;
-  Result := Succeeded(dataObj.QueryGetData(fmt));
-  if not Result then
+
+  // Standard Windows text formats
+  fmt.cfFormat := CF_UNICODETEXT;
+  if Succeeded(dataObj.QueryGetData(fmt)) then Exit(True);
+  fmt.cfFormat := CF_TEXT;
+  if Succeeded(dataObj.QueryGetData(fmt)) then Exit(True);
+
+  // HTML formats (Firefox, Chrome, etc.)
+  if CF_HTML_FORMAT <> 0 then
   begin
-    fmt.cfFormat := CF_TEXT;
-    Result := Succeeded(dataObj.QueryGetData(fmt));
+    fmt.cfFormat := CF_HTML_FORMAT;
+    if Succeeded(dataObj.QueryGetData(fmt)) then Exit(True);
+  end;
+  if CF_HTML_MIME <> 0 then
+  begin
+    fmt.cfFormat := CF_HTML_MIME;
+    if Succeeded(dataObj.QueryGetData(fmt)) then Exit(True);
+  end;
+
+  // Raw MIME text/plain (Firefox often uses it)
+  if CF_TEXT_PLAIN <> 0 then
+  begin
+    fmt.cfFormat := CF_TEXT_PLAIN;
+    if Succeeded(dataObj.QueryGetData(fmt)) then Exit(True);
   end;
 end;
 
@@ -230,7 +275,9 @@ var
   s: string;
   ClientPt: TPoint;
   CharIdx: LResult;
-  isUnicode: Boolean;
+  isUnicode, isPlainText: Boolean;
+  isHTML, isHTMLMime: Boolean;
+  cf: UINT;
 begin
   Result := E_FAIL;
 
@@ -240,23 +287,78 @@ begin
     Exit;
   end;
 
+  // Prepare basic format request structure
   fmt.ptd := nil;
   fmt.dwAspect := DVASPECT_CONTENT;
   fmt.lindex := -1;
   fmt.tymed := TYMED_HGLOBAL;
 
+  // Try to determine the best available format
+  isUnicode := False;
+  isPlainText := False;
+  isHTML := False;
+  isHTMLMime := False;
+
+  // 1. CF_UNICODETEXT (preferred)
   fmt.cfFormat := CF_UNICODETEXT;
-  isUnicode := Succeeded(dataObj.QueryGetData(fmt));
-  if not isUnicode then
+  if Succeeded(dataObj.QueryGetData(fmt)) then
+    isUnicode := True
+  else
   begin
-    fmt.cfFormat := CF_TEXT;
-    if Failed(dataObj.QueryGetData(fmt)) then
+    // 2. HTML Format (CF_HTML)
+    if CF_HTML_FORMAT <> 0 then
     begin
-      dwEffect := DROPEFFECT_NONE;
-      Exit;
+      fmt.cfFormat := CF_HTML_FORMAT;
+      if Succeeded(dataObj.QueryGetData(fmt)) then
+      begin
+        isHTML := True;
+        cf := CF_HTML_FORMAT;
+      end;
+    end;
+    // 3. text/html MIME
+    if not isHTML and (CF_HTML_MIME <> 0) then
+    begin
+      fmt.cfFormat := CF_HTML_MIME;
+      if Succeeded(dataObj.QueryGetData(fmt)) then
+      begin
+        isHTMLMime := True;
+        cf := CF_HTML_MIME;
+      end;
+    end;
+    // 4. text/plain MIME (Firefox)
+    if not isHTML and not isHTMLMime and (CF_TEXT_PLAIN <> 0) then
+    begin
+      fmt.cfFormat := CF_TEXT_PLAIN;
+      if Succeeded(dataObj.QueryGetData(fmt)) then
+      begin
+        isPlainText := True;
+        cf := CF_TEXT_PLAIN;
+      end;
+    end;
+    // 5. Fallback to CF_TEXT (ANSI)
+    if not isHTML and not isHTMLMime and not isPlainText then
+    begin
+      fmt.cfFormat := CF_TEXT;
+      if Failed(dataObj.QueryGetData(fmt)) then
+      begin
+        dwEffect := DROPEFFECT_NONE;
+        Exit;
+      end;
+      // isUnicode stays False, but we have CF_TEXT
     end;
   end;
 
+  // Set the final format for GetData
+  if isUnicode then
+    fmt.cfFormat := CF_UNICODETEXT
+  else if isHTML or isHTMLMime then
+    fmt.cfFormat := cf      // HTML or text/html
+  else if isPlainText then
+    fmt.cfFormat := CF_TEXT_PLAIN
+  else
+    fmt.cfFormat := CF_TEXT;
+
+  // Actually retrieve the data
   if Failed(dataObj.GetData(fmt, stg)) then
   begin
     dwEffect := DROPEFFECT_NONE;
@@ -264,32 +366,64 @@ begin
   end;
 
   try
-    pText := GlobalLock(stg.hGlobal);
-    if not Assigned(pText) then Exit;
-    try
-      if isUnicode then
-        s := PWideChar(pText)
-      else
-        s := string(PAnsiChar(pText));
-
-      // Always fire event first
-      FOwner.DoTextDropped(s);
-
-      // Insert into edit only if allowed
-      if FOwner.InsertText then
-      begin
-        ClientPt := FEdit.ScreenToClient(pt);
-        CharIdx := SendMessage(FEdit.Handle, EM_CHARFROMPOS, 0,
-          MakeLParam(ClientPt.X, ClientPt.Y));
-        FEdit.SelStart := LoWord(CharIdx);
-        FEdit.SelText := s;
+    // Extract text according to format
+    if isUnicode then
+    begin
+      pText := GlobalLock(stg.hGlobal);
+      if not Assigned(pText) then Exit;
+      try
+        s := PWideChar(pText);
+      finally
+        GlobalUnlock(stg.hGlobal);
       end;
-
-      dwEffect := DROPEFFECT_COPY;
-      Result := S_OK;
-    finally
-      GlobalUnlock(stg.hGlobal);
+    end
+    else if isHTML or isHTMLMime then
+    begin
+      pText := GlobalLock(stg.hGlobal);
+      if not Assigned(pText) then Exit;
+      try
+        s := StripHTMLTags(string(PAnsiChar(pText))); // HTML is UTF-8 encoded
+      finally
+        GlobalUnlock(stg.hGlobal);
+      end;
+    end
+    else if isPlainText then
+    begin
+      pText := GlobalLock(stg.hGlobal);
+      if not Assigned(pText) then Exit;
+      try
+        // text/plain from Firefox is UTF-8; treat as such
+        s := string(PAnsiChar(pText));
+      finally
+        GlobalUnlock(stg.hGlobal);
+      end;
+    end
+    else // CF_TEXT (ANSI)
+    begin
+      pText := GlobalLock(stg.hGlobal);
+      if not Assigned(pText) then Exit;
+      try
+        s := string(PAnsiChar(pText));
+      finally
+        GlobalUnlock(stg.hGlobal);
+      end;
     end;
+
+    // Always fire event first
+    FOwner.DoTextDropped(s);
+
+    // Insert into edit only if allowed
+    if FOwner.InsertText then
+    begin
+      ClientPt := FEdit.ScreenToClient(pt);
+      CharIdx := SendMessage(FEdit.Handle, EM_CHARFROMPOS, 0,
+        MakeLParam(ClientPt.X, ClientPt.Y));
+      FEdit.SelStart := LoWord(CharIdx);
+      FEdit.SelText := s;
+    end;
+
+    dwEffect := DROPEFFECT_COPY;
+    Result := S_OK;
   finally
     ReleaseStgMedium(stg);
   end;
@@ -299,6 +433,9 @@ end;
 {$IFDEF WINDOWS}
 initialization
   CoInitializeEx(nil, COINIT_APARTMENTTHREADED);
+  CF_HTML_FORMAT := RegisterClipboardFormat('HTML Format');
+  CF_HTML_MIME   := RegisterClipboardFormat('text/html');
+  CF_TEXT_PLAIN  := RegisterClipboardFormat('text/plain');
 finalization
   CoUninitialize;
 {$ENDIF}
