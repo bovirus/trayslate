@@ -83,6 +83,8 @@ uses mainform, systemtool;
 
 procedure TformPopupTrayslate.FormCreate(Sender: TObject);
 begin
+  ApplicationTranslate(language, self, formTrayslate.LoadCustomPoFile(formTrayslate.CustomPoFile));
+
   FDropTarget := TTextDropTarget.Create(Self);
   FDropTarget.Target := MemoTarget;
   FDropTarget.InsertText := False;
@@ -149,6 +151,7 @@ end;
 procedure TformPopupTrayslate.MemoTargetChange(Sender: TObject);
 begin
   UpdateWatermarkVisibility;
+  TimerTimer(Self);
 end;
 
 procedure TformPopupTrayslate.PanelWatermarkClick(Sender: TObject);
@@ -165,10 +168,10 @@ var
   InWindow: boolean;
 const
   // Individual margins for each side (in pixels)
-  MARGIN_LEFT = 10;
-  MARGIN_RIGHT = 5; // Increased to compensate for invisible borders
-  MARGIN_TOP = 40; // Covers the caption bar
-  MARGIN_BOTTOM = 5; // Increased for easier resizing
+  MARGIN_LEFT = 15;
+  MARGIN_RIGHT = 10; // Increased to compensate for invisible borders
+  MARGIN_TOP = 45; // Covers the caption bar
+  MARGIN_BOTTOM = 15; // Increased for easier resizing
 begin
   // Exit early if the form is not visible or is being destroyed
   if not Self.Visible or (csDestroying in Self.ComponentState) then
@@ -215,8 +218,8 @@ begin
     UpdateWatermarkVisibility;
   end;
 
-  PanelPairs.Visible := InWIndow or not formTrayslate.HideControls;
-  PanelButtonTarget.Visible := InWindow or not formTrayslate.HideControls;
+  PanelPairs.Visible := InWindow or not formTrayslate.HideControls;
+  PanelButtonTarget.Visible := (InWindow and (Width > 100) and (Height > 50 + FlowPairs.Height)) or not formTrayslate.HideControls;
 end;
 
 procedure TformPopupTrayslate.OnTextDroppedHandler(Sender: TObject; const AText: string);
@@ -231,7 +234,7 @@ begin
   if (Width < PanelWatermark.Width) or (Height < PanelWatermark.Height + FlowPairs.Height) then
     PanelWaterMark.Visible := False;
 
-  PanelButtonTarget.Visible := (Width > 100) and (Height > 50 + FlowPairs.Height);
+  PanelButtonTarget.Visible := ((Width > 100) and (Height > 50 + FlowPairs.Height)) or not formTrayslate.HideControls;
 end;
 
 end.

@@ -37,6 +37,32 @@ msgstr "Indtast navn på ny konfigurationsfil:"
 msgid "The configuration was modified. Save changes?"
 msgstr "Konfigurationen er ændret. Gemme ændringer?"
 
+#: formconfig.rvaluetype1
+msgctxt "formconfig.rvaluetype1"
+msgid "None"
+msgstr "Ingen"
+
+#: formconfig.rvaluetype2
+msgctxt "formconfig.rvaluetype2"
+msgid "Language"
+msgstr "Sprog"
+
+#: formconfig.rvaluetype3
+msgid "Currency All"
+msgstr "Alle valutaer"
+
+#: formconfig.rvaluetype4
+msgid "Currency Fiat Only"
+msgstr "Kun fiat-valuta"
+
+#: formconfig.rvaluetype5
+msgid "Currency Crypto Only"
+msgstr "Kun kryptovaluta"
+
+#: formconfig.rvaluetype6
+msgid "Measurement Units"
+msgstr "Måleenheder"
+
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
@@ -186,6 +212,10 @@ msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
 msgstr "Konfigurationsfil ikke fundet! Opret den i konfigurationseditoren."
 
+#: mainform.ropenpofiletr
+msgid "Language File (*.po)|*.po"
+msgstr "Sprogfil (*.po)|*.po"
+
 #: mainform.rswap
 #, object-pascal-format
 msgctxt "mainform.rswap"
@@ -228,19 +258,24 @@ msgid "by Alexander Tverskoy is licensed under"
 msgstr "af Alexander Tverskoy er licenseret under"
 
 #: tformabouttrayslate.labelby1.caption
-msgid "the GNU General Public License, Version 3 "
-msgstr "GNU General Public License, version 3"
+msgid "the GNU General Public License, Version 3"
+msgstr "the GNU General Public License, version 3"
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
-msgstr "for spørgsmål eller feedback kontakt mig på"
-
-#: tformabouttrayslate.labellicurl.caption
-msgid "mailto:astverskoy@gmail.com"
-msgstr ""
+msgstr "For spørgsmål eller feedback kontakt mig på"
 
 #: tformabouttrayslate.labelname.caption
 msgid "Trayslate © 2026"
+msgstr ""
+
+#: tformabouttrayslate.labelurlemail.caption
+msgctxt "tformabouttrayslate.labelurlemail.caption"
+msgid "mailto:astverskoy@gmail.com"
+msgstr ""
+
+#: tformabouttrayslate.labelurlgithub.caption
+msgid "github:plaintool"
 msgstr ""
 
 #: tformabouttrayslate.lblabout.caption
@@ -339,6 +374,7 @@ msgid "GET"
 msgstr ""
 
 #: tformconfigtrayslate.combovaluetype.text
+msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
 msgstr ""
 
@@ -662,29 +698,28 @@ msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
 #: tformpopuptrayslate.acopytarget.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Copy Translation"
 
 #: tformpopuptrayslate.anewtranslate.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Ny oversættelse"
 
 #: tformpopuptrayslate.asend.hint
 msgid "Send source and translation to main window"
-msgstr ""
+msgstr "Send kilde og oversættelse til hovedvinduet"
 
 #: tformpopuptrayslate.caption
-msgid " Trayslate"
+msgctxt "tformpopuptrayslate.caption"
+msgid "Trayslate"
 msgstr ""
 
 #: tformpopuptrayslate.labelwatermark.caption
 msgctxt "tformpopuptrayslate.labelwatermark.caption"
 msgid "Drag text here to translate"
-msgstr ""
+msgstr "Træk tekst hertil for at oversætte"
 
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
@@ -746,11 +781,11 @@ msgstr "Registrer automatisk inputsprog og byt par om nødvendigt, virker ikke u
 
 #: tformsettingstrayslate.checkhidecontrols.caption
 msgid "Auto-hide controls"
-msgstr ""
+msgstr "Skjul kontroller automatisk"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
-msgstr ""
+msgstr "Skjul vindueskontroller når musen ikke er over popup-vinduet"
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -764,11 +799,11 @@ msgstr "Oversæt automatisk tekst mens du skriver"
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
-msgstr ""
+msgstr "Altid øverst"
 
 #: tformsettingstrayslate.checkstayontop.hint
 msgid "Keeps the window above all other windows"
-msgstr ""
+msgstr "Holder vinduet over alle andre vinduer"
 
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
@@ -794,7 +829,7 @@ msgstr "Genvej"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
-msgstr ""
+msgstr "Automatisk opstart"
 
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
@@ -812,7 +847,7 @@ msgstr "Seneste sprogpar"
 
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
-msgstr ""
+msgstr "Popup-vindue"
 
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
@@ -851,11 +886,11 @@ msgstr "Maks. par"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity on Hover"
-msgstr ""
+msgstr "Gennemsigtighed ved hover"
 
 #: tformsettingstrayslate.labelopacityidle.caption
 msgid "Opacity Idle"
-msgstr ""
+msgstr "Gennemsigtighed i inaktiv tilstand"
 
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
@@ -890,11 +925,11 @@ msgstr "Oversættelsesforsinkelse i millisekunder"
 
 #: tformsettingstrayslate.trackopacityhover.hint
 msgid "Window transparency when the mouse is over the window"
-msgstr ""
+msgstr "Vinduesgennemsigtighed når musen er over vinduet"
 
 #: tformsettingstrayslate.trackopacityidle.hint
 msgid "Window transparency when the mouse is not over the window"
-msgstr ""
+msgstr "Vinduesgennemsigtighed når musen ikke er over vinduet"
 
 #: tformtrayslate.aabout.caption
 msgid "About..."
@@ -1053,7 +1088,7 @@ msgstr "Ny oversættelse"
 
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
-msgstr ""
+msgstr "Popup-oversættelse"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -1090,6 +1125,6 @@ msgid "Recent Pairs"
 msgstr "Seneste par"
 
 #: tformtrayslate.menulanguage.caption
+msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr ""
-

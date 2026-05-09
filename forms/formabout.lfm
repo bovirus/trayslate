@@ -224,7 +224,7 @@ object formAboutTrayslate: TformAboutTrayslate
     Caption = 'For questions or feedback, contact me at'
     WordWrap = True
   end
-  object LabelLicUrl: TLabel
+  object LabelUrlEmail: TLabel
     Cursor = crHandPoint
     Left = 140
     Height = 15
@@ -235,7 +235,7 @@ object formAboutTrayslate: TformAboutTrayslate
     Font.Style = [fsUnderline]
     ParentFont = False
     WordWrap = True
-    OnClick = LabelLicUrlClick
+    OnClick = LabelUrlEmailClick
   end
   object MemoAbout: TMemo
     Left = 16
@@ -251,9 +251,22 @@ object formAboutTrayslate: TformAboutTrayslate
     Left = 140
     Height = 15
     Top = 92
-    Width = 222
+    Width = 219
     Alignment = taCenter
-    Caption = 'the GNU General Public License, Version 3 '
+    Caption = 'the GNU General Public License, Version 3'
     WordWrap = True
+  end
+  object LabelUrlGithub: TLabel
+    Cursor = crHandPoint
+    Left = 312
+    Height = 15
+    Top = 132
+    Width = 85
+    Caption = 'github:plaintool'
+    Font.Color = clBlue
+    Font.Style = [fsUnderline]
+    ParentFont = False
+    WordWrap = True
+    OnClick = LabelUrlGithubClick
   end
 end

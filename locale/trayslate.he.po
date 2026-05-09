@@ -37,6 +37,32 @@ msgstr "הכנס שם לקובץ תצורה חדש:"
 msgid "The configuration was modified. Save changes?"
 msgstr "התצורה השתנתה. לשמור שינויים?"
 
+#: formconfig.rvaluetype1
+msgctxt "formconfig.rvaluetype1"
+msgid "None"
+msgstr "ללא"
+
+#: formconfig.rvaluetype2
+msgctxt "formconfig.rvaluetype2"
+msgid "Language"
+msgstr "שפה"
+
+#: formconfig.rvaluetype3
+msgid "Currency All"
+msgstr "כל המטבעות"
+
+#: formconfig.rvaluetype4
+msgid "Currency Fiat Only"
+msgstr "מטבעות פיאט בלבד"
+
+#: formconfig.rvaluetype5
+msgid "Currency Crypto Only"
+msgstr "מטבעות קריפטו בלבד"
+
+#: formconfig.rvaluetype6
+msgid "Measurement Units"
+msgstr "יחידות מידה"
+
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
@@ -186,6 +212,10 @@ msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
 msgstr "קובץ תצורה לא נמצא! צור אותו בעורך התצורה."
 
+#: mainform.ropenpofiletr
+msgid "Language File (*.po)|*.po"
+msgstr "קובץ שפה (*.po)|*.po"
+
 #: mainform.rswap
 #, object-pascal-format
 msgctxt "mainform.rswap"
@@ -228,19 +258,24 @@ msgid "by Alexander Tverskoy is licensed under"
 msgstr "מאת Alexander Tverskoy ברישיון תחת"
 
 #: tformabouttrayslate.labelby1.caption
-msgid "the GNU General Public License, Version 3 "
+msgid "the GNU General Public License, Version 3"
 msgstr "רישיון GNU GPL, גרסה 3"
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
 msgstr "לשאלות או משוב צרו קשר ב"
 
-#: tformabouttrayslate.labellicurl.caption
+#: tformabouttrayslate.labelname.caption
+msgid "Trayslate © 2026"
+msgstr ""
+
+#: tformabouttrayslate.labelurlemail.caption
+msgctxt "tformabouttrayslate.labelurlemail.caption"
 msgid "mailto:astverskoy@gmail.com"
 msgstr ""
 
-#: tformabouttrayslate.labelname.caption
-msgid "Trayslate © 2026"
+#: tformabouttrayslate.labelurlgithub.caption
+msgid "github:plaintool"
 msgstr ""
 
 #: tformabouttrayslate.lblabout.caption
@@ -339,6 +374,7 @@ msgid "GET"
 msgstr ""
 
 #: tformconfigtrayslate.combovaluetype.text
+msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
 msgstr ""
 
@@ -662,29 +698,28 @@ msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
 #: tformpopuptrayslate.acopytarget.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "העתק תרגום"
 
 #: tformpopuptrayslate.anewtranslate.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "תרגום חדש"
 
 #: tformpopuptrayslate.asend.hint
 msgid "Send source and translation to main window"
-msgstr ""
+msgstr "שלח מקור ותרגום לחלון הראשי"
 
 #: tformpopuptrayslate.caption
-msgid " Trayslate"
+msgctxt "tformpopuptrayslate.caption"
+msgid "Trayslate"
 msgstr ""
 
 #: tformpopuptrayslate.labelwatermark.caption
 msgctxt "tformpopuptrayslate.labelwatermark.caption"
 msgid "Drag text here to translate"
-msgstr ""
+msgstr "גרור טקסט לכאן לתרגום"
 
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
@@ -746,11 +781,11 @@ msgstr "זהה אוטומטית שפת קלט והחלף זוג במידת הצ�
 
 #: tformsettingstrayslate.checkhidecontrols.caption
 msgid "Auto-hide controls"
-msgstr ""
+msgstr "הסתרת פקדים אוטומטית"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
-msgstr ""
+msgstr "הסתר פקדים כאשר העכבר לא מעל החלון הקופץ"
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -764,11 +799,11 @@ msgstr "תרגם טקסט אוטומטית תוך כדי הקלדה"
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
-msgstr ""
+msgstr "תמיד עליון"
 
 #: tformsettingstrayslate.checkstayontop.hint
 msgid "Keeps the window above all other windows"
-msgstr ""
+msgstr "שומר את החלון מעל כל שאר החלונות"
 
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
@@ -812,7 +847,7 @@ msgstr "זוגות שפות אחרונים"
 
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
-msgstr ""
+msgstr "חלון קופץ"
 
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
@@ -851,11 +886,11 @@ msgstr "זוגות מקסימום"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity on Hover"
-msgstr ""
+msgstr "שקיפות בעת ריחוף"
 
 #: tformsettingstrayslate.labelopacityidle.caption
 msgid "Opacity Idle"
-msgstr ""
+msgstr "שקיפות במצב מנוחה"
 
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
@@ -890,11 +925,11 @@ msgstr "עיכוב תרגום במילישניות"
 
 #: tformsettingstrayslate.trackopacityhover.hint
 msgid "Window transparency when the mouse is over the window"
-msgstr ""
+msgstr "שקיפות החלון כאשר העכבר מעל החלון"
 
 #: tformsettingstrayslate.trackopacityidle.hint
 msgid "Window transparency when the mouse is not over the window"
-msgstr ""
+msgstr "שקיפות החלון כאשר העכבר לא מעל החלון"
 
 #: tformtrayslate.aabout.caption
 msgid "About..."
@@ -1053,7 +1088,7 @@ msgstr "תרגום חדש"
 
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
-msgstr ""
+msgstr "תרגום קופץ"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -1090,6 +1125,6 @@ msgid "Recent Pairs"
 msgstr "זוגות אחרונים"
 
 #: tformtrayslate.menulanguage.caption
+msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr ""
-

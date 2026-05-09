@@ -37,6 +37,32 @@ msgstr "Geben Sie den Namen der neuen Konfigurationsdatei ein:"
 msgid "The configuration was modified. Save changes?"
 msgstr "Die Konfiguration wurde geändert. Änderungen speichern?"
 
+#: formconfig.rvaluetype1
+msgctxt "formconfig.rvaluetype1"
+msgid "None"
+msgstr "Keine"
+
+#: formconfig.rvaluetype2
+msgctxt "formconfig.rvaluetype2"
+msgid "Language"
+msgstr "Sprache"
+
+#: formconfig.rvaluetype3
+msgid "Currency All"
+msgstr "Alle Währungen"
+
+#: formconfig.rvaluetype4
+msgid "Currency Fiat Only"
+msgstr "Nur Fiat-Währungen"
+
+#: formconfig.rvaluetype5
+msgid "Currency Crypto Only"
+msgstr "Nur Kryptowährungen"
+
+#: formconfig.rvaluetype6
+msgid "Measurement Units"
+msgstr "Maßeinheiten"
+
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
@@ -186,6 +212,10 @@ msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
 msgstr "Konfigurationsdatei nicht gefunden! Erstellen Sie sie im Konfigurationseditor."
 
+#: mainform.ropenpofiletr
+msgid "Language File (*.po)|*.po"
+msgstr "Sprachdatei (*.po)|*.po"
+
 #: mainform.rswap
 #, object-pascal-format
 msgctxt "mainform.rswap"
@@ -228,19 +258,24 @@ msgid "by Alexander Tverskoy is licensed under"
 msgstr "von Alexander Tverskoy ist lizenziert unter"
 
 #: tformabouttrayslate.labelby1.caption
-msgid "the GNU General Public License, Version 3 "
-msgstr "GNU General Public License, Version 3"
+msgid "the GNU General Public License, Version 3"
+msgstr "the GNU General Public License, Version 3"
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
-msgstr "für Fragen oder Feedback kontaktiere mich unter"
-
-#: tformabouttrayslate.labellicurl.caption
-msgid "mailto:astverskoy@gmail.com"
-msgstr ""
+msgstr "Für Fragen oder Feedback kontaktiere mich unter"
 
 #: tformabouttrayslate.labelname.caption
 msgid "Trayslate © 2026"
+msgstr ""
+
+#: tformabouttrayslate.labelurlemail.caption
+msgctxt "tformabouttrayslate.labelurlemail.caption"
+msgid "mailto:astverskoy@gmail.com"
+msgstr ""
+
+#: tformabouttrayslate.labelurlgithub.caption
+msgid "github:plaintool"
 msgstr ""
 
 #: tformabouttrayslate.lblabout.caption
@@ -339,6 +374,7 @@ msgid "GET"
 msgstr ""
 
 #: tformconfigtrayslate.combovaluetype.text
+msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
 msgstr ""
 
@@ -662,29 +698,28 @@ msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
 #: tformpopuptrayslate.acopytarget.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Übersetzung kopieren"
 
 #: tformpopuptrayslate.anewtranslate.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Neue Übersetzung"
 
 #: tformpopuptrayslate.asend.hint
 msgid "Send source and translation to main window"
-msgstr ""
+msgstr "Quelle und Übersetzung an Hauptfenster senden"
 
 #: tformpopuptrayslate.caption
-msgid " Trayslate"
+msgctxt "tformpopuptrayslate.caption"
+msgid "Trayslate"
 msgstr ""
 
 #: tformpopuptrayslate.labelwatermark.caption
 msgctxt "tformpopuptrayslate.labelwatermark.caption"
 msgid "Drag text here to translate"
-msgstr ""
+msgstr "Text hierher ziehen zum Übersetzen"
 
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
@@ -746,11 +781,11 @@ msgstr "Erkennt automatisch die Eingabesprache und tauscht das Paar bei Bedarf, 
 
 #: tformsettingstrayslate.checkhidecontrols.caption
 msgid "Auto-hide controls"
-msgstr ""
+msgstr "Steuerelemente automatisch ausblenden"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
-msgstr ""
+msgstr "Fenstersteuerung ausblenden, wenn sich die Maus nicht über dem Popup-Fenster befindet"
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -764,11 +799,11 @@ msgstr "Übersetzt Text automatisch während der Eingabe"
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
-msgstr ""
+msgstr "Immer im Vordergrund"
 
 #: tformsettingstrayslate.checkstayontop.hint
 msgid "Keeps the window above all other windows"
-msgstr ""
+msgstr "Hält das Fenster über allen anderen Fenstern"
 
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
@@ -794,7 +829,7 @@ msgstr "Tastenkürzel"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
-msgstr ""
+msgstr "Automatischer Start"
 
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
@@ -812,7 +847,7 @@ msgstr "Letzte Sprachpaare"
 
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
-msgstr ""
+msgstr "Popup-Fenster"
 
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
@@ -851,11 +886,11 @@ msgstr "Max. Paare"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity on Hover"
-msgstr ""
+msgstr "Deckkraft bei Hover"
 
 #: tformsettingstrayslate.labelopacityidle.caption
 msgid "Opacity Idle"
-msgstr ""
+msgstr "Deckkraft im Leerlauf"
 
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
@@ -890,11 +925,11 @@ msgstr "Übersetzungsverzögerung in Millisekunden"
 
 #: tformsettingstrayslate.trackopacityhover.hint
 msgid "Window transparency when the mouse is over the window"
-msgstr ""
+msgstr "Fenstertransparenz wenn sich die Maus über dem Fenster befindet"
 
 #: tformsettingstrayslate.trackopacityidle.hint
 msgid "Window transparency when the mouse is not over the window"
-msgstr ""
+msgstr "Fenstertransparenz wenn sich die Maus nicht über dem Fenster befindet"
 
 #: tformtrayslate.aabout.caption
 msgid "About..."
@@ -1053,7 +1088,7 @@ msgstr "Neue Übersetzung"
 
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
-msgstr ""
+msgstr "Popup-Übersetzung"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -1090,6 +1125,6 @@ msgid "Recent Pairs"
 msgstr "Letzte Paare"
 
 #: tformtrayslate.menulanguage.caption
+msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr ""
-

@@ -37,6 +37,32 @@ msgstr "Voer de naam van het nieuwe configuratiebestand in:"
 msgid "The configuration was modified. Save changes?"
 msgstr "De configuratie is gewijzigd. Wijzigingen opslaan?"
 
+#: formconfig.rvaluetype1
+msgctxt "formconfig.rvaluetype1"
+msgid "None"
+msgstr "Geen"
+
+#: formconfig.rvaluetype2
+msgctxt "formconfig.rvaluetype2"
+msgid "Language"
+msgstr "Taal"
+
+#: formconfig.rvaluetype3
+msgid "Currency All"
+msgstr "Alle valuta"
+
+#: formconfig.rvaluetype4
+msgid "Currency Fiat Only"
+msgstr "Alleen fiatvaluta"
+
+#: formconfig.rvaluetype5
+msgid "Currency Crypto Only"
+msgstr "Alleen cryptovaluta"
+
+#: formconfig.rvaluetype6
+msgid "Measurement Units"
+msgstr "Meeteenheden"
+
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
@@ -186,6 +212,10 @@ msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
 msgstr "Configuratiebestand niet gevonden! Maak het aan in de configuratie-editor."
 
+#: mainform.ropenpofiletr
+msgid "Language File (*.po)|*.po"
+msgstr "Taalbestand (*.po)|*.po"
+
 #: mainform.rswap
 #, object-pascal-format
 msgctxt "mainform.rswap"
@@ -228,19 +258,24 @@ msgid "by Alexander Tverskoy is licensed under"
 msgstr "door Alexander Tverskoy gelicentieerd onder"
 
 #: tformabouttrayslate.labelby1.caption
-msgid "the GNU General Public License, Version 3 "
-msgstr "GNU General Public License, versie 3"
+msgid "the GNU General Public License, Version 3"
+msgstr "the GNU General Public License, versie 3"
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
-msgstr "voor vragen of feedback neem contact met mij op via"
-
-#: tformabouttrayslate.labellicurl.caption
-msgid "mailto:astverskoy@gmail.com"
-msgstr ""
+msgstr "Voor vragen of feedback neem contact met mij op via"
 
 #: tformabouttrayslate.labelname.caption
 msgid "Trayslate © 2026"
+msgstr ""
+
+#: tformabouttrayslate.labelurlemail.caption
+msgctxt "tformabouttrayslate.labelurlemail.caption"
+msgid "mailto:astverskoy@gmail.com"
+msgstr ""
+
+#: tformabouttrayslate.labelurlgithub.caption
+msgid "github:plaintool"
 msgstr ""
 
 #: tformabouttrayslate.lblabout.caption
@@ -339,6 +374,7 @@ msgid "GET"
 msgstr ""
 
 #: tformconfigtrayslate.combovaluetype.text
+msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
 msgstr ""
 
@@ -662,29 +698,28 @@ msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
 #: tformpopuptrayslate.acopytarget.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Vertaling kopiëren"
 
 #: tformpopuptrayslate.anewtranslate.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Nieuwe vertaling"
 
 #: tformpopuptrayslate.asend.hint
 msgid "Send source and translation to main window"
-msgstr ""
+msgstr "Bron en vertaling naar hoofdvenster sturen"
 
 #: tformpopuptrayslate.caption
-msgid " Trayslate"
+msgctxt "tformpopuptrayslate.caption"
+msgid "Trayslate"
 msgstr ""
 
 #: tformpopuptrayslate.labelwatermark.caption
 msgctxt "tformpopuptrayslate.labelwatermark.caption"
 msgid "Drag text here to translate"
-msgstr ""
+msgstr "Sleep tekst hier om te vertalen"
 
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
@@ -746,11 +781,11 @@ msgstr "Detecteert automatisch de invoertaal en wisselt indien nodig van paar, w
 
 #: tformsettingstrayslate.checkhidecontrols.caption
 msgid "Auto-hide controls"
-msgstr ""
+msgstr "Bediening automatisch verbergen"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
-msgstr ""
+msgstr "Verberg bediening wanneer de muis niet boven het popupvenster is"
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -764,11 +799,11 @@ msgstr "Vertaal tekst automatisch tijdens het typen"
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
-msgstr ""
+msgstr "Altijd bovenaan"
 
 #: tformsettingstrayslate.checkstayontop.hint
 msgid "Keeps the window above all other windows"
-msgstr ""
+msgstr "Houdt het venster boven alle andere vensters"
 
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
@@ -794,7 +829,7 @@ msgstr "Sneltoets"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
-msgstr ""
+msgstr "Automatisch opstarten"
 
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
@@ -812,7 +847,7 @@ msgstr "Recente taalparen"
 
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
-msgstr ""
+msgstr "Pop-upvenster"
 
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
@@ -851,11 +886,11 @@ msgstr "Max. paren"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity on Hover"
-msgstr ""
+msgstr "Ondoorzichtigheid bij hover"
 
 #: tformsettingstrayslate.labelopacityidle.caption
 msgid "Opacity Idle"
-msgstr ""
+msgstr "Ondoorzichtigheid in rust"
 
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
@@ -873,7 +908,7 @@ msgstr "Sneltoetsen"
 #: tformsettingstrayslate.pageinterface.caption
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
-msgstr ""
+msgstr "Interface"
 
 #: tformsettingstrayslate.panelfont.caption
 msgctxt "tformsettingstrayslate.panelfont.caption"
@@ -890,11 +925,11 @@ msgstr "Vertraging van vertaling in milliseconden"
 
 #: tformsettingstrayslate.trackopacityhover.hint
 msgid "Window transparency when the mouse is over the window"
-msgstr ""
+msgstr "Venstertransparantie wanneer de muis over het venster is"
 
 #: tformsettingstrayslate.trackopacityidle.hint
 msgid "Window transparency when the mouse is not over the window"
-msgstr ""
+msgstr "Venstertransparantie wanneer de muis niet over het venster is"
 
 #: tformtrayslate.aabout.caption
 msgid "About..."
@@ -1053,7 +1088,7 @@ msgstr "Nieuwe vertaling"
 
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
-msgstr ""
+msgstr "Pop-upvertaling"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -1083,13 +1118,13 @@ msgstr "Configuratie"
 
 #: tformtrayslate.menuhelp.caption
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: tformtrayslate.menulangpairs.caption
 msgid "Recent Pairs"
 msgstr "Recente paren"
 
 #: tformtrayslate.menulanguage.caption
+msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr ""
-

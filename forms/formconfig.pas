@@ -174,6 +174,12 @@ resourcestring
   rcaption = 'Config Editor';
   rdeleteconfigcaption = 'Delete config';
   rdeleteconfig = 'Are you sure you want to delete config';
+  rvaluetype1 = 'None';
+  rvaluetype2 = 'Language';
+  rvaluetype3 = 'Currency All';
+  rvaluetype4 = 'Currency Fiat Only';
+  rvaluetype5 = 'Currency Crypto Only';
+  rvaluetype6 = 'Measurement Units';
 
 implementation
 
@@ -191,6 +197,15 @@ begin
   BtnClose.Cancel := True;
   LabelFillLanguages.Font.Color := ThemeColor(clBlue, clSkyBlue);
   AddCustomColors(ColorServiceColorRecent);
+
+  ComboValueType.Items.Clear;
+  ComboValueType.Items.Add(rvaluetype1);
+  ComboValueType.Items.Add(rvaluetype2);
+  ComboValueType.Items.Add(rvaluetype3);
+  ComboValueType.Items.Add(rvaluetype4);
+  ComboValueType.Items.Add(rvaluetype5);
+  ComboValueType.Items.Add(rvaluetype6);
+  ComboValueType.ItemIndex := Ord(formTrayslate.Trans.ValueType);
 end;
 
 procedure TformConfigTrayslate.FormShow(Sender: TObject);

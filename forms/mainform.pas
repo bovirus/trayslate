@@ -459,6 +459,7 @@ resourcestring
   rswap = 'Swap (%s) with text (%s)';
   rnoconfig = 'Configuration file not found! Create it in the configuration editor.';
   rtoremovepair = ' to remove pair';
+  ropenpofiletr = 'Language File (*.po)|*.po';
 
 implementation
 
@@ -1957,6 +1958,23 @@ begin
   aSwap.Hint := Format(rswap, [HotKeyToText(HotKeyTransSwap), MIDDLE_MOUSE]).Replace('() ', string.Empty);
 
   FlowPairs.Hint := MIDDLE_MOUSE + rtoremovepair;
+
+  OpenPo.Filter := ropenpofiletr;
+
+  if Assigned(formConfigTrayslate) then
+  begin
+    with formConfigTrayslate do
+    begin
+      ComboValueType.Items.Clear;
+      ComboValueType.Items.Add(rvaluetype1);
+      ComboValueType.Items.Add(rvaluetype2);
+      ComboValueType.Items.Add(rvaluetype3);
+      ComboValueType.Items.Add(rvaluetype4);
+      ComboValueType.Items.Add(rvaluetype5);
+      ComboValueType.Items.Add(rvaluetype6);
+      ComboValueType.ItemIndex := Ord(Trans.ValueType);
+    end;
+  end;
 
   if Assigned(formAboutTrayslate) then
     formAboutTrayslate.MemoAbout.Text := formAboutTrayslate.LblAbout.Caption;

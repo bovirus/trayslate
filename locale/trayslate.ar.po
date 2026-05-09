@@ -37,6 +37,32 @@ msgstr "أدخل اسم ملف التكوين الجديد:"
 msgid "The configuration was modified. Save changes?"
 msgstr "تم تعديل التكوين. هل تريد حفظ التغييرات؟"
 
+#: formconfig.rvaluetype1
+msgctxt "formconfig.rvaluetype1"
+msgid "None"
+msgstr "لا شيء"
+
+#: formconfig.rvaluetype2
+msgctxt "formconfig.rvaluetype2"
+msgid "Language"
+msgstr "اللغة"
+
+#: formconfig.rvaluetype3
+msgid "Currency All"
+msgstr "جميع العملات"
+
+#: formconfig.rvaluetype4
+msgid "Currency Fiat Only"
+msgstr "العملات الورقية فقط"
+
+#: formconfig.rvaluetype5
+msgid "Currency Crypto Only"
+msgstr "العملات الرقمية فقط"
+
+#: formconfig.rvaluetype6
+msgid "Measurement Units"
+msgstr "وحدات القياس"
+
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
@@ -186,6 +212,10 @@ msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
 msgstr "ملف التكوين غير موجود! قم بإنشائه في محرر التكوين."
 
+#: mainform.ropenpofiletr
+msgid "Language File (*.po)|*.po"
+msgstr "ملف اللغة (*.po)|*.po"
+
 #: mainform.rswap
 #, object-pascal-format
 msgctxt "mainform.rswap"
@@ -228,19 +258,26 @@ msgid "by Alexander Tverskoy is licensed under"
 msgstr "بواسطة Alexander Tverskoy مرخّص بموجب"
 
 #: tformabouttrayslate.labelby1.caption
-msgid "the GNU General Public License, Version 3 "
-msgstr "رخصة GNU العامة، الإصدار 3"
+#, fuzzy
+#| msgid "the GNU General Public License, Version 3 "
+msgid "the GNU General Public License, Version 3"
+msgstr "رخصة GNU العامة، الإصدار 3 "
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
 msgstr "للأسئلة أو الملاحظات، تواصل معي على"
 
-#: tformabouttrayslate.labellicurl.caption
+#: tformabouttrayslate.labelname.caption
+msgid "Trayslate © 2026"
+msgstr ""
+
+#: tformabouttrayslate.labelurlemail.caption
+msgctxt "tformabouttrayslate.labelurlemail.caption"
 msgid "mailto:astverskoy@gmail.com"
 msgstr ""
 
-#: tformabouttrayslate.labelname.caption
-msgid "Trayslate © 2026"
+#: tformabouttrayslate.labelurlgithub.caption
+msgid "github:plaintool"
 msgstr ""
 
 #: tformabouttrayslate.lblabout.caption
@@ -339,6 +376,7 @@ msgid "GET"
 msgstr ""
 
 #: tformconfigtrayslate.combovaluetype.text
+msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
 msgstr ""
 
@@ -662,29 +700,28 @@ msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
 #: tformpopuptrayslate.acopytarget.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "نسخ الترجمة"
 
 #: tformpopuptrayslate.anewtranslate.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "ترجمة جديدة"
 
 #: tformpopuptrayslate.asend.hint
 msgid "Send source and translation to main window"
-msgstr ""
+msgstr "إرسال المصدر والترجمة إلى النافذة الرئيسية"
 
 #: tformpopuptrayslate.caption
-msgid " Trayslate"
+msgctxt "tformpopuptrayslate.caption"
+msgid "Trayslate"
 msgstr ""
 
 #: tformpopuptrayslate.labelwatermark.caption
 msgctxt "tformpopuptrayslate.labelwatermark.caption"
 msgid "Drag text here to translate"
-msgstr ""
+msgstr "اسحب النص هنا للترجمة"
 
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
@@ -746,11 +783,11 @@ msgstr "يكتشف تلقائياً لغة الإدخال ويبدل الزوج 
 
 #: tformsettingstrayslate.checkhidecontrols.caption
 msgid "Auto-hide controls"
-msgstr ""
+msgstr "إخفاء تلقائي للأدوات"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
-msgstr ""
+msgstr "إخفاء عناصر التحكم عند عدم مرور الفأرة فوق النافذة"
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -764,11 +801,11 @@ msgstr "ترجمة النص تلقائياً أثناء الكتابة"
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
-msgstr ""
+msgstr "البقاء في المقدمة"
 
 #: tformsettingstrayslate.checkstayontop.hint
 msgid "Keeps the window above all other windows"
-msgstr ""
+msgstr "يبقي النافذة فوق جميع النوافذ"
 
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
@@ -812,7 +849,7 @@ msgstr "أزواج اللغات الحديثة"
 
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
-msgstr ""
+msgstr "نافذة منبثقة"
 
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
@@ -851,11 +888,11 @@ msgstr "الحد الأقصى للأزواج"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity on Hover"
-msgstr ""
+msgstr "الشفافية عند التمرير"
 
 #: tformsettingstrayslate.labelopacityidle.caption
 msgid "Opacity Idle"
-msgstr ""
+msgstr "الشفافية في وضع الخمول"
 
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
@@ -890,11 +927,11 @@ msgstr "تأخير الترجمة بالمللي ثانية"
 
 #: tformsettingstrayslate.trackopacityhover.hint
 msgid "Window transparency when the mouse is over the window"
-msgstr ""
+msgstr "شفافية النافذة عند مرور الفأرة"
 
 #: tformsettingstrayslate.trackopacityidle.hint
 msgid "Window transparency when the mouse is not over the window"
-msgstr ""
+msgstr "شفافية النافذة عند عدم مرور الفأرة"
 
 #: tformtrayslate.aabout.caption
 msgid "About..."
@@ -1053,7 +1090,7 @@ msgstr "ترجمة جديدة"
 
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
-msgstr ""
+msgstr "ترجمة منبثقة"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -1090,6 +1127,6 @@ msgid "Recent Pairs"
 msgstr "الأزواج الحديثة"
 
 #: tformtrayslate.menulanguage.caption
+msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr ""
-

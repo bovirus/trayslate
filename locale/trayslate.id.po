@@ -37,6 +37,32 @@ msgstr "Masukkan nama file konfigurasi baru:"
 msgid "The configuration was modified. Save changes?"
 msgstr "Konfigurasi telah diubah. Simpan perubahan?"
 
+#: formconfig.rvaluetype1
+msgctxt "formconfig.rvaluetype1"
+msgid "None"
+msgstr "Tidak ada"
+
+#: formconfig.rvaluetype2
+msgctxt "formconfig.rvaluetype2"
+msgid "Language"
+msgstr "Bahasa"
+
+#: formconfig.rvaluetype3
+msgid "Currency All"
+msgstr "Semua Mata Uang"
+
+#: formconfig.rvaluetype4
+msgid "Currency Fiat Only"
+msgstr "Hanya Mata Uang Fiat"
+
+#: formconfig.rvaluetype5
+msgid "Currency Crypto Only"
+msgstr "Hanya Mata Uang Kripto"
+
+#: formconfig.rvaluetype6
+msgid "Measurement Units"
+msgstr "Satuan Ukur"
+
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
@@ -45,7 +71,7 @@ msgstr "Alihkan Aplikasi (Klik Ikon Baki)"
 #: formsettings.rapp_default
 msgctxt "formsettings.rapp_default"
 msgid "Default Ctrl+Shift+A"
-msgstr ""
+msgstr "Bawaan Ctrl+Shift+A"
 
 #: formsettings.rapp_hint
 msgctxt "formsettings.rapp_hint"
@@ -55,7 +81,7 @@ msgstr "Menampilkan atau menyembunyikan jendela utama aplikasi"
 #: formsettings.rdefaultfont
 msgctxt "formsettings.rdefaultfont"
 msgid "Default"
-msgstr ""
+msgstr "Bawaan"
 
 #: formsettings.rglobal
 msgid "Global Hotkeys"
@@ -98,7 +124,7 @@ msgstr "Menerjemahkan teks clipboard ke jendela popup di dekat kursor mouse"
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
 msgid "Default Ctrl+Shift+R"
-msgstr ""
+msgstr "Bawaan Ctrl+Shift+R"
 
 #: formsettings.rtransclipboard_hint
 msgctxt "formsettings.rtransclipboard_hint"
@@ -125,7 +151,7 @@ msgstr "Menerjemahkan teks yang dipilih dari aplikasi aktif ke jendela popup di 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
 msgid "Default Ctrl+Shift+V"
-msgstr ""
+msgstr "Bawaan Ctrl+Shift+V"
 
 #: formsettings.rtranscontrol_hint
 msgctxt "formsettings.rtranscontrol_hint"
@@ -140,7 +166,7 @@ msgstr "Terjemahkan dari Papan Klip (Klik Ganda Ikon Baki)"
 #: formsettings.rtransfromclipboard_default
 msgctxt "formsettings.rtransfromclipboard_default"
 msgid "Default Ctrl+Shift+T"
-msgstr ""
+msgstr "Bawaan Ctrl+Shift+T"
 
 #: formsettings.rtransfromclipboard_hint
 msgctxt "formsettings.rtransfromclipboard_hint"
@@ -155,7 +181,7 @@ msgstr "Terjemahkan dari Pilihan Aplikasi Aktif"
 #: formsettings.rtransfromcontrol_default
 msgctxt "formsettings.rtransfromcontrol_default"
 msgid "Default Ctrl+Shift+C"
-msgstr ""
+msgstr "Bawaan Ctrl+Shift+C"
 
 #: formsettings.rtransfromcontrol_hint
 msgctxt "formsettings.rtransfromcontrol_hint"
@@ -170,7 +196,7 @@ msgstr "Tukar Bahasa (Klik Tengah Ikon Baki)"
 #: formsettings.rtransswap_default
 msgctxt "formsettings.rtransswap_default"
 msgid "Default Ctrl+Shift+S"
-msgstr ""
+msgstr "Bawaan Ctrl+Shift+S"
 
 #: formsettings.rtransswap_hint
 msgctxt "formsettings.rtransswap_hint"
@@ -185,6 +211,10 @@ msgstr "Deteksi otomatis"
 msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
 msgstr "File konfigurasi tidak ditemukan! Buat di editor konfigurasi."
+
+#: mainform.ropenpofiletr
+msgid "Language File (*.po)|*.po"
+msgstr "Berkas Bahasa (*.po)|*.po"
 
 #: mainform.rswap
 #, object-pascal-format
@@ -228,19 +258,24 @@ msgid "by Alexander Tverskoy is licensed under"
 msgstr "oleh Alexander Tverskoy dilisensikan di bawah"
 
 #: tformabouttrayslate.labelby1.caption
-msgid "the GNU General Public License, Version 3 "
-msgstr "GNU General Public License, Versi 3"
+msgid "the GNU General Public License, Version 3"
+msgstr "the GNU General Public License, Versi 3"
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
-msgstr "untuk pertanyaan atau masukan hubungi saya di"
-
-#: tformabouttrayslate.labellicurl.caption
-msgid "mailto:astverskoy@gmail.com"
-msgstr ""
+msgstr "Untuk pertanyaan atau masukan hubungi saya di"
 
 #: tformabouttrayslate.labelname.caption
 msgid "Trayslate © 2026"
+msgstr ""
+
+#: tformabouttrayslate.labelurlemail.caption
+msgctxt "tformabouttrayslate.labelurlemail.caption"
+msgid "mailto:astverskoy@gmail.com"
+msgstr ""
+
+#: tformabouttrayslate.labelurlgithub.caption
+msgid "github:plaintool"
 msgstr ""
 
 #: tformabouttrayslate.lblabout.caption
@@ -339,6 +374,7 @@ msgid "GET"
 msgstr ""
 
 #: tformconfigtrayslate.combovaluetype.text
+msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
 msgstr ""
 
@@ -662,29 +698,28 @@ msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
 #: tformpopuptrayslate.acopytarget.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Salin terjemahan"
 
 #: tformpopuptrayslate.anewtranslate.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Terjemahan Baru"
 
 #: tformpopuptrayslate.asend.hint
 msgid "Send source and translation to main window"
-msgstr ""
+msgstr "Kirim sumber dan terjemahan ke jendela utama"
 
 #: tformpopuptrayslate.caption
-msgid " Trayslate"
+msgctxt "tformpopuptrayslate.caption"
+msgid "Trayslate"
 msgstr ""
 
 #: tformpopuptrayslate.labelwatermark.caption
 msgctxt "tformpopuptrayslate.labelwatermark.caption"
 msgid "Drag text here to translate"
-msgstr ""
+msgstr "Seret teks ke sini untuk diterjemahkan"
 
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
@@ -746,11 +781,11 @@ msgstr "Deteksi bahasa masukan secara otomatis dan tukar pasangan jika diperluka
 
 #: tformsettingstrayslate.checkhidecontrols.caption
 msgid "Auto-hide controls"
-msgstr ""
+msgstr "Sembunyikan kontrol otomatis"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
-msgstr ""
+msgstr "Sembunyikan kontrol saat mouse tidak berada di atas jendela popup"
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -764,11 +799,11 @@ msgstr "Terjemahkan teks secara otomatis saat mengetik"
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
-msgstr ""
+msgstr "Tetap di Atas"
 
 #: tformsettingstrayslate.checkstayontop.hint
 msgid "Keeps the window above all other windows"
-msgstr ""
+msgstr "Menjaga jendela di atas semua jendela lainnya"
 
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
@@ -812,7 +847,7 @@ msgstr "Pasangan Bahasa Terbaru"
 
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
-msgstr ""
+msgstr "Jendela Popup"
 
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
@@ -851,11 +886,11 @@ msgstr "Pasangan Maks"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity on Hover"
-msgstr ""
+msgstr "Opasitas saat Hover"
 
 #: tformsettingstrayslate.labelopacityidle.caption
 msgid "Opacity Idle"
-msgstr ""
+msgstr "Opasitas saat Diam"
 
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
@@ -878,7 +913,7 @@ msgstr "Antarmuka"
 #: tformsettingstrayslate.panelfont.caption
 msgctxt "tformsettingstrayslate.panelfont.caption"
 msgid "Default, 0"
-msgstr ""
+msgstr "Bawaan, 0"
 
 #: tformsettingstrayslate.spinmaxlangpairs.hint
 msgid "Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel"
@@ -890,11 +925,11 @@ msgstr "Tunda Terjemahan dalam milidetik"
 
 #: tformsettingstrayslate.trackopacityhover.hint
 msgid "Window transparency when the mouse is over the window"
-msgstr ""
+msgstr "Transparansi jendela saat mouse berada di atas jendela"
 
 #: tformsettingstrayslate.trackopacityidle.hint
 msgid "Window transparency when the mouse is not over the window"
-msgstr ""
+msgstr "Transparansi jendela saat mouse tidak berada di atas jendela"
 
 #: tformtrayslate.aabout.caption
 msgid "About..."
@@ -1053,7 +1088,7 @@ msgstr "Terjemahan Baru"
 
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
-msgstr ""
+msgstr "Terjemahan Popup"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -1090,6 +1125,6 @@ msgid "Recent Pairs"
 msgstr "Pasangan Terbaru"
 
 #: tformtrayslate.menulanguage.caption
+msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr ""
-

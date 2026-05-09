@@ -37,6 +37,32 @@ msgstr ""
 msgid "The configuration was modified. Save changes?"
 msgstr ""
 
+#: formconfig.rvaluetype1
+msgctxt "formconfig.rvaluetype1"
+msgid "None"
+msgstr ""
+
+#: formconfig.rvaluetype2
+msgctxt "formconfig.rvaluetype2"
+msgid "Language"
+msgstr ""
+
+#: formconfig.rvaluetype3
+msgid "Currency All"
+msgstr ""
+
+#: formconfig.rvaluetype4
+msgid "Currency Fiat Only"
+msgstr ""
+
+#: formconfig.rvaluetype5
+msgid "Currency Crypto Only"
+msgstr ""
+
+#: formconfig.rvaluetype6
+msgid "Measurement Units"
+msgstr ""
+
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
@@ -186,6 +212,10 @@ msgctxt "mainform.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
 msgstr ""
 
+#: mainform.ropenpofiletr
+msgid "Language File (*.po)|*.po"
+msgstr ""
+
 #: mainform.rswap
 #, object-pascal-format
 msgctxt "mainform.rswap"
@@ -228,19 +258,24 @@ msgid "by Alexander Tverskoy is licensed under"
 msgstr ""
 
 #: tformabouttrayslate.labelby1.caption
-msgid "the GNU General Public License, Version 3 "
+msgid "the GNU General Public License, Version 3"
 msgstr ""
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
 msgstr ""
 
-#: tformabouttrayslate.labellicurl.caption
+#: tformabouttrayslate.labelname.caption
+msgid "Trayslate © 2026"
+msgstr ""
+
+#: tformabouttrayslate.labelurlemail.caption
+msgctxt "tformabouttrayslate.labelurlemail.caption"
 msgid "mailto:astverskoy@gmail.com"
 msgstr ""
 
-#: tformabouttrayslate.labelname.caption
-msgid "Trayslate © 2026"
+#: tformabouttrayslate.labelurlgithub.caption
+msgid "github:plaintool"
 msgstr ""
 
 #: tformabouttrayslate.lblabout.caption
@@ -324,6 +359,7 @@ msgid "GET"
 msgstr ""
 
 #: tformconfigtrayslate.combovaluetype.text
+msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
 msgstr ""
 
@@ -651,7 +687,8 @@ msgid "Send source and translation to main window"
 msgstr ""
 
 #: tformpopuptrayslate.caption
-msgid " Trayslate"
+msgctxt "tformpopuptrayslate.caption"
+msgid "Trayslate"
 msgstr ""
 
 #: tformpopuptrayslate.labelwatermark.caption
@@ -1063,6 +1100,7 @@ msgid "Recent Pairs"
 msgstr ""
 
 #: tformtrayslate.menulanguage.caption
+msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr ""
 

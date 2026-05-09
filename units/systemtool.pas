@@ -130,6 +130,7 @@ resourcestring
 
 const
   REPO = 'plaintool/trayslate';
+  GITHUB = 'https://github.com/plaintool';
 
 implementation
 

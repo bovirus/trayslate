@@ -6,7 +6,7 @@ object formPopupTrayslate: TformPopupTrayslate
   AlphaBlend = True
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSizeToolWin
-  Caption = ' Trayslate'
+  Caption = 'Trayslate'
   ClientHeight = 240
   ClientWidth = 480
   ParentFont = True

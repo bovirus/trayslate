@@ -25,16 +25,18 @@ type
   TformAboutTrayslate = class(TForm)
     buttonOk: TButton;
     imageLogo: TImage;
+    LabelUrlGithub: TLabel;
     LblAbout: TLabel;
     labelBy: TLabel;
     labelName: TLabel;
     labelLic: TLabel;
-    LabelLicUrl: TLabel;
+    LabelUrlEmail: TLabel;
     MemoAbout: TMemo;
     labelBy1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
-    procedure LabelLicUrlClick(Sender: TObject);
+    procedure LabelUrlEmailClick(Sender: TObject);
+    procedure LabelUrlGithubClick(Sender: TObject);
   private
 
   public
@@ -58,7 +60,8 @@ begin
 
   MemoAbout.Text := LblAbout.Caption;
   labelName.Caption := 'Trayslate © ' + GetAppVersion;
-  LabelLicUrl.Font.Color := ThemeColor(clBlue, clSkyBlue);
+  LabelUrlEmail.Font.Color := ThemeColor(clBlue, clSkyBlue);
+  LabelUrlGithub.Font.Color := ThemeColor(clBlue, clSkyBlue);
 end;
 
 procedure TformAboutTrayslate.FormResize(Sender: TObject);
@@ -67,9 +70,14 @@ begin
   formTrayslate.FormAboutHeight := Height;
 end;
 
-procedure TformAboutTrayslate.LabelLicUrlClick(Sender: TObject);
+procedure TformAboutTrayslate.LabelUrlEmailClick(Sender: TObject);
 begin
-  OpenUrl(labelLicUrl.Caption);
+  OpenUrl(LabelUrlEmail.Caption);
+end;
+
+procedure TformAboutTrayslate.LabelUrlGithubClick(Sender: TObject);
+begin
+  OpenUrl(GITHUB);
 end;
 
 end.
