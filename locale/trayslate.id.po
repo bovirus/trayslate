@@ -661,6 +661,22 @@ msgstr "Cara melakukannya dengan mudah"
 msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
+#: tformpopuptrayslate.acopytarget.hint
+#, fuzzy
+msgctxt "tformpopuptrayslate.acopytarget.hint"
+msgid "Copy Translation"
+msgstr "Salin terjemahan"
+
+#: tformpopuptrayslate.anewtranslate.hint
+#, fuzzy
+msgctxt "tformpopuptrayslate.anewtranslate.hint"
+msgid "New Translate"
+msgstr "Terjemahan Baru"
+
+#: tformpopuptrayslate.asend.hint
+msgid "Send source and translation to main window"
+msgstr ""
+
 #: tformpopuptrayslate.caption
 msgid " Trayslate"
 msgstr ""
@@ -897,6 +913,7 @@ msgid "Copy"
 msgstr "Salin"
 
 #: tformtrayslate.acopytarget.hint
+msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Salin terjemahan"
 
@@ -1022,6 +1039,7 @@ msgid "Display Menu"
 msgstr "Tampilkan menu"
 
 #: tformtrayslate.anewtranslate.hint
+msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Terjemahan Baru"
 

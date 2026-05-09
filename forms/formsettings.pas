@@ -168,6 +168,7 @@ type
     function GetOriginalHotKey(Row: integer): THotKeyData;
     procedure FillListPages;
     procedure FillGridHotkeys;
+    procedure SetPopup;
   end;
 
 var
@@ -501,16 +502,28 @@ begin
   end
   else
   if Sender = TrackOpacityHover then
-    SpinHover.Value := TrackOpacityHover.Position
+  begin
+    SpinHover.Value := TrackOpacityHover.Position;
+    SetPopup;
+  end
   else
   if Sender = TrackOpacityIdle then
-    SpinIdle.Value := TrackOpacityIdle.Position
+  begin
+    SpinIdle.Value := TrackOpacityIdle.Position;
+    SetPopup;
+  end
   else
   if Sender = SpinHover then
-    TrackOpacityHover.Position := SpinHover.Value
+  begin
+    TrackOpacityHover.Position := SpinHover.Value;
+    SetPopup;
+  end
   else
   if Sender = SpinIdle then
+  begin
     TrackOpacityIdle.Position := SpinIdle.Value;
+    SetPopup;
+  end;
 end;
 
 procedure TformSettingsTrayslate.SplitterPagesMoved(Sender: TObject);
@@ -657,6 +670,15 @@ begin
     GridHotkeys.Row := SavedRow
   else
     GridHotkeys.Row := GridHotkeys.FixedRows;
+end;
+
+procedure TformSettingsTrayslate.SetPopup;
+begin
+  if Assigned(formPopupTrayslate) then
+  begin
+    formTrayslate.OpacityHover := TrackOpacityHover.Position;
+    formTrayslate.OpacityIdle := TrackOpacityIdle.Position;
+  end;
 end;
 
 procedure TformSettingsTrayslate.Apply;

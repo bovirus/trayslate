@@ -661,6 +661,22 @@ msgstr "簡単な方法"
 msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr ""
 
+#: tformpopuptrayslate.acopytarget.hint
+#, fuzzy
+msgctxt "tformpopuptrayslate.acopytarget.hint"
+msgid "Copy Translation"
+msgstr "翻訳をコピー"
+
+#: tformpopuptrayslate.anewtranslate.hint
+#, fuzzy
+msgctxt "tformpopuptrayslate.anewtranslate.hint"
+msgid "New Translate"
+msgstr "新規翻訳"
+
+#: tformpopuptrayslate.asend.hint
+msgid "Send source and translation to main window"
+msgstr ""
+
 #: tformpopuptrayslate.caption
 msgid " Trayslate"
 msgstr ""
@@ -897,6 +913,7 @@ msgid "Copy"
 msgstr "コピー"
 
 #: tformtrayslate.acopytarget.hint
+msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "翻訳をコピー"
 
@@ -1022,6 +1039,7 @@ msgid "Display Menu"
 msgstr "メニューを表示"
 
 #: tformtrayslate.anewtranslate.hint
+msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "新規翻訳"
 

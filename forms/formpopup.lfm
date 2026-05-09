@@ -20,8 +20,8 @@ object formPopupTrayslate: TformPopupTrayslate
   OnShow = FormShow
   object MemoTarget: TMemo
     Left = 3
-    Height = 234
-    Top = 3
+    Height = 209
+    Top = 28
     Width = 474
     Align = alClient
     BorderSpacing.Around = 3
@@ -45,7 +45,7 @@ object formPopupTrayslate: TformPopupTrayslate
     ParentBackground = False
     ParentColor = False
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 2
     OnClick = PanelWatermarkClick
     object LabelWatermark: TLabel
       Cursor = crIBeam
@@ -71,12 +71,13 @@ object formPopupTrayslate: TformPopupTrayslate
     Color = clNone
     ParentBackground = False
     ParentColor = False
-    TabOrder = 2
+    TabOrder = 1
     object SbCopyTarget: TSpeedButton
       Left = 0
       Height = 16
       Top = 0
       Width = 16
+      Action = aCopyTarget
       Align = alClient
       Color = clNone
       Flat = True
@@ -85,31 +86,94 @@ object formPopupTrayslate: TformPopupTrayslate
       PressedImageIndex = 12
       ShowHint = True
       ParentShowHint = False
-      OnClick = SbCopyTargetClick
     end
   end
-  object FlowPairs: TFlowPanel
-    Left = 5
-    Height = 0
+  object PanelPairs: TPanel
+    Left = 0
+    Height = 25
     Top = 0
-    Width = 470
+    Width = 480
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
-    BorderSpacing.Left = 5
-    BorderSpacing.Right = 5
-    BorderSpacing.Bottom = 3
-    ControlList = <>
-    FlowLayout = tlCenter
-    FlowStyle = fsLeftRightTopBottom
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 1
+    ClientHeight = 25
+    ClientWidth = 480
+    Color = clBtnFace
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 3
+    object SbSend: TSpeedButton
+      Left = 453
+      Height = 24
+      Top = 1
+      Width = 24
+      Action = aSend
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 1
+      Flat = True
+      Images = formTrayslate.ImageButtons
+      ImageIndex = 14
+      ShowHint = True
+      ParentShowHint = False
+    end
+    object FlowPairs: TFlowPanel
+      Left = 32
+      Height = 22
+      Top = 3
+      Width = 416
+      Align = alClient
+      AutoSize = True
+      BevelOuter = bvNone
+      BorderSpacing.Left = 32
+      BorderSpacing.Top = 3
+      BorderSpacing.Right = 32
+      ControlList = <>
+      FlowLayout = tlCenter
+      FlowStyle = fsLeftRightTopBottom
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+    end
+    object SbNewTranslate: TSpeedButton
+      Left = 3
+      Height = 24
+      Top = 1
+      Width = 24
+      Action = aNewTranslate
+      BorderSpacing.Left = 3
+      BorderSpacing.Top = 1
+      Flat = True
+      Images = formTrayslate.ImageButtons
+      ImageIndex = 8
+      ShowHint = True
+      ParentShowHint = False
+    end
   end
   object Timer: TTimer
     Interval = 100
     OnTimer = TimerTimer
+    Left = 112
+    Top = 176
+  end
+  object ActionList: TActionList
+    Images = formTrayslate.ImageButtons
     Left = 32
-    Top = 168
+    Top = 176
+    object aNewTranslate: TAction
+      Hint = 'New Translate'
+      ImageIndex = 8
+      ShortCut = 16462
+      OnExecute = aNewTranslateExecute
+    end
+    object aSend: TAction
+      Hint = 'Send source and translation to main window'
+      ImageIndex = 14
+      OnExecute = aSendExecute
+    end
+    object aCopyTarget: TAction
+      Hint = 'Copy Translation'
+      ImageIndex = 10
+      OnExecute = aCopyTargetExecute
+    end
   end
 end

@@ -494,8 +494,8 @@ begin
   FRealTimeDelay := 1000;
   FAutoSwap := False;
   FStayOnTop := True;
-  FOpacityHover := 80;
-  FOpacityIdle := 60;
+  FOpacityHover := 60;
+  FOpacityIdle := 40;
   FAutoCheckUpdates := True;
   FUpdatesChecked := False;
   FAutoStart := True;
@@ -594,13 +594,13 @@ begin
   Left := Screen.WorkAreaRect.Right - Width - 30;
   Top := Screen.WorkAreaRect.Bottom - Height - 50;
 
-  SbSwap.ImageIndex := ThemeValue(0, 1);
-  SbTranslate.ImageIndex := ThemeValue(2, 3);
-  SbAddPair.ImageIndex := ThemeValue(4, 5);
-  SbMenu.ImageIndex := ThemeValue(6, 7);
-  SbNewTranslate.ImageIndex := ThemeValue(8, 9);
-  SbCopySource.ImageIndex := ThemeValue(10, 11);
-  SbCopyTarget.ImageIndex := ThemeValue(10, 11);
+  aNewTranslate.ImageIndex := ThemeValue(8, 9);
+  aSwap.ImageIndex := ThemeValue(0, 1);
+  aTranslate.ImageIndex := ThemeValue(2, 3);
+  aAddPair.ImageIndex := ThemeValue(4, 5);
+  aMenu.ImageIndex := ThemeValue(6, 7);
+  aCopySource.ImageIndex := ThemeValue(10, 11);
+  aCopyTarget.ImageIndex := ThemeValue(10, 11);
   SbCopySource.PressedImageIndex := ThemeValue(12, 13);
   SbCopyTarget.PressedImageIndex := ThemeValue(12, 13);
   FLeftButton := True;

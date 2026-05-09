@@ -19,6 +19,8 @@ uses
   ExtCtrls,
   Graphics,
   Dialogs,
+  ActnList,
+  Menus,
   StdCtrls,
   Clipbrd,
   Math,
@@ -32,14 +34,24 @@ type
   { TformPopupTrayslate }
 
   TformPopupTrayslate = class(TForm)
+    aSend: TAction;
+    aCopyTarget: TAction;
+    aNewTranslate: TAction;
+    ActionList: TActionList;
     FlowPairs: TFlowPanel;
     LabelWatermark: TLabel;
     MemoTarget: TMemo;
+    PanelPairs: TPanel;
     PanelWatermark: TPanel;
     PanelButtonTarget: TPanel;
+    SbNewTranslate: TSpeedButton;
     SbCopyTarget: TSpeedButton;
+    SbSend: TSpeedButton;
     Timer: TTimer;
 
+    procedure aCopyTargetExecute(Sender: TObject);
+    procedure aNewTranslateExecute(Sender: TObject);
+    procedure aSendExecute(Sender: TObject);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
@@ -47,7 +59,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure MemoTargetChange(Sender: TObject);
     procedure PanelWatermarkClick(Sender: TObject);
-    procedure SbCopyTargetClick(Sender: TObject);
     procedure TimerTimer(Sender: TObject);
     procedure OnTextDroppedHandler(Sender: TObject; const AText: string);
   private
@@ -77,7 +88,9 @@ begin
   FDropTarget.InsertText := False;
   FDropTarget.OnTextDropped := @OnTextDroppedHandler;
 
-  SbCopyTarget.ImageIndex := ThemeValue(10, 11);
+  aNewTranslate.ImageIndex := ThemeValue(8, 9);
+  aSend.ImageIndex := ThemeValue(14, 15);
+  aCopyTarget.ImageIndex := ThemeValue(10, 11);
   SbCopyTarget.PressedImageIndex := ThemeValue(12, 13);
 
   UpdateWatermarkVisibility;
@@ -114,6 +127,25 @@ begin
   formTrayslate.FormPopupTop := Top;
 end;
 
+procedure TformPopupTrayslate.aNewTranslateExecute(Sender: TObject);
+begin
+  MemoTarget.Clear;
+  SourceText := string.Empty;
+end;
+
+procedure TformPopupTrayslate.aSendExecute(Sender: TObject);
+begin
+  if MemoTarget.Text = string.Empty then exit;
+  formTrayslate.MemoSource.Text := SourceText;
+  formTrayslate.MemoTarget.Text := MemoTarget.Text;
+  formTrayslate.aShow.Execute;
+end;
+
+procedure TformPopupTrayslate.aCopyTargetExecute(Sender: TObject);
+begin
+  Clipboard.AsText := MemoTarget.Text;
+end;
+
 procedure TformPopupTrayslate.MemoTargetChange(Sender: TObject);
 begin
   UpdateWatermarkVisibility;
@@ -125,16 +157,12 @@ begin
     MemoTarget.SetFocus;
 end;
 
-procedure TformPopupTrayslate.SbCopyTargetClick(Sender: TObject);
-begin
-  Clipboard.AsText := MemoTarget.Text;
-end;
-
 procedure TformPopupTrayslate.TimerTimer(Sender: TObject);
 var
   CursorPos: TPoint;
   TargetAlpha: integer;
   DetectionRect: TRect;
+  InWindow: boolean;
 const
   // Individual margins for each side (in pixels)
   MARGIN_LEFT = 10;
@@ -166,12 +194,14 @@ begin
   if PtInRect(DetectionRect, CursorPos) then
   begin
     // Mouse is within range (including margins)
-    TargetAlpha := Round(EnsureRange(formTrayslate.OpacityHover, 0, 100) * 255 / 100);
+    InWindow := True;
+    TargetAlpha := Round(Power(EnsureRange(formTrayslate.OpacityHover, 0, 100) / 100, 0.5) * 255);
   end
   else
   begin
     // Mouse is outside the detection zone
-    TargetAlpha := Round(EnsureRange(formTrayslate.OpacityIdle, 0, 100) * 255 / 100);
+    InWindow := False;
+    TargetAlpha := Round(Power(EnsureRange(formTrayslate.OpacityIdle, 0, 100) / 100, 0.5) * 255);
   end;
 
   // Apply AlphaBlendValue only when it changes to avoid UI flicker
@@ -184,6 +214,9 @@ begin
 
     UpdateWatermarkVisibility;
   end;
+
+  PanelPairs.Visible := InWIndow;
+  PanelButtonTarget.Visible := InWindow;
 end;
 
 procedure TformPopupTrayslate.OnTextDroppedHandler(Sender: TObject; const AText: string);

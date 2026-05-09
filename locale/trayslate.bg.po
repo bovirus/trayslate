@@ -661,6 +661,22 @@ msgstr "Как да го направя лесно"
 msgid "https://plaintool.github.io/notetask/donate.htm"
 msgstr "https://plaintool.github.io/notetask/donate.htm"
 
+#: tformpopuptrayslate.acopytarget.hint
+#, fuzzy
+msgctxt "tformpopuptrayslate.acopytarget.hint"
+msgid "Copy Translation"
+msgstr "Копирай превода"
+
+#: tformpopuptrayslate.anewtranslate.hint
+#, fuzzy
+msgctxt "tformpopuptrayslate.anewtranslate.hint"
+msgid "New Translate"
+msgstr "Нов превод"
+
+#: tformpopuptrayslate.asend.hint
+msgid "Send source and translation to main window"
+msgstr ""
+
 #: tformpopuptrayslate.caption
 msgid " Trayslate"
 msgstr ""
@@ -897,6 +913,7 @@ msgid "Copy"
 msgstr "Копиране"
 
 #: tformtrayslate.acopytarget.hint
+msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Копирай превода"
 
@@ -1022,6 +1039,7 @@ msgid "Display Menu"
 msgstr "Покажи Меню"
 
 #: tformtrayslate.anewtranslate.hint
+msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Нов превод"
 
