@@ -744,6 +744,14 @@ msgstr "Αυτόματη εναλλαγή ζεύγους γλωσσών"
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "Αυτόματος εντοπισμός γλώσσας εισαγωγής και εναλλαγή ζεύγους εάν χρειάζεται, δεν λειτουργεί κατά τη Μετάφραση σε πραγματικό χρόνο"
 
+#: tformsettingstrayslate.checkhidecontrols.caption
+msgid "Auto-hide controls"
+msgstr ""
+
+#: tformsettingstrayslate.checkhidecontrols.hint
+msgid "Hide window controls when the mouse is not over the popup window"
+msgstr ""
+
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
 msgid "Translate As You Type"

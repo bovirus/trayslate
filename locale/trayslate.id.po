@@ -744,6 +744,14 @@ msgstr "Tukar Pasangan Bahasa Secara Otomatis"
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "Deteksi bahasa masukan secara otomatis dan tukar pasangan jika diperlukan, tidak berfungsi selama Terjemahan Waktu Nyata"
 
+#: tformsettingstrayslate.checkhidecontrols.caption
+msgid "Auto-hide controls"
+msgstr ""
+
+#: tformsettingstrayslate.checkhidecontrols.hint
+msgid "Hide window controls when the mouse is not over the popup window"
+msgstr ""
+
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
 msgid "Translate As You Type"

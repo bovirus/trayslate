@@ -281,6 +281,7 @@ type
     FRealTimeDelay: integer;
     FAutoSwap: boolean;
     FStayOnTop: boolean;
+    FHideControls: boolean;
     FOpacityHover: integer;
     FOpacityIdle: integer;
     FAutoCheckUpdates: boolean;
@@ -404,6 +405,7 @@ type
     property RealTimeDelay: integer read FRealTimeDelay write FRealTimeDelay;
     property AutoSwap: boolean read FAutoSwap write FAutoSwap;
     property StayOnTop: boolean read FStayOnTop write FStayOnTop;
+    property HideControls: boolean read FHideControls write FHideControls;
     property OpacityHover: integer read FOpacityHover write FOpacityHover;
     property OpacityIdle: integer read FOpacityIdle write FOpacityIdle;
     property AutoCheckUpdates: boolean read FAutoCheckUpdates write FAutoCheckUpdates;
@@ -494,6 +496,7 @@ begin
   FRealTimeDelay := 1000;
   FAutoSwap := False;
   FStayOnTop := True;
+  FHideControls := True;
   FOpacityHover := 60;
   FOpacityIdle := 40;
   FAutoCheckUpdates := True;

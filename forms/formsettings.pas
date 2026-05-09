@@ -44,6 +44,7 @@ type
     CheckStayOnTop: TCheckBox;
     CheckRealTime: TCheckBox;
     CheckAutoSwap: TCheckBox;
+    CheckHideControls: TCheckBox;
     CheckTwoLang: TCheckBox;
     CheckAutostart: TCheckBox;
     CheckAutoAddLangPairs: TCheckBox;
@@ -121,6 +122,7 @@ type
     FOriginalRealTimeDelay: integer;
     FOriginalAutoSwap: boolean;
     FOriginalStayOnTop: boolean;
+    FOriginalHideControls: boolean;
     FOriginalOpacityHover: integer;
     FOriginalOpacityIdle: integer;
     FOriginalConfigLangDetect: string;
@@ -691,6 +693,7 @@ begin
   formTrayslate.RealTimeDelay := SpinRealTimeDelay.Value;
   formTrayslate.AutoSwap := CheckAutoSwap.Checked;
   formTrayslate.StayOnTop := CheckStayOnTop.Checked;
+  formTrayslate.HideControls := CheckHideControls.Checked;
   formTrayslate.OpacityHover := TrackOpacityHover.Position;
   formTrayslate.OpacityIdle := TrackOpacityIdle.Position;
 
@@ -755,6 +758,7 @@ begin
   FOriginalRealTimeDelay := formTrayslate.RealTimeDelay;
   FOriginalAutoSwap := formTrayslate.AutoSwap;
   FOriginalStayOnTop := formTrayslate.StayOnTop;
+  FOriginalHideControls := formTrayslate.HideControls;
   FOriginalOpacityHover := formTrayslate.OpacityHover;
   FOriginalOpacityIdle := formTrayslate.OpacityIdle;
   FOriginalConfigLangDetect := formTrayslate.ConfigLangDetect;
@@ -805,6 +809,7 @@ begin
   SpinRealTimeDelay.Value := FOriginalRealTimeDelay;
   CheckAutoSwap.Checked := FOriginalAutoSwap;
   CheckStayOnTop.Checked := FOriginalStayOnTop;
+  CheckHideControls.Checked := FOriginalHideControls;
   TrackOpacityHover.Position := FOriginalOpacityHover;
   TrackOpacityIdle.Position := FOriginalOpacityIdle;
   if FOriginalConfigLangDetect <> string.Empty then

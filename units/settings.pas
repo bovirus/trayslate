@@ -170,6 +170,7 @@ begin
     JSONObj.Add('RealTimeDelay', Form.RealTimeDelay);
     JSONObj.Add('AutoSwap', Form.AutoSwap);
     JSONObj.Add('StayOnTop', Form.StayOnTop);
+    JSONObj.Add('HideControls', Form.HideControls);
     JSONObj.Add('OpacityHover', Form.OpacityHover);
     JSONObj.Add('OpacityIdle', Form.OpacityIdle);
     JSONObj.Add('AutoAddLangPairs', Form.AutoAddLangPairs);
@@ -402,6 +403,9 @@ begin
 
         if (JSONObj.FindPath('StayOnTop') <> nil) then
           Form.StayOnTop := JSONObj.FindPath('StayOnTop').AsBoolean;
+
+        if (JSONObj.FindPath('HideControls') <> nil) then
+          Form.HideControls := JSONObj.FindPath('HideControls').AsBoolean;
 
         if (JSONObj.FindPath('OpacityHover') <> nil) then
           Form.OpacityHover := JSONObj.FindPath('OpacityHover').AsInteger;

@@ -215,8 +215,8 @@ begin
     UpdateWatermarkVisibility;
   end;
 
-  PanelPairs.Visible := InWIndow;
-  PanelButtonTarget.Visible := InWindow;
+  PanelPairs.Visible := InWIndow or not formTrayslate.HideControls;
+  PanelButtonTarget.Visible := InWindow or not formTrayslate.HideControls;
 end;
 
 procedure TformPopupTrayslate.OnTextDroppedHandler(Sender: TObject; const AText: string);
