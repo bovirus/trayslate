@@ -548,6 +548,9 @@ begin
   formTrayslate.IconTwoLang := FOriginalIconTwoLang;
   formTrayslate.SetIcon;
 
+  formTrayslate.OpacityHover := FOriginalOpacityHover;
+  formTrayslate.OpacityIdle := FOriginalOpacityIdle;
+
   Reset;
   ModalResult := mrCancel;
 end;
