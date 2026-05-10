@@ -2693,14 +2693,14 @@ begin
   TimerAnimate.Enabled := True;
 
   // Detect language in source memo
-  langDetect := TranslateThread(TransDetect, ExtractTextSample(AText));
+  langDetect := LowerCase(TranslateThread(TransDetect, ExtractTextSample(AText)));
 
   // Check selected languages
-  langSrc := Trans.Languages.ValueFromIndex[FLanguages.IndexOf(ComboSource.Text)];
-  langTar := Trans.Languages.ValueFromIndex[FLanguages.IndexOf(ComboTarget.Text)];
+  langSrc := LowerCase(Trans.Languages.ValueFromIndex[FLanguages.IndexOf(ComboSource.Text)]);
+  langTar := LowerCase(Trans.Languages.ValueFromIndex[FLanguages.IndexOf(ComboTarget.Text)]);
 
   // Swap if needed
-  if (LowerCase(langSrc) <> LowerCase(langDetect)) and (LowerCase(langTar) = LowerCase(langDetect)) then
+  if (langSrc <> langDetect) and (langTar = langDetect) and (not IsSpecialCode(langSrc)) and (not IsSpecialCode(langTar)) then
   begin
     SwapLanguages;
     ShowCustomHint(TrayIcon.Hint);

@@ -25,7 +25,6 @@ type
 
 const
   SpecialCodes: array[0..1] of string = ('auto', 'empty');
-  AUTO_DETECT_NAME = 'Auto Detect';
 
 resourcestring
   rautodetect = 'Auto Detect';
@@ -47,6 +46,8 @@ function GetLanguageDisplayStrings(AValueType: TValueType): TStringList;
 function GetDisplayNamesFromCodeMap(ACodeMap: TStringList; AValueType: TValueType; Sort: boolean = False): TStringList;
 
 function ExtractCodeFromItem(const ItemText: string): string;
+
+function IsSpecialCode(const Value: string): boolean;
 
 implementation
 
@@ -1015,6 +1016,17 @@ begin
     Result := Copy(ItemText, P + 2, Length(ItemText) - P - 2)
   else
     Result := ItemText;
+end;
+
+function IsSpecialCode(const Value: string): boolean;
+var
+  i: integer;
+begin
+  for i := Low(SpecialCodes) to High(SpecialCodes) do
+    if SpecialCodes[i] = Value then
+      Exit(True);
+
+  Result := False;
 end;
 
 end.
