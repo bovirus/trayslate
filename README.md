@@ -1,3 +1,5 @@
+[:it: IT](README-it.md "Italian")&nbsp;&nbsp;
+
 # Trayslate
 
 Trayslate is a tray-based client for translation services. You can enter text directly, translate clipboard content, or translate selected text in any application. You can also replace text in another app with its translation using a hotkey. The app lets you choose and fully configure the translation service you use.
