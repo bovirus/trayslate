@@ -131,6 +131,7 @@ resourcestring
 const
   REPO = 'plaintool/trayslate';
   GITHUB = 'https://github.com/plaintool';
+  EMAIL = 'mailto:astverskoy@gmail.com';
 
 implementation
 

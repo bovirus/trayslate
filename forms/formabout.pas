@@ -72,7 +72,7 @@ end;
 
 procedure TformAboutTrayslate.LabelUrlEmailClick(Sender: TObject);
 begin
-  OpenUrl(LabelUrlEmail.Caption);
+  OpenUrl(EMAIL);
 end;
 
 procedure TformAboutTrayslate.LabelUrlGithubClick(Sender: TObject);
