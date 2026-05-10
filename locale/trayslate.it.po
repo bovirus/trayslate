@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Trayslate - Italian - 07.05.2026\n"
+"Project-Id-Version: Trayslate - Italian - 10.05.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: formconfig.rcaption
@@ -45,7 +45,7 @@ msgstr ""
 #: formconfig.rvaluetype1
 msgctxt "formconfig.rvaluetype1"
 msgid "None"
-msgstr "Nessuno"
+msgstr "Nessuna"
 
 #: formconfig.rvaluetype2
 msgctxt "formconfig.rvaluetype2"
@@ -58,11 +58,11 @@ msgstr "Tutte le valute"
 
 #: formconfig.rvaluetype4
 msgid "Currency Fiat Only"
-msgstr "Solo valute fiat"
+msgstr "Solo valuta Fiat"
 
 #: formconfig.rvaluetype5
 msgid "Currency Crypto Only"
-msgstr "Solo criptovalute"
+msgstr "Solo valute crypto"
 
 #: formconfig.rvaluetype6
 msgid "Measurement Units"
@@ -124,7 +124,9 @@ msgstr "Predefinito: Ctrl+Maiusc+P"
 
 #: formsettings.rtransclipboardpopup_hint
 msgid "Translates clipboard text to a popup window near the mouse cursor"
-msgstr "Traduci il testo degli appunti in una finestra popup vicino al cursore del mouse"
+msgstr ""
+"Traduci il testo degli appunti in una finestra popup vicino al cursore del "
+"mouse"
 
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
@@ -133,8 +135,11 @@ msgstr "Predefinito Ctrl+Maiusc+R"
 
 #: formsettings.rtransclipboard_hint
 msgctxt "formsettings.rtransclipboard_hint"
-msgid "Translates the current text in clipboard and copies the result to the clipboard"
-msgstr "Traduci il testo attuale negli appunti e copia il risultato negli appunti"
+msgid ""
+"Translates the current text in clipboard and copies the result to the "
+"clipboard"
+msgstr ""
+"Traduci il testo attuale negli appunti e copia il risultato negli appunti"
 
 #: formsettings.rtranscontrol
 msgctxt "formsettings.rtranscontrol"
@@ -150,8 +155,12 @@ msgid "Default: Ctrl+Shift+X"
 msgstr "Predefinito: Ctrl+Maiusc+X"
 
 #: formsettings.rtranscontrolpopup_hint
-msgid "Translates selected text from the active application to a popup window near the mouse cursor"
-msgstr "Traduci il testo selezionato dall'applicazione attiva in una finestra popup vicino al cursore del mouse"
+msgid ""
+"Translates selected text from the active application to a popup window near "
+"the mouse cursor"
+msgstr ""
+"Traduci il testo selezionato dall'applicazione attiva in una finestra popup "
+"vicino al cursore del mouse"
 
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
@@ -160,8 +169,10 @@ msgstr "Predefinito Ctrl+Maiusc+V"
 
 #: formsettings.rtranscontrol_hint
 msgctxt "formsettings.rtranscontrol_hint"
-msgid "Replaces the selected text in the active application with the translation"
-msgstr "Sostituisci nell'applicazione attiva il testo selezionato con la traduzione"
+msgid ""
+"Replaces the selected text in the active application with the translation"
+msgstr ""
+"Sostituisci nell'applicazione attiva il testo selezionato con la traduzione"
 
 #: formsettings.rtransfromclipboard
 msgctxt "formsettings.rtransfromclipboard"
@@ -279,7 +290,7 @@ msgstr "Trayslate © 2026"
 #: tformabouttrayslate.labelurlemail.caption
 msgctxt "tformabouttrayslate.labelurlemail.caption"
 msgid "mailto:astverskoy@gmail.com"
-msgstr "mailto:astverskoy@gmail.com"
+msgstr "Invia email"
 
 #: tformabouttrayslate.labelurlgithub.caption
 msgid "github:plaintool"
@@ -287,7 +298,11 @@ msgstr "github:plaintool"
 
 #: tformabouttrayslate.lblabout.caption
 msgid ""
-"Trayslate is a tray-based client for translation services. You can enter text directly, translate clipboard content, or translate selected text in any application. You can also replace text in another app with its translation using a hotkey. The app lets you choose and fully configure the translation service you use.\n"
+"Trayslate is a tray-based client for translation services. You can enter "
+"text directly, translate clipboard content, or translate selected text in "
+"any application. You can also replace text in another app with its "
+"translation using a hotkey. The app lets you choose and fully configure the "
+"translation service you use.\n"
 "\n"
 "This application uses third-party resources under the following licenses:\n"
 "\n"
@@ -304,10 +319,14 @@ msgid ""
 "   https://www.flaticon.com/ru/free-icon/translator_682045"
 msgstr ""
 "Trayslate è un client nella baarra di sistema per servizi di traduzione. \n"
-"Puoi inserire testo direttamente, tradurre il contenuto degli appunti o il testo selezionato in qualsiasi applicazione. \n"
-"Puoi anche sostituire in un’altra app tramite un tasto rapido il testo con la traduzione. \n"
-"L’app permette di scegliere/configurare completamente il servizio di traduzione usato.\n"
-"Questa applicazione utilizza risorse di terze parti con le seguenti licenze:\n"
+"Puoi inserire testo direttamente, tradurre il contenuto degli appunti o il "
+"testo selezionato in qualsiasi applicazione. \n"
+"Puoi anche sostituire in un’altra app tramite un tasto rapido il testo con "
+"la traduzione. \n"
+"L’app permette di scegliere/configurare completamente il servizio di "
+"traduzione usato.\n"
+"Questa applicazione utilizza risorse di terze parti con le seguenti "
+"licenze:\n"
 "\n"
 "1. Librerie OpenSSL (compilate da sorgente, versioni 32 e 64 bit)\n"
 "   Licenza: Apache License 2.0\n"
@@ -385,7 +404,7 @@ msgstr "GET"
 #: tformconfigtrayslate.combovaluetype.text
 msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
-msgstr "Nessuno"
+msgstr "Nessuna"
 
 #: tformconfigtrayslate.groupboxcustomparameters.caption
 msgid "Custom Parameters"
@@ -422,7 +441,9 @@ msgstr "Risposta"
 
 #: tformconfigtrayslate.imagepreview.hint
 msgid "Click to select the config icon, Middle-Click clears the icon"
-msgstr "Fai clic per selezionare l’icona di configurazione, clic centrale elimina l’icona"
+msgstr ""
+"Fai clic per selezionare l’icona di configurazione, clic centrale elimina "
+"l’icona"
 
 #: tformconfigtrayslate.labelaccept.caption
 msgid "Accept"
@@ -442,12 +463,19 @@ msgid "Fill with default"
 msgstr "Compila con i valori predefiniti"
 
 #: tformconfigtrayslate.labelheaders.caption
-msgid "Additional request headers in key=value format, key: value is also supported"
-msgstr "Intestazioni aggiuntive della richiesta in formato 'key=value', è supportato anche 'key: value'"
+msgid ""
+"Additional request headers in key=value format, key: value is also supported"
+msgstr ""
+"Intestazioni aggiuntive della richiesta in formato 'key=value', è supportato "
+"anche 'key: value'"
 
 #: tformconfigtrayslate.labelinitheaders.caption
-msgid "Additional initial request headers in key=value format, key: value is also supported"
-msgstr "Intestazioni aggiuntive della richiesta iniziale in formato 'key=value', è supportato anche 'key: value'"
+msgid ""
+"Additional initial request headers in key=value format, key: value is also "
+"supported"
+msgstr ""
+"Intestazioni aggiuntive della richiesta iniziale in formato 'key=value', è "
+"supportato anche 'key: value'"
 
 #: tformconfigtrayslate.labelinitheaders2.caption
 msgctxt "tformconfigtrayslate.labelinitheaders2.caption"
@@ -460,12 +488,19 @@ msgid "Live time"
 msgstr "Durata live"
 
 #: tformconfigtrayslate.labelinitparameters.caption
-msgid "Parameters name=regexp are extracted from the response and used by name in requests"
-msgstr "I parametri 'name=regexp' vengono estratti dalla risposta e usati per nome nelle richieste"
+msgid ""
+"Parameters name=regexp are extracted from the response and used by name in "
+"requests"
+msgstr ""
+"I parametri 'name=regexp' vengono estratti dalla risposta e usati per nome "
+"nelle richieste"
 
 #: tformconfigtrayslate.labelinitparameters1.caption
-msgid "Time in seconds to refresh parameters with a new request (0 = every request)"
-msgstr "Tempo in secondi per aggiornare i parametri con una nuova richiesta (0 = ogni richiesta)"
+msgid ""
+"Time in seconds to refresh parameters with a new request (0 = every request)"
+msgstr ""
+"Tempo in secondi per aggiornare i parametri con una nuova richiesta (0 = "
+"ogni richiesta)"
 
 #: tformconfigtrayslate.labelinitparameters2.caption
 msgctxt "tformconfigtrayslate.labelinitparameters2.caption"
@@ -497,40 +532,79 @@ msgstr "User Agent"
 
 #: tformconfigtrayslate.labeljsonpointer2.caption
 msgid ""
-"Json Pointer: Use / for levels, keys for objects, and numbers for indexes. Use * for all items, *#10 to join items by newline. Use ~ at the end of the path to return the raw JSON branch. Separate multiple segments with semicolon ;.\n"
-"Literal: Text block in {…}. Special tag #10 for newlines. Use {{regex}} inside to extract data directly into the text.\n"
-"Logic: If a Pointer in a segment is empty, the whole segment is skipped. If a segment has no Pointer, only literal text blocks with embedded regular expressions are processed.\n"
-"Regex: {prefix {regex[index]} suffix} inside a text block. If no [index] is specified, the first match is used. Index can be a number, [*] (join by space), or [*#10] (join by newline). If the regex finds no match, the entire {…} block is removed. Using ~ inside a regex returns the entire text.\n"
-"Inversion: Start a segment with ! (e.g. !/path{Error}) to show its text only if the Pointer data is missing or the JSON is invalid.\n"
-"Commenting: /* text */ comments are stripped from the entire expression before any processing.\n"
+"Json Pointer: Use / for levels, keys for objects, and numbers for indexes. "
+"Use * for all items, *#10 to join items by newline. Use ~ at the end of the "
+"path to return the raw JSON branch. Separate multiple segments with "
+"semicolon ;.\n"
+"Literal: Text block in {…}. Special tag #10 for newlines. Use {{regex}} "
+"inside to extract data directly into the text.\n"
+"Logic: If a Pointer in a segment is empty, the whole segment is skipped. If "
+"a segment has no Pointer, only literal text blocks with embedded regular "
+"expressions are processed.\n"
+"Regex: {prefix {regex[index]} suffix} inside a text block. If no [index] is "
+"specified, the first match is used. Index can be a number, [*] (join by "
+"space), or [*#10] (join by newline). If the regex finds no match, the entire "
+"{…} block is removed. Using ~ inside a regex returns the entire text.\n"
+"Inversion: Start a segment with ! (e.g. !/path{Error}) to show its text only "
+"if the Pointer data is missing or the JSON is invalid.\n"
+"Commenting: /* text */ comments are stripped from the entire expression "
+"before any processing.\n"
 "Examples:\n"
-"responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!#10}; /translations/0/text"
+"responseData/translatedText; matches/*#10/translation; /texts/text; {literal "
+"text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!"
+"#10}; /translations/0/text"
 msgstr ""
-"Json Pointer: Usa / per i livelli, le chiavi per gli oggetti e i numeri per gli indici. Usa * per tutti gli elementi, *#10 per unire gli elementi con nuova riga. Usa ~ alla fine del percorso per restituire il ramo JSON grezzo. Separa più segmenti con il punto e virgola ;.\n"
-"Letterale: Blocco di testo in {…}. Tag speciale #10 per le nuove righe. Usa {{regex}} all'interno per estrarre i dati direttamente nel testo.\n"
-"Logica: Se un puntatore in un segmento è vuoto, l'intero segmento viene saltato. Se un segmento non ha un puntatore, vengono elaborati solo i blocchi di testo letterale con espressioni regolari incorporate.\n"
-"Regex: {prefisso {regex[indice]} suffisso} all'interno di un blocco di testo. Se non viene specificato [indice], viene usata la prima corrispondenza. L'indice può essere un numero, [*] (unisci con spazio) o [*#10] (unisci con nuova riga). Se l'espressione regolare non trova corrispondenze, l'intero blocco {…} viene rimosso. L'uso di ~ all'interno di un'espressione regolare restituisce l'intero testo.\n"
-"Inversione: Inizia un segmento con ! (es. !/path{Error}) per visualizzarne il testo solo se i dati del puntatore mancano o il JSON non è valido.\n"
-"Commenti: i commenti /* testo */ vengono rimossi dall'intera espressione prima di qualsiasi elaborazione.\n"
+"Json Pointer: Usa / per i livelli, le chiavi per gli oggetti e i numeri per "
+"gli indici. Usa * per tutti gli elementi, *#10 per unire gli elementi con "
+"nuova riga. Usa ~ alla fine del percorso per restituire il ramo JSON grezzo. "
+"Separa più segmenti con il punto e virgola ;.\n"
+"Letterale: Blocco di testo in {…}. Tag speciale #10 per le nuove righe. Usa "
+"{{regex}} all'interno per estrarre i dati direttamente nel testo.\n"
+"Logica: Se un puntatore in un segmento è vuoto, l'intero segmento viene "
+"saltato. Se un segmento non ha un puntatore, vengono elaborati solo i "
+"blocchi di testo letterale con espressioni regolari incorporate.\n"
+"Regex: {prefisso {regex[indice]} suffisso} all'interno di un blocco di "
+"testo. Se non viene specificato [indice], viene usata la prima "
+"corrispondenza. L'indice può essere un numero, [*] (unisci con spazio) o "
+"[*#10] (unisci con nuova riga). Se l'espressione regolare non trova "
+"corrispondenze, l'intero blocco {…} viene rimosso. L'uso di ~ all'interno di "
+"un'espressione regolare restituisce l'intero testo.\n"
+"Inversione: Inizia un segmento con ! (es. !/path{Error}) per visualizzarne "
+"il testo solo se i dati del puntatore mancano o il JSON non è valido.\n"
+"Commenti: i commenti /* testo */ vengono rimossi dall'intera espressione "
+"prima di qualsiasi elaborazione.\n"
 "Esempi:\n"
-"responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!#10}; /translations/0/text"
+"responseData/translatedText; matches/*#10/translation; /texts/text; {literal "
+"text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!"
+"#10}; /translations/0/text"
 
 #: tformconfigtrayslate.labellanguages.caption
 msgctxt "tformconfigtrayslate.labellanguages.caption"
-msgid "Supported languages e.g. en=en-US (en - internal, en-US - service). \"empty\" - do not send."
-msgstr "Lingue supportate, ad es. en=en-US (en - interno, en-US - servizio). \"empty\" - non inviare."
+msgid ""
+"Supported languages e.g. en=en-US (en - internal, en-US - service). "
+"\"empty\" - do not send."
+msgstr ""
+"Lingue supportate, ad es. en=en-US (en - interno, en-US - servizio). "
+"\"empty\" - non inviare."
 
 #: tformconfigtrayslate.labellanguages1.caption
-msgid "Value type for populating names. None keeps originals; None and Unit are case-sensitive."
-msgstr "Tipo di valore per popolare i nomi. 'Nessuno' mantiene quelli originali. 'Nessuno' e 'Unità' fanno distinzione tra maiuscole e minuscole."
+msgid ""
+"Value type for populating names. None keeps originals; None and Unit are "
+"case-sensitive."
+msgstr ""
+"Tipo di valore per popolare i nomi. 'Nessuno' mantiene quelli originali. "
+"'Nessuno' e 'Unità' fanno distinzione tra maiuscole e minuscole."
 
 #: tformconfigtrayslate.labellanguagestarget.caption
 msgid ""
 "Target languages e.g. en=en-US, en - internal, en-US - service code.\n"
-"If not specified, both source and target languages are taken from the languages section."
+"If not specified, both source and target languages are taken from the "
+"languages section."
 msgstr ""
-"Lingue destinazione, ad es. en=en-US, en - interno, en-US - codice servizio.\n"
-"Se non specificato, sia le lingue sorgenti che quelle destinazione vengono prese dalla sezione lingue."
+"Lingue destinazione, ad es. en=en-US, en - interno, en-US - codice "
+"servizio.\n"
+"Se non specificato, sia le lingue sorgenti che quelle destinazione vengono "
+"prese dalla sezione lingue."
 
 #: tformconfigtrayslate.labelmaxlength.caption
 msgid "Max Length, bytes"
@@ -543,8 +617,16 @@ msgstr "Metodo"
 
 #: tformconfigtrayslate.labelparemeters.caption
 msgctxt "tformconfigtrayslate.labelparemeters.caption"
-msgid "Use parameters: {text} – input text, {source} – source language, {target} – target language. Prefix the name with ! for lowercase or ^ for uppercase value. Also supported {timestamp}, {rand}. Use {parameter} from the parameters page."
-msgstr "Usa i parametri: {text} – testo sorgente, {source} – lingua sorgente, {target} – lingua destinazione. Anteponi '!' per il valore in minuscolo o '^' per il valore in maiuscolo. Sono supportati anche {timestamp}, {rand}. Usa {parameter} dalla pagina dei parametri."
+msgid ""
+"Use parameters: {text} – input text, {source} – source language, {target} – "
+"target language. Prefix the name with ! for lowercase or ^ for uppercase "
+"value. Also supported {timestamp}, {rand}. Use {parameter} from the "
+"parameters page."
+msgstr ""
+"Usa i parametri: {text} – testo sorgente, {source} – lingua sorgente, "
+"{target} – lingua destinazione. Anteponi '!' per il valore in minuscolo o "
+"'^' per il valore in maiuscolo. Sono supportati anche {timestamp}, {rand}. "
+"Usa {parameter} dalla pagina dei parametri."
 
 #: tformconfigtrayslate.labelpostdata.caption
 msgid "Post Data"
@@ -647,7 +729,10 @@ msgid "TYSJJHjpu6aqr8UsGaCTLxDyh6HKWoNQ8k"
 msgstr "TYSJJHjpu6aqr8UsGaCTLxDyh6HKWoNQ8k"
 
 #: tformdonatetrayslate.label1.caption
-msgid "Hey there! Fuel this passion project with a little caffeine boost! Every donation helps keep the code rolling and the coffee brewing. Thanks for supporting the work and the developer behind it!"
+msgid ""
+"Hey there! Fuel this passion project with a little caffeine boost! Every "
+"donation helps keep the code rolling and the coffee brewing. Thanks for "
+"supporting the work and the developer behind it!"
 msgstr ""
 "Dai una spinta di caffeina a questo progetto appassionato! \n"
 "Ogni donazione aiuta a migliorare il codice e il caffè in infusione.\n"
@@ -721,7 +806,7 @@ msgstr "Nuova traduzione"
 
 #: tformpopuptrayslate.asend.hint
 msgid "Send source and translation to main window"
-msgstr "Invia origine e traduzione alla finestra principale"
+msgstr "Invia sorgente e traduzione alla finestra principale"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -731,7 +816,7 @@ msgstr "Trayslate"
 #: tformpopuptrayslate.labelwatermark.caption
 msgctxt "tformpopuptrayslate.labelwatermark.caption"
 msgid "Drag text here to translate"
-msgstr "Trascina qui il testo da tradurre"
+msgstr "Trascina il testo qui per tradurlo"
 
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
@@ -772,7 +857,8 @@ msgstr "Aggiunta automatica al cambio di coppia"
 
 #: tformsettingstrayslate.checkautoaddlangpairs.hint
 msgid "Automatically adds a new language pair when you switch languages"
-msgstr "Quando cambi lingua aggiungi automaticamente una nuova coppia di lingue"
+msgstr ""
+"Quando cambi lingua aggiungi automaticamente una nuova coppia di lingue"
 
 #: tformsettingstrayslate.checkautostart.caption
 msgid "Launch At System Startup"
@@ -788,16 +874,21 @@ msgid "Auto-Swap Language Pair"
 msgstr "Scambia automaticamente la coppia di lingue"
 
 #: tformsettingstrayslate.checkautoswap.hint
-msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
-msgstr "Rileva automaticamente la lingua sorgente e scambia se necessario la coppia , non funziona durante la traduzione in tempo reale"
+msgid ""
+"Automatically detect input language and swap pair if needed, does not work "
+"during Real-Time Translation"
+msgstr ""
+"Rileva automaticamente la lingua sorgente e scambia se necessario la "
+"coppia , non funziona durante la traduzione in tempo reale"
 
 #: tformsettingstrayslate.checkhidecontrols.caption
 msgid "Auto-hide controls"
-msgstr "Nascondi automaticamente i controlli"
+msgstr "Nascondi automaticamente controlli"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
-msgstr "Nascondi i controlli quando il mouse non è sulla finestra popup"
+msgstr ""
+"Quando il mouse non si trova sulla finestra popup nascondi controlli finestra"
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -815,7 +906,7 @@ msgstr "Sempre in primo piano"
 
 #: tformsettingstrayslate.checkstayontop.hint
 msgid "Keeps the window above all other windows"
-msgstr "Mantiene la finestra sopra tutte le altre"
+msgstr "Mantieni finestra sopra tutte le altre finestre"
 
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
@@ -823,11 +914,16 @@ msgstr "Visualizza coppia di lingue"
 
 #: tformsettingstrayslate.checktwolang.hint
 msgid "Display source and/or target language on the tray icon"
-msgstr "Visualizza lingua sorgente e/o destinazione nell'icona nella barra applicazioni"
+msgstr ""
+"Visualizza lingua sorgente e/o destinazione nell'icona nella barra "
+"applicazioni"
 
 #: tformsettingstrayslate.combolangdetect.hint
-msgid "Config that auto-detects the target language for the selected language pair"
-msgstr "Configurazione che rileva automaticamente la lingua destinazione per la coppia di lingue selezionata"
+msgid ""
+"Config that auto-detects the target language for the selected language pair"
+msgstr ""
+"Configurazione che rileva automaticamente la lingua destinazione per la "
+"coppia di lingue selezionata"
 
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
@@ -859,7 +955,7 @@ msgstr "Coppie di lingue recenti"
 
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
-msgstr "Finestra popup"
+msgstr "Popup finestra"
 
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
@@ -898,11 +994,11 @@ msgstr "Coppie massime"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity on Hover"
-msgstr "Opacità al passaggio"
+msgstr "Opacità (sopra mouse)"
 
 #: tformsettingstrayslate.labelopacityidle.caption
 msgid "Opacity Idle"
-msgstr "Opacità inattiva"
+msgstr "Opacità (quando in attesa)"
 
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
@@ -928,8 +1024,12 @@ msgid "Default, 0"
 msgstr "Predefinito, 0"
 
 #: tformsettingstrayslate.spinmaxlangpairs.hint
-msgid "Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel"
-msgstr "Numero di coppie recenti nel pannello; quando vengono aggiunte le coppie si spostano a destra; il valore zero nasconde il pannello"
+msgid ""
+"Number of recent pairs on the panel; pairs shift right when added; zero "
+"value hides the panel"
+msgstr ""
+"Numero di coppie recenti nel pannello; quando vengono aggiunte le coppie si "
+"spostano a destra; il valore zero nasconde il pannello"
 
 #: tformsettingstrayslate.spinrealtimedelay.hint
 msgid "Translation Delay in milliseconds"
@@ -937,11 +1037,11 @@ msgstr "Ritardo traduzione (millisecondi)"
 
 #: tformsettingstrayslate.trackopacityhover.hint
 msgid "Window transparency when the mouse is over the window"
-msgstr "Trasparenza della finestra quando il mouse è sopra"
+msgstr "Trasparenza finestra quando il mouse è sopra la finestra"
 
 #: tformsettingstrayslate.trackopacityidle.hint
 msgid "Window transparency when the mouse is not over the window"
-msgstr "Trasparenza della finestra quando il mouse non è sopra"
+msgstr "Trasparenza finestra quando il mouse non è sopra la finestra"
 
 #: tformtrayslate.aabout.caption
 msgid "About..."
@@ -970,7 +1070,7 @@ msgstr "Copia"
 #: tformtrayslate.acopytarget.hint
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
-msgstr "Copia traduzione"
+msgstr "Copy Translation"
 
 #: tformtrayslate.adonate.caption
 msgid "Buy Me a Coffee..."
@@ -982,19 +1082,19 @@ msgstr "Esci"
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
-msgstr "العربية"
+msgstr "Arabo"
 
 #: tformtrayslate.alangbelarusian.caption
 msgid "Belarusian"
-msgstr "Беларуская"
+msgstr "Bielorusso"
 
 #: tformtrayslate.alangbulgarian.caption
 msgid "Bulgarian"
-msgstr "Български"
+msgstr "Bulgaro"
 
 #: tformtrayslate.alangchinese.caption
 msgid "Chinese"
-msgstr "中文"
+msgstr "Cinese"
 
 #: tformtrayslate.alangcustom.caption
 msgid "Custom File..."
@@ -1002,47 +1102,47 @@ msgstr "File personalizzato..."
 
 #: tformtrayslate.alangczech.caption
 msgid "Czech"
-msgstr "Čeština"
+msgstr "Ceco"
 
 #: tformtrayslate.alangdanish.caption
 msgid "Danish"
-msgstr "Dansk"
+msgstr "Danese"
 
 #: tformtrayslate.alangdutch.caption
 msgid "Dutch"
-msgstr "Nederlands"
+msgstr "Olandese"
 
 #: tformtrayslate.alangenglish.caption
 msgid "English"
-msgstr "English"
+msgstr "Inglese"
 
 #: tformtrayslate.alangfinnish.caption
 msgid "Finnish"
-msgstr "Suomi"
+msgstr "Finlandese"
 
 #: tformtrayslate.alangfrench.caption
 msgid "French"
-msgstr "Français"
+msgstr "Francese"
 
 #: tformtrayslate.alanggerman.caption
 msgid "German"
-msgstr "Deutsch"
+msgstr "Tedesco"
 
 #: tformtrayslate.alanggreek.caption
 msgid "Greek"
-msgstr "Ελληνικά"
+msgstr "Greco"
 
 #: tformtrayslate.alanghebrew.caption
 msgid "Hebrew"
-msgstr "עברית"
+msgstr "Ebraico"
 
 #: tformtrayslate.alanghindi.caption
 msgid "Hindi"
-msgstr "हिन्दी"
+msgstr "Hindi"
 
 #: tformtrayslate.alangindonesian.caption
 msgid "Indonesian"
-msgstr "Bahasa Indonesia"
+msgstr "Indonesiano"
 
 #: tformtrayslate.alangitalian.caption
 msgid "Italian"
@@ -1050,43 +1150,43 @@ msgstr "Italiano"
 
 #: tformtrayslate.alangjapanese.caption
 msgid "Japanese"
-msgstr "日本語"
+msgstr "Giapponese"
 
 #: tformtrayslate.alangkorean.caption
 msgid "Korean"
-msgstr "한국어"
+msgstr "Coreano"
 
 #: tformtrayslate.alangpolish.caption
 msgid "Polish"
-msgstr "Polski"
+msgstr "Polacco"
 
 #: tformtrayslate.alangportuguese.caption
 msgid "Portuguese"
-msgstr "Português"
+msgstr "Portoghese"
 
 #: tformtrayslate.alangromanian.caption
 msgid "Romanian"
-msgstr "Română"
+msgstr "Rumeno"
 
 #: tformtrayslate.alangrussian.caption
 msgid "Russian"
-msgstr "Русский"
+msgstr "Russo"
 
 #: tformtrayslate.alangspanish.caption
 msgid "Spanish"
-msgstr "Español"
+msgstr "Spagnolo"
 
 #: tformtrayslate.alangswedish.caption
 msgid "Swedish"
-msgstr "Svenska"
+msgstr "Svedese"
 
 #: tformtrayslate.alangturkish.caption
 msgid "Turkish"
-msgstr "Türkçe"
+msgstr "Turco"
 
 #: tformtrayslate.alangukrainian.caption
 msgid "Ukrainian"
-msgstr "Українська"
+msgstr "Ucraino"
 
 #: tformtrayslate.amenu.hint
 msgctxt "tformtrayslate.amenu.hint"
@@ -1100,7 +1200,7 @@ msgstr "Nuova traduzione"
 
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
-msgstr "Traduzione popup"
+msgstr "Popup traduzione"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
