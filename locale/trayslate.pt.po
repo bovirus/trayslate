@@ -376,7 +376,7 @@ msgstr ""
 #: tformconfigtrayslate.combovaluetype.text
 msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 #: tformconfigtrayslate.groupboxcustomparameters.caption
 msgid "Custom Parameters"
@@ -1127,4 +1127,4 @@ msgstr "Pares recentes"
 #: tformtrayslate.menulanguage.caption
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
-msgstr ""
+msgstr "Language"

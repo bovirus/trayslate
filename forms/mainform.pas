@@ -947,6 +947,9 @@ begin
     FreeAndNil(formSettingsTrayslate);
     RegisterHotKeys;
     SetHints;
+
+    if Assigned(formPopupTrayslate) then
+      formPopupTrayslate.UpdateStayOnTop(0);
   end;
 end;
 
@@ -2260,18 +2263,18 @@ begin
     formPopupTrayslate.PanelWatermark.Font.Size := Font.Size;
     formPopupTrayslate.PanelWatermark.Font.Name := Font.Name;
     formPopupTrayslate.AlphaBlendValue := OpacityIdle;
-    if StayOnTop then
-      formPopupTrayslate.FormStyle := fsSystemStayOnTop
-    else
-      formPopupTrayslate.FormStyle := fsNormal;
+    formPopupTrayslate.UpdateStayOnTop(0);
   end;
 
   formPopupTrayslate.SourceText := SourceText;
 
   SetIcon;
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
-  formPopupTrayslate.Show;
-  formPopupTrayslate.BringToFront;
+
+  if not formPopupTrayslate.Visible then
+    formPopupTrayslate.Show;
+  if not StayOnTop then
+    BringToFrontNoFocus(formPopupTrayslate);
 end;
 
 {$IFDEF WINDOWS}
@@ -2853,7 +2856,8 @@ begin
 
     SelectedText := Clipboard.AsText;
 
-    Show;
+    if (not Showing) then
+      Show;
     BringToFront;
     FTopMost := True;
     ProcessMessages;

@@ -1127,4 +1127,4 @@ msgstr "Πρόσφατα ζεύγη"
 #: tformtrayslate.menulanguage.caption
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
-msgstr ""
+msgstr "Language"

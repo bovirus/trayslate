@@ -67,6 +67,8 @@ type
 
     procedure UpdateWatermarkVisibility;
   public
+    procedure UpdateStayOnTop(Data: PtrInt);
+
     property SourceText: string read FSourceText write FSourceText;
   end;
 
@@ -235,6 +237,14 @@ begin
     PanelWaterMark.Visible := False;
 
   PanelButtonTarget.Visible := ((Width > 100) and (Height > 50 + FlowPairs.Height)) or not formTrayslate.HideControls;
+end;
+
+procedure TformPopupTrayslate.UpdateStayOnTop(Data: PtrInt);
+begin
+  if formTrayslate.StayOnTop then
+    formPopupTrayslate.FormStyle := fsSystemStayOnTop
+  else
+    formPopupTrayslate.FormStyle := fsNormal;
 end;
 
 end.

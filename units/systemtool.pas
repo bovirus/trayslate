@@ -90,6 +90,8 @@ function GetAppVersion: string;
 
 procedure RegAutoStart(const AEnable: boolean; const AppName: string = 'Trayslate');
 
+procedure BringToFrontNoFocus(AForm: TForm);
+
 { Check Github Version }
 
 function CheckGithubLatestVersion(out Version: string; const Repo: string; const Silent: boolean = False): boolean;
@@ -652,6 +654,27 @@ begin
   finally
     Reg.Free;
   end;
+end;
+
+procedure BringToFrontNoFocus(AForm: TForm);
+begin
+  {$IFDEF WINDOWS}
+    SetWindowPos(
+      AForm.Handle,
+      HWND_TOPMOST,
+      0, 0, 0, 0,
+      SWP_NOMOVE or SWP_NOSIZE or SWP_NOACTIVATE or SWP_SHOWWINDOW
+    );
+
+    SetWindowPos(
+      AForm.Handle,
+      HWND_NOTOPMOST,
+      0, 0, 0, 0,
+      SWP_NOMOVE or SWP_NOSIZE or SWP_NOACTIVATE
+    );
+  {$ELSE}
+  AForm.BringToFront;
+  {$ENDIF}
 end;
 
 { Check Github Version }

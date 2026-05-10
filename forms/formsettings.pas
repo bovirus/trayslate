@@ -615,11 +615,12 @@ procedure TformSettingsTrayslate.FillListPages;
 var
   i: integer;
 begin
+  if PagesSettings.ShowTabs then
+    PagesSettings.ShowTabs := False;
   ListPages.Clear;
   for i := 0 to PagesSettings.PageCount - 1 do
     ListPages.Items.Add(PagesSettings.Pages[i].Caption);
   ListPages.ItemIndex := PagesSettings.PageIndex;
-  PagesSettings.ShowTabs := False;
 end;
 
 procedure TformSettingsTrayslate.FillGridHotkeys;
@@ -734,11 +735,6 @@ begin
     formPopupTrayslate.Font.Assign(PanelFont.Font);
     formPopupTrayslate.PanelWatermark.Font.Size := PanelFont.Font.Size;
     formPopupTrayslate.PanelWatermark.Font.Name := PanelFont.Font.Name;
-
-    if formTrayslate.StayOnTop then
-      formPopupTrayslate.FormStyle := fsSystemStayOnTop
-    else
-      formPopupTrayslate.FormStyle := fsNormal;
   end;
 
   Reset;

@@ -1128,3 +1128,4 @@ msgstr "Последни двойки"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Език"
+

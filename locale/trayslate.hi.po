@@ -376,7 +376,7 @@ msgstr ""
 #: tformconfigtrayslate.combovaluetype.text
 msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
-msgstr ""
+msgstr "कोई नहीं"
 
 #: tformconfigtrayslate.groupboxcustomparameters.caption
 msgid "Custom Parameters"
@@ -1127,4 +1127,4 @@ msgstr "हाल के युग्म"
 #: tformtrayslate.menulanguage.caption
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
-msgstr ""
+msgstr "Language"
