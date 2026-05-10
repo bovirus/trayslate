@@ -1,5 +1,4 @@
-🇺🇸 [EN](README.md "English")&nbsp;
-🇮🇹 [IT](README-it.md "Italian")&nbsp;
+[:it: IT](README-it.md "Italian")&nbsp;&nbsp;
 
 # Trayslate
 

@@ -1,9 +1,8 @@
-🇺🇸 [EN](README.md "English")&nbsp;
-🇮🇹 [IT](README-it.md "Italian")&nbsp;
+[:uk: EN](README.md "English")&nbsp;&nbsp;
 
 # Trayslate
 
-Trayslate is a tray-based client for translation services. You can enter text directly, translate clipboard content, or translate selected text in any application. You can also replace text in another app with its translation using a hotkey. The app lets you choose and fully configure the translation service you use.
+Trayslate è un client basato su icona nella barra applicazioni per servizi di traduzione. Puoi inserire il testo direttamente, tradurre il contenuto degli appunti o tradurre il testo selezionato in qualsiasi applicazione. Puoi anche sostituire il testo in un'altra app con la sua traduzione usando un tasto scelta rapida. L'app ti consente di scegliere e configurare completamente il servizio di traduzione che usi.
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Build with: Lazarus](https://img.shields.io/badge/Build_with-Lazarus-blueviolet)](https://www.lazarus-ide.org/)
@@ -20,169 +19,129 @@ Trayslate is a tray-based client for translation services. You can enter text di
   </a>
 </p>
 
-## What is it?
+## Che cos'è?
 
-A **compact tray translator** that is always at hand. It acts as a web client for translation services — meaning it doesn’t include any built-in engines, everything is handled through **external configurable services**. This keeps the tool **lightweight and independent**.
+Un **traduttore compatto accessibile da barra sistema** sempre a portata di mano. Funziona come un client web per i servizi di traduzione, il che significa che non include alcun motore integrato, tutto è gestito tramite **servizi esterni configurabili**. Ciò mantiene lo strumento **leggero e indipendente**.
 
-It works anywhere on your system. Select text in any application and translate it instantly using a **global hotkey** — not just in the browser. You can also replace text directly inside input fields with the translated version in a single keystroke. Double-click the tray icon to quickly translate your clipboard content.
+Funziona ovunque nel sistema. Seleziona il testo in qualsiasi applicazione e traducilo istantaneamente usando un **tasto scelta rapida globale**, non solo nel browser. Puoi anche sostituire il testo direttamente all'interno dei campi di input con la versione tradotta premendo un solo tasto. Fai doppio clic sull'icona nella barra delle applicazioni per tradurre rapidamente il contenuto degli appunti.
 
-For added convenience, the main window supports **real-time translation as you type**, allowing you to draft text and see the translation simultaneously.
+Per maggiore comodità, la finestra principale supporta la **traduzione in tempo reale durante la digitazione**, consentendoti di creare una bozza di testo e di contemporaneamente visualizzare la traduzione.
 
-The interface is available in **twenty-five widely used languages**, making it accessible to a global audience.
+L'interfaccia è disponibile in **venticinque lingue ampiamente usate**, rendendola accessibile a un pubblico globale.
 
-**Always close, always ready** — a translator that fits perfectly into your workflow.
+**Sempre vicino, sempre pronto**: un traduttore che si adatta perfettamente al tuo flusso di lavoro.
 
 ![trayslate1](samples/trayslate1.png)
 
----
-
 ## Features:
 
-- **Always Available** — Runs in the system tray and is always ready  
-- **External Services** — Uses configurable translation services with no built-in engines  
-- **Configurability** — Fully configurable using INI files  
-- **System-wide Use** — Works across all applications, not just the browser  
-- **Global Hotkeys** — Translate selected text using configurable hotkeys  
-- **Input Replacement** — Replace text directly inside input fields using a hotkey  
-- **Clipboard Support** — Process clipboard content via tray icon double-click or hotkeys  
-- **Popup Window** — Floating translation window with quick access from anywhere
-- **Real-time Mode** — Live processing while typing with an adjustable delay  
-- **Auto Language Swap** — Optional automatic swap based on the input language  
-- **Tray Indicator** — Shows the current language pair and translation progress on the tray icon  
-- **Recent Pairs** — Manage and automatically save recently used language pairs  
-- **Multilingual UI** — Interface available in twenty-five widely used languages  
-- **Dark Mode** — Supports Windows dark mode and adapts to system theme  
+- **Sempre disponibile** — funziona nella barra delle applicazioni ed è sempre pronto  
+- **Servizi esterni** — Usa servizi di traduzione configurabili senza motori integrati  
+- **Configurabilità** — Completamente configurabile usando file INI  
+- **Uso a livello di sistema** — Funziona in tutte le applicazioni, non solo sul browser  
+- **Tasti scelta rapida globali** — Traduci il testo selezionato usando i tasti scelta rapida configurabili  
+- **Sostituzione input** — Sostituisci il testo direttamente all'interno dei campi di input usando un tasto scelta rapida  
+- **Supporto appunti** — Elabora il contenuto degli appunti tramite doppio clic sull'icona della barra applicazioni o tasti scelta rapida
+- **Modo tempo reale** — Elaborazione in tempo reale durante la digitazione con un ritardo regolabile  
+- **Scambio automatico lingua** — Scambio automatico opzionale in base alla lingua sorgente  
+- **Indicatore barra sistema** — Visualizza la coppia di lingue attuale e l'avanzamento della traduzione nell'icona della barra applicazioni  
+- **Coppie recenti** — Gestisci e salva automaticamente le coppie di lingue usate di recente  
+- **UI multilingua** — Interfaccia disponibile in venticinque lingue ampiamente usate  
+- **Modo scuro** — Supporta la modalità scura di Windows e si adatta al tema del sistema  
 
-## Tray Icon
+## Icona barra applicazioni
 
-The tray icon is fully customizable in appearance settings and adapts to any Windows color scheme. It also provides a context menu for quick access to features such as switching configurations, managing recent language pairs, and other key functions.
+L'icona nella barra delle applicazioni è completamente personalizzabile nelle impostazioni dell'aspetto e si adatta a qualsiasi combinazione di colori di Windows. Fornisce inoltre un menu contestuale per un rapido accesso a funzionalità come la modifica della configurazione, la gestione delle coppie di lingue usate di  recente e altre funzioni chiave.
 
 ![trayslate2](samples/trayslate2.png)
 
----
+## Copie di lingue usate di recente
 
-## Recent Language Pairs
+Un comodo pannello per passare istantaneamente tra le combinazioni di lingue e le configurazioni usate più frequentemente. Ogni voce può appartenere a una configurazione diversa, semplificando il passaggio da un flusso di lavoro all'altro senza configurazioni aggiuntive.
 
-A convenient panel for instantly switching between your most frequently used language pairs and configurations. Each entry can belong to a different config, making it easy to jump across workflows without extra setup.
-
-The panel can be automatically populated based on your activity when auto-add is enabled in the settings, keeping your most relevant pairs always within reach. You can also add pairs manually at any time using the plus button on the panel or middle-click any pair to remove it from the panel.
+Il pannello può essere popolato automaticamente in base all'attività quando nelle impostazioni è abilitata l'aggiunta automatica, mantenendo le coppie di lingue più rilevanti sempre a portata di mano. Puoi anche aggiungere manualmente coppie di lingue in qualsiasi momento usando il pulsante '+' nel pannello o fare clic con il pulsante centrale su qualsiasi coppia di lingue per rimuoverla dal pannello.
 
 ![trayslate3](samples/trayslate3.png)
 
----
+## Tasti scelta rapida
 
-## Popup Window
+I tasti scelta rapida globali possono essere completamente configurati nelle impostazioni dell'applicazione. Sono disponibili in qualsiasi momento e funzionano anche quando l'applicazione è ridotta a icona nella barra applicazioni.
 
-Popup translation window supports text translation using configurable hotkeys. You can translate either text from the clipboard or selected text from any application. 
-
-Drag-and-drop of text from other applications into the popup window is also supported (depending on Windows security restrictions, drag-and-drop may require both Trayslate and the source application to run with the same privileges).
-
-The popup window can stay on top of other windows and supports adjustable transparency, with separate settings for both idle and hover states. It also allows configuring the visibility of interface elements, which can be shown only on hover or kept always visible. All these options are configurable in Settings.
-
-![popup1](samples/popup1.png)
-
----
-
-## Hotkeys
-
-Global hotkeys can be fully configured in the application settings. They are available at any time and work even when the application is minimized to the system tray.
-
-| Action | Shortcut |
+| Azione | Tasto rapido |
 |--------|----------|
-| **Global Hotkeys** | |
-| Shows or hides the main application window | `Ctrl + Shift + A` |
-| Swaps the source and target languages | `Ctrl + Shift + S` |
-| Translates the current text from the clipboard | `Ctrl + Shift + T` |
-| Translates the current text in clipboard and copies the result to the clipboard | `Ctrl + Shift + R` |
-| Translates clipboard text to a popup window near the mouse cursor | `Ctrl + Shift + P` |
-| Translates the selected text from the active application | `Ctrl + Shift + C` |
-| Replaces the selected text in the active application with the translation | `Ctrl + Shift + V` |
-| Translates selected text from the active application to a popup window near the mouse cursor | `Ctrl + Shift + X` |
-| **Recent Language Pair Hotkeys** | |
-| Select recent language pair 1 | `Ctrl + Shift + 1` |
-| Select recent language pair 2 | `Ctrl + Shift + 2` |
-| Select recent language pair 3 | `Ctrl + Shift + 3` |
-| Select recent language pair 4 | `Ctrl + Shift + 4` |
-| Select recent language pair 5 | `Ctrl + Shift + 5` |
-| Select recent language pair 6 | `Ctrl + Shift + 6` |
-| Select recent language pair 7 | `Ctrl + Shift + 7` |
-| Select recent language pair 8 | `Ctrl + Shift + 8` |
-| Select recent language pair 9 | `Ctrl + Shift + 9` |
-| **Main Window Hotkeys** | |
-| New Translate | `Ctrl + N` |
-| Add Current Pair To Recent Panel | `Ctrl + F` |
-| Translate | `Ctrl + Enter`<br>`Shift + Enter`<br>`Double Enter`|
+| **Tasti scelta rapida globali** | |
+| Visualizza/nascondi finestra principale  | `Ctrl + Miausc + A` |
+| Scambia lingue sorgente e destinazione | `Ctrl + Maiusc + S` |
+| Traduci il testo attuale negli appunti | `Ctrl + Maiusc + T` |
+| Traduci il testo attuale negli appunti e copia il risultato negli appunti | `Ctrl + Miausc + R` |
+| Traduci il testo selezionato dall'applicazione attiva | `Ctrl + Maiusc + C` |
+| Sostituisci il testo selezionato nell'applicazione attiva con la traduzione | `Ctrl + Miausc + V` |
+| Seleziona la coppia di lingue recente | `Ctrl + Maiusc + Numbero` |
+| **Tasti rapidi finestra principale** | |
+| Nuova traduzione | `Ctrl + N` |
+| Aggiungi la coppia attuale di lingue al pannello lingue recenti | `Ctrl + F` |
+| Traduci | `Ctrl + Invio`<br>`Maiusc + Enter`<br>`Doppio Invio`|
 
----
+## Impostazioni
 
-## Settings
+Le impostazioni consentono di configurare il comportamento, l'aspetto e i tasti scelta rapida globali dell'applicazione.
 
-Settings allow you to configure the behavior, appearance, and global hotkeys of the application.
-
-| General | Interface | Global Hotkeys |
+| Generale | Interfaccia | Tasti scelta rapida globali |
 |-------------|-------------|-------------|
 | ![img](samples/settings1.png) | ![img](samples/settings2.png) | ![img](samples/settings3.png) |
 
----
+## Configurazione
 
-## Config
+L'applicazione è dotata di un potente editor di configurazione che consente di creare le  configurazioni del servizio di traduzione o modificare quelle esistenti.
 
-The application comes with a powerful configuration editor, allowing you to create your own translation service configurations or modify existing ones.
-
-| Service | Parameters |
+| Servizio | Parametri |
 |---------|------------|
 | ![configeditor1](samples/configeditor1.png) | ![configeditor1](samples/configeditor2.png) |
-| **Response** | **Languages** |
+| **Risposta** | **Lingue** |
 | ![configeditor1](samples/configeditor3.png) | ![configeditor1](samples/configeditor4.png) |
-| **Target Languages** | |
+| **Lingue destinazione** | |
 | ![configeditor1](samples/configeditor5.png) | ![configeditor1](samples/configeditor6.png) |
 
----
-
-## Installation
+## Installazione
 
 [![latest version](https://img.shields.io/github/v/release/plaintool/trayslate?color=blue&label=Latest%20release&style=for-the-badge)](https://github.com/plaintool/trayslate/releases/latest)
 
 ### Windows
 
-Several installer options are available on the releases page:
+Nella pagina delle versioni sono disponibili diverse opzioni di installazione:
 
-| Description | Files |
+| Descrizione | File |
 |-------------|-------|
-| **Universal installer (EXE)** — universal installer for **x86 and x64**, supports installation **for the current user or for all users** | `trayslate‑any‑x86‑x64.exe` |
-| **User installer (MSI)** — installs the application **for the current user** | `trayslate‑x64.msi`<br>`trayslate‑x86.msi` |
-| **System installer (MSI)** — installs the application **for all users on the system** | `trayslate‑x64‑allusers.msi`<br>`trayslate‑x86‑allusers.msi` |
-| **Portable version** — saves its settings to `form_settings.json` if it is near the executable; otherwise, in the user directory | `trayslate‑x86‑x64‑portable.zip` |
+| **Installer universale (EXE)** — installer universale per sistemi **a 32bit e 64bit**, che supporta l'installazione **per l'utente attuale e per tutti gli utenti** | `trayslate‑any‑x86‑x64.exe` |
+| **Installer utente (MSI)** — installa l'applicazione **per l'utente attuale** | `trayslate‑x64.msi`<br>`trayslate‑x86.msi` |
+| **Instalelr di sistema (MSI)** — installa l'applicazione **per tutti gli utenti del sistema** | `trayslate‑x64‑allusers.msi`<br>`trayslate‑x86‑allusers.msi` |
+| **Versione portatile** — salva le impostazioni in `form_settings.json` nella stessa cartella se è presente l'eseguibile; altrimenti nella cartella dell'utente | `trayslate‑x86‑x64‑portable.zip` |
 
-> **Note:** Windows XP supports installation **only via MSI installers**. The EXE installer is **not compatible** with Windows XP.
+> **Note:** Windows XP supporta l'installazione **solo tranite installer MSI**. Il file installer EXE **non è compatibile** con Windows XP.
 
-Download the installer from the [releases page](https://github.com/plaintool/trayslate/releases), run it, and follow the on-screen instructions. After installation, you can launch Trayslate from the Start menu or from the desktop shortcut.
+Scarica l'installer dalla [pagina versioni programma](https://github.com/plaintool/trayslate/releases), eseguilo, e segui le istruzioni visualizzate sullo schermo. Dopo l'installazione, puoi avviare Trayslate dal menu Start o dal collegamento sul desktop.
 
----
+## Dona 💖
 
-## Donate 💖
+Se ti piace Trayslate e vuoi sostenerne lo sviluppo, puoi inviare una donazione:
 
-If you like Trayslate and want to support its development, you can send a donation:
-
-| Currency | Network | Wallet Address |
+| Valuta   | Rete | Indirizo wallet |
 |----------|-----------------|----------------|
 | USDT     | Tron (TRC20)    | `TYSJJHjpu6aqr8UsGaCTLxDyh6HKWoNQ8k` |
 | USDT     | Ethereum (ERC20), Binance Smart Chain (BEP20) | `0x328e689E961c3Abb143835f8677947Fa9eaF9f6F` |
 | BTC      | Bitcoin (BTC)   | `bc1qp8m5j75yd58zhf9hl0a753shay093j2548f84e` |
 | ETH      | Ethereum (ERC20)| `0x328e689E961c3Abb143835f8677947Fa9eaF9f6F` |
 
-Every little help is appreciated! 🙏
+Ogni piccolo aiuto è apprezzato! 🙏
 
----
+## Licenza
 
-## Licensing
+Trayslate è concesso in licenza con la licenza GPL v3. Per i dettagli vedi il file LICENSE.
 
-Trayslate is licensed under the GPL v3 license. See the LICENSE file for details.
+L'applicazione Trayslate usa risorse di terze parti concesse in licenza come descritto nel file [THIRD_PARTIES](THIRD_PARTIES).
 
-The Trayslate application uses third-party resources licensed as described in the [THIRD_PARTIES](THIRD_PARTIES) file.
+## Esclusione di responabilità
 
-## Disclaimer
+L'applicazione non fornisce alcun servizio di traduzione. Funziona come client solo per servizi di terze parti. Qualsiasi uso di servizi esterni è di esclusiva responsabilità dell'utente, incluso il rispetto dei rispettivi termini di servizio.
 
-The application does not provide any translation services. It acts as a client for third-party services only. All usage of external services is the sole responsibility of the user, including compliance with their respective terms of service.
-
-The configuration files included in the distribution are intended to demonstrate the flexibility of setting up and integrating custom translation services. Users may obtain and use API keys from service providers and configure the application to work with those services in accordance with the providers official guidelines and terms.
+I file di configurazione inclusi nella distribuzione hanno lo scopo di dimostrare la flessibilità di impostazione e integrazione di servizi di traduzione personalizzati. Gli utenti possono ottenere e usare le chiavi API dai fornitori di servizi e configurare l'applicazione per funzionare con tali servizi in conformità con le linee guida e i termini ufficiali dei fornitori.
