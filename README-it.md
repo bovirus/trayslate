@@ -140,7 +140,7 @@ Trayslate è concesso in licenza con la licenza GPL v3. Per i dettagli vedi il f
 
 L'applicazione Trayslate usa risorse di terze parti concesse in licenza come descritto nel file [THIRD_PARTIES](THIRD_PARTIES).
 
-## DisclaimerDisclaimer
+## Esclusione di responabilità
 
 L'applicazione non fornisce alcun servizio di traduzione. Funziona come client solo per servizi di terze parti. Qualsiasi uso di servizi esterni è di esclusiva responsabilità dell'utente, incluso il rispetto dei rispettivi termini di servizio.
 
