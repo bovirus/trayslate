@@ -54,6 +54,7 @@ type
     procedure aSendExecute(Sender: TObject);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormHide(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShortCut(var Msg: TLMKey; var Handled: boolean);
     procedure FormShow(Sender: TObject);
@@ -103,6 +104,11 @@ end;
 procedure TformPopupTrayslate.FormShow(Sender: TObject);
 begin
   FDropTarget.ForceRegister;
+end;
+
+procedure TformPopupTrayslate.FormHide(Sender: TObject);
+begin
+  FDropTarget.Unregister;
 end;
 
 procedure TformPopupTrayslate.FormShortCut(var Msg: TLMKey; var Handled: boolean);

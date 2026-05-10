@@ -15,6 +15,7 @@ object formPopupTrayslate: TformPopupTrayslate
   LCLVersion = '4.4.0.0'
   OnChangeBounds = FormChangeBounds
   OnCreate = FormCreate
+  OnHide = FormHide
   OnResize = FormResize
   OnShortCut = FormShortCut
   OnShow = FormShow

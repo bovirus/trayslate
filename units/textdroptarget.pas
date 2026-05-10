@@ -61,6 +61,7 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure ForceRegister;
+    procedure Unregister;
   published
     property Target: TCustomEdit read FTarget write SetTarget;
     property InsertText: boolean read FInsertText write SetInsertText default True;
@@ -195,6 +196,11 @@ begin
   end
   else
     UnregisterTarget;
+end;
+
+procedure TTextDropTarget.Unregister;
+begin
+  UnregisterTarget;
 end;
 
 { TTextDropTargetImpl }
