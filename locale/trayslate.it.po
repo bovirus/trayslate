@@ -45,7 +45,7 @@ msgstr ""
 #: formconfig.rvaluetype1
 msgctxt "formconfig.rvaluetype1"
 msgid "None"
-msgstr "Nessuna"
+msgstr "Nessuno"
 
 #: formconfig.rvaluetype2
 msgctxt "formconfig.rvaluetype2"
@@ -404,7 +404,7 @@ msgstr "GET"
 #: tformconfigtrayslate.combovaluetype.text
 msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
-msgstr "Nessuna"
+msgstr "Nessuno"
 
 #: tformconfigtrayslate.groupboxcustomparameters.caption
 msgid "Custom Parameters"
