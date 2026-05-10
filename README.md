@@ -74,7 +74,9 @@ The panel can be automatically populated based on your activity when auto-add is
 
 Popup translation window supports text translation using configurable hotkeys. You can translate either text from the clipboard or selected text from any application. 
 
-Drag-and-drop of text from other applications into the popup window is also supported (depending on Windows security restrictions, drag-and-drop may require both Trayslate and the source application to run with the same privileges).
+Drag-and-drop of text from other applications into the popup window is also supported 
+
+> **Note:** Depending on Windows security restrictions, drag-and-drop may require both Trayslate and the source application to run with the same privileges.
 
 The popup window can stay on top of other windows and supports adjustable transparency, with separate settings for both idle and hover states. It also allows configuring the visibility of interface elements, which can be shown only on hover or kept always visible. All these options are configurable in Settings.
 
@@ -96,7 +98,7 @@ Global hotkeys can be fully configured in the application settings. They are ava
 | Translates clipboard text to a popup window near the mouse cursor | `Ctrl + Shift + P` |
 | Translates the selected text from the active application | `Ctrl + Shift + C` |
 | Replaces the selected text in the active application with the translation | `Ctrl + Shift + V` |
-| Translates selected text from the active application to a popup window near the mouse cursor | `Ctrl + Shift + X` |
+| Translates selected text from the active application to a popup window | `Ctrl + Shift + X` |
 | **Recent Language Pair Hotkeys** | |
 | Select recent language pair 1 | `Ctrl + Shift + 1` |
 | Select recent language pair 2 | `Ctrl + Shift + 2` |
