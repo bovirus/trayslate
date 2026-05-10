@@ -37,6 +37,8 @@ AppUpdatesURL={#MyAppURL}
 UninstallDisplayName={#MyAppName} {#MyAppVersion}
 UninstallDisplayIcon={app}\trayslate.exe
 
+RestartApplications=no
+
 ShowLanguageDialog=yes
 UsePreviousLanguage=no
 LanguageDetectionMethod=uilanguage
@@ -57,6 +59,34 @@ OutputDir=.\
 OutputBaseFilename=trayslate-{#MyAppVersion}-any-x86-x64
 Compression=lzma
 SolidCompression=yes
+
+[Code]
+
+procedure KillTrayslate();
+var
+  ResultCode: Integer;
+begin
+  Exec(
+    ExpandConstant('{sys}\taskkill.exe'),
+    '/F /IM trayslate.exe /T',
+    '',
+    SW_HIDE,
+    ewWaitUntilTerminated,
+    ResultCode
+  );
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if CurStep = ssInstall then
+    KillTrayslate();
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+begin
+  if CurUninstallStep = usUninstall then
+    KillTrayslate();
+end;
 
 [Languages]
 Name: "arabic";     MessagesFile: "compiler:Languages\Arabic.isl"
