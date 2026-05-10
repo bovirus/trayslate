@@ -18,11 +18,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
     Top = 5
     Width = 554
     TabStop = False
-    ActivePage = PageInterface
+    ActivePage = PageGeneral
     Align = alClient
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 1
     object PageGeneral: TTabSheet
       Caption = 'General'
