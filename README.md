@@ -33,6 +33,8 @@ The interface is available in **twenty-five widely used languages**, making it a
 
 ![trayslate1](samples/trayslate1.png)
 
+---
+
 ## Features:
 
 - **Always Available** — Runs in the system tray and is always ready  
@@ -42,6 +44,7 @@ The interface is available in **twenty-five widely used languages**, making it a
 - **Global Hotkeys** — Translate selected text using configurable hotkeys  
 - **Input Replacement** — Replace text directly inside input fields using a hotkey  
 - **Clipboard Support** — Process clipboard content via tray icon double-click or hotkeys  
+- **Popup Window** — Floating translation window with quick access from anywhere
 - **Real-time Mode** — Live processing while typing with an adjustable delay  
 - **Auto Language Swap** — Optional automatic swap based on the input language  
 - **Tray Indicator** — Shows the current language pair and translation progress on the tray icon  
@@ -55,6 +58,8 @@ The tray icon is fully customizable in appearance settings and adapts to any Win
 
 ![trayslate2](samples/trayslate2.png)
 
+---
+
 ## Recent Language Pairs
 
 A convenient panel for instantly switching between your most frequently used language pairs and configurations. Each entry can belong to a different config, making it easy to jump across workflows without extra setup.
@@ -62,6 +67,20 @@ A convenient panel for instantly switching between your most frequently used lan
 The panel can be automatically populated based on your activity when auto-add is enabled in the settings, keeping your most relevant pairs always within reach. You can also add pairs manually at any time using the plus button on the panel or middle-click any pair to remove it from the panel.
 
 ![trayslate3](samples/trayslate3.png)
+
+---
+
+## Popup Window
+
+Popup translation window supports text translation using configurable hotkeys. You can translate either text from the clipboard or selected text from any application. 
+
+Drag-and-drop of text from other applications into the popup window is also supported (depending on Windows security restrictions, drag-and-drop may require both Trayslate and the source application to run with the same privileges).
+
+The popup window can stay on top of other windows and supports adjustable transparency, with separate settings for both idle and hover states. It also allows configuring the visibility of interface elements, which can be shown only on hover or kept always visible. All these options are configurable in Settings.
+
+![popup1](samples/popup1.png)
+
+---
 
 ## Hotkeys
 
@@ -74,13 +93,26 @@ Global hotkeys can be fully configured in the application settings. They are ava
 | Swaps the source and target languages | `Ctrl + Shift + S` |
 | Translates the current text from the clipboard | `Ctrl + Shift + T` |
 | Translates the current text in clipboard and copies the result to the clipboard | `Ctrl + Shift + R` |
+| Translates clipboard text to a popup window near the mouse cursor | `Ctrl + Shift + P` |
 | Translates the selected text from the active application | `Ctrl + Shift + C` |
 | Replaces the selected text in the active application with the translation | `Ctrl + Shift + V` |
-| Select recent language pair | `Ctrl + Shift + Number` |
+| Translates selected text from the active application to a popup window near the mouse cursor | `Ctrl + Shift + X` |
+| **Recent Language Pair Hotkeys** | |
+| Select recent language pair 1 | `Ctrl + Shift + 1` |
+| Select recent language pair 2 | `Ctrl + Shift + 2` |
+| Select recent language pair 3 | `Ctrl + Shift + 3` |
+| Select recent language pair 4 | `Ctrl + Shift + 4` |
+| Select recent language pair 5 | `Ctrl + Shift + 5` |
+| Select recent language pair 6 | `Ctrl + Shift + 6` |
+| Select recent language pair 7 | `Ctrl + Shift + 7` |
+| Select recent language pair 8 | `Ctrl + Shift + 8` |
+| Select recent language pair 9 | `Ctrl + Shift + 9` |
 | **Main Window Hotkeys** | |
 | New Translate | `Ctrl + N` |
 | Add Current Pair To Recent Panel | `Ctrl + F` |
 | Translate | `Ctrl + Enter`<br>`Shift + Enter`<br>`Double Enter`|
+
+---
 
 ## Settings
 
@@ -89,6 +121,8 @@ Settings allow you to configure the behavior, appearance, and global hotkeys of 
 | General | Interface | Global Hotkeys |
 |-------------|-------------|-------------|
 | ![img](samples/settings1.png) | ![img](samples/settings2.png) | ![img](samples/settings3.png) |
+
+---
 
 ## Config
 
@@ -101,6 +135,8 @@ The application comes with a powerful configuration editor, allowing you to crea
 | ![configeditor1](samples/configeditor3.png) | ![configeditor1](samples/configeditor4.png) |
 | **Target Languages** | |
 | ![configeditor1](samples/configeditor5.png) | ![configeditor1](samples/configeditor6.png) |
+
+---
 
 ## Installation
 
@@ -121,6 +157,8 @@ Several installer options are available on the releases page:
 
 Download the installer from the [releases page](https://github.com/plaintool/trayslate/releases), run it, and follow the on-screen instructions. After installation, you can launch Trayslate from the Start menu or from the desktop shortcut.
 
+---
+
 ## Donate 💖
 
 If you like Trayslate and want to support its development, you can send a donation:
@@ -133,6 +171,8 @@ If you like Trayslate and want to support its development, you can send a donati
 | ETH      | Ethereum (ERC20)| `0x328e689E961c3Abb143835f8677947Fa9eaF9f6F` |
 
 Every little help is appreciated! 🙏
+
+---
 
 ## Licensing
 
