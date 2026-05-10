@@ -1,12 +1,12 @@
 object formSettingsTrayslate: TformSettingsTrayslate
   Left = 318
-  Height = 570
+  Height = 600
   Top = 250
-  Width = 740
+  Width = 750
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Settings'
-  ClientHeight = 570
-  ClientWidth = 740
+  ClientHeight = 600
+  ClientWidth = 750
   LCLVersion = '4.4.0.0'
   OnChangeBounds = FormChangeBounds
   OnCreate = FormCreate
@@ -14,25 +14,25 @@ object formSettingsTrayslate: TformSettingsTrayslate
   OnShow = FormShow
   object PagesSettings: TPageControl
     Left = 186
-    Height = 525
+    Height = 555
     Top = 5
-    Width = 554
+    Width = 564
     TabStop = False
-    ActivePage = PageGeneral
+    ActivePage = PageInterface
     Align = alClient
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     object PageGeneral: TTabSheet
       Caption = 'General'
-      ClientHeight = 497
-      ClientWidth = 546
+      ClientHeight = 527
+      ClientWidth = 556
       object ScrollGeneral: TScrollBox
         Left = 0
-        Height = 497
+        Height = 527
         Top = 0
-        Width = 546
+        Width = 556
         HorzScrollBar.Increment = 18
         HorzScrollBar.Page = 185
         HorzScrollBar.Smooth = True
@@ -43,19 +43,19 @@ object formSettingsTrayslate: TformSettingsTrayslate
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 497
-        ClientWidth = 546
+        ClientHeight = 527
+        ClientWidth = 556
         TabOrder = 0
         object GroupRealTime: TGroupBox
           Left = 5
           Height = 99
           Top = 173
-          Width = 536
+          Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Real-Time Translation'
           ClientHeight = 79
-          ClientWidth = 532
+          ClientWidth = 542
           TabOrder = 2
           object CheckRealTime: TCheckBox
             Left = 16
@@ -84,7 +84,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Height = 23
             Hint = 'Translation Delay in milliseconds'
             Top = 40
-            Width = 357
+            Width = 367
             Anchors = [akTop, akLeft, akRight]
             ParentShowHint = False
             ShowHint = True
@@ -97,19 +97,19 @@ object formSettingsTrayslate: TformSettingsTrayslate
           Left = 5
           Height = 99
           Top = 69
-          Width = 536
+          Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Auto-Swap Languages'
           ClientHeight = 79
-          ClientWidth = 532
+          ClientWidth = 542
           TabOrder = 1
           object ComboLangDetect: TComboBox
             Left = 152
             Height = 23
             Hint = 'Config that auto-detects the target language for the selected language pair'
             Top = 40
-            Width = 357
+            Width = 367
             Anchors = [akTop, akLeft, akRight]
             DropDownCount = 15
             ItemHeight = 15
@@ -146,12 +146,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
           Left = 5
           Height = 59
           Top = 5
-          Width = 536
+          Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Autostart'
           ClientHeight = 39
-          ClientWidth = 532
+          ClientWidth = 542
           TabOrder = 0
           object CheckAutostart: TCheckBox
             Left = 16
@@ -170,42 +170,42 @@ object formSettingsTrayslate: TformSettingsTrayslate
     end
     object PageInterface: TTabSheet
       Caption = 'Interface'
-      ClientHeight = 497
-      ClientWidth = 546
+      ClientHeight = 527
+      ClientWidth = 556
       object ScrollInterface: TScrollBox
         Left = 0
-        Height = 497
+        Height = 527
         Top = 0
-        Width = 546
+        Width = 556
         HorzScrollBar.Increment = 18
         HorzScrollBar.Page = 187
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
-        VertScrollBar.Increment = 49
-        VertScrollBar.Page = 497
+        VertScrollBar.Increment = 52
+        VertScrollBar.Page = 525
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 497
-        ClientWidth = 529
+        ClientHeight = 527
+        ClientWidth = 556
         TabOrder = 0
         object GroupFont: TGroupBox
           Left = 5
           Height = 99
           Top = 5
-          Width = 519
+          Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Font'
           ClientHeight = 79
-          ClientWidth = 515
+          ClientWidth = 542
           TabOrder = 0
           object PanelFont: TPanel
             Left = 16
             Height = 57
             Top = 8
-            Width = 377
+            Width = 404
             Anchors = [akTop, akLeft, akRight]
             BevelOuter = bvNone
             Caption = 'Default, 0'
@@ -216,7 +216,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             TabOrder = 0
           end
           object BtnFont: TButton
-            Left = 401
+            Left = 428
             Height = 25
             Top = 8
             Width = 91
@@ -226,7 +226,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             OnClick = BtnFontClick
           end
           object BtnReset: TButton
-            Left = 401
+            Left = 428
             Height = 25
             Top = 40
             Width = 91
@@ -241,12 +241,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
           Left = 5
           Height = 155
           Top = 109
-          Width = 519
+          Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Tray Icon'
           ClientHeight = 135
-          ClientWidth = 515
+          ClientWidth = 542
           TabOrder = 1
           object CheckTwoLang: TCheckBox
             Left = 16
@@ -264,7 +264,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Left = 152
             Height = 22
             Top = 8
-            Width = 340
+            Width = 367
             Style = [cbIncludeNone, cbCustomColor, cbPrettyNames, cbCustomColors]
             ColorDialog = ColorDialog
             Anchors = [akTop, akLeft, akRight]
@@ -297,7 +297,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Left = 152
             Height = 22
             Top = 40
-            Width = 340
+            Width = 367
             Style = [cbCustomColor, cbPrettyNames, cbCustomColors]
             ColorDialog = ColorDialog
             Anchors = [akTop, akLeft, akRight]
@@ -320,7 +320,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Left = 152
             Height = 23
             Top = 72
-            Width = 340
+            Width = 367
             Anchors = [akTop, akLeft, akRight]
             DropDownCount = 15
             ItemHeight = 15
@@ -333,19 +333,19 @@ object formSettingsTrayslate: TformSettingsTrayslate
           Left = 5
           Height = 91
           Top = 269
-          Width = 519
+          Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Recent Language Pairs'
           ClientHeight = 71
-          ClientWidth = 515
+          ClientWidth = 542
           TabOrder = 2
           object SpinMaxLangPairs: TSpinEdit
             Left = 152
             Height = 23
             Hint = 'Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel'
             Top = 9
-            Width = 330
+            Width = 357
             Anchors = [akTop, akLeft, akRight]
             MaxValue = 100
             ParentShowHint = False
@@ -381,12 +381,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
           Left = 5
           Height = 155
           Top = 365
-          Width = 519
+          Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Popup Window'
           ClientHeight = 135
-          ClientWidth = 515
+          ClientWidth = 542
           TabOrder = 3
           object CheckStayOnTop: TCheckBox
             Left = 16
@@ -405,7 +405,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Height = 25
             Hint = 'Window transparency when the mouse is over the window'
             Top = 8
-            Width = 258
+            Width = 285
             Frequency = 5
             Max = 100
             Position = 0
@@ -430,7 +430,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Height = 25
             Hint = 'Window transparency when the mouse is not over the window'
             Top = 40
-            Width = 258
+            Width = 285
             Frequency = 5
             Max = 100
             Position = 0
@@ -451,7 +451,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             WordWrap = True
           end
           object SpinHover: TSpinEdit
-            Left = 415
+            Left = 442
             Height = 23
             Top = 8
             Width = 67
@@ -461,7 +461,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             OnChange = SettingChange
           end
           object SpinIdle: TSpinEdit
-            Left = 415
+            Left = 442
             Height = 23
             Top = 40
             Width = 67
@@ -487,13 +487,13 @@ object formSettingsTrayslate: TformSettingsTrayslate
     end
     object PageHotkeys: TTabSheet
       Caption = 'Hotkeys'
-      ClientHeight = 497
-      ClientWidth = 546
+      ClientHeight = 527
+      ClientWidth = 556
       object ScrollHotkeys: TScrollBox
         Left = 0
-        Height = 497
+        Height = 527
         Top = 0
-        Width = 546
+        Width = 556
         HorzScrollBar.Increment = 16
         HorzScrollBar.Page = 166
         HorzScrollBar.Smooth = True
@@ -504,25 +504,25 @@ object formSettingsTrayslate: TformSettingsTrayslate
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 497
-        ClientWidth = 546
+        ClientHeight = 527
+        ClientWidth = 556
         TabOrder = 0
         object GroupTransFromClipboard1: TGroupBox
           Left = 5
-          Height = 487
+          Height = 517
           Top = 5
-          Width = 536
+          Width = 546
           Align = alClient
           BorderSpacing.Around = 5
           Caption = 'Hotkeys'
-          ClientHeight = 467
-          ClientWidth = 532
+          ClientHeight = 497
+          ClientWidth = 542
           TabOrder = 0
           object GridHotkeys: TStringGrid
             Left = 5
-            Height = 427
+            Height = 457
             Top = 35
-            Width = 522
+            Width = 532
             Align = alClient
             BorderSpacing.Top = 30
             BorderSpacing.Around = 5
@@ -578,7 +578,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
   end
   object SplitterPages: TSplitter
     Left = 176
-    Height = 535
+    Height = 565
     Top = 0
     Width = 10
     AutoSnap = False
@@ -589,15 +589,15 @@ object formSettingsTrayslate: TformSettingsTrayslate
   object PanelBottom: TPanel
     Left = 0
     Height = 35
-    Top = 535
-    Width = 740
+    Top = 565
+    Width = 750
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 35
-    ClientWidth = 740
+    ClientWidth = 750
     TabOrder = 2
     object BtnOk: TButton
-      Left = 501
+      Left = 511
       Height = 25
       Top = 3
       Width = 75
@@ -607,7 +607,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
       OnClick = BtnOkClick
     end
     object BtnCancel: TButton
-      Left = 581
+      Left = 591
       Height = 25
       Top = 3
       Width = 75
@@ -618,7 +618,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
       OnClick = BtnCancelClick
     end
     object BtnApply: TButton
-      Left = 661
+      Left = 671
       Height = 25
       Top = 3
       Width = 75
@@ -631,7 +631,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
   end
   object PanelPages: TPanel
     Left = 6
-    Height = 523
+    Height = 553
     Top = 6
     Width = 170
     Align = alLeft
@@ -641,12 +641,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
     BevelColor = clActiveBorder
     BevelInner = bvRaised
     BevelOuter = bvNone
-    ClientHeight = 523
+    ClientHeight = 553
     ClientWidth = 170
     TabOrder = 3
     object ListPages: TListBox
       Left = 1
-      Height = 521
+      Height = 551
       Top = 1
       Width = 168
       Align = alClient
