@@ -84,8 +84,26 @@ msgid "Default"
 msgstr ""
 
 #: formsettings.rglobal
+msgctxt "formsettings.rglobal"
 msgid "Global Hotkeys"
 msgstr "مفاتيح الاختصار العامة"
+
+#: formsettings.rmousemodeballon
+msgid "Show Balloon Translation"
+msgstr ""
+
+#: formsettings.rmousemodebutton
+msgctxt "formsettings.rmousemodebutton"
+msgid "Show Translate Button"
+msgstr ""
+
+#: formsettings.rmousemodemain
+msgid "Show Main Window"
+msgstr ""
+
+#: formsettings.rmousemodepopup
+msgid "Show Popup Translation"
+msgstr ""
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
@@ -781,13 +799,32 @@ msgstr "تبديل زوج اللغات تلقائياً"
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "يكتشف تلقائياً لغة الإدخال ويبدل الزوج إذا لزم الأمر، لا يعمل أثناء الترجمة الفورية"
 
+#: tformsettingstrayslate.checkenablemousemode.caption
+msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
+msgid "Enable Mouse Mode"
+msgstr ""
+
+#: tformsettingstrayslate.checkenablemousemode.hint
+msgid "Allows translation by selecting text with the mouse in any application"
+msgstr ""
+
 #: tformsettingstrayslate.checkhidecontrols.caption
-msgid "Auto-hide controls"
+#, fuzzy
+#| msgid "Auto-hide controls"
+msgid "Auto-Hide controls"
 msgstr "إخفاء تلقائي للأدوات"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "إخفاء عناصر التحكم عند عدم مرور الفأرة فوق النافذة"
+
+#: tformsettingstrayslate.checkmousemodectrl.caption
+msgid "Only when Ctrl is pressed"
+msgstr ""
+
+#: tformsettingstrayslate.checkmousemodectrl.hint
+msgid "Works only when the Ctrl key is pressed"
+msgstr ""
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -815,9 +852,27 @@ msgstr "إظهار زوج اللغات"
 msgid "Display source and/or target language on the tray icon"
 msgstr "عرض اللغة المصدر و/أو الهدف على أيقونة العلبة"
 
+#: tformsettingstrayslate.checkverticalsplit.caption
+msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
+msgid "Vertical Split Position"
+msgstr ""
+
+#: tformsettingstrayslate.checkverticalsplit.hint
+msgid "Changes the splitter position for left/right panel layout"
+msgstr ""
+
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects the target language for the selected language pair"
 msgstr "تكوين يكتشف تلقائياً اللغة الهدف لزوج اللغات المحدد"
+
+#: tformsettingstrayslate.combomousemode.hint
+msgid "Choose how translation appears on mouse text selection"
+msgstr ""
+
+#: tformsettingstrayslate.combomousemode.text
+msgctxt "tformsettingstrayslate.combomousemode.text"
+msgid "Show Translate Button"
+msgstr ""
 
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
@@ -847,6 +902,15 @@ msgctxt "tformsettingstrayslate.grouplangpairs.caption"
 msgid "Recent Language Pairs"
 msgstr "أزواج اللغات الحديثة"
 
+#: tformsettingstrayslate.grouplayout.caption
+msgid "Layout"
+msgstr ""
+
+#: tformsettingstrayslate.groupmousemode.caption
+msgctxt "tformsettingstrayslate.groupmousemode.caption"
+msgid "Mouse Mode"
+msgstr ""
+
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
 msgstr "نافذة منبثقة"
@@ -868,11 +932,6 @@ msgstr "أيقونة العلبة"
 msgid "Background Color"
 msgstr "لون الخلفية"
 
-#: tformsettingstrayslate.labeliconbackground1.caption
-msgctxt "tformsettingstrayslate.labeliconbackground1.caption"
-msgid "Lang Detect Config"
-msgstr "تكوين كشف اللغة"
-
 #: tformsettingstrayslate.labeliconfont.caption
 msgid "Font Color"
 msgstr "لون الخط"
@@ -881,10 +940,21 @@ msgstr "لون الخط"
 msgid "Font Name"
 msgstr "اسم الخط"
 
+#: tformsettingstrayslate.labellangdetectconfig.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
+msgid "Lang Detect Config"
+msgstr "تكوين كشف اللغة"
+
 #: tformsettingstrayslate.labelmaxlangpairs.caption
 msgctxt "tformsettingstrayslate.labelmaxlangpairs.caption"
 msgid "Max Pairs"
 msgstr "الحد الأقصى للأزواج"
+
+#: tformsettingstrayslate.labelmousemode.caption
+msgctxt "tformsettingstrayslate.labelmousemode.caption"
+msgid "Mouse Mode"
+msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity on Hover"
@@ -969,6 +1039,43 @@ msgstr "ادعم المشروع..."
 #: tformtrayslate.aexit.caption
 msgid "Exit"
 msgstr "خروج"
+
+#: tformtrayslate.afastautoaddrecentlangpairs.caption
+msgid "Auto-Add Recent Language Pairs"
+msgstr ""
+
+#: tformtrayslate.afastautohidepopupcontrols.caption
+msgid "Auto-Hide Popup Controls"
+msgstr ""
+
+#: tformtrayslate.afastautoswaplangpair.caption
+#, fuzzy
+msgctxt "tformtrayslate.afastautoswaplangpair.caption"
+msgid "Auto-Swap Language Pair"
+msgstr "تبديل زوج اللغات تلقائياً"
+
+#: tformtrayslate.afastenableglobalhotkeys.caption
+#, fuzzy
+#| msgid "Global Hotkeys"
+msgctxt "tformtrayslate.afastenableglobalhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "مفاتيح الاختصار العامة"
+
+#: tformtrayslate.afastenablemousemode.caption
+msgctxt "tformtrayslate.afastenablemousemode.caption"
+msgid "Enable Mouse Mode"
+msgstr ""
+
+#: tformtrayslate.afasttranslateasyoutype.caption
+#, fuzzy
+msgctxt "tformtrayslate.afasttranslateasyoutype.caption"
+msgid "Translate As You Type"
+msgstr "الترجمة أثناء الكتابة"
+
+#: tformtrayslate.afastverticalsplitposition.caption
+msgctxt "tformtrayslate.afastverticalsplitposition.caption"
+msgid "Vertical Split Position"
+msgstr ""
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
@@ -1118,6 +1225,10 @@ msgstr ""
 msgid "Config"
 msgstr "التكوين"
 
+#: tformtrayslate.menufastsettings.caption
+msgid "Fast Settings"
+msgstr ""
+
 #: tformtrayslate.menuhelp.caption
 msgid "Help"
 msgstr "مساعدة"
@@ -1130,3 +1241,4 @@ msgstr "الأزواج الحديثة"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
+

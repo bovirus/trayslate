@@ -28,7 +28,10 @@ uses
   jsonparser;
 
 type
+  { TWebMethod }
   TWebMethod = (wmGet, wmPost);
+
+  { TValueType}
   TValueType = (
     vtNone,            // as is
     vtLanguage,        // languages

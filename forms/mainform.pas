@@ -49,6 +49,13 @@ type
     aAutoCheckUpdates: TAction;
     aCopySource: TAction;
     aCopyTarget: TAction;
+    aFastEnableGlobalHotkeys: TAction;
+    aFastEnableMouseMode: TAction;
+    aFastAutoSwapLangPair: TAction;
+    aFastTranslateAsYouType: TAction;
+    aFastAutoAddRecentLangPairs: TAction;
+    aFastAutoHidePopupControls: TAction;
+    aFastVerticalSplitPosition: TAction;
     aPopupTranslate: TAction;
     aLangCustom: TAction;
     aLangBulgarian: TAction;
@@ -66,6 +73,14 @@ type
     MenuBulgarian: TMenuItem;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
+    MenuFastSettings: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    MenuItem9: TMenuItem;
     OpenPo: TOpenDialog;
     SbCopySource: TSpeedButton;
     SbCopyTarget: TSpeedButton;
@@ -260,7 +275,6 @@ type
     FTranslateThread: TTranslateThread;
     FPopupOpen: boolean;
     FHint: THintWindow;
-    FSplitRatio: double;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -282,12 +296,17 @@ type
     FRealTime: boolean;
     FRealTimeDelay: integer;
     FAutoSwap: boolean;
+    FEnableMouseMode: boolean;
+    FMouseModeCtrl: boolean;
+    FMouseMode: TMouseMode;
+    FVerticalSplit: boolean;
     FStayOnTop: boolean;
     FHideControls: boolean;
     FOpacityHover: integer;
     FOpacityIdle: integer;
     FAutoCheckUpdates: boolean;
     FUpdatesChecked: boolean;
+    FSplitRatio: double;
     FFormConfigLeft: integer;
     FFormConfigTop: integer;
     FFormConfigWidth: integer;
@@ -363,6 +382,7 @@ type
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
     procedure ShowPopup(const SourceText: string; X: integer = 0; Y: integer = 0);
+    procedure SetVerticalMode;
     function GetLangCodeFromPoFile(const AFileName: string): string;
     function LoadCustomPoFile(const AFileName: string): string;
     {$IFDEF WINDOWS}
@@ -406,11 +426,16 @@ type
     property RealTime: boolean read FRealTime write FRealTime;
     property RealTimeDelay: integer read FRealTimeDelay write FRealTimeDelay;
     property AutoSwap: boolean read FAutoSwap write FAutoSwap;
+    property EnableMouseMode: boolean read FEnableMouseMode write FEnableMouseMode;
+    property MouseModeCtrl: boolean read FMouseModeCtrl write FMouseModeCtrl;
+    property MouseMode: TMouseMode read FMouseMode write FMouseMode;
+    property VerticalSplit: boolean read FVerticalSplit write FVerticalSplit;
     property StayOnTop: boolean read FStayOnTop write FStayOnTop;
     property HideControls: boolean read FHideControls write FHideControls;
     property OpacityHover: integer read FOpacityHover write FOpacityHover;
     property OpacityIdle: integer read FOpacityIdle write FOpacityIdle;
     property AutoCheckUpdates: boolean read FAutoCheckUpdates write FAutoCheckUpdates;
+    property SplitRatio: double read FSplitRatio write FSplitRatio;
     property FormConfigLeft: integer read FFormConfigLeft write FFormConfigLeft;
     property FormConfigTop: integer read FFormConfigTop write FFormConfigTop;
     property FormConfigWidth: integer read FFormConfigWidth write FFormConfigWidth;
@@ -498,6 +523,10 @@ begin
   FRealTime := False;
   FRealTimeDelay := 1000;
   FAutoSwap := False;
+  FEnableMouseMode := False;
+  FMouseModeCtrl := True;
+  FMouseMode := mmShowTranslateButton;
+  FVerticalSplit := False;
   FStayOnTop := True;
   FHideControls := True;
   FOpacityHover := 60;
@@ -729,7 +758,14 @@ begin
   end;
 
   // Calc Splitter position
-  SplitterMemoMoved(SplitterMemo);
+  case PanelTarget.Align of
+    alBottom:
+      PanelTarget.Height := Round((PanelSource.Height + PanelTarget.Height) * FSplitRatio);
+
+    alRight:
+      PanelTarget.Width := Round((PanelSource.Width + PanelTarget.Width) * FSplitRatio);
+  end;
+  SetVerticalMode;
 end;
 
 procedure TformTrayslate.FormCloseQuery(Sender: TObject; var CanClose: boolean);
@@ -2300,6 +2336,31 @@ begin
     formPopupTrayslate.Show;
   if not StayOnTop then
     BringToFrontNoFocus(formPopupTrayslate);
+end;
+
+procedure TformTrayslate.SetVerticalMode;
+begin
+  SplitterMemoMoved(SplitterMemo);
+  if FVerticalSplit then
+  begin
+    // Switch to vertical layout
+    PanelSource.Align := alClient;
+    PanelTarget.Align := alRight;
+    SplitterMemo.Align := alRight;
+    SplitterMemo.Left := PanelSource.Width;
+
+    PanelSource.Width := Round((PanelSource.Width + PanelTarget.Width) * FSplitRatio);
+  end
+  else
+  begin
+    // Switch to horizontal layout
+    PanelSource.Align := alClient;
+    PanelTarget.Align := alBottom;
+    SplitterMemo.Align := alBottom;
+    SplitterMemo.Top := PanelSource.Height + PanelPairs.Height;
+
+    PanelSource.Height := Round((PanelSource.Height + PanelTarget.Height) * FSplitRatio);
+  end;
 end;
 
 {$IFDEF WINDOWS}

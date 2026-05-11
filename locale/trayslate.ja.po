@@ -84,8 +84,26 @@ msgid "Default"
 msgstr ""
 
 #: formsettings.rglobal
+msgctxt "formsettings.rglobal"
 msgid "Global Hotkeys"
 msgstr "グローバルホットキー"
+
+#: formsettings.rmousemodeballon
+msgid "Show Balloon Translation"
+msgstr ""
+
+#: formsettings.rmousemodebutton
+msgctxt "formsettings.rmousemodebutton"
+msgid "Show Translate Button"
+msgstr ""
+
+#: formsettings.rmousemodemain
+msgid "Show Main Window"
+msgstr ""
+
+#: formsettings.rmousemodepopup
+msgid "Show Popup Translation"
+msgstr ""
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
@@ -779,13 +797,32 @@ msgstr "言語ペアを自動入れ替え"
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "入力言語を自動検出し、必要に応じてペアを入れ替えます。リアルタイム翻訳中は動作しません"
 
+#: tformsettingstrayslate.checkenablemousemode.caption
+msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
+msgid "Enable Mouse Mode"
+msgstr ""
+
+#: tformsettingstrayslate.checkenablemousemode.hint
+msgid "Allows translation by selecting text with the mouse in any application"
+msgstr ""
+
 #: tformsettingstrayslate.checkhidecontrols.caption
-msgid "Auto-hide controls"
+#, fuzzy
+#| msgid "Auto-hide controls"
+msgid "Auto-Hide controls"
 msgstr "コントロールを自動で隠す"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "マウスがポップアップ上にない時はコントロールを隠す"
+
+#: tformsettingstrayslate.checkmousemodectrl.caption
+msgid "Only when Ctrl is pressed"
+msgstr ""
+
+#: tformsettingstrayslate.checkmousemodectrl.hint
+msgid "Works only when the Ctrl key is pressed"
+msgstr ""
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -813,9 +850,27 @@ msgstr "言語ペアを表示"
 msgid "Display source and/or target language on the tray icon"
 msgstr "トレイアイコンにソース言語やターゲット言語を表示します"
 
+#: tformsettingstrayslate.checkverticalsplit.caption
+msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
+msgid "Vertical Split Position"
+msgstr ""
+
+#: tformsettingstrayslate.checkverticalsplit.hint
+msgid "Changes the splitter position for left/right panel layout"
+msgstr ""
+
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects the target language for the selected language pair"
 msgstr "選択した言語ペアに対してターゲット言語を自動検出する設定"
+
+#: tformsettingstrayslate.combomousemode.hint
+msgid "Choose how translation appears on mouse text selection"
+msgstr ""
+
+#: tformsettingstrayslate.combomousemode.text
+msgctxt "tformsettingstrayslate.combomousemode.text"
+msgid "Show Translate Button"
+msgstr ""
 
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
@@ -845,6 +900,15 @@ msgctxt "tformsettingstrayslate.grouplangpairs.caption"
 msgid "Recent Language Pairs"
 msgstr "最近の言語ペア"
 
+#: tformsettingstrayslate.grouplayout.caption
+msgid "Layout"
+msgstr ""
+
+#: tformsettingstrayslate.groupmousemode.caption
+msgctxt "tformsettingstrayslate.groupmousemode.caption"
+msgid "Mouse Mode"
+msgstr ""
+
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
 msgstr "ポップアップウィンドウ"
@@ -866,11 +930,6 @@ msgstr "トレイアイコン"
 msgid "Background Color"
 msgstr "背景色"
 
-#: tformsettingstrayslate.labeliconbackground1.caption
-msgctxt "tformsettingstrayslate.labeliconbackground1.caption"
-msgid "Lang Detect Config"
-msgstr "言語検出設定"
-
 #: tformsettingstrayslate.labeliconfont.caption
 msgid "Font Color"
 msgstr "フォントの色"
@@ -879,10 +938,21 @@ msgstr "フォントの色"
 msgid "Font Name"
 msgstr "フォント名"
 
+#: tformsettingstrayslate.labellangdetectconfig.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
+msgid "Lang Detect Config"
+msgstr "言語検出設定"
+
 #: tformsettingstrayslate.labelmaxlangpairs.caption
 msgctxt "tformsettingstrayslate.labelmaxlangpairs.caption"
 msgid "Max Pairs"
 msgstr "最大ペア数"
+
+#: tformsettingstrayslate.labelmousemode.caption
+msgctxt "tformsettingstrayslate.labelmousemode.caption"
+msgid "Mouse Mode"
+msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity on Hover"
@@ -967,6 +1037,43 @@ msgstr "プロジェクトを支援..."
 #: tformtrayslate.aexit.caption
 msgid "Exit"
 msgstr "終了"
+
+#: tformtrayslate.afastautoaddrecentlangpairs.caption
+msgid "Auto-Add Recent Language Pairs"
+msgstr ""
+
+#: tformtrayslate.afastautohidepopupcontrols.caption
+msgid "Auto-Hide Popup Controls"
+msgstr ""
+
+#: tformtrayslate.afastautoswaplangpair.caption
+#, fuzzy
+msgctxt "tformtrayslate.afastautoswaplangpair.caption"
+msgid "Auto-Swap Language Pair"
+msgstr "言語ペアを自動入れ替え"
+
+#: tformtrayslate.afastenableglobalhotkeys.caption
+#, fuzzy
+#| msgid "Global Hotkeys"
+msgctxt "tformtrayslate.afastenableglobalhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "グローバルホットキー"
+
+#: tformtrayslate.afastenablemousemode.caption
+msgctxt "tformtrayslate.afastenablemousemode.caption"
+msgid "Enable Mouse Mode"
+msgstr ""
+
+#: tformtrayslate.afasttranslateasyoutype.caption
+#, fuzzy
+msgctxt "tformtrayslate.afasttranslateasyoutype.caption"
+msgid "Translate As You Type"
+msgstr "入力しながら翻訳"
+
+#: tformtrayslate.afastverticalsplitposition.caption
+msgctxt "tformtrayslate.afastverticalsplitposition.caption"
+msgid "Vertical Split Position"
+msgstr ""
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
@@ -1116,6 +1223,10 @@ msgstr ""
 msgid "Config"
 msgstr "設定"
 
+#: tformtrayslate.menufastsettings.caption
+msgid "Fast Settings"
+msgstr ""
+
 #: tformtrayslate.menuhelp.caption
 msgid "Help"
 msgstr "ヘルプ"
@@ -1128,3 +1239,4 @@ msgstr "最近のペア"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
+

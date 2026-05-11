@@ -247,6 +247,7 @@ object formTrayslate: TformTrayslate
     ClientHeight = 230
     ClientWidth = 506
     Constraints.MinHeight = 30
+    Constraints.MinWidth = 30
     ParentBackground = False
     TabOrder = 1
     object MemoTarget: TMemo
@@ -326,6 +327,38 @@ object formTrayslate: TformTrayslate
     end
     object MenuConfigEditor: TMenuItem
       Action = aConfigEditor
+    end
+    object MenuFastSettings: TMenuItem
+      Caption = 'Fast Settings'
+      Visible = False
+      object MenuItem3: TMenuItem
+        Action = aFastEnableGlobalHotkeys
+        AutoCheck = True
+      end
+      object MenuItem4: TMenuItem
+        Action = aFastEnableMouseMode
+        AutoCheck = True
+      end
+      object MenuItem5: TMenuItem
+        Action = aFastVerticalSplitPosition
+        AutoCheck = True
+      end
+      object MenuItem6: TMenuItem
+        Action = aFastAutoSwapLangPair
+        AutoCheck = True
+      end
+      object MenuItem8: TMenuItem
+        Action = aFastAutoAddRecentLangPairs
+        AutoCheck = True
+      end
+      object MenuItem9: TMenuItem
+        Action = aFastAutoHidePopupControls
+        AutoCheck = True
+      end
+      object MenuItem7: TMenuItem
+        Action = aFastTranslateAsYouType
+        AutoCheck = True
+      end
     end
     object MenuSettings: TMenuItem
       Action = aSettings
@@ -676,6 +709,41 @@ object formTrayslate: TformTrayslate
       Category = 'Tray'
       Caption = 'Exit'
       OnExecute = aExitExecute
+    end
+    object aFastEnableGlobalHotkeys: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Enable Global Hotkeys'
+    end
+    object aFastEnableMouseMode: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Enable Mouse Mode'
+    end
+    object aFastVerticalSplitPosition: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Vertical Split Position'
+    end
+    object aFastAutoSwapLangPair: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Auto-Swap Language Pair'
+    end
+    object aFastAutoAddRecentLangPairs: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Auto-Add Recent Language Pairs'
+    end
+    object aFastAutoHidePopupControls: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Auto-Hide Popup Controls'
+    end
+    object aFastTranslateAsYouType: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Translate As You Type'
     end
   end
   object TimerClick: TTimer

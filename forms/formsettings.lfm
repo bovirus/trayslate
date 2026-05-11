@@ -1,12 +1,13 @@
 object formSettingsTrayslate: TformSettingsTrayslate
   Left = 318
-  Height = 600
+  Height = 665
   Top = 250
   Width = 750
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Settings'
-  ClientHeight = 600
+  ClientHeight = 665
   ClientWidth = 750
+  ShowHint = True
   LCLVersion = '4.4.0.0'
   OnChangeBounds = FormChangeBounds
   OnCreate = FormCreate
@@ -14,36 +15,36 @@ object formSettingsTrayslate: TformSettingsTrayslate
   OnShow = FormShow
   object PagesSettings: TPageControl
     Left = 186
-    Height = 555
+    Height = 620
     Top = 5
     Width = 564
     TabStop = False
-    ActivePage = PageInterface
+    ActivePage = PageGeneral
     Align = alClient
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 1
     object PageGeneral: TTabSheet
       Caption = 'General'
-      ClientHeight = 527
+      ClientHeight = 592
       ClientWidth = 556
       object ScrollGeneral: TScrollBox
         Left = 0
-        Height = 527
+        Height = 592
         Top = 0
         Width = 556
-        HorzScrollBar.Increment = 18
-        HorzScrollBar.Page = 185
+        HorzScrollBar.Increment = 53
+        HorzScrollBar.Page = 533
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
-        VertScrollBar.Increment = 27
-        VertScrollBar.Page = 277
+        VertScrollBar.Increment = 41
+        VertScrollBar.Page = 413
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 527
+        ClientHeight = 592
         ClientWidth = 556
         TabOrder = 0
         object GroupRealTime: TGroupBox
@@ -64,8 +65,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Top = 8
             Width = 133
             Caption = 'Translate As You Type'
-            ParentShowHint = False
-            ShowHint = True
             TabOrder = 0
             OnChange = SettingChange
           end
@@ -86,8 +85,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Top = 40
             Width = 367
             Anchors = [akTop, akLeft, akRight]
-            ParentShowHint = False
-            ShowHint = True
             TabOrder = 1
             Value = 1000
             OnChange = SettingChange
@@ -113,13 +110,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Anchors = [akTop, akLeft, akRight]
             DropDownCount = 15
             ItemHeight = 15
-            ParentShowHint = False
-            ShowHint = True
             Style = csDropDownList
             TabOrder = 1
             OnChange = SettingChange
           end
-          object LabelIconBackground1: TLabel
+          object LabelLangDetectConfig: TLabel
             Left = 8
             Height = 32
             Top = 40
@@ -136,8 +131,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Top = 8
             Width = 155
             Caption = 'Auto-Swap Language Pair'
-            ParentShowHint = False
-            ShowHint = True
             TabOrder = 0
             OnChange = SettingChange
           end
@@ -160,47 +153,105 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Top = 8
             Width = 154
             Caption = 'Launch At System Startup'
-            ParentShowHint = False
-            ShowHint = True
             TabOrder = 0
             OnChange = SettingChange
+          end
+        end
+        object GroupMouseMode: TGroupBox
+          Left = 5
+          Height = 131
+          Top = 277
+          Width = 546
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Mouse Mode'
+          ClientHeight = 111
+          ClientWidth = 542
+          TabOrder = 3
+          Visible = False
+          object CheckEnableMouseMode: TCheckBox
+            Left = 16
+            Height = 19
+            Hint = 'Allows translation by selecting text with the mouse in any application'
+            Top = 8
+            Width = 126
+            Caption = 'Enable Mouse Mode'
+            TabOrder = 0
+          end
+          object ComboMouseMode: TComboBox
+            Left = 152
+            Height = 23
+            Hint = 'Choose how translation appears on mouse text selection'
+            Top = 72
+            Width = 367
+            ItemHeight = 15
+            ItemIndex = 0
+            Items.Strings = (
+              'Show Translate Button'
+              'Show Balloon Translation'
+              'Show Popup Translation'
+              'Show Main Window'
+            )
+            Style = csDropDownList
+            TabOrder = 2
+            Text = 'Show Translate Button'
+          end
+          object LabelMouseMode: TLabel
+            Left = 8
+            Height = 32
+            Top = 72
+            Width = 136
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Mouse Mode'
+            WordWrap = True
+          end
+          object CheckMouseModeCtrl: TCheckBox
+            Left = 16
+            Height = 19
+            Hint = 'Works only when the Ctrl key is pressed'
+            Top = 40
+            Width = 151
+            HelpType = htKeyword
+            Caption = 'Only when Ctrl is pressed'
+            TabOrder = 1
           end
         end
       end
     end
     object PageInterface: TTabSheet
       Caption = 'Interface'
-      ClientHeight = 527
+      ClientHeight = 592
       ClientWidth = 556
       object ScrollInterface: TScrollBox
         Left = 0
-        Height = 527
+        Height = 592
         Top = 0
         Width = 556
         HorzScrollBar.Increment = 18
         HorzScrollBar.Page = 187
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
-        VertScrollBar.Increment = 52
-        VertScrollBar.Page = 525
+        VertScrollBar.Increment = 58
+        VertScrollBar.Page = 589
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 527
+        ClientHeight = 592
         ClientWidth = 556
         TabOrder = 0
         object GroupFont: TGroupBox
           Left = 5
           Height = 99
-          Top = 5
+          Top = 69
           Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Font'
           ClientHeight = 79
           ClientWidth = 542
-          TabOrder = 0
+          TabOrder = 1
           object PanelFont: TPanel
             Left = 16
             Height = 57
@@ -240,14 +291,14 @@ object formSettingsTrayslate: TformSettingsTrayslate
         object GroupTrayIcon: TGroupBox
           Left = 5
           Height = 155
-          Top = 109
+          Top = 173
           Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Tray Icon'
           ClientHeight = 135
           ClientWidth = 542
-          TabOrder = 1
+          TabOrder = 2
           object CheckTwoLang: TCheckBox
             Left = 16
             Height = 19
@@ -255,8 +306,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Top = 104
             Width = 125
             Caption = 'Show Language Pair'
-            ParentShowHint = False
-            ShowHint = True
             TabOrder = 3
             OnChange = SettingChange
           end
@@ -332,14 +381,14 @@ object formSettingsTrayslate: TformSettingsTrayslate
         object GroupLangPairs: TGroupBox
           Left = 5
           Height = 91
-          Top = 269
+          Top = 333
           Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Recent Language Pairs'
           ClientHeight = 71
           ClientWidth = 542
-          TabOrder = 2
+          TabOrder = 3
           object SpinMaxLangPairs: TSpinEdit
             Left = 152
             Height = 23
@@ -348,8 +397,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Width = 357
             Anchors = [akTop, akLeft, akRight]
             MaxValue = 100
-            ParentShowHint = False
-            ShowHint = True
             TabOrder = 0
             Value = 10
             OnChange = SettingChange
@@ -371,8 +418,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Top = 40
             Width = 157
             Caption = 'Auto-Add On Pair Change'
-            ParentShowHint = False
-            ShowHint = True
             TabOrder = 1
             OnChange = SettingChange
           end
@@ -380,14 +425,14 @@ object formSettingsTrayslate: TformSettingsTrayslate
         object GroupPopup: TGroupBox
           Left = 5
           Height = 155
-          Top = 365
+          Top = 429
           Width = 546
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Popup Window'
           ClientHeight = 135
           ClientWidth = 542
-          TabOrder = 3
+          TabOrder = 4
           object CheckStayOnTop: TCheckBox
             Left = 16
             Height = 19
@@ -395,8 +440,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Top = 72
             Width = 82
             Caption = 'Stay On Top'
-            ParentShowHint = False
-            ShowHint = True
             TabOrder = 0
             OnChange = SettingChange
           end
@@ -411,8 +454,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Position = 0
             OnChange = SettingChange
             Anchors = [akTop, akLeft, akRight]
-            ParentShowHint = False
-            ShowHint = True
             TabOrder = 1
           end
           object LabelOpacityHover: TLabel
@@ -436,8 +477,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Position = 0
             OnChange = SettingChange
             Anchors = [akTop, akLeft, akRight]
-            ParentShowHint = False
-            ShowHint = True
             TabOrder = 2
           end
           object LabelOpacityIdle: TLabel
@@ -475,11 +514,31 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Height = 19
             Hint = 'Hide window controls when the mouse is not over the popup window'
             Top = 104
-            Width = 118
-            Caption = 'Auto-hide controls'
-            ParentShowHint = False
-            ShowHint = True
+            Width = 120
+            Caption = 'Auto-Hide controls'
             TabOrder = 5
+            OnChange = SettingChange
+          end
+        end
+        object GroupLayout: TGroupBox
+          Left = 5
+          Height = 59
+          Top = 5
+          Width = 546
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Layout'
+          ClientHeight = 39
+          ClientWidth = 542
+          TabOrder = 0
+          object CheckVerticalSplit: TCheckBox
+            Left = 16
+            Height = 19
+            Hint = 'Changes the splitter position for left/right panel layout'
+            Top = 8
+            Width = 129
+            Caption = 'Vertical Split Position'
+            TabOrder = 0
             OnChange = SettingChange
           end
         end
@@ -487,11 +546,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
     end
     object PageHotkeys: TTabSheet
       Caption = 'Hotkeys'
-      ClientHeight = 527
+      ClientHeight = 592
       ClientWidth = 556
       object ScrollHotkeys: TScrollBox
         Left = 0
-        Height = 527
+        Height = 592
         Top = 0
         Width = 556
         HorzScrollBar.Increment = 16
@@ -504,23 +563,23 @@ object formSettingsTrayslate: TformSettingsTrayslate
         VertScrollBar.Tracking = True
         Align = alClient
         BorderStyle = bsNone
-        ClientHeight = 527
+        ClientHeight = 592
         ClientWidth = 556
         TabOrder = 0
         object GroupTransFromClipboard1: TGroupBox
           Left = 5
-          Height = 517
+          Height = 582
           Top = 5
           Width = 546
           Align = alClient
           BorderSpacing.Around = 5
           Caption = 'Hotkeys'
-          ClientHeight = 497
+          ClientHeight = 562
           ClientWidth = 542
           TabOrder = 0
           object GridHotkeys: TStringGrid
             Left = 5
-            Height = 457
+            Height = 522
             Top = 35
             Width = 532
             Align = alClient
@@ -553,9 +612,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             FocusColor = clGrayText
             GridLineWidth = 0
             Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing, goEditing, goThumbTracking, goSmoothScroll, goHeaderHotTracking, goCellHints, goRowHighlight]
-            ParentShowHint = False
             RowCount = 1
-            ShowHint = True
             TabOrder = 0
             OnDrawCell = GridHotkeysDrawCell
             OnGetCellHint = GridHotkeysGetCellHint
@@ -578,7 +635,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
   end
   object SplitterPages: TSplitter
     Left = 176
-    Height = 565
+    Height = 630
     Top = 0
     Width = 10
     AutoSnap = False
@@ -589,7 +646,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
   object PanelBottom: TPanel
     Left = 0
     Height = 35
-    Top = 565
+    Top = 630
     Width = 750
     Align = alBottom
     BevelOuter = bvNone
@@ -631,7 +688,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
   end
   object PanelPages: TPanel
     Left = 6
-    Height = 553
+    Height = 618
     Top = 6
     Width = 170
     Align = alLeft
@@ -641,12 +698,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
     BevelColor = clActiveBorder
     BevelInner = bvRaised
     BevelOuter = bvNone
-    ClientHeight = 553
+    ClientHeight = 618
     ClientWidth = 170
     TabOrder = 3
     object ListPages: TListBox
       Left = 1
-      Height = 551
+      Height = 616
       Top = 1
       Width = 168
       Align = alClient

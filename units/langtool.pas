@@ -33,6 +33,13 @@ type
     Key: word;            // virtual key code
   end;
 
+  TMouseMode = (
+    mmShowTranslateButton,
+    mmShowBalloonTranslation,
+    mmShowPopupTranslation,
+    mmShowMainWindow
+    );
+
 const
   {$IFDEF WINDOWS}
   HOTKEY_APP = 1;

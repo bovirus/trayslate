@@ -84,8 +84,26 @@ msgid "Default"
 msgstr ""
 
 #: formsettings.rglobal
+msgctxt "formsettings.rglobal"
 msgid "Global Hotkeys"
 msgstr "Globala snabbtangenter"
+
+#: formsettings.rmousemodeballon
+msgid "Show Balloon Translation"
+msgstr ""
+
+#: formsettings.rmousemodebutton
+msgctxt "formsettings.rmousemodebutton"
+msgid "Show Translate Button"
+msgstr ""
+
+#: formsettings.rmousemodemain
+msgid "Show Main Window"
+msgstr ""
+
+#: formsettings.rmousemodepopup
+msgid "Show Popup Translation"
+msgstr ""
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
@@ -779,13 +797,32 @@ msgstr "Byt språkpar automatiskt"
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "Identifiera inmatningsspråk automatiskt och byt par vid behov, fungerar inte under realtidsöversättning"
 
+#: tformsettingstrayslate.checkenablemousemode.caption
+msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
+msgid "Enable Mouse Mode"
+msgstr ""
+
+#: tformsettingstrayslate.checkenablemousemode.hint
+msgid "Allows translation by selecting text with the mouse in any application"
+msgstr ""
+
 #: tformsettingstrayslate.checkhidecontrols.caption
-msgid "Auto-hide controls"
+#, fuzzy
+#| msgid "Auto-hide controls"
+msgid "Auto-Hide controls"
 msgstr "Dölj kontroller automatiskt"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Dölj kontroller när musen inte är över popupfönstret"
+
+#: tformsettingstrayslate.checkmousemodectrl.caption
+msgid "Only when Ctrl is pressed"
+msgstr ""
+
+#: tformsettingstrayslate.checkmousemodectrl.hint
+msgid "Works only when the Ctrl key is pressed"
+msgstr ""
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -813,9 +850,27 @@ msgstr "Visa språkpar"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Visa käll- och/eller målspråk på systemfältsikonen"
 
+#: tformsettingstrayslate.checkverticalsplit.caption
+msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
+msgid "Vertical Split Position"
+msgstr ""
+
+#: tformsettingstrayslate.checkverticalsplit.hint
+msgid "Changes the splitter position for left/right panel layout"
+msgstr ""
+
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects the target language for the selected language pair"
 msgstr "Konfiguration som automatiskt identifierar målspråket för det valda språkparet"
+
+#: tformsettingstrayslate.combomousemode.hint
+msgid "Choose how translation appears on mouse text selection"
+msgstr ""
+
+#: tformsettingstrayslate.combomousemode.text
+msgctxt "tformsettingstrayslate.combomousemode.text"
+msgid "Show Translate Button"
+msgstr ""
 
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
@@ -845,6 +900,15 @@ msgctxt "tformsettingstrayslate.grouplangpairs.caption"
 msgid "Recent Language Pairs"
 msgstr "Senaste språkpar"
 
+#: tformsettingstrayslate.grouplayout.caption
+msgid "Layout"
+msgstr ""
+
+#: tformsettingstrayslate.groupmousemode.caption
+msgctxt "tformsettingstrayslate.groupmousemode.caption"
+msgid "Mouse Mode"
+msgstr ""
+
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
 msgstr "Popupfönster"
@@ -866,11 +930,6 @@ msgstr "Systemfältsikon"
 msgid "Background Color"
 msgstr "Bakgrundsfärg"
 
-#: tformsettingstrayslate.labeliconbackground1.caption
-msgctxt "tformsettingstrayslate.labeliconbackground1.caption"
-msgid "Lang Detect Config"
-msgstr "Språkidentifieringskonfiguration"
-
 #: tformsettingstrayslate.labeliconfont.caption
 msgid "Font Color"
 msgstr "Teckensnittsfärg"
@@ -879,10 +938,21 @@ msgstr "Teckensnittsfärg"
 msgid "Font Name"
 msgstr "Teckensnittsnamn"
 
+#: tformsettingstrayslate.labellangdetectconfig.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
+msgid "Lang Detect Config"
+msgstr "Språkidentifieringskonfiguration"
+
 #: tformsettingstrayslate.labelmaxlangpairs.caption
 msgctxt "tformsettingstrayslate.labelmaxlangpairs.caption"
 msgid "Max Pairs"
 msgstr "Max par"
+
+#: tformsettingstrayslate.labelmousemode.caption
+msgctxt "tformsettingstrayslate.labelmousemode.caption"
+msgid "Mouse Mode"
+msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity on Hover"
@@ -967,6 +1037,43 @@ msgstr "Stöd projektet..."
 #: tformtrayslate.aexit.caption
 msgid "Exit"
 msgstr "Avsluta"
+
+#: tformtrayslate.afastautoaddrecentlangpairs.caption
+msgid "Auto-Add Recent Language Pairs"
+msgstr ""
+
+#: tformtrayslate.afastautohidepopupcontrols.caption
+msgid "Auto-Hide Popup Controls"
+msgstr ""
+
+#: tformtrayslate.afastautoswaplangpair.caption
+#, fuzzy
+msgctxt "tformtrayslate.afastautoswaplangpair.caption"
+msgid "Auto-Swap Language Pair"
+msgstr "Byt språkpar automatiskt"
+
+#: tformtrayslate.afastenableglobalhotkeys.caption
+#, fuzzy
+#| msgid "Global Hotkeys"
+msgctxt "tformtrayslate.afastenableglobalhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "Globala snabbtangenter"
+
+#: tformtrayslate.afastenablemousemode.caption
+msgctxt "tformtrayslate.afastenablemousemode.caption"
+msgid "Enable Mouse Mode"
+msgstr ""
+
+#: tformtrayslate.afasttranslateasyoutype.caption
+#, fuzzy
+msgctxt "tformtrayslate.afasttranslateasyoutype.caption"
+msgid "Translate As You Type"
+msgstr "Översätt medan du skriver"
+
+#: tformtrayslate.afastverticalsplitposition.caption
+msgctxt "tformtrayslate.afastverticalsplitposition.caption"
+msgid "Vertical Split Position"
+msgstr ""
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
@@ -1116,6 +1223,10 @@ msgstr ""
 msgid "Config"
 msgstr "Konfiguration"
 
+#: tformtrayslate.menufastsettings.caption
+msgid "Fast Settings"
+msgstr ""
+
 #: tformtrayslate.menuhelp.caption
 msgid "Help"
 msgstr "Hjälp"
@@ -1128,3 +1239,4 @@ msgstr "Senaste par"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
+

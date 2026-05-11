@@ -41,6 +41,8 @@ type
     BtnCancel: TButton;
     BtnOk: TButton;
     CheckAllowHotkeys: TCheckBox;
+    CheckEnableMouseMode: TCheckBox;
+    CheckMouseModeCtrl: TCheckBox;
     CheckStayOnTop: TCheckBox;
     CheckRealTime: TCheckBox;
     CheckAutoSwap: TCheckBox;
@@ -48,14 +50,18 @@ type
     CheckTwoLang: TCheckBox;
     CheckAutostart: TCheckBox;
     CheckAutoAddLangPairs: TCheckBox;
+    CheckVerticalSplit: TCheckBox;
     ColorIconBackground: TColorBox;
     ColorIconFont: TColorBox;
     ColorDialog: TColorDialog;
+    ComboMouseMode: TComboBox;
     ComboIconFontName: TComboBox;
     ComboLangDetect: TComboBox;
     FontDialog: TFontDialog;
     GroupAutoSwap: TGroupBox;
     GroupAutostart: TGroupBox;
+    GroupLayout: TGroupBox;
+    GroupMouseMode: TGroupBox;
     GroupPopup: TGroupBox;
     GroupLangPairs: TGroupBox;
     GroupTransFromClipboard1: TGroupBox;
@@ -63,7 +69,8 @@ type
     GroupFont: TGroupBox;
     GroupTrayIcon: TGroupBox;
     ImagesPages: TImageList;
-    LabelIconBackground1: TLabel;
+    LabelLangDetectConfig: TLabel;
+    LabelMouseMode: TLabel;
     LabelIconFont1: TLabel;
     LabelMaxLangPairs: TLabel;
     LabelOpacityHover: TLabel;
@@ -121,6 +128,10 @@ type
     FOriginalRealTime: boolean;
     FOriginalRealTimeDelay: integer;
     FOriginalAutoSwap: boolean;
+    FOriginalEnableMouseMode: boolean;
+    FOriginalMouseModeCtrl: boolean;
+    FOriginalMouseMode: TMouseMode;
+    FOriginalVerticalSplit: boolean;
     FOriginalStayOnTop: boolean;
     FOriginalHideControls: boolean;
     FOriginalOpacityHover: integer;
@@ -170,6 +181,7 @@ type
     function GetOriginalHotKey(Row: integer): THotKeyData;
     procedure FillListPages;
     procedure FillGridHotkeys;
+    procedure FillMouseMode;
     procedure SetPopup;
   end;
 
@@ -222,6 +234,11 @@ resourcestring
   rrecentpair_hint = 'Select Recent Language Pair';
   rrecentpair_default = 'Default: Ctrl+Shift+';
 
+  rmousemodebutton = 'Show Translate Button';
+  rmousemodeballon = 'Show Balloon Translation';
+  rmousemodepopup = 'Show Popup Translation';
+  rmousemodemain = 'Show Main Window';
+
 implementation
 
 uses mainform, formattool, formpopup, systemtool;
@@ -253,6 +270,7 @@ begin
   Reset;
   FillListPages;
   FillGridHotkeys;
+  FillMouseMode;
 end;
 
 procedure TformSettingsTrayslate.FormResize(Sender: TObject);
@@ -678,6 +696,15 @@ begin
     GridHotkeys.Row := GridHotkeys.FixedRows;
 end;
 
+procedure TformSettingsTrayslate.FillMouseMode;
+begin
+  ComboMouseMode.Items.Clear;
+  ComboMouseMode.Items.Add(rmousemodebutton);
+  ComboMouseMode.Items.Add(rmousemodeballon);
+  ComboMouseMode.Items.Add(rmousemodepopup);
+  ComboMouseMode.Items.Add(rmousemodemain);
+end;
+
 procedure TformSettingsTrayslate.SetPopup;
 begin
   if Assigned(formPopupTrayslate) then
@@ -696,6 +723,10 @@ begin
   formTrayslate.RealTime := CheckRealTime.Checked;
   formTrayslate.RealTimeDelay := SpinRealTimeDelay.Value;
   formTrayslate.AutoSwap := CheckAutoSwap.Checked;
+  formTrayslate.EnableMouseMode := CheckEnableMouseMode.Checked;
+  formTrayslate.MouseModeCtrl := CheckMouseModeCtrl.Checked;
+  formTrayslate.MouseMode := TMouseMode(ComboMouseMode.ItemIndex);
+  formTrayslate.VerticalSplit := CheckVerticalSplit.Checked;
   formTrayslate.StayOnTop := CheckStayOnTop.Checked;
   formTrayslate.HideControls := CheckHideControls.Checked;
   formTrayslate.OpacityHover := TrackOpacityHover.Position;
@@ -743,6 +774,7 @@ begin
   Reset;
   formTrayslate.TimerTranslate.Interval := Max(formTrayslate.RealTimeDelay, 1);
   formTrayslate.LoadConfig;
+  formTrayslate.SetVerticalMode;
   formTrayslate.DoRealign(0);
   Application.QueueAsyncCall(@formTrayslate.RebuildLangPairsPanel, 0);
 end;
@@ -756,6 +788,10 @@ begin
   FOriginalRealTime := formTrayslate.RealTime;
   FOriginalRealTimeDelay := formTrayslate.RealTimeDelay;
   FOriginalAutoSwap := formTrayslate.AutoSwap;
+  FOriginalEnableMouseMode := formTrayslate.EnableMouseMode;
+  FOriginalMouseModeCtrl := formTrayslate.MouseModeCtrl;
+  FOriginalMouseMode := formTrayslate.MouseMode;
+  FOriginalVerticalSplit := formTrayslate.VerticalSplit;
   FOriginalStayOnTop := formTrayslate.StayOnTop;
   FOriginalHideControls := formTrayslate.HideControls;
   FOriginalOpacityHover := formTrayslate.OpacityHover;
@@ -807,6 +843,10 @@ begin
   CheckRealTime.Checked := FOriginalRealTime;
   SpinRealTimeDelay.Value := FOriginalRealTimeDelay;
   CheckAutoSwap.Checked := FOriginalAutoSwap;
+  CheckEnableMouseMode.Checked := FOriginalEnableMouseMode;
+  CheckMouseModeCtrl.Checked := FOriginalMouseModeCtrl;
+  ComboMouseMode.ItemIndex := Ord(FOriginalMouseMode);
+  CheckVerticalSplit.Checked := FOriginalVerticalSplit;
   CheckStayOnTop.Checked := FOriginalStayOnTop;
   CheckHideControls.Checked := FOriginalHideControls;
   TrackOpacityHover.Position := FOriginalOpacityHover;
