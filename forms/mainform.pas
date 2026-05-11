@@ -203,6 +203,7 @@ type
     procedure MemoSourceKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure MemoTargetKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure PanelLangResize(Sender: TObject);
+    procedure SplitterMemoMoved(Sender: TObject);
     procedure SbSwapMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure TimerActiveTimer(Sender: TObject);
     procedure TimerAnimateStopTimer(Sender: TObject);
@@ -259,6 +260,7 @@ type
     FTranslateThread: TTranslateThread;
     FPopupOpen: boolean;
     FHint: THintWindow;
+    FSplitRatio: double;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -725,6 +727,9 @@ begin
     Application.QueueAsyncCall(@DoCheckUpdates, 0);
     FUpdatesChecked := True;
   end;
+
+  // Calc Splitter position
+  SplitterMemoMoved(SplitterMemo);
 end;
 
 procedure TformTrayslate.FormCloseQuery(Sender: TObject; var CanClose: boolean);
@@ -1256,6 +1261,17 @@ begin
   PanelLang.Tag := 1;
 
   Application.QueueAsyncCall(@DoRealign, 0);
+end;
+
+procedure TformTrayslate.SplitterMemoMoved(Sender: TObject);
+begin
+  case PanelTarget.Align of
+    alBottom:
+      FSplitRatio := PanelTarget.Height / (PanelSource.Height + PanelTarget.Height);
+
+    alRight:
+      FSplitRatio := PanelTarget.Width / (PanelSource.Width + PanelTarget.Width);
+  end;
 end;
 
 procedure TformTrayslate.SbSwapMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
@@ -2042,6 +2058,15 @@ begin
       Border,
       sbTranslate.Width,
       ComboTarget.Height);
+
+    // Restore splitter ratio
+    case PanelTarget.Align of
+      alBottom:
+        PanelTarget.Height := Round((PanelSource.Height + PanelTarget.Height) * FSplitRatio);
+
+      alRight:
+        PanelTarget.Width := Round((PanelSource.Width + PanelTarget.Width) * FSplitRatio);
+    end;
 
   finally
     PanelLang.EnableAlign;

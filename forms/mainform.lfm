@@ -119,6 +119,7 @@ object formTrayslate: TformTrayslate
     Color = clBtnFace
     ParentColor = False
     ResizeAnchor = akBottom
+    OnMoved = SplitterMemoMoved
   end
   object PanelPairs: TPanel
     Left = 0
