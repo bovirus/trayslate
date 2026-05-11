@@ -764,6 +764,12 @@ msgctxt "tformsettingstrayslate.btnfont.caption"
 msgid "Font..."
 msgstr "Font.."
 
+#: tformsettingstrayslate.btnfontpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.btnfontpopup.caption"
+msgid "Font..."
+msgstr "Font.."
+
 #: tformsettingstrayslate.btnok.caption
 msgctxt "tformsettingstrayslate.btnok.caption"
 msgid "OK"
@@ -771,6 +777,12 @@ msgstr "OK"
 
 #: tformsettingstrayslate.btnreset.caption
 msgctxt "tformsettingstrayslate.btnreset.caption"
+msgid "Reset"
+msgstr "Ripristina"
+
+#: tformsettingstrayslate.btnresetpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.btnresetpopup.caption"
 msgid "Reset"
 msgstr "Ripristina"
 
@@ -864,11 +876,11 @@ msgstr "Visualizza lingua sorgente e/o destinazione nell'icona nella barra appli
 
 #: tformsettingstrayslate.checkverticalsplit.caption
 msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
-msgid "Vertical Split Position"
+msgid "Side-By-Side Layout"
 msgstr ""
 
 #: tformsettingstrayslate.checkverticalsplit.hint
-msgid "Changes the splitter position for left/right panel layout"
+msgid "Switches to side-by-side layout with source text beside translation"
 msgstr ""
 
 #: tformsettingstrayslate.combolangdetect.hint
@@ -902,18 +914,13 @@ msgstr "Avvio automatico"
 msgid "Auto-Swap Languages"
 msgstr "Scambio automatico lingue"
 
-#: tformsettingstrayslate.groupfont.caption
-msgctxt "tformsettingstrayslate.groupfont.caption"
-msgid "Font"
-msgstr "Font"
-
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
 msgid "Recent Language Pairs"
 msgstr "Coppie di lingue recenti"
 
-#: tformsettingstrayslate.grouplayout.caption
-msgid "Layout"
+#: tformsettingstrayslate.groupmainwindow.caption
+msgid "Main Window"
 msgstr ""
 
 #: tformsettingstrayslate.groupmousemode.caption
@@ -997,6 +1004,12 @@ msgctxt "tformsettingstrayslate.panelfont.caption"
 msgid "Default, 0"
 msgstr "Predefinito, 0"
 
+#: tformsettingstrayslate.panelfontpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.panelfontpopup.caption"
+msgid "Default, 0"
+msgstr "Predefinito, 0"
+
 #: tformsettingstrayslate.spinmaxlangpairs.hint
 msgid "Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel"
 msgstr "Numero di coppie recenti nel pannello; quando vengono aggiunte le coppie si spostano a destra; il valore zero nasconde il pannello"
@@ -1076,16 +1089,16 @@ msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr ""
 
+#: tformtrayslate.afastsidebysidelayout.caption
+msgctxt "tformtrayslate.afastsidebysidelayout.caption"
+msgid "Side-By-Side Layout"
+msgstr ""
+
 #: tformtrayslate.afasttranslateasyoutype.caption
 #, fuzzy
 msgctxt "tformtrayslate.afasttranslateasyoutype.caption"
 msgid "Translate As You Type"
 msgstr "Traduci mentre scrivi"
-
-#: tformtrayslate.afastverticalsplitposition.caption
-msgctxt "tformtrayslate.afastverticalsplitposition.caption"
-msgid "Vertical Split Position"
-msgstr ""
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"

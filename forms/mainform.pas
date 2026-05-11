@@ -56,7 +56,7 @@ type
     aFastTranslateAsYouType: TAction;
     aFastAutoAddRecentLangPairs: TAction;
     aFastAutoHidePopupControls: TAction;
-    aFastVerticalSplitPosition: TAction;
+    aFastSideBySideLayout: TAction;
     aPopupTranslate: TAction;
     aLangCustom: TAction;
     aLangBulgarian: TAction;
@@ -282,6 +282,7 @@ type
     FMouseHook: TGlobalMouseHook;
     FPopupOpen: boolean;
     FHint: THintWindow;
+    FFontPopup: TFont;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -381,6 +382,7 @@ type
     procedure SetHints;
     procedure SetAnimate(Angle: integer);
     procedure DoRealign(Data: PtrInt);
+    procedure DoRealignSplit(Data: PtrInt);
     procedure UpdateCheckConfigMenu;
     procedure UpdateCheckMenuPair;
     function UpdateSourceLanguage(const Lang: string): string;
@@ -440,6 +442,7 @@ type
     property MouseMode: TMouseMode read FMouseMode write FMouseMode;
     property VerticalSplit: boolean read FVerticalSplit write FVerticalSplit;
     property StayOnTop: boolean read FStayOnTop write FStayOnTop;
+    property FontPopup: TFont read FFontPopup write FFontPopup;
     property HideControls: boolean read FHideControls write FHideControls;
     property OpacityHover: integer read FOpacityHover write FOpacityHover;
     property OpacityIdle: integer read FOpacityIdle write FOpacityIdle;
@@ -564,6 +567,7 @@ begin
   FLastHotkeyTime := 0;
   FTranslateThread := nil;
   FCustomPoFile := string.Empty;
+  FFontPopup := TFont.Create;
 
   // AllowHotKeys Initialize
   // Ctrl+Shift+A
@@ -761,6 +765,7 @@ begin
   FreeAndNil(FTrans);
   FreeAndNil(FTransDetect);
   FreeAndNil(FHint);
+  FreeAndNil(FFontPopup);
 end;
 
 procedure TformTrayslate.FormShow(Sender: TObject);
@@ -800,6 +805,8 @@ end;
 procedure TformTrayslate.FormResize(Sender: TObject);
 begin
   PanelLang.Top := 0;
+
+  Application.QueueAsyncCall(@DoRealignSplit, 0);
 end;
 
 procedure TformTrayslate.FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
@@ -1878,7 +1885,7 @@ end;
 
 procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
 
-  procedure Build(Target: TFlowPanel; FillMenu: boolean = True);
+  procedure Build(Target: TFlowPanel; AFont: TFont; FillMenu: boolean = True);
   var
     pnl: TPanel;
     lbl: TLabel;
@@ -1923,7 +1930,7 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
       // Create Panels (with Image + Label) and Menu Items
       for i := 0 to FLangPairs.Count - 1 do
       begin
-        Target.BorderSpacing.Top := Max(0, Min(4, 13 - Font.Size));
+        Target.BorderSpacing.Top := Max(0, Min(4, 13 - AFont.Size));
 
         pnl := TPanel.Create(Target);
         pnl.Parent := Target;
@@ -2009,9 +2016,9 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
 
 begin
   try
-    Build(FlowPairs);
+    Build(FlowPairs, Font);
     if Assigned(formPopupTrayslate) then
-      Build(formPopupTrayslate.FlowPairs, False);
+      Build(formPopupTrayslate.FlowPairs, FontPopup, False);
   finally
     UpdateCheckMenuPair;
     Repaint;
@@ -2140,20 +2147,23 @@ begin
       Border,
       sbTranslate.Width,
       ComboTarget.Height);
-
-    // Restore splitter ratio
-    case PanelTarget.Align of
-      alBottom:
-        PanelTarget.Height := Round((PanelSource.Height + PanelTarget.Height) * FSplitRatio);
-
-      alRight:
-        PanelTarget.Width := Round((PanelSource.Width + PanelTarget.Width) * FSplitRatio);
-    end;
-
   finally
     PanelLang.EnableAlign;
     PanelLang.Tag := 0;
   end;
+end;
+
+procedure TformTrayslate.DoRealignSplit(Data: PtrInt);
+begin
+  // Restore splitter ratio
+  case PanelTarget.Align of
+    alBottom:
+      PanelTarget.Height := Round((PanelSource.Height + PanelTarget.Height) * FSplitRatio);
+
+    alRight:
+      PanelTarget.Width := Round((PanelSource.Width + PanelTarget.Width) * FSplitRatio);
+  end;
+
 end;
 
 procedure TFormTrayslate.UpdateCheckConfigMenu;
@@ -2366,9 +2376,9 @@ begin
     if FormPopupHeight > 0 then
       formPopupTrayslate.Height := FormPopupHeight;
 
-    formPopupTrayslate.Font.Assign(Font);
-    formPopupTrayslate.PanelWatermark.Font.Size := Font.Size;
-    formPopupTrayslate.PanelWatermark.Font.Name := Font.Name;
+    formPopupTrayslate.Font.Assign(FontPopup);
+    formPopupTrayslate.PanelWatermark.Font.Size := FontPopup.Size;
+    formPopupTrayslate.PanelWatermark.Font.Name := FontPopup.Name;
     formPopupTrayslate.AlphaBlendValue := OpacityIdle;
     formPopupTrayslate.UpdateStayOnTop(0);
   end;

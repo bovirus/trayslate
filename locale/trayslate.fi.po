@@ -752,6 +752,12 @@ msgctxt "tformsettingstrayslate.btnfont.caption"
 msgid "Font..."
 msgstr "Fontti..."
 
+#: tformsettingstrayslate.btnfontpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.btnfontpopup.caption"
+msgid "Font..."
+msgstr "Fontti..."
+
 #: tformsettingstrayslate.btnok.caption
 msgctxt "tformsettingstrayslate.btnok.caption"
 msgid "OK"
@@ -759,6 +765,12 @@ msgstr ""
 
 #: tformsettingstrayslate.btnreset.caption
 msgctxt "tformsettingstrayslate.btnreset.caption"
+msgid "Reset"
+msgstr "Palauta"
+
+#: tformsettingstrayslate.btnresetpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.btnresetpopup.caption"
 msgid "Reset"
 msgstr "Palauta"
 
@@ -852,11 +864,11 @@ msgstr "Näytä lähde- ja/tai kohdekieli järjestelmäkuvakkeessa"
 
 #: tformsettingstrayslate.checkverticalsplit.caption
 msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
-msgid "Vertical Split Position"
+msgid "Side-By-Side Layout"
 msgstr ""
 
 #: tformsettingstrayslate.checkverticalsplit.hint
-msgid "Changes the splitter position for left/right panel layout"
+msgid "Switches to side-by-side layout with source text beside translation"
 msgstr ""
 
 #: tformsettingstrayslate.combolangdetect.hint
@@ -890,18 +902,13 @@ msgstr "Automaattinen käynnistys"
 msgid "Auto-Swap Languages"
 msgstr "Kielten automaattinen vaihto"
 
-#: tformsettingstrayslate.groupfont.caption
-msgctxt "tformsettingstrayslate.groupfont.caption"
-msgid "Font"
-msgstr "Fontti"
-
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
 msgid "Recent Language Pairs"
 msgstr "Viimeisimmät kieliparit"
 
-#: tformsettingstrayslate.grouplayout.caption
-msgid "Layout"
+#: tformsettingstrayslate.groupmainwindow.caption
+msgid "Main Window"
 msgstr ""
 
 #: tformsettingstrayslate.groupmousemode.caption
@@ -985,6 +992,12 @@ msgctxt "tformsettingstrayslate.panelfont.caption"
 msgid "Default, 0"
 msgstr "Oletus, 0"
 
+#: tformsettingstrayslate.panelfontpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.panelfontpopup.caption"
+msgid "Default, 0"
+msgstr "Oletus, 0"
+
 #: tformsettingstrayslate.spinmaxlangpairs.hint
 msgid "Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel"
 msgstr "Viimeisimpien parien määrä paneelissa; parit siirtyvät oikealle lisättäessä; nolla-arvo piilottaa paneelin"
@@ -1064,16 +1077,16 @@ msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr ""
 
+#: tformtrayslate.afastsidebysidelayout.caption
+msgctxt "tformtrayslate.afastsidebysidelayout.caption"
+msgid "Side-By-Side Layout"
+msgstr ""
+
 #: tformtrayslate.afasttranslateasyoutype.caption
 #, fuzzy
 msgctxt "tformtrayslate.afasttranslateasyoutype.caption"
 msgid "Translate As You Type"
 msgstr "Käännä kirjoittaessasi"
-
-#: tformtrayslate.afastverticalsplitposition.caption
-msgctxt "tformtrayslate.afastverticalsplitposition.caption"
-msgid "Vertical Split Position"
-msgstr ""
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"

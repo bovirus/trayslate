@@ -343,7 +343,7 @@ object formTrayslate: TformTrayslate
         AutoCheck = True
       end
       object MenuItem5: TMenuItem
-        Action = aFastVerticalSplitPosition
+        Action = aFastSideBySideLayout
         AutoCheck = True
       end
       object MenuItem6: TMenuItem
@@ -723,10 +723,10 @@ object formTrayslate: TformTrayslate
       AutoCheck = True
       Caption = 'Enable Mouse Mode'
     end
-    object aFastVerticalSplitPosition: TAction
+    object aFastSideBySideLayout: TAction
       Category = 'FastSettings'
       AutoCheck = True
-      Caption = 'Vertical Split Position'
+      Caption = 'Side-By-Side Layout'
     end
     object aFastAutoSwapLangPair: TAction
       Category = 'FastSettings'

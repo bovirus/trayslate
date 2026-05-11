@@ -752,6 +752,12 @@ msgctxt "tformsettingstrayslate.btnfont.caption"
 msgid "Font..."
 msgstr "フォント..."
 
+#: tformsettingstrayslate.btnfontpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.btnfontpopup.caption"
+msgid "Font..."
+msgstr "フォント..."
+
 #: tformsettingstrayslate.btnok.caption
 msgctxt "tformsettingstrayslate.btnok.caption"
 msgid "OK"
@@ -759,6 +765,12 @@ msgstr ""
 
 #: tformsettingstrayslate.btnreset.caption
 msgctxt "tformsettingstrayslate.btnreset.caption"
+msgid "Reset"
+msgstr "リセット"
+
+#: tformsettingstrayslate.btnresetpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.btnresetpopup.caption"
 msgid "Reset"
 msgstr "リセット"
 
@@ -852,11 +864,11 @@ msgstr "トレイアイコンにソース言語やターゲット言語を表示
 
 #: tformsettingstrayslate.checkverticalsplit.caption
 msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
-msgid "Vertical Split Position"
+msgid "Side-By-Side Layout"
 msgstr ""
 
 #: tformsettingstrayslate.checkverticalsplit.hint
-msgid "Changes the splitter position for left/right panel layout"
+msgid "Switches to side-by-side layout with source text beside translation"
 msgstr ""
 
 #: tformsettingstrayslate.combolangdetect.hint
@@ -890,18 +902,13 @@ msgstr "自動起動"
 msgid "Auto-Swap Languages"
 msgstr "言語の自動入れ替え"
 
-#: tformsettingstrayslate.groupfont.caption
-msgctxt "tformsettingstrayslate.groupfont.caption"
-msgid "Font"
-msgstr "フォント"
-
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
 msgid "Recent Language Pairs"
 msgstr "最近の言語ペア"
 
-#: tformsettingstrayslate.grouplayout.caption
-msgid "Layout"
+#: tformsettingstrayslate.groupmainwindow.caption
+msgid "Main Window"
 msgstr ""
 
 #: tformsettingstrayslate.groupmousemode.caption
@@ -985,6 +992,12 @@ msgctxt "tformsettingstrayslate.panelfont.caption"
 msgid "Default, 0"
 msgstr "デフォルト, 0"
 
+#: tformsettingstrayslate.panelfontpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.panelfontpopup.caption"
+msgid "Default, 0"
+msgstr "デフォルト, 0"
+
 #: tformsettingstrayslate.spinmaxlangpairs.hint
 msgid "Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel"
 msgstr "パネルに表示する最近のペアの数。追加時にペアは右にずれます。0の場合はパネルを非表示にします"
@@ -1064,16 +1077,16 @@ msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr ""
 
+#: tformtrayslate.afastsidebysidelayout.caption
+msgctxt "tformtrayslate.afastsidebysidelayout.caption"
+msgid "Side-By-Side Layout"
+msgstr ""
+
 #: tformtrayslate.afasttranslateasyoutype.caption
 #, fuzzy
 msgctxt "tformtrayslate.afasttranslateasyoutype.caption"
 msgid "Translate As You Type"
 msgstr "入力しながら翻訳"
-
-#: tformtrayslate.afastverticalsplitposition.caption
-msgctxt "tformtrayslate.afastverticalsplitposition.caption"
-msgid "Vertical Split Position"
-msgstr ""
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"

@@ -752,6 +752,12 @@ msgctxt "tformsettingstrayslate.btnfont.caption"
 msgid "Font..."
 msgstr "글꼴..."
 
+#: tformsettingstrayslate.btnfontpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.btnfontpopup.caption"
+msgid "Font..."
+msgstr "글꼴..."
+
 #: tformsettingstrayslate.btnok.caption
 msgctxt "tformsettingstrayslate.btnok.caption"
 msgid "OK"
@@ -759,6 +765,12 @@ msgstr ""
 
 #: tformsettingstrayslate.btnreset.caption
 msgctxt "tformsettingstrayslate.btnreset.caption"
+msgid "Reset"
+msgstr "초기화"
+
+#: tformsettingstrayslate.btnresetpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.btnresetpopup.caption"
 msgid "Reset"
 msgstr "초기화"
 
@@ -852,11 +864,11 @@ msgstr "트레이 아이콘에 소스 및/또는 대상 언어를 표시합니�
 
 #: tformsettingstrayslate.checkverticalsplit.caption
 msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
-msgid "Vertical Split Position"
+msgid "Side-By-Side Layout"
 msgstr ""
 
 #: tformsettingstrayslate.checkverticalsplit.hint
-msgid "Changes the splitter position for left/right panel layout"
+msgid "Switches to side-by-side layout with source text beside translation"
 msgstr ""
 
 #: tformsettingstrayslate.combolangdetect.hint
@@ -890,18 +902,13 @@ msgstr "자동 시작"
 msgid "Auto-Swap Languages"
 msgstr "언어 자동 교체"
 
-#: tformsettingstrayslate.groupfont.caption
-msgctxt "tformsettingstrayslate.groupfont.caption"
-msgid "Font"
-msgstr "글꼴"
-
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
 msgid "Recent Language Pairs"
 msgstr "최근 언어 쌍"
 
-#: tformsettingstrayslate.grouplayout.caption
-msgid "Layout"
+#: tformsettingstrayslate.groupmainwindow.caption
+msgid "Main Window"
 msgstr ""
 
 #: tformsettingstrayslate.groupmousemode.caption
@@ -985,6 +992,12 @@ msgctxt "tformsettingstrayslate.panelfont.caption"
 msgid "Default, 0"
 msgstr "기본값, 0"
 
+#: tformsettingstrayslate.panelfontpopup.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.panelfontpopup.caption"
+msgid "Default, 0"
+msgstr "기본값, 0"
+
 #: tformsettingstrayslate.spinmaxlangpairs.hint
 msgid "Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel"
 msgstr "패널에 표시할 최근 쌍 수; 추가 시 쌍이 오른쪽으로 이동합니다; 0 값은 패널을 숨깁니다"
@@ -1064,16 +1077,16 @@ msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr ""
 
+#: tformtrayslate.afastsidebysidelayout.caption
+msgctxt "tformtrayslate.afastsidebysidelayout.caption"
+msgid "Side-By-Side Layout"
+msgstr ""
+
 #: tformtrayslate.afasttranslateasyoutype.caption
 #, fuzzy
 msgctxt "tformtrayslate.afasttranslateasyoutype.caption"
 msgid "Translate As You Type"
 msgstr "입력하면서 번역"
-
-#: tformtrayslate.afastverticalsplitposition.caption
-msgctxt "tformtrayslate.afastverticalsplitposition.caption"
-msgid "Vertical Split Position"
-msgstr ""
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"

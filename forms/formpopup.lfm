@@ -119,14 +119,13 @@ object formPopupTrayslate: TformPopupTrayslate
     end
     object FlowPairs: TFlowPanel
       Left = 32
-      Height = 22
-      Top = 3
+      Height = 25
+      Top = 0
       Width = 416
       Align = alClient
       AutoSize = True
       BevelOuter = bvNone
       BorderSpacing.Left = 32
-      BorderSpacing.Top = 3
       BorderSpacing.Right = 32
       ControlList = <>
       FlowLayout = tlCenter

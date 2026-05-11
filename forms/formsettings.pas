@@ -36,10 +36,12 @@ type
 
   TformSettingsTrayslate = class(TForm)
     BtnFont: TButton;
+    BtnFontPopup: TButton;
     BtnReset: TButton;
     BtnApply: TButton;
     BtnCancel: TButton;
     BtnOk: TButton;
+    BtnResetPopup: TButton;
     CheckAllowHotkeys: TCheckBox;
     CheckEnableMouseMode: TCheckBox;
     CheckMouseModeCtrl: TCheckBox;
@@ -60,13 +62,12 @@ type
     FontDialog: TFontDialog;
     GroupAutoSwap: TGroupBox;
     GroupAutostart: TGroupBox;
-    GroupLayout: TGroupBox;
+    GroupMainWindow: TGroupBox;
     GroupMouseMode: TGroupBox;
     GroupPopup: TGroupBox;
     GroupLangPairs: TGroupBox;
     GroupTransFromClipboard1: TGroupBox;
     GroupRealTime: TGroupBox;
-    GroupFont: TGroupBox;
     GroupTrayIcon: TGroupBox;
     ImagesPages: TImageList;
     LabelLangDetectConfig: TLabel;
@@ -80,6 +81,7 @@ type
     LabelIconFont: TLabel;
     ListPages: TListBox;
     PagesSettings: TPageControl;
+    PanelFontPopup: TPanel;
     PanelPages: TPanel;
     PanelBottom: TPanel;
     PanelFont: TPanel;
@@ -97,6 +99,10 @@ type
     GridHotkeys: TStringGrid;
     TrackOpacityHover: TTrackBar;
     TrackOpacityIdle: TTrackBar;
+    procedure BtnFontPopupClick(Sender: TObject);
+    procedure BtnResetPopupClick(Sender: TObject);
+    procedure ComboIconFontNameMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer;
+      MousePos: TPoint; var Handled: boolean);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormResize(Sender: TObject);
@@ -118,6 +124,7 @@ type
   private
     FOriginalAutoStart: boolean;
     FOriginalFont: TFont;
+    FOriginalFontPopup: TFont;
     FOriginalIconBackgroundColor: TColor;
     FOriginalIconFontColor: TColor;
     FOriginalIconFontName: string;
@@ -173,7 +180,7 @@ type
     FHotKeyRecent8: THotKeyData;
     FHotKeyRecent9: THotKeyData;
 
-    procedure SetPanelFont(const AFont: TFont);
+    procedure SetPanelFont(Panel: TPanel; const AFont: TFont);
   public
     procedure Apply;
     procedure Reset;
@@ -257,6 +264,7 @@ begin
   PagesSettings.PageIndex := 0;
   BtnCancel.Cancel := True;
   BtnReset.Enabled := True;
+  BtnResetPopup.Enabled := True;
 
   ComboLangDetect.Items.Clear;
   ComboLangDetect.Items.Add(string.Empty);
@@ -296,7 +304,7 @@ begin
   if FontDialog.Execute then
   begin
     PanelFont.Font.Assign(FontDialog.Font);
-    SetPanelFont(FontDialog.Font);
+    SetPanelFont(PanelFont, FontDialog.Font);
 
     BtnApply.Enabled := True;
   end;
@@ -305,8 +313,33 @@ end;
 procedure TformSettingsTrayslate.BtnResetClick(Sender: TObject);
 begin
   PanelFont.Font.SetDefault;
-  SetPanelFont(PanelFont.Font);
+  SetPanelFont(PanelFont, PanelFont.Font);
   SettingChange(Self);
+end;
+
+procedure TformSettingsTrayslate.BtnFontPopupClick(Sender: TObject);
+begin
+  FontDialog.Font.Assign(PanelFontPopup.Font);
+  if FontDialog.Execute then
+  begin
+    PanelFontPopup.Font.Assign(FontDialog.Font);
+    SetPanelFont(PanelFontPopup, FontDialog.Font);
+
+    BtnApply.Enabled := True;
+  end;
+end;
+
+procedure TformSettingsTrayslate.BtnResetPopupClick(Sender: TObject);
+begin
+  PanelFontPopup.Font.SetDefault;
+  SetPanelFont(PanelFontPopup, PanelFontPopup.Font);
+  SettingChange(Self);
+end;
+
+procedure TformSettingsTrayslate.ComboIconFontNameMouseWheel(Sender: TObject; Shift: TShiftState;
+  WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
+begin
+  Handled := True;
 end;
 
 procedure TformSettingsTrayslate.GridHotkeysDrawCell(Sender: TObject; aCol, aRow: integer; aRect: TRect; aState: TGridDrawState);
@@ -578,9 +611,9 @@ begin
   Apply;
 end;
 
-procedure TformSettingsTrayslate.SetPanelFont(const AFont: TFont);
+procedure TformSettingsTrayslate.SetPanelFont(Panel: TPanel; const AFont: TFont);
 begin
-  PanelFont.Caption := ifthen((Trim(AFont.Name) = string.Empty) or (LowerCase(AFont.Name) = 'default'), rdefaultfont, AFont.Name) +
+  Panel.Caption := ifthen((Trim(AFont.Name) = string.Empty) or (LowerCase(AFont.Name) = 'default'), rdefaultfont, AFont.Name) +
     ',' + IntToStr(AFont.Size);
 end;
 
@@ -737,6 +770,7 @@ begin
   else
     formTrayslate.ConfigLangDetect := string.Empty;
   formTrayslate.Font.Assign(PanelFont.Font);
+  formTrayslate.FontPopup.Assign(PanelFontPopup.Font);
   formTrayslate.IconBackgroundColor := ColorIconBackground.Selected;
   formTrayslate.IconFontColor := ColorIconFont.Selected;
   formTrayslate.IconFontName := ComboIconFontName.Text;
@@ -766,9 +800,9 @@ begin
 
   if Assigned(formPopupTrayslate) then
   begin
-    formPopupTrayslate.Font.Assign(PanelFont.Font);
-    formPopupTrayslate.PanelWatermark.Font.Size := PanelFont.Font.Size;
-    formPopupTrayslate.PanelWatermark.Font.Name := PanelFont.Font.Name;
+    formPopupTrayslate.Font.Assign(PanelFontPopup.Font);
+    formPopupTrayslate.PanelWatermark.Font.Size := PanelFontPopup.Font.Size;
+    formPopupTrayslate.PanelWatermark.Font.Name := PanelFontPopup.Font.Name;
   end;
 
   Reset;
@@ -776,6 +810,7 @@ begin
   formTrayslate.LoadConfig;
   formTrayslate.SetVerticalMode;
   formTrayslate.DoRealign(0);
+  formTrayslate.DoRealignSplit(0);
   Application.QueueAsyncCall(@formTrayslate.RebuildLangPairsPanel, 0);
 end;
 
@@ -798,6 +833,7 @@ begin
   FOriginalOpacityIdle := formTrayslate.OpacityIdle;
   FOriginalConfigLangDetect := formTrayslate.ConfigLangDetect;
   FOriginalFont := formTrayslate.Font;
+  FOriginalFontPopup := formTrayslate.FontPopup;
   FOriginalIconBackgroundColor := formTrayslate.IconBackgroundColor;
   FOriginalIconFontColor := formTrayslate.IconFontColor;
   FOriginalIconFontName := formTrayslate.IconFontName;
@@ -856,7 +892,9 @@ begin
   else
     ComboLangDetect.ItemIndex := 0;
   PanelFont.Font.Assign(FOriginalFont);
-  SetPanelFont(FOriginalFont);
+  SetPanelFont(PanelFont, FOriginalFont);
+  PanelFontPopup.Font.Assign(FOriginalFontPopup);
+  SetPanelFont(PanelFontPopup, FOriginalFontPopup);
   ColorIconBackground.Selected := FOriginalIconBackgroundColor;
   ColorIconFont.Selected := FOriginalIconFontColor;
   ComboIconFontName.Text := FOriginalIconFontName;
