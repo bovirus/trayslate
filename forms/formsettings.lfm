@@ -168,7 +168,6 @@ object formSettingsTrayslate: TformSettingsTrayslate
           ClientHeight = 111
           ClientWidth = 542
           TabOrder = 3
-          Visible = False
           object CheckEnableMouseMode: TCheckBox
             Left = 16
             Height = 19

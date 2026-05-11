@@ -209,6 +209,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="TextDropTarget"/>
       </Unit>
+      <Unit>
+        <Filename Value="units\globalmousehook.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GlobalMouseHook"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
