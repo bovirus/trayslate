@@ -2395,6 +2395,10 @@ begin
     SplitterMemo.Align := alRight;
     SplitterMemo.Left := PanelSource.Width;
 
+    PanelSource.BorderSpacing.Right := 0;
+    PanelSource.BorderSpacing.Bottom := 3;
+    PanelTarget.BorderSpacing.Left := 0;
+
     PanelSource.Width := Round((PanelSource.Width + PanelTarget.Width) * FSplitRatio);
   end
   else
@@ -2404,6 +2408,10 @@ begin
     PanelTarget.Align := alBottom;
     SplitterMemo.Align := alBottom;
     SplitterMemo.Top := PanelSource.Height + PanelPairs.Height;
+
+    PanelSource.BorderSpacing.Right := 3;
+    PanelSource.BorderSpacing.Bottom := 0;
+    PanelTarget.BorderSpacing.Left := 3;
 
     PanelSource.Height := Round((PanelSource.Height + PanelTarget.Height) * FSplitRatio);
   end;
