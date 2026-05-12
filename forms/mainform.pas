@@ -369,7 +369,7 @@ type
     FIconFontName: string;
     FIconTwoLang: boolean;
 
-    procedure ProcessMessages;
+    procedure SleepLoop(ADelay: integer = 0; ARepaint: boolean = False);
     procedure SetAutoStart(Value: boolean);
     procedure ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
     procedure ChangeTargetLang(NewLang: string; AddRecentPairs: boolean = True);
@@ -377,7 +377,7 @@ type
     procedure AddLangPair(const Pair: string; ToEnd: boolean = True);
     procedure SelectPair(const Pair: string; RunTranslate: boolean = True);
     procedure SelectPairConfig(const LangPairIndex: integer; RunTranslate: boolean = True);
-    procedure GlobalCtrlC(Delay: integer = 250);
+    procedure GlobalCtrlC;
     procedure GlobalCtrlV;
     function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
     procedure ThreadDone(Sender: TObject);
@@ -2537,11 +2537,25 @@ begin
   end;
 end;
 
-procedure TformTrayslate.ProcessMessages;
+procedure TformTrayslate.SleepLoop(ADelay: integer = 0; ARepaint: boolean = False);
+var
+  i: integer;
 begin
-  Application.ProcessMessages;
-  Repaint;
-  Application.ProcessMessages;
+  if (ADelay > 0) then
+  begin
+    for i := 0 to ADelay do
+    begin
+      Application.ProcessMessages;
+      Sleep(1);
+    end;
+  end
+  else
+    Application.ProcessMessages;
+  if ARepaint then
+  begin
+    Repaint;
+    Application.ProcessMessages;
+  end;
 end;
 
 procedure TformTrayslate.SetAutoStart(Value: boolean);
@@ -2784,38 +2798,38 @@ begin
   SelectPair(FLangPairs.ValueFromIndex[LangPairIndex], RunTranslate);
 end;
 
-procedure TformTrayslate.GlobalCtrlC(Delay: integer = 250);
+procedure TformTrayslate.GlobalCtrlC;
 var
-  CtrlWasDown: boolean;
+  i: integer;
 begin
-  Sleep(Delay);
-  CtrlWasDown := GetKeyState(VK_CONTROL) < 0;
-  KeyInput.Unapply([ssShift, ssAlt]);
-  Sleep(5);
-  if not CtrlWasDown then KeyInput.Apply([ssCtrl]);
-  Sleep(5);
+  KeyInput.Unapply([ssCtrl, ssShift, ssAlt]);
+  i := 0;
+  while (GetKeyState(VK_CONTROL) >= 0) and (i < 10) do
+  begin
+    KeyInput.Apply([ssCtrl]);
+    Inc(i);
+  end;
   KeyInput.Down(Ord('C'));
-  Sleep(5);
+  SleepLoop(2);
   KeyInput.Up(Ord('C'));
-  Sleep(5);
-  if not CtrlWasDown then KeyInput.Unapply([ssCtrl]);
+  KeyInput.Unapply([ssCtrl]);
 end;
 
 procedure TformTrayslate.GlobalCtrlV;
 var
-  CtrlWasDown: boolean;
+  i: integer;
 begin
-  Sleep(5);
-  CtrlWasDown := GetKeyState(VK_CONTROL) < 0;
-  KeyInput.Unapply([ssShift, ssAlt]);
-  Sleep(5);
-  if not CtrlWasDown then KeyInput.Apply([ssCtrl]);
-  Sleep(5);
+  KeyInput.Unapply([ssCtrl, ssShift, ssAlt]);
+  i := 0;
+  while (GetKeyState(VK_CONTROL) >= 0) and (i < 10) do
+  begin
+    KeyInput.Apply([ssCtrl]);
+    Inc(i);
+  end;
   KeyInput.Down(Ord('V'));
-  Sleep(5);
+  SleepLoop(2);
   KeyInput.Up(Ord('V'));
-  Sleep(5);
-  if not CtrlWasDown then KeyInput.Unapply([ssCtrl]);
+  KeyInput.Unapply([ssCtrl]);
 end;
 
 {$IFDEF WINDOWS}
@@ -3032,7 +3046,7 @@ begin
     Show;
   BringToFront;
   FTopMost := True;
-  ProcessMessages;
+  SleepLoop;
   if (Clipboard.AsText <> string.empty) then
   begin
     MemoSource.Text := Clipboard.AsText;
@@ -3126,7 +3140,7 @@ begin
       Show;
     BringToFront;
     FTopMost := True;
-    ProcessMessages;
+    SleepLoop;
     MemoSource.Text := SelectedText;
     TranslateMemo;
   finally
@@ -3226,7 +3240,7 @@ begin
   FMouseHook.Enabled := False;
   try
     // Copy selection from active window (Ctrl+C)
-    GlobalCtrlC(300);
+    GlobalCtrlC;
     SelectedText := Clipboard.AsText;
     if (SelectedText <> string.Empty) then
     begin
@@ -3268,7 +3282,7 @@ begin
             Show;
           BringToFront;
           FTopMost := True;
-          ProcessMessages;
+          SleepLoop;
           MemoSource.Text := SelectedText;
           TranslateMemo;
         end;
