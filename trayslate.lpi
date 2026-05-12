@@ -205,14 +205,14 @@
         <ResourceBaseClass Value="Form"/>
       </Unit>
       <Unit>
-        <Filename Value="units\textdroptarget.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="TextDropTarget"/>
-      </Unit>
-      <Unit>
-        <Filename Value="units\globalmousehook.pas"/>
+        <Filename Value="common\globalmousehook.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="GlobalMouseHook"/>
+      </Unit>
+      <Unit>
+        <Filename Value="common\textdroptarget.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TextDropTarget"/>
       </Unit>
     </Units>
   </ProjectOptions>
