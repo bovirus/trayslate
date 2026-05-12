@@ -247,7 +247,7 @@ msgstr " çifti kaldırmak için"
 #: mainform.rtrayslate
 msgctxt "mainform.rtrayslate"
 msgid "Trayslate"
-msgstr ""
+msgstr "Trayslate"
 
 #: systemtool.newversion
 #, object-pascal-format
@@ -265,7 +265,7 @@ msgstr "Sürümünüz güncel."
 #: tformabouttrayslate.buttonok.caption
 msgctxt "tformabouttrayslate.buttonok.caption"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: tformabouttrayslate.caption
 msgid "About"
@@ -285,16 +285,16 @@ msgstr "Sorular veya geri bildirim için benimle iletişime geçin"
 
 #: tformabouttrayslate.labelname.caption
 msgid "Trayslate © 2026"
-msgstr ""
+msgstr "Trayslate © 2026"
 
 #: tformabouttrayslate.labelurlemail.caption
 msgctxt "tformabouttrayslate.labelurlemail.caption"
 msgid "mailto:astverskoy@gmail.com"
-msgstr ""
+msgstr "mailto:astverskoy@gmail.com"
 
 #: tformabouttrayslate.labelurlgithub.caption
 msgid "github:plaintool"
-msgstr ""
+msgstr "github:plaintool"
 
 #: tformabouttrayslate.lblabout.caption
 msgid ""
@@ -394,7 +394,7 @@ msgstr "Menüde görünür"
 
 #: tformconfigtrayslate.combomethod.text
 msgid "GET"
-msgstr ""
+msgstr "GET"
 
 #: tformconfigtrayslate.combovaluetype.text
 msgctxt "tformconfigtrayslate.combovaluetype.text"
@@ -440,7 +440,7 @@ msgstr "Yapılandırma simgesini seçmek için tıklayın, Middle-Click simgeyi 
 
 #: tformconfigtrayslate.labelaccept.caption
 msgid "Accept"
-msgstr ""
+msgstr "Accept"
 
 #: tformconfigtrayslate.labelcolorrecent.caption
 msgid "Recent Color"
@@ -449,7 +449,7 @@ msgstr "Son renk"
 #: tformconfigtrayslate.labelcontenttype.caption
 msgctxt "tformconfigtrayslate.labelcontenttype.caption"
 msgid "Content Type"
-msgstr ""
+msgstr "Content Type"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
 msgid "Fill with default"
@@ -466,7 +466,7 @@ msgstr "Ek başlangıç istek başlıkları key=value biçiminde; key: value bi�
 #: tformconfigtrayslate.labelinitheaders2.caption
 msgctxt "tformconfigtrayslate.labelinitheaders2.caption"
 msgid "Headers"
-msgstr ""
+msgstr "Headers"
 
 #: tformconfigtrayslate.labelinitlivetime.caption
 msgctxt "tformconfigtrayslate.labelinitlivetime.caption"
@@ -502,12 +502,12 @@ msgstr "Gerekli parametreleri almak için başlangıç GET isteği."
 #: tformconfigtrayslate.labeliniturl.caption
 msgctxt "tformconfigtrayslate.labeliniturl.caption"
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: tformconfigtrayslate.labelinituseragent.caption
 msgctxt "tformconfigtrayslate.labelinituseragent.caption"
 msgid "User Agent"
-msgstr ""
+msgstr "User Agent"
 
 #: tformconfigtrayslate.labeljsonpointer2.caption
 msgid ""
@@ -562,12 +562,12 @@ msgstr "Parametreleri kullanın: {text} – giriş metni, {source} – kaynak di
 
 #: tformconfigtrayslate.labelpostdata.caption
 msgid "Post Data"
-msgstr ""
+msgstr "Post Data"
 
 #: tformconfigtrayslate.labelpostdata1.caption
 msgctxt "tformconfigtrayslate.labelpostdata1.caption"
 msgid "Headers"
-msgstr ""
+msgstr "Headers"
 
 #: tformconfigtrayslate.labelservicedescription.caption
 msgid "Description"
@@ -584,12 +584,12 @@ msgstr "Sıra"
 #: tformconfigtrayslate.labelurl.caption
 msgctxt "tformconfigtrayslate.labelurl.caption"
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: tformconfigtrayslate.labeluseragent.caption
 msgctxt "tformconfigtrayslate.labeluseragent.caption"
 msgid "User Agent"
-msgstr ""
+msgstr "User Agent"
 
 #: tformconfigtrayslate.labelvaluetype.caption
 msgid "Value Type"
@@ -636,7 +636,7 @@ msgstr "Yeni yapılandırma"
 #: tformdonatetrayslate.buttonok.caption
 msgctxt "tformdonatetrayslate.buttonok.caption"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: tformdonatetrayslate.caption
 msgid "Buy me a coffee"
@@ -644,21 +644,21 @@ msgstr "Projeyi destekle"
 
 #: tformdonatetrayslate.editwallet1.text
 msgid "bc1qp8m5j75yd58zhf9hl0a753shay093j2548f84e"
-msgstr ""
+msgstr "bc1qp8m5j75yd58zhf9hl0a753shay093j2548f84e"
 
 #: tformdonatetrayslate.editwallet2.text
 msgctxt "tformdonatetrayslate.editwallet2.text"
 msgid "0x328e689E961c3Abb143835f8677947Fa9eaF9f6F"
-msgstr ""
+msgstr "0x328e689E961c3Abb143835f8677947Fa9eaF9f6F"
 
 #: tformdonatetrayslate.editwallet3.text
 msgctxt "tformdonatetrayslate.editwallet3.text"
 msgid "0x328e689E961c3Abb143835f8677947Fa9eaF9f6F"
-msgstr ""
+msgstr "0x328e689E961c3Abb143835f8677947Fa9eaF9f6F"
 
 #: tformdonatetrayslate.editwallet4.text
 msgid "TYSJJHjpu6aqr8UsGaCTLxDyh6HKWoNQ8k"
-msgstr ""
+msgstr "TYSJJHjpu6aqr8UsGaCTLxDyh6HKWoNQ8k"
 
 #: tformdonatetrayslate.label1.caption
 msgid "Hey there! Fuel this passion project with a little caffeine boost! Every donation helps keep the code rolling and the coffee brewing. Thanks for supporting the work and the developer behind it!"
@@ -670,47 +670,47 @@ msgstr "Herhangi bir borsa aracılığıyla bağış yapabilirsiniz, örneğin:"
 
 #: tformdonatetrayslate.label2.caption
 msgid "BTC"
-msgstr ""
+msgstr "BTC"
 
 #: tformdonatetrayslate.label3.caption
 msgid "Bitcoin (BTC)"
-msgstr ""
+msgstr "Bitcoin (BTC)"
 
 #: tformdonatetrayslate.label4.caption
 msgid "ETH"
-msgstr ""
+msgstr "ETH"
 
 #: tformdonatetrayslate.label5.caption
 msgid "Ethereum (ERC20)"
-msgstr ""
+msgstr "Ethereum (ERC20)"
 
 #: tformdonatetrayslate.label6.caption
 msgctxt "tformdonatetrayslate.label6.caption"
 msgid "USDT"
-msgstr ""
+msgstr "USDT"
 
 #: tformdonatetrayslate.label7.caption
 msgid "ETH Ethereum (ERC20), BSC Binance Smart Chain (BEP20)"
-msgstr ""
+msgstr "ETH Ethereum (ERC20), BSC Binance Smart Chain (BEP20)"
 
 #: tformdonatetrayslate.label8.caption
 msgid "TRX Tron (TRC20)"
-msgstr ""
+msgstr "TRX Tron (TRC20)"
 
 #: tformdonatetrayslate.label9.caption
 msgctxt "tformdonatetrayslate.label9.caption"
 msgid "USDT"
-msgstr ""
+msgstr "USDT"
 
 #: tformdonatetrayslate.labelurl.caption
 msgctxt "tformdonatetrayslate.labelurl.caption"
 msgid "Changelly.com"
-msgstr ""
+msgstr "Changelly.com"
 
 #: tformdonatetrayslate.labelurl.hint
 msgctxt "tformdonatetrayslate.labelurl.hint"
 msgid "https://changelly.com/buy-crypto?amount=15&from=usd"
-msgstr ""
+msgstr "https://changelly.com/buy-crypto?amount=15&from=usd"
 
 #: tformdonatetrayslate.labelurl1.caption
 msgid "How to do it easily"
@@ -718,7 +718,7 @@ msgstr "Kolayca nasıl yapılır"
 
 #: tformdonatetrayslate.labelurl1.hint
 msgid "https://plaintool.github.io/notetask/donate.htm"
-msgstr ""
+msgstr "https://plaintool.github.io/notetask/donate.htm"
 
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
@@ -737,7 +737,7 @@ msgstr "Kaynak ve çeviriyi ana pencereye gönder"
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
 msgid "Trayslate"
-msgstr ""
+msgstr "Trayslate"
 
 #: tformpopuptrayslate.labelwatermark.caption
 msgctxt "tformpopuptrayslate.labelwatermark.caption"
@@ -766,7 +766,7 @@ msgstr "Yazı Tipi..."
 #: tformsettingstrayslate.btnok.caption
 msgctxt "tformsettingstrayslate.btnok.caption"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: tformsettingstrayslate.btnreset.caption
 msgctxt "tformsettingstrayslate.btnreset.caption"
@@ -1266,4 +1266,3 @@ msgstr "Son Çiftler"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
-
