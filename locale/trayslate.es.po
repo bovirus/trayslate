@@ -758,7 +758,6 @@ msgid "Font..."
 msgstr "Fuente..."
 
 #: tformsettingstrayslate.btnfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnfontpopup.caption"
 msgid "Font..."
 msgstr "Fuente..."
@@ -774,7 +773,6 @@ msgid "Reset"
 msgstr "Restablecer"
 
 #: tformsettingstrayslate.btnresetpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnresetpopup.caption"
 msgid "Reset"
 msgstr "Restablecer"
@@ -824,8 +822,6 @@ msgid "Allows translation by selecting text with the mouse in any application"
 msgstr ""
 
 #: tformsettingstrayslate.checkhidecontrols.caption
-#, fuzzy
-#| msgid "Auto-hide controls"
 msgid "Auto-Hide Controls"
 msgstr "Ocultar controles automáticamente"
 
@@ -952,7 +948,6 @@ msgid "Font Name"
 msgstr "Nombre de la fuente"
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
 msgid "Lang Detect Config"
 msgstr "Configuración de detección de idioma"
@@ -968,8 +963,6 @@ msgid "Mouse Mode"
 msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
-#, fuzzy
-#| msgid "Opacity on Hover"
 msgid "Opacity On Hover"
 msgstr "Opacidad al pasar el ratón"
 
@@ -1001,7 +994,6 @@ msgid "Default, 0"
 msgstr "Predeterminado, 0"
 
 #: tformsettingstrayslate.panelfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.panelfontpopup.caption"
 msgid "Default, 0"
 msgstr "Predeterminado, 0"
@@ -1060,7 +1052,6 @@ msgid "Exit"
 msgstr "Salir"
 
 #: tformtrayslate.afastallowhotkeys.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastallowhotkeys.caption"
 msgid "Enable Global Hotkeys"
 msgstr "Habilitar atajos de teclado globales"
@@ -1071,7 +1062,6 @@ msgid "Auto-Add Recent Language Pairs"
 msgstr ""
 
 #: tformtrayslate.afastautoswap.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
 msgstr "Intercambiar automáticamente el par de idiomas"
@@ -1092,7 +1082,6 @@ msgid "Only When Ctrl Is Pressed"
 msgstr ""
 
 #: tformtrayslate.afastrealtime.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Traducir mientras escribe"

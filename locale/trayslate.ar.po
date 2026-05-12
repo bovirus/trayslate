@@ -276,10 +276,8 @@ msgid "by Alexander Tverskoy is licensed under"
 msgstr "بواسطة Alexander Tverskoy مرخّص بموجب"
 
 #: tformabouttrayslate.labelby1.caption
-#, fuzzy
-#| msgid "the GNU General Public License, Version 3 "
 msgid "the GNU General Public License, Version 3"
-msgstr "رخصة GNU العامة، الإصدار 3 "
+msgstr "رخصة GNU العامة، الإصدار 3"
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
@@ -760,7 +758,6 @@ msgid "Font..."
 msgstr "الخط..."
 
 #: tformsettingstrayslate.btnfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnfontpopup.caption"
 msgid "Font..."
 msgstr "الخط..."
@@ -776,7 +773,6 @@ msgid "Reset"
 msgstr "إعادة تعيين"
 
 #: tformsettingstrayslate.btnresetpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnresetpopup.caption"
 msgid "Reset"
 msgstr "إعادة تعيين"
@@ -826,8 +822,6 @@ msgid "Allows translation by selecting text with the mouse in any application"
 msgstr ""
 
 #: tformsettingstrayslate.checkhidecontrols.caption
-#, fuzzy
-#| msgid "Auto-hide controls"
 msgid "Auto-Hide Controls"
 msgstr "إخفاء تلقائي للأدوات"
 
@@ -954,7 +948,6 @@ msgid "Font Name"
 msgstr "اسم الخط"
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
 msgid "Lang Detect Config"
 msgstr "تكوين كشف اللغة"
@@ -970,8 +963,6 @@ msgid "Mouse Mode"
 msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
-#, fuzzy
-#| msgid "Opacity on Hover"
 msgid "Opacity On Hover"
 msgstr "الشفافية عند التمرير"
 
@@ -1003,7 +994,6 @@ msgid "Default, 0"
 msgstr "الافتراضي، 0"
 
 #: tformsettingstrayslate.panelfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.panelfontpopup.caption"
 msgid "Default, 0"
 msgstr "الافتراضي، 0"
@@ -1062,7 +1052,6 @@ msgid "Exit"
 msgstr "خروج"
 
 #: tformtrayslate.afastallowhotkeys.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastallowhotkeys.caption"
 msgid "Enable Global Hotkeys"
 msgstr "تمكين مفاتيح الاختصار العامة"
@@ -1073,7 +1062,6 @@ msgid "Auto-Add Recent Language Pairs"
 msgstr ""
 
 #: tformtrayslate.afastautoswap.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
 msgstr "تبديل زوج اللغات تلقائياً"
@@ -1094,7 +1082,6 @@ msgid "Only When Ctrl Is Pressed"
 msgstr ""
 
 #: tformtrayslate.afastrealtime.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "الترجمة أثناء الكتابة"

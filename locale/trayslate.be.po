@@ -758,7 +758,6 @@ msgid "Font..."
 msgstr "Шрыфт..."
 
 #: tformsettingstrayslate.btnfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnfontpopup.caption"
 msgid "Font..."
 msgstr "Шрыфт..."
@@ -774,7 +773,6 @@ msgid "Reset"
 msgstr "Скінуць"
 
 #: tformsettingstrayslate.btnresetpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnresetpopup.caption"
 msgid "Reset"
 msgstr "Скінуць"
@@ -824,8 +822,6 @@ msgid "Allows translation by selecting text with the mouse in any application"
 msgstr ""
 
 #: tformsettingstrayslate.checkhidecontrols.caption
-#, fuzzy
-#| msgid "Auto-hide controls"
 msgid "Auto-Hide Controls"
 msgstr "Аўта-хаваць элементы"
 
@@ -952,7 +948,6 @@ msgid "Font Name"
 msgstr "Назва шрыфта"
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
 msgid "Lang Detect Config"
 msgstr "Канфігурацыя вызначэння мовы"
@@ -968,8 +963,6 @@ msgid "Mouse Mode"
 msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
-#, fuzzy
-#| msgid "Opacity on Hover"
 msgid "Opacity On Hover"
 msgstr "Празрыстасць пры навядзенні"
 
@@ -1001,7 +994,6 @@ msgid "Default, 0"
 msgstr "Па змаўчанні, 0"
 
 #: tformsettingstrayslate.panelfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.panelfontpopup.caption"
 msgid "Default, 0"
 msgstr "Па змаўчанні, 0"
@@ -1060,7 +1052,6 @@ msgid "Exit"
 msgstr "Выхад"
 
 #: tformtrayslate.afastallowhotkeys.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastallowhotkeys.caption"
 msgid "Enable Global Hotkeys"
 msgstr "Уключыць глабальныя гарачыя клавішы"
@@ -1071,7 +1062,6 @@ msgid "Auto-Add Recent Language Pairs"
 msgstr ""
 
 #: tformtrayslate.afastautoswap.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
 msgstr "Аўтаматычна мяняць моўную пару"
@@ -1092,7 +1082,6 @@ msgid "Only When Ctrl Is Pressed"
 msgstr ""
 
 #: tformtrayslate.afastrealtime.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Пераклад па меры ўводу"

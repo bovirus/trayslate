@@ -758,7 +758,6 @@ msgid "Font..."
 msgstr "फ़ॉन्ट..."
 
 #: tformsettingstrayslate.btnfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnfontpopup.caption"
 msgid "Font..."
 msgstr "फ़ॉन्ट..."
@@ -774,7 +773,6 @@ msgid "Reset"
 msgstr "रीसेट"
 
 #: tformsettingstrayslate.btnresetpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnresetpopup.caption"
 msgid "Reset"
 msgstr "रीसेट"
@@ -824,8 +822,6 @@ msgid "Allows translation by selecting text with the mouse in any application"
 msgstr ""
 
 #: tformsettingstrayslate.checkhidecontrols.caption
-#, fuzzy
-#| msgid "Auto-hide controls"
 msgid "Auto-Hide Controls"
 msgstr "नियंत्रण स्वतः छुपाएँ"
 
@@ -952,7 +948,6 @@ msgid "Font Name"
 msgstr "फ़ॉन्ट का नाम"
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
 msgid "Lang Detect Config"
 msgstr "भाषा पहचान कॉन्फ़िगरेशन"
@@ -968,8 +963,6 @@ msgid "Mouse Mode"
 msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
-#, fuzzy
-#| msgid "Opacity on Hover"
 msgid "Opacity On Hover"
 msgstr "होवर पर अपारदर्शिता"
 
@@ -1001,7 +994,6 @@ msgid "Default, 0"
 msgstr "डिफ़ॉल्ट, 0"
 
 #: tformsettingstrayslate.panelfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.panelfontpopup.caption"
 msgid "Default, 0"
 msgstr "डिफ़ॉल्ट, 0"
@@ -1060,7 +1052,6 @@ msgid "Exit"
 msgstr "बाहर जाएँ"
 
 #: tformtrayslate.afastallowhotkeys.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastallowhotkeys.caption"
 msgid "Enable Global Hotkeys"
 msgstr "वैश्विक शॉर्टकट कुंजियाँ सक्षम करें"
@@ -1071,7 +1062,6 @@ msgid "Auto-Add Recent Language Pairs"
 msgstr ""
 
 #: tformtrayslate.afastautoswap.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
 msgstr "स्वचालित रूप से भाषा युग्म बदलें"
@@ -1092,7 +1082,6 @@ msgid "Only When Ctrl Is Pressed"
 msgstr ""
 
 #: tformtrayslate.afastrealtime.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "टाइप करते ही अनुवाद करें"

@@ -397,7 +397,6 @@ msgid "GET"
 msgstr "GET"
 
 #: tformconfigtrayslate.combovaluetype.text
-#, fuzzy
 msgctxt "tformconfigtrayslate.combovaluetype.text"
 msgid "None"
 msgstr "Κανένα"
@@ -759,7 +758,6 @@ msgid "Font..."
 msgstr "Γρ/ρά..."
 
 #: tformsettingstrayslate.btnfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnfontpopup.caption"
 msgid "Font..."
 msgstr "Γρ/ρά..."
@@ -775,7 +773,6 @@ msgid "Reset"
 msgstr "Επαναφορά"
 
 #: tformsettingstrayslate.btnresetpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnresetpopup.caption"
 msgid "Reset"
 msgstr "Επαναφορά"
@@ -825,8 +822,6 @@ msgid "Allows translation by selecting text with the mouse in any application"
 msgstr ""
 
 #: tformsettingstrayslate.checkhidecontrols.caption
-#, fuzzy
-#| msgid "Auto-hide controls"
 msgid "Auto-Hide Controls"
 msgstr "Αυτόματη απόκρυψη χειριστηρίων"
 
@@ -953,7 +948,6 @@ msgid "Font Name"
 msgstr "Όνομα γραμματοσειράς"
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
 msgid "Lang Detect Config"
 msgstr "Ρύθμιση ανίχνευσης γλώσσας"
@@ -969,8 +963,6 @@ msgid "Mouse Mode"
 msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
-#, fuzzy
-#| msgid "Opacity on Hover"
 msgid "Opacity On Hover"
 msgstr "Διαφάνεια κατά την αιώρηση"
 
@@ -1002,7 +994,6 @@ msgid "Default, 0"
 msgstr "Προεπιλογή, 0"
 
 #: tformsettingstrayslate.panelfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.panelfontpopup.caption"
 msgid "Default, 0"
 msgstr "Προεπιλογή, 0"
@@ -1061,7 +1052,6 @@ msgid "Exit"
 msgstr "Έξοδος"
 
 #: tformtrayslate.afastallowhotkeys.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastallowhotkeys.caption"
 msgid "Enable Global Hotkeys"
 msgstr "Ενεργοποίηση καθολικών συντομεύσεων"
@@ -1072,7 +1062,6 @@ msgid "Auto-Add Recent Language Pairs"
 msgstr ""
 
 #: tformtrayslate.afastautoswap.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
 msgstr "Αυτόματη εναλλαγή ζεύγους γλωσσών"
@@ -1093,7 +1082,6 @@ msgid "Only When Ctrl Is Pressed"
 msgstr ""
 
 #: tformtrayslate.afastrealtime.caption
-#, fuzzy
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Μετάφραση κατά την πληκτρολόγηση"
