@@ -797,7 +797,7 @@ msgid "Allows translation by selecting text with the mouse in any application"
 msgstr ""
 
 #: tformsettingstrayslate.checkhidecontrols.caption
-msgid "Auto-Hide controls"
+msgid "Auto-Hide Controls"
 msgstr ""
 
 #: tformsettingstrayslate.checkhidecontrols.hint
@@ -805,7 +805,8 @@ msgid "Hide window controls when the mouse is not over the popup window"
 msgstr ""
 
 #: tformsettingstrayslate.checkmousemodectrl.caption
-msgid "Only when Ctrl is pressed"
+msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
+msgid "Only When Ctrl Is Pressed"
 msgstr ""
 
 #: tformsettingstrayslate.checkmousemodectrl.hint
@@ -937,7 +938,7 @@ msgid "Mouse Mode"
 msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
-msgid "Opacity on Hover"
+msgid "Opacity On Hover"
 msgstr ""
 
 #: tformsettingstrayslate.labelopacityidle.caption
@@ -1025,22 +1026,19 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-#: tformtrayslate.afastautoaddrecentlangpairs.caption
+#: tformtrayslate.afastallowhotkeys.caption
+msgctxt "tformtrayslate.afastallowhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr ""
+
+#: tformtrayslate.afastautoaddlangpairs.caption
+msgctxt "tformtrayslate.afastautoaddlangpairs.caption"
 msgid "Auto-Add Recent Language Pairs"
 msgstr ""
 
-#: tformtrayslate.afastautohidepopupcontrols.caption
-msgid "Auto-Hide Popup Controls"
-msgstr ""
-
-#: tformtrayslate.afastautoswaplangpair.caption
-msgctxt "tformtrayslate.afastautoswaplangpair.caption"
+#: tformtrayslate.afastautoswap.caption
+msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
-msgstr ""
-
-#: tformtrayslate.afastenableglobalhotkeys.caption
-msgctxt "tformtrayslate.afastenableglobalhotkeys.caption"
-msgid "Enable Global Hotkeys"
 msgstr ""
 
 #: tformtrayslate.afastenablemousemode.caption
@@ -1048,14 +1046,24 @@ msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr ""
 
-#: tformtrayslate.afastsidebysidelayout.caption
-msgctxt "tformtrayslate.afastsidebysidelayout.caption"
-msgid "Side-By-Side Layout"
+#: tformtrayslate.afasthidecontrols.caption
+msgctxt "tformtrayslate.afasthidecontrols.caption"
+msgid "Auto-Hide Popup Controls"
 msgstr ""
 
-#: tformtrayslate.afasttranslateasyoutype.caption
-msgctxt "tformtrayslate.afasttranslateasyoutype.caption"
+#: tformtrayslate.afastmousemodectrl.caption
+msgctxt "tformtrayslate.afastmousemodectrl.caption"
+msgid "Only When Ctrl Is Pressed"
+msgstr ""
+
+#: tformtrayslate.afastrealtime.caption
+msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
+msgstr ""
+
+#: tformtrayslate.afastverticalsplit.caption
+msgctxt "tformtrayslate.afastverticalsplit.caption"
+msgid "Side-By-Side Layout"
 msgstr ""
 
 #: tformtrayslate.alangarabic.caption
@@ -1207,7 +1215,7 @@ msgid "Config"
 msgstr ""
 
 #: tformtrayslate.menufastsettings.caption
-msgid "Fast Settings"
+msgid "Quick Settings"
 msgstr ""
 
 #: tformtrayslate.menuhelp.caption

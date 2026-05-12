@@ -50,13 +50,14 @@ type
     aAutoCheckUpdates: TAction;
     aCopySource: TAction;
     aCopyTarget: TAction;
-    aFastEnableGlobalHotkeys: TAction;
+    aFastMouseModeCtrl: TAction;
+    aFastAllowHotKeys: TAction;
     aFastEnableMouseMode: TAction;
-    aFastAutoSwapLangPair: TAction;
-    aFastTranslateAsYouType: TAction;
-    aFastAutoAddRecentLangPairs: TAction;
-    aFastAutoHidePopupControls: TAction;
-    aFastSideBySideLayout: TAction;
+    aFastAutoSwap: TAction;
+    aFastRealTime: TAction;
+    aFastAutoAddLangPairs: TAction;
+    aFastHideControls: TAction;
+    aFastVerticalSplit: TAction;
     aPopupTranslate: TAction;
     aLangCustom: TAction;
     aLangBulgarian: TAction;
@@ -73,15 +74,16 @@ type
     ImageConfig: TImageList;
     MenuBulgarian: TMenuItem;
     MenuItem1: TMenuItem;
+    MenuFastMouseModeCtrl: TMenuItem;
     MenuItem2: TMenuItem;
     MenuFastSettings: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
-    MenuItem5: TMenuItem;
-    MenuItem6: TMenuItem;
-    MenuItem7: TMenuItem;
-    MenuItem8: TMenuItem;
-    MenuItem9: TMenuItem;
+    MenuFastAllowHotKeys: TMenuItem;
+    MenuFastEnableMouseMode: TMenuItem;
+    MenuFastVerticalSplit: TMenuItem;
+    MenuFastAutoSwap: TMenuItem;
+    MenuFastRealTime: TMenuItem;
+    MenuFastAutoAddLangPairs: TMenuItem;
+    MenuFastHideControls: TMenuItem;
     OpenPo: TOpenDialog;
     SbCopySource: TSpeedButton;
     SbCopyTarget: TSpeedButton;
@@ -119,6 +121,9 @@ type
     SbSwap: TSpeedButton;
     SbTranslate: TSpeedButton;
     Separator3: TMenuItem;
+    Separator4: TMenuItem;
+    Separator5: TMenuItem;
+    Separator6: TMenuItem;
     Separator9: TMenuItem;
     SplitterMemo: TSplitter;
     TimerHideHint: TTimer;
@@ -177,6 +182,14 @@ type
     MenuUkrainian: TMenuItem;
     MenuBelarusian: TMenuItem;
     MenuHindi: TMenuItem;
+    procedure aFastAllowHotKeysExecute(Sender: TObject);
+    procedure aFastAutoAddLangPairsExecute(Sender: TObject);
+    procedure aFastAutoSwapExecute(Sender: TObject);
+    procedure aFastEnableMouseModeExecute(Sender: TObject);
+    procedure aFastHideControlsExecute(Sender: TObject);
+    procedure aFastMouseModeCtrlExecute(Sender: TObject);
+    procedure aFastRealTimeExecute(Sender: TObject);
+    procedure aFastVerticalSplitExecute(Sender: TObject);
     procedure aLangBulgarianExecute(Sender: TObject);
     procedure aLangCustomExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -672,6 +685,14 @@ begin
   // Components config after load settings
   TimerTranslate.Interval := Max(RealTimeDelay, 1);
   aAutoCheckUpdates.Checked := FAutoCheckUpdates;
+  aFastAllowHotKeys.Checked := FAllowHotKeys;
+  aFastEnableMouseMode.Checked := FEnableMouseMode;
+  aFastMouseModeCtrl.Checked := FMouseModeCtrl;
+  aFastVerticalSplit.Checked := FVerticalSplit;
+  aFastHideControls.Checked := FHideControls;
+  aFastAutoSwap.Checked := FAutoSwap;
+  aFastAutoAddLangPairs.Checked := FAutoAddLangPairs;
+  aFastRealTime.Checked := FRealTime;
 
   // Load config files
   FConfigFiles := TStringList.Create;
@@ -1037,9 +1058,12 @@ begin
       formSettingsTrayslate.ListPages.Width := FormSettingsSplit;
 
     UnregisterHotKeys;
+    MenuFastSettings.Visible := False;
+
     formSettingsTrayslate.ShowModal;
   finally
     FreeAndNil(formSettingsTrayslate);
+    MenuFastSettings.Visible := True;
     RegisterHotKeys;
     SetHints;
     FMouseHook.Enabled := FEnableMouseMode;
@@ -1164,6 +1188,52 @@ end;
 procedure TformTrayslate.aExitExecute(Sender: TObject);
 begin
   Application.Terminate;
+end;
+
+{ Actions Fast Settings }
+
+procedure TformTrayslate.aFastAllowHotKeysExecute(Sender: TObject);
+begin
+  AllowHotKeys := aFastAllowHotKeys.Checked;
+  RegisterHotKeys;
+end;
+
+procedure TformTrayslate.aFastAutoAddLangPairsExecute(Sender: TObject);
+begin
+  AutoAddLangPairs := aFastAutoAddLangPairs.Checked;
+end;
+
+procedure TformTrayslate.aFastAutoSwapExecute(Sender: TObject);
+begin
+  AutoSwap := aFastAutoSwap.Checked;
+end;
+
+procedure TformTrayslate.aFastEnableMouseModeExecute(Sender: TObject);
+begin
+  EnableMouseMode := aFastEnableMouseMode.Checked;
+  FMouseHook.Enabled := EnableMouseMode;
+end;
+
+procedure TformTrayslate.aFastHideControlsExecute(Sender: TObject);
+begin
+  HideControls := aFastHideControls.Checked;
+end;
+
+procedure TformTrayslate.aFastMouseModeCtrlExecute(Sender: TObject);
+begin
+  MouseModeCtrl := aFastMouseModeCtrl.Checked;
+end;
+
+procedure TformTrayslate.aFastRealTimeExecute(Sender: TObject);
+begin
+  RealTime := aFastRealTime.Checked;
+end;
+
+procedure TformTrayslate.aFastVerticalSplitExecute(Sender: TObject);
+begin
+  VerticalSplit := aFastVerticalSplit.Checked;
+  formTrayslate.SetVerticalMode;
+  Application.QueueAsyncCall(@DoRealignSplit, 0);
 end;
 
 { Control Events }
@@ -1855,7 +1925,7 @@ begin
       FConfigColors.Add(SL[i] + '=' + IntToStr(Data^.Color));
       FConfigImages.Add(SL[i] + '=' + IntToStr(Data^.ImageIndex));
 
-      // menu item
+      // MenuFastEnableMouseMode item
       Item := TMenuItem.Create(MenuConfig);
 
       if Data^.Name <> string.Empty then
@@ -1908,7 +1978,7 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
       if FillMenu then
         MenuLangPairs.Clear;
 
-      // Hide panel and menu if no pairs
+      // Hide panel and MenuFastEnableMouseMode if no pairs
       if (FMaxLangPairs <= 0) then
       begin
         Target.Visible := False;
@@ -1929,7 +1999,7 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
         totalWidth := totalWidth + Target.Canvas.TextWidth(FLangPairs.ValueFromIndex[i]) + 10;
       Target.Width := totalWidth;
 
-      // Create Panels (with Image + Label) and Menu Items
+      // Create Panels (with Image + Label) and MenuFastEnableMouseMode Items
       for i := 0 to FLangPairs.Count - 1 do
       begin
         Target.BorderSpacing.Top := Max(0, Min(4, 13 - AFont.Size));
@@ -2240,7 +2310,7 @@ begin
 
   for i := 0 to MenuLangPairs.Count - 1 do
   begin
-    // Update menu item check state
+    // Update MenuFastEnableMouseMode item check state
     MenuLangPairs.Items[i].Checked :=
       SameText(MenuLangPairs.Items[i].Hint, FConfigFile + '=' + currentPair);
 

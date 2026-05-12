@@ -758,7 +758,6 @@ msgid "Font..."
 msgstr "Font..."
 
 #: tformsettingstrayslate.btnfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnfontpopup.caption"
 msgid "Font..."
 msgstr "Font..."
@@ -774,7 +773,6 @@ msgid "Reset"
 msgstr "Reset"
 
 #: tformsettingstrayslate.btnresetpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.btnresetpopup.caption"
 msgid "Reset"
 msgstr "Reset"
@@ -824,17 +822,16 @@ msgid "Allows translation by selecting text with the mouse in any application"
 msgstr ""
 
 #: tformsettingstrayslate.checkhidecontrols.caption
-#, fuzzy
-#| msgid "Auto-hide controls"
-msgid "Auto-Hide controls"
-msgstr "Auto-hide controls"
+msgid "Auto-Hide Controls"
+msgstr "Auto-Hide Controls"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Hide window controls when the mouse is not over the popup window"
 
 #: tformsettingstrayslate.checkmousemodectrl.caption
-msgid "Only when Ctrl is pressed"
+msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
+msgid "Only When Ctrl Is Pressed"
 msgstr ""
 
 #: tformsettingstrayslate.checkmousemodectrl.hint
@@ -951,7 +948,6 @@ msgid "Font Name"
 msgstr "Font Name"
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
 msgid "Lang Detect Config"
 msgstr "Lang Detect Config"
@@ -967,8 +963,8 @@ msgid "Mouse Mode"
 msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
-msgid "Opacity on Hover"
-msgstr "Opacity on Hover"
+msgid "Opacity On Hover"
+msgstr "Opacity On Hover"
 
 #: tformsettingstrayslate.labelopacityidle.caption
 msgid "Opacity Idle"
@@ -998,7 +994,6 @@ msgid "Default, 0"
 msgstr "Default, 0"
 
 #: tformsettingstrayslate.panelfontpopup.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.panelfontpopup.caption"
 msgid "Default, 0"
 msgstr "Default, 0"
@@ -1056,42 +1051,45 @@ msgstr "Buy Me a Coffee..."
 msgid "Exit"
 msgstr "Exit"
 
-#: tformtrayslate.afastautoaddrecentlangpairs.caption
+#: tformtrayslate.afastallowhotkeys.caption
+msgctxt "tformtrayslate.afastallowhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "Enable Global Hotkeys"
+
+#: tformtrayslate.afastautoaddlangpairs.caption
+msgctxt "tformtrayslate.afastautoaddlangpairs.caption"
 msgid "Auto-Add Recent Language Pairs"
 msgstr ""
 
-#: tformtrayslate.afastautohidepopupcontrols.caption
-msgid "Auto-Hide Popup Controls"
-msgstr ""
-
-#: tformtrayslate.afastautoswaplangpair.caption
-#, fuzzy
-msgctxt "tformtrayslate.afastautoswaplangpair.caption"
+#: tformtrayslate.afastautoswap.caption
+msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
 msgstr "Auto-Swap Language Pair"
-
-#: tformtrayslate.afastenableglobalhotkeys.caption
-#, fuzzy
-#| msgid "Global Hotkeys"
-msgctxt "tformtrayslate.afastenableglobalhotkeys.caption"
-msgid "Enable Global Hotkeys"
-msgstr "Global Hotkeys"
 
 #: tformtrayslate.afastenablemousemode.caption
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr ""
 
-#: tformtrayslate.afastsidebysidelayout.caption
-msgctxt "tformtrayslate.afastsidebysidelayout.caption"
-msgid "Side-By-Side Layout"
+#: tformtrayslate.afasthidecontrols.caption
+msgctxt "tformtrayslate.afasthidecontrols.caption"
+msgid "Auto-Hide Popup Controls"
 msgstr ""
 
-#: tformtrayslate.afasttranslateasyoutype.caption
-#, fuzzy
-msgctxt "tformtrayslate.afasttranslateasyoutype.caption"
+#: tformtrayslate.afastmousemodectrl.caption
+msgctxt "tformtrayslate.afastmousemodectrl.caption"
+msgid "Only When Ctrl Is Pressed"
+msgstr ""
+
+#: tformtrayslate.afastrealtime.caption
+msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Translate As You Type"
+
+#: tformtrayslate.afastverticalsplit.caption
+msgctxt "tformtrayslate.afastverticalsplit.caption"
+msgid "Side-By-Side Layout"
+msgstr ""
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
@@ -1242,7 +1240,7 @@ msgid "Config"
 msgstr "Config"
 
 #: tformtrayslate.menufastsettings.caption
-msgid "Fast Settings"
+msgid "Quick Settings"
 msgstr ""
 
 #: tformtrayslate.menuhelp.caption

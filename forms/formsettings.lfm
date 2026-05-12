@@ -210,9 +210,9 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Height = 19
             Hint = 'Works only when the Ctrl key is pressed'
             Top = 40
-            Width = 151
+            Width = 153
             HelpType = htKeyword
-            Caption = 'Only when Ctrl is pressed'
+            Caption = 'Only When Ctrl Is Pressed'
             TabOrder = 1
           end
         end
@@ -416,7 +416,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Width = 136
             Alignment = taRightJustify
             AutoSize = False
-            Caption = 'Opacity on Hover'
+            Caption = 'Opacity On Hover'
             WordWrap = True
           end
           object TrackOpacityIdle: TTrackBar
@@ -467,8 +467,8 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Height = 19
             Hint = 'Hide window controls when the mouse is not over the popup window'
             Top = 176
-            Width = 120
-            Caption = 'Auto-Hide controls'
+            Width = 122
+            Caption = 'Auto-Hide Controls'
             TabOrder = 8
             OnChange = SettingChange
           end

@@ -307,7 +307,7 @@ object formTrayslate: TformTrayslate
     Images = ImageConfig
     OnPopup = PopupTrayPopup
     OnClose = PopupTrayClose
-    Left = 128
+    Left = 120
     Top = 312
     object MenuShow: TMenuItem
       Action = aShow
@@ -332,34 +332,46 @@ object formTrayslate: TformTrayslate
       Action = aConfigEditor
     end
     object MenuFastSettings: TMenuItem
-      Caption = 'Fast Settings'
-      Visible = False
-      object MenuItem3: TMenuItem
-        Action = aFastEnableGlobalHotkeys
+      Caption = 'Quick Settings'
+      object MenuFastAllowHotKeys: TMenuItem
+        Action = aFastAllowHotKeys
         AutoCheck = True
       end
-      object MenuItem4: TMenuItem
+      object Separator4: TMenuItem
+        Caption = '-'
+      end
+      object MenuFastEnableMouseMode: TMenuItem
         Action = aFastEnableMouseMode
         AutoCheck = True
       end
-      object MenuItem5: TMenuItem
-        Action = aFastSideBySideLayout
+      object MenuFastMouseModeCtrl: TMenuItem
+        Action = aFastMouseModeCtrl
         AutoCheck = True
       end
-      object MenuItem6: TMenuItem
-        Action = aFastAutoSwapLangPair
+      object Separator5: TMenuItem
+        Caption = '-'
+      end
+      object MenuFastVerticalSplit: TMenuItem
+        Action = aFastVerticalSplit
         AutoCheck = True
       end
-      object MenuItem8: TMenuItem
-        Action = aFastAutoAddRecentLangPairs
+      object MenuFastHideControls: TMenuItem
+        Action = aFastHideControls
         AutoCheck = True
       end
-      object MenuItem9: TMenuItem
-        Action = aFastAutoHidePopupControls
+      object Separator6: TMenuItem
+        Caption = '-'
+      end
+      object MenuFastAutoSwap: TMenuItem
+        Action = aFastAutoSwap
         AutoCheck = True
       end
-      object MenuItem7: TMenuItem
-        Action = aFastTranslateAsYouType
+      object MenuFastAutoAddLangPairs: TMenuItem
+        Action = aFastAutoAddLangPairs
+        AutoCheck = True
+      end
+      object MenuFastRealTime: TMenuItem
+        Action = aFastRealTime
         AutoCheck = True
       end
     end
@@ -713,40 +725,53 @@ object formTrayslate: TformTrayslate
       Caption = 'Exit'
       OnExecute = aExitExecute
     end
-    object aFastEnableGlobalHotkeys: TAction
+    object aFastAllowHotKeys: TAction
       Category = 'FastSettings'
       AutoCheck = True
       Caption = 'Enable Global Hotkeys'
+      OnExecute = aFastAllowHotKeysExecute
     end
     object aFastEnableMouseMode: TAction
       Category = 'FastSettings'
       AutoCheck = True
       Caption = 'Enable Mouse Mode'
+      OnExecute = aFastEnableMouseModeExecute
     end
-    object aFastSideBySideLayout: TAction
+    object aFastMouseModeCtrl: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Only When Ctrl Is Pressed'
+      OnExecute = aFastMouseModeCtrlExecute
+    end
+    object aFastVerticalSplit: TAction
       Category = 'FastSettings'
       AutoCheck = True
       Caption = 'Side-By-Side Layout'
+      OnExecute = aFastVerticalSplitExecute
     end
-    object aFastAutoSwapLangPair: TAction
-      Category = 'FastSettings'
-      AutoCheck = True
-      Caption = 'Auto-Swap Language Pair'
-    end
-    object aFastAutoAddRecentLangPairs: TAction
-      Category = 'FastSettings'
-      AutoCheck = True
-      Caption = 'Auto-Add Recent Language Pairs'
-    end
-    object aFastAutoHidePopupControls: TAction
+    object aFastHideControls: TAction
       Category = 'FastSettings'
       AutoCheck = True
       Caption = 'Auto-Hide Popup Controls'
+      OnExecute = aFastHideControlsExecute
     end
-    object aFastTranslateAsYouType: TAction
+    object aFastAutoSwap: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Auto-Swap Language Pair'
+      OnExecute = aFastAutoSwapExecute
+    end
+    object aFastAutoAddLangPairs: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Auto-Add Recent Language Pairs'
+      OnExecute = aFastAutoAddLangPairsExecute
+    end
+    object aFastRealTime: TAction
       Category = 'FastSettings'
       AutoCheck = True
       Caption = 'Translate As You Type'
+      OnExecute = aFastRealTimeExecute
     end
   end
   object TimerClick: TTimer
@@ -821,7 +846,7 @@ object formTrayslate: TformTrayslate
     Top = 312
   end
   object ImageConfig: TImageList
-    Left = 128
+    Left = 120
     Top = 384
   end
   object OpenPo: TOpenDialog
@@ -829,6 +854,6 @@ object formTrayslate: TformTrayslate
     Filter = 'Language File (*.po)|*.po'
     Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
     Left = 40
-    Top = 248
+    Top = 240
   end
 end

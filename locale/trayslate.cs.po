@@ -826,7 +826,7 @@ msgstr ""
 #: tformsettingstrayslate.checkhidecontrols.caption
 #, fuzzy
 #| msgid "Auto-hide controls"
-msgid "Auto-Hide controls"
+msgid "Auto-Hide Controls"
 msgstr "Automaticky skrýt ovládací prvky"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
@@ -834,7 +834,8 @@ msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Skrýt ovládací prvky, když není myš nad vyskakovacím oknem"
 
 #: tformsettingstrayslate.checkmousemodectrl.caption
-msgid "Only when Ctrl is pressed"
+msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
+msgid "Only When Ctrl Is Pressed"
 msgstr ""
 
 #: tformsettingstrayslate.checkmousemodectrl.hint
@@ -967,7 +968,9 @@ msgid "Mouse Mode"
 msgstr ""
 
 #: tformsettingstrayslate.labelopacityhover.caption
-msgid "Opacity on Hover"
+#, fuzzy
+#| msgid "Opacity on Hover"
+msgid "Opacity On Hover"
 msgstr "Průhlednost při najetí"
 
 #: tformsettingstrayslate.labelopacityidle.caption
@@ -1056,42 +1059,48 @@ msgstr "Podpořit projekt..."
 msgid "Exit"
 msgstr "Konec"
 
-#: tformtrayslate.afastautoaddrecentlangpairs.caption
+#: tformtrayslate.afastallowhotkeys.caption
+#, fuzzy
+msgctxt "tformtrayslate.afastallowhotkeys.caption"
+msgid "Enable Global Hotkeys"
+msgstr "Povolit globální klávesové zkratky"
+
+#: tformtrayslate.afastautoaddlangpairs.caption
+msgctxt "tformtrayslate.afastautoaddlangpairs.caption"
 msgid "Auto-Add Recent Language Pairs"
 msgstr ""
 
-#: tformtrayslate.afastautohidepopupcontrols.caption
-msgid "Auto-Hide Popup Controls"
-msgstr ""
-
-#: tformtrayslate.afastautoswaplangpair.caption
+#: tformtrayslate.afastautoswap.caption
 #, fuzzy
-msgctxt "tformtrayslate.afastautoswaplangpair.caption"
+msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
 msgstr "Automaticky prohodit jazykový pár"
-
-#: tformtrayslate.afastenableglobalhotkeys.caption
-#, fuzzy
-#| msgid "Global Hotkeys"
-msgctxt "tformtrayslate.afastenableglobalhotkeys.caption"
-msgid "Enable Global Hotkeys"
-msgstr "Globální klávesové zkratky"
 
 #: tformtrayslate.afastenablemousemode.caption
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr ""
 
-#: tformtrayslate.afastsidebysidelayout.caption
-msgctxt "tformtrayslate.afastsidebysidelayout.caption"
-msgid "Side-By-Side Layout"
+#: tformtrayslate.afasthidecontrols.caption
+msgctxt "tformtrayslate.afasthidecontrols.caption"
+msgid "Auto-Hide Popup Controls"
 msgstr ""
 
-#: tformtrayslate.afasttranslateasyoutype.caption
+#: tformtrayslate.afastmousemodectrl.caption
+msgctxt "tformtrayslate.afastmousemodectrl.caption"
+msgid "Only When Ctrl Is Pressed"
+msgstr ""
+
+#: tformtrayslate.afastrealtime.caption
 #, fuzzy
-msgctxt "tformtrayslate.afasttranslateasyoutype.caption"
+msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Překládat při psaní"
+
+#: tformtrayslate.afastverticalsplit.caption
+msgctxt "tformtrayslate.afastverticalsplit.caption"
+msgid "Side-By-Side Layout"
+msgstr ""
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
@@ -1242,7 +1251,7 @@ msgid "Config"
 msgstr "Konfigurace"
 
 #: tformtrayslate.menufastsettings.caption
-msgid "Fast Settings"
+msgid "Quick Settings"
 msgstr ""
 
 #: tformtrayslate.menuhelp.caption
