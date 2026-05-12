@@ -202,6 +202,7 @@ object formTrayslate: TformTrayslate
       Width = 506
       Align = alClient
       BorderStyle = bsNone
+      HideSelection = False
       ScrollBars = ssAutoBoth
       TabOrder = 0
       OnKeyDown = MemoSourceKeyDown
@@ -260,6 +261,7 @@ object formTrayslate: TformTrayslate
       Width = 506
       Align = alClient
       BorderStyle = bsNone
+      HideSelection = False
       ScrollBars = ssAutoBoth
       TabOrder = 0
       OnKeyDown = MemoTargetKeyDown

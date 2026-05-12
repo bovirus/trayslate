@@ -22,11 +22,12 @@ object formPopupTrayslate: TformPopupTrayslate
   object MemoTarget: TMemo
     Left = 3
     Height = 209
-    Top = 28
+    Top = 3
     Width = 474
     Align = alClient
     BorderSpacing.Around = 3
     BorderStyle = bsNone
+    HideSelection = False
     ScrollBars = ssAutoBoth
     TabOrder = 0
     OnChange = MemoTargetChange
@@ -63,7 +64,7 @@ object formPopupTrayslate: TformPopupTrayslate
   object PanelButtonTarget: TPanel
     Left = 433
     Height = 16
-    Top = 210
+    Top = 185
     Width = 16
     Anchors = [akRight, akBottom]
     BevelOuter = bvNone
@@ -92,9 +93,9 @@ object formPopupTrayslate: TformPopupTrayslate
   object PanelPairs: TPanel
     Left = 0
     Height = 25
-    Top = 0
+    Top = 215
     Width = 480
-    Align = alTop
+    Align = alBottom
     AutoSize = True
     BevelOuter = bvNone
     ClientHeight = 25
@@ -106,11 +107,11 @@ object formPopupTrayslate: TformPopupTrayslate
     object SbSend: TSpeedButton
       Left = 453
       Height = 24
-      Top = 1
+      Top = 0
       Width = 24
       Action = aSend
       Anchors = [akTop, akRight]
-      BorderSpacing.Top = 1
+      BorderSpacing.Bottom = 1
       Flat = True
       Images = formTrayslate.ImageButtons
       ImageIndex = 14
@@ -137,11 +138,11 @@ object formPopupTrayslate: TformPopupTrayslate
     object SbNewTranslate: TSpeedButton
       Left = 3
       Height = 24
-      Top = 1
+      Top = 0
       Width = 24
       Action = aNewTranslate
       BorderSpacing.Left = 3
-      BorderSpacing.Top = 1
+      BorderSpacing.Bottom = 1
       Flat = True
       Images = formTrayslate.ImageButtons
       ImageIndex = 8
