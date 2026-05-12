@@ -637,6 +637,8 @@ begin
     17: FHotKeyRecent7 := HK;
     18: FHotKeyRecent8 := HK;
     19: FHotKeyRecent9 := HK;
+    else
+      ;
   end;
 end;
 

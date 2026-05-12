@@ -810,6 +810,8 @@ begin
 
     alRight:
       PanelTarget.Width := Round((PanelSource.Width + PanelTarget.Width) * FSplitRatio);
+    else
+      ;
   end;
   SetVerticalMode;
 end;
@@ -1432,6 +1434,8 @@ begin
 
     alRight:
       FSplitRatio := PanelTarget.Width / (PanelSource.Width + PanelTarget.Width);
+    else
+      ;
   end;
 end;
 
@@ -2069,6 +2073,8 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
               6: mi.ShortCut := HotKeyToShortCut(HotKeyRecent7);
               7: mi.ShortCut := HotKeyToShortCut(HotKeyRecent8);
               8: mi.ShortCut := HotKeyToShortCut(HotKeyRecent9);
+              else
+                ;
             end;
           end;
           mi.Tag := i;
@@ -2234,8 +2240,9 @@ begin
 
     alRight:
       PanelTarget.Width := Round((PanelSource.Width + PanelTarget.Width) * FSplitRatio);
+    else
+      ;
   end;
-
 end;
 
 procedure TFormTrayslate.UpdateCheckConfigMenu;
@@ -2778,31 +2785,37 @@ begin
 end;
 
 procedure TformTrayslate.GlobalCtrlC(Delay: integer = 250);
+var
+  CtrlWasDown: boolean;
 begin
   Sleep(Delay);
-  KeyInput.Unapply([ssCtrl, ssShift, ssAlt]);
+  CtrlWasDown := GetKeyState(VK_CONTROL) < 0;
+  KeyInput.Unapply([ssShift, ssAlt]);
   Sleep(5);
-  KeyInput.Apply([ssCtrl]);
+  if not CtrlWasDown then KeyInput.Apply([ssCtrl]);
   Sleep(5);
   KeyInput.Down(Ord('C'));
   Sleep(5);
   KeyInput.Up(Ord('C'));
   Sleep(5);
-  KeyInput.Unapply([ssCtrl]);
+  if not CtrlWasDown then KeyInput.Unapply([ssCtrl]);
 end;
 
 procedure TformTrayslate.GlobalCtrlV;
+var
+  CtrlWasDown: boolean;
 begin
   Sleep(5);
-  KeyInput.Unapply([ssCtrl, ssShift, ssAlt]);
+  CtrlWasDown := GetKeyState(VK_CONTROL) < 0;
+  KeyInput.Unapply([ssShift, ssAlt]);
   Sleep(5);
-  KeyInput.Apply([ssCtrl]);
+  if not CtrlWasDown then KeyInput.Apply([ssCtrl]);
   Sleep(5);
   KeyInput.Down(Ord('V'));
   Sleep(5);
   KeyInput.Up(Ord('V'));
   Sleep(5);
-  KeyInput.Unapply([ssCtrl]);
+  if not CtrlWasDown then KeyInput.Unapply([ssCtrl]);
 end;
 
 {$IFDEF WINDOWS}
@@ -3259,6 +3272,8 @@ begin
           MemoSource.Text := SelectedText;
           TranslateMemo;
         end;
+        else
+          ;
       end;
     end;
   finally

@@ -6,6 +6,10 @@
 
 unit GlobalMouseHook;
 
+{$NOTES OFF}
+{$HINTS OFF}
+{$WARNINGS OFF}
+
 {$mode objfpc}{$H+}
 
 interface
@@ -87,7 +91,7 @@ var
 begin
   if (nCode >= 0) and (FActiveInstance <> nil) then
   begin
-    p := {%H-}PMouseLLHookStruct(PtrUInt(lParam));
+    p := PMouseLLHookStruct(PtrUInt(lParam));
     FActiveInstance.InternalMouseEvent(wParam, p^);
   end;
   if FActiveInstance <> nil then

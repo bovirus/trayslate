@@ -249,7 +249,8 @@ begin
     Form.MemoTarget.Lines.TrailingLineBreak := False;
     Form.MemoTarget.Lines.SaveToFile(GetSettingsDirectory('target.txt'));
   except
-    // Do nothing if can't save current text files
+    on E: Exception do
+      // Do nothing if can't save current text files
   end;
 end;
 
@@ -645,6 +646,8 @@ begin
       vtCurrencyFiat: Ini.WriteString('Service', 'ValueType', 'CurrencyFiat');
       vtCurrencyCrypto: Ini.WriteString('Service', 'ValueType', 'CurrencyCrypto');
       vtUnit: Ini.WriteString('Service', 'ValueType', 'Unit');
+      else
+        ;
     end;
 
     // Save service description

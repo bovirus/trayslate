@@ -6,6 +6,10 @@
 
 unit TextDropTarget;
 
+{$NOTES OFF}
+{$HINTS OFF}
+{$WARNINGS OFF}
+
 {$mode ObjFPC}{$H+}
 
 interface

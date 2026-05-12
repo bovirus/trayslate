@@ -356,6 +356,8 @@ var
         end;
         // Return object as JSON if path ends on an object
         jtObject: Result := Data.AsJSON;
+        else
+          ;
       end;
       Exit;
     end;
@@ -424,6 +426,8 @@ var
             Result := Traverse(Arr.Items[i], PathParts, Level + 1);
         end;
       end;
+      else
+        ;
     end;
   end;
 

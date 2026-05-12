@@ -366,7 +366,8 @@ begin
         JsonData.Free;
       end;
     except
-      // Invalid JSON, fall through to URL processing
+      on E: Exception do
+        // Invalid JSON, fall through to URL processing
     end;
   end;
 
