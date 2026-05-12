@@ -214,6 +214,13 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="TextDropTarget"/>
       </Unit>
+      <Unit>
+        <Filename Value="forms\formbutton.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="formButtonTrayslate"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

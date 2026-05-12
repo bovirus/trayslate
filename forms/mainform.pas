@@ -391,6 +391,7 @@ type
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
     procedure ShowPopup(const SourceText: string; X: integer = 0; Y: integer = 0);
+    procedure ShowButton(const SourceText: string; X: integer = 0; Y: integer = 0);
     procedure SetVerticalMode;
     function GetLangCodeFromPoFile(const AFileName: string): string;
     function LoadCustomPoFile(const AFileName: string): string;
@@ -489,7 +490,8 @@ var
 const
   DOUBLE_ENTER_INTERVAL = 200; // ms
   HOTKEY_INTERVAL = 500; // ms
-  MOUSE_MODE_INTERVAL = 300; // ms
+  MOUSE_MODE_INTERVAL = 200; // ms
+  BUTTON_DELTA = 10;
 
   MIDDLE_MOUSE = 'Middle-Click';
   DEF_LANGDETECT = 'languagedetect.ini';
@@ -503,7 +505,7 @@ resourcestring
 
 implementation
 
-uses formdonate, formabout, formsettings, formconfig, formpopup, settings, languages, formattool, systemtool;
+uses formdonate, formabout, formsettings, formconfig, formpopup, formbutton, settings, languages, formattool, systemtool;
 
   {$R *.lfm}
 
@@ -2376,6 +2378,14 @@ begin
     if FormPopupHeight > 0 then
       formPopupTrayslate.Height := FormPopupHeight;
 
+    if formPopupTrayslate.Position <> poDesktopCenter then
+    begin
+      if formPopupTrayslate.Left + formPopupTrayslate.Width > Screen.WorkAreaRect.Right then
+        formPopupTrayslate.Left := Screen.WorkAreaRect.Right - formPopupTrayslate.Width - 10;
+      if formPopupTrayslate.Top + formPopupTrayslate.Height > Screen.WorkAreaRect.Bottom then
+        formPopupTrayslate.Top := Screen.WorkAreaRect.Bottom - formPopupTrayslate.Height + 8;
+    end;
+
     formPopupTrayslate.Font.Assign(FontPopup);
     formPopupTrayslate.PanelWatermark.Font.Size := FontPopup.Size;
     formPopupTrayslate.PanelWatermark.Font.Name := FontPopup.Name;
@@ -2389,9 +2399,32 @@ begin
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
 
   if not formPopupTrayslate.Visible then
-    formPopupTrayslate.Show;
+    formPopupTrayslate.Visible := True;
   if not StayOnTop then
     BringToFrontNoFocus(formPopupTrayslate);
+end;
+
+procedure TformTrayslate.ShowButton(const SourceText: string; X: integer = 0; Y: integer = 0);
+begin
+  if not Assigned(formButtonTrayslate) then
+    formButtonTrayslate := TformButtonTrayslate.Create(Application);
+
+  formButtonTrayslate.Position := poDesigned;
+  if X > 0 then
+    formButtonTrayslate.Left := X + BUTTON_DELTA
+  else
+    formButtonTrayslate.Position := poDesktopCenter;
+  if Y > 0 then
+    formButtonTrayslate.Top := Y + BUTTON_DELTA
+  else
+    formButtonTrayslate.Position := poDesktopCenter;
+
+  formButtonTrayslate.SourceText := SourceText;
+  formButtonTrayslate.TimerHide.Enabled := False;
+  formButtonTrayslate.TimerHide.Enabled := True;
+
+  if not formButtonTrayslate.Visible then
+    formButtonTrayslate.Visible := True;
 end;
 
 procedure TformTrayslate.SetVerticalMode;
@@ -3120,7 +3153,7 @@ begin
       case MouseMode of
         mmShowTranslateButton:
         begin
-
+          ShowButton(SelectedText, ACursorPos.X, ACursorPos.Y);
         end;
 
         mmShowBalloonTranslation:

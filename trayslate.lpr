@@ -22,7 +22,7 @@ uses
   systemtool
   {$IFDEF WINDOWS}
   ,uDarkStyle
-  ,uWin32WidgetSetDark, GlobalMouseHook, TextDropTarget
+  ,uWin32WidgetSetDark
   {$ENDIF}
   ;
 

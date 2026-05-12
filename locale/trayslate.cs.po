@@ -330,6 +330,11 @@ msgstr ""
 "3. Hlavní ikona navržena Flaticon\n"
 "   https://www.flaticon.com/ru/free-icon/translator_682045"
 
+#: tformbuttontrayslate.sbtranslate.hint
+msgctxt "tformbuttontrayslate.sbtranslate.hint"
+msgid "Translate in Popup"
+msgstr ""
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
