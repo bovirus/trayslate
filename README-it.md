@@ -33,7 +33,9 @@ L'interfaccia è disponibile in **venticinque lingue ampiamente usate**, rendend
 
 ![trayslate1](samples/trayslate1.png)
 
-## Features:
+---
+
+## Funzionalità:
 
 - **Sempre disponibile** — funziona nella barra delle applicazioni ed è sempre pronto  
 - **Servizi esterni** — Usa servizi di traduzione configurabili senza motori integrati  
@@ -42,6 +44,7 @@ L'interfaccia è disponibile in **venticinque lingue ampiamente usate**, rendend
 - **Tasti scelta rapida globali** — Traduci il testo selezionato usando i tasti scelta rapida configurabili  
 - **Sostituzione input** — Sostituisci il testo direttamente all'interno dei campi di input usando un tasto scelta rapida  
 - **Supporto appunti** — Elabora il contenuto degli appunti tramite doppio clic sull'icona della barra applicazioni o tasti scelta rapida
+- **Finestra popup** — Finestra di traduzione mobile con accesso rapido da qualsiasi luogo
 - **Modo tempo reale** — Elaborazione in tempo reale durante la digitazione con un ritardo regolabile  
 - **Scambio automatico lingua** — Scambio automatico opzionale in base alla lingua sorgente  
 - **Indicatore barra sistema** — Visualizza la coppia di lingue attuale e l'avanzamento della traduzione nell'icona della barra applicazioni  
@@ -55,6 +58,8 @@ L'icona nella barra delle applicazioni è completamente personalizzabile nelle i
 
 ![trayslate2](samples/trayslate2.png)
 
+---
+
 ## Copie di lingue usate di recente
 
 Un comodo pannello per passare istantaneamente tra le combinazioni di lingue e le configurazioni usate più frequentemente. Ogni voce può appartenere a una configurazione diversa, semplificando il passaggio da un flusso di lavoro all'altro senza configurazioni aggiuntive.
@@ -62,6 +67,22 @@ Un comodo pannello per passare istantaneamente tra le combinazioni di lingue e l
 Il pannello può essere popolato automaticamente in base all'attività quando nelle impostazioni è abilitata l'aggiunta automatica, mantenendo le coppie di lingue più rilevanti sempre a portata di mano. Puoi anche aggiungere manualmente coppie di lingue in qualsiasi momento usando il pulsante '+' nel pannello o fare clic con il pulsante centrale su qualsiasi coppia di lingue per rimuoverla dal pannello.
 
 ![trayslate3](samples/trayslate3.png)
+
+---
+
+## Finestra popup
+
+La finestra di traduzione popup supporta la traduzione del testo usando tasti di scelta rapida configurabili. È possibile tradurre il testo dagli appunti o il testo selezionato da qualsiasi applicazione.
+
+È supportato anche il trascinamento del testo da altre applicazioni nella finestra popup.
+
+> **Nota:** A seconda delle restrizioni di sicurezza di Windows, il trascinamento della selezione potrebbe richiedere l'esecuzione sia di Trayslate che dell'applicazione testo sorgente con gli stessi privilegi.
+
+La finestra popup può rimanere in primo piano rispetto alle altre finestre e supporta la trasparenza regolabile, con impostazioni separate sia per lo stato non attivo che per quello al passaggio del mouse. Permette inoltre di configurare la visibilità degli elementi dell'interfaccia, che possono essere visualizzati solo al passaggio del mouse o mantenuti sempre visibili. Tutte queste opzioni sono configurabili nelle Impostazioni.
+
+![popup1](samples/popup1.png)
+
+---
 
 ## Tasti scelta rapida
 
@@ -74,13 +95,26 @@ I tasti scelta rapida globali possono essere completamente configurati nelle imp
 | Scambia lingue sorgente e destinazione | `Ctrl + Maiusc + S` |
 | Traduci il testo attuale negli appunti | `Ctrl + Maiusc + T` |
 | Traduci il testo attuale negli appunti e copia il risultato negli appunti | `Ctrl + Miausc + R` |
+| Traduci il testo degli appunti in una finestra popup vicino al cursore del mouse | `Ctrl + Maiusc + P` |
 | Traduci il testo selezionato dall'applicazione attiva | `Ctrl + Maiusc + C` |
 | Sostituisci il testo selezionato nell'applicazione attiva con la traduzione | `Ctrl + Miausc + V` |
-| Seleziona la coppia di lingue recente | `Ctrl + Maiusc + Numbero` |
+| Traduci il testo selezionato dall'applicazione attiva in una finestra popup | `Ctrl + Maiusc + X` |
+| **Tasti rapidi copiie lingue recenti** | |
+| Seleziona coppia lingue recenti 1 | `Ctrl + Maiusc + 1` |
+| Seleziona coppia lingue recenti 2 | `Ctrl + Maiusc + 1` |
+| Seleziona coppia lingue recenti 3 | `Ctrl + Maiusc + 1` |
+| Seleziona coppia lingue recenti 4 | `Ctrl + Maiusc + 1` |
+| Seleziona coppia lingue recenti 5 | `Ctrl + Maiusc + 1` |
+| Seleziona coppia lingue recenti 6 | `Ctrl + Maiusc + 1` |
+| Seleziona coppia lingue recenti 7 | `Ctrl + Maiusc + 1` |
+| Seleziona coppia lingue recenti 8 | `Ctrl + Maiusc + 1` |
+| Seleziona coppia lingue recenti 9 | `Ctrl + Maiusc + 1` |
 | **Tasti rapidi finestra principale** | |
 | Nuova traduzione | `Ctrl + N` |
 | Aggiungi la coppia attuale di lingue al pannello lingue recenti | `Ctrl + F` |
 | Traduci | `Ctrl + Invio`<br>`Maiusc + Enter`<br>`Doppio Invio`|
+
+---
 
 ## Impostazioni
 
@@ -89,6 +123,8 @@ Le impostazioni consentono di configurare il comportamento, l'aspetto e i tasti 
 | Generale | Interfaccia | Tasti scelta rapida globali |
 |-------------|-------------|-------------|
 | ![img](samples/settings1.png) | ![img](samples/settings2.png) | ![img](samples/settings3.png) |
+
+---
 
 ## Configurazione
 
@@ -101,6 +137,8 @@ L'applicazione è dotata di un potente editor di configurazione che consente di 
 | ![configeditor1](samples/configeditor3.png) | ![configeditor1](samples/configeditor4.png) |
 | **Lingue destinazione** | |
 | ![configeditor1](samples/configeditor5.png) | ![configeditor1](samples/configeditor6.png) |
+
+---
 
 ## Installazione
 
@@ -117,9 +155,11 @@ Nella pagina delle versioni sono disponibili diverse opzioni di installazione:
 | **Instalelr di sistema (MSI)** — installa l'applicazione **per tutti gli utenti del sistema** | `trayslate‑x64‑allusers.msi`<br>`trayslate‑x86‑allusers.msi` |
 | **Versione portatile** — salva le impostazioni in `form_settings.json` nella stessa cartella se è presente l'eseguibile; altrimenti nella cartella dell'utente | `trayslate‑x86‑x64‑portable.zip` |
 
-> **Note:** Windows XP supporta l'installazione **solo tranite installer MSI**. Il file installer EXE **non è compatibile** con Windows XP.
+> **Nota:** Windows XP supporta l'installazione **solo tramite installer MSI**. Il file installer EXE **non è compatibile** con Windows XP.
 
 Scarica l'installer dalla [pagina versioni programma](https://github.com/plaintool/trayslate/releases), eseguilo, e segui le istruzioni visualizzate sullo schermo. Dopo l'installazione, puoi avviare Trayslate dal menu Start o dal collegamento sul desktop.
+
+---
 
 ## Dona 💖
 
@@ -133,6 +173,8 @@ Se ti piace Trayslate e vuoi sostenerne lo sviluppo, puoi inviare una donazione:
 | ETH      | Ethereum (ERC20)| `0x328e689E961c3Abb143835f8677947Fa9eaF9f6F` |
 
 Ogni piccolo aiuto è apprezzato! 🙏
+
+---
 
 ## Licenza
 
