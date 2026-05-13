@@ -54,6 +54,7 @@ type
     procedure aSendExecute(Sender: TObject);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure FormHide(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShortCut(var Msg: TLMKey; var Handled: boolean);
@@ -90,6 +91,8 @@ begin
 
   FDropTarget := TTextDropTarget.Create(Self);
   FDropTarget.Target := MemoTarget;
+  FDropTarget.AddSubTarget(PanelWatermark);
+  FDropTarget.AddSubTarget(PanelButtonTarget);
   FDropTarget.InsertText := False;
   FDropTarget.OnTextDropped := @OnTextDroppedHandler;
 
@@ -99,6 +102,11 @@ begin
   SbCopyTarget.PressedImageIndex := ThemeValue(12, 13);
 
   UpdateWatermarkVisibility;
+end;
+
+procedure TformPopupTrayslate.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(FDropTarget);
 end;
 
 procedure TformPopupTrayslate.FormShow(Sender: TObject);
