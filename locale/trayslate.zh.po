@@ -855,7 +855,7 @@ msgstr ""
 #: tformsettingstrayslate.checksmarthard.hint
 msgid ""
 "Always prefer Primary/Secondary language pair, even if the detected language is already part of the current pair.\n"
-"This forces the translator to return to the main configured language pair instead of continuing with the currently swapped state."
+"This forces the translator to return to the main configured language pair instead of swapping the current pair."
 msgstr ""
 
 #: tformsettingstrayslate.checksmartswap.caption
@@ -896,7 +896,9 @@ msgid "Switches to side-by-side layout with source text beside translation"
 msgstr ""
 
 #: tformsettingstrayslate.combolangdetect.hint
-msgid "Config that auto-detects the target language for the selected language pair"
+#, fuzzy
+#| msgid "Config that auto-detects the target language for the selected language pair"
+msgid "Config that auto-detects language for the source text"
 msgstr "自动检测所选语言对的目标语言的配置"
 
 #: tformsettingstrayslate.combomousemode.hint
