@@ -83,10 +83,13 @@ type
     FParameterEncode: TStringList;
 
     FParametersAge: TDateTime;
+
+    FCurrentClient: TFPHTTPClient;
   public
     constructor Create;
     destructor Destroy; override;
 
+    procedure CancelRequest;
     procedure GetParameters(Data: string);
     function SetParameters(Data: string; IncludeSet: boolean = True): string;
     procedure SetParametersList(Strings: TStrings);
@@ -163,6 +166,7 @@ const
   EMPTY_LANG = 'empty';
   REGEXP_ERROR = 'REGEX_ERROR: ';
   CONNECT_TIMEOUT = 10000;
+  IO_TIMEOUT = 300000;
 
 implementation
 
@@ -240,6 +244,12 @@ begin
   FParameterValues.Free;
   FParameterEncode.Free;
   inherited Destroy;
+end;
+
+procedure TTranslate.CancelRequest;
+begin
+  if Assigned(FCurrentClient) then
+    FCurrentClient.Terminate;
 end;
 
 procedure TTranslate.GetParameters(Data: string);
@@ -406,7 +416,9 @@ begin
   FParameterValues.Clear;
 
   http := TFPHTTPClient.Create(nil);
+  FCurrentClient := http;
   http.ConnectTimeout := CONNECT_TIMEOUT;
+  http.IOTimeout := IO_TIMEOUT;
   response := TMemoryStream.Create;
   try
     http.AllowRedirect := True;
@@ -451,6 +463,7 @@ begin
     end;
 
   finally
+    FCurrentClient := nil;
     response.Free;
     http.Free;
   end;
@@ -476,7 +489,9 @@ begin
     GetParameters(GetInit);
 
     http := TFPHTTPClient.Create(nil);
+    FCurrentClient := http;
     http.ConnectTimeout := CONNECT_TIMEOUT;
+    http.IOTimeout := IO_TIMEOUT;
     rawResponse := TMemoryStream.Create;
     try
       TempUrl := FUrl;
@@ -556,6 +571,7 @@ begin
         end;
       end;
     finally
+      FCurrentClient := nil;
       rawResponse.Free;
       http.Free;
     end;
@@ -585,7 +601,9 @@ begin
     GetParameters(GetInit);
 
     http := TFPHTTPClient.Create(nil);
+    FCurrentClient := http;
     http.ConnectTimeout := CONNECT_TIMEOUT;
+    http.IOTimeout := IO_TIMEOUT;
     rawResponse := TMemoryStream.Create;
     try
       TempUrl := FUrl;
@@ -666,6 +684,7 @@ begin
         postStream.Free;
       end;
     finally
+      FCurrentClient := nil;
       rawResponse.Free;
       http.Free;
     end;
@@ -1028,6 +1047,8 @@ end;
 procedure TTranslateThread.Cancel;
 begin
   FCancelled := True;
+  if Assigned(FTrans) then
+    FTrans.CancelRequest;
 end;
 
 procedure TTranslateThread.AfterExecute;

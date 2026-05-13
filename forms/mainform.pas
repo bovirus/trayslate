@@ -18,6 +18,7 @@ uses
   {$ENDIF}
   Classes,
   SysUtils,
+  DateUtils,
   Forms,
   Controls,
   Graphics,
@@ -369,7 +370,7 @@ type
     FIconFontName: string;
     FIconTwoLang: boolean;
 
-    procedure SleepLoop(ADelay: integer = 0; ARepaint: boolean = False);
+    procedure SleepLoop(ALoop: integer = 0; ASleep: integer = 1; ARepaint: boolean = False);
     procedure SetAutoStart(Value: boolean);
     procedure ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
     procedure ChangeTargetLang(NewLang: string; AddRecentPairs: boolean = True);
@@ -424,6 +425,7 @@ type
     procedure TranslateControl(Data: PtrInt);
     procedure TranslateControlPopup(Data: PtrInt);
     procedure TranslateMouseMode(ACursorPos: TPoint);
+    procedure CancelTranslate(FreeThread: boolean = False; WaitMs: integer = 0);
 
     // Base properties
     property Trans: TTranslate read FTrans write FTrans;
@@ -753,22 +755,7 @@ begin
   TimerTranslate.Enabled := False;
   TimerClick.Enabled := False;
 
-  if Assigned(FTranslateThread) then
-  begin
-    FTranslateThread.Cancel;
-
-    // if thread is NOT auto-free, wait and free it
-    if not FTranslateThread.FreeOnTerminate then
-    begin
-      FTranslateThread.WaitFor;
-      FreeAndNil(FTranslateThread);
-    end
-    else
-    begin
-      // thread will free itself
-      FTranslateThread := nil;
-    end;
-  end;
+  CancelTranslate(True);
 
   {$IFDEF WINDOWS}
   UnregisterHotKeys;
@@ -1077,12 +1064,7 @@ end;
 
 procedure TformTrayslate.aNewTranslateExecute(Sender: TObject);
 begin
-  // Cancel old translation
-  if Assigned(FTranslateThread) then
-    FTranslateThread.Cancel;
-  Screen.Cursor := crDefault;
-  TimerAnimate.Enabled := False;
-
+  CancelTranslate;
   MemoSource.Clear;
   MemoTarget.Clear;
 end;
@@ -1189,6 +1171,7 @@ end;
 
 procedure TformTrayslate.aExitExecute(Sender: TObject);
 begin
+  CancelTranslate;
   Application.Terminate;
 end;
 
@@ -2537,25 +2520,24 @@ begin
   end;
 end;
 
-procedure TformTrayslate.SleepLoop(ADelay: integer = 0; ARepaint: boolean = False);
+procedure TformTrayslate.SleepLoop(ALoop: integer = 0; ASleep: integer = 1; ARepaint: boolean = False);
 var
   i: integer;
 begin
-  if (ADelay > 0) then
+  if ARepaint then
+    Repaint;
+
+  if (ALoop > 0) then
   begin
-    for i := 0 to ADelay do
+    for i := 1 to ALoop do
     begin
       Application.ProcessMessages;
-      Sleep(1);
+      if ASleep > 0 then
+        Sleep(ASleep);
     end;
   end
   else
     Application.ProcessMessages;
-  if ARepaint then
-  begin
-    Repaint;
-    Application.ProcessMessages;
-  end;
 end;
 
 procedure TformTrayslate.SetAutoStart(Value: boolean);
@@ -2810,7 +2792,7 @@ begin
     Inc(i);
   end;
   KeyInput.Down(Ord('C'));
-  SleepLoop(2);
+  SleepLoop(5, 2);
   KeyInput.Up(Ord('C'));
   KeyInput.Unapply([ssCtrl]);
 end;
@@ -2827,7 +2809,7 @@ begin
     Inc(i);
   end;
   KeyInput.Down(Ord('V'));
-  SleepLoop(2);
+  SleepLoop(5, 2);
   KeyInput.Up(Ord('V'));
   KeyInput.Unapply([ssCtrl]);
 end;
@@ -3294,6 +3276,54 @@ begin
     // Restore original clipboard
     Clipboard.AsText := OriginalClip;
     FMouseHook.Enabled := FEnableMouseMode;
+  end;
+end;
+
+procedure TformTrayslate.CancelTranslate(FreeThread: boolean = False; WaitMs: integer = 0);
+var
+  StartTime: TDateTime;
+  WaitLimit: integer;
+begin
+  TimerAnimate.Enabled := False;
+
+  {$IFDEF WINDOWS}
+  SystemParametersInfo(SPI_SETCURSORS, 0, nil, 0);
+  {$ELSE}
+  Screen.Cursor := crDefault;
+  {$ENDIF}
+
+  if Assigned(FTranslateThread) then
+  begin
+    FTranslateThread.Cancel;
+
+    if FreeThread then
+    begin
+      if FTranslateThread.FreeOnTerminate then
+      begin
+        // The stream will self-destruct, we just lose the link
+        FTranslateThread := nil;
+      end
+      else
+      begin
+        // We wait for completion, but do not block the interface for a long time
+        WaitLimit := WaitMs;
+        if WaitLimit <= 0 then
+          WaitLimit := 500;  // default value is 0.5 sec
+
+        StartTime := Now;
+        while (not FTranslateThread.Finished) and (MilliSecondsBetween(Now, StartTime) < WaitLimit) do
+          SleepLoop(1, 10);
+
+        if FTranslateThread.Finished then
+          FreeAndNil(FTranslateThread)
+        else
+        begin
+          // We couldn't wait – we let go to live independently
+          FTranslateThread.FreeOnTerminate := True;
+          FTranslateThread := nil;
+        end;
+      end;
+    end;
   end;
 end;
 
