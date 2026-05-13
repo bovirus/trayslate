@@ -750,7 +750,7 @@ begin
 
   FMouseHook := TGlobalMouseHook.Create;
   FMouseHook.OnLeftDown := @OnHookLeftDown;
-  FMouseHook.OnLeftUp   := @OnHookLeftUp;
+  FMouseHook.OnLeftUp := @OnHookLeftUp;
   FMouseHook.Enabled := FEnableMouseMode;
   {$ENDIF}
 

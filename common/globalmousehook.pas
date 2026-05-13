@@ -18,8 +18,8 @@ uses
   SysUtils,
   Controls
   {$IFDEF WINDOWS}
-  ,Windows
-  ,Messages
+  , Windows
+  , Messages
   {$ENDIF}
   ;
 
@@ -29,7 +29,7 @@ type
   TMouseEventInfo = record
     Button: TMouseButton;
     X, Y: integer;
-    Time: longword;         // system tick count (ms)
+    Time: longword;
     CtrlDown: boolean;
     ShiftDown: boolean;
     AltDown: boolean;
@@ -52,6 +52,7 @@ type
   TGlobalMouseHook = class
   private
     FEnabled: boolean;
+    FEditFieldOnly: boolean;
     FOnLeftDown, FOnLeftUp: TMouseEvent;
     FOnRightDown, FOnRightUp: TMouseEvent;
     FOnMiddleDown, FOnMiddleUp: TMouseEvent;
@@ -59,13 +60,17 @@ type
     {$IFDEF WINDOWS}
     class var FActiveInstance: TGlobalMouseHook;
     FHook: HHOOK;
+    FIsDropDown: Boolean;                          // flag for drop‑down list detection
     class function HookProc(nCode: Integer; wParam: WPARAM; lParam: LPARAM): LRESULT; stdcall; static;
     procedure InternalMouseEvent(wParam: WPARAM; const p: TMouseLLHookStruct);
+    function IsEditControl(Wnd: THandle): Boolean;
+    function IsDropDownWindow(Wnd: THandle): Boolean;
     {$ENDIF}
   public
     constructor Create;
     destructor Destroy; override;
     property Enabled: boolean read FEnabled write SetEnabled;
+    property EditFieldOnly: boolean read FEditFieldOnly write FEditFieldOnly;
     property OnLeftDown: TMouseEvent read FOnLeftDown write FOnLeftDown;
     property OnLeftUp: TMouseEvent read FOnLeftUp write FOnLeftUp;
     property OnRightDown: TMouseEvent read FOnRightDown write FOnRightDown;
@@ -91,7 +96,7 @@ var
 begin
   if (nCode >= 0) and (FActiveInstance <> nil) then
   begin
-    p := PMouseLLHookStruct(PtrUInt(lParam));
+    p := PMouseLLHookStruct(Pointer(PtrUInt(lParam)));
     FActiveInstance.InternalMouseEvent(wParam, p^);
   end;
   if FActiveInstance <> nil then
@@ -100,10 +105,80 @@ begin
     Result := CallNextHookEx(0, nCode, wParam, lParam);
 end;
 
+function TGlobalMouseHook.IsDropDownWindow(Wnd: THandle): Boolean;
+var
+  szClass: array[0..255] of Char;
+begin
+  Result := False;
+  if Wnd = 0 then Exit;
+  if GetClassName(HWND(Wnd), szClass, Length(szClass)) > 0 then
+  begin
+    // ComboLBox is the class of the popup list in a ComboBox
+    if StrIComp(szClass, 'ComboLBox') = 0 then Exit(True);
+  end;
+end;
+
+function TGlobalMouseHook.IsEditControl(Wnd: THandle): Boolean;
+const
+  TextEditClasses: array[0..11] of PChar = (
+    'Edit', 'RichEdit20A', 'RichEdit50W', 'TMemo', 'TEdit',
+    'Scintilla',
+    'Chrome_RenderWidgetHostHWND',
+    'MozillaContentWindowClass',
+    'Internet Explorer_Server',
+    'OperaWindowClass',
+    'Windows.UI.Core.CoreWindow',
+    'Afx:FrameOrView:100'
+  );
+var
+  szClass: array[0..255] of Char;
+  i: Integer;
+  pid: DWORD;
+  hProc: THandle;
+  fileName: array[0..MAX_PATH] of WideChar;
+  len: DWORD;
+  s: WideString;
+  j: Integer;
+  dwStart, dwEnd: DWORD;
+begin
+  Result := False;
+  if Wnd = 0 then Exit;
+
+  if GetClassName(HWND(Wnd), szClass, Length(szClass)) > 0 then
+  begin
+    for i := Low(TextEditClasses) to High(TextEditClasses) do
+      if StrIComp(szClass, TextEditClasses[i]) = 0 then
+        Exit(True);
+  end;
+
+  GetWindowThreadProcessId(HWND(Wnd), @pid);
+  hProc := OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, pid);
+  if hProc <> 0 then
+  begin
+    len := MAX_PATH;
+    if QueryFullProcessImageNameW(hProc, 0, @fileName[0], @len) then
+    begin
+      SetString(s, PWideChar(@fileName[0]), len);
+      j := LastDelimiter('\', s);
+      if (j > 0) and (StrIComp(PWideChar(@s[j+1]), 'explorer.exe') = 0) then
+      begin
+        CloseHandle(hProc);
+        Exit(False);
+      end;
+    end;
+    CloseHandle(hProc);
+  end;
+
+  if SendMessageTimeout(HWND(Wnd), EM_GETSEL, WPARAM(@dwStart), LPARAM(@dwEnd),
+                        SMTO_ABORTIFHUNG, 20, nil) <> 0 then
+    Exit(True);
+end;
+
 procedure TGlobalMouseHook.InternalMouseEvent(wParam: WPARAM; const p: TMouseLLHookStruct);
 var
   info: TMouseEventInfo;
   handler: TMouseEvent;
+  wndHandle: THandle;
 begin
   info.X := p.pt.X;
   info.Y := p.pt.Y;
@@ -111,6 +186,28 @@ begin
   info.CtrlDown := (GetAsyncKeyState(VK_CONTROL) and $8000) <> 0;
   info.ShiftDown := (GetAsyncKeyState(VK_SHIFT) and $8000) <> 0;
   info.AltDown := (GetAsyncKeyState(VK_MENU) and $8000) <> 0;
+
+  // --- Global drop‑down list guard (always active) ---
+  if wParam = WM_LBUTTONDOWN then
+  begin
+    wndHandle := THandle(WindowFromPoint(p.pt));
+    FIsDropDown := IsDropDownWindow(wndHandle);
+  end;
+
+  if (wParam = WM_LBUTTONDOWN) or (wParam = WM_LBUTTONUP) then
+  begin
+    if FIsDropDown then
+      Exit;   // Ignore clicks inside drop‑down lists (ComboBox, etc.)
+  end;
+  // ----------------------------------------------------
+
+  // Apply EditFieldOnly filter only if the option is enabled
+  if FEditFieldOnly then
+  begin
+    wndHandle := THandle(WindowFromPoint(p.pt));
+    if (wndHandle = 0) or (not IsEditControl(wndHandle)) then
+      Exit;
+  end;
 
   handler := nil;
   case wParam of
@@ -131,6 +228,8 @@ begin
   inherited;
   FHook := 0;
   FEnabled := False;
+  FEditFieldOnly := False;
+  FIsDropDown := False;
 end;
 
 destructor TGlobalMouseHook.Destroy;
@@ -183,11 +282,13 @@ begin
 end;
 
 {$ELSE}
+// Non‑Windows stub – compiles but does nothing
 
 constructor TGlobalMouseHook.Create;
 begin
   inherited;
   FEnabled := False;
+  FEditFieldOnly := False;
 end;
 
 destructor TGlobalMouseHook.Destroy;
