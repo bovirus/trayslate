@@ -864,6 +864,28 @@ msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
 msgstr "Traduci automaticamente il testo mentre scrivi"
 
+#: tformsettingstrayslate.checksmarthard.caption
+msgid "Always Prefer Primary/Secondary Language"
+msgstr ""
+
+#: tformsettingstrayslate.checksmarthard.hint
+msgid ""
+"Always prefer Primary/Secondary language pair, even if the detected language is already part of the current pair.\n"
+"This forces the translator to return to the main configured language pair instead of continuing with the currently swapped state."
+msgstr ""
+
+#: tformsettingstrayslate.checksmartswap.caption
+msgctxt "tformsettingstrayslate.checksmartswap.caption"
+msgid "Smart Swap For Languages Outside Pair"
+msgstr ""
+
+#: tformsettingstrayslate.checksmartswap.hint
+msgctxt "tformsettingstrayslate.checksmartswap.hint"
+msgid ""
+"If Detected language is outside the current pair, the Source language is replaced with the Detected language and the Target language is set to Primary.\n"
+"If Detected language equals Primary, the translation pair is set to Primary - Secondary."
+msgstr ""
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Sempre in primo piano"
@@ -989,9 +1011,17 @@ msgstr "Opacità (sopra mouse)"
 msgid "Opacity Idle"
 msgstr "Opacità (quando in attesa)"
 
+#: tformsettingstrayslate.labelprimarylang.caption
+msgid "Primary Language"
+msgstr ""
+
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
 msgstr "Ritardo traduzione (ms)"
+
+#: tformsettingstrayslate.labelsecondarylang.caption
+msgid "Secondary Language"
+msgstr ""
 
 #: tformsettingstrayslate.pagegeneral.caption
 msgid "General"

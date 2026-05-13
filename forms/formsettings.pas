@@ -43,8 +43,10 @@ type
     BtnOk: TButton;
     BtnResetPopup: TButton;
     CheckAllowHotkeys: TCheckBox;
+    CheckSmartSwap: TCheckBox;
     CheckEnableMouseMode: TCheckBox;
     CheckMouseModeCtrl: TCheckBox;
+    CheckSmartHard: TCheckBox;
     CheckStayOnTop: TCheckBox;
     CheckRealTime: TCheckBox;
     CheckAutoSwap: TCheckBox;
@@ -56,6 +58,8 @@ type
     ColorIconBackground: TColorBox;
     ColorIconFont: TColorBox;
     ColorDialog: TColorDialog;
+    ComboPrimaryLang: TComboBox;
+    ComboSecondaryLang: TComboBox;
     ComboMouseMode: TComboBox;
     ComboIconFontName: TComboBox;
     ComboLangDetect: TComboBox;
@@ -71,11 +75,13 @@ type
     GroupTrayIcon: TGroupBox;
     ImagesPages: TImageList;
     LabelLangDetectConfig: TLabel;
+    LabelPrimaryLang: TLabel;
     LabelMouseMode: TLabel;
     LabelIconFont1: TLabel;
     LabelMaxLangPairs: TLabel;
     LabelOpacityHover: TLabel;
     LabelOpacityIdle: TLabel;
+    LabelSecondaryLang: TLabel;
     LabelRealTimeDelay: TLabel;
     LabelIconBackground: TLabel;
     LabelIconFont: TLabel;
@@ -135,6 +141,10 @@ type
     FOriginalRealTime: boolean;
     FOriginalRealTimeDelay: integer;
     FOriginalAutoSwap: boolean;
+    FOriginalSmartSwap: boolean;
+    FOriginalSmartHard: boolean;
+    FOriginalPrimaryLang: string;
+    FOriginalSecondaryLang: string;
     FOriginalEnableMouseMode: boolean;
     FOriginalMouseModeCtrl: boolean;
     FOriginalMouseMode: TMouseMode;
@@ -248,7 +258,7 @@ resourcestring
 
 implementation
 
-uses mainform, formattool, formpopup, systemtool;
+uses mainform, formattool, formpopup, systemtool, languages, translate;
 
   {$R *.lfm}
 
@@ -257,6 +267,7 @@ uses mainform, formattool, formpopup, systemtool;
 procedure TformSettingsTrayslate.FormCreate(Sender: TObject);
 var
   i: integer;
+  List: TStringList;
 begin
   ApplicationTranslate(language, self, formTrayslate.LoadCustomPoFile(formTrayslate.CustomPoFile));
 
@@ -271,6 +282,14 @@ begin
   for i := 0 to formTrayslate.ConfigFiles.Count - 1 do
     ComboLangDetect.Items.Add(formTrayslate.ConfigTitles.Values[formTrayslate.ConfigFiles[i]]);
   ComboLangDetect.ItemIndex := formTrayslate.ConfigFiles.IndexOf(formTrayslate.ConfigLangDetect) + 1;
+
+  List := GetLanguageCodeDisplayPairs(vtLanguage, True);
+  try
+    ComboPrimaryLang.Items.Assign(List);
+    ComboSecondaryLang.Items.Assign(List);
+  finally
+    List.Free;
+  end;
 
   AddCustomColors(ColorIconBackground);
   AddCustomColors(ColorIconFont);
@@ -758,6 +777,10 @@ begin
   formTrayslate.RealTime := CheckRealTime.Checked;
   formTrayslate.RealTimeDelay := SpinRealTimeDelay.Value;
   formTrayslate.AutoSwap := CheckAutoSwap.Checked;
+  formTrayslate.SmartSwap := CheckSmartSwap.Checked;
+  formTrayslate.SmartHard := CheckSmartHard.Checked;
+  formTrayslate.PrimaryLang := ExtractCodeFromItem(ComboPrimaryLang.Text);
+  formTrayslate.SecondaryLang := ExtractCodeFromItem(ComboSecondaryLang.Text);
   formTrayslate.EnableMouseMode := CheckEnableMouseMode.Checked;
   formTrayslate.MouseModeCtrl := CheckMouseModeCtrl.Checked;
   formTrayslate.MouseMode := TMouseMode(ComboMouseMode.ItemIndex);
@@ -825,6 +848,10 @@ begin
   FOriginalRealTime := formTrayslate.RealTime;
   FOriginalRealTimeDelay := formTrayslate.RealTimeDelay;
   FOriginalAutoSwap := formTrayslate.AutoSwap;
+  FOriginalSmartSwap := formTrayslate.SmartSwap;
+  FOriginalSmartHard := formTrayslate.SmartHard;
+  FOriginalPrimaryLang := formTrayslate.PrimaryLang;
+  FOriginalSecondaryLang := formTrayslate.SecondaryLang;
   FOriginalEnableMouseMode := formTrayslate.EnableMouseMode;
   FOriginalMouseModeCtrl := formTrayslate.MouseModeCtrl;
   FOriginalMouseMode := formTrayslate.MouseMode;
@@ -881,6 +908,10 @@ begin
   CheckRealTime.Checked := FOriginalRealTime;
   SpinRealTimeDelay.Value := FOriginalRealTimeDelay;
   CheckAutoSwap.Checked := FOriginalAutoSwap;
+  CheckSmartSwap.Checked := FOriginalSmartSwap;
+  CheckSmartHard.Checked := FOriginalSmartHard;
+  ComboPrimaryLang.ItemIndex := FindIndexByCode(ComboPrimaryLang.Items, FOriginalPrimaryLang);
+  ComboSecondaryLang.ItemIndex := FindIndexByCode(ComboSecondaryLang.Items, FOriginalSecondaryLang);
   CheckEnableMouseMode.Checked := FOriginalEnableMouseMode;
   CheckMouseModeCtrl.Checked := FOriginalMouseModeCtrl;
   ComboMouseMode.ItemIndex := Ord(FOriginalMouseMode);

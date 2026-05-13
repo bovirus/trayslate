@@ -45,7 +45,13 @@ function GetLanguageDisplayStrings(AValueType: TValueType): TStringList;
 
 function GetDisplayNamesFromCodeMap(ACodeMap: TStringList; AValueType: TValueType; Sort: boolean = False): TStringList;
 
+function GetDisplayName(const ACode: string): string;
+
+function GetLanguageCodeDisplayPairs(AValueType: TValueType; ASort: boolean = False; AIncludeSpecial: boolean = False): TStringList;
+
 function ExtractCodeFromItem(const ItemText: string): string;
+
+function FindIndexByCode(const AStrings: TStrings; const ACode: string): Integer;
 
 function IsSpecialCode(const Value: string): boolean;
 
@@ -1006,6 +1012,38 @@ begin
   end;
 end;
 
+function GetDisplayName(const ACode: string): string;
+var
+  Langs: array of TAppValue;
+  i: Integer;
+begin
+  Result := '';
+  Langs := GetLanguages;
+  for i := 0 to High(Langs) do
+    if SameText(Langs[i].Code, ACode) then
+      Exit(Langs[i].DisplayName);
+end;
+
+function GetLanguageCodeDisplayPairs(AValueType: TValueType; ASort: boolean = False; AIncludeSpecial: boolean = False): TStringList;
+var
+  Langs: array of TAppValue;
+  L: TAppValue;
+begin
+  Result := TStringList.Create;
+  try
+    Langs := GetValues(AValueType, ASort);
+    for L in Langs do
+    begin
+      if not AIncludeSpecial and IsSpecialCode(L.Code) then
+        Continue;
+      Result.Add(L.DisplayName + ' (' + L.Code + ')');
+    end;
+  except
+    Result.Free;
+    raise;
+  end;
+end;
+
 function ExtractCodeFromItem(const ItemText: string): string;
 var
   P: integer;
@@ -1016,6 +1054,16 @@ begin
     Result := Copy(ItemText, P + 2, Length(ItemText) - P - 2)
   else
     Result := ItemText;
+end;
+
+function FindIndexByCode(const AStrings: TStrings; const ACode: string): Integer;
+var
+  i: Integer;
+begin
+  Result := -1;
+  for i := 0 to AStrings.Count - 1 do
+    if ExtractCodeFromItem(AStrings[i]) = ACode then
+      Exit(i);
 end;
 
 function IsSpecialCode(const Value: string): boolean;

@@ -127,6 +127,7 @@ type
     property JsonPointer: string read FJsonPointer write FJsonPointer;
     property EncodeCustomParameters: boolean read FEncodeCustomParameters write FEncodeCustomParameters;
     property CustomParameters: TStringList read FCustomParameters write FCustomParameters;
+    // Languages from config, eg en=en
     property Languages: TStringList read FLanguages write FLanguages;
     property LanguagesTarget: TStringList read FLanguagesTarget write FLanguagesTarget;
     property ValueType: TValueType read FValueType write FValueType;

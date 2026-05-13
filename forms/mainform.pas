@@ -318,6 +318,10 @@ type
     FRealTime: boolean;
     FRealTimeDelay: integer;
     FAutoSwap: boolean;
+    FSmartSwap: boolean;
+    FSmartHard: boolean;
+    FPrimaryLang: string;
+    FSecondaryLang: string;
     FEnableMouseMode: boolean;
     FMouseModeCtrl: boolean;
     FMouseMode: TMouseMode;
@@ -453,6 +457,10 @@ type
     property RealTime: boolean read FRealTime write FRealTime;
     property RealTimeDelay: integer read FRealTimeDelay write FRealTimeDelay;
     property AutoSwap: boolean read FAutoSwap write FAutoSwap;
+    property SmartSwap: boolean read FSmartSwap write FSmartSwap;
+    property SmartHard: boolean read FSmartHard write FSmartHard;
+    property PrimaryLang: string read FPrimaryLang write FPrimaryLang;
+    property SecondaryLang: string read FSecondaryLang write FSecondaryLang;
     property EnableMouseMode: boolean read FEnableMouseMode write FEnableMouseMode;
     property MouseModeCtrl: boolean read FMouseModeCtrl write FMouseModeCtrl;
     property MouseMode: TMouseMode read FMouseMode write FMouseMode;
@@ -553,8 +561,12 @@ begin
   FRealTime := False;
   FRealTimeDelay := 1000;
   FAutoSwap := False;
+  FSmartSwap := False;
+  FSmartHard := False;
+  FPrimaryLang := Language;
+  FSecondaryLang := DEFAULT_LANG;
   FEnableMouseMode := False;
-  FMouseModeCtrl := True;
+  FMouseModeCtrl := False;
   FMouseMode := mmShowTranslateButton;
   FVerticalSplit := False;
   FStayOnTop := True;
@@ -2946,10 +2958,14 @@ end;
 
 procedure TformTrayslate.DetectLanguage(AText: string);
 var
-  langSrc, langTar, langDetect: string;
+  langSrc, langTar, langDetect, langPrimary, langSecondary: string;
+  idxSrc, idxTar: integer;
 begin
   if (not FAutoSwap) or (not Trans.ServiceAutoSwap) or (not Assigned(FTransDetect)) then exit;
-  if (FLanguages.IndexOf(ComboSource.Text) < 0) or (FLanguages.IndexOf(ComboTarget.Text) < 0) then exit;
+
+  idxSrc := FLanguages.IndexOf(ComboSource.Text);
+  idxTar := FLanguages.IndexOf(ComboTarget.Text);
+  if (idxSrc < 0) or (idxTar < 0) then Exit;
 
   Screen.Cursor := crAppStart;
   TimerAnimate.Enabled := True;
@@ -2957,15 +2973,59 @@ begin
   // Detect language in source memo
   langDetect := LowerCase(TranslateThread(TransDetect, ExtractTextSample(AText)));
 
+  langPrimary := LowerCase(PrimaryLang);
+  langSecondary := LowerCase(SecondaryLang);
+
   // Check selected languages
-  langSrc := LowerCase(Trans.Languages.ValueFromIndex[FLanguages.IndexOf(ComboSource.Text)]);
-  langTar := LowerCase(Trans.Languages.ValueFromIndex[FLanguages.IndexOf(ComboTarget.Text)]);
+  langSrc := LowerCase(Trans.Languages.Names[idxSrc]);
+  langTar := LowerCase(Trans.Languages.Names[idxTar]);
 
   // Swap if needed
-  if (langSrc <> langDetect) and (langTar = langDetect) and (not IsSpecialCode(langSrc)) and (not IsSpecialCode(langTar)) then
+  if not SmartSwap then
   begin
-    SwapLanguages;
-    ShowCustomHint(TrayIcon.Hint);
+    // Ordinary swap
+    if ((langSrc = langDetect) or (langTar = langDetect)) and (not IsSpecialCode(langSrc)) and (not IsSpecialCode(langTar)) then
+    begin
+      if (langTar = langDetect) then
+      begin
+        SwapLanguages;
+        ShowCustomHint(TrayIcon.Hint);
+      end;
+    end;
+  end
+  else
+  begin
+    // Smart swap
+    if ((langSrc = langDetect) or (langTar = langDetect)) and (not IsSpecialCode(langSrc)) and
+      (not IsSpecialCode(langTar)) and ((not SmartHard) or (((langSrc = langPrimary) and (langTar = langSecondary)) or
+      ((langSrc = langSecondary) and (langTar = langPrimary)))) then
+    begin
+      if (langTar = langDetect) then
+      begin
+        SwapLanguages;
+        ShowCustomHint(TrayIcon.Hint);
+      end;
+    end
+    else
+    begin
+      if (langSrc <> langDetect) then
+      begin
+        if (langDetect = langPrimary) then
+        begin
+          if not IsSpecialCode(langSrc) then
+            ChangeSourceLang(FLanguages[Trans.Languages.IndexOfName(langPrimary)], False);
+          ChangeTargetLang(FLanguages[Trans.Languages.IndexOfName(langSecondary)]);
+          ShowCustomHint(TrayIcon.Hint);
+        end
+        else
+        begin
+          if not IsSpecialCode(langSrc) then
+            ChangeSourceLang(FLanguages[Trans.Languages.IndexOfName(langDetect)], False);
+          ChangeTargetLang(FLanguages[Trans.Languages.IndexOfName(langPrimary)]);
+          ShowCustomHint(TrayIcon.Hint);
+        end;
+      end;
+    end;
   end;
 end;
 

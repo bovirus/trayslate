@@ -169,6 +169,10 @@ begin
     JSONObj.Add('RealTime', Form.RealTime);
     JSONObj.Add('RealTimeDelay', Form.RealTimeDelay);
     JSONObj.Add('AutoSwap', Form.AutoSwap);
+    JSONObj.Add('SmartSwap', Form.SmartSwap);
+    JSONObj.Add('SmartHard', Form.SmartHard);
+    JSONObj.Add('PrimaryLang', Form.PrimaryLang);
+    JSONObj.Add('SecondaryLang', Form.SecondaryLang);
     JSONObj.Add('EnableMouseMode', Form.EnableMouseMode);
     JSONObj.Add('MouseModeCtrl', Form.MouseModeCtrl);
     JSONObj.Add('MouseMode', Ord(Form.MouseMode));
@@ -407,6 +411,18 @@ begin
 
         if (JSONObj.FindPath('AutoSwap') <> nil) then
           Form.AutoSwap := JSONObj.FindPath('AutoSwap').AsBoolean;
+
+        if (JSONObj.FindPath('SmartSwap') <> nil) then
+          Form.SmartSwap := JSONObj.FindPath('SmartSwap').AsBoolean;
+
+        if (JSONObj.FindPath('SmartHard') <> nil) then
+          Form.SmartHard := JSONObj.FindPath('SmartHard').AsBoolean;
+
+        if (JSONObj.FindPath('PrimaryLang') <> nil) and (JSONObj.FindPath('PrimaryLang').AsString <> string.Empty) then
+          Form.PrimaryLang := JSONObj.FindPath('PrimaryLang').AsString;
+
+        if (JSONObj.FindPath('SecondaryLang') <> nil) and (JSONObj.FindPath('SecondaryLang').AsString <> string.Empty) then
+          Form.SecondaryLang := JSONObj.FindPath('SecondaryLang').AsString;
 
         if (JSONObj.FindPath('EnableMouseMode') <> nil) then
           Form.EnableMouseMode := JSONObj.FindPath('EnableMouseMode').AsBoolean;

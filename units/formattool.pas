@@ -47,7 +47,7 @@ procedure RemoveSameNameValueFromMemo(Memo: TMemo);
 
 function FindInStringList(Strings: TStringList; const SubText: string): integer;
 
-function GetIndexByValue(Strings: TStringList; const AValue: string; CaseSensitive: boolean = True): integer;
+function GetIndexByValue(Strings: TStrings; const AValue: string; CaseSensitive: boolean = True): integer;
 
 procedure RemoveEmptyValues(Strings: TStringList);
 
@@ -262,17 +262,18 @@ begin
     end;
 end;
 
-function GetIndexByValue(Strings: TStringList; const AValue: string; CaseSensitive: boolean = True): integer;
+function GetIndexByValue(Strings: TStrings; const AValue: string; CaseSensitive: boolean = True): integer;
 var
   i: integer;
 begin
-  Result := -1; // not found
+  Result := -1;
+
   for i := 0 to Strings.Count - 1 do
     if (CaseSensitive and (Strings.ValueFromIndex[i] = AValue)) or (not CaseSensitive and
       (UTF8CompareText(Strings.ValueFromIndex[i], AValue) = 0)) then
     begin
       Result := i;
-      Exit; // first match
+      Exit;
     end;
 end;
 
