@@ -135,7 +135,7 @@ end;
 destructor TTextDropTarget.Destroy;
 begin
   {$IFDEF WINDOWS}
-  ClearSubTargets;                     // unregister all sub-targets, uses stored handles
+  ClearSubTargets;                     // unregister and remove all sub-targets
   FSubImpls.Free;
   FSubHandles.Free;
   FSubControls.Free;
@@ -394,20 +394,64 @@ begin
 end;
 
 procedure TTextDropTarget.ForceRegister;
+var
+  i: Integer;
+  ctrl: TWinControl;
+  h: HWND;
+  SubImpl: IDropTarget;
 begin
+  // Primary target
   if Assigned(FTarget) and FTarget.HandleAllocated then
   begin
-    if FRegisteredHandle = FTarget.Handle then Exit;
-    UnregisterTarget;
-    RegisterTarget;
+    if FRegisteredHandle <> FTarget.Handle then
+    begin
+      UnregisterTarget;
+      RegisterTarget;
+    end;
   end
   else
     UnregisterTarget;
+
+  // Unregister all sub-targets (keep FSubControls intact)
+  for i := 0 to FSubHandles.Count - 1 do
+  begin
+    h := HWND(FSubHandles[i]);
+    if (h <> 0) and IsWindow(h) then
+      RevokeDragDrop(h);
+  end;
+  FSubHandles.Clear;
+  FSubImpls.Clear;
+
+  // Re-register all sub-targets from FSubControls
+  for i := 0 to FSubControls.Count - 1 do
+  begin
+    ctrl := TWinControl(FSubControls[i]);
+    if not ctrl.HandleAllocated then
+      ctrl.HandleNeeded;
+    h := ctrl.Handle;
+    SubImpl := TTextDropTargetSubImpl.Create(Self, ctrl);
+    OleCheck(RegisterDragDrop(h, SubImpl));
+    FSubHandles.Add(Pointer(h));
+    FSubImpls.Add(SubImpl as IUnknown);
+  end;
 end;
 
 procedure TTextDropTarget.Unregister;
+var
+  i: Integer;
+  h: HWND;
 begin
   UnregisterTarget;
+
+  // Unregister all sub-targets, clear handles and impls but keep FSubControls
+  for i := 0 to FSubHandles.Count - 1 do
+  begin
+    h := HWND(FSubHandles[i]);
+    if (h <> 0) and IsWindow(h) then
+      RevokeDragDrop(h);
+  end;
+  FSubHandles.Clear;
+  FSubImpls.Clear;
 end;
 
 // ----- Sub-target management -----
@@ -417,12 +461,12 @@ var
   SubImpl: IDropTarget;
   h: HWND;
 begin
-  if not Assigned(AControl) or (AControl = FTarget) then Exit;          // ignore main target
-  if FSubControls.IndexOf(AControl) >= 0 then Exit;                    // already registered
+  if not Assigned(AControl) or (AControl = FTarget) then Exit;   // ignore main target
+  if FSubControls.IndexOf(AControl) >= 0 then Exit;             // already registered
 
   if not AControl.HandleAllocated then
-    AControl.HandleNeeded;                                             // force handle creation
-  h := AControl.Handle;                                               // save the actual handle used
+    AControl.HandleNeeded;
+  h := AControl.Handle;
 
   SubImpl := TTextDropTargetSubImpl.Create(Self, AControl);
   OleCheck(RegisterDragDrop(h, SubImpl));
@@ -441,14 +485,16 @@ begin
   idx := FSubControls.IndexOf(AControl);
   if idx < 0 then Exit;
 
-  h := HWND(FSubHandles[idx]);
+  // Guard against desynchronized lists (e.g., after Unregister cleared FSubHandles)
+  if idx < FSubHandles.Count then
+  begin
+    h := HWND(FSubHandles[idx]);
+    if (h <> 0) and IsWindow(h) then
+      RevokeDragDrop(h);
+    FSubHandles.Delete(idx);
+    FSubImpls.Delete(idx);
+  end;
 
-  // Revoke using the *original* handle – works even if the control’s window was recreated
-  if (h <> 0) and IsWindow(h) then
-    RevokeDragDrop(h);
-
-  FSubImpls.Delete(idx);
-  FSubHandles.Delete(idx);
   FSubControls.Delete(idx);
 end;
 
@@ -465,7 +511,7 @@ end;
 procedure TTextDropTarget.ClearSubTargets;
 begin
   while FSubControls.Count > 0 do
-    UnregisterSubTarget(TWinControl(FSubControls.Last));
+    RemoveSubTarget(TWinControl(FSubControls.Last));
 end;
 
 function TTextDropTarget.SubTargetCount: Integer;
