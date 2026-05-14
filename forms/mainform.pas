@@ -423,7 +423,7 @@ type
     procedure CancelTranslate;
     procedure DetectLanguage(AText: string);
     procedure TranslateMemo(ADetectLanguage: boolean = True);
-    procedure TranslatePopup(AText: string);
+    procedure TranslatePopup(AText: string; X: integer = 0; Y: integer = 0);
     procedure TranslateFromClipboard;
     procedure TranslateClipboard;
     procedure TranslateClipboardPopup(NearMouse: boolean = False);
@@ -3137,7 +3137,7 @@ begin
   end;
 end;
 
-procedure TformTrayslate.TranslatePopup(AText: string);
+procedure TformTrayslate.TranslatePopup(AText: string; X: integer = 0; Y: integer = 0);
 begin
   FCancelled := False;
 
@@ -3147,7 +3147,7 @@ begin
   if TimerTranslate.Enabled then
     TimerTranslate.Enabled := False;
 
-  ShowPopup(AText, Mouse.CursorPos.X, Mouse.CursorPos.Y);
+  ShowPopup(AText, ifthen(X > 0, X, Mouse.CursorPos.X), ifthen(Y > 0, Y, Mouse.CursorPos.Y));
 
   DetectLanguage(AText);
 

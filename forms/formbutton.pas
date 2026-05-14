@@ -90,7 +90,7 @@ end;
 procedure TformButtonTrayslate.SbTranslateClick(Sender: TObject);
 begin
   TimerHideTimer(Self);
-  formTrayslate.TranslatePopup(SourceText);
+  formTrayslate.TranslatePopup(SourceText, Left, Top);
 end;
 
 procedure TformButtonTrayslate.CreateParams(var Params: TCreateParams);
