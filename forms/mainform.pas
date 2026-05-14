@@ -282,6 +282,7 @@ type
   private
     FTrans: TTranslate;
     FTransDetect: TTranslate;
+    FCancelled: boolean;
     FTopMost: boolean;
     FLeftButton: boolean;
     FLastEnterTime: DWORD;
@@ -384,8 +385,6 @@ type
     procedure SelectPairConfig(const LangPairIndex: integer; RunTranslate: boolean = True);
     procedure GlobalCtrlC;
     procedure GlobalCtrlV;
-    function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
-    procedure ThreadDone(Sender: TObject);
     procedure SetLanguage(aLanguage: string = string.Empty);
   protected
     {$IFDEF WINDOWS}
@@ -419,6 +418,9 @@ type
     procedure UnregisterHotKeys;
     {$ENDIF}
 
+    function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
+    procedure ThreadDone(Sender: TObject);
+    procedure CancelTranslate(FreeThread: boolean = False; Sleep: integer = 0);
     procedure DetectLanguage(AText: string);
     procedure TranslateMemo(ADetectLanguage: boolean = True);
     procedure TranslatePopup(AText: string);
@@ -429,7 +431,6 @@ type
     procedure TranslateControl(Data: PtrInt);
     procedure TranslateControlPopup(Data: PtrInt);
     procedure TranslateMouseMode(ACursorPos: TPoint);
-    procedure CancelTranslate(FreeThread: boolean = False; WaitMs: integer = 0);
 
     // Base properties
     property Trans: TTranslate read FTrans write FTrans;
@@ -597,6 +598,7 @@ begin
   FTranslateThread := nil;
   FCustomPoFile := string.Empty;
   FFontPopup := TFont.Create;
+  FCancelled := False;
 
   // AllowHotKeys Initialize
   // Ctrl+Shift+A
@@ -766,8 +768,6 @@ begin
   TimerActive.Enabled := False;
   TimerTranslate.Enabled := False;
   TimerClick.Enabled := False;
-
-  CancelTranslate(True);
 
   {$IFDEF WINDOWS}
   UnregisterHotKeys;
@@ -1183,7 +1183,11 @@ end;
 
 procedure TformTrayslate.aExitExecute(Sender: TObject);
 begin
-  CancelTranslate;
+  CancelTranslate(True);
+
+  Self.Enabled := False;
+  Screen.Cursor := crHourGlass;
+
   Application.Terminate;
 end;
 
@@ -2905,6 +2909,13 @@ var
   Th: TTranslateThread;
 begin
   Result := string.Empty;
+  if FCancelled then
+  begin
+    Screen.Cursor := crDefault;
+    TimerAnimate.Enabled := False;
+    Exit;
+  end;
+
   try
     if (LangSource = string.Empty) or (LangTarget = string.Empty) then Exit;
 
@@ -2925,6 +2936,8 @@ begin
         // Wait for thread to finish
         while not Th.Finished do
         begin
+          if FCancelled then Exit;
+
           Application.ProcessMessages;
           Sleep(1); // reduce CPU usage
         end;
@@ -2934,7 +2947,7 @@ begin
           Result := Th.ResultTextSync;
       finally
         if Assigned(Th) then
-          Th.Free;
+          Th.FreeOnTerminate := True;
         if FTranslateThread = Th then
           FTranslateThread := nil;
       end;
@@ -2956,12 +2969,66 @@ begin
     ShowCustomHint(TrayIcon.Hint);
 end;
 
+procedure TformTrayslate.CancelTranslate(FreeThread: boolean = False; Sleep: integer = 0);
+var
+  StartTime: TDateTime;
+  WaitLimit: integer;
+begin
+  FCancelled := True;
+
+  try
+    Screen.Cursor := crHourGlass;
+    if Assigned(FTranslateThread) then
+    begin
+      FTranslateThread.Cancel;
+
+      if FreeThread then
+      begin
+        if FTranslateThread.FreeOnTerminate then
+        begin
+          // The stream will self-destruct, we just lose the link
+          FTranslateThread := nil;
+        end
+        else
+        begin
+          // We wait for completion, but do not block the interface for a long time
+          WaitLimit := Sleep;
+          if WaitLimit <= 0 then
+            WaitLimit := 500;  // default value is 0.5 sec
+
+          StartTime := Now;
+          while (not FTranslateThread.Finished) and (MilliSecondsBetween(Now, StartTime) < WaitLimit) do
+            SleepLoop(1, 10);
+
+          if FTranslateThread.Finished then
+            FreeAndNil(FTranslateThread)
+          else
+          begin
+            // We couldn't wait – we let go to live independently
+            FTranslateThread.FreeOnTerminate := True;
+            FTranslateThread := nil;
+          end;
+        end;
+      end;
+    end;
+
+  finally
+    TimerAnimate.Enabled := False;
+    Screen.Cursor := crDefault;
+    {$IFDEF WINDOWS}
+    SystemParametersInfo(SPI_SETCURSORS, 0, nil, 0);
+    {$ENDIF}
+  end;
+end;
+
 procedure TformTrayslate.DetectLanguage(AText: string);
 var
   langSrc, langTar, langDetect, langPrimary, langSecondary: string;
   idxSrc, idxTar: integer;
+  NeedHint: boolean = False;
 begin
-  if (not FAutoSwap) or (not Trans.ServiceAutoSwap) or (not Assigned(FTransDetect)) then exit;
+  if FCancelled then Exit;
+  if not FAutoSwap or not Trans.ServiceAutoSwap or not Assigned(FTransDetect) then Exit;
 
   idxSrc := FLanguages.IndexOf(ComboSource.Text);
   idxTar := FLanguages.IndexOf(ComboTarget.Text);
@@ -2972,6 +3039,8 @@ begin
 
   // Detect language in source memo
   langDetect := LowerCase(TranslateThread(TransDetect, ExtractTextSample(AText)));
+
+  if FCancelled or (langDetect = string.Empty) or (Length(langDetect) > 5) then Exit;
 
   langPrimary := LowerCase(PrimaryLang);
   langSecondary := LowerCase(SecondaryLang);
@@ -3008,21 +3077,37 @@ begin
     end
     else
     begin
-      if (langSrc <> langDetect) then
+      if (langSrc <> langDetect) or (IsSpecialCode(langSrc)) then
       begin
         if (langDetect = langPrimary) then
         begin
-          if not IsSpecialCode(langSrc) then
+          if (langSrc <> langPrimary) and (not IsSpecialCode(langSrc)) then
+          begin
             ChangeSourceLang(FLanguages[Trans.Languages.IndexOfName(langPrimary)], False);
-          ChangeTargetLang(FLanguages[Trans.Languages.IndexOfName(langSecondary)]);
-          ShowCustomHint(TrayIcon.Hint);
+            NeedHint := True;
+          end;
+          if (langTar <> langSecondary) then
+          begin
+            ChangeTargetLang(FLanguages[Trans.Languages.IndexOfName(langSecondary)]);
+            NeedHint := True;
+          end;
+          if NeedHint then
+            ShowCustomHint(TrayIcon.Hint);
         end
         else
         begin
-          if not IsSpecialCode(langSrc) then
+          if (langSrc <> langDetect) and (not IsSpecialCode(langSrc)) then
+          begin
             ChangeSourceLang(FLanguages[Trans.Languages.IndexOfName(langDetect)], False);
-          ChangeTargetLang(FLanguages[Trans.Languages.IndexOfName(langPrimary)]);
-          ShowCustomHint(TrayIcon.Hint);
+            NeedHint := True;
+          end;
+          if (langTar <> langPrimary) then
+          begin
+            ChangeTargetLang(FLanguages[Trans.Languages.IndexOfName(langPrimary)]);
+            NeedHint := True;
+          end;
+          if NeedHint then
+            ShowCustomHint(TrayIcon.Hint);
         end;
       end;
     end;
@@ -3031,6 +3116,8 @@ end;
 
 procedure TformTrayslate.TranslateMemo(ADetectLanguage: boolean = True);
 begin
+  FCancelled := False;
+
   if TimerTranslate.Enabled then
     TimerTranslate.Enabled := False;
 
@@ -3068,6 +3155,8 @@ end;
 
 procedure TformTrayslate.TranslatePopup(AText: string);
 begin
+  FCancelled := False;
+
   Screen.Cursor := crAppStart;
   TimerAnimate.Enabled := True;
 
@@ -3084,6 +3173,8 @@ end;
 
 procedure TformTrayslate.TranslateFromClipboard;
 begin
+  FCancelled := False;
+
   if not Showing then
     Show;
   BringToFront;
@@ -3100,6 +3191,8 @@ procedure TformTrayslate.TranslateClipboard;
 var
   TranslatedText: string;
 begin
+  FCancelled := False;
+
   {$IFDEF WINDOWS}
   SetSystemCursor(LoadCursor(0, IDC_APPSTARTING), OCR_IBEAM);
   Application.ProcessMessages;
@@ -3131,6 +3224,8 @@ procedure TformTrayslate.TranslateClipboardPopup(NearMouse: boolean = False);
 var
   ClipboardText: string;
 begin
+  FCancelled := False;
+
   {$IFDEF WINDOWS}
   SetSystemCursor(LoadCursor(0, IDC_APPSTARTING), OCR_IBEAM);
   Application.ProcessMessages;
@@ -3166,6 +3261,8 @@ procedure TformTrayslate.TranslateFromControl(Data: PtrInt);
 var
   OriginalClip, SelectedText: string;
 begin
+  FCancelled := False;
+
   Screen.Cursor := crAppStart;
   TimerAnimate.Enabled := True;
 
@@ -3196,6 +3293,8 @@ var
   OriginalClip: string;
   TranslatedText: string;
 begin
+  FCancelled := False;
+
   {$IFDEF WINDOWS}
   SetSystemCursor(LoadCursor(0, IDC_APPSTARTING), OCR_IBEAM);
   Application.ProcessMessages;
@@ -3244,6 +3343,8 @@ procedure TformTrayslate.TranslateControlPopup(Data: PtrInt);
 var
   OriginalClip, SelectedText: string;
 begin
+  FCancelled := False;
+
   Screen.Cursor := crAppStart;
   TimerAnimate.Enabled := True;
 
@@ -3275,6 +3376,8 @@ procedure TformTrayslate.TranslateMouseMode(ACursorPos: TPoint);
 var
   OriginalClip, SelectedText, TranslatedText: string;
 begin
+  FCancelled := False;
+
   // Save current clipboard to restore later
   OriginalClip := Clipboard.AsText;
   Clipboard.AsText := string.Empty;
@@ -3336,54 +3439,6 @@ begin
     // Restore original clipboard
     Clipboard.AsText := OriginalClip;
     FMouseHook.Enabled := FEnableMouseMode;
-  end;
-end;
-
-procedure TformTrayslate.CancelTranslate(FreeThread: boolean = False; WaitMs: integer = 0);
-var
-  StartTime: TDateTime;
-  WaitLimit: integer;
-begin
-  TimerAnimate.Enabled := False;
-
-  {$IFDEF WINDOWS}
-  SystemParametersInfo(SPI_SETCURSORS, 0, nil, 0);
-  {$ELSE}
-  Screen.Cursor := crDefault;
-  {$ENDIF}
-
-  if Assigned(FTranslateThread) then
-  begin
-    FTranslateThread.Cancel;
-
-    if FreeThread then
-    begin
-      if FTranslateThread.FreeOnTerminate then
-      begin
-        // The stream will self-destruct, we just lose the link
-        FTranslateThread := nil;
-      end
-      else
-      begin
-        // We wait for completion, but do not block the interface for a long time
-        WaitLimit := WaitMs;
-        if WaitLimit <= 0 then
-          WaitLimit := 500;  // default value is 0.5 sec
-
-        StartTime := Now;
-        while (not FTranslateThread.Finished) and (MilliSecondsBetween(Now, StartTime) < WaitLimit) do
-          SleepLoop(1, 10);
-
-        if FTranslateThread.Finished then
-          FreeAndNil(FTranslateThread)
-        else
-        begin
-          // We couldn't wait – we let go to live independently
-          FTranslateThread.FreeOnTerminate := True;
-          FTranslateThread := nil;
-        end;
-      end;
-    end;
   end;
 end;
 
