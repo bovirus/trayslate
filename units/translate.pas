@@ -156,6 +156,7 @@ type
     procedure AfterExecute;
   public
     constructor Create(ATrans: TTranslate; AMemo: TMemo = nil; ATimer: TTimer = nil; AFreeOnTerminate: boolean = True);
+    destructor Destroy; override;
     procedure Cancel;
     property ExceptionObj: Exception read FException;
     property ResultText: string read FResultText;
@@ -1018,6 +1019,13 @@ begin
   Start;
 end;
 
+destructor TTranslateThread.Destroy;
+begin
+  if Assigned(FException) then
+    FreeAndNil(FException);
+  inherited Destroy;
+end;
+
 procedure TTranslateThread.BeforeExecute;
 begin
   if Assigned(FMemo) then
@@ -1031,10 +1039,12 @@ procedure TTranslateThread.Execute;
 begin
   try
     try
+      if Terminated then Exit;
       if Length(Trim(FSourceText)) > 0 then
         FResultText := FTrans.Translate
       else
         FResultText := string.Empty;
+      if Terminated then Exit;
     except
       on E: Exception do
         FException := Exception.Create(E.Message);

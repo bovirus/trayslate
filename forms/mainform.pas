@@ -754,6 +754,7 @@ begin
   FMouseHook.OnLeftDown := @OnHookLeftDown;
   FMouseHook.OnLeftUp := @OnHookLeftUp;
   FMouseHook.Enabled := FEnableMouseMode;
+  FMouseHook.EditFieldOnly := True;
   {$ENDIF}
 
   // Set language
@@ -956,6 +957,8 @@ end;
 procedure TformTrayslate.ApplicationOnException(Sender: TObject; E: Exception);
 begin
   MessageDlg(rtrayslate, E.Message, mtWarning, [mbOK], 0);
+
+  CancelTranslate(True);
 end;
 
 procedure TformTrayslate.ScreenActiveFormChanged(Sender: TObject);
@@ -2428,7 +2431,12 @@ begin
 end;
 
 procedure TformTrayslate.ShowPopup(const SourceText: string; X: integer = 0; Y: integer = 0);
+var
+  PrevForm: TCustomForm;
 begin
+  // Save current active form
+  PrevForm := Screen.ActiveForm;
+
   if not Assigned(formPopupTrayslate) then
     formPopupTrayslate := TformPopupTrayslate.Create(Application);
 
@@ -2478,10 +2486,19 @@ begin
     formPopupTrayslate.Visible := True;
   if not StayOnTop then
     BringToFrontNoFocus(formPopupTrayslate);
+
+  // Restore focus
+  if Assigned(PrevForm) and PrevForm.Visible and PrevForm.CanFocus then
+    PrevForm.SetFocus;
 end;
 
 procedure TformTrayslate.ShowButton(const SourceText: string; X: integer = 0; Y: integer = 0);
+var
+  PrevForm: TCustomForm;
 begin
+  // Save current active form
+  PrevForm := Screen.ActiveForm;
+
   if not Assigned(formButtonTrayslate) then
     formButtonTrayslate := TformButtonTrayslate.Create(Application);
 
@@ -2501,6 +2518,10 @@ begin
 
   if not formButtonTrayslate.Visible then
     formButtonTrayslate.Visible := True;
+
+  // Restore focus
+  if Assigned(PrevForm) and PrevForm.Visible and PrevForm.CanFocus then
+    PrevForm.SetFocus;
 end;
 
 procedure TformTrayslate.SetVerticalMode;
