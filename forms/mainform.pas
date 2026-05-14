@@ -420,7 +420,7 @@ type
 
     function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
     procedure ThreadDone(Sender: TObject);
-    procedure CancelTranslate(FreeThread: boolean = False; Sleep: integer = 0);
+    procedure CancelTranslate;
     procedure DetectLanguage(AText: string);
     procedure TranslateMemo(ADetectLanguage: boolean = True);
     procedure TranslatePopup(AText: string);
@@ -957,8 +957,6 @@ end;
 procedure TformTrayslate.ApplicationOnException(Sender: TObject; E: Exception);
 begin
   MessageDlg(rtrayslate, E.Message, mtWarning, [mbOK], 0);
-
-  CancelTranslate(True);
 end;
 
 procedure TformTrayslate.ScreenActiveFormChanged(Sender: TObject);
@@ -1186,9 +1184,10 @@ end;
 
 procedure TformTrayslate.aExitExecute(Sender: TObject);
 begin
-  CancelTranslate(True);
+  CancelTranslate;
 
   Self.Enabled := False;
+  Self.Cursor := crHourGlass;
   Screen.Cursor := crHourGlass;
 
   Application.Terminate;
@@ -1402,6 +1401,7 @@ begin
   if TimerTranslate.Enabled then
   begin
     TimerTranslate.Enabled := False;
+
     // Cancel the current translation thread if it is still running
     if Assigned(FTranslateThread) then
       FTranslateThread.Cancel;
@@ -2964,11 +2964,11 @@ begin
         end;
 
         // Set translated text to clipboard
-        if Th.ResultTextSync <> string.Empty then
+        if Assigned(Th) and not FCancelled and (Th.ResultTextSync <> string.Empty) then
           Result := Th.ResultTextSync;
       finally
         if Assigned(Th) then
-          Th.FreeOnTerminate := True;
+          Th.Free;
         if FTranslateThread = Th then
           FTranslateThread := nil;
       end;
@@ -2990,49 +2990,12 @@ begin
     ShowCustomHint(TrayIcon.Hint);
 end;
 
-procedure TformTrayslate.CancelTranslate(FreeThread: boolean = False; Sleep: integer = 0);
-var
-  StartTime: TDateTime;
-  WaitLimit: integer;
+procedure TformTrayslate.CancelTranslate;
 begin
   FCancelled := True;
-
   try
-    Screen.Cursor := crHourGlass;
     if Assigned(FTranslateThread) then
-    begin
       FTranslateThread.Cancel;
-
-      if FreeThread then
-      begin
-        if FTranslateThread.FreeOnTerminate then
-        begin
-          // The stream will self-destruct, we just lose the link
-          FTranslateThread := nil;
-        end
-        else
-        begin
-          // We wait for completion, but do not block the interface for a long time
-          WaitLimit := Sleep;
-          if WaitLimit <= 0 then
-            WaitLimit := 500;  // default value is 0.5 sec
-
-          StartTime := Now;
-          while (not FTranslateThread.Finished) and (MilliSecondsBetween(Now, StartTime) < WaitLimit) do
-            SleepLoop(1, 10);
-
-          if FTranslateThread.Finished then
-            FreeAndNil(FTranslateThread)
-          else
-          begin
-            // We couldn't wait – we let go to live independently
-            FTranslateThread.FreeOnTerminate := True;
-            FTranslateThread := nil;
-          end;
-        end;
-      end;
-    end;
-
   finally
     TimerAnimate.Enabled := False;
     Screen.Cursor := crDefault;
