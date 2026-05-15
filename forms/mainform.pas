@@ -2829,7 +2829,7 @@ begin
     Inc(i);
   end;
   KeyInput.Down(Ord('C'));
-  SleepLoop(5, 2);
+  SleepLoop(10);
   KeyInput.Up(Ord('C'));
   KeyInput.Unapply([ssCtrl]);
 end;
@@ -2846,7 +2846,7 @@ begin
     Inc(i);
   end;
   KeyInput.Down(Ord('V'));
-  SleepLoop(5, 2);
+  SleepLoop(10);
   KeyInput.Up(Ord('V'));
   KeyInput.Unapply([ssCtrl]);
 end;

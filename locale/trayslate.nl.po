@@ -854,8 +854,9 @@ msgstr ""
 
 #: tformsettingstrayslate.checksmarthard.hint
 msgid ""
-"Always prefer Primary/Secondary language pair, even if the detected language is already part of the current pair.\n"
-"This forces the translator to return to the main configured language pair instead of swapping the current pair."
+"Always prefer the Primary/Secondary language pair when the detected language matches the current target language.\n"
+"\n"
+"Restore the configured pair instead of performing a normal swap."
 msgstr ""
 
 #: tformsettingstrayslate.checksmartswap.caption
@@ -1263,7 +1264,6 @@ msgid "Translate Clipboard"
 msgstr "Klembord vertalen"
 
 #: tformtrayslate.caption
-#, fuzzy
 msgctxt "tformtrayslate.caption"
 msgid "Trayslate"
 msgstr "Trayslate"
@@ -1288,4 +1288,3 @@ msgstr "Recente paren"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
-
