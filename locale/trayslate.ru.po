@@ -855,7 +855,6 @@ msgstr ""
 #: tformsettingstrayslate.checksmarthard.hint
 msgid ""
 "Always prefer the Primary/Secondary language pair when the detected language matches the current target language.\n"
-"\n"
 "Restore the configured pair instead of performing a normal swap."
 msgstr ""
 
@@ -1288,3 +1287,4 @@ msgstr "Недавние пары"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
+

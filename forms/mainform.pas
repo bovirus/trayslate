@@ -2121,14 +2121,14 @@ begin
   end;
 
   // Set tray icon hint
-  hintText := rtrayslate;
+  hintText := string.Empty;
   if ComboSource.Text <> string.Empty then
-    hintText := hintText + ' - ' + ComboSource.Text;
+    hintText += ComboSource.Text;
   if ComboTarget.Text <> string.Empty then
-    hintText := hintText + ' : ' + ComboTarget.Text;
+    hintText += ' : ' + ComboTarget.Text;
   if FConfigTitles.Values[FConfigFile] <> string.Empty then
-    hintText := hintText + sLineBreak + FConfigTitles.Values[FConfigFile];
-  TrayIcon.Hint := hintText;
+    hintText += sLineBreak + FConfigTitles.Values[FConfigFile];
+  TrayIcon.Hint := rtrayslate + ' - ' + hintText;
 
   // Set popup window caption
   if (Assigned(formPopupTrayslate)) then
@@ -3497,6 +3497,7 @@ begin
 
   // Update form text
   SetHints;
+  SetIcon;
 
   if FCustomPoFile = string.Empty then
   begin

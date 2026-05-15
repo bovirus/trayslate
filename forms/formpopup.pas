@@ -41,6 +41,7 @@ type
     FlowPairs: TFlowPanel;
     LabelWatermark: TLabel;
     MemoTarget: TMemo;
+    PanelTarget: TPanel;
     PanelPairs: TPanel;
     PanelWatermark: TPanel;
     PanelButtonTarget: TPanel;
@@ -91,6 +92,7 @@ begin
 
   FDropTarget := TTextDropTarget.Create(Self);
   FDropTarget.Target := MemoTarget;
+  FDropTarget.AddSubTarget(PanelTarget);
   FDropTarget.AddSubTarget(PanelWatermark);
   FDropTarget.AddSubTarget(PanelButtonTarget);
   FDropTarget.InsertText := False;
@@ -133,8 +135,8 @@ begin
   formTrayslate.FormPopupWidth := Width;
   formTrayslate.FormPopupHeight := Height;
 
-  PanelWatermark.Left := MemoTarget.Left + (MemoTarget.Width - PanelWatermark.Width) div 2;
-  PanelWatermark.Top := MemoTarget.Top + (MemoTarget.Height - PanelWatermark.Height) div 2;
+  PanelWatermark.Left := PanelTarget.Left + (PanelTarget.Width - PanelWatermark.Width) div 2;
+  PanelWatermark.Top := PanelTarget.Top + (PanelTarget.Height - PanelWatermark.Height) div 2;
 
   UpdateWatermarkVisibility;
 end;
