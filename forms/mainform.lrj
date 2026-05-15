@@ -51,9 +51,9 @@
 {"hash":161569763,"name":"tformtrayslate.afastallowhotkeys.caption","sourcebytes":[69,110,97,98,108,101,32,71,108,111,98,97,108,32,72,111,116,107,101,121,115],"value":"Enable Global Hotkeys"},
 {"hash":189711605,"name":"tformtrayslate.afastenablemousemode.caption","sourcebytes":[69,110,97,98,108,101,32,77,111,117,115,101,32,77,111,100,101],"value":"Enable Mouse Mode"},
 {"hash":127161300,"name":"tformtrayslate.afastmousemodectrl.caption","sourcebytes":[79,110,108,121,32,87,104,101,110,32,67,116,114,108,32,73,115,32,80,114,101,115,115,101,100],"value":"Only When Ctrl Is Pressed"},
-{"hash":150707572,"name":"tformtrayslate.afastverticalsplit.caption","sourcebytes":[83,105,100,101,45,66,121,45,83,105,100,101,32,76,97,121,111,117,116],"value":"Side-By-Side Layout"},
-{"hash":173111059,"name":"tformtrayslate.afasthidecontrols.caption","sourcebytes":[65,117,116,111,45,72,105,100,101,32,80,111,112,117,112,32,67,111,110,116,114,111,108,115],"value":"Auto-Hide Popup Controls"},
 {"hash":232048130,"name":"tformtrayslate.afastautoswap.caption","sourcebytes":[65,117,116,111,45,83,119,97,112,32,76,97,110,103,117,97,103,101,32,80,97,105,114],"value":"Auto-Swap Language Pair"},
 {"hash":163010755,"name":"tformtrayslate.afastautoaddlangpairs.caption","sourcebytes":[65,117,116,111,45,65,100,100,32,82,101,99,101,110,116,32,76,97,110,103,117,97,103,101,32,80,97,105,114,115],"value":"Auto-Add Recent Language Pairs"},
-{"hash":157787781,"name":"tformtrayslate.afastrealtime.caption","sourcebytes":[84,114,97,110,115,108,97,116,101,32,65,115,32,89,111,117,32,84,121,112,101],"value":"Translate As You Type"}
+{"hash":157787781,"name":"tformtrayslate.afastrealtime.caption","sourcebytes":[84,114,97,110,115,108,97,116,101,32,65,115,32,89,111,117,32,84,121,112,101],"value":"Translate As You Type"},
+{"hash":150707572,"name":"tformtrayslate.afastverticalsplit.caption","sourcebytes":[83,105,100,101,45,66,121,45,83,105,100,101,32,76,97,121,111,117,116],"value":"Side-By-Side Layout"},
+{"hash":173111059,"name":"tformtrayslate.afasthidecontrols.caption","sourcebytes":[65,117,116,111,45,72,105,100,101,32,80,111,112,117,112,32,67,111,110,116,114,111,108,115],"value":"Auto-Hide Popup Controls"}
 ]}

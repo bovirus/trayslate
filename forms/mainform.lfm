@@ -353,17 +353,6 @@ object formTrayslate: TformTrayslate
       object Separator5: TMenuItem
         Caption = '-'
       end
-      object MenuFastVerticalSplit: TMenuItem
-        Action = aFastVerticalSplit
-        AutoCheck = True
-      end
-      object MenuFastHideControls: TMenuItem
-        Action = aFastHideControls
-        AutoCheck = True
-      end
-      object Separator6: TMenuItem
-        Caption = '-'
-      end
       object MenuFastAutoSwap: TMenuItem
         Action = aFastAutoSwap
         AutoCheck = True
@@ -374,6 +363,17 @@ object formTrayslate: TformTrayslate
       end
       object MenuFastRealTime: TMenuItem
         Action = aFastRealTime
+        AutoCheck = True
+      end
+      object Separator6: TMenuItem
+        Caption = '-'
+      end
+      object MenuFastVerticalSplit: TMenuItem
+        Action = aFastVerticalSplit
+        AutoCheck = True
+      end
+      object MenuFastHideControls: TMenuItem
+        Action = aFastHideControls
         AutoCheck = True
       end
     end
@@ -745,18 +745,6 @@ object formTrayslate: TformTrayslate
       Caption = 'Only When Ctrl Is Pressed'
       OnExecute = aFastMouseModeCtrlExecute
     end
-    object aFastVerticalSplit: TAction
-      Category = 'FastSettings'
-      AutoCheck = True
-      Caption = 'Side-By-Side Layout'
-      OnExecute = aFastVerticalSplitExecute
-    end
-    object aFastHideControls: TAction
-      Category = 'FastSettings'
-      AutoCheck = True
-      Caption = 'Auto-Hide Popup Controls'
-      OnExecute = aFastHideControlsExecute
-    end
     object aFastAutoSwap: TAction
       Category = 'FastSettings'
       AutoCheck = True
@@ -774,6 +762,18 @@ object formTrayslate: TformTrayslate
       AutoCheck = True
       Caption = 'Translate As You Type'
       OnExecute = aFastRealTimeExecute
+    end
+    object aFastVerticalSplit: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Side-By-Side Layout'
+      OnExecute = aFastVerticalSplitExecute
+    end
+    object aFastHideControls: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Auto-Hide Popup Controls'
+      OnExecute = aFastHideControlsExecute
     end
   end
   object TimerClick: TTimer
