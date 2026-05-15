@@ -82,7 +82,7 @@ begin
 
   Canvas.Pen.Color := clSilver;
   Canvas.MoveTo(Width - 1, 0);
-  Canvas.LineTo(Width - 1, Height - 1);
+  Canvas.LineTo(Width - 1, Height);
   Canvas.MoveTo(0, Height - 1);
   Canvas.LineTo(Width - 1, Height - 1);
 end;

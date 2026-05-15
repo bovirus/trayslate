@@ -60,7 +60,6 @@ type
     {$IFDEF WINDOWS}
     class var FActiveInstance: TGlobalMouseHook;
     FHook: HHOOK;
-    FIsDropDown: Boolean;                          // flag for drop‑down list detection
     class function HookProc(nCode: Integer; wParam: WPARAM; lParam: LPARAM): LRESULT; stdcall; static;
     procedure InternalMouseEvent(wParam: WPARAM; const p: TMouseLLHookStruct);
     function IsEditControl(Wnd: THandle): Boolean;
@@ -179,6 +178,8 @@ var
   info: TMouseEventInfo;
   handler: TMouseEvent;
   wndHandle: THandle;
+  R: TRect;
+  Pt: TPoint;
 begin
   info.X := p.pt.X;
   info.Y := p.pt.Y;
@@ -187,16 +188,11 @@ begin
   info.ShiftDown := (GetAsyncKeyState(VK_SHIFT) and $8000) <> 0;
   info.AltDown := (GetAsyncKeyState(VK_MENU) and $8000) <> 0;
 
-  // --- Global drop‑down list guard (always active) ---
-  if wParam = WM_LBUTTONDOWN then
-  begin
-    wndHandle := THandle(WindowFromPoint(p.pt));
-    FIsDropDown := IsDropDownWindow(wndHandle);
-  end;
-
+  // --- Global drop-down list guard (always active) ---
   if (wParam = WM_LBUTTONDOWN) or (wParam = WM_LBUTTONUP) then
   begin
-    if FIsDropDown then
+    wndHandle := THandle(WindowFromPoint(p.pt));
+    if IsDropDownWindow(wndHandle) then
       Exit;   // Ignore clicks inside drop‑down lists (ComboBox, etc.)
   end;
   // ----------------------------------------------------
@@ -207,6 +203,18 @@ begin
     wndHandle := THandle(WindowFromPoint(p.pt));
     if (wndHandle = 0) or (not IsEditControl(wndHandle)) then
       Exit;
+
+    // Additional check: release must be in the client area of the edit window
+    if wParam = WM_LBUTTONUP then
+    begin
+      if GetClientRect(wndHandle, @R) then
+      begin
+        Pt := p.pt;
+        ScreenToClient(wndHandle, Pt);
+        if not PtInRect(R, Pt) then
+          Exit;   // physically the cursor is outside the editing area - suppress the event
+      end;
+    end;
   end;
 
   handler := nil;
@@ -229,7 +237,6 @@ begin
   FHook := 0;
   FEnabled := False;
   FEditFieldOnly := False;
-  FIsDropDown := False;
 end;
 
 destructor TGlobalMouseHook.Destroy;

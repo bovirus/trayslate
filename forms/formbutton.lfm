@@ -6,7 +6,7 @@ object formButtonTrayslate: TformButtonTrayslate
   BorderIcons = []
   BorderStyle = bsNone
   ClientHeight = 91
-  ClientWidth = 89
+  ClientWidth = 120
   Color = clWindow
   FormStyle = fsSystemStayOnTop
   LCLVersion = '4.4.0.0'

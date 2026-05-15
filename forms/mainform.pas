@@ -287,8 +287,7 @@ type
     FLeftButton: boolean;
     FLastEnterTime: DWORD;
     FLastHotkeyTime: DWORD;
-    FLastMouseTime: DWORD;
-    FLastMouseCtrlDown: boolean;
+    FLastMouseInfo: TMouseEventInfo;
     FMemoSourceCaretPos: integer;
     FPrevSourceText: string;
     FPrevTargetText: string;
@@ -514,7 +513,8 @@ var
 const
   DOUBLE_ENTER_INTERVAL = 200; // ms
   HOTKEY_INTERVAL = 500; // ms
-  MOUSE_MODE_INTERVAL = 200; // ms
+  MOUSE_MODE_INTERVAL = 100; // ms
+  MOUSE_MODE_DELTA = 20; // pixel
   BUTTON_DELTA = 10;
 
   MIDDLE_MOUSE = 'Middle-Click';
@@ -969,20 +969,26 @@ end;
 
 procedure TFormTrayslate.OnHookLeftDown(Sender: TObject; const Info: TMouseEventInfo);
 begin
-  FLastMouseTime := Info.Time;
-  FLastMouseCtrlDown := Info.CtrlDown;
+  FLastMouseInfo := Info;
 end;
 
 procedure TFormTrayslate.OnHookLeftUp(Sender: TObject; const Info: TMouseEventInfo);
 var
   packedCoords: PtrInt;
+  dx, dy: integer;
 begin
-  if (Info.Time - FLastMouseTime) > MOUSE_MODE_INTERVAL then
+  if ((Info.Time - FLastMouseInfo.Time) > MOUSE_MODE_INTERVAL) then
   begin
-    if (not MouseModeCtrl) or (FLastMouseCtrlDown and Info.CtrlDown) then
+    // Checking the offset relative to the point of pressure
+    dx := Info.X - FLastMouseInfo.X;
+    dy := Info.Y - FLastMouseInfo.Y;
+    if (dx * dx + dy * dy) > (MOUSE_MODE_DELTA * MOUSE_MODE_DELTA) then
     begin
-      packedCoords := Info.Y shl 16 + Info.X;
-      Application.QueueAsyncCall(@OnTranslateMouseMode, packedCoords);
+      if (not MouseModeCtrl) or (FLastMouseInfo.CtrlDown and Info.CtrlDown) then
+      begin
+        packedCoords := Info.Y shl 16 + Info.X;
+        Application.QueueAsyncCall(@OnTranslateMouseMode, packedCoords);
+      end;
     end;
   end;
 end;
