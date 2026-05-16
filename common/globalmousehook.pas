@@ -158,7 +158,7 @@ begin
     if QueryFullProcessImageNameW(hProc, 0, @fileName[0], @len) then
     begin
       SetString(s, PWideChar(@fileName[0]), len);
-      j := LastDelimiter('\', s);
+      j := LastDelimiter('\', string(s));
       if (j > 0) and (StrIComp(PWideChar(@s[j+1]), 'explorer.exe') = 0) then
       begin
         CloseHandle(hProc);

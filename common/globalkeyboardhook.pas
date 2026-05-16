@@ -1,0 +1,267 @@
+//-----------------------------------------------------------------------------------
+//  Trayslate © 2026 by Alexander Tverskoy
+//  Licensed under the GNU General Public License, Version 3 (GPL-3.0)
+//  You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.html
+//-----------------------------------------------------------------------------------
+
+unit GlobalKeyboardHook;
+
+{$NOTES OFF}
+{$HINTS OFF}
+{$WARNINGS OFF}
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  SysUtils
+  {$IFDEF WINDOWS}
+  , Windows
+  , Messages
+  {$ENDIF}
+  ;
+
+type
+  TKeyCodeSet = set of Byte;   // set of virtual key codes to block
+
+  PKeyboardLLHookStruct = ^TKeyboardLLHookStruct;
+  TKeyboardLLHookStruct = record
+    vkCode: DWORD;
+    scanCode: DWORD;
+    flags: DWORD;
+    time: DWORD;
+    dwExtraInfo: PtrUInt;
+  end;
+
+  TKeyboardEventInfo = record
+    KeyCode: DWORD;      // virtual key code
+    ScanCode: DWORD;     // hardware scan code
+    Flags: DWORD;        // LLKHF_* flags (e.g. LLKHF_EXTENDED, LLKHF_ALTDOWN)
+    Time: DWORD;         // event timestamp in milliseconds
+    IsDown: Boolean;     // True = key press, False = key release
+    CtrlDown: Boolean;
+    ShiftDown: Boolean;
+    AltDown: Boolean;
+  end;
+
+  TKeyboardEvent = procedure(Sender: TObject; const Info: TKeyboardEventInfo) of object;
+
+  {$IFDEF WINDOWS}
+  TGlobalKeyboardHook = class
+  private
+    FEnabled: Boolean;
+    FEditFieldOnly: Boolean;   // process events only when focus is in an editable control
+    FBlockedKeys: TKeyCodeSet; // keys that will be swallowed (not passed to system)
+    FOnKeyEvent: TKeyboardEvent;
+
+    class var FActiveInstance: TGlobalKeyboardHook;
+    FHook: HHOOK;
+
+    procedure SetEnabled(AValue: Boolean);
+    class function HookProc(nCode: Integer; wParam: WPARAM; lParam: LPARAM): LRESULT; stdcall; static;
+    procedure InternalKeyboardEvent(wParam: WPARAM; const KBDLLHOOKSTRUCT: TKeyboardLLHookStruct);
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    property Enabled: Boolean read FEnabled write SetEnabled;
+    // When True, events are generated only when focus is in an editable control
+    property EditFieldOnly: Boolean read FEditFieldOnly write FEditFieldOnly;
+    // Set of virtual key codes that will be blocked (not passed to the system)
+    property BlockedKeys: TKeyCodeSet read FBlockedKeys write FBlockedKeys;
+    // Event fired on any key press or release (if filters pass)
+    property OnKeyEvent: TKeyboardEvent read FOnKeyEvent write FOnKeyEvent;
+
+    class function IsCtrlPressed: Boolean;
+    class function IsShiftPressed: Boolean;
+    class function IsAltPressed: Boolean;
+  end;
+
+const
+  WH_KEYBOARD_LL = 13;
+
+  // Flags that may appear in TKeyboardLLHookStruct.flags
+  LLKHF_EXTENDED = 1;
+  LLKHF_ALTDOWN  = 32;
+  LLKHF_UP       = 128; // usually indicates key up; but wParam gives exact state
+
+  LLKHF_INJECTED = $00000010;
+
+implementation
+
+// ---------- Hook callback ----------
+class function TGlobalKeyboardHook.HookProc(nCode: Integer; wParam: WPARAM; lParam: LPARAM): LRESULT; stdcall;
+var
+  p: PKeyboardLLHookStruct;
+  Block: Boolean;
+begin
+  Result := 0;
+  if (nCode >= 0) and (FActiveInstance <> nil) then
+  begin
+    p := PKeyboardLLHookStruct(Pointer(PtrUInt(lParam)));
+
+    // Fire the notification event (if assigned)
+    FActiveInstance.InternalKeyboardEvent(wParam, p^);
+
+    // Decide whether to block this key
+    Block := False;
+    // Block only hardware (non-injected) events that belong to the blocked set
+    if (p^.flags and LLKHF_INJECTED) = 0 then
+      Block := (p^.vkCode in FActiveInstance.FBlockedKeys);
+
+    if Block then
+    begin
+      Result := 1;   // Swallow the event – do not pass to the system
+      Exit;
+    end;
+  end;
+
+  // Pass to the next hook in the chain
+  if FActiveInstance <> nil then
+    Result := CallNextHookEx(FActiveInstance.FHook, nCode, wParam, lParam)
+  else
+    Result := CallNextHookEx(0, nCode, wParam, lParam);
+end;
+
+procedure TGlobalKeyboardHook.InternalKeyboardEvent(wParam: WPARAM; const KBDLLHOOKSTRUCT: TKeyboardLLHookStruct);
+var
+  Info: TKeyboardEventInfo;
+begin
+  // Fill event information
+  Info.KeyCode  := KBDLLHOOKSTRUCT.vkCode;
+  Info.ScanCode := KBDLLHOOKSTRUCT.scanCode;
+  Info.Flags    := KBDLLHOOKSTRUCT.flags;
+  Info.Time     := KBDLLHOOKSTRUCT.time;
+
+  // Determine key state: down = WM_KEYDOWN or WM_SYSKEYDOWN
+  Info.IsDown := (wParam = WM_KEYDOWN) or (wParam = WM_SYSKEYDOWN);
+
+  // Modifier states at the moment of the event
+  Info.CtrlDown  := (GetAsyncKeyState(VK_CONTROL) and $8000) <> 0;
+  Info.ShiftDown := (GetAsyncKeyState(VK_SHIFT)   and $8000) <> 0;
+  Info.AltDown   := (GetAsyncKeyState(VK_MENU)    and $8000) <> 0;
+
+  // Fire the event if assigned
+  if Assigned(FOnKeyEvent) then
+    FOnKeyEvent(Self, Info);
+end;
+
+// ---------- Lifecycle and hook management ----------
+constructor TGlobalKeyboardHook.Create;
+begin
+  inherited;
+  FHook := 0;
+  FEnabled := False;
+  FEditFieldOnly := False;
+  FBlockedKeys := [];
+end;
+
+destructor TGlobalKeyboardHook.Destroy;
+begin
+  Enabled := False;
+  inherited;
+end;
+
+procedure TGlobalKeyboardHook.SetEnabled(AValue: Boolean);
+begin
+  if FEnabled = AValue then Exit;
+  if AValue then
+  begin
+    if FActiveInstance <> nil then
+      raise Exception.Create('Only one TGlobalKeyboardHook can be active at a time.');
+    FActiveInstance := Self;
+    FHook := SetWindowsHookEx(WH_KEYBOARD_LL, @HookProc, 0, 0);
+    if FHook = 0 then
+    begin
+      FActiveInstance := nil;
+      RaiseLastOSError;
+    end;
+    FEnabled := True;
+  end
+  else
+  begin
+    if FHook <> 0 then
+    begin
+      UnhookWindowsHookEx(FHook);
+      FHook := 0;
+    end;
+    FActiveInstance := nil;
+    FEnabled := False;
+  end;
+end;
+
+// ---------- Helper methods ----------
+class function TGlobalKeyboardHook.IsCtrlPressed: Boolean;
+begin
+  Result := (GetAsyncKeyState(VK_CONTROL) and $8000) <> 0;
+end;
+
+class function TGlobalKeyboardHook.IsShiftPressed: Boolean;
+begin
+  Result := (GetAsyncKeyState(VK_SHIFT) and $8000) <> 0;
+end;
+
+class function TGlobalKeyboardHook.IsAltPressed: Boolean;
+begin
+  Result := (GetAsyncKeyState(VK_MENU) and $8000) <> 0;
+end;
+
+{$ELSE}
+// ---------------------------------------------------------------------------
+//  Non-Windows platform – stub to allow compilation
+// ---------------------------------------------------------------------------
+type
+  TGlobalKeyboardHook = class
+  private
+    FEnabled: Boolean;
+    FEditFieldOnly: Boolean;
+    FOnKeyEvent: TKeyboardEvent;
+    procedure SetEnabled(AValue: Boolean);
+  public
+    constructor Create;
+    destructor Destroy; override;
+    property Enabled: Boolean read FEnabled write SetEnabled;
+    property EditFieldOnly: Boolean read FEditFieldOnly write FEditFieldOnly;
+    property OnKeyEvent: TKeyboardEvent read FOnKeyEvent write FOnKeyEvent;
+    class function IsCtrlPressed: Boolean;
+    class function IsShiftPressed: Boolean;
+    class function IsAltPressed: Boolean;
+  end;
+
+constructor TGlobalKeyboardHook.Create;
+begin
+  inherited;
+  FEnabled := False;
+  FEditFieldOnly := False;
+end;
+
+destructor TGlobalKeyboardHook.Destroy;
+begin
+  inherited;
+end;
+
+procedure TGlobalKeyboardHook.SetEnabled(AValue: Boolean);
+begin
+  if AValue then
+    raise Exception.Create('GlobalKeyboardHook is only supported on Windows.');
+end;
+
+class function TGlobalKeyboardHook.IsCtrlPressed: Boolean;
+begin
+  Result := False;
+end;
+
+class function TGlobalKeyboardHook.IsShiftPressed: Boolean;
+begin
+  Result := False;
+end;
+
+class function TGlobalKeyboardHook.IsAltPressed: Boolean;
+begin
+  Result := False;
+end;
+
+{$ENDIF}
+
+end.
