@@ -1148,19 +1148,19 @@ msgstr ""
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
-msgstr "Arabo"
+msgstr "العربية"
 
 #: tformtrayslate.alangbelarusian.caption
 msgid "Belarusian"
-msgstr "Bielorusso"
+msgstr "Беларуская"
 
 #: tformtrayslate.alangbulgarian.caption
 msgid "Bulgarian"
-msgstr "Bulgaro"
+msgstr "Български"
 
 #: tformtrayslate.alangchinese.caption
 msgid "Chinese"
-msgstr "Cinese"
+msgstr "中文"
 
 #: tformtrayslate.alangcustom.caption
 msgid "Custom File..."
@@ -1168,47 +1168,47 @@ msgstr "File personalizzato..."
 
 #: tformtrayslate.alangczech.caption
 msgid "Czech"
-msgstr "Ceco"
+msgstr "Čeština"
 
 #: tformtrayslate.alangdanish.caption
 msgid "Danish"
-msgstr "Danese"
+msgstr "Dansk"
 
 #: tformtrayslate.alangdutch.caption
 msgid "Dutch"
-msgstr "Olandese"
+msgstr "Nederlands"
 
 #: tformtrayslate.alangenglish.caption
 msgid "English"
-msgstr "Inglese"
+msgstr "English"
 
 #: tformtrayslate.alangfinnish.caption
 msgid "Finnish"
-msgstr "Finlandese"
+msgstr "Suomi"
 
 #: tformtrayslate.alangfrench.caption
 msgid "French"
-msgstr "Francese"
+msgstr "Français"
 
 #: tformtrayslate.alanggerman.caption
 msgid "German"
-msgstr "Tedesco"
+msgstr "Deutsch"
 
 #: tformtrayslate.alanggreek.caption
 msgid "Greek"
-msgstr "Greco"
+msgstr "Ελληνικά"
 
 #: tformtrayslate.alanghebrew.caption
 msgid "Hebrew"
-msgstr "Ebraico"
+msgstr "עברית"
 
 #: tformtrayslate.alanghindi.caption
 msgid "Hindi"
-msgstr "Hindi"
+msgstr "हिन्दी"
 
 #: tformtrayslate.alangindonesian.caption
 msgid "Indonesian"
-msgstr "Indonesiano"
+msgstr "Bahasa Indonesia"
 
 #: tformtrayslate.alangitalian.caption
 msgid "Italian"
@@ -1216,43 +1216,43 @@ msgstr "Italiano"
 
 #: tformtrayslate.alangjapanese.caption
 msgid "Japanese"
-msgstr "Giapponese"
+msgstr "日本語"
 
 #: tformtrayslate.alangkorean.caption
 msgid "Korean"
-msgstr "Coreano"
+msgstr "한국어"
 
 #: tformtrayslate.alangpolish.caption
 msgid "Polish"
-msgstr "Polacco"
+msgstr "Polski"
 
 #: tformtrayslate.alangportuguese.caption
 msgid "Portuguese"
-msgstr "Portoghese"
+msgstr "Português"
 
 #: tformtrayslate.alangromanian.caption
 msgid "Romanian"
-msgstr "Rumeno"
+msgstr "Română"
 
 #: tformtrayslate.alangrussian.caption
 msgid "Russian"
-msgstr "Russo"
+msgstr "Русский"
 
 #: tformtrayslate.alangspanish.caption
 msgid "Spanish"
-msgstr "Spagnolo"
+msgstr "Español"
 
 #: tformtrayslate.alangswedish.caption
 msgid "Swedish"
-msgstr "Svedese"
+msgstr "Svenska"
 
 #: tformtrayslate.alangturkish.caption
 msgid "Turkish"
-msgstr "Turco"
+msgstr "Türkçe"
 
 #: tformtrayslate.alangukrainian.caption
 msgid "Ukrainian"
-msgstr "Ucraino"
+msgstr "Українська"
 
 #: tformtrayslate.amenu.hint
 msgctxt "tformtrayslate.amenu.hint"
