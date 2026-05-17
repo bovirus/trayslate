@@ -88,7 +88,7 @@ function IsSystemKey(Key: word): boolean;
 
 function GetAppVersion: string;
 
-procedure RegAutoStart(const AEnable: boolean; const AppName: string = 'Trayslate');
+procedure RegAutoStart(const AEnable: boolean; const AppName: string);
 
 procedure BringToFrontNoFocus(AForm: TForm);
 
@@ -636,12 +636,15 @@ begin
   end;
 end;
 
-procedure RegAutoStart(const AEnable: boolean; const AppName: string = 'Trayslate');
+procedure RegAutoStart(const AEnable: boolean; const AppName: string);
 var
   Reg: TRegistry;
   ExeName: string;
+  OldName: string;
 begin
   ExeName := '"' + ParamStr(0) + '"';
+
+  OldName := 'Trayslate';
 
   Reg := TRegistry.Create;
   try
@@ -649,11 +652,21 @@ begin
 
     if Reg.OpenKey('Software\Microsoft\Windows\CurrentVersion\Run', True) then
     begin
+      // Remove old entry only if name changed
+      if (AppName <> OldName) and Reg.ValueExists(OldName) then
+        Reg.DeleteValue(OldName);
+
       if AEnable then
         Reg.WriteString(AppName, ExeName)
       else
-      if Reg.ValueExists(AppName) then
-        Reg.DeleteValue(AppName);
+      begin
+        if Reg.ValueExists(AppName) then
+          Reg.DeleteValue(AppName);
+
+        // also clean legacy key when disabling
+        if Reg.ValueExists(OldName) then
+          Reg.DeleteValue(OldName);
+      end;
     end;
   finally
     Reg.Free;

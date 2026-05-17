@@ -2629,9 +2629,19 @@ begin
 end;
 
 procedure TformTrayslate.SetAutoStart(Value: boolean);
+var
+  AppName: string;
+  AppPath: string;
 begin
   FAutoStart := Value;
-  RegAutoStart(FAutoStart, rtrayslate);
+
+  // Normalize install path
+  AppPath := ExcludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0)));
+
+  // Build unique registry key per installation path
+  AppName := 'Trayslate (' + AppPath + ')';
+
+  RegAutoStart(FAutoStart, AppName);
 end;
 
 procedure TformTrayslate.ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
