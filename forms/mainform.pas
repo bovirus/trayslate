@@ -995,10 +995,13 @@ end;
 { MouseHook Events}
 
 procedure TFormTrayslate.OnKeyboardEvent(Sender: TObject; const Info: TKeyboardEventInfo);
+var
+  packedCoords: PtrInt;
 begin
   if not Info.IsDown then Exit;
   if Info.IsInjected then Exit;
 
+  // Signals about pressing physical keys
   if Info.KeyCode = VK_CONTROL then
     FLastCtrlTime := GetTickCount64;
   if Info.KeyCode = Ord('C') then
@@ -1007,6 +1010,13 @@ begin
     FLastXTime := GetTickCount64;
   if Info.KeyCode = Ord('V') then
     FLastVTime := GetTickCount64;
+
+  // Detecting select all for mouse mode
+  if (Info.CtrlDown) and (Info.KeyCode = Ord('A')) and (MouseMode = mmShowTranslateButton) then
+  begin
+    packedCoords := Mouse.CursorPos.Y shl 16 + Mouse.CursorPos.X;
+    Application.QueueAsyncCall(@OnTranslateMouseMode, packedCoords);
+  end;
 end;
 
 procedure TFormTrayslate.OnHookLeftDown(Sender: TObject; const Info: TMouseEventInfo);
