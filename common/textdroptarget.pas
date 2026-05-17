@@ -98,8 +98,8 @@ type
     procedure AddSubTarget(AControl: TWinControl);
     procedure RemoveSubTarget(AControl: TWinControl);
     procedure ClearSubTargets;
-    function SubTargetCount: Integer;
-    property SubTargets[Index: Integer]: TWinControl read GetSubTarget;
+    function SubTargetCount: integer;
+    property SubTargets[Index: integer]: TWinControl read GetSubTarget;
   published
     property Target: TCustomEdit read FTarget write SetTarget;
     property InsertText: boolean read FInsertText write SetInsertText default True;
@@ -180,6 +180,8 @@ begin
     {$IFDEF WINDOWS}
     else if AComponent is TWinControl then
       RemoveSubTarget(TWinControl(AComponent));  // auto-remove destroyed sub-targets
+    {$ELSE}
+    ;
     {$ENDIF}
   end;
 end;

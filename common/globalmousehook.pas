@@ -289,7 +289,8 @@ begin
 end;
 
 {$ELSE}
-// Non‑Windows stub – compiles but does nothing
+
+// Non Windows stub – compiles but does nothing
 
 constructor TGlobalMouseHook.Create;
 begin

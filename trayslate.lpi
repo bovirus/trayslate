@@ -221,6 +221,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="common\globalkeyboardhook.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GlobalKeyboardHook"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

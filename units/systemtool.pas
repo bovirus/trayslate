@@ -92,6 +92,10 @@ procedure RegAutoStart(const AEnable: boolean; const AppName: string = 'Trayslat
 
 procedure BringToFrontNoFocus(AForm: TForm);
 
+procedure SleepBusy(MS: integer);
+
+procedure SleepLoop(ALoop: integer = 0; ASleep: integer = 0; AProcessMessages: boolean = True);
+
 { Check Github Version }
 
 function CheckGithubLatestVersion(out Version: string; const Repo: string; const Silent: boolean = False): boolean;
@@ -675,6 +679,28 @@ begin
   {$ELSE}
   AForm.BringToFront;
   {$ENDIF}
+end;
+
+procedure SleepBusy(MS: integer);
+var
+  StartTick: QWord;
+begin
+  StartTick := GetTickCount64;
+  while (GetTickCount64 - StartTick) < QWord(MS) do
+    Application.ProcessMessages;
+end;
+
+procedure SleepLoop(ALoop: integer = 0; ASleep: integer = 0; AProcessMessages: boolean = True);
+var
+  i: integer;
+begin
+  for i := 0 to ALoop do
+  begin
+    if AProcessMessages then
+      Application.ProcessMessages;
+    if ASleep > 0 then
+      SleepBusy(ASleep);
+  end;
 end;
 
 { Check Github Version }

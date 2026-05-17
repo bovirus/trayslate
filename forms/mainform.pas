@@ -35,6 +35,7 @@ uses
   LCLType,
   LMessages,
   mouseandkeyinput,
+  globalkeyboardhook,
   globalmousehook,
   translate,
   langtool;
@@ -127,6 +128,7 @@ type
     Separator6: TMenuItem;
     Separator9: TMenuItem;
     SplitterMemo: TSplitter;
+    TimerUnapply: TTimer;
     TimerHideHint: TTimer;
     TimerAnimate: TTimer;
     TimerTranslate: TTimer;
@@ -206,6 +208,7 @@ type
     procedure ApplicationOnShowHint(var HintStr: string; var CanShow: boolean; var HintInfo: THintInfo);
     procedure ApplicationOnException(Sender: TObject; E: Exception);
     procedure ScreenActiveFormChanged(Sender: TObject);
+    procedure OnKeyboardEvent(Sender: TObject; const Info: TKeyboardEventInfo);
     procedure OnHookLeftDown(Sender: TObject; const Info: TMouseEventInfo);
     procedure OnHookLeftUp(Sender: TObject; const Info: TMouseEventInfo);
     procedure OnTranslateMouseMode(Data: PtrInt);
@@ -242,6 +245,7 @@ type
     procedure TimerAnimateStopTimer(Sender: TObject);
     procedure TimerAnimateTimer(Sender: TObject);
     procedure TimerHideHintTimer(Sender: TObject);
+    procedure TimerUnapplyTimer(Sender: TObject);
     procedure TimerTranslateTimer(Sender: TObject);
     procedure TimerClickTimer(Sender: TObject);
     procedure TrayIconMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
@@ -294,9 +298,17 @@ type
     FLangPairs: TStringList;
     FTranslateThread: TTranslateThread;
     FMouseHook: TGlobalMouseHook;
+    FKeyHook: TGlobalKeyboardHook;
     FPopupOpen: boolean;
     FHint: THintWindow;
     FFontPopup: TFont;
+    FUnapplyCtrl: boolean;
+    FUnapplyC: boolean;
+    FUnapplyV: boolean;
+    FLastCtrlTime: DWORD;
+    FLastCTime: DWORD;
+    FLastXTime: DWORD;
+    FLastVTime: DWORD;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -374,7 +386,6 @@ type
     FIconFontName: string;
     FIconTwoLang: boolean;
 
-    procedure SleepLoop(ALoop: integer = 0; ASleep: integer = 0; ARepaint: boolean = False);
     procedure SetAutoStart(Value: boolean);
     procedure ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
     procedure ChangeTargetLang(NewLang: string; AddRecentPairs: boolean = True);
@@ -600,6 +611,13 @@ begin
   FFontPopup := TFont.Create;
   FCancelled := False;
   FPopupOpen := False;
+  FUnapplyCtrl := False;
+  FUnapplyC := False;
+  FUnapplyV := False;
+  FLastCtrlTime := 0;
+  FLastXTime := 0;
+  FLastCTime := 0;
+  FLastVTime := 0;
 
   // AllowHotKeys Initialize
   // Ctrl+Shift+A
@@ -756,6 +774,10 @@ begin
   FMouseHook.OnLeftUp := @OnHookLeftUp;
   FMouseHook.Enabled := FEnableMouseMode;
   FMouseHook.EditFieldOnly := True;
+
+  FKeyHook:=TGlobalKeyboardHook.Create;
+  FKeyHook.OnKeyEvent := @OnKeyboardEvent;
+  FKeyHook.Enabled := True;
   {$ENDIF}
 
   // Set language
@@ -770,12 +792,16 @@ begin
   TimerActive.Enabled := False;
   TimerTranslate.Enabled := False;
   TimerClick.Enabled := False;
+  if TimerUnapply.Enabled then
+    TimerUnapplyTimer(Self);
 
   {$IFDEF WINDOWS}
   UnregisterHotKeys;
 
   FMouseHook.Enabled := False;
   FreeAndNil(FMouseHook);
+  FKeyHook.Enabled:=False;
+  FreeAndNil(FKeyHook);
   {$ENDIF}
   if FFormSettingsLoaded then
     SaveFormSettings(Self);
@@ -967,6 +993,21 @@ begin
 end;
 
 { MouseHook Events}
+
+procedure TFormTrayslate.OnKeyboardEvent(Sender: TObject; const Info: TKeyboardEventInfo);
+begin
+  if not Info.IsDown then Exit;
+  if Info.IsInjected then Exit;
+
+  if Info.KeyCode = VK_CONTROL then
+    FLastCtrlTime := GetTickCount64;
+  if Info.KeyCode = Ord('C') then
+    FLastCTime := GetTickCount64;
+  if Info.KeyCode = Ord('X') then
+    FLastXTime := GetTickCount64;
+  if Info.KeyCode = Ord('V') then
+    FLastVTime := GetTickCount64;
+end;
 
 procedure TFormTrayslate.OnHookLeftDown(Sender: TObject; const Info: TMouseEventInfo);
 begin
@@ -1484,6 +1525,27 @@ begin
   TimerHideHint.Enabled := False;
   if Assigned(FHint) then
     FHint.ReleaseHandle; // Correct way to hide THintWindow
+end;
+
+procedure TformTrayslate.TimerUnapplyTimer(Sender: TObject);
+begin
+  TimerUnapply.Enabled := False;
+
+  if FUnapplyCtrl then
+  begin
+    KeyInput.Unapply([ssCtrl]);
+    FUnapplyCtrl := False;
+  end;
+  if FUnapplyC then
+  begin
+    KeyInput.Up(Ord('C'));
+    FUnapplyC := False;
+  end;
+  if FUnapplyV then
+  begin
+    KeyInput.Up(Ord('V'));
+    FUnapplyV := False;
+  end;
 end;
 
 procedure TformTrayslate.TimerTranslateTimer(Sender: TObject);
@@ -2564,21 +2626,6 @@ begin
   end;
 end;
 
-procedure TformTrayslate.SleepLoop(ALoop: integer = 0; ASleep: integer = 0; ARepaint: boolean = False);
-var
-  i: integer;
-begin
-  if ARepaint then
-    Repaint;
-
-  for i := 0 to ALoop do
-  begin
-    Application.ProcessMessages;
-    if ASleep > 0 then
-      Sleep(ASleep);
-  end;
-end;
-
 procedure TformTrayslate.SetAutoStart(Value: boolean);
 begin
   FAutoStart := Value;
@@ -2823,24 +2870,26 @@ procedure TformTrayslate.GlobalCtrlC;
 var
   ctrl, shift, alt: boolean;
 begin
+  TimerUnapply.Enabled := False;
+  ctrl := GetAsyncKeyState(VK_CONTROL) < 0;
   shift := GetAsyncKeyState(VK_SHIFT) < 0;
   alt := GetAsyncKeyState(VK_MENU) < 0;
-  ctrl := GetAsyncKeyState(VK_CONTROL) < 0;
 
+  if not ctrl then
+    KeyInput.Apply([ssCtrl]);
   if shift then
     KeyInput.Unapply([ssShift]);
   if alt then
     KeyInput.Unapply([ssAlt]);
-  if not ctrl then
-    KeyInput.Apply([ssCtrl]);
 
   KeyInput.Down(Ord('C'));
-  Sleep(5);
-  SleepLoop(100, 0);
-  KeyInput.Up(Ord('C'));
+  SleepLoop(5, 1);
 
+  FUnapplyC := True;
   if not ctrl then
-    KeyInput.Unapply([ssCtrl]);
+    FUnapplyCtrl := True;
+  TimerUnapply.Enabled := True;
+
   if shift then
     KeyInput.Apply([ssShift]);
   if alt then
@@ -2851,24 +2900,26 @@ procedure TformTrayslate.GlobalCtrlV;
 var
   ctrl, shift, alt: boolean;
 begin
+  TimerUnapply.Enabled := False;
+  ctrl := GetAsyncKeyState(VK_CONTROL) < 0;
   shift := GetAsyncKeyState(VK_SHIFT) < 0;
   alt := GetAsyncKeyState(VK_MENU) < 0;
-  ctrl := GetAsyncKeyState(VK_CONTROL) < 0;
 
+  if not ctrl then
+    KeyInput.Apply([ssCtrl]);
   if shift then
     KeyInput.Unapply([ssShift]);
   if alt then
     KeyInput.Unapply([ssAlt]);
-  if not ctrl then
-    KeyInput.Apply([ssCtrl]);
 
   KeyInput.Down(Ord('V'));
-  Sleep(5);
-  SleepLoop(100, 0);
-  KeyInput.Up(Ord('V'));
+  SleepLoop(5, 1);
 
+  FUnapplyV := True;
   if not ctrl then
-    KeyInput.Unapply([ssCtrl]);
+    FUnapplyCtrl := True;
+  TimerUnapply.Enabled := True;
+
   if shift then
     KeyInput.Apply([ssShift]);
   if alt then
@@ -3385,17 +3436,26 @@ var
   OriginalClip, SelectedText, TranslatedText: string;
 begin
   FCancelled := False;
-
-  // Save current clipboard to restore later
-  OriginalClip := Clipboard.AsText;
-  Clipboard.AsText := string.Empty;
-  Sleep(10);
   FMouseHook.Enabled := False;
   try
-    // Copy selection from active window (Ctrl+C)
-    GlobalCtrlC;
-    SelectedText := Clipboard.AsText;
-    if (SelectedText <> string.Empty) then
+    // Save current clipboard to restore later
+    OriginalClip := Clipboard.AsText;
+    Clipboard.AsText := string.Empty;
+    try
+      // Copy selection from active window (Ctrl+C)
+      GlobalCtrlC;
+      SelectedText := Clipboard.AsText;
+    finally
+      // Restore original clipboard only if one of the copy combination keys is not pressed
+      if (((GetTickCount64 - FLastCtrlTime) <= 200) and ((GetTickCount64 - FLastVTime) <= 100)) then
+        Clipboard.AsText := OriginalClip
+      else
+      if (((GetTickCount64 - FLastCtrlTime) > 200) and ((GetTickCount64 - FLastCTime) > 100) and
+        ((GetTickCount64 - FLastXTime) > 100)) then
+        Clipboard.AsText := OriginalClip
+    end;
+
+    if (Trim(SelectedText) <> string.Empty) then
     begin
       if TimerTranslate.Enabled then
         TimerTranslate.Enabled := False;
@@ -3444,8 +3504,6 @@ begin
       end;
     end;
   finally
-    // Restore original clipboard
-    Clipboard.AsText := OriginalClip;
     FMouseHook.Enabled := FEnableMouseMode;
   end;
 end;
