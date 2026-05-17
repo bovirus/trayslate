@@ -751,12 +751,24 @@ begin
 end;
 
 procedure TformSettingsTrayslate.FillMouseMode;
+var
+  SavedIndex: integer;
 begin
+  // Save current selection
+  SavedIndex := ComboMouseMode.ItemIndex;
+
   ComboMouseMode.Items.Clear;
+
   ComboMouseMode.Items.Add(rmousemodebutton);
   ComboMouseMode.Items.Add(rmousemodeballon);
   ComboMouseMode.Items.Add(rmousemodepopup);
   ComboMouseMode.Items.Add(rmousemodemain);
+
+  // Restore selection safely
+  if (SavedIndex >= 0) and (SavedIndex < ComboMouseMode.Items.Count) then
+    ComboMouseMode.ItemIndex := SavedIndex
+  else
+    ComboMouseMode.ItemIndex := Ord(formTrayslate.MouseMode);
 end;
 
 procedure TformSettingsTrayslate.SetPopup;

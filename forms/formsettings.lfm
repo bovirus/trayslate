@@ -240,6 +240,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Width = 126
             Caption = 'Enable Mouse Mode'
             TabOrder = 0
+            OnChange = SettingChange
           end
           object ComboMouseMode: TComboBox
             Left = 152
@@ -259,6 +260,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Style = csDropDownList
             TabOrder = 2
             Text = 'Show Translate Button'
+            OnChange = SettingChange
           end
           object LabelMouseMode: TLabel
             Left = 8
@@ -279,6 +281,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             HelpType = htKeyword
             Caption = 'Only When Ctrl Is Pressed'
             TabOrder = 1
+            OnChange = SettingChange
           end
         end
       end
@@ -591,7 +594,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Top = 72
             Width = 124
             Caption = 'Side-By-Side Layout'
-            TabOrder = 0
+            TabOrder = 3
             OnChange = SettingChange
           end
           object PanelFont: TPanel
@@ -606,7 +609,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             ParentBackground = False
             ParentColor = False
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 0
           end
           object BtnFont: TButton
             Left = 411
@@ -615,7 +618,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Width = 91
             Anchors = [akTop, akRight]
             Caption = 'Font...'
-            TabOrder = 2
+            TabOrder = 1
             OnClick = BtnFontClick
           end
           object BtnReset: TButton
@@ -626,7 +629,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Anchors = [akTop, akRight]
             Caption = 'Reset'
             Enabled = False
-            TabOrder = 3
+            TabOrder = 2
             OnClick = BtnResetClick
           end
         end

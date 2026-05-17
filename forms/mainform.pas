@@ -2252,6 +2252,7 @@ begin
   begin
     formSettingsTrayslate.FillListPages;
     formSettingsTrayslate.FillGridHotkeys;
+    formSettingsTrayslate.FillMouseMode;
   end;
 end;
 
