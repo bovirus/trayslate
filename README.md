@@ -47,8 +47,10 @@ The interface is available in **twenty-five widely used languages**, making it a
 - **Popup Window** — Floating translation window with quick access from anywhere
 - **Real-time Mode** — Live processing while typing with an adjustable delay  
 - **Auto Language Swap** — Optional automatic swap based on the input language  
+- **Smart Language Swap** — Automatically switches language pair if detected language is outside current pair  
 - **Tray Indicator** — Shows the current language pair and translation progress on the tray icon  
 - **Recent Pairs** — Manage and automatically save recently used language pairs  
+- **Mouse Mode** — Translate text by simply selecting it with the mouse in any application  
 - **Multilingual UI** — Interface available in twenty-five widely used languages  
 - **Dark Mode** — Supports Windows dark mode and adapts to system theme  
 
@@ -84,6 +86,24 @@ The popup window can stay on top of other windows and supports adjustable transp
 
 ---
 
+## Mouse Mode
+
+Mouse Mode allows translating text by selecting it with the mouse in any application. After selecting text, a translation action becomes available depending on the selected mode.
+
+By default, a Translate button appears after text selection. Clicking this button opens the translation result in a popup window if needed.
+
+You can configure how translation is triggered after selection:
+
+- Only When Ctrl Is Pressed — Mouse Mode is active only while holding the Ctrl key
+- Show Translate Button — Displays a translation button after selecting text (default behavior)
+- Show Balloon Translation — Shows translation in a tray balloon popup (system tray notification)
+- Show Popup Translation — Opens a floating popup window with the translation result
+- Show Main Window — Sends the selected text to the main application window for translation
+
+![popup2](samples/popup2.png)
+
+---
+
 ## Hotkeys
 
 Global hotkeys can be fully configured in the application settings. They are available at any time and work even when the application is minimized to the system tray.
@@ -113,6 +133,32 @@ Global hotkeys can be fully configured in the application settings. They are ava
 | New Translate | `Ctrl + N` |
 | Add Current Pair To Recent Panel | `Ctrl + F` |
 | Translate | `Ctrl + Enter`<br>`Shift + Enter`<br>`Double Enter`|
+
+---
+
+## Auto-Swap Languages
+
+Automatically detects the input language using the selected language detection configuration and updates the translation pair accordingly.
+
+When enabled, the application analyzes the source text language and automatically swaps the translation direction if the detected language does not match the current source language.
+
+> **Note:** This feature does not work during Real-Time Translation mode, where the language pair remains fixed for continuous processing.
+
+### Smart Language Swap
+
+Automatically adjusts the translation direction based on the detected input language and the configured Primary/Secondary language pair.
+
+If the detected language is outside the current Primary/Secondary pair:
+- The detected language becomes the new Source language
+- The Target language is set to Primary language
+
+If the detected language matches the Primary language:
+- The translation pair is restored to Primary → Secondary
+
+### Preferred Primary/Secondary Behavior
+When the detected language matches the configured Target language, the application restores the original Primary/Secondary pair instead of performing a standard swap.
+
+This ensures consistent behavior and keeps the preferred language pair as the default translation direction.
 
 ---
 
