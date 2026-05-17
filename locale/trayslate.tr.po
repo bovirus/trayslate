@@ -81,7 +81,7 @@ msgstr "Ana uygulama penceresini gösterir veya gizler"
 #: formsettings.rdefaultfont
 msgctxt "formsettings.rdefaultfont"
 msgid "Default"
-msgstr ""
+msgstr "Varsayılan"
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
@@ -90,20 +90,20 @@ msgstr "Genel kısayol tuşları"
 
 #: formsettings.rmousemodeballon
 msgid "Show Balloon Translation"
-msgstr ""
+msgstr "Balon çeviriyi göster"
 
 #: formsettings.rmousemodebutton
 msgctxt "formsettings.rmousemodebutton"
 msgid "Show Translate Button"
-msgstr ""
+msgstr "Çeviri düğmesini göster"
 
 #: formsettings.rmousemodemain
 msgid "Show Main Window"
-msgstr ""
+msgstr "Ana pencereyi göster"
 
 #: formsettings.rmousemodepopup
 msgid "Show Popup Translation"
-msgstr ""
+msgstr "Açılır çeviriyi göster"
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
@@ -333,7 +333,7 @@ msgstr ""
 #: tformbuttontrayslate.sbtranslate.hint
 msgctxt "tformbuttontrayslate.sbtranslate.hint"
 msgid "Translate in Popup"
-msgstr ""
+msgstr "Açılır pencerede çevir"
 
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
@@ -815,11 +815,11 @@ msgstr "Giriş dilini otomatik algıla ve gerekiyorsa çifti değiştir, Gerçek
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
-msgstr ""
+msgstr "Fare modunu etkinleştir"
 
 #: tformsettingstrayslate.checkenablemousemode.hint
 msgid "Allows translation by selecting text with the mouse in any application"
-msgstr ""
+msgstr "Herhangi bir uygulamada fare ile metin seçerek çeviri yapılmasını sağlar"
 
 #: tformsettingstrayslate.checkhidecontrols.caption
 msgid "Auto-Hide Controls"
@@ -832,11 +832,11 @@ msgstr "Fare açılır pencerenin üzerinde değilken kontrolleri gizle"
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"
-msgstr ""
+msgstr "Sadece Ctrl basılıyken"
 
 #: tformsettingstrayslate.checkmousemodectrl.hint
 msgid "Works only when the Ctrl key is pressed"
-msgstr ""
+msgstr "Yalnızca Ctrl tuşu basılıyken çalışır"
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -850,18 +850,20 @@ msgstr "Yazarken metni otomatik çevir"
 
 #: tformsettingstrayslate.checksmarthard.caption
 msgid "Always Prefer Primary/Secondary Language"
-msgstr ""
+msgstr "Her zaman birincil/ikincil dili tercih et"
 
 #: tformsettingstrayslate.checksmarthard.hint
 msgid ""
 "Always prefer the Primary/Secondary language pair when the detected language matches the current target language.\n"
 "Restore the configured pair instead of performing a normal swap."
 msgstr ""
+"Algılanan dil mevcut hedef dile eşleştiğinde her zaman birincil/ikincil dil çiftini tercih et.\n"
+"Normal değiştirme yerine yapılandırılmış çifti geri yükle."
 
 #: tformsettingstrayslate.checksmartswap.caption
 msgctxt "tformsettingstrayslate.checksmartswap.caption"
 msgid "Smart Swap For Languages Outside Pair"
-msgstr ""
+msgstr "Çift dışı diller için akıllı değişim"
 
 #: tformsettingstrayslate.checksmartswap.hint
 msgctxt "tformsettingstrayslate.checksmartswap.hint"
@@ -869,6 +871,8 @@ msgid ""
 "If Detected language is outside the current pair, the Source language is replaced with the Detected language and the Target language is set to Primary.\n"
 "If Detected language equals Primary, the translation pair is set to Primary - Secondary."
 msgstr ""
+"Algılanan dil mevcut hedef dile eşleştiğinde her zaman birincil/ikincil dil çiftini tercih et.\n"
+"Normal değiştirme yerine yapılandırılmış çifti geri yükle."
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
@@ -889,26 +893,24 @@ msgstr "Sistem tepsisindeki simgede kaynak ve/veya hedef dili göster"
 #: tformsettingstrayslate.checkverticalsplit.caption
 msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
 msgid "Side-By-Side Layout"
-msgstr ""
+msgstr "Yan yana düzen"
 
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
-msgstr ""
+msgstr "Kaynak metni çevirinin yanında gösteren yan yana düzene geçer"
 
 #: tformsettingstrayslate.combolangdetect.hint
-#, fuzzy
-#| msgid "Config that auto-detects the target language for the selected language pair"
 msgid "Config that auto-detects language for the source text"
-msgstr "Seçilen dil çifti için hedef dili otomatik algılayan yapılandırma"
+msgstr "Kaynak metin dilini otomatik algılayan yapılandırma"
 
 #: tformsettingstrayslate.combomousemode.hint
 msgid "Choose how translation appears on mouse text selection"
-msgstr ""
+msgstr "Fare ile metin seçildiğinde çevirinin nasıl görüneceğini seç"
 
 #: tformsettingstrayslate.combomousemode.text
 msgctxt "tformsettingstrayslate.combomousemode.text"
 msgid "Show Translate Button"
-msgstr ""
+msgstr "Çeviri düğmesini göster"
 
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
@@ -935,12 +937,12 @@ msgstr "Son Dil Çiftleri"
 
 #: tformsettingstrayslate.groupmainwindow.caption
 msgid "Main Window"
-msgstr ""
+msgstr "Ana pencere"
 
 #: tformsettingstrayslate.groupmousemode.caption
 msgctxt "tformsettingstrayslate.groupmousemode.caption"
 msgid "Mouse Mode"
-msgstr ""
+msgstr "Fare modu"
 
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
@@ -984,7 +986,7 @@ msgstr "Maks. Çift"
 #: tformsettingstrayslate.labelmousemode.caption
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
-msgstr ""
+msgstr "Fare modu"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"
@@ -996,7 +998,7 @@ msgstr "Boşta opaklık"
 
 #: tformsettingstrayslate.labelprimarylang.caption
 msgid "Primary Language"
-msgstr ""
+msgstr "Birincil dil"
 
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
@@ -1004,7 +1006,7 @@ msgstr "Çeviri Gecikmesi, ms"
 
 #: tformsettingstrayslate.labelsecondarylang.caption
 msgid "Secondary Language"
-msgstr ""
+msgstr "İkincil dil"
 
 #: tformsettingstrayslate.pagegeneral.caption
 msgid "General"
@@ -1091,7 +1093,7 @@ msgstr "Genel kısayol tuşlarını etkinleştir"
 #: tformtrayslate.afastautoaddlangpairs.caption
 msgctxt "tformtrayslate.afastautoaddlangpairs.caption"
 msgid "Auto-Add Recent Language Pairs"
-msgstr ""
+msgstr "Son kullanılan dil çiftlerini otomatik ekle"
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
@@ -1101,17 +1103,17 @@ msgstr "Dil Çiftini Otomatik Değiştir"
 #: tformtrayslate.afastenablemousemode.caption
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
-msgstr ""
+msgstr "Fare modunu etkinleştir"
 
 #: tformtrayslate.afasthidecontrols.caption
 msgctxt "tformtrayslate.afasthidecontrols.caption"
 msgid "Auto-Hide Popup Controls"
-msgstr ""
+msgstr "Açılır kontrolleri otomatik gizle"
 
 #: tformtrayslate.afastmousemodectrl.caption
 msgctxt "tformtrayslate.afastmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"
-msgstr ""
+msgstr "Sadece Ctrl basılıyken"
 
 #: tformtrayslate.afastrealtime.caption
 msgctxt "tformtrayslate.afastrealtime.caption"
@@ -1121,7 +1123,7 @@ msgstr "Yazarken Çevir"
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"
 msgid "Side-By-Side Layout"
-msgstr ""
+msgstr "Yan yana düzen"
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
@@ -1273,7 +1275,7 @@ msgstr "Yapılandırma"
 
 #: tformtrayslate.menufastsettings.caption
 msgid "Quick Settings"
-msgstr ""
+msgstr "Hızlı ayarlar"
 
 #: tformtrayslate.menuhelp.caption
 msgid "Help"
@@ -1287,4 +1289,3 @@ msgstr "Son Çiftler"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
-

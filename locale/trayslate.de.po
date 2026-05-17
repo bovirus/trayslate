@@ -81,7 +81,7 @@ msgstr "Zeigt oder verbirgt das Hauptfenster der Anwendung"
 #: formsettings.rdefaultfont
 msgctxt "formsettings.rdefaultfont"
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
@@ -90,20 +90,20 @@ msgstr "Globale Tastenkürzel"
 
 #: formsettings.rmousemodeballon
 msgid "Show Balloon Translation"
-msgstr ""
+msgstr "Ballonübersetzung anzeigen"
 
 #: formsettings.rmousemodebutton
 msgctxt "formsettings.rmousemodebutton"
 msgid "Show Translate Button"
-msgstr ""
+msgstr "Übersetzen-Schaltfläche anzeigen"
 
 #: formsettings.rmousemodemain
 msgid "Show Main Window"
-msgstr ""
+msgstr "Hauptfenster anzeigen"
 
 #: formsettings.rmousemodepopup
 msgid "Show Popup Translation"
-msgstr ""
+msgstr "Popup-Übersetzung anzeigen"
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
@@ -333,7 +333,7 @@ msgstr ""
 #: tformbuttontrayslate.sbtranslate.hint
 msgctxt "tformbuttontrayslate.sbtranslate.hint"
 msgid "Translate in Popup"
-msgstr ""
+msgstr "Im Popup übersetzen"
 
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
@@ -815,11 +815,11 @@ msgstr "Erkennt automatisch die Eingabesprache und tauscht das Paar bei Bedarf, 
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
-msgstr ""
+msgstr "Mausmodus aktivieren"
 
 #: tformsettingstrayslate.checkenablemousemode.hint
 msgid "Allows translation by selecting text with the mouse in any application"
-msgstr ""
+msgstr "Ermöglicht Übersetzung durch Textauswahl mit der Maus in jeder Anwendung"
 
 #: tformsettingstrayslate.checkhidecontrols.caption
 msgid "Auto-Hide Controls"
@@ -832,11 +832,11 @@ msgstr "Fenstersteuerung ausblenden, wenn sich die Maus nicht über dem Popup-Fe
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"
-msgstr ""
+msgstr "Nur wenn Strg gedrückt ist"
 
 #: tformsettingstrayslate.checkmousemodectrl.hint
 msgid "Works only when the Ctrl key is pressed"
-msgstr ""
+msgstr "Funktioniert nur bei gedrückter Strg-Taste"
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
@@ -850,18 +850,20 @@ msgstr "Übersetzt Text automatisch während der Eingabe"
 
 #: tformsettingstrayslate.checksmarthard.caption
 msgid "Always Prefer Primary/Secondary Language"
-msgstr ""
+msgstr "Immer Primär-/Sekundärsprache bevorzugen"
 
 #: tformsettingstrayslate.checksmarthard.hint
 msgid ""
 "Always prefer the Primary/Secondary language pair when the detected language matches the current target language.\n"
 "Restore the configured pair instead of performing a normal swap."
 msgstr ""
+"Immer das Primär-/Sekundär-Sprachpaar verwenden, wenn die erkannte Sprache der aktuellen Zielsprache entspricht.\n"
+"Das konfigurierte Paar wiederherstellen statt normal zu tauschen."
 
 #: tformsettingstrayslate.checksmartswap.caption
 msgctxt "tformsettingstrayslate.checksmartswap.caption"
 msgid "Smart Swap For Languages Outside Pair"
-msgstr ""
+msgstr "Intelligenter Tausch für Sprachen außerhalb des Paars"
 
 #: tformsettingstrayslate.checksmartswap.hint
 msgctxt "tformsettingstrayslate.checksmartswap.hint"
@@ -869,6 +871,8 @@ msgid ""
 "If Detected language is outside the current pair, the Source language is replaced with the Detected language and the Target language is set to Primary.\n"
 "If Detected language equals Primary, the translation pair is set to Primary - Secondary."
 msgstr ""
+"Liegt die erkannte Sprache außerhalb des aktuellen Paars, wird die Quellsprache ersetzt und die Zielsprache auf Primär gesetzt.\n"
+"Ist die erkannte Sprache Primär, wird das Paar auf Primär - Sekundär gesetzt."
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
@@ -889,26 +893,24 @@ msgstr "Zeigt Quell- und/oder Zielsprache auf dem Tray-Symbol an"
 #: tformsettingstrayslate.checkverticalsplit.caption
 msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
 msgid "Side-By-Side Layout"
-msgstr ""
+msgstr "Nebeneinander-Layout"
 
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
-msgstr ""
+msgstr "Wechselt zum Nebeneinander-Layout mit Quelltext neben der Übersetzung"
 
 #: tformsettingstrayslate.combolangdetect.hint
-#, fuzzy
-#| msgid "Config that auto-detects the target language for the selected language pair"
 msgid "Config that auto-detects language for the source text"
-msgstr "Konfiguration, die automatisch die Zielsprache für das ausgewählte Sprachpaar erkennt"
+msgstr "Einstellung zur automatischen Erkennung der Quellsprache"
 
 #: tformsettingstrayslate.combomousemode.hint
 msgid "Choose how translation appears on mouse text selection"
-msgstr ""
+msgstr "Wählen, wie die Übersetzung bei Textauswahl mit der Maus erscheint"
 
 #: tformsettingstrayslate.combomousemode.text
 msgctxt "tformsettingstrayslate.combomousemode.text"
 msgid "Show Translate Button"
-msgstr ""
+msgstr "Übersetzen-Schaltfläche anzeigen"
 
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
@@ -935,12 +937,12 @@ msgstr "Letzte Sprachpaare"
 
 #: tformsettingstrayslate.groupmainwindow.caption
 msgid "Main Window"
-msgstr ""
+msgstr "Hauptfenster"
 
 #: tformsettingstrayslate.groupmousemode.caption
 msgctxt "tformsettingstrayslate.groupmousemode.caption"
 msgid "Mouse Mode"
-msgstr ""
+msgstr "Mausmodus"
 
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
@@ -984,7 +986,7 @@ msgstr "Max. Paare"
 #: tformsettingstrayslate.labelmousemode.caption
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
-msgstr ""
+msgstr "Mausmodus"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"
@@ -996,7 +998,7 @@ msgstr "Deckkraft im Leerlauf"
 
 #: tformsettingstrayslate.labelprimarylang.caption
 msgid "Primary Language"
-msgstr ""
+msgstr "Primärsprache"
 
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
@@ -1004,7 +1006,7 @@ msgstr "Übersetzungs- verzögerung, ms"
 
 #: tformsettingstrayslate.labelsecondarylang.caption
 msgid "Secondary Language"
-msgstr ""
+msgstr "Sekundärsprache"
 
 #: tformsettingstrayslate.pagegeneral.caption
 msgid "General"
@@ -1091,7 +1093,7 @@ msgstr "Globale Tastenkürzel aktivieren"
 #: tformtrayslate.afastautoaddlangpairs.caption
 msgctxt "tformtrayslate.afastautoaddlangpairs.caption"
 msgid "Auto-Add Recent Language Pairs"
-msgstr ""
+msgstr "Neueste Sprachpaare automatisch hinzufügen"
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
@@ -1101,17 +1103,17 @@ msgstr "Sprachpaar automatisch tauschen"
 #: tformtrayslate.afastenablemousemode.caption
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
-msgstr ""
+msgstr "Mausmodus aktivieren"
 
 #: tformtrayslate.afasthidecontrols.caption
 msgctxt "tformtrayslate.afasthidecontrols.caption"
 msgid "Auto-Hide Popup Controls"
-msgstr ""
+msgstr "Popup-Steuerelemente automatisch ausblenden"
 
 #: tformtrayslate.afastmousemodectrl.caption
 msgctxt "tformtrayslate.afastmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"
-msgstr ""
+msgstr "Nur wenn Strg gedrückt ist"
 
 #: tformtrayslate.afastrealtime.caption
 msgctxt "tformtrayslate.afastrealtime.caption"
@@ -1121,7 +1123,7 @@ msgstr "Übersetzen während der Eingabe"
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"
 msgid "Side-By-Side Layout"
-msgstr ""
+msgstr "Nebeneinander-Layout"
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
@@ -1273,7 +1275,7 @@ msgstr "Konfiguration"
 
 #: tformtrayslate.menufastsettings.caption
 msgid "Quick Settings"
-msgstr ""
+msgstr "Schnelleinstellungen"
 
 #: tformtrayslate.menuhelp.caption
 msgid "Help"
@@ -1287,4 +1289,3 @@ msgstr "Letzte Paare"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
-

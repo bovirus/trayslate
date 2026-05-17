@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.8\n"
 
 #: formconfig.rcaption
 msgctxt "formconfig.rcaption"
@@ -277,7 +277,7 @@ msgstr "от Александър Тверской е лицензирано п�
 
 #: tformabouttrayslate.labelby1.caption
 msgid "the GNU General Public License, Version 3"
-msgstr "общият публичен лиценз на GNU, версия 3 "
+msgstr "общият публичен лиценз на GNU, версия 3"
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
@@ -857,8 +857,7 @@ msgid ""
 "Always prefer the Primary/Secondary language pair when the detected language matches the current target language.\n"
 "Restore the configured pair instead of performing a normal swap."
 msgstr ""
-"Винаги предпочитай\n"
-" двойката основни/вторични езици, когато откритият език съвпада с текущия целеви език.\n"
+"Винаги предпочитай двойката основни/вторични езици, когато откритият език съвпада с текущия целеви език.\n"
 "Възстанови конфигурираната двойка, вместо нормална размяна."
 
 #: tformsettingstrayslate.checksmartswap.caption
@@ -901,8 +900,6 @@ msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Превключи към оформление едно до друго с изходен текст до превода"
 
 #: tformsettingstrayslate.combolangdetect.hint
-#, fuzzy
-#| msgid "Config that auto-detects the target language for the selected language pair"
 msgid "Config that auto-detects language for the source text"
 msgstr "Конфигурация, която автоматично разпознава езика за изходния текст"
 
