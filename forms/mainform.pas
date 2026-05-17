@@ -777,7 +777,7 @@ begin
 
   FKeyHook:=TGlobalKeyboardHook.Create;
   FKeyHook.OnKeyEvent := @OnKeyboardEvent;
-  FKeyHook.Enabled := True;
+  FKeyHook.Enabled := FEnableMouseMode;
   {$ENDIF}
 
   // Set language
@@ -1117,6 +1117,7 @@ begin
     RegisterHotKeys;
     SetHints;
     FMouseHook.Enabled := FEnableMouseMode;
+    FKeyHook.Enabled := FEnableMouseMode;
 
     if Assigned(formPopupTrayslate) then
       formPopupTrayslate.UpdateStayOnTop(0);
@@ -1263,6 +1264,7 @@ procedure TformTrayslate.aFastEnableMouseModeExecute(Sender: TObject);
 begin
   EnableMouseMode := aFastEnableMouseMode.Checked;
   FMouseHook.Enabled := EnableMouseMode;
+  FKeyHook.Enabled := EnableMouseMode;
 end;
 
 procedure TformTrayslate.aFastHideControlsExecute(Sender: TObject);
