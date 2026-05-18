@@ -190,6 +190,8 @@ type
     FHotKeyRecent8: THotKeyData;
     FHotKeyRecent9: THotKeyData;
 
+    FApplySettings: boolean;
+
     procedure SetPanelFont(Panel: TPanel; const AFont: TFont);
   public
     procedure Apply;
@@ -200,6 +202,8 @@ type
     procedure FillGridHotkeys;
     procedure FillMouseMode;
     procedure SetPopup;
+
+    property ApplySettings: boolean read FApplySettings write FApplySettings;
   end;
 
 var
@@ -276,6 +280,7 @@ begin
   BtnCancel.Cancel := True;
   BtnReset.Enabled := True;
   BtnResetPopup.Enabled := True;
+  FApplySettings := False;
 
   ComboLangDetect.Items.Clear;
   ComboLangDetect.Items.Add(string.Empty);
@@ -595,7 +600,31 @@ begin
   begin
     TrackOpacityIdle.Position := SpinIdle.Value;
     SetPopup;
-  end;
+  end
+  else
+  if Sender = CheckAutoAddLangPairs then
+    formTrayslate.aFastAutoAddLangPairs.Checked := CheckAutoAddLangPairs.Checked
+  else
+  if Sender = CheckAutoSwap then
+    formTrayslate.aFastAutoSwap.Checked := CheckAutoSwap.Checked
+  else
+  if Sender = CheckAllowHotkeys then
+    formTrayslate.aFastAllowHotkeys.Checked := CheckAllowHotkeys.Checked
+  else
+  if Sender = CheckEnableMouseMode then
+    formTrayslate.aFastEnableMouseMode.Checked := CheckEnableMouseMode.Checked
+  else
+  if Sender = CheckHideControls then
+    formTrayslate.aFastHideControls.Checked := CheckHideControls.Checked
+  else
+  if Sender = CheckMouseModeCtrl then
+    formTrayslate.aFastMouseModeCtrl.Checked := CheckMouseModeCtrl.Checked
+  else
+  if Sender = CheckRealTime then
+    formTrayslate.aFastRealTime.Checked := CheckRealTime.Checked
+  else
+  if Sender = CheckVerticalSplit then
+    formTrayslate.aFastVerticalSplit.Checked := CheckVerticalSplit.Checked;
 end;
 
 procedure TformSettingsTrayslate.SplitterPagesMoved(Sender: TObject);
@@ -782,73 +811,76 @@ end;
 
 procedure TformSettingsTrayslate.Apply;
 begin
-  formTrayslate.AutoStart := CheckAutostart.Checked;
-  formTrayslate.MaxLangPairs := SpinMaxLangPairs.Value;
-  formTrayslate.AutoAddLangPairs := CheckAutoAddLangPairs.Checked;
-  formTrayslate.AllowHotKeys := CheckAllowHotkeys.Checked;
-  formTrayslate.RealTime := CheckRealTime.Checked;
-  formTrayslate.RealTimeDelay := SpinRealTimeDelay.Value;
-  formTrayslate.AutoSwap := CheckAutoSwap.Checked;
-  formTrayslate.SmartSwap := CheckSmartSwap.Checked;
-  formTrayslate.SmartHard := CheckSmartHard.Checked;
-  formTrayslate.PrimaryLang := ExtractCodeFromItem(ComboPrimaryLang.Text);
-  formTrayslate.SecondaryLang := ExtractCodeFromItem(ComboSecondaryLang.Text);
-  formTrayslate.EnableMouseMode := CheckEnableMouseMode.Checked;
-  formTrayslate.MouseModeCtrl := CheckMouseModeCtrl.Checked;
-  formTrayslate.MouseMode := TMouseMode(ComboMouseMode.ItemIndex);
-  formTrayslate.VerticalSplit := CheckVerticalSplit.Checked;
-  formTrayslate.StayOnTop := CheckStayOnTop.Checked;
-  formTrayslate.HideControls := CheckHideControls.Checked;
-  formTrayslate.OpacityHover := TrackOpacityHover.Position;
-  formTrayslate.OpacityIdle := TrackOpacityIdle.Position;
+  FApplySettings := True;
+  try
+    formTrayslate.AutoStart := CheckAutostart.Checked;
+    formTrayslate.MaxLangPairs := SpinMaxLangPairs.Value;
+    formTrayslate.AutoAddLangPairs := CheckAutoAddLangPairs.Checked;
+    formTrayslate.AllowHotKeys := CheckAllowHotkeys.Checked;
+    formTrayslate.RealTime := CheckRealTime.Checked;
+    formTrayslate.RealTimeDelay := SpinRealTimeDelay.Value;
+    formTrayslate.AutoSwap := CheckAutoSwap.Checked;
+    formTrayslate.SmartSwap := CheckSmartSwap.Checked;
+    formTrayslate.SmartHard := CheckSmartHard.Checked;
+    formTrayslate.PrimaryLang := ExtractCodeFromItem(ComboPrimaryLang.Text);
+    formTrayslate.SecondaryLang := ExtractCodeFromItem(ComboSecondaryLang.Text);
+    formTrayslate.EnableMouseMode := CheckEnableMouseMode.Checked;
+    formTrayslate.MouseModeCtrl := CheckMouseModeCtrl.Checked;
+    formTrayslate.MouseMode := TMouseMode(ComboMouseMode.ItemIndex);
+    formTrayslate.VerticalSplit := CheckVerticalSplit.Checked;
+    formTrayslate.StayOnTop := CheckStayOnTop.Checked;
+    formTrayslate.HideControls := CheckHideControls.Checked;
+    formTrayslate.OpacityHover := TrackOpacityHover.Position;
+    formTrayslate.OpacityIdle := TrackOpacityIdle.Position;
 
-  if ComboLangDetect.ItemIndex > 0 then
-    formTrayslate.ConfigLangDetect := formTrayslate.ConfigFiles[ComboLangDetect.ItemIndex - 1]
-  else
-    formTrayslate.ConfigLangDetect := string.Empty;
-  formTrayslate.Font.Assign(PanelFont.Font);
-  formTrayslate.FontPopup.Assign(PanelFontPopup.Font);
-  formTrayslate.IconBackgroundColor := ColorIconBackground.Selected;
-  formTrayslate.IconFontColor := ColorIconFont.Selected;
-  formTrayslate.IconFontName := ComboIconFontName.Text;
-  formTrayslate.IconTwoLang := CheckTwoLang.Checked;
-  formTrayslate.SetIcon;
+    if ComboLangDetect.ItemIndex > 0 then
+      formTrayslate.ConfigLangDetect := formTrayslate.ConfigFiles[ComboLangDetect.ItemIndex - 1]
+    else
+      formTrayslate.ConfigLangDetect := string.Empty;
+    formTrayslate.Font.Assign(PanelFont.Font);
+    formTrayslate.FontPopup.Assign(PanelFontPopup.Font);
+    formTrayslate.IconBackgroundColor := ColorIconBackground.Selected;
+    formTrayslate.IconFontColor := ColorIconFont.Selected;
+    formTrayslate.IconFontName := ComboIconFontName.Text;
+    formTrayslate.IconTwoLang := CheckTwoLang.Checked;
+    formTrayslate.SetIcon;
 
-  formTrayslate.HotKeyApp := FHotKeyApp;
-  formTrayslate.HotKeyTransSwap := FHotKeyTransSwap;
-  formTrayslate.HotKeyTransFromClipboard := FHotKeyTransFromClipboard;
-  formTrayslate.HotKeyTransClipboard := FHotKeyTransClipboard;
-  formTrayslate.HotKeyTransClipboardPopup := FHotKeyTransClipboardPopup;
-  formTrayslate.HotKeyTransFromControl := FHotKeyTransFromControl;
-  formTrayslate.HotKeyTransControl := FHotKeyTransControl;
-  formTrayslate.HotKeyTransControlPopup := FHotKeyTransControlPopup;
-  formTrayslate.HotKeyRecent1 := FHotKeyRecent1;
-  formTrayslate.HotKeyRecent2 := FHotKeyRecent2;
-  formTrayslate.HotKeyRecent3 := FHotKeyRecent3;
-  formTrayslate.HotKeyRecent4 := FHotKeyRecent4;
-  formTrayslate.HotKeyRecent5 := FHotKeyRecent5;
-  formTrayslate.HotKeyRecent6 := FHotKeyRecent6;
-  formTrayslate.HotKeyRecent7 := FHotKeyRecent7;
-  formTrayslate.HotKeyRecent8 := FHotKeyRecent8;
-  formTrayslate.HotKeyRecent9 := FHotKeyRecent9;
+    formTrayslate.HotKeyApp := FHotKeyApp;
+    formTrayslate.HotKeyTransSwap := FHotKeyTransSwap;
+    formTrayslate.HotKeyTransFromClipboard := FHotKeyTransFromClipboard;
+    formTrayslate.HotKeyTransClipboard := FHotKeyTransClipboard;
+    formTrayslate.HotKeyTransClipboardPopup := FHotKeyTransClipboardPopup;
+    formTrayslate.HotKeyTransFromControl := FHotKeyTransFromControl;
+    formTrayslate.HotKeyTransControl := FHotKeyTransControl;
+    formTrayslate.HotKeyTransControlPopup := FHotKeyTransControlPopup;
+    formTrayslate.HotKeyRecent1 := FHotKeyRecent1;
+    formTrayslate.HotKeyRecent2 := FHotKeyRecent2;
+    formTrayslate.HotKeyRecent3 := FHotKeyRecent3;
+    formTrayslate.HotKeyRecent4 := FHotKeyRecent4;
+    formTrayslate.HotKeyRecent5 := FHotKeyRecent5;
+    formTrayslate.HotKeyRecent6 := FHotKeyRecent6;
+    formTrayslate.HotKeyRecent7 := FHotKeyRecent7;
+    formTrayslate.HotKeyRecent8 := FHotKeyRecent8;
+    formTrayslate.HotKeyRecent9 := FHotKeyRecent9;
 
-  formTrayslate.ComboSource.SelLength := 0;
-  formTrayslate.ComboTarget.SelLength := 0;
+    formTrayslate.ComboSource.SelLength := 0;
+    formTrayslate.ComboTarget.SelLength := 0;
 
-  if Assigned(formPopupTrayslate) then
-  begin
-    formPopupTrayslate.Font.Assign(PanelFontPopup.Font);
-    formPopupTrayslate.PanelWatermark.Font.Size := PanelFontPopup.Font.Size;
-    formPopupTrayslate.PanelWatermark.Font.Name := PanelFontPopup.Font.Name;
+    if Assigned(formPopupTrayslate) then
+    begin
+      formPopupTrayslate.Font.Assign(PanelFontPopup.Font);
+      formPopupTrayslate.PanelWatermark.Font.Size := PanelFontPopup.Font.Size;
+      formPopupTrayslate.PanelWatermark.Font.Name := PanelFontPopup.Font.Name;
+    end;
+
+    Reset;
+    formTrayslate.TimerTranslate.Interval := Max(formTrayslate.RealTimeDelay, 1);
+    formTrayslate.LoadConfig;
+    formTrayslate.DoRealign(0);
+    Application.QueueAsyncCall(@formTrayslate.RebuildLangPairsPanel, 0);
+  finally
+    FApplySettings := False;
   end;
-
-  Reset;
-  formTrayslate.TimerTranslate.Interval := Max(formTrayslate.RealTimeDelay, 1);
-  formTrayslate.LoadConfig;
-  formTrayslate.SetVerticalMode;
-  formTrayslate.DoRealign(0);
-  formTrayslate.DoRealignSplit(0);
-  Application.QueueAsyncCall(@formTrayslate.RebuildLangPairsPanel, 0);
 end;
 
 procedure TformSettingsTrayslate.Reset;

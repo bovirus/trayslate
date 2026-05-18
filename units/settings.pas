@@ -404,13 +404,13 @@ begin
           Form.MaxLangPairs := JSONObj.FindPath('MaxLangPairs').AsInteger;
 
         if (JSONObj.FindPath('RealTime') <> nil) then
-          Form.RealTime := JSONObj.FindPath('RealTime').AsBoolean;
+          Form.FRealTime := JSONObj.FindPath('RealTime').AsBoolean;
 
         if (JSONObj.FindPath('RealTimeDelay') <> nil) then
           Form.RealTimeDelay := JSONObj.FindPath('RealTimeDelay').AsInteger;
 
         if (JSONObj.FindPath('AutoSwap') <> nil) then
-          Form.AutoSwap := JSONObj.FindPath('AutoSwap').AsBoolean;
+          Form.FAutoSwap := JSONObj.FindPath('AutoSwap').AsBoolean;
 
         if (JSONObj.FindPath('SmartSwap') <> nil) then
           Form.SmartSwap := JSONObj.FindPath('SmartSwap').AsBoolean;
@@ -425,22 +425,22 @@ begin
           Form.SecondaryLang := JSONObj.FindPath('SecondaryLang').AsString;
 
         if (JSONObj.FindPath('EnableMouseMode') <> nil) then
-          Form.EnableMouseMode := JSONObj.FindPath('EnableMouseMode').AsBoolean;
+          Form.FEnableMouseMode := JSONObj.FindPath('EnableMouseMode').AsBoolean;
 
         if (JSONObj.FindPath('MouseModeCtrl') <> nil) then
-          Form.MouseModeCtrl := JSONObj.FindPath('MouseModeCtrl').AsBoolean;
+          Form.FMouseModeCtrl := JSONObj.FindPath('MouseModeCtrl').AsBoolean;
 
         if (JSONObj.FindPath('MouseMode') <> nil) then
           Form.MouseMode := TMouseMode(JSONObj.FindPath('MouseMode').AsInteger);
 
         if (JSONObj.FindPath('VerticalSplit') <> nil) then
-          Form.VerticalSplit := JSONObj.FindPath('VerticalSplit').AsBoolean;
+          Form.FVerticalSplit := JSONObj.FindPath('VerticalSplit').AsBoolean;
 
         if (JSONObj.FindPath('StayOnTop') <> nil) then
           Form.StayOnTop := JSONObj.FindPath('StayOnTop').AsBoolean;
 
         if (JSONObj.FindPath('HideControls') <> nil) then
-          Form.HideControls := JSONObj.FindPath('HideControls').AsBoolean;
+          Form.FHideControls := JSONObj.FindPath('HideControls').AsBoolean;
 
         if (JSONObj.FindPath('OpacityHover') <> nil) then
           Form.OpacityHover := JSONObj.FindPath('OpacityHover').AsInteger;
@@ -449,10 +449,10 @@ begin
           Form.OpacityIdle := JSONObj.FindPath('OpacityIdle').AsInteger;
 
         if (JSONObj.FindPath('AutoAddLangPairs') <> nil) then
-          Form.AutoAddLangPairs := JSONObj.FindPath('AutoAddLangPairs').AsBoolean;
+          Form.FAutoAddLangPairs := JSONObj.FindPath('AutoAddLangPairs').AsBoolean;
 
         if (JSONObj.FindPath('AllowHotKeys') <> nil) then
-          Form.AllowHotKeys := JSONObj.FindPath('AllowHotKeys').AsBoolean;
+          Form.FAllowHotKeys := JSONObj.FindPath('AllowHotKeys').AsBoolean;
 
         if (JSONObj.FindPath('AutoCheckUpdates') <> nil) then
           Form.AutoCheckUpdates := JSONObj.FindPath('AutoCheckUpdates').AsBoolean;

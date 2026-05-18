@@ -325,21 +325,13 @@ type
     FLangSource: string;
     FLangTarget: string;
     FMaxLangPairs: integer;
-    FAutoAddLangPairs: boolean;
-    FAllowHotKeys: boolean;
-    FRealTime: boolean;
     FRealTimeDelay: integer;
-    FAutoSwap: boolean;
     FSmartSwap: boolean;
     FSmartHard: boolean;
     FPrimaryLang: string;
     FSecondaryLang: string;
-    FEnableMouseMode: boolean;
-    FMouseModeCtrl: boolean;
     FMouseMode: TMouseMode;
-    FVerticalSplit: boolean;
     FStayOnTop: boolean;
-    FHideControls: boolean;
     FOpacityHover: integer;
     FOpacityIdle: integer;
     FAutoCheckUpdates: boolean;
@@ -387,6 +379,15 @@ type
     FIconTwoLang: boolean;
 
     procedure SetAutoStart(Value: boolean);
+    procedure SetAutoAddLangPairs(Value: boolean);
+    procedure SetAutoSwap(Value: boolean);
+    procedure SetAllowHotkeys(Value: boolean);
+    procedure SetEnableMouseMode(Value: boolean);
+    procedure SetHideControls(Value: boolean);
+    procedure SetMouseModeCtrl(Value: boolean);
+    procedure SetRealTime(Value: boolean);
+    procedure SetVerticalSplit(Value: boolean);
+
     procedure ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
     procedure ChangeTargetLang(NewLang: string; AddRecentPairs: boolean = True);
     function SwapLanguages(ASwapTranslate: boolean = False; AddRecentPairs: boolean = True): boolean;
@@ -402,6 +403,15 @@ type
     procedure WndProc(var TheMessage: TLMessage); override;
     {$ENDIF}
   public
+    FAutoAddLangPairs: boolean;
+    FAllowHotKeys: boolean;
+    FRealTime: boolean;
+    FAutoSwap: boolean;
+    FEnableMouseMode: boolean;
+    FMouseModeCtrl: boolean;
+    FHideControls: boolean;
+    FVerticalSplit: boolean;
+
     procedure LoadConfig(SetDefault: boolean = True);
     procedure BuildConfigMenu;
     procedure RebuildLangPairsPanel(Data: PtrInt);
@@ -463,22 +473,22 @@ type
     property LangTarget: string read FLangTarget write FLangTarget;
     property LangPairs: TStringList read FLangPairs write FLangPairs;
     property MaxLangPairs: integer read FMaxLangPairs write FMaxLangPairs;
-    property AutoAddLangPairs: boolean read FAutoAddLangPairs write FAutoAddLangPairs;
-    property AllowHotKeys: boolean read FAllowHotKeys write FAllowHotKeys;
-    property RealTime: boolean read FRealTime write FRealTime;
+    property AutoAddLangPairs: boolean read FAutoAddLangPairs write SetAutoAddLangPairs;
+    property AllowHotKeys: boolean read FAllowHotKeys write SetAllowHotKeys;
+    property RealTime: boolean read FRealTime write SetRealTime;
     property RealTimeDelay: integer read FRealTimeDelay write FRealTimeDelay;
-    property AutoSwap: boolean read FAutoSwap write FAutoSwap;
+    property AutoSwap: boolean read FAutoSwap write SetAutoSwap;
     property SmartSwap: boolean read FSmartSwap write FSmartSwap;
     property SmartHard: boolean read FSmartHard write FSmartHard;
     property PrimaryLang: string read FPrimaryLang write FPrimaryLang;
     property SecondaryLang: string read FSecondaryLang write FSecondaryLang;
-    property EnableMouseMode: boolean read FEnableMouseMode write FEnableMouseMode;
-    property MouseModeCtrl: boolean read FMouseModeCtrl write FMouseModeCtrl;
+    property EnableMouseMode: boolean read FEnableMouseMode write SetEnableMouseMode;
+    property MouseModeCtrl: boolean read FMouseModeCtrl write SetMouseModeCtrl;
     property MouseMode: TMouseMode read FMouseMode write FMouseMode;
-    property VerticalSplit: boolean read FVerticalSplit write FVerticalSplit;
+    property VerticalSplit: boolean read FVerticalSplit write SetVerticalSplit;
     property StayOnTop: boolean read FStayOnTop write FStayOnTop;
     property FontPopup: TFont read FFontPopup write FFontPopup;
-    property HideControls: boolean read FHideControls write FHideControls;
+    property HideControls: boolean read FHideControls write SetHideControls;
     property OpacityHover: integer read FOpacityHover write FOpacityHover;
     property OpacityIdle: integer read FOpacityIdle write FOpacityIdle;
     property AutoCheckUpdates: boolean read FAutoCheckUpdates write FAutoCheckUpdates;
@@ -1118,12 +1128,12 @@ begin
       formSettingsTrayslate.ListPages.Width := FormSettingsSplit;
 
     UnregisterHotKeys;
-    MenuFastSettings.Visible := False;
+    //MenuFastSettings.Visible := False;
 
     formSettingsTrayslate.ShowModal;
   finally
     FreeAndNil(formSettingsTrayslate);
-    MenuFastSettings.Visible := True;
+    //MenuFastSettings.Visible := True;
     RegisterHotKeys;
     SetHints;
     FMouseHook.Enabled := FEnableMouseMode;
@@ -1257,7 +1267,6 @@ end;
 procedure TformTrayslate.aFastAllowHotKeysExecute(Sender: TObject);
 begin
   AllowHotKeys := aFastAllowHotKeys.Checked;
-  RegisterHotKeys;
 end;
 
 procedure TformTrayslate.aFastAutoAddLangPairsExecute(Sender: TObject);
@@ -1273,8 +1282,6 @@ end;
 procedure TformTrayslate.aFastEnableMouseModeExecute(Sender: TObject);
 begin
   EnableMouseMode := aFastEnableMouseMode.Checked;
-  FMouseHook.Enabled := EnableMouseMode;
-  FKeyHook.Enabled := EnableMouseMode;
 end;
 
 procedure TformTrayslate.aFastHideControlsExecute(Sender: TObject);
@@ -1295,8 +1302,6 @@ end;
 procedure TformTrayslate.aFastVerticalSplitExecute(Sender: TObject);
 begin
   VerticalSplit := aFastVerticalSplit.Checked;
-  formTrayslate.SetVerticalMode;
-  Application.QueueAsyncCall(@DoRealignSplit, 0);
 end;
 
 { Control Events }
@@ -2653,6 +2658,89 @@ begin
   AppName := 'Trayslate (' + AppPath + ')';
 
   RegAutoStart(FAutoStart, AppName);
+end;
+
+procedure TformTrayslate.SetAutoAddLangPairs(Value: boolean);
+begin
+  aFastAutoAddLangPairs.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckAutoAddLangPairs.Checked := Value
+  else
+    FAutoAddLangPairs := Value;
+end;
+
+procedure TformTrayslate.SetAutoSwap(Value: boolean);
+begin
+  aFastAutoSwap.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckAutoSwap.Checked := Value
+  else
+    FAutoSwap := Value;
+end;
+
+procedure TformTrayslate.SetAllowHotkeys(Value: boolean);
+begin
+  aFastAllowHotkeys.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckAllowHotkeys.Checked := Value
+  else
+  begin
+    FAllowHotkeys := Value;
+    RegisterHotKeys;
+  end;
+end;
+
+procedure TformTrayslate.SetEnableMouseMode(Value: boolean);
+begin
+  aFastEnableMouseMode.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckEnableMouseMode.Checked := Value
+  else
+  begin
+    FEnableMouseMode := Value;
+    FMouseHook.Enabled := EnableMouseMode;
+    FKeyHook.Enabled := EnableMouseMode;
+  end;
+end;
+
+procedure TformTrayslate.SetHideControls(Value: boolean);
+begin
+  aFastHideControls.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckHideControls.Checked := Value
+  else
+    FHideControls := Value;
+end;
+
+procedure TformTrayslate.SetMouseModeCtrl(Value: boolean);
+begin
+  aFastMouseModeCtrl.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckMouseModeCtrl.Checked := Value
+  else
+    FMouseModeCtrl := Value;
+end;
+
+procedure TformTrayslate.SetRealTime(Value: boolean);
+begin
+  aFastRealTime.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckRealTime.Checked := Value
+  else
+    FRealTime := Value;
+end;
+
+procedure TformTrayslate.SetVerticalSplit(Value: boolean);
+begin
+  aFastVerticalSplit.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckVerticalSplit.Checked := Value
+  else
+  begin
+    FVerticalSplit := Value;
+    formTrayslate.SetVerticalMode;
+    Application.QueueAsyncCall(@DoRealignSplit, 0);
+  end;
 end;
 
 procedure TformTrayslate.ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
