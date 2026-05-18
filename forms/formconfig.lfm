@@ -181,8 +181,8 @@ object formConfigTrayslate: TformConfigTrayslate
         Width = 582
         HorzScrollBar.Page = 1
         HorzScrollBar.Visible = False
-        VertScrollBar.Increment = 27
-        VertScrollBar.Page = 277
+        VertScrollBar.Increment = 28
+        VertScrollBar.Page = 286
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
@@ -213,12 +213,13 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelServiceName: TLabel
             Left = 8
-            Height = 23
+            Height = 32
             Top = 0
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Name'
+            WordWrap = True
           end
           object EditServiceName: TEdit
             Left = 120
@@ -240,12 +241,13 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelServiceOrder: TLabel
             Left = 8
-            Height = 23
+            Height = 32
             Top = 32
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Order'
+            WordWrap = True
           end
           object SpinServiceOrder: TSpinEdit
             Left = 120
@@ -272,21 +274,23 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelServiceDescription: TLabel
             Left = 8
-            Height = 23
+            Height = 32
             Top = 224
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Description'
+            WordWrap = True
           end
           object LabelColorRecent: TLabel
             Left = 9
-            Height = 23
+            Height = 32
             Top = 64
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Recent Color'
+            WordWrap = True
           end
           object ColorServiceColorRecent: TColorBox
             Left = 121
@@ -377,12 +381,13 @@ object formConfigTrayslate: TformConfigTrayslate
           TabOrder = 0
           object LabelMethod: TLabel
             Left = 8
-            Height = 23
+            Height = 32
             Top = 1
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Method'
+            WordWrap = True
           end
           object ComboMethod: TComboBox
             Left = 120
@@ -412,21 +417,23 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelUserAgent: TLabel
             Left = 8
-            Height = 23
+            Height = 31
             Top = 33
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'User Agent'
+            WordWrap = True
           end
           object LabelContentType: TLabel
             Left = 8
-            Height = 23
+            Height = 32
             Top = 416
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Content Type'
+            WordWrap = True
           end
           object EditContentType: TEdit
             Left = 120
@@ -439,12 +446,13 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelUrl: TLabel
             Left = 8
-            Height = 23
+            Height = 31
             Top = 313
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'URL'
+            WordWrap = True
           end
           object MemoURL: TMemo
             Left = 120
@@ -471,12 +479,13 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelPostData: TLabel
             Left = 8
-            Height = 23
+            Height = 32
             Top = 449
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Post Data'
+            WordWrap = True
           end
           object MemoPostData: TMemo
             Left = 120
@@ -501,12 +510,13 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelAccept: TLabel
             Left = 8
-            Height = 23
+            Height = 32
             Top = 384
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Accept'
+            WordWrap = True
           end
           object CheckEncodeText: TCheckBox
             Left = 123
@@ -533,12 +543,13 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelPostData1: TLabel
             Left = 8
-            Height = 23
+            Height = 32
             Top = 88
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Headers'
+            WordWrap = True
           end
           object LabelHeaders: TLabel
             Left = 8
@@ -776,21 +787,23 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelInitUserAgent: TLabel
             Left = 8
-            Height = 23
+            Height = 32
             Top = 32
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'User Agent'
+            WordWrap = True
           end
           object LabelInitUrl: TLabel
             Left = 8
-            Height = 23
+            Height = 34
             Top = 199
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'URL'
+            WordWrap = True
           end
           object MemoInitURL: TMemo
             Left = 120
@@ -805,12 +818,13 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelInitParameters2: TLabel
             Left = 8
-            Height = 23
+            Height = 33
             Top = 295
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Parameters'
+            WordWrap = True
           end
           object MemoInitParameters: TMemo
             Left = 120
@@ -825,12 +839,13 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelInitHeaders2: TLabel
             Left = 8
-            Height = 23
+            Height = 33
             Top = 87
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Headers'
+            WordWrap = True
           end
           object MemoInitHeaders: TMemo
             Left = 120
@@ -879,12 +894,13 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelInitLiveTime: TLabel
             Left = 0
-            Height = 26
+            Height = 32
             Top = 432
             Width = 112
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Live time'
+            WordWrap = True
           end
           object LabelInitParameters1: TLabel
             Left = 8
@@ -1029,12 +1045,13 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object LabelInitParameters3: TLabel
             Left = 8
-            Height = 23
+            Height = 32
             Top = 64
             Width = 104
             Alignment = taRightJustify
             AutoSize = False
             Caption = 'Parameters'
+            WordWrap = True
           end
           object LabelInitParameters4: TLabel
             Left = 8
