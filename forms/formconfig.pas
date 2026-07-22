@@ -245,6 +245,8 @@ begin
     end;
     if Components[i] is TCustomComboBox and (Components[i] <> ComboConfig) then
       (Components[i] as TCustomComboBox).Font.Assign(SynScriptParameters.Font);
+    if Components[i] is TCustomCheckBox then
+      (Components[i] as TCustomCheckBox).Font.Assign(SynScriptParameters.Font);
   end;
 end;
 
