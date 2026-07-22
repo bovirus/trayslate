@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: plaintool <astverskoy@gmail.com>\n"
+"Last-Translator: Krezzin <krezzin.blogspot.com>\n"
 "Language-Team: \n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr "Автоматично разпознаване"
 #: consts.renter
 msgctxt "consts.renter"
 msgid "Enter"
-msgstr "Въведете"
+msgstr "Enter"
 
 #: consts.renterparameter
 msgctxt "consts.renterparameter"
@@ -34,7 +34,7 @@ msgstr "Въведете необходимия параметър"
 #: consts.rnoconfig
 msgctxt "consts.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
-msgstr "Конфигурационният файл не е намерен! Създайте го в редактора на конфигурации."
+msgstr "Конфигурационният файл не е намерен! Трябва да го създадете в редактора на конфигурации."
 
 #: consts.ropenpofiletr
 msgctxt "consts.ropenpofiletr"
@@ -45,13 +45,13 @@ msgstr "Езиков файл (*.po)|*.po"
 #, object-pascal-format
 msgctxt "consts.rremovepair"
 msgid "Are you sure you want to remove the pair \"%s\"?"
-msgstr "Сигурни сте да премахнете двойката \"%s\"?"
+msgstr "Сигурни ли сте, че искате да премахнете двойката \"%s\"?"
 
 #: consts.rswap
 #, object-pascal-format
 msgctxt "consts.rswap"
 msgid "Swap (%s) with text (%s)"
-msgstr "Замяна (%s) с текст (%s)"
+msgstr "Размяна на (%s) с текст (%s)"
 
 #: consts.rtoremovepair
 msgctxt "consts.rtoremovepair"
@@ -65,24 +65,24 @@ msgstr "Редактор на конфигурации"
 
 #: formconfig.rclearlanguages
 msgid "The list is already filled. Do you want to clear it?"
-msgstr "Списъкът вече е попълнен. Ще го изчистите?"
+msgstr "Списъкът вече е запълнен. Искате ли да го изчистите?"
 
 #: formconfig.rdeleteconfig
 msgid "Are you sure you want to delete config"
-msgstr "Сигурни ли сте, че искате да изтриете конфигурацията"
+msgstr "Сигурни ли сте, че искате да изтриете конфигурационния файл"
 
 #: formconfig.rdeleteconfigcaption
 msgid "Delete config"
-msgstr "Изтрий конфигурацията"
+msgstr "Изтрий"
 
 #: formconfig.rnamequestion
 msgctxt "formconfig.rnamequestion"
 msgid "Enter new config file name:"
-msgstr "Въведете новото име на конфигурационния файл:"
+msgstr "Въведете име за новия конфигурационен файл:"
 
 #: formconfig.rneedsave
 msgid "The configuration was modified. Save changes?"
-msgstr "Конфигурацията бе променена. Да се запазят ли промените?"
+msgstr "Настройките бяха променени. Искате ли да запазите промените?"
 
 #: formconfig.rvaluetype1
 msgctxt "formconfig.rvaluetype1"
@@ -100,11 +100,11 @@ msgstr "Всички валути"
 
 #: formconfig.rvaluetype4
 msgid "Currency Fiat Only"
-msgstr "Само фиатни валута"
+msgstr "Само фиатни валути"
 
 #: formconfig.rvaluetype5
 msgid "Currency Crypto Only"
-msgstr "Само крипто валута"
+msgstr "Само криптовалути"
 
 #: formconfig.rvaluetype6
 msgid "Measurement Units"
@@ -113,12 +113,12 @@ msgstr "Мерни единици"
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
-msgstr "Покажи / скрий приложението (клик иконата в трея)"
+msgstr "Показване на приложението чрез натискане на иконата в системната лента"
 
 #: formsettings.rapp_default
 msgctxt "formsettings.rapp_default"
 msgid "Default Ctrl+Shift+A"
-msgstr "По подразбиране Ctrl+Shift+A"
+msgstr "По подразбиране: Ctrl+Shift+A"
 
 #: formsettings.rapp_hint
 msgctxt "formsettings.rapp_hint"
@@ -132,11 +132,11 @@ msgstr "По подразбиране"
 
 #: formsettings.rdefaulthotkeys
 msgid "Are you sure you want to restore default hotkeys?"
-msgstr "Да възстановите бързи клавиши по подразбиране?"
+msgstr "Сигурни ли сте, че искате да възстановите бързите клавиши по подразбиране?"
 
 #: formsettings.rdefaultsettings
 msgid "Are you sure you want to restore default settings?"
-msgstr "Да възстанови настройките по подразбиране?"
+msgstr "Сигурни ли сте, че искате да възстановите настройките по подразбиране?"
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
@@ -145,7 +145,7 @@ msgstr "Глобални бързи клавиши"
 
 #: formsettings.rmousemodeballon
 msgid "Show Balloon Translation"
-msgstr "Показвай превода в балон"
+msgstr "Показване на превода в изскачащ прозорец"
 
 #: formsettings.rmousemodebutton
 msgctxt "formsettings.rmousemodebutton"
@@ -154,15 +154,15 @@ msgstr "Показвай бутон за превод"
 
 #: formsettings.rmousemodemain
 msgid "Show Main Window"
-msgstr "Показвай главния прозорец"
+msgstr "Показване на главния прозорец"
 
 #: formsettings.rmousemodepopup
 msgid "Show Popup Translation"
-msgstr "Показвай изскачащ превод"
+msgstr "Показване на изскачащ превод"
 
 #: formsettings.rproxymodecustomproxy
 msgid "Custom Proxy"
-msgstr "Персонализиран прокси сървър"
+msgstr "Персонализирано прокси"
 
 #: formsettings.rproxymodenoproxy
 msgctxt "formsettings.rproxymodenoproxy"
@@ -171,7 +171,7 @@ msgstr "Без прокси"
 
 #: formsettings.rproxymodesystemproxy
 msgid "System Proxy"
-msgstr "Системен прокси"
+msgstr "Системно прокси"
 
 #: formsettings.rrecent
 msgctxt "formsettings.rrecent"
@@ -188,16 +188,16 @@ msgstr "По подразбиране: Ctrl+Shift+"
 
 #: formsettings.rrecentpair_hint
 msgid "Select Recent Language Pair"
-msgstr "Избери скорошна езикова двойка"
+msgstr "Използване на последната езикова двойка"
 
 #: formsettings.rtransclipboard
 msgctxt "formsettings.rtransclipboard"
 msgid "Translate Clipboard to Clipboard"
-msgstr "Превод на клипборда в клипборд"
+msgstr "Превеждане на клипборда в клипборда"
 
 #: formsettings.rtransclipboardpopup
 msgid "Translate Clipboard to Popup Window"
-msgstr "Превод на клипборда в изскачащ прозорец"
+msgstr "Превеждане на клипборда в изскачащ прозорец"
 
 #: formsettings.rtransclipboardpopup_default
 msgid "Default: Ctrl+Shift+P"
@@ -205,12 +205,12 @@ msgstr "По подразбиране: Ctrl+Shift+P"
 
 #: formsettings.rtransclipboardpopup_hint
 msgid "Translates clipboard text to a popup window near the mouse cursor"
-msgstr "Превежда текста от клипборда в изскачащ прозорец близо до курсора на мишката"
+msgstr "Превежда текста в клипборда в изскачащ прозорец близо до курсора на мишката"
 
 #: formsettings.rtransclipboard_default
 msgctxt "formsettings.rtransclipboard_default"
 msgid "Default Ctrl+Shift+R"
-msgstr "По подразбиране Ctrl+Shift+R"
+msgstr "По подразбиране: Ctrl+Shift+R"
 
 #: formsettings.rtransclipboard_hint
 msgctxt "formsettings.rtransclipboard_hint"
@@ -220,11 +220,11 @@ msgstr "Превежда текущия текст в клипборда и ко
 #: formsettings.rtranscontrol
 msgctxt "formsettings.rtranscontrol"
 msgid "Translate In Active Application Selection"
-msgstr "Превод в избраното активно приложение"
+msgstr "Превеждане на избрания текст в активното приложение"
 
 #: formsettings.rtranscontrolpopup
 msgid "Translate Selected Text to Popup Window"
-msgstr "Превод на избрания текст в изскачащ прозорец"
+msgstr "Превеждане на избрания текст в изскачащ прозорец"
 
 #: formsettings.rtranscontrolpopup_default
 msgid "Default: Ctrl+Shift+X"
@@ -237,7 +237,7 @@ msgstr "Превежда избрания текст от активното п�
 #: formsettings.rtranscontrol_default
 msgctxt "formsettings.rtranscontrol_default"
 msgid "Default Ctrl+Shift+V"
-msgstr "По подразбиране Ctrl+Shift+V"
+msgstr "По подразбиране: Ctrl+Shift+V"
 
 #: formsettings.rtranscontrol_hint
 msgctxt "formsettings.rtranscontrol_hint"
@@ -247,12 +247,12 @@ msgstr "Заменя избрания текст в активното прил�
 #: formsettings.rtransfromclipboard
 msgctxt "formsettings.rtransfromclipboard"
 msgid "Translate From Clipboard (Tray Icon Double-Click)"
-msgstr "Превод от клипборда (двойно щракване върху иконата в трея)"
+msgstr "Превеждане от клипборда (двойно натискане върху иконата в системната лента)"
 
 #: formsettings.rtransfromclipboard_default
 msgctxt "formsettings.rtransfromclipboard_default"
 msgid "Default Ctrl+Shift+T"
-msgstr "По подразбиране Ctrl+Shift+T"
+msgstr "По подразбиране: Ctrl+Shift+T"
 
 #: formsettings.rtransfromclipboard_hint
 msgctxt "formsettings.rtransfromclipboard_hint"
@@ -262,27 +262,27 @@ msgstr "Превежда текущия текст от клипборда"
 #: formsettings.rtransfromcontrol
 msgctxt "formsettings.rtransfromcontrol"
 msgid "Translate From Active Application Selection"
-msgstr "Превод от избрано активно приложение"
+msgstr "Превеждане на избрания текст от активното приложение"
 
 #: formsettings.rtransfromcontrol_default
 msgctxt "formsettings.rtransfromcontrol_default"
 msgid "Default Ctrl+Shift+C"
-msgstr "По подразбиране Ctrl+Shift+C"
+msgstr "По подразбиране: Ctrl+Shift+C"
 
 #: formsettings.rtransfromcontrol_hint
 msgctxt "formsettings.rtransfromcontrol_hint"
 msgid "Translates the selected text from the active application"
-msgstr "Превежда избрания текст от активното приложение"
+msgstr "Превежда избрания текст от активнот приложение"
 
 #: formsettings.rtransswap
 msgctxt "formsettings.rtransswap"
 msgid "Swap Languages (Tray Icon Middle-Click)"
-msgstr "Размяна на езици (среден клик в/у иконата в трея)"
+msgstr "Разменяне на езиците (натискане на среден бутон на мишката върху иконата в системната лента)"
 
 #: formsettings.rtransswap_default
 msgctxt "formsettings.rtransswap_default"
 msgid "Default Ctrl+Shift+S"
-msgstr "По подразбиране Ctrl+Shift+S"
+msgstr "По подразбиране: Ctrl+Shift+S"
 
 #: formsettings.rtransswap_hint
 msgctxt "formsettings.rtransswap_hint"
@@ -305,19 +305,19 @@ msgstr "ОК"
 
 #: tformabouttrayslate.caption
 msgid "About"
-msgstr "Относно"
+msgstr "За приложението"
 
 #: tformabouttrayslate.labelby.caption
 msgid "by Alexander Tverskoy is licensed under"
-msgstr "от Александър Тверской с лиценз от"
+msgstr "от Александър Тверской, с лиценз"
 
 #: tformabouttrayslate.labelby1.caption
 msgid "the GNU General Public License, Version 3"
-msgstr "общия публичен лиценз на GNU, версия 3"
+msgstr "за отворен код GNU General Public License Version 3"
 
 #: tformabouttrayslate.labellic.caption
 msgid "For questions or feedback, contact me at"
-msgstr "За въпроси или обр.връзка, пишете ми"
+msgstr "За въпроси или обратна връзка, свържете се с мен на адрес"
 
 #: tformabouttrayslate.labelname.caption
 msgid "Trayslate © 2026"
@@ -363,17 +363,37 @@ msgid ""
 "   License: BSD-style license\n"
 "   Copyright (c) 1999–2024, Lukas Gebauer\n"
 "   https://github.com/geby/synapse"
-msgstr "Trayslate е базиран на трей клиент за преводачески услуги. Може да въвеждате текст директно, да превеждате съдържанието на клипборда или превеждате избран текст във всяко приложение. Може също да замените текст в друго приложение с неговия превод, като използвате клавишна комбинация. Приложението позволява да изберете и напълно да конфигурирате услугата за превод, която използвате.\n\nТова приложение използва ресурси на трети страни под лицензи:\n\n1. Основна икона, проектирана от Flaticon\n   https://www.flaticon.com/ru/free-icon/translator_682045\n\n2. Модули за поддръжка на тъмна тема от Double Commander\n   Използвани модули: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n   Лиценз: GNU General Public License v2.0 (GPL-2.0)\n   https://github.com/doublecmd/doublecmd\n   \n3. OpenSSL библиотеки (32-битови и 64-битови версии)\n   Лиценз: Apache License 2.0\n   https://www.openssl.org\n\n4. Мрежова библиотека Synapse (laz_synapse / synapse41.0)   \n   Лиценз: в стил BSD\n   Авторско право (c) 1999–2024, Лукас Гебауер\n   https://github.com/geby/synapse"
+msgstr ""
+"Trayslate е програма, работещо в системната лента, предназначено за превод на текст чрез най-различни онлайн услуги. Освен че може да въвеждате текст директно в програмата, можете също така да да превеждате съдържанието на клипборда или избран текст от която и да е друга програма. Програмата разполага с възможност да заменя текста в други програми с превода посредством бързи клавиши. Потребителят има пълен контрол над настройките на услугите за превод.\n"
+"\n"
+"Това приложение използва ресурси на трети страни със следните лицензи:\n"
+"\n"
+"1. Основната икона е изработена от Flaticon\n"
+"   https://www.flaticon.com/ru/free-icon/translator_682045\n"
+"\n"
+"2. Модулите за поддръжка на тъмен режим са дело на Double Commander\n"
+"   Използвани модули: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n"
+"   Лиценз: GNU General Public License v2.0 (GPL-2.0)\n"
+"   https://github.com/doublecmd/doublecmd\n"
+"\n"
+"3. Библиотеки OpenSSL (компилирани от изходния код, 32-битови и 64-битови версии)\n"
+"   Лиценз: Apache License 2.0\n"
+"   https://www.openssl.org\n"
+"\n"
+"4. Мрежова библиотека Synapse (laz_synapse / synapse41.0)\n"
+"Лиценз: BSD\n"
+"Copyright (c) 1999–2024, Lukas Gebauer\n"
+"https://github.com/geby/synapse"
 
 #: tformbuttontrayslate.imagetranslate.hint
 msgctxt "tformbuttontrayslate.imagetranslate.hint"
 msgid "Translate in Popup"
-msgstr "Преведи в изскачащ прозорец"
+msgstr "Превеждане в изскачащ прозорец"
 
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
-msgstr "Запазване"
+msgstr "Запази"
 
 #: tformconfigtrayslate.btnclose.caption
 msgctxt "tformconfigtrayslate.btnclose.caption"
@@ -382,15 +402,15 @@ msgstr "Затвори"
 
 #: tformconfigtrayslate.btninitparameterstest.hint
 msgid "Execute request and view the parameters"
-msgstr "Изпълни заявката и прегледай параметрите"
+msgstr "Изпълняване на заявката и показване на параметрите"
 
 #: tformconfigtrayslate.btniniturltest.hint
 msgid "Execute request and view the result"
-msgstr "Изпълни заявката и прегледай резултата"
+msgstr "Изпълняване на заявката и показване на резултата"
 
 #: tformconfigtrayslate.btnpostdatatest.hint
 msgid "Execute post request and view the result"
-msgstr "Изпълни заявка за публикация и виж резултата"
+msgstr "Изпълняване на post-заявката и показване на резултата"
 
 #: tformconfigtrayslate.btnresponsetest.hint
 msgctxt "tformconfigtrayslate.btnresponsetest.hint"
@@ -404,7 +424,7 @@ msgstr "Изпълни скрипта и покажи резултата"
 
 #: tformconfigtrayslate.btnurltest.hint
 msgid "Execute get request and view the result"
-msgstr "Изпълни заявката за получаване и виж резултата"
+msgstr "Изпълнява заявката за получаване и показва резултата"
 
 #: tformconfigtrayslate.caption
 msgctxt "tformconfigtrayslate.caption"
@@ -413,21 +433,21 @@ msgstr "Редактор на конфигурации"
 
 #: tformconfigtrayslate.checkencodecustomparameters.caption
 msgid "Encode parameters"
-msgstr "Кодиране на параметри"
+msgstr "Параметри за кодиране"
 
 #: tformconfigtrayslate.checkencodetext.caption
 msgctxt "tformconfigtrayslate.checkencodetext.caption"
 msgid "Encode {text} parameter"
-msgstr "Кодиране на параметър {text}"
+msgstr "Кодиране на параметъра {text}"
 
 #: tformconfigtrayslate.checkserviceautoswap.caption
 msgctxt "tformconfigtrayslate.checkserviceautoswap.caption"
 msgid "Allow auto-swap language pair"
-msgstr "Разреши автоматична смяна на езикови двойки"
+msgstr "Разрешаване на автоматична размяна на езиковата двойка"
 
 #: tformconfigtrayslate.checkserviceonlybutton.caption
 msgid "Allow translation only by translation button"
-msgstr "Разреши превод само чрез бутон за превод"
+msgstr "Разрешаване на превода само чрез натискане на бутона за превод"
 
 #: tformconfigtrayslate.checkserviceproxy.caption
 msgid "Allow proxy"
@@ -435,7 +455,7 @@ msgstr "Разреши прокси"
 
 #: tformconfigtrayslate.checkservicerealtime.caption
 msgid "Allow translate as you type"
-msgstr "Позволи превод, докато се въвежда"
+msgstr "Разрешаване на превода по време на въвеждане"
 
 #: tformconfigtrayslate.checkservicevisible.caption
 msgid "Visible in menu"
@@ -457,12 +477,12 @@ msgstr "Персонализирани параметри"
 #: tformconfigtrayslate.groupboxservice.caption
 msgctxt "tformconfigtrayslate.groupboxservice.caption"
 msgid "Service"
-msgstr "Сервиз"
+msgstr "Услуга"
 
 #: tformconfigtrayslate.groupinitparameters.caption
 msgctxt "tformconfigtrayslate.groupinitparameters.caption"
 msgid "Initial Request"
-msgstr "Начална заявка"
+msgstr "Първоначална заявка"
 
 #: tformconfigtrayslate.grouplanguages.caption
 msgctxt "tformconfigtrayslate.grouplanguages.caption"
@@ -490,11 +510,11 @@ msgstr "Извлечени параметри на скрипта"
 
 #: tformconfigtrayslate.imagepreview.hint
 msgid "Click to select the config icon, Middle-Click clears the icon"
-msgstr "Щракни, за да избор на иконата за конфигурация, щракване със средния бутон изчиства иконата"
+msgstr "Натиснете ляв бутон, за да изберете икона и среден бутон, за да я премахнете"
 
 #: tformconfigtrayslate.labelaccept.caption
 msgid "Accept"
-msgstr "Accept"
+msgstr "Приложи"
 
 #: tformconfigtrayslate.labelcolorrecent.caption
 msgid "Recent Color"
@@ -503,24 +523,24 @@ msgstr "Последен цвят"
 #: tformconfigtrayslate.labelcontenttype.caption
 msgctxt "tformconfigtrayslate.labelcontenttype.caption"
 msgid "Content Type"
-msgstr "Content Type"
+msgstr "Вид съдържание"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
 msgid "Fill with default"
-msgstr "Попълни с по подразбиране"
+msgstr "Запълване по подразбиране"
 
 #: tformconfigtrayslate.labelheaders.caption
 msgid "Additional request headers in key=value format, key: value is also supported"
-msgstr "Допълнителни заглавки на заявките във формат key=value, поддържа се key: value"
+msgstr "Допълнителни заглавки на заявките във формат key=value или key: value"
 
 #: tformconfigtrayslate.labelinitheaders.caption
 msgid "Additional initial request headers in key=value format, key: value is also supported"
-msgstr "Допълнителни начални заявки с хедъри във формат key=value, поддържа се key: value"
+msgstr "Допълнителни заглавки на началните заявки във формат key=value или key: value"
 
 #: tformconfigtrayslate.labelinitheaders2.caption
 msgctxt "tformconfigtrayslate.labelinitheaders2.caption"
 msgid "Headers"
-msgstr "Headers"
+msgstr "Заглавки"
 
 #: tformconfigtrayslate.labelinitlivetime.caption
 msgctxt "tformconfigtrayslate.labelinitlivetime.caption"
@@ -533,7 +553,7 @@ msgstr "Параметрите name=regexp се извличат от отгов
 
 #: tformconfigtrayslate.labelinitparameters1.caption
 msgid "Time in seconds to refresh parameters with a new request (0 = every request)"
-msgstr "Време в секунди за обновяване на параметрите с нова заявка (0 = всяка заявка)"
+msgstr "Интервал от секунди за обновяване на параметрите с нова заявка (0 = всяка заявка)"
 
 #: tformconfigtrayslate.labelinitparameters2.caption
 msgctxt "tformconfigtrayslate.labelinitparameters2.caption"
@@ -542,7 +562,7 @@ msgstr "Параметри"
 
 #: tformconfigtrayslate.labelinitparameters4.caption
 msgid "Parameters in the form key=value used by {key} in requests. If the value is omitted (key=), it will be requested from the user."
-msgstr "Параметри в форма ключ=стойност, се използва {key} в заявките. Ако липсва стойност (key=), ще изиска от потребителя."
+msgstr "Параметри под формата на key=value се използват от {key} в заявките. Ако стойността липсва (key=), тя ще бъде изискана от потребителя."
 
 #: tformconfigtrayslate.labelinitparemeters.caption
 msgid "Initial GET request to obtain required parameters."
@@ -551,7 +571,7 @@ msgstr "Първоначална GET заявка за получаване на
 #: tformconfigtrayslate.labeliniturl.caption
 msgctxt "tformconfigtrayslate.labeliniturl.caption"
 msgid "URL"
-msgstr "URL"
+msgstr "URL-адрес"
 
 #: tformconfigtrayslate.labelinituseragent.caption
 msgctxt "tformconfigtrayslate.labelinituseragent.caption"
@@ -568,26 +588,36 @@ msgid ""
 "Commenting: /* text */ comments are stripped from the entire expression before any processing.\n"
 "Examples:\n"
 "responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!#10}; /translations/0/text"
-msgstr "Json показалец: Използва / за нива, ключове за обекти и числа за индекси. Използва * за всички елементи, *#10 за свързване на елементи чрез нов ред. Използвайте ~ в края на пътя, за да върнете необработения JSON клон. Разделете няколко сегмента с точка и запетая ;.\nЛитерал: Текстов блок в {…}. Специален етикет #10 за нови редове. Използвайте {{regex}} вътре, за да извлечете данни директно в текста.\nЛогика: Ако указател в сегмент е празен, целият сегмент се пропуска. Ако даден сегмент няма указател, се обработват само буквални текстови блокове с вградени регулярни изрази.\nRegex: {префикс {regex[index]} суфикс} вътре в текстов блок. Ако не е зададен [индекс], се използва първото съвпадение. Индексът може да бъде число, [*] (съединяване чрез интервал) или [*#10] (съединяване чрез нов ред). Ако регулярният израз не намери съвпадение, целият блок {…} се премахва. Използването на ~ вътре в регулярен израз връща целия текст.\nИнверсия: Започнете сегмент с ! (напр. !/path{Error}), за да покаже текста му само ако липсват данните за указателя или JSON е невалиден.\nКоментиране: /* текст */ коментарите се премахват от целия израз преди обработка.\nПримери:\nresponseData/translatedText; съвпадения/*#10/превод; /текстове/текст; {буквен текст#10}; /резултат/текст; /текст{ ({(\\w+)})}; !/translations{Грешка: Няма данни!#10}; /преводи/0/текст"
+msgstr ""
+"Json Pointer: Използвайте / за нива, ключове за обекти и числа за индекси, * за всички елементи и *#10 за свързване на елементи чрез нов ред. Използвайте ~ в края на пътя, за да върнете необработения JSON клон. Използвайте ;, за да разделите няколко сегмента.\n"
+"Literal: Текстов блок в {…}. Специален етикет #10 за нови редове. Използвайте {{regex}} вътре, за да извлечете данни директно в текста.\n"
+"Логика: Ако Pointer в сегмент е празен, целият сегмент се пропуска. Ако даден сегмент няма Pointer, то се обработват само буквални текстови блокове с вградени регулярни изрази.\n"
+"Regex: {префикс {regex[index]} съфикс} вътре в текстов блок. Ако не е зададен [index], се използва първото съвпадение. Индексът може да бъде число, [*] (съединяване чрез интервал) или [*#10] (съединяване чрез нов ред). Ако регулярният израз не намери съвпадение, целият блок {…} се премахва. Използването на ~ вътре в регулярен израз връща целия текст.\n"
+"Инверсия: Започнете сегмент с ! (напр. !/path{Error}), за да покажете текста му само ако липсват данните за Pointer или JSON е недействителен.\n"
+"Коментири: коментари с /* текст */ се премахват от целия израз преди обработка.\n"
+"Примери:\n"
+"responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!#10}; /translations/0/text"
 
 #: tformconfigtrayslate.labellanguages.caption
 msgctxt "tformconfigtrayslate.labellanguages.caption"
 msgid "Supported languages e.g. en=en-US (en - internal, en-US - service). \"empty\" - do not send."
-msgstr "Поддържани езици, напр. en=en-US (en - вътрешен, en-US - сервизен). „empty“ - не изпращай."
+msgstr "Поддържани езици, напр. en=en-US (en - вътрешен, en-US - сервизен). \"empty\" - не се изпраща."
 
 #: tformconfigtrayslate.labellanguages1.caption
 msgid "Value type for populating names. None keeps originals; None and Unit are case-sensitive."
-msgstr "Тип стойност попълване на имена. None запазва оригинали; None и Unit чувств.регистър букви."
+msgstr "Тип на стойността за попълване на имена. None запазва оригиналните; None и Unit са чувствителни към главни и малки букви."
 
 #: tformconfigtrayslate.labellanguagestarget.caption
 msgid ""
 "Target languages e.g. en=en-US, en - internal, en-US - service code.\n"
 "If not specified, both source and target languages are taken from the languages section."
-msgstr "Целеви езици, например en=en-US, en - вътрешен, en-US - сервизен код.\nАко не е посочено, и двата езика, изходният и целевият, се вземат от секцията за езици."
+msgstr ""
+"Целеви езици, например en=en-US, en - вътрешен, en-US - сервизен код.\n"
+"Ако не са зададени, и двата езика, изходният и целевият, се вземат от раздела за езици."
 
 #: tformconfigtrayslate.labelmaxlength.caption
 msgid "Max Length, bytes"
-msgstr "Макс дължина, байтове"
+msgstr "Допустима дължина, байтове"
 
 #: tformconfigtrayslate.labelmethod.caption
 msgctxt "tformconfigtrayslate.labelmethod.caption"
@@ -597,7 +627,7 @@ msgstr "Метод"
 #: tformconfigtrayslate.labelparemeters.caption
 msgctxt "tformconfigtrayslate.labelparemeters.caption"
 msgid "Use parameters: {text} – input text, {source} – source language, {target} – target language. Prefix the name with ! for lowercase or ^ for uppercase value. Also supported {timestamp}, {rand}. Use {parameter} from the parameters page."
-msgstr "Използвайте параметрите: {text} – входен текст, {source} – изходен език, {target} – целеви език. Поставете ! пред името за малки букви или ^ за главни букви. Също така се поддържат {timestamp}, {rand}. Използвайте {parameter} от страницата с параметри."
+msgstr "Използваеми параметри: {text} – входен текст, {source} – изходен език, {target} – целеви език. Поставете ! пред името за малки букви или ^ за главни букви. Поддържат се също така {timestamp}, {rand}. Използвайте {parameter} от страницата с параметри."
 
 #: tformconfigtrayslate.labelpostdata.caption
 msgid "Post Data"
@@ -623,12 +653,12 @@ msgstr "Име"
 
 #: tformconfigtrayslate.labelserviceorder.caption
 msgid "Order"
-msgstr "Поредност"
+msgstr "Порядък"
 
 #: tformconfigtrayslate.labelurl.caption
 msgctxt "tformconfigtrayslate.labelurl.caption"
 msgid "URL"
-msgstr "URL адрес"
+msgstr "URL-адрес"
 
 #: tformconfigtrayslate.labeluseragent.caption
 msgctxt "tformconfigtrayslate.labeluseragent.caption"
@@ -672,7 +702,7 @@ msgstr "Отговор"
 #: tformconfigtrayslate.pageservice.caption
 msgctxt "tformconfigtrayslate.pageservice.caption"
 msgid "Service"
-msgstr "Сервиз"
+msgstr "Услуга"
 
 #: tformconfigtrayslate.sbcopyconfig.hint
 msgid "Copy configuration"
@@ -689,12 +719,12 @@ msgstr "ОК"
 
 #: tformdonatetrayslate.caption
 msgid "Buy me a coffee"
-msgstr "Купи ми кафе"
+msgstr "Дарение"
 
 #: tformdonatetrayslate.labelbank.caption
 msgctxt "tformdonatetrayslate.labelbank.caption"
 msgid "Donate with Bank Card or PayPal"
-msgstr "Дарете с банкова карта или PayPal"
+msgstr "Даряване с банкова карта или PayPal"
 
 #: tformdonatetrayslate.labelbank.hint
 msgctxt "tformdonatetrayslate.labelbank.hint"
@@ -704,12 +734,12 @@ msgstr "https://app.lava.top/en/astverskoy?tabId=about&currency=EUR"
 #: tformdonatetrayslate.labelcontribution.caption
 msgctxt "tformdonatetrayslate.labelcontribution.caption"
 msgid "Every contribution helps keep the project active and moving forward. Thank you for your support!"
-msgstr "Всеки принос помага за поддържането на активността на проекта и развитието му. Благодарим за подкрепата!"
+msgstr "Всяко дарение подпомага развитието на проекта. Благодаря Ви за подкрепата!"
 
 #: tformdonatetrayslate.labelcrypto.caption
 msgctxt "tformdonatetrayslate.labelcrypto.caption"
 msgid "Donate with Cryptocurrency"
-msgstr "Дарете с Криптовалута"
+msgstr "Дарение с Криптовалута"
 
 #: tformdonatetrayslate.labelcrypto.hint
 msgctxt "tformdonatetrayslate.labelcrypto.hint"
@@ -719,17 +749,17 @@ msgstr "https://nowpayments.io/donation/astverskoy"
 #: tformdonatetrayslate.labeldonate.caption
 msgctxt "tformdonatetrayslate.labeldonate.caption"
 msgid "Hey there! Fuel this passion project with a little caffeine boost! Every donation helps keep the code rolling and the coffee brewing. Thanks for supporting the work and the developer behind it!"
-msgstr "Здравейте! Подкрепете този страстен проект с малко кофеинов тласък! Всяко дарение помага кодът да се развива и кафето свари. Благодарим ви, че подкрепяте работата и разработчика, който стои зад нея!"
+msgstr "Здравейте! Можете да подпомогнете проекта, ако искате той да продължи да се развива. Всяко дарение е от огромно значение. Благодарим Ви за подкрепата!"
 
 #: tformdonatetrayslate.labelsupport.caption
 msgctxt "tformdonatetrayslate.labelsupport.caption"
 msgid "You can support development through one of the following options:"
-msgstr "Може да подкрепите развитието чрез една от следните опции:"
+msgstr "Може да подкрепите развитието на програмата по следните начини:"
 
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
-msgstr "Копирай превода"
+msgstr "Копиране на превода"
 
 #: tformpopuptrayslate.anewtranslate.hint
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
@@ -738,7 +768,7 @@ msgstr "Нов превод"
 
 #: tformpopuptrayslate.asend.hint
 msgid "Send source and translation to main window"
-msgstr "Изпрати изходния код и превода в главния прозорец"
+msgstr "Изпраща изходния текст и превода в главния прозорец"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -748,7 +778,7 @@ msgstr "Trayslate"
 #: tformpopuptrayslate.labelwatermark.caption
 msgctxt "tformpopuptrayslate.labelwatermark.caption"
 msgid "Drag text here to translate"
-msgstr "Плъзнете текста тук, за превод"
+msgstr "Плъзнете тук текста, който искате да преведете"
 
 #: tformsettingstrayslate.btnapply.caption
 msgid "Apply"
@@ -756,16 +786,16 @@ msgstr "Приложи"
 
 #: tformsettingstrayslate.btncancel.caption
 msgid "Cancel"
-msgstr "Отказ"
+msgstr "Отмени"
 
 #: tformsettingstrayslate.btndefault.caption
 msgctxt "tformsettingstrayslate.btndefault.caption"
 msgid "Restore Defaults"
-msgstr "Опции по подразбиране"
+msgstr "Възстановяване на настройките"
 
 #: tformsettingstrayslate.btndefaulthotkeys.caption
 msgid "Restore Default Hotkeys"
-msgstr "Клавиши подразбиране"
+msgstr "Възстановяване на бързите клавиши"
 
 #: tformsettingstrayslate.btnfont.caption
 msgctxt "tformsettingstrayslate.btnfont.caption"
@@ -785,7 +815,7 @@ msgstr "ОК"
 #: tformsettingstrayslate.btnreset.caption
 msgctxt "tformsettingstrayslate.btnreset.caption"
 msgid "Reset"
-msgstr "Нулиране"
+msgstr "Нулирай"
 
 #: tformsettingstrayslate.btnresetpopup.caption
 msgctxt "tformsettingstrayslate.btnresetpopup.caption"
@@ -800,15 +830,15 @@ msgstr "Настройки"
 #: tformsettingstrayslate.checkallowhotkeys.caption
 msgctxt "tformsettingstrayslate.checkallowhotkeys.caption"
 msgid "Enable Global Hotkeys"
-msgstr "Активирай глобални бързи клавиши"
+msgstr "Включване на глобалните бързи клавиши"
 
 #: tformsettingstrayslate.checkautoaddlangpairs.caption
 msgid "Auto-Add On Pair Change"
-msgstr "Автоматично добави при промяна на двойка"
+msgstr "Автоматично добавяне при смяна на езиковата двойка"
 
 #: tformsettingstrayslate.checkautoaddlangpairs.hint
 msgid "Automatically adds a new language pair when you switch languages"
-msgstr "Автоматично добави нова езикова двойка, с превключване на езици"
+msgstr "Автоматично добавя нова езикова двойка при превключването на езиците"
 
 #: tformsettingstrayslate.checkautocopy.caption
 msgctxt "tformsettingstrayslate.checkautocopy.caption"
@@ -817,7 +847,7 @@ msgstr "Автоматично копиране на превода"
 
 #: tformsettingstrayslate.checkautocopy.hint
 msgid "Automatically copy translations from the main and popup windows to the clipboard"
-msgstr "Автоматично копиране на преводи от главния и изскачащите прозорци в клипборда"
+msgstr "Автоматичн копира преводите от главния и изскачащите прозорци, в клипборда"
 
 #: tformsettingstrayslate.checkautoheight.caption
 msgid "Auto Height"
@@ -825,41 +855,41 @@ msgstr "Автоматична височина"
 
 #: tformsettingstrayslate.checkautoheight.hint
 msgid "Popup window height calculated based on text height"
-msgstr "Височината на изскачащия прозорец се изчислява въз основа на височината на текста"
+msgstr "Височината на изскачащия прозорец се определя според обема на текста"
 
 #: tformsettingstrayslate.checkautostart.caption
 msgid "Launch At System Startup"
-msgstr "Пусни при старт на системата"
+msgstr "Зареждане със системата"
 
 #: tformsettingstrayslate.checkautostart.hint
 msgid "Start the application automatically when the computer boots"
-msgstr "Авто-старт на приложението при старт на компютъра"
+msgstr "Автоматично зарежда програмата със стартирането на операционната система"
 
 #: tformsettingstrayslate.checkautoswap.caption
 msgctxt "tformsettingstrayslate.checkautoswap.caption"
 msgid "Auto-Swap Language Pair"
-msgstr "Автоматична смяна на езикова двойка"
+msgstr "Автоматична размяна на езиковата двойка"
 
 #: tformsettingstrayslate.checkautoswap.hint
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
-msgstr "Автоматично разпознаване на езика на въвеждане и размяна на двойки, ако е необходимо, не работи по време на превод в реално време"
+msgstr "Автоматично разпознава езика при въвежданео на текста и заменя езиковата двойка при необходимост. Тази фунция не работи по време на превод в реално време"
 
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
-msgstr "Активирай режим на мишка"
+msgstr "Превод чрез маркиране с мишката"
 
 #: tformsettingstrayslate.checkenablemousemode.hint
 msgid "Allows translation by selecting text with the mouse in any application"
-msgstr "Позволява превод чрез избиране на текст с мишката във всяко приложение"
+msgstr "Позволява превода на текст от всяко приложение чрез маркиране с мишката"
 
 #: tformsettingstrayslate.checkhidecontrols.caption
 msgid "Auto-Hide Controls"
-msgstr "Автоматично скриване на контроли"
+msgstr "Автоматично скриване на контролните функции"
 
 #: tformsettingstrayslate.checkhidecontrols.hint
 msgid "Hide window controls when the mouse is not over the popup window"
-msgstr "Скриване на контролите на прозореца, когато курсорът на мишката не е върху изскачащия прозорец"
+msgstr "Скрива контролните функции в изскачащия прозорец, когато курсорът на мишката не е позициониран върху прозореца"
 
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
@@ -868,7 +898,7 @@ msgstr "Само с натиснат Ctrl"
 
 #: tformsettingstrayslate.checkmousemodectrl.hint
 msgid "Works only when the Ctrl key is pressed"
-msgstr "Работи само с клавиш Ctrl"
+msgstr "Преводът се извършва само когато е натиснат клавиш Ctrl"
 
 #: tformsettingstrayslate.checkproxyauthentication.caption
 msgctxt "tformsettingstrayslate.checkproxyauthentication.caption"
@@ -877,81 +907,85 @@ msgstr "Удостоверяване"
 
 #: tformsettingstrayslate.checkproxyauthentication.hint
 msgid "Enables login and password authentication for proxy access"
-msgstr "Активира удостоверяване с вход и парола за достъп чрез прокси"
+msgstr "Включва функцията за вход с име и парола за достъп чрез прокси"
 
 #: tformsettingstrayslate.checkrealtime.caption
 msgctxt "tformsettingstrayslate.checkrealtime.caption"
 msgid "Translate As You Type"
-msgstr "Превеждай, докато се пише"
+msgstr "Превеждане на текст по време на писане"
 
 #: tformsettingstrayslate.checkrealtime.hint
 msgctxt "tformsettingstrayslate.checkrealtime.hint"
 msgid "Automatically translate text while typing"
-msgstr "Автоматичен превод на текста докато се въвежда"
+msgstr "Автоматично превежда текста по време на писане"
 
 #: tformsettingstrayslate.checksmarthard.caption
 msgid "Always Prefer Primary/Secondary Language"
-msgstr "Винаги предпочитай основен/вторичен език"
+msgstr "Използване на основен/вторичен език за предпочитание"
 
 #: tformsettingstrayslate.checksmarthard.hint
 msgid ""
 "Always prefer the Primary/Secondary language pair when the detected language matches the current target language.\n"
 "Restore the configured pair instead of performing a normal swap."
-msgstr "Винаги предпочитай двойка основен/вторичен език, когато откритият език съвпада с текущия целеви език. \nВъзстанови конфигурирана двойка вместо нормална смяна."
+msgstr ""
+"Винаги предпочита двойка, съставляваща основен/вторичен език, когато разпознатият език съвпада с текущия целеви език. \n"
+"Възстановява настроената двойка, вместо да извършва обикновена размяна."
 
 #: tformsettingstrayslate.checksmartswap.caption
 msgctxt "tformsettingstrayslate.checksmartswap.caption"
 msgid "Smart Swap For Languages Outside Pair"
-msgstr "Интелигентна замяна извън двойката"
+msgstr "Умна размяна на езици извън двойката"
 
 #: tformsettingstrayslate.checksmartswap.hint
 msgctxt "tformsettingstrayslate.checksmartswap.hint"
 msgid ""
 "If Detected language is outside the current pair, the Source language is replaced with the Detected language and the Target language is set to Primary.\n"
 "If Detected language equals Primary, the translation pair is set to Primary - Secondary."
-msgstr "Ако откритият език е извън текущата двойка, изходният се заменя с открития, а целевият е зададен на Основен.\nАко Откритият език е Основен, двойката превод е зададена на Основен - Вторичен."
+msgstr ""
+"Ако засеченият език е извън текущата двойка, изходният се заменя с засечения, а целевият се задава като  Основен.\n"
+"Ако засеченият език е равен на основния, двойката за превод се задава като Основен - Вторичен."
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
-msgstr "Най Отгоре"
+msgstr "Показване на прозореца винаги отгоре"
 
 #: tformsettingstrayslate.checkstayontop.hint
 msgid "Keeps the window above all other windows"
-msgstr "Прозорецът над всички останали"
+msgstr "Поставя прозореца на програмата над всички останали"
 
 #: tformsettingstrayslate.checktwolang.caption
 msgid "Show Language Pair"
-msgstr "Показвай езиковата двойка"
+msgstr "Показване на езиковата двойка"
 
 #: tformsettingstrayslate.checktwolang.hint
 msgid "Display source and/or target language on the tray icon"
-msgstr "Показвай изходния и/или целевия език в иконата в системния трей"
+msgstr "Показва изходния и/или целевия език в иконата в системната лента"
 
 #: tformsettingstrayslate.checkverticalsplit.caption
 msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
 msgid "Side-By-Side Layout"
-msgstr "Едностранично оформление"
+msgstr "Вертикално оформление на прозореца"
 
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
-msgstr "Превключи към оформление едно до друго с изходен текст до превода"
+msgstr "Превключва към вертикално оформпление на прозореца, като до изходния текст се поставя превода"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
-msgstr "Конфигурация за авторазпознава езика на изходния текст"
+msgstr "Настройка, която автоматично разпознава езика на изходния текст"
 
 #: tformsettingstrayslate.combomousemode.hint
 msgid "Choose how translation appears on mouse text selection"
-msgstr "Как да се показва превода при избор на текст с мишката"
+msgstr "Задава как да се показва превода при маркиране на текст с мишката"
 
 #: tformsettingstrayslate.combomousemode.text
 msgctxt "tformsettingstrayslate.combomousemode.text"
 msgid "Show Translate Button"
-msgstr "Показвай бутон за превод"
+msgstr "Показване на бутона за превод"
 
 #: tformsettingstrayslate.comboproxymode.hint
 msgid "Defines how proxy is used no proxy system proxy or custom configuration"
-msgstr "Определя как се използва прокси сървърът, без прокси система, прокси сървър или персонализирана конфигурация"
+msgstr "Определя как се използва прокси сървърът: без прокси, системно прокси или персонализирано прокси"
 
 #: tformsettingstrayslate.comboproxymode.text
 msgctxt "tformsettingstrayslate.comboproxymode.text"
@@ -960,7 +994,7 @@ msgstr "Без прокси"
 
 #: tformsettingstrayslate.comboproxytype.hint
 msgid "Type of proxy protocol used for custom settings"
-msgstr "Тип прокси протокол, използван за персонализирани настройки"
+msgstr "Тип протокол за проксито, използван за персонализирани настройки"
 
 #: tformsettingstrayslate.comboproxytype.text
 msgid "HTTP"
@@ -968,15 +1002,15 @@ msgstr "HTTP"
 
 #: tformsettingstrayslate.editproxyhost.hint
 msgid "Address of the proxy server IP or domain name"
-msgstr "IP адрес или име на домейн на прокси сървъра"
+msgstr "Адрес на прокси сървъра - IP или домейн"
 
 #: tformsettingstrayslate.editproxylogin.hint
 msgid "Username used for proxy authentication"
-msgstr "Потребителско име, използвано за удостоверяване на прокси сървър"
+msgstr "Потребителското име, използвано за свързване с прокси сървъра"
 
 #: tformsettingstrayslate.editproxypassword.hint
 msgid "Password used for proxy authentication"
-msgstr "Парола, използвана за удостоверяване на прокси сървър"
+msgstr "Паролата, използвана за свързване с прокси сървъра"
 
 #: tformsettingstrayslate.gridhotkeys.columns[0].title.caption
 msgctxt "tformsettingstrayslate.gridhotkeys.columns[0].title.caption"
@@ -990,11 +1024,11 @@ msgstr "Клавишни комбинации"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
-msgstr "Авто-старт"
+msgstr "Автоматично стартиране"
 
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
-msgstr "Автоматична смяна на езици"
+msgstr "Автоматична размяна на езици"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1008,7 +1042,7 @@ msgstr "Главен прозорец"
 #: tformsettingstrayslate.groupmousemode.caption
 msgctxt "tformsettingstrayslate.groupmousemode.caption"
 msgid "Mouse Mode"
-msgstr "Режим на мишка"
+msgstr "Превод чрез маркиране с мишката"
 
 #: tformsettingstrayslate.grouppopup.caption
 msgid "Popup Window"
@@ -1025,7 +1059,7 @@ msgstr "Прокси"
 
 #: tformsettingstrayslate.grouprealtime.caption
 msgid "Real-Time Translation"
-msgstr "Превод при въвеждане"
+msgstr "Превод в реално време"
 
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
@@ -1038,7 +1072,7 @@ msgstr "Бързи клавиши"
 
 #: tformsettingstrayslate.grouptrayicon.caption
 msgid "Tray Icon"
-msgstr "Икона в системния трей"
+msgstr "Икона в системната лента"
 
 #: tformsettingstrayslate.groupuserparameters.caption
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
@@ -1068,25 +1102,25 @@ msgstr "Име на шрифта"
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
 msgid "Lang Detect Config"
-msgstr "Конфигурация за разпознаване на езика"
+msgstr "Настройване на функцията за разпознаване на езика"
 
 #: tformsettingstrayslate.labellogin.caption
 msgid "Login"
-msgstr "Логин"
+msgstr "Вход"
 
 #: tformsettingstrayslate.labelmaxheight.caption
 msgid "Max Height"
-msgstr "Максимална височина"
+msgstr "Допустима височина"
 
 #: tformsettingstrayslate.labelmaxlangpairs.caption
 msgctxt "tformsettingstrayslate.labelmaxlangpairs.caption"
 msgid "Max Pairs"
-msgstr "Максимален брой двойки"
+msgstr "Допустим брой езикови двойки"
 
 #: tformsettingstrayslate.labelmousemode.caption
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
-msgstr "Режим на мишка"
+msgstr "Превод чрез маркиране с мишката"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"
@@ -1094,7 +1128,7 @@ msgstr "Прозрачност при задържане"
 
 #: tformsettingstrayslate.labelopacityidle.caption
 msgid "Opacity Idle"
-msgstr "Прозрачност в готовност"
+msgstr "Прозрачност в режим на готовност"
 
 #: tformsettingstrayslate.labelpassword.caption
 msgid "Password"
@@ -1118,7 +1152,7 @@ msgstr "Тип прокси"
 
 #: tformsettingstrayslate.labelrealtimedelay.caption
 msgid "Translation Delay, ms"
-msgstr "Закъснение на превода, ms"
+msgstr "Закъснение на превода, милисекунди"
 
 #: tformsettingstrayslate.labelrequesttimeout.caption
 msgid "Request, sec"
@@ -1163,19 +1197,19 @@ msgstr "По подразбиране, 0"
 
 #: tformsettingstrayslate.spinconnecttimeout.hint
 msgid "Time to establish connection If 0 default 10 seconds is used"
-msgstr "Време за свързване. Ако е 0,по подразбиране 10 сек"
+msgstr "Период от време за свързване; ако е 0, по подразбиране е 10 секунди"
 
 #: tformsettingstrayslate.spinmaxheight.hint
 msgid "Set maximum window height for auto-size; 0 indicates limit to screen height"
-msgstr "Задайте максимална височина на прозореца за автоматично оразмеряване; 0 показва ограничение за височината на екрана"
+msgstr "Задава допустимата височина на прозореца за автоматично оразмеряване; 0 показва границата на височината на екрана"
 
 #: tformsettingstrayslate.spinmaxlangpairs.hint
 msgid "Number of recent pairs on the panel; pairs shift right when added; zero value hides the panel"
-msgstr "Брой скорошни двойки в панела; двойките се изместват надясно при добавяне; нулева стойност скрива панела"
+msgstr "Задава допустимия брой на последните двойки, които да се показват в панела; 0 скрива панела. Двойките се изместват надясно при добавяне."
 
 #: tformsettingstrayslate.spinproxyport.hint
 msgid "Network port used by the proxy server"
-msgstr "Мрежов порт, използван от прокси сървъра"
+msgstr "Мрежовия порт, използван от прокси сървъра"
 
 #: tformsettingstrayslate.spinrealtimedelay.hint
 msgid "Translation Delay in milliseconds"
@@ -1183,31 +1217,31 @@ msgstr "Забавяне на превода в милисекунди"
 
 #: tformsettingstrayslate.spinrequesttimeout.hint
 msgid "Time to wait for response and data If 0 default 300 seconds is used"
-msgstr "Време за изчакване на отговор и данни. Ако е 0, по подразбиране 300 сек"
+msgstr "Време за изчакване на отговор и данни; ако е 0, по подразбиране е 300 секунди"
 
 #: tformsettingstrayslate.trackopacityhover.hint
 msgid "Window transparency when the mouse is over the window"
-msgstr "Прозрачност на прозореца, когато мишката е върху него"
+msgstr "Прозрачност на прозореца, когато курсора не е позициониран върху него"
 
 #: tformsettingstrayslate.trackopacityidle.hint
 msgid "Window transparency when the mouse is not over the window"
-msgstr "Прозрачност на прозореца, когато мишката не е върху него"
+msgstr "Определя прозрачността на прозореца, когато курсорът не е позициониран върху него"
 
 #: tformtrayslate.aabout.caption
 msgid "About..."
-msgstr "Относно..."
+msgstr "За програмата..."
 
 #: tformtrayslate.aaddpair.hint
 msgid "Add Current Pair"
-msgstr "Добави текуща двойка"
+msgstr "Добавяне на текущата двойка"
 
 #: tformtrayslate.aautocheckupdates.caption
 msgid "Auto Check Updates"
-msgstr "Автоматична проверка за актуализации"
+msgstr "Автоматична проверка за обновления"
 
 #: tformtrayslate.acheckforupdates.caption
 msgid "Check For Updates"
-msgstr "Провери за актуализации"
+msgstr "Проверяване за обновления"
 
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
@@ -1220,29 +1254,29 @@ msgstr "Копиране"
 #: tformtrayslate.acopytarget.hint
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
-msgstr "Копирай превода"
+msgstr "Копиране на превода"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
-msgstr "Изтрий двойка"
+msgstr "Премахване на двойката"
 
 #: tformtrayslate.adonate.caption
 msgid "Buy Me a Coffee..."
-msgstr "Купи ми кафе..."
+msgstr "Дарение"
 
 #: tformtrayslate.aexit.caption
 msgid "Exit"
-msgstr "Изход"
+msgstr "Затваряне"
 
 #: tformtrayslate.afastallowhotkeys.caption
 msgctxt "tformtrayslate.afastallowhotkeys.caption"
 msgid "Enable Global Hotkeys"
-msgstr "Активирай глобални бързи клавиши"
+msgstr "Използване на бързи клавиши"
 
 #: tformtrayslate.afastautoaddlangpairs.caption
 msgctxt "tformtrayslate.afastautoaddlangpairs.caption"
 msgid "Auto-Add Recent Language Pairs"
-msgstr "Автоматично добави скорошни езикови двойки"
+msgstr "Автоматично добавяне на последно използвани езикови двойки"
 
 #: tformtrayslate.afastautocopy.caption
 msgctxt "tformtrayslate.afastautocopy.caption"
@@ -1252,12 +1286,12 @@ msgstr "Автоматично копиране на превода"
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
-msgstr "Автоматична смяна на езикова двойка"
+msgstr "Автоматична размяна на езиковата двойка"
 
 #: tformtrayslate.afastenablemousemode.caption
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
-msgstr "Активирай режим на мишка"
+msgstr "Превод чрез маркиране с мишката"
 
 #: tformtrayslate.afasthidecontrols.caption
 msgctxt "tformtrayslate.afasthidecontrols.caption"
@@ -1267,17 +1301,17 @@ msgstr "Автоматично скриване на изскачащи конт
 #: tformtrayslate.afastmousemodectrl.caption
 msgctxt "tformtrayslate.afastmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"
-msgstr "Само с натиснат Ctrl"
+msgstr "Само с натискане на Ctrl"
 
 #: tformtrayslate.afastrealtime.caption
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
-msgstr "Превеждай, докато се пише"
+msgstr "Превеждне по време на писане"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"
 msgid "Side-By-Side Layout"
-msgstr "Оформление едно до друго"
+msgstr "Вертикално оформление на прозореца"
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
@@ -1398,23 +1432,23 @@ msgstr "Tiếng Việt"
 #: tformtrayslate.amenu.hint
 msgctxt "tformtrayslate.amenu.hint"
 msgid "Display Menu"
-msgstr "Покажи Меню"
+msgstr "Показване на менюто"
 
 #: tformtrayslate.amovefirst.caption
 msgid "Move First"
-msgstr "Премести първо"
+msgstr "Преместване най-отгоре"
 
 #: tformtrayslate.amovelast.caption
 msgid "Move Last"
-msgstr "Премести последно"
+msgstr "Преместване най-отдолу"
 
 #: tformtrayslate.amoveleft.caption
 msgid "Move Left"
-msgstr "Премести наляво"
+msgstr "Преместване вляво"
 
 #: tformtrayslate.amoveright.caption
 msgid "Move Right"
-msgstr "Премести надясно"
+msgstr "Преместване вдясно"
 
 #: tformtrayslate.anewtranslate.hint
 msgctxt "tformtrayslate.anewtranslate.hint"
@@ -1436,11 +1470,11 @@ msgstr "Покажи"
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
-msgstr "Превод (Ctrl ¦ Shift ¦ Enter + Enter)"
+msgstr "Преведи (Ctrl ¦ Shift ¦ Enter + Enter)"
 
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
-msgstr "Превод на клипборда"
+msgstr "Превеждане на клипборда"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
@@ -1449,7 +1483,7 @@ msgstr "Trayslate"
 
 #: tformtrayslate.menuconfig.caption
 msgid "Config"
-msgstr "Конфигурация"
+msgstr "Настройване"
 
 #: tformtrayslate.menufastsettings.caption
 msgid "Quick Settings"
