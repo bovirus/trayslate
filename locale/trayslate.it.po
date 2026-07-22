@@ -425,8 +425,6 @@ msgid "Converts the current response"
 msgstr "Converti la risposta attuale"
 
 #: tformconfigtrayslate.btnscropttest.hint
-#, fuzzy
-#| msgid "Converts the current response"
 msgctxt "tformconfigtrayslate.btnscropttest.hint"
 msgid "Execute script and view the result"
 msgstr "Esegui lo script e visualizza il risultato"
