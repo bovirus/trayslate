@@ -48,6 +48,15 @@ msgctxt "consts.rtoremovepair"
 msgid " to remove pair"
 msgstr ""
 
+#: consts.rtranslate
+msgctxt "consts.rtranslate"
+msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
+msgstr ""
+
+#: consts.rtranslatestop
+msgid "Stop Translation (Esc)"
+msgstr ""
+
 #: formconfig.rcaption
 msgctxt "formconfig.rcaption"
 msgid "Config Editor"

@@ -58,6 +58,15 @@ msgctxt "consts.rtoremovepair"
 msgid " to remove pair"
 msgstr " لإزالة الزوج"
 
+#: consts.rtranslate
+msgctxt "consts.rtranslate"
+msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
+msgstr "ترجمة (Ctrl ¦ Shift ¦ Enter + Enter)"
+
+#: consts.rtranslatestop
+msgid "Stop Translation (Esc)"
+msgstr "إيقاف الترجمة (Esc)"
+
 #: formconfig.rcaption
 msgctxt "formconfig.rcaption"
 msgid "Config Editor"

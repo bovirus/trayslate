@@ -58,6 +58,15 @@ msgctxt "consts.rtoremovepair"
 msgid " to remove pair"
 msgstr " युग्म हटाने के लिए"
 
+#: consts.rtranslate
+msgctxt "consts.rtranslate"
+msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
+msgstr "अनुवाद करें (Ctrl ¦ Shift ¦ Enter + Enter)"
+
+#: consts.rtranslatestop
+msgid "Stop Translation (Esc)"
+msgstr "अनुवाद रोकें (Esc)"
+
 #: formconfig.rcaption
 msgctxt "formconfig.rcaption"
 msgid "Config Editor"

@@ -84,6 +84,10 @@ type
     class function WebRequest(AMethod: TWebMethod; const AUrl: string; const APostData: string; AHeaders: TStrings;
       const AUserAgent, AContentType, AAccept: string; AllowProxy: boolean; AProxy: TProxy; ATimeout: TTimeout;
       var ACookies: TStringList; out AResponseHeaders: TStringList; out AError: boolean): string;
+    // Overload – caller gets ownership of the THTTPSend object
+    class function WebRequest(AMethod: TWebMethod; const AUrl: string; const APostData: string; AHeaders: TStrings;
+      const AUserAgent, AContentType, AAccept: string; AllowProxy: boolean; AProxy: TProxy; ATimeout: TTimeout;
+      var ACookies: TStringList; out AResponseHeaders: TStringList; out AError: boolean; var HTTP: THTTPSend): string; overload;
     { Gzip }
     class function IsGzip(Stream: TMemoryStream): boolean; static;
     class function DecompressGzipToStream(Compressed: TMemoryStream): TMemoryStream; static;
@@ -269,6 +273,18 @@ class function TNetwork.WebRequest(AMethod: TWebMethod; const AUrl: string; cons
   ATimeout: TTimeout; var ACookies: TStringList; out AResponseHeaders: TStringList; out AError: boolean): string;
 var
   HTTP: THTTPSend;
+begin
+  HTTP := nil;
+  // Call overloaded version, then free the HTTP object
+  Result := WebRequest(AMethod, AUrl, APostData, AHeaders, AUserAgent, AContentType, AAccept, AllowProxy,
+    AProxy, ATimeout, ACookies, AResponseHeaders, AError, HTTP);
+  FreeAndNil(HTTP);
+end;
+
+class function TNetwork.WebRequest(AMethod: TWebMethod; const AUrl: string; const APostData: string;
+  AHeaders: TStrings; const AUserAgent, AContentType, AAccept: string; AllowProxy: boolean; AProxy: TProxy;
+  ATimeout: TTimeout; var ACookies: TStringList; out AResponseHeaders: TStringList; out AError: boolean; var HTTP: THTTPSend): string;
+var
   rawStream: TMemoryStream;
   decompressedStream: TMemoryStream;
   bodyStream: TStringStream;
@@ -280,7 +296,9 @@ begin
   AResponseHeaders := TStringList.Create;
   AError := False;
 
-  HTTP := THTTPSend.Create;
+  if HTTP = nil then
+    HTTP := THTTPSend.Create;
+
   rawStream := TMemoryStream.Create;
   try
     // Common setup

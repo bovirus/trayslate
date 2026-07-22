@@ -28,6 +28,8 @@ const
 
 resourcestring
   rswap = 'Swap (%s) with text (%s)';
+  rtranslate = 'Translate (Ctrl ¦ Shift ¦ Enter + Enter)';
+  rtranslatestop = 'Stop Translation (Esc)';
   rnoconfig = 'Configuration file not found! Create it in the configuration editor.';
   rtoremovepair = ' to remove pair';
   rremovepair = 'Are you sure you want to remove the pair "%s"?';

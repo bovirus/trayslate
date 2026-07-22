@@ -26,7 +26,13 @@ uses
   fpjson,
   jsonparser,
   scriptrunner,
-  network;
+  network,
+  {$PUSH}
+  {$WARNINGS OFF}
+  {$HINTS OFF}
+  {$NOTES OFF}
+  httpsend;
+  {$POP}
 
 type
   { TValueType}
@@ -47,6 +53,7 @@ type
     FTextToTranslate: string;
     FIsTruncated: boolean;
     FCookies: TStringList;
+    FCurrentHTTP: THTTPSend;
 
     FServiceName: string;
     FServiceIcon: string;
@@ -97,6 +104,7 @@ type
     destructor Destroy; override;
 
     procedure Clear;
+    procedure AbortRequest;
     procedure ExecuteScript;
     function GetParameters(Data: string): boolean;
     function SetParameters(Data: string; IncludeSet: boolean = True): string;
@@ -259,6 +267,7 @@ begin
   FLangSource := DEFAULT_LANG;
   FLangTarget := Language;
   FCookies := TStringList.Create;
+  FCurrentHTTP := nil;
 end;
 
 destructor TTranslate.Destroy;
@@ -318,6 +327,16 @@ begin
   FInitParameters.Clear;
   FInitLiveTime := 0;
   FServiceIcon := string.Empty;
+end;
+
+procedure TTranslate.AbortRequest;
+begin
+  if Assigned(FCurrentHTTP) then
+  begin
+    // Closing the socket will immediately fail any blocking read/write
+    FCurrentHTTP.Sock.CloseSocket;
+    FCurrentHTTP := nil;   // release reference after abort
+  end;
 end;
 
 procedure TTranslate.ExecuteScript;
@@ -534,6 +553,7 @@ var
   i: integer;
   header: string;
   Error: boolean;
+  localHTTP: THTTPSend;   // we will create and own the HTTP object
 begin
   Result := string.Empty;
   if FInitUrl = string.Empty then Exit;
@@ -541,18 +561,28 @@ begin
   FParameterValues.Clear;
   FCookies.Clear;
 
-  responseBody := TNetwork.WebRequest(wmGet, FInitUrl, string.Empty, InitHeaders, FInitUserAgent, string.Empty,
-    string.Empty, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error);
+  localHTTP := THTTPSend.Create;   // create new HTTP object
   try
-    if Error then Exit(responseBody);
+    // Call overloaded WebRequest (caller takes ownership)
+    responseBody := TNetwork.WebRequest(wmGet, FInitUrl, string.Empty, InitHeaders, FInitUserAgent,
+      string.Empty, string.Empty, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
 
-    // Build header string from response headers
-    header := string.Empty;
-    for i := 0 to responseHeaders.Count - 1 do
-      header := header + responseHeaders[i] + LineEnding;
+    // Allow external abort while the request is active
+    FCurrentHTTP := localHTTP;
+    try
+      if Error then Exit(responseBody);
 
-    Result := header + LineEnding + responseBody;
+      // Build header string from response headers
+      header := string.Empty;
+      for i := 0 to responseHeaders.Count - 1 do
+        header := header + responseHeaders[i] + LineEnding;
+
+      Result := header + LineEnding + responseBody;
+    finally
+      FCurrentHTTP := nil;   // clear abort reference
+    end;
   finally
+    FreeAndNil(localHTTP);   // free HTTP object when done
     responseHeaders.Free;
   end;
 end;
@@ -566,6 +596,7 @@ var
   i: integer;
   header: string;
   Error: boolean;
+  localHTTP: THTTPSend;
 begin
   Result := string.Empty;
   if FUrl = string.Empty then exit;
@@ -579,7 +610,6 @@ begin
     if (FLangSource = EMPTY_LANG) or (FLangSource = EMPTY_LANG) then
       TempUrl := TempUrl.RemoveEmptyParams;
 
-    // Prepare custom headers with parameter substitution
     TempHeaders := nil;
     if Assigned(Headers) then
     begin
@@ -588,28 +618,35 @@ begin
       TempHeaders.Assign(Headers);
       SetParametersList(TempHeaders);
     end;
-    responseBody := TNetwork.WebRequest(wmGet, TempUrl, string.Empty, TempHeaders, FUserAgent, FContentType,
-      FAccept, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error);
+
+    localHTTP := THTTPSend.Create;
     try
-      if Error then
-      begin
-        FCookies.Clear;
-        FParametersAge := 0;
-        Exit(responseBody);
+      responseBody := TNetwork.WebRequest(wmGet, TempUrl, string.Empty, TempHeaders, FUserAgent,
+        FContentType, FAccept, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
+
+      FCurrentHTTP := localHTTP;
+      try
+        if Error then
+        begin
+          FCookies.Clear;
+          FParametersAge := 0;
+          Exit(responseBody);
+        end;
+
+        if ReturnHeaders then
+        begin
+          header := string.Empty;
+          for i := 0 to responseHeaders.Count - 1 do
+            header := header + responseHeaders[i] + LineEnding;
+          Result := header + LineEnding + responseBody;
+        end
+        else
+          Result := responseBody;
+      finally
+        FCurrentHTTP := nil;
       end;
-
-      // Optionally prepend headers
-      if ReturnHeaders then
-      begin
-        header := string.Empty;
-        for i := 0 to responseHeaders.Count - 1 do
-          header := header + responseHeaders[i] + LineEnding;
-        Result := header + LineEnding + responseBody;
-      end
-      else
-        Result := responseBody;
-
     finally
+      FreeAndNil(localHTTP);
       TempHeaders.Free;
       responseHeaders.Free;
     end;
@@ -629,6 +666,7 @@ var
   i: integer;
   header: string;
   Error: boolean;
+  localHTTP: THTTPSend;
 begin
   Result := string.Empty;
   if FUrl = string.Empty then exit;
@@ -648,7 +686,6 @@ begin
       TempData := TempData.RemoveEmptyParams;
     end;
 
-    // Prepare custom headers with parameter substitution
     TempHeaders := nil;
     if Assigned(Headers) then
     begin
@@ -658,27 +695,34 @@ begin
       SetParametersList(TempHeaders);
     end;
 
-    responseBody := TNetwork.WebRequest(wmPost, TempUrl, TempData, TempHeaders, FUserAgent, FContentType,
-      FAccept, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error);
+    localHTTP := THTTPSend.Create;
     try
-      if Error then
-      begin
-        FCookies.Clear;
-        FParametersAge := 0;
-        Exit(responseBody);
+      responseBody := TNetwork.WebRequest(wmPost, TempUrl, TempData, TempHeaders, FUserAgent,
+        FContentType, FAccept, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
+
+      FCurrentHTTP := localHTTP;
+      try
+        if Error then
+        begin
+          FCookies.Clear;
+          FParametersAge := 0;
+          Exit(responseBody);
+        end;
+
+        if ReturnHeaders then
+        begin
+          header := string.Empty;
+          for i := 0 to responseHeaders.Count - 1 do
+            header := header + responseHeaders[i] + LineEnding;
+          Result := header + LineEnding + responseBody;
+        end
+        else
+          Result := responseBody;
+      finally
+        FCurrentHTTP := nil;
       end;
-
-      if ReturnHeaders then
-      begin
-        header := string.Empty;
-        for i := 0 to responseHeaders.Count - 1 do
-          header := header + responseHeaders[i] + LineEnding;
-        Result := header + LineEnding + responseBody;
-      end
-      else
-        Result := responseBody;
-
     finally
+      FreeAndNil(localHTTP);
       TempHeaders.Free;
       responseHeaders.Free;
     end;

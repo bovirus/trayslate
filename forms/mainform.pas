@@ -450,6 +450,7 @@ type
     procedure AddLangPair(const Pair: string; ToEnd: boolean = True);
     procedure SelectPair(const Pair: string; RunTranslate: boolean = True);
     procedure SelectPairConfig(const LangPairIndex: integer; RunTranslate: boolean = True);
+    procedure UpdateTranslateButtonState(ForceTranslateButton: boolean = False);
     // Tray Icon
     function CreateTrayIconLang(Form: TForm; const ALang1: string; const ALang2: string = string.Empty;
       ABackgroundColor: TColor = clNone; AFontColor: TColor = clWhite; AFontName: string = string.Empty): Graphics.TBitmap;
@@ -514,7 +515,7 @@ type
     // Translate Methods
     function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
     procedure ThreadDone(Sender: TObject);
-    procedure CancelTranslate;
+    procedure CancelTranslate(AWait: boolean = False);
     procedure DetectLanguage(AText: string);
     procedure TranslateMemo(ADetectLanguage: boolean = True);
     procedure TranslatePopup(AText: string; X: integer = 0; Y: integer = 0);
@@ -784,12 +785,14 @@ begin
 
   {$IFDEF WINDOWS}
   UnregisterHotKeys;
-
   FMouseHook.Enabled := False;
   FreeAndNil(FMouseHook);
-  FKeyHook.Enabled:=False;
+  FKeyHook.Enabled := False;
   FreeAndNil(FKeyHook);
   {$ENDIF}
+
+  // Cancel any running translation and free the thread
+  CancelTranslate(True);
 
   if FFormSettingsLoaded then
     SaveFormSettings(Self);
@@ -854,7 +857,12 @@ end;
 procedure TformTrayslate.FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
   if Key = VK_ESCAPE then
-    Hide;
+  begin
+    if aTranslate.Tag = 1 then
+      aTranslate.Execute
+    else
+      Hide;
+  end;
 end;
 
 procedure TformTrayslate.FormWindowStateChange(Sender: TObject);
@@ -1373,7 +1381,13 @@ end;
 
 procedure TformTrayslate.aTranslateExecute(Sender: TObject);
 begin
-  TranslateMemo;
+  if aTranslate.Tag = 0 then
+    TranslateMemo
+  else
+  begin
+    UpdateTranslateButtonState(True);
+    CancelTranslate;
+  end;
 end;
 
 procedure TformTrayslate.aTranslateClipboardExecute(Sender: TObject);
@@ -1574,7 +1588,7 @@ begin
   if Assigned(formPopupTrayslate) then
     formPopupTrayslate.Close;
 
-  CancelTranslate;
+  CancelTranslate(True);
 
   Self.Enabled := False;
   Self.Cursor := crHourGlass;
@@ -3661,6 +3675,22 @@ begin
   SelectPair(FLangPairs.ValueFromIndex[LangPairIndex], RunTranslate);
 end;
 
+procedure TformTrayslate.UpdateTranslateButtonState(ForceTranslateButton: boolean = False);
+begin
+  if Assigned(FTranslateThread) and not FTranslateThread.Finished and not ForceTranslateButton then
+  begin
+    aTranslate.ImageIndex := TDarkUtils.ThemeValue(16, 17);
+    aTranslate.Hint := rtranslatestop;
+    aTranslate.Tag := 1;
+  end
+  else
+  begin
+    aTranslate.ImageIndex := TDarkUtils.ThemeValue(2, 3);
+    aTranslate.Hint := rtranslate;
+    aTranslate.Tag := 0;
+  end;
+end;
+
 {%EndRegion}
 
 {%Region -fold Tray Icon}
@@ -3844,33 +3874,27 @@ begin
     Exit;
   end;
 
+  // Ensure any previous translation is fully stopped and cleaned up
+  if Assigned(FTranslateThread) then
+    CancelTranslate;
+
   try
-    //if (LangSource = string.Empty) or (LangTarget = string.Empty) then Exit;
-
-    // Cancel old translation
-    if Assigned(FTranslateThread) then
-      FTranslateThread.Cancel;
-
-    // Create translation thread (it will handle exceptions itself)
     ATrans.TextToTranslate := AText;
     Th := TTranslateThread.Create(ATrans, AMemo, TimerAnimate, Assigned(AMemo));
     FTranslateThread := Th;
+    UpdateTranslateButtonState;
 
     if Assigned(AMemo) then
       Th.OnTerminate := @ThreadDone
     else
     begin
       try
-        // Wait for thread to finish
         while not Th.Finished do
         begin
           if FCancelled then Exit;
-
           Application.ProcessMessages;
-          Sleep(1); // reduce CPU usage
+          Sleep(1);
         end;
-
-        // Set translated text to clipboard
         if Assigned(Th) and not FCancelled and (Th.ResultTextSync <> string.Empty) then
           Result := Th.ResultTextSync;
       finally
@@ -3891,7 +3915,11 @@ end;
 
 procedure TformTrayslate.ThreadDone(Sender: TObject);
 begin
-  FTranslateThread := nil;
+  // Only clear reference if this is the thread we are currently tracking
+  if Sender = FTranslateThread then
+    FTranslateThread := nil;   // thread will free itself (FreeOnTerminate = True)
+
+  UpdateTranslateButtonState;
 
   if Assigned(formPopupTrayslate) and (formPopupTrayslate.Visible) and (FAutoHeightAfter) then
   begin
@@ -3906,19 +3934,53 @@ begin
     ShowCustomHint(TrayIcon.Hint);
 end;
 
-procedure TformTrayslate.CancelTranslate;
+procedure TformTrayslate.CancelTranslate(AWait: boolean = False);
+var
+  StartTick: QWord;
 begin
   FCancelled := True;
-  try
-    if Assigned(FTranslateThread) then
-      FTranslateThread.Cancel;
-  finally
+  if not Assigned(FTranslateThread) then
+  begin
     TimerAnimate.Enabled := False;
     Screen.Cursor := crDefault;
-    {$IFDEF WINDOWS}
-    SystemParametersInfo(SPI_SETCURSORS, 0, nil, 0);
-    {$ENDIF}
+    UpdateTranslateButtonState;
+    Exit;
   end;
+
+  // Signal the thread to stop
+  FTranslateThread.Cancel;
+
+  // Force BOTH possible translate objects to abort their network requests
+  if Assigned(FTrans) then
+    FTrans.AbortRequest;
+  if Assigned(FTransDetect) then
+    FTransDetect.AbortRequest;
+
+  if AWait then
+  begin
+    // Wait up to 500 ms for the thread to finish (for application exit)
+    StartTick := TOS.GetTickCountXp;
+    while (TOS.GetTickCountXp - StartTick < 500) and not FTranslateThread.Finished do
+    begin
+      Sleep(10);
+    end;
+    if not FTranslateThread.Finished then
+    begin
+      {$IFDEF WINDOWS}
+      TerminateThread(FTranslateThread.Handle, 0);
+      {$ENDIF}
+    end;
+    FreeAndNil(FTranslateThread);
+  end
+  else
+  begin
+    // Do NOT wait – thread will free itself via FreeOnTerminate
+    FTranslateThread := nil;
+  end;
+
+  UpdateTranslateButtonState;
+  TimerAnimate.Enabled := False;
+  Screen.Cursor := crDefault;
 end;
 
 procedure TformTrayslate.DetectLanguage(AText: string);
