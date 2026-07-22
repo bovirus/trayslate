@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: plaintool <astverskoy@gmail.com>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: PoBatch 1.0.0\n"
+"X-Generator: Poedit 3.5\n"
 
 #: consts.rappname
 msgctxt "consts.rappname"
@@ -364,26 +364,7 @@ msgid ""
 "   Copyright (c) 1999–2024, Lukas Gebauer\n"
 "   https://github.com/geby/synapse"
 msgstr ""
-"O Trayslate é um cliente para serviços de tradução baseado na bandeja do sistema. Você pode inserir texto diretamente, traduzir o conteúdo da área de transferência ou traduzir texto selecionado em qualquer aplicativo. Também é possível substituir texto em outro aplicativo pela respectiva tradução utilizando uma tecla de atalho. O aplicativo permite escolher e configurar completamente o serviço de tradução utilizado.\n"
-"\n"
-"Este aplicativo utiliza recursos de terceiros licenciados sob os termos abaixo:\n"
-"\n"
-"1. Ícone principal desenvolvido pela Flaticon\n"
-"https://www.flaticon.com/ru/free-icon/translator_682045\n"
-"\n"
-"2. Módulos de suporte ao tema escuro do Double Commander\n"
-"Módulos utilizados: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n"
-"Licença: GNU General Public License v2.0 (GPL-2.0)\n"
-"https://github.com/doublecmd/doublecmd\n"
-"\n"
-"3. Bibliotecas OpenSSL (versões de 32 e 64 bits)\n"
-"Licença: Apache License 2.0\n"
-"https://www.openssl.org\n"
-"\n"
-"4. Biblioteca de rede Synapse (laz_synapse / synapse41.0)\n"
-"Licença: licença do tipo BSD\n"
-"Copyright (c) 1999–2024, Lukas Gebauer\n"
-"https://github.com/geby/synaps"
+"Trayslate é um cliente de bandeja do sistema para serviços de tradução. Você pode digitar o texto diretamente, traduzir o conteúdo da área de transferência ou traduzir o texto selecionado em qualquer aplicativo. Você também pode substituir o texto em outro aplicativo pela sua tradução usando uma tecla de atalho. O aplicativo permite que você escolha e configure totalmente o serviço de tradução que utiliza.\n\nEste aplicativo utiliza recursos de terceiros sob as seguintes licenças:\n\n1. Ícone principal desenhado por Flaticon\n   https://www.flaticon.com/ru/free-icon/translator_682045\n\n2. Módulos de suporte a tema escuro do Double Commander\n   Módulos utilizados: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n   Licença: GNU General Public License v2.0 (GPL-2.0)\n   https://github.com/doublecmd/doublecmd\n   \n3. Bibliotecas OpenSSL (versões de 32 bits e 64 bits)\n   Licença: Apache License 2.0\n   https://www.openssl.org\n\n4. Biblioteca de rede Synapse (laz_synapse / synapse41.0)   \n   Licença: Licença estilo BSD\n   Copyright (c) 1999–2024, Lukas Gebauer\n   https://github.com/geby/synapse"
 
 #: tformbuttontrayslate.imagetranslate.hint
 msgctxt "tformbuttontrayslate.imagetranslate.hint"
@@ -420,7 +401,7 @@ msgstr "Converte a resposta atual"
 #: tformconfigtrayslate.btnscropttest.hint
 msgctxt "tformconfigtrayslate.btnscropttest.hint"
 msgid "Execute script and view the result"
-msgstr "Executar o script e visualizar o resultado"
+msgstr "Execute o script e veja o resultado"
 
 #: tformconfigtrayslate.btnurltest.hint
 msgid "Execute get request and view the result"
@@ -506,7 +487,7 @@ msgstr "Resposta"
 
 #: tformconfigtrayslate.groupscript.caption
 msgid "Script Retrieved Parameters"
-msgstr "Parâmetros recuperados pelo script"
+msgstr "Parâmetros Recuperados do Script"
 
 #: tformconfigtrayslate.imagepreview.hint
 msgid "Click to select the config icon, Middle-Click clears the icon"
@@ -589,31 +570,23 @@ msgid ""
 "Examples:\n"
 "responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!#10}; /translations/0/text"
 msgstr ""
-"Ponteiro JSON: Use / para níveis, chaves para objetos e números para índices. Use * para todos os itens e #10 para unir itens por quebra de linha. Use ~ ao final do caminho para retornar o ramo JSON bruto. Separe múltiplos segmentos com ponto e vírgula ;.\n"
-"Literal: Bloco de texto em {…}. Tag especial #10 para quebras de linha. Use {{regex}} internamente para extrair dados diretamente no texto.\n"
-"Lógica: Se um Ponteiro em um segmento estiver vazio, o segmento inteiro é ignorado. Se um segmento não tiver Ponteiro, apenas os blocos de texto literal com expressões regulares incorporadas serão processados.\n"
-"Regex: {prefixo {regex[índice]} sufixo} dentro de um bloco de texto. Se nenhum [índice] for especificado, a primeira correspondência é utilizada. O índice pode ser um número, [] (unir por espaço) ou [#10] (unir por quebra de linha). Se a regex não encontrar correspondência, o bloco {…} inteiro é removido. O uso de ~ dentro de uma regex retorna o texto completo.\n"
-"Inversão: Inicie um segmento com ! (ex.: !/caminho{Error}) para exibir seu texto somente se os dados do Ponteiro estiverem ausentes ou o JSON for inválido.\n"
-"Comentários: Comentários no formato / texto / são removidos de toda a expressão antes de qualquer processamento.\n"
-"Exemplos:\n"
-"responseData/translatedText; matches/#10/translation; /texts/text; {texto literal#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Erro: Sem dados!#10}; /translations/0/text"
+"Ponteiro Json: Use / para níveis, chaves para objetos e números para índices. Use * para todos os itens, *#10 para unir itens por quebra de linha. Use ~ no final do caminho para retornar o branch JSON bruto. Separe vários segmentos com ponto e vírgula ;.\nLiteral: Bloco de texto em {…}. Etiqueta especial #10 para quebras de linha. Use {{regex}} dentro para extrair dados diretamente no texto.\nLógica: Se um Ponteiro em um segmento estiver vazio, o segmento inteiro é ignorado. Se um segmento não tiver Pointer, apenas blocos de texto literal com expressões regulares incorporadas são processados.\nRegex: {prefixo {regex[índice]} sufixo} dentro de um bloco de texto. Se nenhum [índice] for especificado, a primeira correspondência é usada. O índice pode ser um número, [*] (unir por espaço) ou [*#10] (unir por quebra de linha). Se a expressão regular não encontrar nenhuma correspondência, o bloco {…} inteiro é removido. Usar ~ dentro de uma expressão regular retorna o texto inteiro.\nInversão: Inicie um segmento com ! (por exemplo, !/caminho{Erro}) para mostrar seu texto somente se os dados do Ponteiro estiverem ausentes ou o JSON for inválido.\nComentando: Comentários /* texto */ são removidos de toda a expressão antes de qualquer processamento.\nExemplos:\nresponseData/translatedText; matches/*#10/translation; /texts/text; {texto literal#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Erro: Sem dados!#10}; /translations/0/text"
 
 #: tformconfigtrayslate.labellanguages.caption
 msgctxt "tformconfigtrayslate.labellanguages.caption"
 msgid "Supported languages e.g. en=en-US (en - internal, en-US - service). \"empty\" - do not send."
-msgstr "Idiomas suportados, ex.: en=en-US (en — interno, en-US — serviço). \"empty\" — não enviar."
+msgstr "Idiomas suportados, por exemplo, en=en-US (en - interno, en-US - serviço). \"vazio\" - não enviar."
 
 #: tformconfigtrayslate.labellanguages1.caption
 msgid "Value type for populating names. None keeps originals; None and Unit are case-sensitive."
-msgstr "Tipo de valor para preenchimento de nomes. \"None\" mantém os originais; \"None\" e \"Unit\" diferenciam maiúsculas de minúsculas."
+msgstr "Tipo de valor para preenchimento de nomes. Nenhum mantém os originais; Nenhum e Unidade diferenciam maiúsculas de minúsculas."
 
 #: tformconfigtrayslate.labellanguagestarget.caption
 msgid ""
 "Target languages e.g. en=en-US, en - internal, en-US - service code.\n"
 "If not specified, both source and target languages are taken from the languages section."
 msgstr ""
-"Idiomas de destino, ex.: en=en-US, sendo en — código interno e en-US — código do serviço.\n"
-"Se não especificado, tanto o idioma de origem quanto o de destino são obtidos da seção de idiomas."
+"Idiomas de destino, por exemplo, en=en-US, en - interno, en-US - código do serviço.\nSe não especificado, tanto o idioma de origem quanto o de destino são obtidos da seção de idiomas."
 
 #: tformconfigtrayslate.labelmaxlength.caption
 msgid "Max Length, bytes"
@@ -627,7 +600,7 @@ msgstr "Método"
 #: tformconfigtrayslate.labelparemeters.caption
 msgctxt "tformconfigtrayslate.labelparemeters.caption"
 msgid "Use parameters: {text} – input text, {source} – source language, {target} – target language. Prefix the name with ! for lowercase or ^ for uppercase value. Also supported {timestamp}, {rand}. Use {parameter} from the parameters page."
-msgstr "Use os parâmetros: {text} — texto de entrada, {source} — idioma de origem, {target} — idioma de destino. Prefixe o nome com ! para valor em minúsculas ou ^ para valor em maiúsculas. Também são suportados {timestamp} e {rand}. Use {parameter} da página de parâmetros."
+msgstr "Use parâmetros: {text} – texto de entrada, {source} – idioma de origem, {target} – idioma de destino. Adicione ! antes do nome para valor em minúsculas ou ^ para valor em maiúsculas. Também são compatíveis {timestamp}, {rand}. Use {parâmetro} da página de parâmetros."
 
 #: tformconfigtrayslate.labelpostdata.caption
 msgid "Post Data"
@@ -640,7 +613,7 @@ msgstr "Cabeçalhos"
 
 #: tformconfigtrayslate.labelscript.caption
 msgid "The script can access any parameters defined above using GetParam('name') and return values with SetOutput('name', 'value'). Additional helper functions are available: GetTimestamp() and GetRandom(Length)."
-msgstr "O script pode acessar qualquer parâmetro definido acima usando GetParam('name') e retornar valores com SetOutput('name', 'value'). Também estão disponíveis as funções auxiliares: GetTimestamp() e GetRandom(Length)."
+msgstr "O script pode acessar quaisquer parâmetros definidos acima usando GetParam('name') e retornar valores com SetOutput('name', 'value'). Funções auxiliares adicionais estão disponíveis: GetTimestamp() e GetRandom(Length)."
 
 #: tformconfigtrayslate.labelservicedescription.caption
 msgid "Description"
@@ -749,7 +722,7 @@ msgstr "https://nowpayments.io/donation/astverskoy"
 #: tformdonatetrayslate.labeldonate.caption
 msgctxt "tformdonatetrayslate.labeldonate.caption"
 msgid "Hey there! Fuel this passion project with a little caffeine boost! Every donation helps keep the code rolling and the coffee brewing. Thanks for supporting the work and the developer behind it!"
-msgstr "Olá! Mantenha este projeto animado com um impulso de cafeína! Cada doação ajuda a manter o código rodando e o café passando. Obrigado por apoiar o trabalho e o desenvolvedor por trás dele!"
+msgstr "Olá! Ajude a manter este projeto de paixão vivo com uma dose de cafeína! Cada doação ajuda a manter o código rodando e o café fresquinho. Obrigado por apoiar o trabalho e o desenvolvedor por trás dele!"
 
 #: tformdonatetrayslate.labelsupport.caption
 msgctxt "tformdonatetrayslate.labelsupport.caption"
@@ -928,8 +901,7 @@ msgid ""
 "Always prefer the Primary/Secondary language pair when the detected language matches the current target language.\n"
 "Restore the configured pair instead of performing a normal swap."
 msgstr ""
-"Sempre preferir o par de idiomas Primário/Secundário quando o idioma detectado corresponder ao idioma de destino atual.\n"
-"Restaurar o par configurado em vez de realizar uma alternância normal."
+"Sempre prefira o par de idioma Primário/Secundário quando o idioma detectado corresponder ao idioma de destino atual.\nRestaure o par configurado em vez de realizar uma troca normal."
 
 #: tformsettingstrayslate.checksmartswap.caption
 msgctxt "tformsettingstrayslate.checksmartswap.caption"
@@ -942,8 +914,7 @@ msgid ""
 "If Detected language is outside the current pair, the Source language is replaced with the Detected language and the Target language is set to Primary.\n"
 "If Detected language equals Primary, the translation pair is set to Primary - Secondary."
 msgstr ""
-"Se o idioma detectado estiver fora do par atual, o idioma de origem é substituído pelo idioma detectado e o idioma de destino é definido como Primário.\n"
-"Se o idioma detectado for igual ao Primário, o par de tradução é definido como Primário - Secundário."
+"Se o idioma detectado estiver fora do par atual, o idioma de origem é substituído pelo idioma detectado e o idioma de destino é definido como Primário.\nSe o idioma detectado for igual ao Primário, o par de tradução é definido como Primário - Secundário."
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
@@ -1050,7 +1021,7 @@ msgstr "Janela Pop-up"
 
 #: tformsettingstrayslate.groupproxiedconfigs.caption
 msgid "Proxied Configs (Default: All)"
-msgstr "Configurações com proxy (Padrão: Todas)"
+msgstr "Configurações via Proxy (Padrão: Todas)"
 
 #: tformsettingstrayslate.groupproxy.caption
 msgid "Proxy"
@@ -1426,7 +1397,7 @@ msgstr "Українська"
 
 #: tformtrayslate.alangvietnamese.caption
 msgid "Vietnamese"
-msgstr "Tiếng Việt"
+msgstr "Vietnamita"
 
 #: tformtrayslate.amenu.hint
 msgctxt "tformtrayslate.amenu.hint"
@@ -1500,4 +1471,3 @@ msgstr "Pares Recentes"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Idioma"
-
