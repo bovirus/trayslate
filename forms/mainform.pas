@@ -3907,6 +3907,7 @@ begin
   finally
     if not Assigned(AMemo) and (ATrans <> TransDetect) then
     begin
+      UpdateTranslateButtonState;
       Screen.Cursor := crDefault;
       TimerAnimate.Enabled := False;
     end;
