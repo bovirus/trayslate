@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------------
 
 const
-  Languages_Data: array[0..267] of TAppValue = (
+  Languages_Data: array[0..268] of TAppValue = (
     // Languages
     (Code: 'auto'; DisplayName: 'Auto Detect'),
     (Code: 'empty'; DisplayName: 'Auto Detect'),
@@ -147,6 +147,7 @@ const
     (Code: 'mr'; DisplayName: 'Marathi'),
     (Code: 'mwr'; DisplayName: 'Marwari'),
     (Code: 'mh'; DisplayName: 'Marshallese'),
+    (Code: 'mhr'; DisplayName: 'Meadow Mari'),
     (Code: 'mni-Mtei'; DisplayName: 'Meiteilon (Manipuri)'),
     (Code: 'lus'; DisplayName: 'Mizo'),
     (Code: 'min'; DisplayName: 'Minangkabau'),

@@ -63,6 +63,7 @@ type
     FServiceRealTime: boolean;
     FServiceOnlyButton: boolean;
     FServiceProxy: boolean;
+    FProxyEnabled: boolean;
     FWebMethod: TWebMethod;
     FUserAgent: string;
     FHeaders: TStringList;
@@ -157,6 +158,7 @@ type
     property EncodeCustomParameters: boolean read FEncodeCustomParameters write FEncodeCustomParameters;
     property CustomParameters: TStringList read FCustomParameters write FCustomParameters;
     property ScriptParameters: TStringList read FScriptParameters write FScriptParameters;
+    property ProxyEnabled: boolean read FProxyEnabled write FProxyEnabled;
     property Proxy: TProxy read FProxy write FProxy;
     property Timeout: TTimeout read FTimeout write FTimeout;
 
@@ -307,6 +309,7 @@ begin
   FServiceRealTime := False;
   FServiceOnlyButton := False;
   FServiceProxy := True;
+  FProxyEnabled:=True;
   FServiceColorRecent := clBlue;
   FServiceDescription.Clear;
   FWebMethod := wmGet;
@@ -578,7 +581,7 @@ begin
   try
     // Call overloaded WebRequest (caller takes ownership)
     responseBody := TNetwork.WebRequest(wmGet, FInitUrl, string.Empty, InitHeaders, FInitUserAgent,
-      string.Empty, string.Empty, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
+      string.Empty, string.Empty, FProxyEnabled, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
 
     if Error then Exit(responseBody);
 
@@ -633,7 +636,7 @@ begin
     FCurrentHTTP := localHTTP;
     try
       responseBody := TNetwork.WebRequest(wmGet, TempUrl, string.Empty, TempHeaders, FUserAgent, FContentType,
-        FAccept, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
+        FAccept, FProxyEnabled, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
 
       if Error then
       begin
@@ -708,7 +711,7 @@ begin
     FCurrentHTTP := localHTTP;
     try
       responseBody := TNetwork.WebRequest(wmPost, TempUrl, TempData, TempHeaders, FUserAgent, FContentType,
-        FAccept, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
+        FAccept, FProxyEnabled, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
 
       if Error then
       begin
