@@ -16,7 +16,6 @@ uses
   SysUtils,
   StrUtils,
   StdCtrls,
-  stringshelper,
   translate;
 
 type
@@ -65,12 +64,14 @@ type
 
 implementation
 
-{$include languages_data.inc}
-{$include currency_data.inc}
-{$include currencycrypto_data.inc}
-{$include units_data.inc}
+uses stringshelper;
 
-{%Region -fold [TAppValue Helper Implementation]}
+  {$include languages_data.inc}
+  {$include currency_data.inc}
+  {$include currencycrypto_data.inc}
+  {$include units_data.inc}
+
+  {%Region -fold [TAppValue Helper Implementation]}
 
 function TAppValueHelper.DisplayText: string;
 begin

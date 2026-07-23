@@ -324,6 +324,8 @@ type
   private
     FTrans: TTranslate;
     FTransDetect: TTranslate;
+    FTranslateThread: TTranslateThread;
+    FActiveThreads: TList;
     FProxy: TProxy;
     FTimeout: TTimeout;
     FCancelled: boolean;
@@ -340,7 +342,6 @@ type
     FPrevTargetText: string;
     FUserParameters: TStringList;
     FLangPairs: TStringList;
-    FTranslateThread: TTranslateThread;
     FMouseHook: TGlobalMouseHook;
     FKeyHook: TGlobalKeyboardHook;
     FPopupOpen: boolean;
@@ -515,7 +516,7 @@ type
     // Translate Methods
     function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
     procedure ThreadDone(Sender: TObject);
-    procedure CancelTranslate(AWait: boolean = False);
+    procedure CancelTranslate;
     procedure DetectLanguage(AText: string);
     procedure TranslateMemo(ADetectLanguage: boolean = True);
     procedure TranslatePopup(AText: string; X: integer = 0; Y: integer = 0);
@@ -670,6 +671,7 @@ begin
   FillChar(FPrevMouseDown, SizeOf(FPrevMouseDown), 0);
   FClickCount := 0;
   FSettingsPage := 0;
+  FActiveThreads := TList.Create;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -775,7 +777,49 @@ begin
 end;
 
 procedure TformTrayslate.FormDestroy(Sender: TObject);
+var
+  // StartTick: QWord;
+  i: integer;
+  Th: TTranslateThread;
 begin
+  // Wait for the thread
+  if Assigned(FActiveThreads) then
+  begin
+    for i := FActiveThreads.Count - 1 downto 0 do
+    begin
+      Th := TTranslateThread(FActiveThreads[i]);
+      if Assigned(Th) and not Th.Finished and not Th.IsTerminated then Th.WaitFor;
+      FActiveThreads.Delete(i);
+    end;
+    FreeAndNil(FActiveThreads);
+  end;
+
+  // Wait for the thread with timeout
+  //if Assigned(FActiveThreads) then
+  //begin
+  //  for i := FActiveThreads.Count - 1 downto 0 do
+  //  begin
+  //    Th := TTranslateThread(FActiveThreads[i]);
+  //    if not Assigned(Th) then
+  //    begin
+  //      FActiveThreads.Delete(i);
+  //      Continue;
+  //    end;
+  //    StartTick := TOS.GetTickCountXp;
+  //    while not Th.Finished and not Th.IsTerminated do
+  //    begin
+  //      Application.ProcessMessages;
+  //      Sleep(1);
+  //      if TOS.GetTickCountXp - StartTick >= 5000 then
+  //        Break;
+  //    end;
+  //    if Th.Finished then
+  //      FActiveThreads.Delete(i);
+  //  end;
+  //  if FActiveThreads.Count = 0 then
+  //    FreeAndNil(FActiveThreads);
+  //end;
+
   TimerAnimate.Enabled := False;
   TimerActive.Enabled := False;
   TimerTranslate.Enabled := False;
@@ -791,11 +835,9 @@ begin
   FreeAndNil(FKeyHook);
   {$ENDIF}
 
-  // Cancel any running translation and free the thread
-  CancelTranslate(True);
-
   if FFormSettingsLoaded then
     SaveFormSettings(Self);
+
   FreeAndNil(FLangPairs);
   FreeAndNil(FUserParameters);
   FreeAndNil(FProxiedConfigs);
@@ -1588,9 +1630,9 @@ begin
   if Assigned(formPopupTrayslate) then
     formPopupTrayslate.Close;
 
-  CancelTranslate(True);
-
   Self.Enabled := False;
+  Self.Visible := False;
+  TrayIcon.Hide;
   Self.Cursor := crHourGlass;
   Screen.Cursor := crHourGlass;
 
@@ -3879,33 +3921,47 @@ begin
     CancelTranslate;
 
   try
+    FCancelled := False;
     ATrans.TextToTranslate := AText;
-    Th := TTranslateThread.Create(ATrans, AMemo, TimerAnimate, Assigned(AMemo));
+    Th := TTranslateThread.Create(ATrans, False);
     FTranslateThread := Th;
+    FActiveThreads.Add(Th);
     UpdateTranslateButtonState;
-
-    if Assigned(AMemo) then
-      Th.OnTerminate := @ThreadDone
-    else
-    begin
-      try
-        while not Th.Finished do
+    Screen.Cursor := crAppStart;
+    TimerAnimate.Enabled := True;
+    try
+      while Assigned(Th) and (not Th.Finished) do
+      begin
+        if FCancelled then
+          Break;
+        Application.ProcessMessages;
+        // If the thread was replaced or freed externally, abandon local reference
+        if FTranslateThread <> Th then
         begin
-          if FCancelled then Exit;
-          Application.ProcessMessages;
-          Sleep(1);
+          Th := nil;
+          Break;
         end;
-        if Assigned(Th) and not FCancelled and (Th.ResultTextSync <> string.Empty) then
-          Result := Th.ResultTextSync;
-      finally
-        if Assigned(Th) then
-          Th.Free;
-        if FTranslateThread = Th then
-          FTranslateThread := nil;
+        Sleep(1);
       end;
+      // Result only if the thread is still ours and not cancelled
+      if not FCancelled and Assigned(Th) and (Th.ResultTextSync <> string.Empty) then
+      begin
+        Result := Th.ResultTextSync;
+        if Assigned(AMemo) then
+          AMemo.Text := Result;
+        if ATrans = Trans then
+          ThreadDone(Th);
+      end;
+    finally
+      if Assigned(Th) then
+      begin
+        Th.Free;   // Th is nil if the thread was replaced/force-killed
+        FActiveThreads.Remove(Th);
+      end;
+      FTranslateThread := nil;   // always clear shared reference
     end;
   finally
-    if not Assigned(AMemo) and (ATrans <> TransDetect) then
+    if ATrans <> TransDetect then
     begin
       UpdateTranslateButtonState;
       Screen.Cursor := crDefault;
@@ -3916,12 +3972,6 @@ end;
 
 procedure TformTrayslate.ThreadDone(Sender: TObject);
 begin
-  // Only clear reference if this is the thread we are currently tracking
-  if Sender = FTranslateThread then
-    FTranslateThread := nil;   // thread will free itself (FreeOnTerminate = True)
-
-  UpdateTranslateButtonState;
-
   if Assigned(formPopupTrayslate) and (formPopupTrayslate.Visible) and (FAutoHeightAfter) then
   begin
     FAutoHeightAfter := False;
@@ -3935,53 +3985,20 @@ begin
     ShowCustomHint(TrayIcon.Hint);
 end;
 
-procedure TformTrayslate.CancelTranslate(AWait: boolean = False);
-var
-  StartTick: QWord;
+procedure TformTrayslate.CancelTranslate;
 begin
-  FCancelled := True;
-  if not Assigned(FTranslateThread) then
-  begin
+  try
+    if Assigned(FTranslateThread) then
+    begin
+      FTranslateThread.Cancel;
+      FTranslateThread := nil;
+    end;
+    FCancelled := True;
+  finally
+    UpdateTranslateButtonState;
     TimerAnimate.Enabled := False;
     Screen.Cursor := crDefault;
-    UpdateTranslateButtonState;
-    Exit;
   end;
-
-  // Signal the thread to stop
-  FTranslateThread.Cancel;
-
-  // Force BOTH possible translate objects to abort their network requests
-  if Assigned(FTrans) then
-    FTrans.AbortRequest;
-  if Assigned(FTransDetect) then
-    FTransDetect.AbortRequest;
-
-  if AWait then
-  begin
-    // Wait up to 500 ms for the thread to finish (for application exit)
-    StartTick := TOS.GetTickCountXp;
-    while (TOS.GetTickCountXp - StartTick < 500) and not FTranslateThread.Finished do
-    begin
-      Sleep(10);
-    end;
-    if not FTranslateThread.Finished then
-    begin
-      {$IFDEF WINDOWS}
-      TerminateThread(FTranslateThread.Handle, 0);
-      {$ENDIF}
-    end;
-    FreeAndNil(FTranslateThread);
-  end
-  else
-  begin
-    // Do NOT wait – thread will free itself via FreeOnTerminate
-    FTranslateThread := nil;
-  end;
-
-  UpdateTranslateButtonState;
-  TimerAnimate.Enabled := False;
-  Screen.Cursor := crDefault;
 end;
 
 procedure TformTrayslate.DetectLanguage(AText: string);
@@ -3998,9 +4015,6 @@ begin
   idxSrc := FLanguages.IndexOf(ComboSource.Text);
   idxTar := FLanguages.IndexOf(ComboTarget.Text);
   //  if (idxSrc < 0) or (idxTar < 0) then Exit;
-
-  Screen.Cursor := crAppStart;
-  TimerAnimate.Enabled := True;
 
   // Detect language in source memo
   langDetect := LowerCase(TranslateThread(TransDetect, AText.ExtractTextSample));
@@ -4123,8 +4137,6 @@ begin
   begin
     if (Trim(MemoSource.Text) = string.Empty) then
     begin
-      Screen.Cursor := crDefault;
-      TimerAnimate.Enabled := False;
       MemoTarget.Clear;
       Exit;
     end;
@@ -4140,9 +4152,6 @@ end;
 procedure TformTrayslate.TranslatePopup(AText: string; X: integer = 0; Y: integer = 0);
 begin
   FCancelled := False;
-
-  Screen.Cursor := crAppStart;
-  TimerAnimate.Enabled := True;
 
   if TimerTranslate.Enabled then
     TimerTranslate.Enabled := False;
@@ -4334,9 +4343,6 @@ var
 begin
   FCancelled := False;
 
-  Screen.Cursor := crAppStart;
-  TimerAnimate.Enabled := True;
-
   // Save current clipboard to restore later
   SaveClipboad;
   try
@@ -4473,9 +4479,6 @@ var
 
 begin
   FCancelled := False;
-
-  Screen.Cursor := crAppStart;
-  TimerAnimate.Enabled := True;
 
   // Save current clipboard to restore later
   SaveClipboad;

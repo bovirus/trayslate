@@ -14,7 +14,6 @@ uses
   Classes,
   Forms,
   SysUtils,
-  StdCtrls,
   RegExpr,
   StrUtils,
   Controls,
@@ -54,6 +53,7 @@ type
     FIsTruncated: boolean;
     FCookies: TStringList;
     FCurrentHTTP: THTTPSend;
+    FHTTPList: TList;
 
     FServiceName: string;
     FServiceIcon: string;
@@ -176,21 +176,22 @@ type
   TTranslateThread = class(TThread)
   private
     FTrans: TTranslate;
-    FMemo: TMemo;
-    FTimer: TTimer;
     FSourceText: string;
     FResultText: string;
     FResultTextSync: string;
     FException: Exception;
     FCancelled: boolean;
   protected
-    procedure BeforeExecute;
     procedure Execute; override;
     procedure AfterExecute;
+    function GetIsTerminated: boolean;
+    function GetIsCancelled: boolean;
   public
-    constructor Create(ATrans: TTranslate; AMemo: TMemo = nil; ATimer: TTimer = nil; AFreeOnTerminate: boolean = True);
+    constructor Create(ATrans: TTranslate; AFreeOnTerminate: boolean = True);
     destructor Destroy; override;
     procedure Cancel;
+    property IsTerminated: boolean read GetIsTerminated;
+    property IsCancelled: boolean read GetIsCancelled;
     property ExceptionObj: Exception read FException;
     property ResultText: string read FResultText;
     property ResultTextSync: string read FResultTextSync;
@@ -268,6 +269,7 @@ begin
   FLangTarget := Language;
   FCookies := TStringList.Create;
   FCurrentHTTP := nil;
+  FHTTPList := TList.Create;
 end;
 
 destructor TTranslate.Destroy;
@@ -279,6 +281,8 @@ begin
   FreeAndNil(FServiceDescription);
   FreeAndNil(FLanguages);
   FreeAndNil(FLanguagesTarget);
+  AbortRequest;
+  FreeAndNil(FHTTPList);
 
   FInitHeaders.Free;
   FInitParameters.Free;
@@ -330,13 +334,20 @@ begin
 end;
 
 procedure TTranslate.AbortRequest;
+var
+  i: integer;
+  HTTP: THTTPSend;
 begin
-  if Assigned(FCurrentHTTP) then
+  for i := 0 to FHTTPList.Count - 1 do
   begin
-    // Closing the socket will immediately fail any blocking read/write
-    FCurrentHTTP.Sock.CloseSocket;
-    FCurrentHTTP := nil;   // release reference after abort
+    HTTP := THTTPSend(FHTTPList[i]);
+    if Assigned(HTTP) then
+    begin
+      HTTP.Sock.StopFlag := True;
+      HTTP.Sock.AbortSocket;
+    end;
   end;
+  FHTTPList.Clear;
 end;
 
 procedure TTranslate.ExecuteScript;
@@ -562,27 +573,25 @@ begin
   FCookies.Clear;
 
   localHTTP := THTTPSend.Create;   // create new HTTP object
+  FHTTPList.Add(localHTTP);        // add to list for abort
+  FCurrentHTTP := localHTTP;       // allow external abort while the request is active
   try
     // Call overloaded WebRequest (caller takes ownership)
     responseBody := TNetwork.WebRequest(wmGet, FInitUrl, string.Empty, InitHeaders, FInitUserAgent,
       string.Empty, string.Empty, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
 
-    // Allow external abort while the request is active
-    FCurrentHTTP := localHTTP;
-    try
-      if Error then Exit(responseBody);
+    if Error then Exit(responseBody);
 
-      // Build header string from response headers
-      header := string.Empty;
-      for i := 0 to responseHeaders.Count - 1 do
-        header := header + responseHeaders[i] + LineEnding;
+    // Build header string from response headers
+    header := string.Empty;
+    for i := 0 to responseHeaders.Count - 1 do
+      header := header + responseHeaders[i] + LineEnding;
 
-      Result := header + LineEnding + responseBody;
-    finally
-      FCurrentHTTP := nil;   // clear abort reference
-    end;
+    Result := header + LineEnding + responseBody;
   finally
+    FHTTPList.Remove(localHTTP); // remove from abort list
     FreeAndNil(localHTTP);   // free HTTP object when done
+    FCurrentHTTP := nil;   // clear abort reference
     responseHeaders.Free;
   end;
 end;
@@ -620,33 +629,32 @@ begin
     end;
 
     localHTTP := THTTPSend.Create;
+    FHTTPList.Add(localHTTP);
+    FCurrentHTTP := localHTTP;
     try
-      responseBody := TNetwork.WebRequest(wmGet, TempUrl, string.Empty, TempHeaders, FUserAgent,
-        FContentType, FAccept, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
+      responseBody := TNetwork.WebRequest(wmGet, TempUrl, string.Empty, TempHeaders, FUserAgent, FContentType,
+        FAccept, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
 
-      FCurrentHTTP := localHTTP;
-      try
-        if Error then
-        begin
-          FCookies.Clear;
-          FParametersAge := 0;
-          Exit(responseBody);
-        end;
-
-        if ReturnHeaders then
-        begin
-          header := string.Empty;
-          for i := 0 to responseHeaders.Count - 1 do
-            header := header + responseHeaders[i] + LineEnding;
-          Result := header + LineEnding + responseBody;
-        end
-        else
-          Result := responseBody;
-      finally
-        FCurrentHTTP := nil;
+      if Error then
+      begin
+        FCookies.Clear;
+        FParametersAge := 0;
+        Exit(responseBody);
       end;
+
+      if ReturnHeaders then
+      begin
+        header := string.Empty;
+        for i := 0 to responseHeaders.Count - 1 do
+          header := header + responseHeaders[i] + LineEnding;
+        Result := header + LineEnding + responseBody;
+      end
+      else
+        Result := responseBody;
     finally
+      FHTTPList.Remove(localHTTP);
       FreeAndNil(localHTTP);
+      FCurrentHTTP := nil;
       TempHeaders.Free;
       responseHeaders.Free;
     end;
@@ -696,33 +704,32 @@ begin
     end;
 
     localHTTP := THTTPSend.Create;
+    FHTTPList.Add(localHTTP);
+    FCurrentHTTP := localHTTP;
     try
-      responseBody := TNetwork.WebRequest(wmPost, TempUrl, TempData, TempHeaders, FUserAgent,
-        FContentType, FAccept, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
+      responseBody := TNetwork.WebRequest(wmPost, TempUrl, TempData, TempHeaders, FUserAgent, FContentType,
+        FAccept, FServiceProxy, FProxy, FTimeout, FCookies, responseHeaders, Error, localHTTP);
 
-      FCurrentHTTP := localHTTP;
-      try
-        if Error then
-        begin
-          FCookies.Clear;
-          FParametersAge := 0;
-          Exit(responseBody);
-        end;
-
-        if ReturnHeaders then
-        begin
-          header := string.Empty;
-          for i := 0 to responseHeaders.Count - 1 do
-            header := header + responseHeaders[i] + LineEnding;
-          Result := header + LineEnding + responseBody;
-        end
-        else
-          Result := responseBody;
-      finally
-        FCurrentHTTP := nil;
+      if Error then
+      begin
+        FCookies.Clear;
+        FParametersAge := 0;
+        Exit(responseBody);
       end;
+
+      if ReturnHeaders then
+      begin
+        header := string.Empty;
+        for i := 0 to responseHeaders.Count - 1 do
+          header := header + responseHeaders[i] + LineEnding;
+        Result := header + LineEnding + responseBody;
+      end
+      else
+        Result := responseBody;
     finally
+      FHTTPList.Remove(localHTTP);
       FreeAndNil(localHTTP);
+      FCurrentHTTP := nil;
       TempHeaders.Free;
       responseHeaders.Free;
     end;
@@ -1743,17 +1750,14 @@ end;
 
 {%Region -fold TTranslateThread }
 
-constructor TTranslateThread.Create(ATrans: TTranslate; AMemo: TMemo = nil; ATimer: TTimer = nil; AFreeOnTerminate: boolean = True);
+constructor TTranslateThread.Create(ATrans: TTranslate; AFreeOnTerminate: boolean = True);
 begin
   inherited Create(True);
   FreeOnTerminate := AFreeOnTerminate;
 
   FTrans := ATrans;
-  FMemo := AMemo;
-  FTimer := ATimer;
   FSourceText := FTrans.TextToTranslate;
   FCancelled := False;
-  BeforeExecute;
   Start;
 end;
 
@@ -1764,26 +1768,28 @@ begin
   inherited Destroy;
 end;
 
-procedure TTranslateThread.BeforeExecute;
+function TTranslateThread.GetIsTerminated: boolean;
 begin
-  if Assigned(FMemo) then
-    Screen.Cursor := crAppStart;
+  Result := Terminated;
+end;
 
-  if Assigned(FTimer) then
-    FTimer.Enabled := True;
+function TTranslateThread.GetIsCancelled: boolean;
+begin
+  Result := FCancelled or Terminated or Application.Terminated;
 end;
 
 procedure TTranslateThread.Execute;
 begin
   try
     try
-      if Terminated or Application.Terminated then Exit;
+      if IsCancelled then Exit;
+
       if Length(Trim(FSourceText)) > 0 then
         FResultText := FTrans.Translate
       else
         FResultText := string.Empty;
 
-      if Terminated or Application.Terminated then Exit;
+      if IsCancelled then Exit;
     except
       on E: Exception do
         if not Application.Terminated then
@@ -1791,7 +1797,7 @@ begin
     end;
   finally
     // Call AfterExecute in main thread to handle exceptions
-    if not Application.Terminated then
+    if not IsCancelled then
       Synchronize(@AfterExecute);
   end;
 end;
@@ -1799,38 +1805,26 @@ end;
 procedure TTranslateThread.Cancel;
 begin
   FCancelled := True;
+  FTrans.AbortRequest;
+  FreeOnTerminate := True;
 end;
 
 procedure TTranslateThread.AfterExecute;
 begin
-  try
-    if FCancelled then Exit; // check if cancelled
+  if IsCancelled then Exit;
 
-    // Handle exception in main thread if occurred
-    if Assigned(FException) then
-    begin
-      if Assigned(Application.OnException) then
-        Application.OnException(Self, FException)
-      else
-        Application.ShowException(FException);
-
-      FreeAndNil(FException); // free manually
-    end
+  // Handle exception in main thread if occurred
+  if Assigned(FException) then
+  begin
+    if Assigned(Application.OnException) then
+      Application.OnException(Self, FException)
     else
-    begin
-      if Assigned(FMemo) and (FResultText <> string.Empty) then
-        FMemo.Text := FResultText;
-      FResultTextSync := FResultText;
-    end;
-  finally
-    if Assigned(FMemo) then
-    begin
-      Screen.Cursor := crDefault;
+      Application.ShowException(FException);
 
-      if Assigned(FTimer) then
-        FTimer.Enabled := False;
-    end;
-  end;
+    FreeAndNil(FException); // free manually
+  end
+  else
+    FResultTextSync := FResultText;
 end;
 
 {%EndRegion}
