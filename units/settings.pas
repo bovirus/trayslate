@@ -14,6 +14,8 @@ interface
 uses
   Forms,
   Classes,
+  Controls,
+  Dialogs,
   SysUtils,
   fpjson,
   jsonparser,
@@ -40,7 +42,7 @@ function LoadFormSettings(Form: TformTrayslate): boolean;
 
 implementation
 
-uses hotkeyhelper, localize, network, darkutils;
+uses hotkeyhelper, localize, network, darkutils, controlshelper;
 
 function GetSettingsDirectory(fileName: string = string.Empty): string;
   {$IFDEF WINDOWS}
@@ -263,15 +265,8 @@ begin
     JSONObj.Free;
   end;
 
-  try
-    Form.MemoSource.Lines.TrailingLineBreak := False;
-    Form.MemoSource.Lines.SaveToFile(GetSettingsDirectory('source.txt'));
-    Form.MemoTarget.Lines.TrailingLineBreak := False;
-    Form.MemoTarget.Lines.SaveToFile(GetSettingsDirectory('target.txt'));
-  except
-    on E: Exception do
-      // Do nothing if can't save current text files
-  end;
+  Form.MemoSource.SaveToFileSafe(GetSettingsDirectory('source.txt'));
+  Form.MemoTarget.SaveToFileSafe(GetSettingsDirectory('target.txt'));
 end;
 
 function LoadFormSettings(Form: TformTrayslate): boolean;
