@@ -204,7 +204,7 @@ resourcestring
 
 implementation
 
-uses consts, mainform, translate, settings, languages, network, stringhelper, base64utils, localize, darkutils, controlshelper;
+uses Consts, mainform, translate, settings, languages, network, stringhelper, base64utils, localize, darkutils, controlshelper;
 
   {$R *.lfm}
 
@@ -228,7 +228,7 @@ begin
   ComboValueType.Items.Add(rvaluetype4);
   ComboValueType.Items.Add(rvaluetype5);
   ComboValueType.Items.Add(rvaluetype6);
-  ComboValueType.ItemIndex := Ord(formTrayslate.Trans.ValueType);
+  ComboValueType.ItemIndex := Ord(formTrayslate.Trans.LangType);
 
   SynScriptParameters.Font.Color := clWindowText;
   SynScriptParameters.Gutter.LineNumberPart.MarkupInfo.Foreground := clWindowText;
@@ -471,7 +471,7 @@ begin
     MemoLanguages.Clear;
   end;
 
-  List := TLanguages.GetLanguageCodePairList(TValueType(ComboValueType.ItemIndex));
+  List := TLanguages.GetLanguageCodePairList(TLangType(ComboValueType.ItemIndex));
   try
     MemoLanguages.Lines.Assign(List);
   finally
@@ -713,7 +713,7 @@ begin
     MemoLanguagesTarget.Lines.Assign(LanguagesTarget);
     MemoLanguagesTarget.RemoveSameNameValueFromMemo;
 
-    ComboValueType.ItemIndex := Ord(ValueType);
+    ComboValueType.ItemIndex := Ord(LangType);
     EditInitUserAgent.Text := InitUserAgent;
     MemoInitHeaders.Lines.Assign(InitHeaders);
     MemoInitUrl.Text := InitUrl;
@@ -787,7 +787,7 @@ begin
       JsonPointer := MemoJsonPointer.Text;
       Languages.Text := MemoLanguages.Text;
       LanguagesTarget.Text := MemoLanguagesTarget.Text;
-      ValueType := TValueType(ComboValueType.ItemIndex);
+      LangType := TLangType(ComboValueType.ItemIndex);
       EncodeCustomParameters := CheckEncodeCustomParameters.Checked;
       CustomParameters.Text := MemoCustomParameters.Text;
       ScriptParameters.Text := SynScriptParameters.Text;

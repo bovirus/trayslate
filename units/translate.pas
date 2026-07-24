@@ -34,8 +34,8 @@ uses
   {$POP}
 
 type
-  { TValueType}
-  TValueType = (
+  { TLangType }
+  TLangType = (
     vtNone,            // as is
     vtLanguage,        // languages
     vtCurrencyAll,     // fiat + crypto
@@ -82,7 +82,7 @@ type
     FRegexp: string;
     FLanguages: TStringList;
     FLanguagesTarget: TStringList;
-    FValueType: TValueType;
+    FLangType: TLangType;
     FProxy: TProxy;
     FTimeout: TTimeout;
 
@@ -165,7 +165,7 @@ type
     // Languages from config, eg en=en
     property Languages: TStringList read FLanguages write FLanguages;
     property LanguagesTarget: TStringList read FLanguagesTarget write FLanguagesTarget;
-    property ValueType: TValueType read FValueType write FValueType;
+    property LangType: TLangType read FLangType write FLangType;
 
     property InitUserAgent: string read FInitUserAgent write FInitUserAgent;
     property InitHeaders: TStringList read FInitHeaders write FInitHeaders;
@@ -249,7 +249,7 @@ begin
   FLanguagesTarget := TStringList.Create;
   FLanguagesTarget.TrailingLineBreak := False;
   FLanguagesTarget.SkipLastLineBreak := True;
-  FValueType := vtLanguage;
+  FLangType := vtLanguage;
 
   FInitUserAgent := 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0';
   FInitHeaders := TStringList.Create;
@@ -309,7 +309,7 @@ begin
   FServiceRealTime := False;
   FServiceOnlyButton := False;
   FServiceProxy := True;
-  FProxyEnabled:=True;
+  FProxyEnabled := True;
   FServiceColorRecent := clBlue;
   FServiceDescription.Clear;
   FWebMethod := wmGet;
@@ -325,7 +325,7 @@ begin
   FEncodeCustomParameters := False;
   FCustomParameters.Clear;
   FScriptParameters.Clear;
-  FValueType := vtNone;
+  FLangType := vtNone;
   FLanguages.Clear;
   FLanguagesTarget.Clear;
   FInitUserAgent := string.Empty;
@@ -1274,7 +1274,7 @@ begin
     Ini.WriteBool('Service', 'AllowProxy', ServiceProxy);
     Ini.WriteInteger('Service', 'ColorRecent', ServiceColorRecent);
 
-    case ValueType of
+    case LangType of
       vtNone: Ini.WriteString('Service', 'ValueType', 'None');
       vtLanguage: Ini.WriteString('Service', 'ValueType', 'Language');
       vtCurrencyAll: Ini.WriteString('Service', 'ValueType', 'CurrencyAll');
@@ -1491,19 +1491,19 @@ begin
 
     Value := Ini.ReadString('Service', 'ValueType', 'None');
     if SameText(Value, 'None') then
-      ValueType := vtNone
+      LangType := vtNone
     else if SameText(Value, 'Language') then
-      ValueType := vtLanguage
+      LangType := vtLanguage
     else if SameText(Value, 'CurrencyAll') then
-      ValueType := vtCurrencyAll
+      LangType := vtCurrencyAll
     else if SameText(Value, 'CurrencyFiat') then
-      ValueType := vtCurrencyFiat
+      LangType := vtCurrencyFiat
     else if SameText(Value, 'CurrencyCrypto') then
-      ValueType := vtCurrencyCrypto
+      LangType := vtCurrencyCrypto
     else if SameText(Value, 'Unit') then
-      ValueType := vtUnit
+      LangType := vtUnit
     else
-      ValueType := vtNone; // default
+      LangType := vtNone; // default
 
     Method := Ini.ReadString('Request', 'Method', 'GET');
     if SameText(Method, 'POST') then

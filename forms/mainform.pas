@@ -2213,7 +2213,7 @@ begin
 
   // Loading source languages from the config
   FLanguages.Clear;
-  List := TLanguages.GetDisplayNamesFromCodeMap(Trans.Languages, Trans.ValueType);
+  List := TLanguages.GetDisplayNamesFromCodeMap(Trans.Languages, Trans.LangType);
   try
     FLanguages.Assign(List); // Assign available source languages
   finally
@@ -2224,7 +2224,7 @@ begin
   FLanguagesTarget.Clear;
   if (Assigned(Trans.LanguagesTarget)) and (Trans.LanguagesTarget.Count > 0) then
   begin
-    List := TLanguages.GetDisplayNamesFromCodeMap(Trans.LanguagesTarget, Trans.ValueType);
+    List := TLanguages.GetDisplayNamesFromCodeMap(Trans.LanguagesTarget, Trans.LangType);
     try
       FLanguagesTarget.Assign(List); // Assign available target languages
     finally
@@ -2233,7 +2233,7 @@ begin
   end;
 
   // Fill ComboSource with display names
-  List := TLanguages.GetDisplayNamesFromCodeMap(Trans.Languages, Trans.ValueType, True);
+  List := TLanguages.GetDisplayNamesFromCodeMap(Trans.Languages, Trans.LangType, True);
   try
     ComboSource.Items.Assign(List); // Text with large letter
   finally
@@ -2277,7 +2277,7 @@ begin
   // Fill ComboTarget with display names
   if (Assigned(Trans.LanguagesTarget)) and (Trans.LanguagesTarget.Count > 0) then
   begin
-    List := TLanguages.GetDisplayNamesFromCodeMap(Trans.LanguagesTarget, Trans.ValueType, True);
+    List := TLanguages.GetDisplayNamesFromCodeMap(Trans.LanguagesTarget, Trans.LangType, True);
     try
       ComboTarget.Items.Assign(List); // Text with large letter
     finally
@@ -2831,7 +2831,7 @@ begin
       ComboValueType.Items.Add(rvaluetype4);
       ComboValueType.Items.Add(rvaluetype5);
       ComboValueType.Items.Add(rvaluetype6);
-      ComboValueType.ItemIndex := Ord(Trans.ValueType);
+      ComboValueType.ItemIndex := Ord(Trans.LangType);
     end;
   end;
 
