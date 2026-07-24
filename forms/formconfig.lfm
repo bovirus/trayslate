@@ -1774,11 +1774,11 @@ object formConfigTrayslate: TformConfigTrayslate
         TabOrder = 0
         object MemoLanguages: TMemo
           Left = 5
-          Height = 391
-          Top = 105
+          Height = 381
+          Top = 115
           Width = 543
           Align = alClient
-          BorderSpacing.Top = 100
+          BorderSpacing.Top = 110
           BorderSpacing.Right = 15
           BorderSpacing.Around = 5
           ScrollBars = ssAutoBoth
@@ -1790,8 +1790,8 @@ object formConfigTrayslate: TformConfigTrayslate
         object LabelLanguages: TLabel
           Left = 5
           Height = 15
-          Top = 64
-          Width = 540
+          Top = 72
+          Width = 543
           Anchors = [akTop, akLeft, akRight]
           Caption = 'Supported languages e.g. en=en-US (en - internal, en-US - service). "empty" - do not send.'
           Color = clInfoBk
@@ -1802,7 +1802,7 @@ object formConfigTrayslate: TformConfigTrayslate
           Cursor = crHandPoint
           Left = 5
           Height = 15
-          Top = 84
+          Top = 96
           Width = 81
           Caption = 'Fill with default'
           Font.Color = clBlue
@@ -1815,7 +1815,7 @@ object formConfigTrayslate: TformConfigTrayslate
           Left = 5
           Height = 15
           Top = 8
-          Width = 540
+          Width = 543
           Anchors = [akTop, akLeft, akRight]
           Caption = 'Value type for populating names. None keeps originals; None and Unit are case-sensitive.'
           Color = clInfoBk
@@ -1823,10 +1823,10 @@ object formConfigTrayslate: TformConfigTrayslate
           Transparent = False
         end
         object ComboValueType: TComboBox
-          Left = 142
+          Left = 139
           Height = 23
-          Top = 32
-          Width = 406
+          Top = 40
+          Width = 409
           Anchors = [akTop, akLeft, akRight]
           ItemHeight = 15
           ItemIndex = 0
@@ -1844,9 +1844,9 @@ object formConfigTrayslate: TformConfigTrayslate
           OnChange = ValueChange
         end
         object LabelValueType: TLabel
-          Left = 27
+          Left = 24
           Height = 23
-          Top = 32
+          Top = 40
           Width = 104
           Alignment = taRightJustify
           AutoSize = False
