@@ -204,7 +204,8 @@ resourcestring
 
 implementation
 
-uses Consts, mainform, translate, settings, languages, network, stringhelper, base64utils, localize, darkutils, controlshelper;
+uses Consts, mainform, formsettings, translate, settings, languages, network, stringhelper, base64utils,
+  localize, darkutils, controlshelper;
 
   {$R *.lfm}
 
@@ -675,6 +676,9 @@ begin
   if (UpdateItemIndex) then
     ComboConfig.ItemIndex := ComboConfig.Items.IndexOf(formTrayslate.ConfigFile);
   FLastConfig := ComboConfig.ItemIndex;
+
+  if Assigned(formSettingsTrayslate) and formSettingsTrayslate.Visible then
+    formSettingsTrayslate.FillConfigs;
 end;
 
 procedure TformConfigTrayslate.UpdateConfig;

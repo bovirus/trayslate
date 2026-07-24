@@ -271,6 +271,7 @@ type
     procedure FillUserParameters;
     procedure FillMouseMode;
     procedure FillProxyMode;
+    procedure FillConfigs;
     procedure SetPopup;
     procedure SetState;
 
@@ -347,7 +348,7 @@ resourcestring
 
 implementation
 
-uses consts, mainform, formpopup, languages, translate, localize, darkutils, controlshelper, stringshelper;
+uses Consts, mainform, formpopup, languages, translate, localize, darkutils, controlshelper, stringshelper;
 
   {$R *.lfm}
 
@@ -357,9 +358,7 @@ uses consts, mainform, formpopup, languages, translate, localize, darkutils, con
 
 procedure TformSettingsTrayslate.FormCreate(Sender: TObject);
 var
-  i: integer;
   List: TStringList;
-  Item, Path: string;
 begin
   TLocalize.ApplicationTranslate(APP_NAME, language, self, TLocalize.LoadCustomPoFile(formTrayslate.CustomPoFile));
 
@@ -371,17 +370,7 @@ begin
   FApplySettings := False;
   FOldKeyValue := string.Empty;
 
-  ComboLangDetect.Items.Clear;
-  ClbProxiedConfigs.Items.Clear;
-  ComboLangDetect.Items.Add(string.Empty);
-  for i := 0 to formTrayslate.ConfigFiles.Count - 1 do
-  begin
-    Item := formTrayslate.ConfigTitles.Values[formTrayslate.ConfigFiles[i]];
-    Path := formTrayslate.ConfigFiles[i];
-    ComboLangDetect.Items.Add(Item);
-    ClbProxiedConfigs.Checked[ClbProxiedConfigs.Items.Add(Item)] := formTrayslate.ProxiedConfigs.Contains(Path);
-  end;
-  ComboLangDetect.ItemIndex := formTrayslate.ConfigFiles.IndexOf(formTrayslate.ConfigLangDetect) + 1;
+  FillConfigs;
 
   List := TLanguages.GetLanguageCodeDisplayPairs(vtLanguage, True);
   try
@@ -1343,6 +1332,24 @@ begin
     ComboProxyMode.ItemIndex := Ord(formTrayslate.Proxy.ProxyMode);
 end;
 
+procedure TformSettingsTrayslate.FillConfigs;
+var
+  i: integer;
+  Item, Path: string;
+begin
+  ComboLangDetect.Items.Clear;
+  ClbProxiedConfigs.Items.Clear;
+  ComboLangDetect.Items.Add(string.Empty);
+  for i := 0 to formTrayslate.ConfigFiles.Count - 1 do
+  begin
+    Item := formTrayslate.ConfigTitles.Values[formTrayslate.ConfigFiles[i]];
+    Path := formTrayslate.ConfigFiles[i];
+    ComboLangDetect.Items.Add(Item);
+    ClbProxiedConfigs.Checked[ClbProxiedConfigs.Items.Add(Item)] := formTrayslate.ProxiedConfigs.Contains(Path);
+  end;
+  ComboLangDetect.ItemIndex := formTrayslate.ConfigFiles.IndexOf(formTrayslate.ConfigLangDetect) + 1;
+end;
+
 procedure TformSettingsTrayslate.SetPopup;
 begin
   if Assigned(formPopupTrayslate) then
@@ -1570,7 +1577,8 @@ begin
   else
     ComboLangDetect.ItemIndex := 0;
   for i := 0 to ClbProxiedConfigs.Count - 1 do
-    ClbProxiedConfigs.Checked[i] := FOriginalProxiedConfigs.Contains(formTrayslate.ConfigFiles[i]);
+    if formTrayslate.ConfigFiles.Count > i then
+      ClbProxiedConfigs.Checked[i] := FOriginalProxiedConfigs.Contains(formTrayslate.ConfigFiles[i]);
   ValueListUserParameters.Strings.Assign(FOriginalUserParameters);
   SpinConnectTimeout.Value := FOriginalTimeout.Connection div 1000;
   SpinRequestTimeout.Value := FOriginalTimeout.Request div 1000;
