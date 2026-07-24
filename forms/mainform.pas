@@ -1069,7 +1069,7 @@ begin
 
           if (LangIndex >= 0) and (LangIndex < MenuLangPairs.Count) then
           try
-            MenuLangPairs.Items[LangIndex].Click;
+            SelectPairConfig(MenuLangPairs.Items[LangIndex].Tag, Showing and TopMost);
             ShowCustomHint(TrayIcon.Hint);
           finally
             // Release modifiers for the specific recent pair hotkey that was pressed
