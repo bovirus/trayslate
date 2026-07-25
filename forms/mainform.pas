@@ -2204,11 +2204,11 @@ begin
     if not ProxiedConfigs.Contains(FConfigFile) then
       FTrans.ProxyEnabled := False
     else
-      FTrans.ProxyEnabled := FTransDetect.ServiceProxy;
+      FTrans.ProxyEnabled := FTrans.ServiceProxy;
     if not ProxiedConfigs.Contains(FConfigLangDetect) then
-      FTrans.ProxyEnabled := False
+      FTransDetect.ProxyEnabled := False
     else
-      FTrans.ProxyEnabled := FTransDetect.ServiceProxy;
+      FTransDetect.ProxyEnabled := FTransDetect.ServiceProxy;
   end;
 
   // Loading source languages from the config
