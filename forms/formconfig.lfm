@@ -1937,10 +1937,10 @@ object formConfigTrayslate: TformConfigTrayslate
     Top = 40
   end
   object DialogOpen: TOpenDialog
-    Filter = 'Images (*.png, *.jpg, *.jpeg, *.bmp)|*.png;*.jpg;*.jpeg;*.bmp|All files (*.*)|*.*'
+    Filter = 'Images (*.png, *.jpg, *.jpeg, *.bmp, *.ico)|*.png;*.jpg;*.jpeg;*.bmp;*.ico|All files (*.*)|*.*'
     Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
     Left = 464
-    Top = 104
+    Top = 112
   end
   object SynPasSyn: TSynPasSyn
     Enabled = False
