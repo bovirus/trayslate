@@ -154,6 +154,8 @@ type
     procedure ScreenActiveControlChanged(Sender: TObject);
     procedure SettingChange(Sender: TObject);
     procedure ListPagesClick(Sender: TObject);
+    procedure PageHotkeysHide(Sender: TObject);
+    procedure PageHotkeysShow(Sender: TObject);
     procedure EditProxyHostKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure BtnApplyClick(Sender: TObject);
     procedure BtnCancelClick(Sender: TObject);
@@ -536,6 +538,16 @@ begin
   begin
     PagesSettings.ActivePageIndex := ListPages.ItemIndex;
   end;
+end;
+
+procedure TformSettingsTrayslate.PageHotkeysHide(Sender: TObject);
+begin
+  formTrayslate.UpdateInputState(True);
+end;
+
+procedure TformSettingsTrayslate.PageHotkeysShow(Sender: TObject);
+begin
+  formTrayslate.UpdateInputState(False);
 end;
 
 procedure TformSettingsTrayslate.GridHotkeysDrawCell(Sender: TObject; aCol, aRow: integer; aRect: TRect; aState: TGridDrawState);

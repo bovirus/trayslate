@@ -22,11 +22,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
     Top = 5
     Width = 614
     TabStop = False
-    ActivePage = PageGeneral
+    ActivePage = PageHotkeys
     Align = alClient
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 1
     object PageGeneral: TTabSheet
       Caption = 'General'
@@ -692,6 +692,8 @@ object formSettingsTrayslate: TformSettingsTrayslate
       Caption = 'Hotkeys'
       ClientHeight = 567
       ClientWidth = 606
+      OnHide = PageHotkeysHide
+      OnShow = PageHotkeysShow
       object ScrollHotkeys: TScrollBox
         Left = 0
         Height = 567
@@ -1094,7 +1096,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           )
           ColWidths = (
             200
-            382
+            365
           )
         end
       end

@@ -510,6 +510,7 @@ type
     function UpdateSourceLanguage(const Lang: string): string;
     function UpdateTargetLanguage(const Lang: string): string;
     function UpdatePairLanguage(const Pair: string): string;
+    procedure UpdateInputState(AEnabled: boolean);
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
     function GetParameterValue(AName: string; out ResultOk: boolean): string;
@@ -764,17 +765,15 @@ begin
   Screen.OnActiveFormChange := @ScreenActiveFormChanged;
 
   {$IFDEF WINDOWS}
-  RegisterHotKeys;
-
   FMouseHook := TGlobalMouseHook.Create;
   FMouseHook.OnLeftDown := @OnHookLeftDown;
   FMouseHook.OnLeftUp := @OnHookLeftUp;
-  FMouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
   FMouseHook.EditFieldOnly := True;
 
   FKeyHook:=TGlobalKeyboardHook.Create;
   FKeyHook.OnKeyEvent := @OnKeyboardEvent;
-  FKeyHook.Enabled := FEnableMouseMode;
+
+  UpdateInputState(True);
   {$ENDIF}
 
   // Set language
@@ -797,10 +796,8 @@ begin
     TimerUnapplyTimer(Self);
 
   {$IFDEF WINDOWS}
-  UnregisterHotKeys;
-  FMouseHook.Enabled := False;
+  UpdateInputState(False);
   FreeAndNil(FMouseHook);
-  FKeyHook.Enabled := False;
   FreeAndNil(FKeyHook);
   {$ENDIF}
 
@@ -1416,10 +1413,6 @@ begin
   formSettingsTrayslate.PagesSettings.ActivePageIndex := FSettingsPage;
   formSettingsTrayslate.ListPages.ItemIndex := FSettingsPage;
 
-  UnregisterHotKeys;
-  FMouseHook.Enabled := False;
-  FKeyHook.Enabled := False;
-
   formSettingsTrayslate.Show;
 
   // Remove TopMost since the main form is not on the top
@@ -1909,10 +1902,8 @@ begin
 
     FSettingsPage := formSettingsTrayslate.PagesSettings.ActivePageIndex;
 
-    RegisterHotKeys;
+    UpdateInputState(True);
     SetHints;
-    FMouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
-    FKeyHook.Enabled := FEnableMouseMode;
 
     FTrans.Proxy := FProxy;
     FTrans.Timeout := FTimeout;
@@ -3100,6 +3091,22 @@ begin
     Tar := UpdateSourceLanguage(Tar);
 
     Result := Src + ':' + Tar;
+  end;
+end;
+
+procedure TFormTrayslate.UpdateInputState(AEnabled: boolean);
+begin
+  if AEnabled then
+  begin
+    KeyHook.Enabled := FEnableMouseMode;
+    MouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
+    RegisterHotKeys;
+  end
+  else
+  begin
+    UnregisterHotKeys;
+    KeyHook.Enabled := False;
+    MouseHook.Enabled := False;
   end;
 end;
 
