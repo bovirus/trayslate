@@ -44,9 +44,7 @@ type
 var
   Profiles: array of TProfile;
 
-// ------------------------------------------------------------------
 //  Check if a UTF-8 character is in the CJK (Chinese/Japanese/Korean) range
-// ------------------------------------------------------------------
 function IsCJK(const s: string): boolean;
 var
   cp: UCS4Char;
@@ -62,10 +60,8 @@ begin
     ((cp >= $AC00) and (cp <= $D7AF));
 end;
 
-// ------------------------------------------------------------------
 //  Extract character trigrams from a UTF-8 text
 //  For texts dominated by CJK characters, spaces are ignored.
-// ------------------------------------------------------------------
 function ExtractCharTrigrams(const AText: string): TStringArray;
 var
   s: string;
@@ -160,10 +156,8 @@ begin
     Result[i] := chars[i] + chars[i + 1] + chars[i + 2];
 end;
 
-// ------------------------------------------------------------------
 //  Distance between text trigrams and a profile
 //  (simple linear search – fast enough for typical trigram sets)
-// ------------------------------------------------------------------
 function DistanceToProfile(const TextTrigrams: TStringArray; const Profile: TProfile): integer;
 var
   i, j, penalty: integer;
@@ -189,22 +183,19 @@ begin
   end;
 end;
 
-// ------------------------------------------------------------------
 //  Default profiles (defined in separate include file)
-// ------------------------------------------------------------------
 {$include langprofiles_data.inc}
 
-// ------------------------------------------------------------------
 //  Load profiles from binary file and merge into the global Profiles
-// ------------------------------------------------------------------
 procedure MergeProfilesFromFile(const FileName: string);
 var
   fs: TFileStream;
-  Count, i, j, trigCount, existingIdx: integer;
-  codeLen: byte;
+  Count, i, j, trigCount, existingIdx: Integer;
+  codeLen: Byte;
   code: string = '';
-  trigLen: byte;
+  trigLen: Byte;
   trig: string = '';
+  freq: Integer;                 // frequency is read but not stored (reserved for future use)
   fileProfiles: array of TProfile = ();
 begin
   if not FileExists(FileName) then Exit;
@@ -233,13 +224,18 @@ begin
         if trigLen > 0 then
           fs.ReadBuffer(trig[1], trigLen);
         fileProfiles[i].Trigrams[j] := trig;
+
+        // Read the frequency (4 bytes) – we don't use it yet,
+        // but it must be consumed to keep the file pointer correct.
+        freq := 0;
+        fs.ReadBuffer(freq, SizeOf(freq));
       end;
     end;
   finally
     fs.Free;
   end;
 
-  // Merge
+  // Merge (same as before)
   for i := 0 to High(fileProfiles) do
   begin
     existingIdx := -1;
@@ -259,9 +255,7 @@ begin
   end;
 end;
 
-// ------------------------------------------------------------------
 //  Public functions
-// ------------------------------------------------------------------
 function DetectLanguageForText(const AText: string): string;
 var
   dummy: double;
@@ -397,9 +391,7 @@ begin
     Result := 'unknown';
 end;
 
-// ------------------------------------------------------------------
 //  Unit initialization
-// ------------------------------------------------------------------
 var
   ExePath: string;
 
