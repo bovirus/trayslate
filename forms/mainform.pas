@@ -3332,6 +3332,16 @@ begin
   else
     formButtonTrayslate.Position := poDesktopCenter;
 
+  // Keep button inside screen always (same as AdjustPopupHeight)
+  if formButtonTrayslate.Position <> poDesktopCenter then
+  begin
+    if formButtonTrayslate.Left + formButtonTrayslate.Width > Screen.WorkAreaRect.Right then
+      formButtonTrayslate.Left := Screen.WorkAreaRect.Right - formButtonTrayslate.Width - 10;
+
+    if formButtonTrayslate.Top + formButtonTrayslate.Height > Screen.WorkAreaRect.Bottom then
+      formButtonTrayslate.Top := Screen.WorkAreaRect.Bottom - formButtonTrayslate.Height + 8;
+  end;
+
   formButtonTrayslate.SourceText := SourceText;
   formButtonTrayslate.TimerHide.Enabled := False;
   formButtonTrayslate.TimerHide.Enabled := True;
