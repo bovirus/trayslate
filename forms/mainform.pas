@@ -17,6 +17,9 @@ uses
   Windows,
   Messages,
   {$ENDIF}
+  {$IFDEF DEBUG}
+  heaptrc,
+  {$ENDIF}
   Types,
   Classes,
   SysUtils,
@@ -595,7 +598,7 @@ type
     property LastDarkMode: boolean read FLastDarkMode write FLastDarkMode;
     property CustomPoFile: string read FCustomPoFile write FCustomPoFile;
     property RawTranslate: string read FRawTranslate write FRawTranslate;
-    property TranslateTarget:TWinControl read FTranslateTarget;
+    property TranslateTarget: TWinControl read FTranslateTarget;
     property MouseHook: TGlobalMouseHook read FMouseHook write FMouseHook;
     property KeyHook: TGlobalKeyboardHook read FKeyHook write FKeyHook;
     property HotKeyApp: THotKeyData read FHotKeyApp write FHotKeyApp;
@@ -780,48 +783,10 @@ end;
 
 procedure TformTrayslate.FormDestroy(Sender: TObject);
 var
-  // StartTick: QWord;
+  TotalDeadline: QWord;
   i: integer;
   Th: TTranslateThread;
 begin
-  // Wait for the thread
-  if Assigned(FActiveThreads) then
-  begin
-    for i := FActiveThreads.Count - 1 downto 0 do
-    begin
-      Th := TTranslateThread(FActiveThreads[i]);
-      if Assigned(Th) and not Th.Finished and not Th.IsTerminated then Th.WaitFor;
-      FActiveThreads.Delete(i);
-    end;
-    FreeAndNil(FActiveThreads);
-  end;
-
-  // Wait for the thread with timeout
-  //if Assigned(FActiveThreads) then
-  //begin
-  //  for i := FActiveThreads.Count - 1 downto 0 do
-  //  begin
-  //    Th := TTranslateThread(FActiveThreads[i]);
-  //    if not Assigned(Th) then
-  //    begin
-  //      FActiveThreads.Delete(i);
-  //      Continue;
-  //    end;
-  //    StartTick := TOS.GetTickCountXp;
-  //    while not Th.Finished and not Th.IsTerminated do
-  //    begin
-  //      Application.ProcessMessages;
-  //      Sleep(1);
-  //      if TOS.GetTickCountXp - StartTick >= 5000 then
-  //        Break;
-  //    end;
-  //    if Th.Finished then
-  //      FActiveThreads.Delete(i);
-  //  end;
-  //  if FActiveThreads.Count = 0 then
-  //    FreeAndNil(FActiveThreads);
-  //end;
-
   TimerAnimate.Enabled := False;
   TimerActive.Enabled := False;
   TimerTranslate.Enabled := False;
@@ -836,6 +801,49 @@ begin
   FKeyHook.Enabled := False;
   FreeAndNil(FKeyHook);
   {$ENDIF}
+
+  // Wait for the thread
+  //if Assigned(FActiveThreads) then
+  //begin
+  //  for i := FActiveThreads.Count - 1 downto 0 do
+  //  begin
+  //    Th := TTranslateThread(FActiveThreads[i]);
+  //    if Assigned(Th) and not Th.Finished and not Th.IsTerminated then Th.WaitFor;
+  //    FActiveThreads.Delete(i);
+  //  end;
+  //  FreeAndNil(FActiveThreads);
+  //end;
+
+  // Wait for all active translation threads to finish, with a single global timeout.
+  if Assigned(FActiveThreads) then
+  begin
+    TotalDeadline := TOS.GetTickCountXp + THREADS_WAIT_TIME;
+    repeat
+      // Remove finished threads from the list (iterate backwards)
+      for i := FActiveThreads.Count - 1 downto 0 do
+      begin
+        Th := TTranslateThread(FActiveThreads[i]);
+        if not Assigned(Th) or Th.Finished or Th.IsTerminated then
+          FActiveThreads.Delete(i);
+      end;
+      // All threads have finished – exit the wait loop
+      if FActiveThreads.Count = 0 then Break;
+      // Total timeout expired – abandon any remaining threads
+      if TOS.GetTickCountXp >= TotalDeadline then
+      begin
+        {$IFDEF DEBUG}
+        UseHeapTrace := False;
+        {$ENDIF}
+        Break;
+      end;
+      // Keep the message loop alive so threads can post Synchronize calls
+      Application.ProcessMessages;
+      Sleep(1);
+    until False;
+
+    // Any threads still left are stuck; they will be reclaimed by the OS when the process exits.
+    FreeAndNil(FActiveThreads);
+  end;
 
   if FFormSettingsLoaded then
     SaveFormSettings(Self);
