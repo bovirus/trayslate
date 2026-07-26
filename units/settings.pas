@@ -157,6 +157,7 @@ begin
     JSONObj.Add('RealTime', Form.RealTime);
     JSONObj.Add('RealTimeDelay', Form.RealTimeDelay);
     JSONObj.Add('AutoSwap', Form.AutoSwap);
+    JSONObj.Add('BuiltInDetect', Form.BuiltInDetect);
     JSONObj.Add('SmartSwap', Form.SmartSwap);
     JSONObj.Add('SmartHard', Form.SmartHard);
     JSONObj.Add('PrimaryLang', Form.PrimaryLang);
@@ -443,6 +444,9 @@ begin
 
         if (JSONObj.FindPath('AutoSwap') <> nil) then
           Form.FAutoSwap := JSONObj.FindPath('AutoSwap').AsBoolean;
+
+        if (JSONObj.FindPath('BuiltInDetect') <> nil) then
+          Form.BuiltInDetect := JSONObj.FindPath('BuiltInDetect').AsBoolean;
 
         if (JSONObj.FindPath('SmartSwap') <> nil) then
           Form.SmartSwap := JSONObj.FindPath('SmartSwap').AsBoolean;

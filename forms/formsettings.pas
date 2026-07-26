@@ -53,6 +53,7 @@ type
     BtnResetPopup: TButton;
     CheckAllowHotkeys: TCheckBox;
     CheckAutoHeight: TCheckBox;
+    CheckBuiltInDetect: TCheckBox;
     ClbProxiedConfigs: TCheckListBox;
     CheckProxyAuthentication: TCheckBox;
     CheckSmartSwap: TCheckBox;
@@ -195,6 +196,7 @@ type
     FOriginalRealTime: boolean;
     FOriginalRealTimeDelay: integer;
     FOriginalAutoSwap: boolean;
+    FOriginalBuiltInDetect: boolean;
     FOriginalSmartSwap: boolean;
     FOriginalSmartHard: boolean;
     FOriginalPrimaryLang: string;
@@ -492,6 +494,9 @@ begin
   else
   if Sender = CheckAutoSwap then
     formTrayslate.aFastAutoSwap.Checked := CheckAutoSwap.Checked
+  else
+  if Sender = CheckBuiltInDetect then
+    SetState
   else
   if Sender = CheckAllowHotkeys then
   begin
@@ -1361,6 +1366,8 @@ end;
 
 procedure TformSettingsTrayslate.SetState;
 begin
+  ComboLangDetect.Enabled := not CheckBuiltInDetect.Checked;
+
   GridHotkeys.Enabled := CheckAllowHotkeys.Checked;
   GridHotkeys.Color := ifthen(GridHotkeys.Enabled, clWindow, clBtnFace);
 
@@ -1388,6 +1395,7 @@ begin
     formTrayslate.RealTime := CheckRealTime.Checked;
     formTrayslate.RealTimeDelay := SpinRealTimeDelay.Value;
     formTrayslate.AutoSwap := CheckAutoSwap.Checked;
+    formTrayslate.BuiltInDetect := CheckBuiltInDetect.Checked;
     formTrayslate.SmartSwap := CheckSmartSwap.Checked;
     formTrayslate.SmartHard := CheckSmartHard.Checked;
     formTrayslate.PrimaryLang := TLanguages.ExtractCodeFromItem(ComboPrimaryLang.Text);
@@ -1520,6 +1528,7 @@ begin
   FOriginalAllowHotkeys := formTrayslate.AllowHotKeys;
   FOriginalRealTime := formTrayslate.RealTime;
   FOriginalRealTimeDelay := formTrayslate.RealTimeDelay;
+  FOriginalBuiltInDetect := formTrayslate.BuiltInDetect;
   FOriginalAutoSwap := formTrayslate.AutoSwap;
   FOriginalSmartSwap := formTrayslate.SmartSwap;
   FOriginalSmartHard := formTrayslate.SmartHard;
@@ -1557,6 +1566,7 @@ begin
   CheckRealTime.Checked := FOriginalRealTime;
   SpinRealTimeDelay.Value := FOriginalRealTimeDelay;
   CheckAutoSwap.Checked := FOriginalAutoSwap;
+  CheckBuiltInDetect.Checked := FOriginalBuiltInDetect;
   CheckSmartSwap.Checked := FOriginalSmartSwap;
   CheckSmartHard.Checked := FOriginalSmartHard;
   ComboPrimaryLang.ItemIndex := TLanguages.FindIndexByCode(ComboPrimaryLang.Items, FOriginalPrimaryLang);

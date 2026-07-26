@@ -381,6 +381,7 @@ type
     FLangTarget: string;
     FMaxLangPairs: integer;
     FRealTimeDelay: integer;
+    FBuiltInDetect: boolean;
     FSmartSwap: boolean;
     FSmartHard: boolean;
     FPrimaryLang: string;
@@ -562,6 +563,7 @@ type
     property RealTime: boolean read FRealTime write SetRealTime;
     property RealTimeDelay: integer read FRealTimeDelay write FRealTimeDelay;
     property AutoSwap: boolean read FAutoSwap write SetAutoSwap;
+    property BuiltInDetect: boolean read FBuiltInDetect write FBuiltInDetect;
     property SmartSwap: boolean read FSmartSwap write FSmartSwap;
     property SmartHard: boolean read FSmartHard write FSmartHard;
     property PrimaryLang: string read FPrimaryLang write FPrimaryLang;
@@ -625,7 +627,7 @@ var
 
 implementation
 
-uses formdonate, formabout, formsettings, formconfig, formpopup, formbutton, settings, languages,
+uses formdonate, formabout, formsettings, formconfig, formpopup, formbutton, settings, languages, langdetect,
   checkupdates, base64utils, localize, colorhelper, controlshelper, darkutils;
 
   {$R *.lfm}
@@ -2435,6 +2437,7 @@ begin
   FRealTime := False;
   FRealTimeDelay := 1000;
   FAutoSwap := False;
+  FBuiltInDetect := False;
   FSmartSwap := False;
   FSmartHard := False;
   FPrimaryLang := TLocalize.GetOSLanguage;
@@ -4037,7 +4040,10 @@ begin
   //  if (idxSrc < 0) or (idxTar < 0) then Exit;
 
   // Detect language in source memo
-  langDetect := LowerCase(TranslateThread(TransDetect, AText.ExtractTextSample));
+  if BuiltInDetect then
+    langDetect := DetectLanguageForText(AText.ExtractTextSample)
+  else
+    langDetect := LowerCase(TranslateThread(TransDetect, AText.ExtractTextSample));
 
   if FCancelled or (langDetect = string.Empty) or (Length(langDetect) > 5) then Exit;
 

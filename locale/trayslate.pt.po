@@ -883,6 +883,14 @@ msgstr "Trocar automaticamente o par de idiomas"
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "Deteta automaticamente o idioma de entrada e troca o par se necessário, não funciona durante a Tradução em Tempo Real"
 
+#: tformsettingstrayslate.checkbuiltindetect.caption
+msgid "Use Built-In Language Detection Engine"
+msgstr "Usar o mecanismo integrado de deteção de idioma"
+
+#: tformsettingstrayslate.checkbuiltindetect.hint
+msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
+msgstr "Utiliza o mecanismo integrado de deteção de idioma em vez da configuração do serviço de tradução. É mais rápido, mas suporta apenas um número limitado de idiomas."
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"

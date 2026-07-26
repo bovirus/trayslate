@@ -883,6 +883,14 @@ msgstr "Schimbă automat perechea de limbi"
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "Detectează automat limba de intrare și schimbă perechea dacă este necesar, nu funcționează în timpul traducerii în timp real"
 
+#: tformsettingstrayslate.checkbuiltindetect.caption
+msgid "Use Built-In Language Detection Engine"
+msgstr "Utilizează motorul integrat de detectare a limbii"
+
+#: tformsettingstrayslate.checkbuiltindetect.hint
+msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
+msgstr "Folosește motorul integrat de detectare a limbii în locul configurației serviciului de traducere. Este mai rapid, dar acceptă doar un număr limitat de limbi."
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"

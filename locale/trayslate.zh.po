@@ -883,6 +883,14 @@ msgstr "自动交换语言对"
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "自动检测输入语言并在需要时交换语言对，在实时翻译期间不起作用"
 
+#: tformsettingstrayslate.checkbuiltindetect.caption
+msgid "Use Built-In Language Detection Engine"
+msgstr "使用内置语言检测引擎"
+
+#: tformsettingstrayslate.checkbuiltindetect.hint
+msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
+msgstr "使用内置语言检测引擎，而不是翻译服务配置。这样速度更快，但仅支持有限数量的语言。"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"

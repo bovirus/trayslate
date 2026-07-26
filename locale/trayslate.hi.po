@@ -883,6 +883,14 @@ msgstr "स्वचालित रूप से भाषा युग्म �
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "इनपुट भाषा स्वचालित रूप से पहचानें और आवश्यक होने पर युग्म बदलें, रीयल-टाइम अनुवाद के दौरान काम नहीं करता है"
 
+#: tformsettingstrayslate.checkbuiltindetect.caption
+msgid "Use Built-In Language Detection Engine"
+msgstr "अंतर्निहित भाषा पहचान इंजन का उपयोग करें"
+
+#: tformsettingstrayslate.checkbuiltindetect.hint
+msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
+msgstr "अनुवाद सेवा के कॉन्फ़िगरेशन के बजाय अंतर्निहित भाषा पहचान इंजन का उपयोग करता है। यह तेज़ है, लेकिन केवल सीमित संख्या में भाषाओं का समर्थन करता है।"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"

@@ -883,6 +883,14 @@ msgstr "Dil Çiftini Otomatik Değiştir"
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "Giriş dilini otomatik algıla ve gerekiyorsa çifti değiştir, Gerçek Zamanlı Çeviri sırasında çalışmaz"
 
+#: tformsettingstrayslate.checkbuiltindetect.caption
+msgid "Use Built-In Language Detection Engine"
+msgstr "Yerleşik dil algılama motorunu kullan"
+
+#: tformsettingstrayslate.checkbuiltindetect.hint
+msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
+msgstr "Çeviri hizmeti yapılandırması yerine yerleşik dil algılama motorunu kullanır. Bu daha hızlıdır, ancak yalnızca sınırlı sayıda dili destekler."
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"

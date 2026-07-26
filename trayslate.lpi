@@ -213,11 +213,19 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
+        <Filename Value="units\langdetect.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
         <Filename Value="units\network.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="units\scriptrunner.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="units\langprofiles_data.inc"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>

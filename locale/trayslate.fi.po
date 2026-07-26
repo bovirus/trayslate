@@ -883,6 +883,14 @@ msgstr "Vaihda kielipari automaattisesti"
 msgid "Automatically detect input language and swap pair if needed, does not work during Real-Time Translation"
 msgstr "Tunnista syöttökieli automaattisesti ja vaihda paria tarvittaessa, ei toimi reaaliaikaisen käännöksen aikana"
 
+#: tformsettingstrayslate.checkbuiltindetect.caption
+msgid "Use Built-In Language Detection Engine"
+msgstr "Käytä sisäänrakennettua kielentunnistusmoottoria"
+
+#: tformsettingstrayslate.checkbuiltindetect.hint
+msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
+msgstr "Käyttää sisäänrakennettua kielentunnistusmoottoria käännöspalvelun asetusten sijaan. Tämä on nopeampaa, mutta tukee vain rajoitettua määrää kieliä."
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
