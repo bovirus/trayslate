@@ -360,6 +360,7 @@ type
     FPopupRecentPair: TComponent;
     FRawTranslate: string;
     FSettingsPage: integer;
+    FTranslateTarget: TWinControl;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -594,6 +595,7 @@ type
     property LastDarkMode: boolean read FLastDarkMode write FLastDarkMode;
     property CustomPoFile: string read FCustomPoFile write FCustomPoFile;
     property RawTranslate: string read FRawTranslate write FRawTranslate;
+    property TranslateTarget:TWinControl read FTranslateTarget;
     property MouseHook: TGlobalMouseHook read FMouseHook write FMouseHook;
     property KeyHook: TGlobalKeyboardHook read FKeyHook write FKeyHook;
     property HotKeyApp: THotKeyData read FHotKeyApp write FHotKeyApp;
@@ -3932,6 +3934,7 @@ begin
     Th := TTranslateThread.Create(ATrans, False);
     FTranslateThread := Th;
     FActiveThreads.Add(Th);
+    FTranslateTarget := AMemo;
     UpdateTranslateButtonState;
     Screen.Cursor := crAppStart;
     TimerAnimate.Enabled := True;
@@ -3989,6 +3992,8 @@ begin
 
   if not Visible and (not Assigned(formPopupTrayslate) or not formPopupTrayslate.Visible) then
     ShowCustomHint(TrayIcon.Hint);
+
+  FTranslateTarget := nil;
 end;
 
 procedure TformTrayslate.CancelTranslate;
@@ -4000,6 +4005,7 @@ begin
       FTranslateThread := nil;
     end;
     FCancelled := True;
+    FTranslateTarget := nil;
   finally
     UpdateTranslateButtonState;
     TimerAnimate.Enabled := False;

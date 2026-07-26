@@ -90,7 +90,7 @@ var
 
 implementation
 
-uses consts, mainform, localize, darkutils, controlshelper;
+uses Consts, mainform, localize, darkutils, controlshelper;
 
   {$R *.lfm}
 
@@ -130,6 +130,10 @@ end;
 procedure TformPopupTrayslate.FormHide(Sender: TObject);
 begin
   FDropTarget.Unregister;
+
+  if Assigned(formTrayslate.TranslateTarget) and (formTrayslate.TranslateTarget is TMemo) and
+    (formTrayslate.TranslateTarget = MemoTarget) then
+    formTrayslate.CancelTranslate;
 end;
 
 procedure TformPopupTrayslate.FormShortCut(var Msg: TLMKey; var Handled: boolean);
