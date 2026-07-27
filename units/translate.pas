@@ -1761,7 +1761,6 @@ begin
   FTrans := ATrans;
   FSourceText := FTrans.TextToTranslate;
   FCancelled := False;
-  Start;
 end;
 
 destructor TTranslateThread.Destroy;

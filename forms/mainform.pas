@@ -3966,6 +3966,7 @@ begin
     UpdateTranslateButtonState;
     Screen.Cursor := crAppStart;
     TimerAnimate.Enabled := True;
+    Th.Start;
     try
       while Assigned(Th) and (not Th.Finished) do
       begin
@@ -3992,8 +3993,8 @@ begin
     finally
       if Assigned(Th) then
       begin
-        Th.Free;   // Th is nil if the thread was replaced/force-killed
         FActiveThreads.Remove(Th);
+        Th.Free;   // Th is nil if the thread was replaced/force-killed
       end;
       FTranslateThread := nil;   // always clear shared reference
     end;
