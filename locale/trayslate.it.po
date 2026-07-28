@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Trayslate - Italian - 06.07.2026\n"
+"Project-Id-Version: Trayslate - Italian - 28.07.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -382,7 +382,7 @@ msgstr ""
 "Puoi inserire testo direttamente, tradurre il contenuto degli appunti o il testo selezionato in qualsiasi applicazione. \n"
 "Puoi anche sostituire in un’altra app tramite un tasto rapido il testo con la traduzione. \n"
 "L’app permette di scegliere/configurare completamente il servizio di traduzione usato.\n"
-"Questa applicazione utilizza risorse di terze parti con le seguenti licenze:\n"
+"Questa applicazione usa risorse di terze parti con le seguenti licenze:\n"
 "\n"
 "1. Icona principale progettata da Flaticon\n"
 "   https://www.flaticon.com/ru/free-icon/translator_682045\n"
@@ -895,11 +895,11 @@ msgstr "Rileva automaticamente la lingua sorgente e scambia se necessario la cop
 
 #: tformsettingstrayslate.checkbuiltindetect.caption
 msgid "Use Built-In Language Detection Engine"
-msgstr "Usa il motore integrato di rilevamento della lingua"
+msgstr "Usa motore integrato rilevamento lingua"
 
 #: tformsettingstrayslate.checkbuiltindetect.hint
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
-msgstr "Utilizza il motore integrato di rilevamento della lingua invece della configurazione del servizio di traduzione. È più veloce, ma supporta solo un numero limitato di lingue."
+msgstr "Usa il motore integrato di rilevamento della lingua invece della configurazione del servizio di traduzione. È più veloce, ma supporta solo un numero limitato di lingue."
 
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
