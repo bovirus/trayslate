@@ -60,8 +60,8 @@ msgstr " çifti kaldırmak için"
 
 #: consts.rtranslate
 msgctxt "consts.rtranslate"
-msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
-msgstr "Çevir (Ctrl ¦ Shift ¦ Enter + Enter)"
+msgid "Translate (Ctrl ¦ Shift + Enter, Triple Enter)"
+msgstr "Çevir (Ctrl ¦ Shift + Enter, Triple Enter)"
 
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
@@ -1518,4 +1518,9 @@ msgstr "Son Çiftler"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
+
+#: tformtrayslate.sbtranslate.hint
+msgctxt "tformtrayslate.sbtranslate.hint"
+msgid "Translate"
+msgstr "Çevir"
 

@@ -28,7 +28,7 @@ const
 
 resourcestring
   rswap = 'Swap (%s) with text (%s)';
-  rtranslate = 'Translate (Ctrl ¦ Shift ¦ Enter + Enter)';
+  rtranslate = 'Translate (Ctrl ¦ Shift + Enter, Triple Enter)';
   rtranslatestop = 'Stop Translation (Esc)';
   rnoconfig = 'Configuration file not found! Create it in the configuration editor.';
   rtoremovepair = ' to remove pair';

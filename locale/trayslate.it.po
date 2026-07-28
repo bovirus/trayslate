@@ -61,8 +61,8 @@ msgstr " per rimuovere la coppia"
 
 #: consts.rtranslate
 msgctxt "consts.rtranslate"
-msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
-msgstr "Traduci (Ctrl ¦ Maiusc ¦ Inserisci + Invio)"
+msgid "Translate (Ctrl ¦ Shift + Enter, Triple Enter)"
+msgstr "Traduci (Ctrl ¦ Shift + Enter, Triple Enter)"
 
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
@@ -1527,4 +1527,9 @@ msgstr "Coppie recenti"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Lingua"
+
+#: tformtrayslate.sbtranslate.hint
+msgctxt "tformtrayslate.sbtranslate.hint"
+msgid "Translate"
+msgstr "Traduci"
 

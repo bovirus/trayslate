@@ -60,8 +60,8 @@ msgstr " ペアを削除するには"
 
 #: consts.rtranslate
 msgctxt "consts.rtranslate"
-msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
-msgstr "翻訳 (Ctrl ¦ Shift ¦ Enter + Enter)"
+msgid "Translate (Ctrl ¦ Shift + Enter, Triple Enter)"
+msgstr "翻訳 (Ctrl ¦ Shift + Enter, Triple Enter)"
 
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
@@ -1517,4 +1517,9 @@ msgstr "最近のペア"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
+
+#: tformtrayslate.sbtranslate.hint
+msgctxt "tformtrayslate.sbtranslate.hint"
+msgid "Translate"
+msgstr "翻訳"
 

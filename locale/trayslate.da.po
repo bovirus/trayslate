@@ -60,8 +60,8 @@ msgstr " for at fjerne par"
 
 #: consts.rtranslate
 msgctxt "consts.rtranslate"
-msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
-msgstr "Oversæt (Ctrl ¦ Shift ¦ Enter + Enter)"
+msgid "Translate (Ctrl ¦ Shift + Enter, Triple Enter)"
+msgstr "Oversæt (Ctrl ¦ Shift + Enter, Triple Enter)"
 
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
@@ -1517,4 +1517,9 @@ msgstr "Seneste par"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
+
+#: tformtrayslate.sbtranslate.hint
+msgctxt "tformtrayslate.sbtranslate.hint"
+msgid "Translate"
+msgstr "Oversæt"
 

@@ -60,8 +60,8 @@ msgstr " om paar te verwijderen"
 
 #: consts.rtranslate
 msgctxt "consts.rtranslate"
-msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
-msgstr "Vertalen (Ctrl ¦ Shift ¦ Enter + Enter)"
+msgid "Translate (Ctrl ¦ Shift + Enter, Triple Enter)"
+msgstr "Vertalen (Ctrl ¦ Shift + Enter, Triple Enter)"
 
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
@@ -1517,4 +1517,9 @@ msgstr "Recente paren"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Language"
+
+#: tformtrayslate.sbtranslate.hint
+msgctxt "tformtrayslate.sbtranslate.hint"
+msgid "Translate"
+msgstr "Vertalen"
 

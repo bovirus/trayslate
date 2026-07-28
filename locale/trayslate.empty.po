@@ -60,7 +60,7 @@ msgstr ""
 
 #: consts.rtranslate
 msgctxt "consts.rtranslate"
-msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
+msgid "Translate (Ctrl ¦ Shift + Enter, Triple Enter)"
 msgstr ""
 
 #: consts.rtranslatestop
@@ -1482,5 +1482,10 @@ msgstr ""
 #: tformtrayslate.menulanguage.caption
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
+msgstr ""
+
+#: tformtrayslate.sbtranslate.hint
+msgctxt "tformtrayslate.sbtranslate.hint"
+msgid "Translate"
 msgstr ""
 

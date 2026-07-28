@@ -335,6 +335,7 @@ type
     FTopMost: boolean;
     FLeftButton: boolean;
     FLastEnterTime: DWORD;
+    FEnterCount: integer;
     FLastHotkeyTime: DWORD;
     FLastMouseInfo: TMouseEventInfo;
     FClickCount: integer;
@@ -662,6 +663,7 @@ begin
   FFormAboutWidth := 0;
   FFormAboutHeight := 0;
   FLastEnterTime := 0;
+  FEnterCount := 0;
   FLastHotkeyTime := 0;
   FTranslateThread := nil;
   FCustomPoFile := string.Empty;
@@ -1805,6 +1807,7 @@ procedure TformTrayslate.MemoSourceKeyDown(Sender: TObject; var Key: word; Shift
 var
   NowTime: DWORD;
 begin
+  // Allow pasting with Ctrl+V (custom paste that handles line endings)
   if (ssCtrl in Shift) and (Key = VK_V) then
   begin
     (Sender as TMemo).PasteWithLineEnding;
@@ -1812,41 +1815,81 @@ begin
     Exit;
   end;
 
+  // Ctrl+Enter or Shift+Enter triggers immediate translation
   if ((ssCtrl in Shift) or (ssShift in Shift)) and (Key = VK_RETURN) then
   begin
     aTranslate.Execute;
+    FEnterCount := 0;      // reset triple-Enter counter
     Key := 0;
     Exit;
   end;
 
-  // Check double Enter
+  // Any key other than plain Enter resets the triple‑Enter sequence
+  if (Key <> VK_RETURN) then
+    FEnterCount := 0;
+
+  // Triple‑Enter logic: three quick presses of plain Enter trigger translation
   if (Key = VK_RETURN) and not (ssCtrl in Shift) and not (ssShift in Shift) then
   begin
-    FMemoSourceCaretPos := MemoSource.SelStart; // save current caret
-
     NowTime := TOS.GetTickCountXp;
-    if NowTime - FLastEnterTime <= DOUBLE_ENTER_INTERVAL then
-    begin
-      // Delete the previous Enter inserted
-      if FMemoSourceCaretPos >= 2 then
-      begin
-        MemoSource.SelStart := FMemoSourceCaretPos - 2;
-        MemoSource.SelLength := 2;
-        if MemoSource.SelText = sLineBreak then
-          MemoSource.SelText := string.Empty; // remove the line break
-      end;
 
-      // Restore caret to original position
-      MemoSource.SelStart := FMemoSourceCaretPos - 2;
-      MemoSource.SelLength := 0;
+    case FEnterCount of
+      0:
+        begin
+          // First plain Enter – remember the original caret position and start counting
+          FMemoSourceCaretPos := MemoSource.SelStart;
+          FEnterCount := 1;
+          FLastEnterTime := NowTime;
+        end;
+      1:
+        begin
+          if NowTime - FLastEnterTime <= DOUBLE_ENTER_INTERVAL then
+          begin
+            // Second plain Enter within interval – advance to count 2 and update last time
+            FEnterCount := 2;
+            FLastEnterTime := NowTime;       // ← crucial: use time of this press for the next check
+          end
+          else
+          begin
+            // Interval expired – restart the count from this Enter
+            FMemoSourceCaretPos := MemoSource.SelStart;
+            FEnterCount := 1;
+            FLastEnterTime := NowTime;
+          end;
+        end;
+      2:
+        begin
+          if NowTime - FLastEnterTime <= DOUBLE_ENTER_INTERVAL then
+          begin
+            // Third plain Enter within interval – translate and suppress the newline
+            Key := 0;
 
-      aTranslate.Execute; // double Enter detected
-      FLastEnterTime := 0; // reset
-      TimerTranslate.Enabled := False;
-      Key := 0;
-    end
-    else
-      FLastEnterTime := NowTime;
+            // Remove the two line breaks inserted by the first two presses
+            MemoSource.SelStart := FMemoSourceCaretPos;
+            MemoSource.SelLength := 2 * Length(sLineBreak);
+            MemoSource.SelText := '';
+
+            // Restore caret to where it was before the first Enter
+            MemoSource.SelStart := FMemoSourceCaretPos;
+            MemoSource.SelLength := 0;
+
+            // Trigger translation
+            aTranslate.Execute;
+
+            // Reset the sequence and disable real-time timer
+            FEnterCount := 0;
+            FLastEnterTime := 0;
+            TimerTranslate.Enabled := False;
+          end
+          else
+          begin
+            // Interval expired – restart the count from this Enter
+            FMemoSourceCaretPos := MemoSource.SelStart;
+            FEnterCount := 1;
+            FLastEnterTime := NowTime;
+          end;
+        end;
+    end; // case
   end;
 end;
 
