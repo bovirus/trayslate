@@ -3959,42 +3959,43 @@ begin
   try
     FCancelled := False;
     ATrans.TextToTranslate := AText;
-    Th := TTranslateThread.Create(ATrans, False);
+    FRawTranslate := string.Empty;
+    Th := TTranslateThread.Create(ATrans, @FRawTranslate);
     FTranslateThread := Th;
     FActiveThreads.Add(Th);
     FTranslateTarget := AMemo;
     UpdateTranslateButtonState;
     Screen.Cursor := crAppStart;
     TimerAnimate.Enabled := True;
+    Th.OnTerminate := @ThreadDone;
     Th.Start;
     try
       while Assigned(Th) and (not Th.Finished) do
       begin
-        if FCancelled then
-          Break;
-        Application.ProcessMessages;
         // If the thread was replaced or freed externally, abandon local reference
-        if FTranslateThread <> Th then
+        if FCancelled or (FTranslateThread <> Th) then
         begin
           Th := nil;
+          Result := string.Empty;
           Break;
         end;
+        Application.ProcessMessages;
         Sleep(1);
       end;
       // Result only if the thread is still ours and not cancelled
-      if not FCancelled and Assigned(Th) and (Th.ResultTextSync <> string.Empty) then
+      if not FCancelled and (FRawTranslate.Trim <> string.Empty) then
       begin
-        Result := Th.ResultTextSync;
+        Result := FRawTranslate;
         if Assigned(AMemo) then
           AMemo.Text := Result;
-        if ATrans = Trans then
-          ThreadDone(Th);
+        //if ATrans = Trans then
+        //  ThreadDone(Th);
       end;
     finally
       if Assigned(Th) then
       begin
         FActiveThreads.Remove(Th);
-        Th.Free;   // Th is nil if the thread was replaced/force-killed
+        Th := nil;   // Th is nil if the thread was replaced/force-killed
       end;
       FTranslateThread := nil;   // always clear shared reference
     end;
@@ -4017,7 +4018,7 @@ begin
   end;
 
   if FAutoCopy then
-    Clipboard.AsText := (Sender as TTranslateThread).ResultTextSync;
+    Clipboard.AsText := (Sender as TTranslateThread).ResultText;
 
   if not Visible and (not Assigned(formPopupTrayslate) or not formPopupTrayslate.Visible) then
     ShowCustomHint(TrayIcon.Hint);

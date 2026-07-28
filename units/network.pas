@@ -362,7 +362,7 @@ begin
       HTTP.HTTPMethod('GET', AUrl);
 
     // Save cookies received in the response
-    if Assigned(ACookies) then
+    if Assigned(ACookies) and Assigned(HTTP.Cookies) and (HTTP.Cookies.Count > 0) then
       ACookies.Assign(HTTP.Cookies);
 
     // Capture response headers
@@ -381,11 +381,14 @@ begin
           if SameText(contentEncoding, 'gzip') and IsGzip(rawStream) then
           begin
             decompressedStream := DecompressGzipToStream(rawStream);
+            if Assigned(decompressedStream) then
             try
               bodyStream.CopyFrom(decompressedStream, 0);
             finally
               FreeAndNil(decompressedStream);
-            end;
+            end
+            else
+              bodyStream.CopyFrom(rawStream, 0); // Fallback to compressed body
           end
           else
             bodyStream.CopyFrom(rawStream, 0);
@@ -419,11 +422,14 @@ begin
       if SameText(contentEncoding, 'gzip') and IsGzip(rawStream) then
       begin
         decompressedStream := DecompressGzipToStream(rawStream);
+        if Assigned(decompressedStream) then
         try
           bodyStream.CopyFrom(decompressedStream, 0);
         finally
           FreeAndNil(decompressedStream);
-        end;
+        end
+        else
+          bodyStream.CopyFrom(rawStream, 0); // Fallback to compressed body
       end
       else
         bodyStream.CopyFrom(rawStream, 0);
@@ -447,7 +453,7 @@ var
 begin
   Result := False;
   if Stream.Size < 2 then Exit;
-  p := Stream.Memory;
+  p := pbyte(Stream.Memory);
   Result := (p^ = $1F) and ((p + 1)^ = $8B);
 end;
 
@@ -463,55 +469,65 @@ var
   dataPos: integer;
 begin
   zstream := Default(TZStream);
-
-  // Basic validation: gzip header
-  if Compressed.Size < 10 then
-    raise Exception.Create('Compressed data too small for gzip');
-  p := Compressed.Memory;
-  if (p[0] <> $1F) or (p[1] <> $8B) then
-    raise Exception.Create('Not a gzip stream (invalid ID bytes)');
-
-  // Check compression method (must be deflate, 8)
-  if p[2] <> 8 then
-    raise Exception.Create('Unsupported compression method (not deflate)');
-
-  flags := p[3];
-  dataPos := 10; // start after fixed header (10 bytes)
-
-  // Skip extra field (FEXTRA) if present
-  if (flags and $04) <> 0 then
-  begin
-    if Compressed.Size < int64(dataPos) + 2 then
-      raise Exception.Create('Truncated gzip: FEXTRA length missing');
-    xlen := p[dataPos] or (p[dataPos + 1] shl 8);
-    Inc(dataPos, 2 + xlen);
-  end;
-
-  // Skip original filename (FNAME) if present (null-terminated)
-  if (flags and $08) <> 0 then
-  begin
-    while (dataPos < Compressed.Size) and (p[dataPos] <> 0) do
-      Inc(dataPos);
-    Inc(dataPos); // skip null terminator
-  end;
-
-  // Skip file comment (FCOMMENT) if present (null-terminated)
-  if (flags and $10) <> 0 then
-  begin
-    while (dataPos < Compressed.Size) and (p[dataPos] <> 0) do
-      Inc(dataPos);
-    Inc(dataPos);
-  end;
-
-  // Skip header CRC (FHCRC) if present (2 bytes)
-  if (flags and $02) <> 0 then
-    Inc(dataPos, 2);
-
-  if dataPos >= Compressed.Size then
-    raise Exception.Create('No compressed data after gzip header');
-
   Result := TMemoryStream.Create;
   try
+    // Basic validation: gzip header
+    if Compressed.Size < 10 then
+      raise Exception.Create('Compressed data too small for gzip');
+    p := pbyte(Compressed.Memory);
+    if (p[0] <> $1F) or (p[1] <> $8B) then
+      raise Exception.Create('Not a gzip stream (invalid ID bytes)');
+
+    // Check compression method (must be deflate, 8)
+    if p[2] <> 8 then
+      raise Exception.Create('Unsupported compression method (not deflate)');
+
+    flags := p[3];
+    dataPos := 10; // start after fixed header (10 bytes)
+
+    // Skip extra field (FEXTRA) if present
+    if (flags and $04) <> 0 then
+    begin
+      if Compressed.Size < int64(dataPos) + 2 then
+        raise Exception.Create('Truncated gzip: FEXTRA length missing');
+      xlen := p[dataPos] or (p[dataPos + 1] shl 8);
+      Inc(dataPos, 2 + xlen);
+    end;
+
+    // Skip original filename (FNAME) if present (null-terminated)
+    if (flags and $08) <> 0 then
+    begin
+      while (dataPos < Compressed.Size) and (p[dataPos] <> 0) do
+        Inc(dataPos);
+
+      if dataPos >= Compressed.Size then
+        raise Exception.Create('Truncated gzip header');
+
+      Inc(dataPos); // skip null terminator
+    end;
+
+    // Skip file comment (FCOMMENT) if present (null-terminated)
+    if (flags and $10) <> 0 then
+    begin
+      while (dataPos < Compressed.Size) and (p[dataPos] <> 0) do
+        Inc(dataPos);
+
+      if dataPos >= Compressed.Size then
+        raise Exception.Create('Truncated gzip header');
+
+      Inc(dataPos); // skip null terminator
+    end;
+
+    // Skip header CRC (FHCRC) if present (2 bytes)
+    if (flags and $02) <> 0 then
+      Inc(dataPos, 2);
+
+    if dataPos > Compressed.Size then
+      raise Exception.Create('Truncated gzip header');
+
+    if dataPos = Compressed.Size then
+      raise Exception.Create('No compressed data after gzip header');
+
     {$PUSH}
     {$NOTES OFF}
 
@@ -526,7 +542,7 @@ begin
     try
       // Point to the compressed data after the header
       zstream.next_in := p + dataPos;
-      zstream.avail_in := Compressed.Size - dataPos;
+      zstream.avail_in := cardinal(Compressed.Size - dataPos);
 
       repeat
         zstream.next_out := @outBuffer;
@@ -534,14 +550,16 @@ begin
 
         err := inflate(zstream, Z_NO_FLUSH);
         if err < 0 then
-          raise Exception.Create('inflate error: ' + IntToStr(err));
+        begin
+          FreeAndNil(Result);
+          Exit;
+        end;
 
         bytesWritten := SizeOf(outBuffer) - zstream.avail_out;
         if bytesWritten > 0 then
           Result.Write(outBuffer, bytesWritten);
 
       until err = Z_STREAM_END; // End of stream reached
-
     finally
       inflateEnd(zstream);
     end;
@@ -549,8 +567,8 @@ begin
 
     Result.Position := 0;
   except
-    Result.Free;
-    raise;
+    FreeAndNil(Result);
+    // No raise;
   end;
 end;
 

@@ -174,29 +174,29 @@ type
     property InitLiveTime: integer read FInitLiveTime write FInitLiveTime;
   end;
 
+type
+  PString = ^string;
+
   { TTranslateThread }
   TTranslateThread = class(TThread)
   private
     FTrans: TTranslate;
+    FResult: PString;
     FSourceText: string;
-    FResultText: string;
-    FResultTextSync: string;
-    FException: Exception;
+    FExceptionMessage: string;
     FCancelled: boolean;
   protected
     procedure Execute; override;
-    procedure AfterExecute;
     function GetIsTerminated: boolean;
     function GetIsCancelled: boolean;
+    function GetResultText: string;
   public
-    constructor Create(ATrans: TTranslate; AFreeOnTerminate: boolean = True);
-    destructor Destroy; override;
+    constructor Create(ATrans: TTranslate; AResult: PString; AFreeOnTerminate: boolean = True);
     procedure Cancel;
     property IsTerminated: boolean read GetIsTerminated;
     property IsCancelled: boolean read GetIsCancelled;
-    property ExceptionObj: Exception read FException;
-    property ResultText: string read FResultText;
-    property ResultTextSync: string read FResultTextSync;
+    property ExceptionMessage: string read FExceptionMessage;
+    property ResultText: string read GetResultText;
   end;
 
 const
@@ -341,6 +341,8 @@ var
   i: integer;
   HTTP: THTTPSend;
 begin
+  if not Assigned(FHTTPList) then Exit;
+
   for i := 0 to FHTTPList.Count - 1 do
   begin
     HTTP := THTTPSend(FHTTPList[i]);
@@ -1753,7 +1755,7 @@ end;
 
 {%Region -fold TTranslateThread }
 
-constructor TTranslateThread.Create(ATrans: TTranslate; AFreeOnTerminate: boolean = True);
+constructor TTranslateThread.Create(ATrans: TTranslate; AResult: PString; AFreeOnTerminate: boolean = True);
 begin
   inherited Create(True);
   FreeOnTerminate := AFreeOnTerminate;
@@ -1761,13 +1763,8 @@ begin
   FTrans := ATrans;
   FSourceText := FTrans.TextToTranslate;
   FCancelled := False;
-end;
-
-destructor TTranslateThread.Destroy;
-begin
-  if Assigned(FException) then
-    FreeAndNil(FException);
-  inherited Destroy;
+  FExceptionMessage := string.Empty;
+  FResult := AResult;
 end;
 
 function TTranslateThread.GetIsTerminated: boolean;
@@ -1780,53 +1777,35 @@ begin
   Result := FCancelled or Terminated or Application.Terminated;
 end;
 
+function TTranslateThread.GetResultText: string;
+begin
+  if Assigned(FResult) then
+    Result := FResult^
+  else
+    Result := string.Empty;
+end;
+
 procedure TTranslateThread.Execute;
 begin
+  if IsCancelled then Exit;
   try
-    try
-      if IsCancelled then Exit;
-
-      if Length(Trim(FSourceText)) > 0 then
-        FResultText := FTrans.Translate
-      else
-        FResultText := string.Empty;
-
-      if IsCancelled then Exit;
-    except
-      on E: Exception do
-        if not Application.Terminated then
-          FException := Exception.Create(E.Message);
-    end;
-  finally
-    // Call AfterExecute in main thread to handle exceptions
-    if not IsCancelled then
-      Synchronize(@AfterExecute);
+    if Length(Trim(FSourceText)) > 0 then
+      FResult^ := FTrans.Translate
+    else
+      FResult^ := string.Empty;
+  except
+    on E: Exception do
+      FResult^ := E.ClassName + ': ' + E.Message;
   end;
 end;
 
 procedure TTranslateThread.Cancel;
 begin
-  FCancelled := True;
-  FTrans.AbortRequest;
-  FreeOnTerminate := True;
-end;
-
-procedure TTranslateThread.AfterExecute;
-begin
   if IsCancelled then Exit;
+  FCancelled := True;
 
-  // Handle exception in main thread if occurred
-  if Assigned(FException) then
-  begin
-    if Assigned(Application.OnException) then
-      Application.OnException(Self, FException)
-    else
-      Application.ShowException(FException);
-
-    FreeAndNil(FException); // free manually
-  end
-  else
-    FResultTextSync := FResultText;
+  if Assigned(FTrans) then
+    FTrans.AbortRequest;
 end;
 
 {%EndRegion}
