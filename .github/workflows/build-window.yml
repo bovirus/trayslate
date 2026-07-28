@@ -45,12 +45,6 @@ jobs:
           curl.exe -L "https://github.com/jrsoftware/issrc/releases/download/is-6_7_3/innosetup-6.7.3.exe" -o $innoInstaller
           Start-Process -FilePath $innoInstaller -ArgumentList "/VERYSILENT","/SUPPRESSMSGBOXES","/NORESTART" -Wait
 
-      - name: Check build tools
-        shell: pwsh
-        run: |
-          C:\Lazarus\lazbuild.exe --version
-          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /VERSION
-
       - name: Copy Inno Setup language files
         shell: pwsh
         run: |
