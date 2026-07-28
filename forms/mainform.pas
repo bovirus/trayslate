@@ -328,6 +328,7 @@ type
     FTrans: TTranslate;
     FTransDetect: TTranslate;
     FTranslateThread: TTranslateThread;
+    FTranslateTarget: TWinControl;
     FActiveThreads: TList;
     FProxy: TProxy;
     FTimeout: TTimeout;
@@ -364,7 +365,6 @@ type
     FPopupRecentPair: TComponent;
     FRawTranslate: string;
     FSettingsPage: integer;
-    FTranslateTarget: TWinControl;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -450,6 +450,7 @@ type
     procedure SetVerticalSplit(Value: boolean);
     procedure SetAutoCopy(Value: boolean);
     procedure SetProxy(Value: TProxy);
+    procedure SetTranslateTarget(Value: TWinControl);
 
     procedure ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
     procedure ChangeTargetLang(NewLang: string; AddRecentPairs: boolean = True);
@@ -602,7 +603,7 @@ type
     property LastDarkMode: boolean read FLastDarkMode write FLastDarkMode;
     property CustomPoFile: string read FCustomPoFile write FCustomPoFile;
     property RawTranslate: string read FRawTranslate write FRawTranslate;
-    property TranslateTarget: TWinControl read FTranslateTarget;
+    property TranslateTarget: TWinControl read FTranslateTarget write SetTranslateTarget;
     property MouseHook: TGlobalMouseHook read FMouseHook write FMouseHook;
     property KeyHook: TGlobalKeyboardHook read FKeyHook write FKeyHook;
     property HotKeyApp: THotKeyData read FHotKeyApp write FHotKeyApp;
@@ -1835,60 +1836,60 @@ begin
 
     case FEnterCount of
       0:
+      begin
+        // First plain Enter – remember the original caret position and start counting
+        FMemoSourceCaretPos := MemoSource.SelStart;
+        FEnterCount := 1;
+        FLastEnterTime := NowTime;
+      end;
+      1:
+      begin
+        if NowTime - FLastEnterTime <= DOUBLE_ENTER_INTERVAL then
         begin
-          // First plain Enter – remember the original caret position and start counting
+          // Second plain Enter within interval – advance to count 2 and update last time
+          FEnterCount := 2;
+          FLastEnterTime := NowTime;       // ← crucial: use time of this press for the next check
+        end
+        else
+        begin
+          // Interval expired – restart the count from this Enter
           FMemoSourceCaretPos := MemoSource.SelStart;
           FEnterCount := 1;
           FLastEnterTime := NowTime;
         end;
-      1:
-        begin
-          if NowTime - FLastEnterTime <= DOUBLE_ENTER_INTERVAL then
-          begin
-            // Second plain Enter within interval – advance to count 2 and update last time
-            FEnterCount := 2;
-            FLastEnterTime := NowTime;       // ← crucial: use time of this press for the next check
-          end
-          else
-          begin
-            // Interval expired – restart the count from this Enter
-            FMemoSourceCaretPos := MemoSource.SelStart;
-            FEnterCount := 1;
-            FLastEnterTime := NowTime;
-          end;
-        end;
+      end;
       2:
+      begin
+        if NowTime - FLastEnterTime <= DOUBLE_ENTER_INTERVAL then
         begin
-          if NowTime - FLastEnterTime <= DOUBLE_ENTER_INTERVAL then
-          begin
-            // Third plain Enter within interval – translate and suppress the newline
-            Key := 0;
+          // Third plain Enter within interval – translate and suppress the newline
+          Key := 0;
 
-            // Remove the two line breaks inserted by the first two presses
-            MemoSource.SelStart := FMemoSourceCaretPos;
-            MemoSource.SelLength := 2 * Length(sLineBreak);
-            MemoSource.SelText := '';
+          // Remove the two line breaks inserted by the first two presses
+          MemoSource.SelStart := FMemoSourceCaretPos;
+          MemoSource.SelLength := 2 * Length(sLineBreak);
+          MemoSource.SelText := '';
 
-            // Restore caret to where it was before the first Enter
-            MemoSource.SelStart := FMemoSourceCaretPos;
-            MemoSource.SelLength := 0;
+          // Restore caret to where it was before the first Enter
+          MemoSource.SelStart := FMemoSourceCaretPos;
+          MemoSource.SelLength := 0;
 
-            // Trigger translation
-            aTranslate.Execute;
+          // Trigger translation
+          aTranslate.Execute;
 
-            // Reset the sequence and disable real-time timer
-            FEnterCount := 0;
-            FLastEnterTime := 0;
-            TimerTranslate.Enabled := False;
-          end
-          else
-          begin
-            // Interval expired – restart the count from this Enter
-            FMemoSourceCaretPos := MemoSource.SelStart;
-            FEnterCount := 1;
-            FLastEnterTime := NowTime;
-          end;
+          // Reset the sequence and disable real-time timer
+          FEnterCount := 0;
+          FLastEnterTime := 0;
+          TimerTranslate.Enabled := False;
+        end
+        else
+        begin
+          // Interval expired – restart the count from this Enter
+          FMemoSourceCaretPos := MemoSource.SelStart;
+          FEnterCount := 1;
+          FLastEnterTime := NowTime;
         end;
+      end;
     end; // case
   end;
 end;
@@ -3560,6 +3561,28 @@ begin
   FTransDetect.Timeout := FTimeout;
 end;
 
+procedure TformTrayslate.SetTranslateTarget(Value: TWinControl);
+begin
+  if Assigned(Value) then
+  begin
+    FTranslateTarget := Value;
+    if FTranslateTarget is TCustomEdit then
+    begin
+      FTranslateTarget.Color := clBtnFace;
+      (FTranslateTarget as TCustomEdit).ReadOnly := True;
+    end;
+  end
+  else
+  begin
+    if FTranslateTarget is TCustomEdit then
+    begin
+      FTranslateTarget.Color := clWindow;
+      (FTranslateTarget as TCustomEdit).ReadOnly := False;
+    end;
+    FTranslateTarget := nil;
+  end;
+end;
+
 procedure TformTrayslate.ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
 var
   id, idnative: integer;
@@ -4006,7 +4029,7 @@ begin
     Th := TTranslateThread.Create(ATrans, @FRawTranslate);
     FTranslateThread := Th;
     FActiveThreads.Add(Th);
-    FTranslateTarget := AMemo;
+    TranslateTarget := AMemo;
     UpdateTranslateButtonState;
     Screen.Cursor := crAppStart;
     TimerAnimate.Enabled := True;
@@ -4066,7 +4089,7 @@ begin
   if not Visible and (not Assigned(formPopupTrayslate) or not formPopupTrayslate.Visible) then
     ShowCustomHint(TrayIcon.Hint);
 
-  FTranslateTarget := nil;
+  TranslateTarget := nil;
 end;
 
 procedure TformTrayslate.CancelTranslate;
@@ -4078,7 +4101,8 @@ begin
       FTranslateThread := nil;
     end;
     FCancelled := True;
-    FTranslateTarget := nil;
+
+    TranslateTarget := nil;
   finally
     UpdateTranslateButtonState;
     TimerAnimate.Enabled := False;
