@@ -329,6 +329,7 @@ type
     FTransDetect: TTranslate;
     FTranslateThread: TTranslateThread;
     FTranslateTarget: TWinControl;
+    FRawTranslate: string;
     FActiveThreads: TList;
     FProxy: TProxy;
     FTimeout: TTimeout;
@@ -363,7 +364,6 @@ type
     FAutoHeightAfter: boolean;
     FPrevMouseDown: TMouseEventInfo;
     FPopupRecentPair: TComponent;
-    FRawTranslate: string;
     FSettingsPage: integer;
 
     // Non sorted combo named languages
@@ -4009,6 +4009,7 @@ end;
 function TformTrayslate.TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
 var
   Th: TTranslateThread;
+  ThDone: boolean;
 begin
   Result := string.Empty;
   if FCancelled then
@@ -4026,7 +4027,8 @@ begin
     FCancelled := False;
     ATrans.TextToTranslate := AText;
     FRawTranslate := string.Empty;
-    Th := TTranslateThread.Create(ATrans, @FRawTranslate);
+    ThDone := False;
+    Th := TTranslateThread.Create(ATrans, @FRawTranslate, @ThDone);
     FTranslateThread := Th;
     FActiveThreads.Add(Th);
     TranslateTarget := AMemo;
@@ -4036,7 +4038,7 @@ begin
     Th.OnTerminate := @ThreadDone;
     Th.Start;
     try
-      while Assigned(Th) and (not Th.Finished) do
+      while Assigned(Th) and not ThDone do
       begin
         // If the thread was replaced or freed externally, abandon local reference
         if FCancelled or (FTranslateThread <> Th) then
@@ -4127,7 +4129,7 @@ begin
 
   // Detect language in source memo
   if BuiltInDetect then
-    langDetect := DetectLanguageForText(AText.ExtractTextSample)
+    langDetect := DetectLanguageForText(AText.ExtractTextSample(5000))
   else
     langDetect := LowerCase(TranslateThread(TransDetect, AText.ExtractTextSample));
 

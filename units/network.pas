@@ -296,6 +296,9 @@ begin
   AResponseHeaders := TStringList.Create;
   AError := False;
 
+  if Trim(AUrl) = string.Empty then
+    Exit;
+
   if HTTP = nil then
     HTTP := THTTPSend.Create;
 

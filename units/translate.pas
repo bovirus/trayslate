@@ -176,12 +176,14 @@ type
 
 type
   PString = ^string;
+  PBoolean = ^boolean;
 
   { TTranslateThread }
   TTranslateThread = class(TThread)
   private
     FTrans: TTranslate;
     FResult: PString;
+    FDone: PBoolean;
     FSourceText: string;
     FExceptionMessage: string;
     FCancelled: boolean;
@@ -191,7 +193,7 @@ type
     function GetIsCancelled: boolean;
     function GetResultText: string;
   public
-    constructor Create(ATrans: TTranslate; AResult: PString; AFreeOnTerminate: boolean = True);
+    constructor Create(ATrans: TTranslate; AResult: PString; ADone: PBoolean; AFreeOnTerminate: boolean = True);
     procedure Cancel;
     property IsTerminated: boolean read GetIsTerminated;
     property IsCancelled: boolean read GetIsCancelled;
@@ -1755,7 +1757,7 @@ end;
 
 {%Region -fold TTranslateThread }
 
-constructor TTranslateThread.Create(ATrans: TTranslate; AResult: PString; AFreeOnTerminate: boolean = True);
+constructor TTranslateThread.Create(ATrans: TTranslate; AResult: PString; ADone: PBoolean; AFreeOnTerminate: boolean = True);
 begin
   inherited Create(True);
   FreeOnTerminate := AFreeOnTerminate;
@@ -1765,6 +1767,10 @@ begin
   FCancelled := False;
   FExceptionMessage := string.Empty;
   FResult := AResult;
+  FDone := ADone;
+
+  if Assigned(FDone) then
+    FDone^ := False;
 end;
 
 function TTranslateThread.GetIsTerminated: boolean;
@@ -1787,15 +1793,20 @@ end;
 
 procedure TTranslateThread.Execute;
 begin
-  if IsCancelled then Exit;
   try
-    if Length(Trim(FSourceText)) > 0 then
-      FResult^ := FTrans.Translate
-    else
-      FResult^ := string.Empty;
-  except
-    on E: Exception do
-      FResult^ := E.ClassName + ': ' + E.Message;
+    if IsCancelled then Exit;
+    try
+      if Length(Trim(FSourceText)) > 0 then
+        FResult^ := FTrans.Translate
+      else
+        FResult^ := string.Empty;
+    except
+      on E: Exception do
+        FResult^ := E.ClassName + ': ' + E.Message;
+    end;
+  finally
+    if Assigned(FDone) then
+      FDone^ := True;
   end;
 end;
 
