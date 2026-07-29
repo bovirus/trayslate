@@ -16,7 +16,7 @@
         <TextDesc Value="Trayslate is a tray-based client for translation services. You can enter text directly, translate clipboard content, or translate selected text in any application. You can also replace text in another app with its translation using a hotkey. The app lets you choose and fully configure the translation service you use."/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="28">
+      <Resources Count="29">
         <Resource_0 FileName="locale\trayslate.en.po" Type="RCDATA" ResourceName="TRAYSLATE.EN"/>
         <Resource_1 FileName="locale\trayslate.ru.po" Type="RCDATA" ResourceName="TRAYSLATE.RU"/>
         <Resource_2 FileName="locale\trayslate.ar.po" Type="RCDATA" ResourceName="TRAYSLATE.AR"/>
@@ -45,6 +45,7 @@
         <Resource_25 FileName="locale\trayslate.bg.po" Type="RCDATA" ResourceName="TRAYSLATE.BG"/>
         <Resource_26 FileName="locale\trayslate.pt-BR.po" Type="RCDATA" ResourceName="TRAYSLATE.PT-BR"/>
         <Resource_27 FileName="locale\trayslate.vi.po" Type="RCDATA" ResourceName="TRAYSLATE.VI"/>
+        <Resource_28 FileName="langprofiles.dat" Type="RCDATA" ResourceName="LANGPROFILES"/>
       </Resources>
     </General>
     <i18n>

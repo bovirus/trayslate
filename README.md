@@ -9,6 +9,7 @@ Trayslate is a tray-based client for translation services. You can enter text di
 [![Platform: Windows](https://img.shields.io/badge/Platform-Windows-yellow)](#)
 [![Latest Release](https://img.shields.io/github/v/release/plaintool/trayslate?label=Release)](https://github.com/plaintool/trayslate/releases/latest)
 [![GitHub Downloads](https://img.shields.io/github/downloads/plaintool/trayslate/total?label=Downloads&cacheSeconds=3600)](https://github.com/plaintool/trayslate/releases)
+<!-- ar be bg cs da de el en es fi fr he hi id it ja ko nl pl pt pt-BR ro ru sv tr uk vi zh -->
 
 <p align="left">
   <a href="https://www.majorgeeks.com/files/details/trayslate.html">
