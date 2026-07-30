@@ -4,7 +4,20 @@ set "APP_NAME=trayslate"
 
 :: Determine build architecture: 64-bit by default, 32-bit if first argument is "32"
 SET "ARCH=64"
-IF /I "%1"=="32" SET "ARCH=32"
+SET "SKIP_DEPS=0"
+SET "SKIP_BUILD=0"
+SET "SKIP_SIGN=0"
+SET "SKIP_BINARIES=0"
+:parse_args
+if "%~1"=="" goto :done_parsing
+if /I "%~1"=="32" SET "ARCH=32"
+if /I "%~1"=="--no-deps" SET "SKIP_DEPS=1"
+if /I "%~1"=="--no-build" SET "SKIP_BUILD=1"
+if /I "%~1"=="--no-sign" SET "SKIP_SIGN=1"
+if /I "%~1"=="--no-binary" SET "SKIP_BINARIES=1"
+shift
+goto :parse_args
+:done_parsing
 
 :: Label for console output
 IF "%ARCH%"=="32" (SET "ARCH_LABEL=x86") ELSE (SET "ARCH_LABEL=x64")
@@ -57,6 +70,7 @@ IF "%ARCH%"=="32" if not exist "%FPC32%" (
 IF "%ARCH%"=="32" set "LAZBUILD_OPTS=%LAZBUILD_OPTS% --cpu=i386 --ws=win32 --compiler=%FPC32%"
 
 :: Updating and building dependencies
+if %SKIP_DEPS%==1 goto :skip_deps
 IF "%ARCH%"=="32" (
     call "%~dp0dependencies.cmd" 32 nopull
 ) ELSE (
@@ -67,7 +81,9 @@ if %ERRORLEVEL% neq 0 (
     if not defined CI pause
     exit /b %ERRORLEVEL%
 )
+:skip_deps
 
+if %SKIP_BUILD%==1 goto :skip_build
 echo.
 echo ############################################################
 echo                      Build %ARCH_LABEL%                   
@@ -113,7 +129,9 @@ IF "%ARCH%"=="32" (
 )
 
 echo Build completed successfully
+:skip_build
 
+if %SKIP_SIGN%==1 goto :skip_sign
 echo.
 echo ############################################################
 echo               Signing %ARCH_LABEL% executable     
@@ -179,8 +197,10 @@ if exist "%EXE_NAME%" (
     if not defined CI pause
     exit /b 1
 )
+:skip_sign
 
 :: Copy and sign binaries using external script
+if %SKIP_BINARIES%==1 goto :skip_binaries
 echo.
 echo Processing binaries...
 call "%~dp0depsbinary.cmd" %ARCH% %APP_NAME%
@@ -189,5 +209,6 @@ if %ERRORLEVEL% neq 0 (
     if not defined CI pause
     exit /b %ERRORLEVEL%
 )
+:skip_binaries
 
 echo All done.
