@@ -317,17 +317,23 @@ begin
 
   {$IFDEF WINDOWS}
   // Applying WS_EX_NOACTIVATE in a real window
-  if HandleAllocated then
+  if HandleAllocated and (Data = 1) then
   begin
     ExStyle := GetWindowLongPtr(Handle, GWL_EXSTYLE);
     if FormStyle = fsSystemStayOnTop then
       ExStyle := ExStyle or WS_EX_NOACTIVATE
     else
       ExStyle := ExStyle and (not WS_EX_NOACTIVATE);
+
     SetWindowLongPtr(Handle, GWL_EXSTYLE, ExStyle);
-    // We force the window manager to redraw non-client areas (frames, title)
-    SetWindowPos(Handle, 0, 0, 0, 0, 0,
-      SWP_FRAMECHANGED or SWP_NOMOVE or SWP_NOSIZE or SWP_NOZORDER or SWP_NOACTIVATE);
+
+    // Update non-client area and restore correct Z-order
+    if FormStyle = fsSystemStayOnTop then
+      SetWindowPos(Handle, HWND_TOPMOST, 0, 0, 0, 0,
+        SWP_FRAMECHANGED or SWP_NOMOVE or SWP_NOSIZE or SWP_NOACTIVATE)
+    else
+      SetWindowPos(Handle, HWND_NOTOPMOST, 0, 0, 0, 0,
+        SWP_FRAMECHANGED or SWP_NOMOVE or SWP_NOSIZE or SWP_NOACTIVATE);
   end;
   {$ENDIF}
 end;

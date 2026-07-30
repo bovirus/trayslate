@@ -459,6 +459,7 @@ type
     procedure SelectPair(const Pair: string; RunTranslate: boolean = True);
     procedure SelectPairConfig(const LangPairIndex: integer; RunTranslate: boolean = True);
     procedure UpdateTranslateButtonState(ForceTranslateButton: boolean = False);
+    procedure UpdatePopupState(SetWindowParam: boolean = True);
     // Tray Icon
     function CreateTrayIconLang(Form: TForm; const ALang1: string; const ALang2: string = string.Empty;
       ABackgroundColor: TColor = clNone; AFontColor: TColor = clWhite; AFontName: string = string.Empty): Graphics.TBitmap;
@@ -501,7 +502,7 @@ type
     procedure SetDefaultHotKeys;
     procedure BuildConfigMenu;
     procedure RebuildLangPairsPanel(Data: PtrInt);
-    procedure SetIcon;
+    procedure SetTrayIcon;
     procedure SetHints;
     procedure SetAnimate(Angle: integer);
     procedure DoRealign(Data: PtrInt);
@@ -631,7 +632,7 @@ var
 implementation
 
 uses formdonate, formabout, formsettings, formconfig, formpopup, formbutton, settings, languages, langdetect,
-  checkupdates, base64utils, localize, colorhelper, controlshelper, darkutils;
+  checkupdates, base64utils, localize, colorhelper, controlshelper, darkutils, pascalutils;
 
   {$R *.lfm}
 
@@ -761,7 +762,7 @@ begin
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
 
   // Set tray icon
-  SetIcon;
+  SetTrayIcon;
   SetHints;
 
   // Events assign
@@ -867,8 +868,6 @@ end;
 
 procedure TformTrayslate.FormShow(Sender: TObject);
 begin
-  SetHints;
-
   // Check new version if needed
   if not FUpdatesChecked and AutoCheckUpdates then
   begin
@@ -887,7 +886,11 @@ begin
     else
       ;
   end;
+
+  // Configure state
+  SetHints;
   SetVerticalMode;
+  UpdatePopupState;
 end;
 
 procedure TformTrayslate.FormCloseQuery(Sender: TObject; var CanClose: boolean);
@@ -1717,7 +1720,7 @@ begin
     begin
       FLangSource := string.Empty;
       FTrans.LangSource := string.Empty;
-      SetIcon;
+      SetTrayIcon;
     end
     else
     if (FLangSource <> string.Empty) and (FLangTarget <> string.Empty) then
@@ -1758,7 +1761,7 @@ begin
     begin
       FLangTarget := string.Empty;
       FTrans.LangTarget := string.Empty;
-      SetIcon;
+      SetTrayIcon;
     end
     else
     if (FLangSource <> string.Empty) and (FLangTarget <> string.Empty) then
@@ -1954,8 +1957,7 @@ begin
     FTransDetect.Proxy := FProxy;
     FTransDetect.Timeout := FTimeout;
 
-    if Assigned(formPopupTrayslate) then
-      formPopupTrayslate.UpdateStayOnTop(0);
+    UpdatePopupState;
   finally
     CloseAction := caFree;
     formSettingsTrayslate := nil;
@@ -2002,7 +2004,7 @@ end;
 
 procedure TformTrayslate.TimerAnimateStopTimer(Sender: TObject);
 begin
-  SetIcon;
+  SetTrayIcon;
 end;
 
 procedure TformTrayslate.TimerAnimateTimer(Sender: TObject);
@@ -2443,7 +2445,7 @@ begin
 
   UpdateAutoDetect(AutoDetect, rautodetect);
   UpdateCheckMenuPair;
-  SetIcon;
+  SetTrayIcon;
   SetHints;
 end;
 
@@ -2821,7 +2823,7 @@ begin
   end;
 end;
 
-procedure TformTrayslate.SetIcon;
+procedure TformTrayslate.SetTrayIcon;
 var
   Bitmap: TBitmap;
   hintText: string;
@@ -3333,21 +3335,22 @@ begin
     formPopupTrayslate.PanelWatermark.Font.Size := FontPopup.Size;
     formPopupTrayslate.PanelWatermark.Font.Name := FontPopup.Name;
     formPopupTrayslate.AlphaBlendValue := OpacityIdle;
-    formPopupTrayslate.UpdateStayOnTop(0);
   end;
-
-  // Set auto-height after translate in any case
-  FAutoHeightAfter := True;
 
   formPopupTrayslate.SourceText := SourceText;
 
-  SetIcon;
+  SetTrayIcon;
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
 
   if not formPopupTrayslate.Visible then
     formPopupTrayslate.Visible := True;
   if not StayOnTop then
     TOS.BringToFrontNoFocus(formPopupTrayslate);
+
+  UpdatePopupState;
+
+  // Set auto-height after translate in any case
+  FAutoHeightAfter := True;
 
   // Restore focus
   if Assigned(PrevForm) and PrevForm.Visible and PrevForm.CanFocus then
@@ -3619,7 +3622,7 @@ begin
     ComboSource.Hint := LongestString([FLangSource, ComboSource.Text]);
     Trans.LangSource := FLangSource;
     UpdateCheckMenuPair;
-    if FIconTwoLang then SetIcon;
+    if FIconTwoLang then SetTrayIcon;
   end;
 end;
 
@@ -3668,7 +3671,7 @@ begin
     ComboTarget.Hint := LongestString([FLangTarget, ComboTarget.Text]);
     Trans.LangTarget := FLangTarget;
     UpdateCheckMenuPair;
-    SetIcon;
+    SetTrayIcon;
   end;
 end;
 
@@ -3821,7 +3824,7 @@ end;
 
 procedure TformTrayslate.UpdateTranslateButtonState(ForceTranslateButton: boolean = False);
 begin
-  if Assigned(FTranslateThread) and not FTranslateThread.Finished and not ForceTranslateButton then
+  if Assigned(FTranslateThread) and not FTranslateThread.Finished and not FTranslateThread.IsCancelled and not ForceTranslateButton then
   begin
     aTranslate.ImageIndex := TDarkUtils.ThemeValue(16, 17);
     aTranslate.Hint := rtranslatestop;
@@ -3832,6 +3835,19 @@ begin
     aTranslate.ImageIndex := TDarkUtils.ThemeValue(2, 3);
     aTranslate.Hint := rtranslate;
     aTranslate.Tag := 0;
+  end;
+end;
+
+procedure TformTrayslate.UpdatePopupState(SetWindowParam: boolean = True);
+begin
+  if Assigned(formPopupTrayslate) and (formPopupTrayslate.Visible) then
+  begin
+    if (FAutoHeightAfter) then
+    begin
+      FAutoHeightAfter := False;
+      AdjustPopupHeight(FRawTranslate);
+    end;
+    Application.QueueAsyncCall(@formPopupTrayslate.UpdateStayOnTop, iif(SetWindowParam, 1, 0));
   end;
 end;
 
@@ -4055,9 +4071,7 @@ begin
       begin
         Result := FRawTranslate;
         if Assigned(AMemo) then
-          AMemo.Text := Result;
-        //if ATrans = Trans then
-        //  ThreadDone(Th);
+          AMemo.Text := FRawTranslate;
       end;
     finally
       if Assigned(Th) then
@@ -4065,7 +4079,6 @@ begin
         FActiveThreads.Remove(Th);
         Th := nil;   // Th is nil if the thread was replaced/force-killed
       end;
-      FTranslateThread := nil;   // always clear shared reference
     end;
   finally
     if ATrans <> TransDetect then
@@ -4079,18 +4092,18 @@ end;
 
 procedure TformTrayslate.ThreadDone(Sender: TObject);
 begin
-  if Assigned(formPopupTrayslate) and (formPopupTrayslate.Visible) and (FAutoHeightAfter) then
-  begin
-    FAutoHeightAfter := False;
-    AdjustPopupHeight(formPopupTrayslate.MemoTarget.Text);
-  end;
+  if Sender <> FTranslateThread then
+    Exit;
 
   if FAutoCopy then
-    Clipboard.AsText := (Sender as TTranslateThread).ResultText;
+    Clipboard.AsText := FRawTranslate;
+
+  UpdatePopupState;
 
   if not Visible and (not Assigned(formPopupTrayslate) or not formPopupTrayslate.Visible) then
     ShowCustomHint(TrayIcon.Hint);
 
+  FTranslateThread := nil;
   TranslateTarget := nil;
 end;
 
@@ -4098,10 +4111,8 @@ procedure TformTrayslate.CancelTranslate;
 begin
   try
     if Assigned(FTranslateThread) then
-    begin
       FTranslateThread.Cancel;
-      FTranslateThread := nil;
-    end;
+
     FCancelled := True;
 
     TranslateTarget := nil;
@@ -4801,7 +4812,7 @@ begin
 
   // Update form text
   SetHints;
-  SetIcon;
+  SetTrayIcon;
 
   if FCustomPoFile = string.Empty then
   begin

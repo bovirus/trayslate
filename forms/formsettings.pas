@@ -464,7 +464,7 @@ begin
     formTrayslate.IconFontColor := ColorIconFont.Selected;
     formTrayslate.IconFontName := ComboIconFontName.Text;
     formTrayslate.IconTwoLang := CheckTwoLang.Checked;
-    formTrayslate.SetIcon;
+    formTrayslate.SetTrayIcon;
   end
   else
   if Sender = TrackOpacityHover then
@@ -1166,7 +1166,7 @@ begin
   formTrayslate.IconFontColor := FOriginalIconFontColor;
   formTrayslate.IconFontName := FOriginalIconFontName;
   formTrayslate.IconTwoLang := FOriginalIconTwoLang;
-  formTrayslate.SetIcon;
+  formTrayslate.SetTrayIcon;
 
   formTrayslate.OpacityHover := FOriginalOpacityHover;
   formTrayslate.OpacityIdle := FOriginalOpacityIdle;
@@ -1452,7 +1452,7 @@ begin
     formTrayslate.IconFontColor := ColorIconFont.Selected;
     formTrayslate.IconFontName := ComboIconFontName.Text;
     formTrayslate.IconTwoLang := CheckTwoLang.Checked;
-    formTrayslate.SetIcon;
+    formTrayslate.SetTrayIcon;
 
     formTrayslate.HotKeyApp := FHotKeyApp;
     formTrayslate.HotKeyTransSwap := FHotKeyTransSwap;
