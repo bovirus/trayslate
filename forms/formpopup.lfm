@@ -198,6 +198,10 @@ object formPopupTrayslate: TformPopupTrayslate
       ImageIndex = 6
       OnExecute = aMenuExecute
     end
+    object AApplyAutoHeight: TAction
+      Caption = 'Apply Auto Height'
+      OnExecute = AApplyAutoHeightExecute
+    end
     object aFastAutoHeight: TAction
       Caption = 'Lock Auto Height'
       ImageIndex = 19
@@ -222,8 +226,14 @@ object formPopupTrayslate: TformPopupTrayslate
     OnClose = PopupClose
     Left = 184
     Top = 152
+    object MenuApplyAutoHeight: TMenuItem
+      Action = AApplyAutoHeight
+    end
     object MenuFastAutoHeight: TMenuItem
       Action = aFastAutoHeight
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
     end
     object MenuSendToMainWindow: TMenuItem
       Action = aSendToMainWindow

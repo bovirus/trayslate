@@ -38,6 +38,7 @@ type
   { TformPopupTrayslate }
 
   TformPopupTrayslate = class(TForm)
+    AApplyAutoHeight: TAction;
     aSwapPair: TAction;
     aFastAutoHeight: TAction;
     aMenu: TAction;
@@ -49,6 +50,7 @@ type
     LabelWatermark: TLabel;
     MemoTarget: TMemo;
     MenuFastAutoHeight: TMenuItem;
+    MenuApplyAutoHeight: TMenuItem;
     MenuSwapPair: TMenuItem;
     MenuSendToMainWindow: TMenuItem;
     PanelTarget: TPanel;
@@ -60,8 +62,10 @@ type
     SbNewTranslate: TSpeedButton;
     SbCopyTarget: TSpeedButton;
     SbMenu: TSpeedButton;
+    Separator1: TMenuItem;
     Timer: TTimer;
 
+    procedure AApplyAutoHeightExecute(Sender: TObject);
     procedure aCopyTargetExecute(Sender: TObject);
     procedure aFastAutoHeightExecute(Sender: TObject);
     procedure aMenuExecute(Sender: TObject);
@@ -214,6 +218,11 @@ end;
 procedure TformPopupTrayslate.aCopyTargetExecute(Sender: TObject);
 begin
   Clipboard.AsText := MemoTarget.Text;
+end;
+
+procedure TformPopupTrayslate.AApplyAutoHeightExecute(Sender: TObject);
+begin
+  formTrayslate.AdjustPopupHeight(MemoTarget.Text, True);
 end;
 
 procedure TformPopupTrayslate.aFastAutoHeightExecute(Sender: TObject);

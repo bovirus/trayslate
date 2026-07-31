@@ -521,7 +521,7 @@ type
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
     function GetParameterValue(AName: string; out ResultOk: boolean): string;
-    procedure AdjustPopupHeight(AText: string);
+    procedure AdjustPopupHeight(AText: string; Force: boolean = False);
     procedure ShowPopup(const SourceText: string; X: integer = 0; Y: integer = 0);
     procedure ClosePopupAsync(Data: PtrInt);
     procedure ShowButton(const SourceText: string; X: integer = 0; Y: integer = 0);
@@ -3407,14 +3407,14 @@ begin
   Result := Value;
 end;
 
-procedure TformTrayslate.AdjustPopupHeight(AText: string);
+procedure TformTrayslate.AdjustPopupHeight(AText: string; Force: boolean = False);
 var
   R: TRect;
   NewHeight: integer;
   MaxH: integer;
   TextWidth: integer;
 begin
-  if FAutoHeight and (AText <> string.Empty) then
+  if (FAutoHeight or Force) and (AText <> string.Empty) then
   begin
     // Maximum allowed height
     if FMaxHeight = 0 then

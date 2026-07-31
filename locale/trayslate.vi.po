@@ -775,6 +775,10 @@ msgctxt "tformdonatetrayslate.labelsupport.caption"
 msgid "You can support development through one of the following options:"
 msgstr "Bạn có thể hỗ trợ phát triển thông qua một trong các lựa chọn sau:"
 
+#: tformpopuptrayslate.aapplyautoheight.caption
+msgid "Apply Auto Height"
+msgstr ""
+
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
