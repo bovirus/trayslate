@@ -49,7 +49,8 @@ type
     LabelWatermark: TLabel;
     MemoTarget: TMemo;
     MenuFastAutoHeight: TMenuItem;
-    MenuSend: TMenuItem;
+    MenuSwapPair: TMenuItem;
+    MenuSendToMainWindow: TMenuItem;
     PanelTarget: TPanel;
     PanelPairs: TPanel;
     PanelWatermark: TPanel;
@@ -126,6 +127,7 @@ begin
 
   aNewTranslate.ImageIndex := TDarkUtils.ThemeValue(8, 9);
   aSendToMainWindow.ImageIndex := TDarkUtils.ThemeValue(14, 15);
+  aSwapPair.ImageIndex := TDarkUtils.ThemeValue(0, 1);
   aMenu.ImageIndex := TDarkUtils.ThemeValue(6, 7);
   aCopyTarget.ImageIndex := TDarkUtils.ThemeValue(10, 11);
   SbCopyTarget.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);

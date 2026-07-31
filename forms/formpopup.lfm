@@ -225,8 +225,11 @@ object formPopupTrayslate: TformPopupTrayslate
     object MenuFastAutoHeight: TMenuItem
       Action = aFastAutoHeight
     end
-    object MenuSend: TMenuItem
+    object MenuSendToMainWindow: TMenuItem
       Action = aSendToMainWindow
+    end
+    object MenuSwapPair: TMenuItem
+      Action = aSwapPair
     end
   end
 end

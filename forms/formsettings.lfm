@@ -561,7 +561,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Anchors = [akTop, akLeft, akRight]
             BevelOuter = bvNone
             Caption = 'Default, 0'
-            Color = clBtnFace
+            Color = clMenu
             ParentBackground = False
             ParentColor = False
             ParentFont = False
@@ -648,7 +648,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Anchors = [akTop, akLeft, akRight]
             BevelOuter = bvNone
             Caption = 'Default, 0'
-            Color = clBtnFace
+            Color = clMenu
             ParentBackground = False
             ParentColor = False
             ParentFont = False
