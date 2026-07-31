@@ -253,6 +253,9 @@ begin
     Self.AlphaBlendValue := TargetAlpha;
   end;
 
+  if PanelWatermark.Color <> MemoTarget.Color then
+    PanelWatermark.Color := MemoTarget.Color;
+
   UpdateControlsVisibility;
 end;
 
