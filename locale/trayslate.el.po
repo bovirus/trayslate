@@ -119,6 +119,16 @@ msgstr "Μόνο κρυπτονομίσματα"
 msgid "Measurement Units"
 msgstr "Μονάδες μέτρησης"
 
+#: formpopup.rlockautpheight
+msgctxt "formpopup.rlockautpheight"
+msgid "Lock Auto Height"
+msgstr ""
+
+#: formpopup.runlockautoheight
+msgctxt "formpopup.runlockautoheight"
+msgid "Unlock Auto Height"
+msgstr ""
+
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
@@ -770,14 +780,30 @@ msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Αντιγραφή μετάφρασης"
 
+#: tformpopuptrayslate.afastautoheight.caption
+msgctxt "tformpopuptrayslate.afastautoheight.caption"
+msgid "Lock Auto Height"
+msgstr ""
+
 #: tformpopuptrayslate.anewtranslate.hint
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Νέα μετάφραση"
 
-#: tformpopuptrayslate.asend.hint
+#: tformpopuptrayslate.asendtomainwindow.caption
+msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
+msgid "Send To Main Window"
+msgstr ""
+
+#: tformpopuptrayslate.asendtomainwindow.hint
+#, fuzzy
+msgctxt "tformpopuptrayslate.asendtomainwindow.hint"
 msgid "Send source and translation to main window"
 msgstr "Αποστολή πηγής και μετάφρασης στο κύριο παράθυρο"
+
+#: tformpopuptrayslate.aswappair.caption
+msgid "Swap Language Pair"
+msgstr ""
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1298,6 +1324,11 @@ msgstr "Αυτόματη προσθήκη πρόσφατων ζευγών γλω
 msgctxt "tformtrayslate.afastautocopy.caption"
 msgid "Auto-Copy Translation"
 msgstr "Αυτόματη αντιγραφή μετάφρασης"
+
+#: tformtrayslate.afastautoheight.caption
+msgctxt "tformtrayslate.afastautoheight.caption"
+msgid "Popup Auto Height"
+msgstr ""
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"

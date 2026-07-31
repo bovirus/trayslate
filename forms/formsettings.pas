@@ -352,7 +352,7 @@ resourcestring
 
 implementation
 
-uses Consts, mainform, formpopup, languages, translate, localize, darkutils, controlshelper, stringshelper;
+uses Consts, mainform, formpopup, languages, translate, localize, darkutils, controlshelper, stringshelper, pascalutils;
 
   {$R *.lfm}
 
@@ -523,6 +523,13 @@ begin
   else
   if Sender = CheckAutoCopy then
     formTrayslate.aFastAutoCopy.Checked := CheckAutoCopy.Checked
+  else
+  if Sender = CheckAutoHeight then
+  begin
+    formTrayslate.aFastAutoHeight.Checked := CheckAutoHeight.Checked;
+    if Assigned(formPopupTrayslate) then
+      formPopupTrayslate.aFastAutoHeight.ImageIndex := iif(CheckAutoHeight.Checked, 19, 18);
+  end
   else
   if Sender = CheckProxyAuthentication then
     SetState

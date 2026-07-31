@@ -119,6 +119,16 @@ msgstr "암호화폐만"
 msgid "Measurement Units"
 msgstr "측정 단위"
 
+#: formpopup.rlockautpheight
+msgctxt "formpopup.rlockautpheight"
+msgid "Lock Auto Height"
+msgstr ""
+
+#: formpopup.runlockautoheight
+msgctxt "formpopup.runlockautoheight"
+msgid "Unlock Auto Height"
+msgstr ""
+
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
@@ -770,14 +780,30 @@ msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "번역 복사"
 
+#: tformpopuptrayslate.afastautoheight.caption
+msgctxt "tformpopuptrayslate.afastautoheight.caption"
+msgid "Lock Auto Height"
+msgstr ""
+
 #: tformpopuptrayslate.anewtranslate.hint
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "새 번역"
 
-#: tformpopuptrayslate.asend.hint
+#: tformpopuptrayslate.asendtomainwindow.caption
+msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
+msgid "Send To Main Window"
+msgstr ""
+
+#: tformpopuptrayslate.asendtomainwindow.hint
+#, fuzzy
+msgctxt "tformpopuptrayslate.asendtomainwindow.hint"
 msgid "Send source and translation to main window"
 msgstr "원문과 번역을 메인 창으로 보내기"
+
+#: tformpopuptrayslate.aswappair.caption
+msgid "Swap Language Pair"
+msgstr ""
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1298,6 +1324,11 @@ msgstr "최근 언어 쌍 자동 추가"
 msgctxt "tformtrayslate.afastautocopy.caption"
 msgid "Auto-Copy Translation"
 msgstr "번역 자동 복사"
+
+#: tformtrayslate.afastautoheight.caption
+msgctxt "tformtrayslate.afastautoheight.caption"
+msgid "Popup Auto Height"
+msgstr ""
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"

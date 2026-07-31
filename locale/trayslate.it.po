@@ -124,6 +124,16 @@ msgstr "Solo valuta crypto"
 msgid "Measurement Units"
 msgstr "Unità di misura"
 
+#: formpopup.rlockautpheight
+msgctxt "formpopup.rlockautpheight"
+msgid "Lock Auto Height"
+msgstr ""
+
+#: formpopup.runlockautoheight
+msgctxt "formpopup.runlockautoheight"
+msgid "Unlock Auto Height"
+msgstr ""
+
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
 msgid "Toggle Application (Tray Icon Click)"
@@ -780,14 +790,30 @@ msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Copia traduzione"
 
+#: tformpopuptrayslate.afastautoheight.caption
+msgctxt "tformpopuptrayslate.afastautoheight.caption"
+msgid "Lock Auto Height"
+msgstr ""
+
 #: tformpopuptrayslate.anewtranslate.hint
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Nuova traduzione"
 
-#: tformpopuptrayslate.asend.hint
+#: tformpopuptrayslate.asendtomainwindow.caption
+msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
+msgid "Send To Main Window"
+msgstr ""
+
+#: tformpopuptrayslate.asendtomainwindow.hint
+#, fuzzy
+msgctxt "tformpopuptrayslate.asendtomainwindow.hint"
 msgid "Send source and translation to main window"
 msgstr "Invia sorgente e traduzione alla finestra principale"
+
+#: tformpopuptrayslate.aswappair.caption
+msgid "Swap Language Pair"
+msgstr ""
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1308,6 +1334,11 @@ msgstr "Aggiungi automaticamente coppie lingue recenti"
 msgctxt "tformtrayslate.afastautocopy.caption"
 msgid "Auto-Copy Translation"
 msgstr "Copia automatica traduzione"
+
+#: tformtrayslate.afastautoheight.caption
+msgctxt "tformtrayslate.afastautoheight.caption"
+msgid "Popup Auto Height"
+msgstr ""
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"

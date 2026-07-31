@@ -116,16 +116,16 @@ object formPopupTrayslate: TformPopupTrayslate
     ParentBackground = False
     ParentColor = False
     TabOrder = 0
-    object SbSend: TSpeedButton
+    object SbMenu: TSpeedButton
       Left = 456
       Height = 26
       Top = 0
       Width = 24
-      Action = aSend
+      Action = aMenu
       Align = alRight
       Flat = True
       Images = formTrayslate.ImageButtons
-      ImageIndex = 14
+      ImageIndex = 6
       ShowHint = True
       ParentShowHint = False
     end
@@ -176,28 +176,57 @@ object formPopupTrayslate: TformPopupTrayslate
   object Timer: TTimer
     Interval = 100
     OnTimer = TimerTimer
-    Left = 104
-    Top = 176
+    Left = 112
+    Top = 152
   end
   object ActionList: TActionList
     Images = formTrayslate.ImageButtons
-    Left = 32
-    Top = 176
+    Left = 40
+    Top = 152
     object aNewTranslate: TAction
       Hint = 'New Translate'
       ImageIndex = 8
       ShortCut = 16462
       OnExecute = aNewTranslateExecute
     end
-    object aSend: TAction
-      Hint = 'Send source and translation to main window'
-      ImageIndex = 14
-      OnExecute = aSendExecute
-    end
     object aCopyTarget: TAction
       Hint = 'Copy Translation'
       ImageIndex = 10
       OnExecute = aCopyTargetExecute
+    end
+    object aMenu: TAction
+      ImageIndex = 6
+      OnExecute = aMenuExecute
+    end
+    object aFastAutoHeight: TAction
+      Caption = 'Lock Auto Height'
+      ImageIndex = 19
+      OnExecute = aFastAutoHeightExecute
+    end
+    object aSendToMainWindow: TAction
+      Caption = 'Send To Main Window'
+      Hint = 'Send source and translation to main window'
+      ImageIndex = 14
+      OnExecute = aSendToMainWindowExecute
+    end
+    object aSwapPair: TAction
+      Caption = 'Swap Language Pair'
+      ImageIndex = 0
+      OnExecute = aSwapPairExecute
+    end
+  end
+  object Popup: TPopupMenu
+    Images = formTrayslate.ImageButtons
+    Alignment = paRight
+    OnPopup = PopupPopup
+    OnClose = PopupClose
+    Left = 184
+    Top = 152
+    object MenuFastAutoHeight: TMenuItem
+      Action = aFastAutoHeight
+    end
+    object MenuSend: TMenuItem
+      Action = aSendToMainWindow
     end
   end
 end

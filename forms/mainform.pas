@@ -66,6 +66,7 @@ type
     aAutoCheckUpdates: TAction;
     aCopySource: TAction;
     aCopyTarget: TAction;
+    aFastAutoHeight: TAction;
     aLangVietnamese: TAction;
     aDeletePair: TAction;
     aMoveLast: TAction;
@@ -110,6 +111,7 @@ type
     MenuFastAutoAddLangPairs: TMenuItem;
     MenuFastHideControls: TMenuItem;
     MenuItem3: TMenuItem;
+    MenuFastAutoHeight: TMenuItem;
     MenuVietnamese: TMenuItem;
     MenuMoveLeft: TMenuItem;
     MenuMoveRight: TMenuItem;
@@ -218,6 +220,7 @@ type
     MenuUkrainian: TMenuItem;
     MenuBelarusian: TMenuItem;
     MenuHindi: TMenuItem;
+    procedure aFastAutoHeightExecute(Sender: TObject);
     procedure aLangVietnameseExecute(Sender: TObject);
     procedure ApplicationPropUserInput(Sender: TObject; Msg: cardinal);
     procedure FormCreate(Sender: TObject);
@@ -361,7 +364,6 @@ type
     FLastCTime: DWORD;
     FLastXTime: DWORD;
     FLastVTime: DWORD;
-    FAutoHeightAfter: boolean;
     FPrevMouseDown: TMouseEventInfo;
     FPopupRecentPair: TComponent;
     FSettingsPage: integer;
@@ -389,7 +391,7 @@ type
     FSecondaryLang: string;
     FMouseMode: TMouseMode;
     FStayOnTop: boolean;
-    FAutoHeight: boolean;
+    FAutoHeightAfter: boolean;
     FMaxHeight: integer;
     FOpacityHover: integer;
     FOpacityIdle: integer;
@@ -444,6 +446,7 @@ type
     procedure SetAutoSwap(Value: boolean);
     procedure SetAllowHotkeys(Value: boolean);
     procedure SetEnableMouseMode(Value: boolean);
+    procedure SetAutoHeight(Value: boolean);
     procedure SetHideControls(Value: boolean);
     procedure SetMouseModeCtrl(Value: boolean);
     procedure SetRealTime(Value: boolean);
@@ -480,9 +483,10 @@ type
     FAutoSwap: boolean;
     FEnableMouseMode: boolean;
     FMouseModeCtrl: boolean;
-    FHideControls: boolean;
     FVerticalSplit: boolean;
     FAutoCopy: boolean;
+    FAutoHeight: boolean;
+    FHideControls: boolean;
 
     {$IFDEF WINDOWS}
     // MouseHook Events
@@ -580,7 +584,7 @@ type
     property StayOnTop: boolean read FStayOnTop write FStayOnTop;
     property FontPopup: TFont read FFontPopup write FFontPopup;
     property HideControls: boolean read FHideControls write SetHideControls;
-    property AutoHeight: boolean read FAutoHeight write FAutoHeight;
+    property AutoHeight: boolean read FAutoHeight write SetAutoHeight;
     property MaxHeight: integer read FMaxHeight write FMaxHeight;
     property OpacityHover: integer read FOpacityHover write FOpacityHover;
     property OpacityIdle: integer read FOpacityIdle write FOpacityIdle;
@@ -1525,7 +1529,7 @@ begin
   MenuLangPairs.Visible := False;
 
   // Bottom-right of button in screen coords
-  P := SbMenu.ClientToScreen(Point(SbMenu.Width, SbMenu.Height));
+  P := SbMenu.ClientToScreen(Classes.Point(SbMenu.Width, SbMenu.Height));
 
   PopupTray.PopUp(P.X, P.Y);
 end;
@@ -1677,6 +1681,11 @@ end;
 procedure TformTrayslate.aFastHideControlsExecute(Sender: TObject);
 begin
   HideControls := aFastHideControls.Checked;
+end;
+
+procedure TformTrayslate.aFastAutoHeightExecute(Sender: TObject);
+begin
+  AutoHeight := aFastAutoHeight.Checked;
 end;
 
 procedure TformTrayslate.aFastMouseModeCtrlExecute(Sender: TObject);
@@ -2222,6 +2231,161 @@ end;
 procedure TformTrayslate.PopupRecentPairPopup(Sender: TObject);
 begin
   FPopupRecentPair := PopupRecentPair.PopupComponent;
+end;
+
+{%EndRegion}
+
+{%Region -fold Setters}
+
+procedure TformTrayslate.SetAutoStart(Value: boolean);
+var
+  AppName: string;
+  AppPath: string;
+begin
+  FAutoStart := Value;
+
+  // Normalize install path
+  AppPath := ExcludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0)));
+
+  // Build unique registry key per installation path
+  AppName := 'Trayslate (' + AppPath + ')';
+
+  TOS.RegAutoStart(FAutoStart, AppName);
+end;
+
+procedure TformTrayslate.SetAutoAddLangPairs(Value: boolean);
+begin
+  aFastAutoAddLangPairs.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckAutoAddLangPairs.Checked := Value
+  else
+    FAutoAddLangPairs := Value;
+end;
+
+procedure TformTrayslate.SetAutoSwap(Value: boolean);
+begin
+  aFastAutoSwap.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckAutoSwap.Checked := Value
+  else
+    FAutoSwap := Value;
+end;
+
+procedure TformTrayslate.SetAllowHotkeys(Value: boolean);
+begin
+  aFastAllowHotkeys.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckAllowHotkeys.Checked := Value
+  else
+  begin
+    FAllowHotkeys := Value;
+    RegisterHotKeys;
+  end;
+end;
+
+procedure TformTrayslate.SetEnableMouseMode(Value: boolean);
+begin
+  aFastEnableMouseMode.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckEnableMouseMode.Checked := Value
+  else
+  begin
+    FEnableMouseMode := Value;
+    FMouseHook.Enabled := EnableMouseMode and not FMouseModeCtrl;
+    FKeyHook.Enabled := EnableMouseMode;
+  end;
+end;
+
+procedure TformTrayslate.SetAutoHeight(Value: boolean);
+begin
+  aFastAutoHeight.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckAutoHeight.Checked := Value
+  else
+    FAutoHeight := Value;
+end;
+
+procedure TformTrayslate.SetHideControls(Value: boolean);
+begin
+  aFastHideControls.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckHideControls.Checked := Value
+  else
+    FHideControls := Value;
+end;
+
+procedure TformTrayslate.SetMouseModeCtrl(Value: boolean);
+begin
+  aFastMouseModeCtrl.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckMouseModeCtrl.Checked := Value
+  else
+  begin
+    FMouseModeCtrl := Value;
+    FMouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
+  end;
+end;
+
+procedure TformTrayslate.SetRealTime(Value: boolean);
+begin
+  aFastRealTime.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckRealTime.Checked := Value
+  else
+    FRealTime := Value;
+end;
+
+procedure TformTrayslate.SetVerticalSplit(Value: boolean);
+begin
+  aFastVerticalSplit.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckVerticalSplit.Checked := Value
+  else
+  begin
+    FVerticalSplit := Value;
+    formTrayslate.SetVerticalMode;
+    Application.QueueAsyncCall(@DoRealignSplit, 0);
+  end;
+end;
+
+procedure TformTrayslate.SetAutoCopy(Value: boolean);
+begin
+  aFastAutoCopy.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckAutoCopy.Checked := Value
+  else
+    FAutoCopy := Value;
+end;
+
+procedure TformTrayslate.SetProxy(Value: TProxy);
+begin
+  FProxy := Value;
+  FTrans.Proxy := FProxy;
+  FTrans.Timeout := FTimeout;
+  FTransDetect.Proxy := FProxy;
+  FTransDetect.Timeout := FTimeout;
+end;
+
+procedure TformTrayslate.SetTranslateTarget(Value: TWinControl);
+begin
+  if Assigned(Value) then
+  begin
+    FTranslateTarget := Value;
+    if FTranslateTarget is TCustomEdit then
+    begin
+      FTranslateTarget.Color := clBtnFace;
+      (FTranslateTarget as TCustomEdit).ReadOnly := True;
+    end;
+  end
+  else
+  begin
+    if FTranslateTarget is TCustomEdit then
+    begin
+      FTranslateTarget.Color := clWindow;
+      (FTranslateTarget as TCustomEdit).ReadOnly := False;
+    end;
+    FTranslateTarget := nil;
+  end;
 end;
 
 {%EndRegion}
@@ -3441,148 +3605,6 @@ begin
     PanelTarget.BorderSpacing.Left := 3;
 
     PanelSource.Height := Round((PanelSource.Height + PanelTarget.Height) * FSplitRatio);
-  end;
-end;
-
-procedure TformTrayslate.SetAutoStart(Value: boolean);
-var
-  AppName: string;
-  AppPath: string;
-begin
-  FAutoStart := Value;
-
-  // Normalize install path
-  AppPath := ExcludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0)));
-
-  // Build unique registry key per installation path
-  AppName := 'Trayslate (' + AppPath + ')';
-
-  TOS.RegAutoStart(FAutoStart, AppName);
-end;
-
-procedure TformTrayslate.SetAutoAddLangPairs(Value: boolean);
-begin
-  aFastAutoAddLangPairs.Checked := Value;
-  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckAutoAddLangPairs.Checked := Value
-  else
-    FAutoAddLangPairs := Value;
-end;
-
-procedure TformTrayslate.SetAutoSwap(Value: boolean);
-begin
-  aFastAutoSwap.Checked := Value;
-  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckAutoSwap.Checked := Value
-  else
-    FAutoSwap := Value;
-end;
-
-procedure TformTrayslate.SetAllowHotkeys(Value: boolean);
-begin
-  aFastAllowHotkeys.Checked := Value;
-  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckAllowHotkeys.Checked := Value
-  else
-  begin
-    FAllowHotkeys := Value;
-    RegisterHotKeys;
-  end;
-end;
-
-procedure TformTrayslate.SetEnableMouseMode(Value: boolean);
-begin
-  aFastEnableMouseMode.Checked := Value;
-  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckEnableMouseMode.Checked := Value
-  else
-  begin
-    FEnableMouseMode := Value;
-    FMouseHook.Enabled := EnableMouseMode and not FMouseModeCtrl;
-    FKeyHook.Enabled := EnableMouseMode;
-  end;
-end;
-
-procedure TformTrayslate.SetHideControls(Value: boolean);
-begin
-  aFastHideControls.Checked := Value;
-  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckHideControls.Checked := Value
-  else
-    FHideControls := Value;
-end;
-
-procedure TformTrayslate.SetMouseModeCtrl(Value: boolean);
-begin
-  aFastMouseModeCtrl.Checked := Value;
-  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckMouseModeCtrl.Checked := Value
-  else
-  begin
-    FMouseModeCtrl := Value;
-    FMouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
-  end;
-end;
-
-procedure TformTrayslate.SetRealTime(Value: boolean);
-begin
-  aFastRealTime.Checked := Value;
-  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckRealTime.Checked := Value
-  else
-    FRealTime := Value;
-end;
-
-procedure TformTrayslate.SetVerticalSplit(Value: boolean);
-begin
-  aFastVerticalSplit.Checked := Value;
-  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckVerticalSplit.Checked := Value
-  else
-  begin
-    FVerticalSplit := Value;
-    formTrayslate.SetVerticalMode;
-    Application.QueueAsyncCall(@DoRealignSplit, 0);
-  end;
-end;
-
-procedure TformTrayslate.SetAutoCopy(Value: boolean);
-begin
-  aFastAutoCopy.Checked := Value;
-  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckAutoCopy.Checked := Value
-  else
-    FAutoCopy := Value;
-end;
-
-procedure TformTrayslate.SetProxy(Value: TProxy);
-begin
-  FProxy := Value;
-  FTrans.Proxy := FProxy;
-  FTrans.Timeout := FTimeout;
-  FTransDetect.Proxy := FProxy;
-  FTransDetect.Timeout := FTimeout;
-end;
-
-procedure TformTrayslate.SetTranslateTarget(Value: TWinControl);
-begin
-  if Assigned(Value) then
-  begin
-    FTranslateTarget := Value;
-    if FTranslateTarget is TCustomEdit then
-    begin
-      FTranslateTarget.Color := clBtnFace;
-      (FTranslateTarget as TCustomEdit).ReadOnly := True;
-    end;
-  end
-  else
-  begin
-    if FTranslateTarget is TCustomEdit then
-    begin
-      FTranslateTarget.Color := clWindow;
-      (FTranslateTarget as TCustomEdit).ReadOnly := False;
-    end;
-    FTranslateTarget := nil;
   end;
 end;
 

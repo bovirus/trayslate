@@ -38,26 +38,35 @@ type
   { TformPopupTrayslate }
 
   TformPopupTrayslate = class(TForm)
-    aSend: TAction;
+    aSwapPair: TAction;
+    aFastAutoHeight: TAction;
+    aMenu: TAction;
+    aSendToMainWindow: TAction;
     aCopyTarget: TAction;
     aNewTranslate: TAction;
     ActionList: TActionList;
     FlowPairs: TFlowPanel;
     LabelWatermark: TLabel;
     MemoTarget: TMemo;
+    MenuFastAutoHeight: TMenuItem;
+    MenuSend: TMenuItem;
     PanelTarget: TPanel;
     PanelPairs: TPanel;
     PanelWatermark: TPanel;
     PanelButtonTarget: TPanel;
+    Popup: TPopupMenu;
     SbCopyTargetPanel: TSpeedButton;
     SbNewTranslate: TSpeedButton;
     SbCopyTarget: TSpeedButton;
-    SbSend: TSpeedButton;
+    SbMenu: TSpeedButton;
     Timer: TTimer;
 
     procedure aCopyTargetExecute(Sender: TObject);
+    procedure aFastAutoHeightExecute(Sender: TObject);
+    procedure aMenuExecute(Sender: TObject);
     procedure aNewTranslateExecute(Sender: TObject);
-    procedure aSendExecute(Sender: TObject);
+    procedure aSendToMainWindowExecute(Sender: TObject);
+    procedure aSwapPairExecute(Sender: TObject);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -67,12 +76,15 @@ type
     procedure FormShow(Sender: TObject);
     procedure MemoTargetChange(Sender: TObject);
     procedure PanelWatermarkClick(Sender: TObject);
+    procedure PopupClose(Sender: TObject);
+    procedure PopupPopup(Sender: TObject);
     procedure TimerTimer(Sender: TObject);
     procedure OnTextDroppedHandler(Sender: TObject; const AText: string);
   private
     FSourceText: string;
     FDropTarget: TTextDropTarget;
     FInWindow: boolean;
+    FPopupOpen: boolean;
 
     procedure UpdateControlsVisibility;
   protected
@@ -88,9 +100,13 @@ type
 var
   formPopupTrayslate: TformPopupTrayslate;
 
+resourcestring
+  rlockautpheight = 'Lock Auto Height';
+  runlockautoheight = 'Unlock Auto Height';
+
 implementation
 
-uses Consts, mainform, localize, darkutils, controlshelper;
+uses Consts, mainform, formsettings, localize, darkutils, controlshelper, pascalutils;
 
   {$R *.lfm}
 
@@ -109,10 +125,17 @@ begin
   FDropTarget.OnTextDropped := @OnTextDroppedHandler;
 
   aNewTranslate.ImageIndex := TDarkUtils.ThemeValue(8, 9);
-  aSend.ImageIndex := TDarkUtils.ThemeValue(14, 15);
+  aSendToMainWindow.ImageIndex := TDarkUtils.ThemeValue(14, 15);
+  aMenu.ImageIndex := TDarkUtils.ThemeValue(6, 7);
   aCopyTarget.ImageIndex := TDarkUtils.ThemeValue(10, 11);
   SbCopyTarget.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);
   SbCopyTargetPanel.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);
+
+  FPopupOpen := False;
+  FInWindow := False;
+
+  aFastAutoHeight.ImageIndex := iif(formTrayslate.AutoHeight, 19, 18);
+  aFastAutoHeight.Caption := iif(formTrayslate.AutoHeight, rlockautpheight, runlockautoheight);
 
   UpdateControlsVisibility;
 end;
@@ -155,7 +178,7 @@ begin
     PanelWatermark.Height) div 2;
 
   SbCopyTargetPanel.Left := FlowPairs.Left + FlowPairs.Width;
-  SbSend.Left := SbCopyTargetPanel.Left + SbCopyTargetPanel.Width;
+  SbMenu.Left := SbCopyTargetPanel.Left + SbCopyTargetPanel.Width;
 
   UpdateControlsVisibility;
 end;
@@ -173,7 +196,7 @@ begin
   FormResize(Self);
 end;
 
-procedure TformPopupTrayslate.aSendExecute(Sender: TObject);
+procedure TformPopupTrayslate.aSendToMainWindowExecute(Sender: TObject);
 begin
   if MemoTarget.Text = string.Empty then exit;
   formTrayslate.MemoSource.Text := SourceText;
@@ -181,9 +204,41 @@ begin
   formTrayslate.aShow.Execute;
 end;
 
+procedure TformPopupTrayslate.aSwapPairExecute(Sender: TObject);
+begin
+  formTrayslate.aSwap.Execute;
+end;
+
 procedure TformPopupTrayslate.aCopyTargetExecute(Sender: TObject);
 begin
   Clipboard.AsText := MemoTarget.Text;
+end;
+
+procedure TformPopupTrayslate.aFastAutoHeightExecute(Sender: TObject);
+var
+  Check: boolean;
+begin
+  Check := not formTrayslate.FAutoHeight;
+  formTrayslate.FAutoHeight := Check;
+  formTrayslate.aFastAutoHeight.Checked := Check;
+  if Assigned(formSettingsTrayslate) and formSettingsTrayslate.Visible then
+    formSettingsTrayslate.CheckAutoHeight.Checked := Check;
+
+  if formTrayslate.AutoHeight then
+    formTrayslate.AdjustPopupHeight(MemoTarget.Text);
+
+  aFastAutoHeight.ImageIndex := iif(Check, 19, 18);
+  aFastAutoHeight.Caption := iif(Check, rlockautpheight, runlockautoheight);
+end;
+
+procedure TformPopupTrayslate.aMenuExecute(Sender: TObject);
+var
+  P: TPoint;
+begin
+  // Bottom-right of button in screen coords
+  P := SbMenu.ClientToScreen(Classes.Point(SbMenu.Width, SbMenu.Height));
+
+  Popup.PopUp(P.X, P.Y);
 end;
 
 procedure TformPopupTrayslate.MemoTargetChange(Sender: TObject);
@@ -196,6 +251,16 @@ procedure TformPopupTrayslate.PanelWatermarkClick(Sender: TObject);
 begin
   if MemoTarget.Enabled and MemoTarget.Visible and MemoTarget.CanFocus then
     MemoTarget.SetFocus;
+end;
+
+procedure TformPopupTrayslate.PopupPopup(Sender: TObject);
+begin
+  FPopupOpen := True;
+end;
+
+procedure TformPopupTrayslate.PopupClose(Sender: TObject);
+begin
+  FPopupOpen := False;
 end;
 
 procedure TformPopupTrayslate.TimerTimer(Sender: TObject);
@@ -256,7 +321,8 @@ begin
   if PanelWatermark.Color <> MemoTarget.Color then
     PanelWatermark.Color := MemoTarget.Color;
 
-  UpdateControlsVisibility;
+  if not FPopupOpen then
+    UpdateControlsVisibility;
 end;
 
 procedure TformPopupTrayslate.OnTextDroppedHandler(Sender: TObject; const AText: string);
