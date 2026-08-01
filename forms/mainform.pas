@@ -112,6 +112,7 @@ type
     MenuFastHideControls: TMenuItem;
     MenuItem3: TMenuItem;
     MenuFastAutoHeight: TMenuItem;
+    MenuRecentConfigEditor: TMenuItem;
     MenuVietnamese: TMenuItem;
     MenuMoveLeft: TMenuItem;
     MenuMoveRight: TMenuItem;
@@ -161,6 +162,7 @@ type
     Separator5: TMenuItem;
     Separator6: TMenuItem;
     Separator7: TMenuItem;
+    Separator8: TMenuItem;
     Separator9: TMenuItem;
     Splitter: TSplitter;
     TimerUnapply: TTimer;

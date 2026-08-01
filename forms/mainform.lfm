@@ -963,5 +963,11 @@ object formTrayslate: TformTrayslate
     object MenuMoveLast: TMenuItem
       Action = aMoveLast
     end
+    object Separator8: TMenuItem
+      Caption = '-'
+    end
+    object MenuRecentConfigEditor: TMenuItem
+      Action = aConfigEditor
+    end
   end
 end
