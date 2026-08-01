@@ -87,7 +87,7 @@ type
   {%Region -fold Private Methods}
 
 // Analyse the script composition of the first 300 characters.
-// Returns detailed counts for Latin, Cyrillic, CJK sub‑ranges, etc.
+// Returns detailed counts for Latin, Cyrillic, CJK sub-ranges, etc.
 function DetectScript(const Txt: string): TScriptInfo;
 const
   SAMPLE_SIZE = 300;

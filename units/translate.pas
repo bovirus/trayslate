@@ -115,6 +115,8 @@ type
     function Post(ReturnHeaders: boolean = False): string;
     function ParseJsonByPointer(const JsonStr, JsonPointer: string): string;
     function ParseResponse(content: string): string;
+    // Clean translated text by replacing <br> and HTML entities only if they were not present in the original.
+    function CleanTranslatedText(const OriginalText, TranslatedText: string): string;
     function Translate: string;
 
     { Ini config }
@@ -475,39 +477,39 @@ begin
   for i := 1 to Length(FullRandom.ToString) do
     FParameterValues.Values['rand' + IntToStr(i)] := Copy(FullRandom.ToString, 1, i);
 
+  // Extract additional parameters using regex
+  if Assigned(FInitParameters) and (Data <> string.Empty) and (SecondsBetween(Now, FParametersAge) >= FInitLiveTime) then
+  begin
+    R := TRegExpr.Create;
+    try
+      for i := 0 to FInitParameters.Count - 1 do
+      begin
+        ParamName := FInitParameters.Names[i];
+        RegExpStr := FInitParameters.ValueFromIndex[i];
+
+        R.Expression := RegExpStr;
+
+        if R.Exec(Data) then
+        begin
+          // Use first captured group if exists, otherwise full match
+          if R.SubExprMatchCount >= 1 then
+            Value := R.Match[1]
+          else
+            Value := R.Match[0];
+
+          // Only add parameter if value is not empty
+          if Value <> string.Empty then
+            FParameterValues.Values[ParamName] := Value;
+        end;
+      end;
+    finally
+      R.Free;
+      FParametersAge := Now;
+    end;
+  end;
+
   // ScriptParameters
   ExecuteScript;
-
-  // Extract additional parameters using regex
-  if not Assigned(FInitParameters) or (Data = string.Empty) or (SecondsBetween(Now, FParametersAge) < FInitLiveTime) then
-    Exit;
-
-  R := TRegExpr.Create;
-  try
-    for i := 0 to FInitParameters.Count - 1 do
-    begin
-      ParamName := FInitParameters.Names[i];
-      RegExpStr := FInitParameters.ValueFromIndex[i];
-
-      R.Expression := RegExpStr;
-
-      if R.Exec(Data) then
-      begin
-        // Use first captured group if exists, otherwise full match
-        if R.SubExprMatchCount >= 1 then
-          Value := R.Match[1]
-        else
-          Value := R.Match[0];
-
-        // Only add parameter if value is not empty
-        if Value <> string.Empty then
-          FParameterValues.Values[ParamName] := Value;
-      end;
-    end;
-  finally
-    R.Free;
-    FParametersAge := Now;
-  end;
 end;
 
 function TTranslate.SetParameters(Data: string; IncludeSet: boolean = True): string;
@@ -1218,6 +1220,94 @@ begin
   end;
 end;
 
+function TTranslate.CleanTranslatedText(const OriginalText, TranslatedText: string): string;
+var
+  i, Start: Integer;
+  EntityStr: string;
+  DecodedChar: string;
+  TagWasReplaced: Boolean;
+begin
+  // Quick exit if the translated text contains no markers that need processing
+  if (Pos('&', TranslatedText) = 0) and (Pos('<', TranslatedText) = 0) then
+  begin
+    Result := TranslatedText;
+    Exit;
+  end;
+
+  Result := '';
+  i := 1;
+  while i <= Length(TranslatedText) do
+  begin
+    // Check for <br> tag (case insensitive)
+    if (TranslatedText[i] = '<') and (i + 3 <= Length(TranslatedText)) and
+       (LowerCase(Copy(TranslatedText, i, 4)) = '<br>') then
+    begin
+      TagWasReplaced := Pos('<br>', OriginalText) = 0;
+      if TagWasReplaced then
+        Result := Result + LineEnding
+      else
+        Result := Result + '<br>';
+      Inc(i, 4);
+      // If we replaced the tag with a newline, skip the following space if present
+      if TagWasReplaced and (i <= Length(TranslatedText)) and (TranslatedText[i] = ' ') then
+        Inc(i);
+    end
+    // Check for <br/> tag (case insensitive)
+    else if (TranslatedText[i] = '<') and (i + 5 <= Length(TranslatedText)) and
+            (LowerCase(Copy(TranslatedText, i, 5)) = '<br/>') then
+    begin
+      TagWasReplaced := Pos('<br/>', OriginalText) = 0;
+      if TagWasReplaced then
+        Result := Result + LineEnding
+      else
+        Result := Result + '<br/>';
+      Inc(i, 5);
+      // If we replaced the tag with a newline, skip the following space if present
+      if TagWasReplaced and (i <= Length(TranslatedText)) and (TranslatedText[i] = ' ') then
+        Inc(i);
+    end
+    // Handle HTML entities starting with '&'
+    else if TranslatedText[i] = '&' then
+    begin
+      Start := i;
+      // Find the closing semicolon
+      while (i <= Length(TranslatedText)) and (TranslatedText[i] <> ';') do
+        Inc(i);
+      if (i <= Length(TranslatedText)) and (TranslatedText[i] = ';') then
+      begin
+        EntityStr := Copy(TranslatedText, Start, i - Start + 1);
+        if Pos(EntityStr, OriginalText) > 0 then
+        begin
+          // Keep the entity if it existed in original text
+          Result := Result + EntityStr;
+        end
+        else
+        begin
+          // Try to decode the entity using the string helper
+          DecodedChar := EntityStr.DecodeHtmlEntity;
+          if DecodedChar <> '' then
+            Result := Result + DecodedChar
+          else
+            // Unknown entity, keep it as is
+            Result := Result + EntityStr;
+        end;
+        Inc(i); // move past the semicolon
+      end
+      else
+      begin
+        // No closing semicolon found, copy the '&' and continue
+        Result := Result + TranslatedText[Start];
+        i := Start + 1;
+      end;
+    end
+    else
+    begin
+      Result := Result + TranslatedText[i];
+      Inc(i);
+    end;
+  end;
+end;
+
 function TTranslate.Translate: string;
 var
   content: string;
@@ -1239,6 +1329,9 @@ begin
 
     Result := ParseResponse(content).PreserveIndentation(FTextToTranslate);
   end;
+
+  // Replace HTML codes (entities and <br>) with actual characters only if they were absent in the original text
+  Result := CleanTranslatedText(FTextToTranslate, Result);
 
   if (Trim(Result) = string.Empty) then
   begin

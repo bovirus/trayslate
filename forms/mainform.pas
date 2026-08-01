@@ -1839,11 +1839,11 @@ begin
     Exit;
   end;
 
-  // Any key other than plain Enter resets the triple‑Enter sequence
+  // Any key other than plain Enter resets the triple-Enter sequence
   if (Key <> VK_RETURN) then
     FEnterCount := 0;
 
-  // Triple‑Enter logic: three quick presses of plain Enter trigger translation
+  // Triple-Enter logic: three quick presses of plain Enter trigger translation
   if (Key = VK_RETURN) and not (ssCtrl in Shift) and not (ssShift in Shift) then
   begin
     NowTime := TOS.GetTickCountXp;

@@ -91,7 +91,7 @@ end;
 // These are registered in OnCompile and can be called from the script.
 // ---------------------------------------------------------------------------
 
-{ Returns a pseudo‑random floating‑point number in the range [0, 1).
+{ Returns a pseudo-random floating-point number in the range [0, 1).
   This is the same as the standard System.Random when called without arguments. }
 function PS_Random: extended;
 begin
@@ -120,6 +120,55 @@ procedure PS_SetOutput(const Name, Value: string);
 begin
   if Assigned(CurrentRunner) then
     CurrentRunner.SetOutput(Name, Value);
+end;
+
+// Replaces all occurrences of OldPattern with NewPattern in S.
+function ReplaceAll(const S, OldPattern, NewPattern: string; IgnoreCase: boolean = False): string;
+var
+  SearchStr, SearchPattern: string;
+  P, OldLen, Offset, SearchLen: integer;
+begin
+  Result := S;
+  if OldPattern = '' then Exit;
+  OldLen := Length(OldPattern);
+
+  if IgnoreCase then
+  begin
+    SearchStr := LowerCase(Result);
+    SearchPattern := LowerCase(OldPattern);
+  end
+  else
+  begin
+    SearchStr := Result;
+    SearchPattern := OldPattern;
+  end;
+
+  Offset := 1;
+  SearchLen := Length(SearchStr) - Offset + 1;
+  if SearchLen > 0 then
+    P := Pos(SearchPattern, Copy(SearchStr, Offset, SearchLen))
+  else
+    P := 0;
+
+  while P > 0 do
+  begin
+    P := P + Offset - 1;
+    Delete(Result, P, OldLen);
+    Insert(NewPattern, Result, P);
+
+    Offset := P + Length(NewPattern);
+
+    if IgnoreCase then
+      SearchStr := LowerCase(Result)
+    else
+      SearchStr := Result;
+
+    SearchLen := Length(SearchStr) - Offset + 1;
+    if SearchLen > 0 then
+      P := Pos(SearchPattern, Copy(SearchStr, Offset, SearchLen))
+    else
+      P := 0;
+  end;
 end;
 
 { TScriptRunner }
@@ -159,16 +208,18 @@ begin
   Sender.AddFunction(@PS_GetTimestamp, 'function GetTimestamp: Int64;');
   Sender.AddFunction(@PS_GetRandom, 'function GetRandom(ALength: Integer): Int64;');
 
-  // Pseudo‑random generator
+  // Pseudo-random generator
   Sender.AddFunction(@PS_Random, 'function Random: Extended;');
   // Hexadecimal conversion
   Sender.AddFunction(@PS_IntToHex, 'function IntToHex(Value: Integer; Digits: Integer): string;');
 
   // Input reader: allows the script to retrieve any parameter by name.
-  // We register the plain wrapper PS_GetParam, not the method.
   Sender.AddFunction(@PS_GetParam, 'function GetParam(const Name: string): string;');
   // Output writer: the script calls this to store a result.
   Sender.AddFunction(@PS_SetOutput, 'procedure SetOutput(const Name, Value: string);');
+
+  // Substring replacement function
+  Sender.AddFunction(@ReplaceAll, 'function ReplaceAll(const S, OldPattern, NewPattern: string; IgnoreCase: Boolean): string;');
 end;
 
 { OnExecute event – called just before the script starts running.

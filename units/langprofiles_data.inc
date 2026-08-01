@@ -28,7 +28,7 @@ const
     'وقد', 'أصب', 'شعر', 'رغم', 'كله', 'نحو', 'تلك', 'هذ ', 'ضد ', 'مدى',
     'مجا', 'حول', 'أجل', 'طرق', 'كثر', 'عشر', 'صار', 'ظل ', 'بات', 'بقي');
 
-  // ----- Belarusian (150 highly distinctive 3‑char trigrams) -----
+  // ----- Belarusian (150 highly distinctive 3-char trigrams) -----
   BE: array[0..179] of string = (
     'гэт', 'які', 'яка', 'яны', 'яна', 'пры', 'пас', 'ля ', 'пад', 'без',
     'для', 'кал', 'алі', 'там', 'тут', 'дзе', 'хто', 'чым', 'ням', 'ама',
@@ -50,7 +50,7 @@ const
     'сь ', 'нь ', 'ць ', 'цьц', 'ццё', 'ёцц', 'е ў', 'а ў', 'і ў', 'ы ў'
     );
 
-  // ----- Bulgarian (150 highly distinctive 3‑char trigrams) -----
+  // ----- Bulgarian (150 highly distinctive 3-char trigrams) -----
   BG: array[0..167] of string = (
     'ът ', 'ъв ', 'ък ', 'ъп ', 'ъс ', 'ъм ', 'та ', 'то ', 'те ', 'ят ',
     'ият', 'ата', 'ята', 'ите', 'ска', 'ско', 'ски', 'ств', 'чен', 'шка',
@@ -89,7 +89,7 @@ const
     'ář ', 'íř ', 'eř ', 'uř ', 'ař ', 'ěte', 'ete', 'íte', 'ete', 'áte',
     'íte', 'éte', 'íti', 'ěti', 'eti', 'nou', 'nou', 'tou', 'dou', 'vou');
 
-  // ----- Danish (150 highly distinctive 3‑char trigrams) -----
+  // ----- Danish (150 highly distinctive 3-char trigrams) -----
   DA: array[0..192] of string = (
     'det', 'den', 'de ', 'jeg', 'du ', 'han', 'hun', 'vi ', 'I  ', 'dem',
     'jer', 'os ', 'mig', 'dig', 'ham', 'hen', 'ikke', 'ogs', 'mås', 'sel',
@@ -405,7 +405,7 @@ const
     'tje', 'pje', 'kje', 'mje', 'sje', 'lje', 'rje', 'nje', 'wje', 'hje',
     'uw ', 'ee ', 'aa ', 'oo ', 'uu ', 'ij ', 'ei ', 'ui ', 'au ', 'ou ');
 
-  // ----- Norwegian Bokmål (150 highly distinctive 3‑char trigrams) -----
+  // ----- Norwegian Bokmål (150 highly distinctive 3-char trigrams) -----
   NO: array[0..162] of string = (
     'seg', 'ikk', 'kke', 'dere', 'skj', 'åpn', 'lukk', 'øy', 'kj', 'er ',
     'en ', 'et ', 'de ', 'vi ', 'du ', 'han', 'hun', 'den', 'det', 'der',
@@ -483,7 +483,7 @@ const
     'țit', 'ânc'
     );
 
-  // ----- Russian (150 highly distinctive 3‑char trigrams) -----
+  // ----- Russian (150 highly distinctive 3-char trigrams) -----
   RU: array[0..179] of string = (
     'что', 'это', 'как', 'так', 'все', 'всё', 'или', 'для', 'при', 'про',
     'под', 'над', 'без', 'из ', 'об ', 'от ', 'до ', 'по ', 'со ', 'во ',
