@@ -121,12 +121,12 @@ msgstr "وحدات القياس"
 
 #: formpopup.rlockautpheight
 msgctxt "formpopup.rlockautpheight"
-msgid "Lock Auto Height"
+msgid "Lock Height"
 msgstr ""
 
 #: formpopup.runlockautoheight
 msgctxt "formpopup.runlockautoheight"
-msgid "Unlock Auto Height"
+msgid "Unlock Height"
 msgstr ""
 
 #: formsettings.rapp
@@ -786,7 +786,7 @@ msgstr "نسخ الترجمة"
 
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
-msgid "Lock Auto Height"
+msgid "Lock Height"
 msgstr ""
 
 #: tformpopuptrayslate.anewtranslate.hint
@@ -800,7 +800,6 @@ msgid "Send To Main Window"
 msgstr ""
 
 #: tformpopuptrayslate.asendtomainwindow.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.asendtomainwindow.hint"
 msgid "Send source and translation to main window"
 msgstr "إرسال المصدر والترجمة إلى النافذة الرئيسية"

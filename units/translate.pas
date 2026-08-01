@@ -189,16 +189,18 @@ type
     FSourceText: string;
     FExceptionMessage: string;
     FCancelled: boolean;
+    FLangDetect: boolean;
   protected
     procedure Execute; override;
     function GetIsTerminated: boolean;
     function GetIsCancelled: boolean;
     function GetResultText: string;
   public
-    constructor Create(ATrans: TTranslate; AResult: PString; ADone: PBoolean; AFreeOnTerminate: boolean = True);
+    constructor Create(ATrans: TTranslate; AResult: PString; ADone: PBoolean; ALangDetect: boolean; AFreeOnTerminate: boolean = True);
     procedure Cancel;
     property IsTerminated: boolean read GetIsTerminated;
     property IsCancelled: boolean read GetIsCancelled;
+    property LangDetect: boolean read FLangDetect;
     property ExceptionMessage: string read FExceptionMessage;
     property ResultText: string read GetResultText;
   end;
@@ -1222,10 +1224,10 @@ end;
 
 function TTranslate.CleanTranslatedText(const OriginalText, TranslatedText: string): string;
 var
-  i, Start: Integer;
+  i, Start: integer;
   EntityStr: string;
   DecodedChar: string;
-  TagWasReplaced: Boolean;
+  TagWasReplaced: boolean;
 begin
   // Quick exit if the translated text contains no markers that need processing
   if (Pos('&', TranslatedText) = 0) and (Pos('<', TranslatedText) = 0) then
@@ -1239,8 +1241,7 @@ begin
   while i <= Length(TranslatedText) do
   begin
     // Check for <br> tag (case insensitive)
-    if (TranslatedText[i] = '<') and (i + 3 <= Length(TranslatedText)) and
-       (LowerCase(Copy(TranslatedText, i, 4)) = '<br>') then
+    if (TranslatedText[i] = '<') and (i + 3 <= Length(TranslatedText)) and (LowerCase(Copy(TranslatedText, i, 4)) = '<br>') then
     begin
       TagWasReplaced := Pos('<br>', OriginalText) = 0;
       if TagWasReplaced then
@@ -1254,7 +1255,7 @@ begin
     end
     // Check for <br/> tag (case insensitive)
     else if (TranslatedText[i] = '<') and (i + 5 <= Length(TranslatedText)) and
-            (LowerCase(Copy(TranslatedText, i, 5)) = '<br/>') then
+      (LowerCase(Copy(TranslatedText, i, 5)) = '<br/>') then
     begin
       TagWasReplaced := Pos('<br/>', OriginalText) = 0;
       if TagWasReplaced then
@@ -1850,7 +1851,8 @@ end;
 
 {%Region -fold TTranslateThread }
 
-constructor TTranslateThread.Create(ATrans: TTranslate; AResult: PString; ADone: PBoolean; AFreeOnTerminate: boolean = True);
+constructor TTranslateThread.Create(ATrans: TTranslate; AResult: PString; ADone: PBoolean; ALangDetect: boolean;
+  AFreeOnTerminate: boolean = True);
 begin
   inherited Create(True);
   FreeOnTerminate := AFreeOnTerminate;
@@ -1861,6 +1863,7 @@ begin
   FExceptionMessage := string.Empty;
   FResult := AResult;
   FDone := ADone;
+  FLangDetect := ALangDetect;
 
   if Assigned(FDone) then
     FDone^ := False;

@@ -106,8 +106,8 @@ var
   formPopupTrayslate: TformPopupTrayslate;
 
 resourcestring
-  rlockautpheight = 'Lock Auto Height';
-  runlockautoheight = 'Unlock Auto Height';
+  rlockautpheight = 'Lock Height';
+  runlockautoheight = 'Unlock Height';
 
 implementation
 

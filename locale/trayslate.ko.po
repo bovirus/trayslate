@@ -121,12 +121,12 @@ msgstr "측정 단위"
 
 #: formpopup.rlockautpheight
 msgctxt "formpopup.rlockautpheight"
-msgid "Lock Auto Height"
+msgid "Lock Height"
 msgstr ""
 
 #: formpopup.runlockautoheight
 msgctxt "formpopup.runlockautoheight"
-msgid "Unlock Auto Height"
+msgid "Unlock Height"
 msgstr ""
 
 #: formsettings.rapp
@@ -786,7 +786,7 @@ msgstr "번역 복사"
 
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
-msgid "Lock Auto Height"
+msgid "Lock Height"
 msgstr ""
 
 #: tformpopuptrayslate.anewtranslate.hint

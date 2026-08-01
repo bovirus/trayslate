@@ -203,7 +203,7 @@ object formPopupTrayslate: TformPopupTrayslate
       OnExecute = AApplyAutoHeightExecute
     end
     object aFastAutoHeight: TAction
-      Caption = 'Lock Auto Height'
+      Caption = 'Lock Height'
       ImageIndex = 19
       OnExecute = aFastAutoHeightExecute
     end

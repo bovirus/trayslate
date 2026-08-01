@@ -4068,8 +4068,9 @@ begin
     ATrans.TextToTranslate := AText;
     FRawTranslate := string.Empty;
     ThDone := False;
-    Th := TTranslateThread.Create(ATrans, @FRawTranslate, @ThDone);
+    Th := TTranslateThread.Create(ATrans, @FRawTranslate, @ThDone, ATrans = TransDetect);
     FTranslateThread := Th;
+
     FActiveThreads.Add(Th);
     TranslateTarget := AMemo;
     UpdateTranslateButtonState;
@@ -4122,7 +4123,8 @@ begin
   if FAutoCopy then
     Clipboard.AsText := FRawTranslate;
 
-  UpdatePopupState;
+  if not (Sender as TTranslateThread).LangDetect then
+    UpdatePopupState;
 
   if not Visible and (not Assigned(formPopupTrayslate) or not formPopupTrayslate.Visible) then
     ShowCustomHint(TrayIcon.Hint);
