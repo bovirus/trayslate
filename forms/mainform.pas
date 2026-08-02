@@ -794,7 +794,7 @@ end;
 
 procedure TformTrayslate.FormDestroy(Sender: TObject);
 var
-  TotalDeadline: QWord;
+  TotalDeadline: DWORD;
   i: integer;
   Th: TTranslateThread;
 begin

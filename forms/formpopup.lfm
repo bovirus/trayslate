@@ -38,6 +38,7 @@ object formPopupTrayslate: TformPopupTrayslate
       Width = 474
       Align = alClient
       BorderStyle = bsNone
+      Color = clWindow
       HideSelection = False
       ScrollBars = ssAutoBoth
       TabOrder = 0
