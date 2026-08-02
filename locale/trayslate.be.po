@@ -31,6 +31,11 @@ msgctxt "consts.renterparameter"
 msgid "Enter the required parameter"
 msgstr "Увядзіце неабходны параметр"
 
+#: consts.rlockheight
+msgctxt "consts.rlockheight"
+msgid "Lock Height"
+msgstr "Заблакаваць вышыню"
+
 #: consts.rnoconfig
 msgctxt "consts.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
@@ -66,6 +71,11 @@ msgstr "Перакласці (Ctrl ¦ Shift + Enter, Triple Enter)"
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
 msgstr "Спыніць пераклад (Esc)"
+
+#: consts.runlockheight
+msgctxt "consts.runlockheight"
+msgid "Unlock Height"
+msgstr "Разблакаваць вышыню"
 
 #: formconfig.rcaption
 msgctxt "formconfig.rcaption"
@@ -118,16 +128,6 @@ msgstr "Валюта: толькі крыпта"
 #: formconfig.rvaluetype6
 msgid "Measurement Units"
 msgstr "Адзінкі вымярэння"
-
-#: formpopup.rlockautpheight
-msgctxt "formpopup.rlockautpheight"
-msgid "Lock Height"
-msgstr ""
-
-#: formpopup.runlockautoheight
-msgctxt "formpopup.runlockautoheight"
-msgid "Unlock Height"
-msgstr ""
 
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
@@ -777,7 +777,7 @@ msgstr "Вы можаце падтрымаць распрацоўку адным
 
 #: tformpopuptrayslate.aapplyautoheight.caption
 msgid "Apply Auto Height"
-msgstr ""
+msgstr "Ужыць аўтавышыню"
 
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
@@ -787,7 +787,7 @@ msgstr "Капіяваць пераклад"
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
 msgid "Lock Height"
-msgstr ""
+msgstr "Заблакаваць вышыню"
 
 #: tformpopuptrayslate.anewtranslate.hint
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
@@ -797,17 +797,16 @@ msgstr "Новы пераклад"
 #: tformpopuptrayslate.asendtomainwindow.caption
 msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
 msgid "Send To Main Window"
-msgstr ""
+msgstr "Адправіць у галоўнае акно"
 
 #: tformpopuptrayslate.asendtomainwindow.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.asendtomainwindow.hint"
 msgid "Send source and translation to main window"
 msgstr "Адправіць зыходны і пераклад у галоўнае акно"
 
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
-msgstr ""
+msgstr "Памяняць моўную пару"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1332,7 +1331,7 @@ msgstr "Аўтакопія перакладу"
 #: tformtrayslate.afastautoheight.caption
 msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
-msgstr ""
+msgstr "Аўтавышыня ўсплывальнага акна"
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"

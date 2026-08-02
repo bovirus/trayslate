@@ -31,6 +31,11 @@ msgctxt "consts.renterparameter"
 msgid "Enter the required parameter"
 msgstr "Voer de vereiste parameter in"
 
+#: consts.rlockheight
+msgctxt "consts.rlockheight"
+msgid "Lock Height"
+msgstr "Hoogte vergrendelen"
+
 #: consts.rnoconfig
 msgctxt "consts.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
@@ -66,6 +71,11 @@ msgstr "Vertalen (Ctrl ¦ Shift + Enter, Triple Enter)"
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
 msgstr "Vertaling stoppen (Esc)"
+
+#: consts.runlockheight
+msgctxt "consts.runlockheight"
+msgid "Unlock Height"
+msgstr "Hoogte ontgrendelen"
 
 #: formconfig.rcaption
 msgctxt "formconfig.rcaption"
@@ -118,16 +128,6 @@ msgstr "Alleen cryptovaluta"
 #: formconfig.rvaluetype6
 msgid "Measurement Units"
 msgstr "Meeteenheden"
-
-#: formpopup.rlockautpheight
-msgctxt "formpopup.rlockautpheight"
-msgid "Lock Height"
-msgstr ""
-
-#: formpopup.runlockautoheight
-msgctxt "formpopup.runlockautoheight"
-msgid "Unlock Height"
-msgstr ""
 
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
@@ -777,7 +777,7 @@ msgstr "U kunt de ontwikkeling ondersteunen via een van de volgende opties:"
 
 #: tformpopuptrayslate.aapplyautoheight.caption
 msgid "Apply Auto Height"
-msgstr ""
+msgstr "Automatische hoogte toepassen"
 
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
@@ -787,7 +787,7 @@ msgstr "Vertaling kopiëren"
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
 msgid "Lock Height"
-msgstr ""
+msgstr "Hoogte vergrendelen"
 
 #: tformpopuptrayslate.anewtranslate.hint
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
@@ -797,17 +797,16 @@ msgstr "Nieuwe vertaling"
 #: tformpopuptrayslate.asendtomainwindow.caption
 msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
 msgid "Send To Main Window"
-msgstr ""
+msgstr "Naar hoofdvenster verzenden"
 
 #: tformpopuptrayslate.asendtomainwindow.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.asendtomainwindow.hint"
 msgid "Send source and translation to main window"
 msgstr "Bron en vertaling naar hoofdvenster sturen"
 
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
-msgstr ""
+msgstr "Taalpaar omwisselen"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1332,7 +1331,7 @@ msgstr "Vertaling automatisch kopiëren"
 #: tformtrayslate.afastautoheight.caption
 msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
-msgstr ""
+msgstr "Automatische pop-uphoogte"
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"

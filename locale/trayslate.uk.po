@@ -31,6 +31,11 @@ msgctxt "consts.renterparameter"
 msgid "Enter the required parameter"
 msgstr "Введіть обов’язковий параметр"
 
+#: consts.rlockheight
+msgctxt "consts.rlockheight"
+msgid "Lock Height"
+msgstr "Зафіксувати висоту"
+
 #: consts.rnoconfig
 msgctxt "consts.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
@@ -66,6 +71,11 @@ msgstr "Перекласти (Ctrl ¦ Shift + Enter, Triple Enter)"
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
 msgstr "Зупинити переклад (Esc)"
+
+#: consts.runlockheight
+msgctxt "consts.runlockheight"
+msgid "Unlock Height"
+msgstr "Зняти фіксацію висоти"
 
 #: formconfig.rcaption
 msgctxt "formconfig.rcaption"
@@ -118,16 +128,6 @@ msgstr "Лише криптовалюти"
 #: formconfig.rvaluetype6
 msgid "Measurement Units"
 msgstr "Одиниці вимірювання"
-
-#: formpopup.rlockautpheight
-msgctxt "formpopup.rlockautpheight"
-msgid "Lock Height"
-msgstr ""
-
-#: formpopup.runlockautoheight
-msgctxt "formpopup.runlockautoheight"
-msgid "Unlock Height"
-msgstr ""
 
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
@@ -777,7 +777,7 @@ msgstr "Ви можете підтримати розробку одним із 
 
 #: tformpopuptrayslate.aapplyautoheight.caption
 msgid "Apply Auto Height"
-msgstr ""
+msgstr "Застосувати автовисоту"
 
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
@@ -787,7 +787,7 @@ msgstr "Копіювати переклад"
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
 msgid "Lock Height"
-msgstr ""
+msgstr "Зафіксувати висоту"
 
 #: tformpopuptrayslate.anewtranslate.hint
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
@@ -797,17 +797,16 @@ msgstr "Новий переклад"
 #: tformpopuptrayslate.asendtomainwindow.caption
 msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
 msgid "Send To Main Window"
-msgstr ""
+msgstr "Надіслати до головного вікна"
 
 #: tformpopuptrayslate.asendtomainwindow.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.asendtomainwindow.hint"
 msgid "Send source and translation to main window"
 msgstr "Надіслати джерело та переклад у головне вікно"
 
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
-msgstr ""
+msgstr "Поміняти мовну пару"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1332,7 +1331,7 @@ msgstr "Автокопіювання перекладу"
 #: tformtrayslate.afastautoheight.caption
 msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
-msgstr ""
+msgstr "Автовисота спливного вікна"
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"

@@ -32,6 +32,11 @@ msgctxt "consts.renterparameter"
 msgid "Enter the required parameter"
 msgstr "Inserisci il parametro richiesto"
 
+#: consts.rlockheight
+msgctxt "consts.rlockheight"
+msgid "Lock Height"
+msgstr "Blocca altezza"
+
 #: consts.rnoconfig
 msgctxt "consts.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
@@ -67,6 +72,11 @@ msgstr "Traduci (Ctrl ¦ Shift + Enter, Triple Enter)"
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
 msgstr "Interrompi traduzione (Esc)"
+
+#: consts.runlockheight
+msgctxt "consts.runlockheight"
+msgid "Unlock Height"
+msgstr "Sblocca altezza"
 
 #: formconfig.rcaption
 msgctxt "formconfig.rcaption"
@@ -123,16 +133,6 @@ msgstr "Solo valuta crypto"
 #: formconfig.rvaluetype6
 msgid "Measurement Units"
 msgstr "Unità di misura"
-
-#: formpopup.rlockautpheight
-msgctxt "formpopup.rlockautpheight"
-msgid "Lock Height"
-msgstr ""
-
-#: formpopup.runlockautoheight
-msgctxt "formpopup.runlockautoheight"
-msgid "Unlock Height"
-msgstr ""
 
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
@@ -787,7 +787,7 @@ msgstr "Puoi supportare lo sviluppo attraverso una delle seguenti opzioni:"
 
 #: tformpopuptrayslate.aapplyautoheight.caption
 msgid "Apply Auto Height"
-msgstr ""
+msgstr "Applica altezza automatica"
 
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
@@ -797,7 +797,7 @@ msgstr "Copia traduzione"
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
 msgid "Lock Height"
-msgstr ""
+msgstr "Blocca altezza"
 
 #: tformpopuptrayslate.anewtranslate.hint
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
@@ -807,17 +807,16 @@ msgstr "Nuova traduzione"
 #: tformpopuptrayslate.asendtomainwindow.caption
 msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
 msgid "Send To Main Window"
-msgstr ""
+msgstr "Invia alla finestra principale"
 
 #: tformpopuptrayslate.asendtomainwindow.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.asendtomainwindow.hint"
 msgid "Send source and translation to main window"
 msgstr "Invia sorgente e traduzione alla finestra principale"
 
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
-msgstr ""
+msgstr "Scambia coppia di lingue"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1342,7 +1341,7 @@ msgstr "Copia automatica traduzione"
 #: tformtrayslate.afastautoheight.caption
 msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
-msgstr ""
+msgstr "Altezza automatica del popup"
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"

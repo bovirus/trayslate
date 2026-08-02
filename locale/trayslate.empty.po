@@ -31,6 +31,11 @@ msgctxt "consts.renterparameter"
 msgid "Enter the required parameter"
 msgstr ""
 
+#: consts.rlockheight
+msgctxt "consts.rlockheight"
+msgid "Lock Height"
+msgstr ""
+
 #: consts.rnoconfig
 msgctxt "consts.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
@@ -65,6 +70,11 @@ msgstr ""
 
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
+msgstr ""
+
+#: consts.runlockheight
+msgctxt "consts.runlockheight"
+msgid "Unlock Height"
 msgstr ""
 
 #: formconfig.rcaption
@@ -117,16 +127,6 @@ msgstr ""
 
 #: formconfig.rvaluetype6
 msgid "Measurement Units"
-msgstr ""
-
-#: formpopup.rlockautpheight
-msgctxt "formpopup.rlockautpheight"
-msgid "Lock Height"
-msgstr ""
-
-#: formpopup.runlockautoheight
-msgctxt "formpopup.runlockautoheight"
-msgid "Unlock Height"
 msgstr ""
 
 #: formsettings.rapp

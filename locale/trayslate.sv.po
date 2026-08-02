@@ -31,6 +31,11 @@ msgctxt "consts.renterparameter"
 msgid "Enter the required parameter"
 msgstr "Ange den obligatoriska parametern"
 
+#: consts.rlockheight
+msgctxt "consts.rlockheight"
+msgid "Lock Height"
+msgstr "Lås höjd"
+
 #: consts.rnoconfig
 msgctxt "consts.rnoconfig"
 msgid "Configuration file not found! Create it in the configuration editor."
@@ -66,6 +71,11 @@ msgstr "Översätt (Ctrl ¦ Shift + Enter, Triple Enter)"
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
 msgstr "Stoppa översättning (Esc)"
+
+#: consts.runlockheight
+msgctxt "consts.runlockheight"
+msgid "Unlock Height"
+msgstr "Lås upp höjd"
 
 #: formconfig.rcaption
 msgctxt "formconfig.rcaption"
@@ -118,16 +128,6 @@ msgstr "Endast kryptovalutor"
 #: formconfig.rvaluetype6
 msgid "Measurement Units"
 msgstr "Måttenheter"
-
-#: formpopup.rlockautpheight
-msgctxt "formpopup.rlockautpheight"
-msgid "Lock Height"
-msgstr ""
-
-#: formpopup.runlockautoheight
-msgctxt "formpopup.runlockautoheight"
-msgid "Unlock Height"
-msgstr ""
 
 #: formsettings.rapp
 msgctxt "formsettings.rapp"
@@ -777,7 +777,7 @@ msgstr "Du kan stödja utvecklingen genom något av följande alternativ:"
 
 #: tformpopuptrayslate.aapplyautoheight.caption
 msgid "Apply Auto Height"
-msgstr ""
+msgstr "Använd automatisk höjd"
 
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
@@ -787,7 +787,7 @@ msgstr "Kopiera översättning"
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
 msgid "Lock Height"
-msgstr ""
+msgstr "Lås höjd"
 
 #: tformpopuptrayslate.anewtranslate.hint
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
@@ -797,17 +797,16 @@ msgstr "Ny översättning"
 #: tformpopuptrayslate.asendtomainwindow.caption
 msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
 msgid "Send To Main Window"
-msgstr ""
+msgstr "Skicka till huvudfönstret"
 
 #: tformpopuptrayslate.asendtomainwindow.hint
-#, fuzzy
 msgctxt "tformpopuptrayslate.asendtomainwindow.hint"
 msgid "Send source and translation to main window"
 msgstr "Skicka källa och översättning till huvudfönstret"
 
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
-msgstr ""
+msgstr "Byt språkpar"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1332,7 +1331,7 @@ msgstr "Kopiera översättning automatiskt"
 #: tformtrayslate.afastautoheight.caption
 msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
-msgstr ""
+msgstr "Automatisk popuphöjd"
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
