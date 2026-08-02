@@ -4166,11 +4166,11 @@ begin
 
   // Detect language in source memo
   if BuiltInDetect then
-    langDetect := DetectLanguageForText(AText.ExtractTextSample(5000))
+    langDetect := DetectLanguageSafe(AText.ExtractTextSample(5000))
   else
     langDetect := LowerCase(TranslateThread(TransDetect, AText.ExtractTextSample));
 
-  if FCancelled or (langDetect = string.Empty) or (Length(langDetect) > 5) then Exit;
+  if FCancelled or (langDetect = string.Empty) or (Length(langDetect) > 5) or (langDetect = UNKNOWN) then Exit;
 
   langPrimary := LowerCase(PrimaryLang);
   langSecondary := LowerCase(SecondaryLang);
