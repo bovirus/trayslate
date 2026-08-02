@@ -105,10 +105,6 @@ type
 var
   formPopupTrayslate: TformPopupTrayslate;
 
-resourcestring
-  rlockautpheight = 'Lock Height';
-  runlockautoheight = 'Unlock Height';
-
 implementation
 
 uses Consts, mainform, formsettings, localize, darkutils, controlshelper, pascalutils;
@@ -141,7 +137,7 @@ begin
   FInWindow := False;
 
   aFastAutoHeight.ImageIndex := iif(formTrayslate.AutoHeight, 19, 18);
-  aFastAutoHeight.Caption := iif(formTrayslate.AutoHeight, rlockautpheight, runlockautoheight);
+  aFastAutoHeight.Caption := iif(formTrayslate.AutoHeight, rlockheight, runlockheight);
 
   UpdateControlsVisibility;
 end;
@@ -239,7 +235,7 @@ begin
     formTrayslate.AdjustPopupHeight(MemoTarget.Text);
 
   aFastAutoHeight.ImageIndex := iif(Check, 19, 18);
-  aFastAutoHeight.Caption := iif(Check, rlockautpheight, runlockautoheight);
+  aFastAutoHeight.Caption := iif(Check, rlockheight, runlockheight);
 end;
 
 procedure TformPopupTrayslate.aMenuExecute(Sender: TObject);

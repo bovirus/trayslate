@@ -4831,7 +4831,7 @@ begin
     if not TLocalize.ApplicationTranslate(APP_NAME, Language, nil, PoText) then
       Language := DEFAULT_LANG;
 
-    TLocalize.UpdatePackageTranslations(APP_NAME, 'checkupdates', Language);
+    TLocalize.UpdatePackageTranslations(APP_NAME, 'checkupdates', Language, ['checkupdates']);
   end;
 
   UpdateAutoDetect(OldAutoDetect, rautodetect);

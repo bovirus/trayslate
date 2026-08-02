@@ -26,18 +26,6 @@ const
 
   { Main Form }
 
-resourcestring
-  rswap = 'Swap (%s) with text (%s)';
-  rtranslate = 'Translate (Ctrl ¦ Shift + Enter, Triple Enter)';
-  rtranslatestop = 'Stop Translation (Esc)';
-  rnoconfig = 'Configuration file not found! Create it in the configuration editor.';
-  rtoremovepair = ' to remove pair';
-  rremovepair = 'Are you sure you want to remove the pair "%s"?';
-  ropenpofiletr = 'Language File (*.po)|*.po';
-  renter = 'Enter';
-  renterparameter = 'Enter the required parameter';
-  rautodetect = 'Auto Detect';
-
 const
   DOUBLE_ENTER_INTERVAL = 200; // ms
   HOTKEY_INTERVAL = 500; // ms
@@ -55,6 +43,24 @@ const
   DEF_FONT = 'Tahoma';
   DEF_NA = 'N/A';
   DEF_AUTO = '*';
+
+resourcestring
+  rswap = 'Swap (%s) with text (%s)';
+  rtranslate = 'Translate (Ctrl ¦ Shift + Enter, Triple Enter)';
+  rtranslatestop = 'Stop Translation (Esc)';
+  rnoconfig = 'Configuration file not found! Create it in the configuration editor.';
+  rtoremovepair = ' to remove pair';
+  rremovepair = 'Are you sure you want to remove the pair "%s"?';
+  ropenpofiletr = 'Language File (*.po)|*.po';
+  renter = 'Enter';
+  renterparameter = 'Enter the required parameter';
+  rautodetect = 'Auto Detect';
+
+  { Form Popup }
+
+resourcestring
+  rlockheight = 'Lock Height';
+  runlockheight = 'Unlock Height';
 
 implementation
 
