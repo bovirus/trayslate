@@ -2640,7 +2640,7 @@ begin
   FRealTime := False;
   FRealTimeDelay := 1000;
   FAutoSwap := False;
-  FBuiltInDetect := False;
+  FBuiltInDetect := True;
   FSmartSwap := False;
   FSmartHard := False;
   FPrimaryLang := TLocalize.GetOSLanguage;
