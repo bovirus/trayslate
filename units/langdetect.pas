@@ -9,7 +9,7 @@
 //  found in an external binary file (langprofiles.dat).  Profiles from the
 //  file overwrite defaults for matching language codes; new codes are added.
 //  Public functions:
-//    function DetectLanguageForText(const AText: string): string;
+//    function DetectLanguageSafe(const AText: string; ACurrentLang: string = string.Empty; MinConfidence: double = 0.5): string;
 //    function DetectLanguageWithConfidence(const AText: string; out Confidence: Double): string;
 //  Cross-platform: Windows, Linux, macOS.  Lazarus / FPC 3.2.2+
 //-----------------------------------------------------------------------------------
@@ -18,6 +18,7 @@ unit langdetect;
 
 {$mode objfpc}{$H+}
 {$codepage utf8}
+{$DEFINE USE_BINARY_SEARCH}
 
 interface
 
@@ -34,13 +35,20 @@ type
   TStringArray = array of string;
   TWordWeightArray = array of word;   // dynamic array for word weights
 
+  TTrigEntry = record
+    Trig: string;
+    Weight: word;
+  end;
+
   TProfile = record
     Code: string;
-    Trigrams: TStringArray;   // sorted by frequency, most frequent first
-    Freqs: array of word;     // corresponding frequency values (same order)
-    Wrds: TStringArray;       // top frequent words (renamed to avoid conflict with 'Word')
-    WrdFreqs: TWordWeightArray; // positional weights for words
-    Priority: word;           // lower = more common, used for tie‑breaking
+    Trigrams: TStringArray;    // sorted by frequency, most frequent first
+    Freqs: array of word;      // corresponding frequency values (same order)
+    Wrds: TStringArray;        // top frequent words (renamed to avoid conflict with 'Word')
+    WrdFreqs: TWordWeightArray;// positional weights for words
+    Priority: word;            // lower = more common, used for tie-breaking
+    // Sorted list for binary search (only when USE_BINARY_SEARCH = 1)
+    SortedTrigrams: array of TTrigEntry;
   end;
 
   TScriptType = (
@@ -120,7 +128,7 @@ function ExtractCharTrigrams(const AText: string): TStringArray;
 // If a current language is provided and confidence is below MinConfidence
 // but above 0.30, the result will still be accepted if the script of the
 // detected language differs from the script of the current language.
-function DetectLanguageSafe(const AText: string; ACurrentLang: string = ''; MinConfidence: double = 0.5): string;
+function DetectLanguageSafe(const AText: string; ACurrentLang: string = string.Empty; MinConfidence: double = 0.5): string;
 
 // Returns language code (e.g. 'en', 'ru') or UNKNOWN
 function DetectLanguageForText(const AText: string): string;
@@ -128,10 +136,14 @@ function DetectLanguageForText(const AText: string): string;
 // Also returns a confidence value between 0.0 and 1.0
 function DetectLanguageWithConfidence(const AText: string; out Confidence: double): string;
 
+// Public wrapper for file-based loading
+procedure MergeProfilesFromFile(const FileName: string);
+
 implementation
 
 {%Region -fold Private Methods}
 
+// Script detection by text
 function DetectScript(const Txt: string): TScriptInfo;
 const
   SAMPLE_SIZE = 300;
@@ -401,7 +413,7 @@ end;
 // No language-specific fast rules here – all of that is now in ApplyPostCorrection.
 function QuickScriptDetection(const AText: string; var Info: TScriptInfo; var Script: TScriptType; out Confidence: double): string;
 begin
-  Result := '';          // we never exit early with a language code
+  Result := string.Empty;          // we never exit early with a language code
   Confidence := 0.0;
   Info := DetectScript(AText);
   Script := Info.Script;
@@ -429,7 +441,7 @@ var
   cp: UCS4Char;
   CharLen: integer;
 begin
-  if s = '' then Exit(False);
+  if s = string.Empty then Exit(False);
   CharLen := 0;
   cp := UTF8CodepointToUnicode(@s[1], CharLen);
   Result :=
@@ -531,8 +543,8 @@ function IsLanguageMatchingScript(const Code: string; Script: TScriptType): bool
 begin
   case Script of
     stLatin:
-      // All languages EXCEPT those that normally use a non‑Latin script.
-      // This list covers all major non‑Latin languages and their script‑specific codes.
+      // All languages EXCEPT those that normally use a non-Latin script.
+      // This list covers all major non-Latin languages and their script-specific codes.
       Result := not (
         // Cyrillic (incl. many languages of Russia, Central Asia, etc.)
         (Code = 'ru') or (Code = 'uk') or (Code = 'be') or (Code = 'bg') or (Code = 'sr') or (Code = 'mk') or
@@ -669,7 +681,7 @@ end;
 
 // Returns a priority value for a language code.
 // Lower value = more widely spoken / higher base frequency.
-// Used for tie‑breaking on very short texts.
+// Used for tie-breaking on very short texts.
 function GetLanguagePriority(const Code: string): word;
 begin
   case Code of
@@ -788,42 +800,88 @@ begin
 end;
 
 // Post-correction for language pairs that trigrams alone have trouble separating.
-// Only fires when the current best guess belongs to one of the problematic pairs,
-// and then uses unique characters or high-frequency words to decide.
+// Optimized: fixed HasWord boundaries bug and reduced repetitive blocks via array helpers.
 procedure ApplyPostCorrection(var Code: string; var Confidence: double; const AText: string);
 var
   TwScore, CnScore: integer;
+  hrScore, bsScore, srScore: integer;
+  tnMarkers, nsMarkers: integer;
 
-// Check if a word exists with word boundaries (space or start/end of string).
-  function HasWord(const word: string): boolean;
+// Checks if a word exists with boundaries, correctly handling multiple occurrences
+  function HasWord(const word: string): boolean; overload;
   var
-    p, len: integer;
+    P, StartPos, Len: integer;
+// Check if character is alphanumeric (basic Latin letters and digits)
+    function IsAlphaNum(c: char): boolean;
+    begin
+      Result := ((c >= 'a') and (c <= 'z')) or ((c >= 'A') and (c <= 'Z')) or ((c >= '0') and (c <= '9'));
+    end;
+
   begin
     Result := False;
-    len := Length(word);
-    if len = 0 then Exit;
-    p := Pos(word, AText);
-    if p = 0 then Exit;
-    // Check left boundary
-    if (p > 1) and (AText[p - 1] <> ' ') then Exit;
-    // Check right boundary
-    if (p + len <= Length(AText)) and (AText[p + len] <> ' ') then Exit;
-    Result := True;
+    Len := Length(word);
+    if Len = 0 then Exit;
+    StartPos := 1;
+    while True do
+    begin
+      P := Pos(word, AText, StartPos);
+      if P = 0 then Exit;
+      // Check boundaries: word should be surrounded by non-alphanumeric characters or text boundaries
+      if ((P = 1) or not IsAlphaNum(AText[P - 1])) and ((P + Len > Length(AText)) or not IsAlphaNum(AText[P + Len])) then
+        Exit(True);
+      StartPos := P + Len;
+    end;
+  end;
+
+  // Helper to check if ANY of the words exist
+  function HasWord(const Words: array of string): boolean; overload;
+  var
+    I: integer;
+  begin
+    for I := Low(Words) to High(Words) do
+      if HasWord(Words[I]) then Exit(True);
+    Result := False;
+  end;
+
+  // Helper to check if ANY of the substrings/chars exist
+  function HasChar(const Chars: array of string): boolean;
+  var
+    I: integer;
+  begin
+    for I := Low(Chars) to High(Chars) do
+      if Pos(Chars[I], AText) > 0 then Exit(True);
+    Result := False;
+  end;
+
+  // Counters for scoring mechanisms
+  function CountChars(const Chars: array of string): integer;
+  var
+    I: integer;
+  begin
+    Result := 0;
+    for I := Low(Chars) to High(Chars) do
+      if Pos(Chars[I], AText) > 0 then Inc(Result);
+  end;
+
+  function CountWords(const Words: array of string): integer;
+  var
+    I: integer;
+  begin
+    Result := 0;
+    for I := Low(Words) to High(Words) do
+      if HasWord(Words[I]) then Inc(Result);
   end;
 
 begin
-  // ----------Norwegian vs Danish vs Swedish----------
+  {%Region -fold Norwegian vs Danish vs Swedish}
   if (Code = 'no') or (Code = 'da') or (Code = 'sv') then
   begin
-    // Swedish unique letters
-    if (Pos('ä', AText) > 0) or (Pos('ö', AText) > 0) then
+    if HasChar(['ä', 'ö']) then
     begin
       Code := 'sv';
       Confidence := 1.0;
       Exit;
     end;
-
-    // Norwegian nynorsk marker (very strong)
     if HasWord('ikkje') then
     begin
       Code := 'no';
@@ -831,50 +889,41 @@ begin
       Exit;
     end;
 
-    // Danish strong marker
     if HasWord('ikke') then
     begin
-      // Both Norwegian Bokmål and Danish use 'ikke', so look for other clues
-      if HasWord('jeg') or HasWord('mig') or HasWord('dig') or HasWord('jer') or HasWord('af') then
+      if HasWord(['jeg', 'mig', 'dig', 'jer', 'af']) then
       begin
         Code := 'da';
         Confidence := 1.0;
         Exit;
       end
-      else if HasWord('meg') or HasWord('deg') or HasWord('dere') or HasWord('av') then
+      else if HasWord(['meg', 'deg', 'dere', 'av']) then
       begin
         Code := 'no';
         Confidence := 1.0;
         Exit;
       end;
-      // If only 'ikke' is present, keep the trigram result (could be either).
     end;
 
-    // Swedish common words
-    if HasWord('och') or HasWord('är') or HasWord('inte') or HasWord('att') then
+    if HasWord(['och', 'är', 'inte', 'att']) then
     begin
       Code := 'sv';
       Confidence := 1.0;
       Exit;
     end;
-
-    // Norwegian common words
-    if HasWord('meg') or HasWord('deg') or HasWord('dere') or HasWord('av') or HasWord('bruker') then
+    if HasWord(['meg', 'deg', 'dere', 'av', 'bruker']) then
     begin
       Code := 'no';
       Confidence := 1.0;
       Exit;
     end;
-
-    // Danish common words
-    if HasWord('mig') or HasWord('dig') or HasWord('jer') or HasWord('af') or HasWord('bruger') then
+    if HasWord(['mig', 'dig', 'jer', 'af', 'bruger']) then
     begin
       Code := 'da';
       Confidence := 1.0;
       Exit;
     end;
 
-    // Fallback: if 'jeg' appears, it's likely Norwegian Bokmål (jeg is rare in Danish)
     if HasWord('jeg') then
     begin
       Code := 'no';
@@ -882,177 +931,213 @@ begin
       Exit;
     end;
   end;
+  {%EndRegion}
 
-  // ----------Xhosa vs Zulu----------
+  {%Region -fold Xhosa vs Zulu}
   if (Code = 'xh') or (Code = 'zu') then
   begin
-    // Xhosa markers
-    if HasWord('xh') or HasWord('kwaye') or HasWord('umntu') or HasWord('ngoku') or HasWord('kwa') or
-      HasWord('xa') or HasWord('ndi') then
+    if CountWords(['ukuba', 'umntu', 'isixhosa', 'kwaye', 'ngoku', 'kwa', 'xa', 'ndi']) >
+      CountWords(['ukuthi', 'umuntu', 'isizulu', 'kanti', 'yena', 'lapha', 'yini', 'lona']) + 1 then
     begin
       Code := 'xh';
-      Confidence := 1.0;
+      Confidence := 0.95;
       Exit;
     end;
-    // Zulu markers
-    if HasWord('zu') or HasWord('ngi') or HasWord('uku') or HasWord('kanti') or HasWord('yena') or
-      HasWord('lapha') or HasWord('yini') or HasWord('nini') or HasWord('lona') then
+    if CountWords(['ukuthi', 'umuntu', 'isizulu', 'kanti', 'yena', 'lapha', 'yini', 'lona']) >
+      CountWords(['ukuba', 'umntu', 'isixhosa', 'kwaye', 'ngoku', 'kwa', 'xa', 'ndi']) + 1 then
     begin
       Code := 'zu';
-      Confidence := 1.0;
-      Exit;
-    end;
-    // If no marker found, reduce confidence
-    Confidence := 0.45;
-  end;
-
-  // ---------- Assamese vs Bengali (share Bengali script) ----------
-  if (Code = 'as') or (Code = 'bn') then
-  begin
-    // Assamese-only letters
-    if (Pos('ৰ', AText) > 0) or (Pos('ৱ', AText) > 0) then
-    begin
-      Code := 'as';
-      Confidence := 1.0;
-      Exit;
-    end;
-
-    // Bengali-only letter
-    if Pos('য়', AText) > 0 then
-    begin
-      Code := 'bn';
-      Confidence := 1.0;
-      Exit;
-    end;
-
-    // Frequent Assamese words
-    if (Pos('যিটো', AText) > 0) or (Pos('তেওঁ', AText) > 0) or (Pos('আৰু', AText) > 0) or
-      (Pos('এটা', AText) > 0) or (Pos('কৰি', AText) > 0) or (Pos('কৰা', AText) > 0) then
-    begin
-      Code := 'as';
       Confidence := 0.95;
       Exit;
     end;
-
-    // Frequent Bengali words
-    if (Pos('যেটা', AText) > 0) or (Pos('এবং', AText) > 0) or (Pos('আমি', AText) > 0) or
-      (Pos('তিনি', AText) > 0) or (Pos('করতে', AText) > 0) or (Pos('করেছে', AText) > 0) then
-    begin
-      Code := 'bn';
-      Confidence := 0.95;
-      Exit;
-    end;
-
-    Confidence := 0.45;
+    // No clear winner – keep original code with reduced confidence
+    Confidence := 0.55;
   end;
+  {%EndRegion}
 
-  // ----------Bosnian / Croatian / Serbian (Latin script)----------
-  if (Code = 'bs') or (Code = 'hr') or (Code = 'sr') then
+  {%Region -fold Kurdish vs Turkish, Hausa and others}
+  if (Code = 'ku') or (Code = 'tr') or (Code = 'ha') or (Code = 'id') then
   begin
-    // Croatian characteristic words
-    if HasWord('što') or HasWord('tko') then
+    // Kurdish must have at least one special letter + several typical words
+    if HasChar(['ê', 'î', 'û', 'Ê', 'Î', 'Û']) and
+      (CountWords(['xwe', 'heye', 'kirin', 'çawa', 'gelek', 'çend', 'hinek', 'rojbaş', 'baş']) >= 2) then
     begin
-      Code := 'hr';
-      Confidence := 0.95;
-      Exit;
-    end;
-    // Serbian/Bosnian characteristic words (may also appear in Croatian, but less often)
-    if HasWord('šta') or HasWord('ko') then
-    begin
-      // Cannot reliably distinguish Serbian from Bosnian without Cyrillic or more words,
-      // so we keep the trigram result but lower confidence slightly.
-      Confidence := 0.8;
-      Exit;
-    end;
-    // No markers found – decrease confidence to avoid false high certainty
-    Confidence := 0.6;
-  end;
-
-  // ----------Albanian vs Turkish----------
-  if (Code = 'sq') or (Code = 'tr') then
-  begin
-    // Albanian specific letter: ë (Turkish does not have)
-    if (Pos('ë', AText) > 0) then
-    begin
-      Code := 'sq';
+      Code := 'ku';
       Confidence := 1.0;
       Exit;
     end;
-    // Turkish specific letters
-    if (Pos('ı', AText) > 0) or (Pos('ş', AText) > 0) or (Pos('ğ', AText) > 0) then
+    if HasChar(['ı', 'ğ']) then
     begin
       Code := 'tr';
       Confidence := 1.0;
       Exit;
     end;
-    // If neither special character is present, lower confidence
+  end;
+  {%EndRegion}
+
+  {%Region -fold Assamese vs Bengali}
+  if (Code = 'as') or (Code = 'bn') then
+  begin
+    // Unique Assamese letter
+    if HasChar(['ৰ', 'ৱ']) then
+    begin
+      Code := 'as';
+      Confidence := 1.0;
+      Exit;
+    end;
+    // Unique Bengali letter
+    if HasChar(['য়']) then
+    begin
+      Code := 'bn';
+      Confidence := 1.0;
+      Exit;
+    end;
+
+    // Strong Bengali phrases (first)
+    if HasWord(['এবং', 'আমি', 'তিনি', 'করতে', 'করেছে', 'যেটা',
+      'দিয়ে', 'থেকে', 'বাংলা']) then
+    begin
+      Code := 'bn';
+      Confidence := 0.95;
+      Exit;
+    end;
+    // Strong Assamese phrases (only if Bengali not matched)
+    if HasWord(['আৰু', 'তেওঁ', 'এটা', 'কৰি', 'কৰা', 'যিটো', 'অসমীয়া']) then
+    begin
+      Code := 'as';
+      Confidence := 0.95;
+      Exit;
+    end;
+
+    Confidence := 0.45;
+  end;
+  {%EndRegion}
+
+  {%Region -fold Bosnian / Croatian / Serbian}
+  if (Code = 'bs') or (Code = 'hr') or (Code = 'sr') then
+  begin
+    // Croatian distinctive words (including very common "što"/"tko")
+    hrScore := 0;
+    if HasWord('što') then Inc(hrScore);
+    if HasWord('tko') then Inc(hrScore);
+    if HasWord('kruh') then Inc(hrScore);
+    if HasWord('sat') then Inc(hrScore);
+    if HasWord('tjedan') then Inc(hrScore);
+    if HasWord('otok') then Inc(hrScore);
+    if HasWord('zrak') then Inc(hrScore);
+    if HasWord('vlak') then Inc(hrScore);
+
+    // Bosnian distinctive words (Turkish/Arabic loanwords)
+    bsScore := 0;
+    if HasWord('kahva') then Inc(bsScore);
+    if HasWord('patka') then Inc(bsScore);
+    if HasWord('megdan') then Inc(bsScore);
+    if HasWord('dućan') then Inc(bsScore);
+    if HasWord('bajram') then Inc(bsScore);
+    if HasWord('pamuk') then Inc(bsScore);
+    if HasWord('šeher') then Inc(bsScore);
+    if HasWord('akšam') then Inc(bsScore);
+
+    // Serbian (ekavian/cyrillic)
+    srScore := 0;
+    if HasChar(['љ', 'њ', 'џ', 'ћ', 'ђ']) then srScore := 10; // very strong Cyrillic signal
+    if HasWord('voz') then Inc(srScore);
+    if HasWord('hleb') then Inc(srScore);
+    if HasWord('voziti') then Inc(srScore);
+    if HasWord('sneg') then Inc(srScore);
+    if HasWord('pevam') then Inc(srScore);
+
+    // Choose only if one language leads by at least 2 points
+    if (hrScore >= bsScore + 2) and (hrScore >= srScore + 2) then
+    begin
+      Code := 'hr';
+      Confidence := 0.95;
+      Exit;
+    end;
+    if (bsScore >= hrScore + 2) and (bsScore >= srScore + 2) then
+    begin
+      Code := 'bs';
+      Confidence := 0.95;
+      Exit;
+    end;
+    if (srScore >= hrScore + 2) and (srScore >= bsScore + 2) then
+    begin
+      Code := 'sr';
+      Confidence := 0.95;
+      Exit;
+    end;
+    // Otherwise keep the trigram result and lower confidence
+    Confidence := 0.60;
+  end;
+  {%EndRegion}
+
+  {%Region -fold Albanian vs Turkish}
+  if (Code = 'sq') or (Code = 'tr') then
+  begin
+    if HasChar(['ë']) then
+    begin
+      Code := 'sq';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ı', 'ş', 'ğ']) then
+    begin
+      Code := 'tr';
+      Confidence := 1.0;
+      Exit;
+    end;
     Confidence := 0.7;
   end;
+  {%EndRegion}
 
-  // ----------Sanskrit (Latin IAST) vs English----------
-  // Only boost confidence if diacritics present,
-  // otherwise trust trigrams (they already work well for 80-char texts).
+  {%Region -fold Sanskrit vs English}
   if (Code = 'sa') and (Confidence < 1.0) then
   begin
-    if (Pos('ā', AText) > 0) or (Pos('ī', AText) > 0) or (Pos('ū', AText) > 0) or (Pos('ṛ', AText) > 0) or
-      (Pos('ṣ', AText) > 0) or (Pos('ṃ', AText) > 0) or (Pos('ḥ', AText) > 0) then
+    if HasChar(['ā', 'ī', 'ū', 'ṛ', 'ṣ', 'ṃ', 'ḥ']) then
     begin
       Code := 'sa';
       Confidence := 1.0;
       Exit;
     end;
-    // No diacritics – leave trigram result unchanged.
   end;
+  {%EndRegion}
 
-  // ----------Cyrillic group: be, uk, ru, bg, mk, sr----------
+  {%Region -fold Cyrillic group: be, uk, ru, bg, mk, sr}
   if (Code = 'be') or (Code = 'uk') or (Code = 'ru') or (Code = 'bg') or (Code = 'mk') or (Code = 'sr') then
   begin
-    // Belarusian unique letter
-    if (Pos('ў', AText) > 0) or (Pos('Ў', AText) > 0) then
+    if HasChar(['ў', 'Ў']) then
     begin
       Code := 'be';
       Confidence := 1.0;
       Exit;
     end;
-
-    // Ukrainian unique letters
-    if (Pos('ї', AText) > 0) or (Pos('є', AText) > 0) or (Pos('ґ', AText) > 0) or (Pos('Ї', AText) > 0) or
-      (Pos('Є', AText) > 0) or (Pos('Ґ', AText) > 0) then
+    if HasChar(['ї', 'є', 'ґ', 'Ї', 'Є', 'Ґ']) then
     begin
       Code := 'uk';
       Confidence := 1.0;
       Exit;
     end;
-
-    // Macedonian unique letters (ѓ, ќ, ѕ)
-    if (Pos('ѓ', AText) > 0) or (Pos('ќ', AText) > 0) or (Pos('ѕ', AText) > 0) then
+    if HasChar(['ѓ', 'ќ', 'ѕ']) then
     begin
       Code := 'mk';
       Confidence := 1.0;
       Exit;
     end;
-
-    // Serbian unique letters (Cyrillic)
-    if (Pos('ђ', AText) > 0) or (Pos('ћ', AText) > 0) or (Pos('љ', AText) > 0) or (Pos('њ', AText) > 0) or
-      (Pos('џ', AText) > 0) or (Pos('Ђ', AText) > 0) or (Pos('Ћ', AText) > 0) or (Pos('Љ', AText) > 0) or
-      (Pos('Њ', AText) > 0) or (Pos('Џ', AText) > 0) then
+    if HasChar(['ђ', 'ћ', 'џ', 'Ђ', 'Ћ', 'Џ']) then
     begin
       Code := 'sr';
       Confidence := 1.0;
       Exit;
     end;
 
-    // 'ј' is a definitive sign of Serbian/Macedonian, NOT ru/be/uk/bg
-    if (Pos('ј', AText) > 0) then
+    if HasChar(['ј']) then
     begin
-      // If the current guess is any of ru/be/uk/bg, switch to sr immediately
       if (Code = 'ru') or (Code = 'be') or (Code = 'uk') or (Code = 'bg') then
       begin
         Code := 'sr';
-        Confidence := 1.0;   // 'ј' is a very strong signal
+        Confidence := 1.0;
         Exit;
       end;
-      // If it's already sr or mk, boost confidence
       if (Code = 'sr') or (Code = 'mk') then
       begin
         Confidence := 1.0;
@@ -1060,127 +1145,94 @@ begin
       end;
     end;
 
-    // Bulgarian strong marker: 'ъ' without Russian letters
-    if (Pos('ъ', AText) > 0) and (Pos('ы', AText) = 0) and (Pos('ё', AText) = 0) and (Pos('э', AText) = 0) then
+    if (Pos('ъ', AText) > 0) and not HasChar(['ы', 'ё', 'э']) then
     begin
       Code := 'bg';
       Confidence := 1.0;
       Exit;
     end;
 
-    // 'і' belongs to Ukrainian or Belarusian only
-    if (Pos('і', AText) > 0) or (Pos('І', AText) > 0) then
+    if HasChar(['і', 'І']) then
     begin
-      if (Pos('ы', AText) > 0) or (Pos('Ы', AText) > 0) then
-        Code := 'be'
+      if HasChar(['ы', 'Ы']) then Code := 'be'
       else
         Code := 'uk';
       Confidence := 1.0;
       Exit;
     end;
 
-    // Russian markers: 'ы', 'ё', 'э' – if present and no other specific letters, it's ru
-    if (Pos('ы', AText) > 0) or (Pos('ё', AText) > 0) or (Pos('э', AText) > 0) then
+    if HasChar(['ы', 'ё', 'э']) then
     begin
-      // If we wrongly had sr or mk, switch to ru
       if (Code = 'sr') or (Code = 'mk') then
       begin
         Code := 'ru';
         Confidence := 1.0;
         Exit;
       end;
-      if Code = 'ru' then
-        Confidence := 1.0;
-      // Do NOT exit – just boost confidence; if it's ru, we keep it
+      if Code = 'ru' then Confidence := 1.0;
     end;
 
-    // Lower confidence for sr and mk if no language-specific letters are present
-    if (Code = 'sr') and (Pos('ђ', AText) = 0) and (Pos('ћ', AText) = 0) and (Pos('љ', AText) = 0) and
-      (Pos('њ', AText) = 0) and (Pos('џ', AText) = 0) and (Pos('ј', AText) = 0) then
-      Confidence := 0.4;
-
-    if (Code = 'mk') and (Pos('ѓ', AText) = 0) and (Pos('ќ', AText) = 0) and (Pos('ѕ', AText) = 0) then
-      Confidence := 0.4;
+    if (Code = 'sr') and not HasChar(['ђ', 'ћ', 'џ', 'ј']) then Confidence := 0.4;
+    if (Code = 'mk') and not HasChar(['ѓ', 'ќ', 'ѕ']) then Confidence := 0.4;
   end;
+  {%EndRegion}
 
-  // ----------Spanish vs Galician vs Portuguese----------
+  {%Region -fold Spanish vs Galician vs Portuguese}
   if (Code = 'es') or (Code = 'gl') or (Code = 'pt') then
   begin
-    if (Pos('ç', AText) > 0) or (Pos('ão', AText) > 0) or (Pos('ção', AText) > 0) or (Pos('ções', AText) > 0) then
+    // Portuguese unique markers (cedilla, ão)
+    if HasChar(['ç', 'ão', 'ção', 'ções']) then
     begin
       Code := 'pt';
       Confidence := 1.0;
       Exit;
     end;
-    if HasWord('non') or HasWord('galego') or HasWord('nós') or HasWord('vós') or HasWord('unha') or
-      HasWord('dúas') or HasWord('ao') or HasWord('coa') then
+
+    // Galician markers – safe now because Portuguese was already ruled out.
+    // 'nós'/'vós' are Portuguese too, but only when Portuguese markers are missing
+    // (which we already checked) can they be considered Galician.
+    if HasWord(['galego', 'unha', 'dúas', 'nós', 'vós', 'ao', 'coa', 'non']) then
     begin
       Code := 'gl';
       Confidence := 1.0;
       Exit;
     end;
-    if (Pos('ñ', AText) > 0) or (Pos('¿', AText) > 0) or (Pos('¡', AText) > 0) then
+
+    // Spanish markers
+    if HasChar(['ñ', '¿', '¡']) then
     begin
       Code := 'es';
       Confidence := 1.0;
       Exit;
     end;
-  end;
 
-  // ----------Czech vs Slovak----------
+    // No distinctive feature – keep trigram result
+  end;
+  {%EndRegion}
+
+  {%Region -fold Czech vs Slovak}
   if (Code = 'cs') or (Code = 'sk') then
   begin
-    if (Pos('ä', AText) > 0) or (Pos('ô', AText) > 0) or (Pos('ŕ', AText) > 0) or (Pos('ĺ', AText) > 0) then
+    if HasChar(['ä', 'ô', 'ŕ', 'ĺ']) then
     begin
       Code := 'sk';
       Confidence := 1.0;
       Exit;
     end
-    else if (Pos('ř', AText) > 0) or (Pos('ů', AText) > 0) then
+    else if HasChar(['ř', 'ů']) then
     begin
       Code := 'cs';
       Confidence := 1.0;
       Exit;
     end;
   end;
+  {%EndRegion}
 
-  // ----------Chinese Simplified vs Traditional----------
+  {%Region -fold Chinese Simplified vs Traditional}
   if (Code = 'zh-CN') or (Code = 'zh-TW') then
   begin
-    TwScore := 0;
-    CnScore := 0;
-
-    Inc(TwScore, Ord(Pos('國', AText) > 0));
-    Inc(TwScore, Ord(Pos('體', AText) > 0));
-    Inc(TwScore, Ord(Pos('門', AText) > 0));
-    Inc(TwScore, Ord(Pos('機', AText) > 0));
-    Inc(TwScore, Ord(Pos('關', AText) > 0));
-    Inc(TwScore, Ord(Pos('開', AText) > 0));
-    Inc(TwScore, Ord(Pos('電', AText) > 0));
-    Inc(TwScore, Ord(Pos('學', AText) > 0));
-    Inc(TwScore, Ord(Pos('說', AText) > 0));
-    Inc(TwScore, Ord(Pos('這', AText) > 0));
-    Inc(TwScore, Ord(Pos('個', AText) > 0));
-    Inc(TwScore, Ord(Pos('為', AText) > 0));
-    Inc(TwScore, Ord(Pos('與', AText) > 0));
-    Inc(TwScore, Ord(Pos('實', AText) > 0));
-    Inc(TwScore, Ord(Pos('歡', AText) > 0));
-
-    Inc(CnScore, Ord(Pos('国', AText) > 0));
-    Inc(CnScore, Ord(Pos('体', AText) > 0));
-    Inc(CnScore, Ord(Pos('门', AText) > 0));
-    Inc(CnScore, Ord(Pos('机', AText) > 0));
-    Inc(CnScore, Ord(Pos('关', AText) > 0));
-    Inc(CnScore, Ord(Pos('开', AText) > 0));
-    Inc(CnScore, Ord(Pos('电', AText) > 0));
-    Inc(CnScore, Ord(Pos('学', AText) > 0));
-    Inc(CnScore, Ord(Pos('说', AText) > 0));
-    Inc(CnScore, Ord(Pos('这', AText) > 0));
-    Inc(CnScore, Ord(Pos('个', AText) > 0));
-    Inc(CnScore, Ord(Pos('为', AText) > 0));
-    Inc(CnScore, Ord(Pos('与', AText) > 0));
-    Inc(CnScore, Ord(Pos('实', AText) > 0));
-    Inc(CnScore, Ord(Pos('欢', AText) > 0));
+    TwScore := CountChars(['國', '體', '門', '機', '關', '開', '電', '學', '說', '這', '個', '為', '與', '實', '歡']);
+    CnScore := CountChars(['国', '体', '门', '机', '关', '开', '电', '学', '说', '这', '个', '为', '与', '实', '欢']);
 
     if TwScore > CnScore then
     begin
@@ -1195,404 +1247,255 @@ begin
       Exit;
     end;
   end;
+  {%EndRegion}
 
-  // ----------Esperanto vs Khmer (Latin)----------
+  {%Region -fold Esperanto vs Khmer}
   if (Code = 'eo') or (Code = 'km') then
   begin
-    // Esperanto unique letters
-    if (Pos('ĉ', AText) > 0) or (Pos('ĝ', AText) > 0) or (Pos('ĥ', AText) > 0) or (Pos('ĵ', AText) > 0) or
-      (Pos('ŝ', AText) > 0) or (Pos('ŭ', AText) > 0) then
+    if HasChar(['ĉ', 'ĝ', 'ĥ', 'ĵ', 'ŝ', 'ŭ']) then
     begin
       Code := 'eo';
       Confidence := 1.0;
       Exit;
     end;
-    // Common Esperanto words
-    if HasWord('kaj') or HasWord('estas') or HasWord('estis') or HasWord('de') or HasWord('la') or HasWord('al') or HasWord('ke') then
+    if HasWord(['kaj', 'estas', 'estis', 'de', 'la', 'al', 'ke']) then
     begin
       Code := 'eo';
       Confidence := 0.95;
       Exit;
     end;
-    // If trigrams chose eo but no markers found, switch to km with moderate confidence
     if Code = 'eo' then
     begin
       Code := 'km';
       Confidence := 0.7;
       Exit;
     end;
-    // If trigrams chose km and no eo markers, boost km confidence slightly
-    if Code = 'km' then
-      Confidence := 0.8;
+    if Code = 'km' then Confidence := 0.8;
   end;
+  {%EndRegion}
 
-  // ----------Uzbek vs Guarani----------
+  {%Region -fold Uzbek vs Guarani}
   if (Code = 'uz') or (Code = 'gn') then
   begin
-    // Guarani uses tilde letters
-    if (Pos('ñ', AText) > 0) or (Pos('ã', AText) > 0) or (Pos('ẽ', AText) > 0) or (Pos('ĩ', AText) > 0) or
-      (Pos('õ', AText) > 0) or (Pos('ũ', AText) > 0) then
+    if HasChar(['ñ', 'ã', 'ẽ', 'ĩ', 'õ', 'ũ']) then
     begin
       Code := 'gn';
       Confidence := 1.0;
       Exit;
     end;
-    // Uzbek uses apostrophes (U+2018, U+02BC) after o and g
-    if (Pos('‘', AText) > 0) or (Pos('ʼ', AText) > 0) then
+    if HasChar(['‘', 'ʼ']) then
     begin
       Code := 'uz';
       Confidence := 1.0;
       Exit;
     end;
-    // No special chars – lower confidence
     Confidence := 0.5;
   end;
+  {%EndRegion}
 
-  // ----------Thai vs English----------
-  if (Code = 'en') and (Pos('ก', AText) > 0) then  // any Thai character (ก is common)
+  {%Region -fold Latin-script languages with unique letters vs English}
+  if Code = 'en' then
   begin
-    Code := 'th';
-    Confidence := 1.0;
-    Exit;
-  end;
-end;
-
-// Special correction for very short texts (< SHORT_TEXT_THRESHOLD chars)
-// Uses unique characters to override the priority guess for many languages
-procedure ApplyShortTextCorrection(var Code: string; var Confidence: double; const AText: string);
-var
-  HasAeOe, HasAa, HasUmlaut, HasI, HasY, HasHardSign, HasRus: boolean;
-begin
-  // Asian scripts based on highly frequent characters
-  if (Pos('の', AText) > 0) or (Pos('に', AText) > 0) or (Pos('は', AText) > 0) or (Pos('を', AText) > 0) or
-    (Pos('だ', AText) > 0) then
-  begin
-    Code := 'ja';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  if (Pos('다', AText) > 0) or (Pos('요', AText) > 0) or (Pos('는', AText) > 0) or (Pos('이', AText) > 0) or
-    (Pos('가', AText) > 0) then
-  begin
-    Code := 'ko';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  if (Pos('的', AText) > 0) or (Pos('是', AText) > 0) or (Pos('我', AText) > 0) or (Pos('不', AText) > 0) or
-    (Pos('在', AText) > 0) then
-  begin
-    Code := 'zh-CN';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Thai script
-  if (Pos('ก', AText) > 0) or (Pos('ข', AText) > 0) or (Pos('ค', AText) > 0) or (Pos('ง', AText) > 0) then
-  begin
-    Code := 'th';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Georgian script
-  if (Pos('ა', AText) > 0) or (Pos('ბ', AText) > 0) or (Pos('გ', AText) > 0) or (Pos('დ', AText) > 0) then
-  begin
-    Code := 'ka';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Armenian script
-  if (Pos('ա', AText) > 0) or (Pos('բ', AText) > 0) or (Pos('գ', AText) > 0) or (Pos('դ', AText) > 0) then
-  begin
-    Code := 'hy';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Amharic script
-  if (Pos('አ', AText) > 0) or (Pos('በ', AText) > 0) or (Pos('የ', AText) > 0) or (Pos('መ', AText) > 0) then
-  begin
-    Code := 'am';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Persian specific letters
-  if (Pos('پ', AText) > 0) or (Pos('چ', AText) > 0) or (Pos('ژ', AText) > 0) or (Pos('گ', AText) > 0) then
-  begin
-    Code := 'fa';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Urdu specific letters
-  if (Pos('ٹ', AText) > 0) or (Pos('ڈ', AText) > 0) or (Pos('ڑ', AText) > 0) or (Pos('ں', AText) > 0) or (Pos('ے', AText) > 0) then
-  begin
-    Code := 'ur';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Azerbaijani unique letters
-  if (Pos('ə', AText) > 0) or (Pos('Ə', AText) > 0) then
-  begin
-    Code := 'az';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Esperanto unique letters
-  if (Pos('ĉ', AText) > 0) or (Pos('ĝ', AText) > 0) or (Pos('ĥ', AText) > 0) or (Pos('ĵ', AText) > 0) or
-    (Pos('ŝ', AText) > 0) or (Pos('ŭ', AText) > 0) or (Pos('Ĉ', AText) > 0) or (Pos('Ĝ', AText) > 0) or
-    (Pos('Ĥ', AText) > 0) or (Pos('Ĵ', AText) > 0) or (Pos('Ŝ', AText) > 0) or (Pos('Ŭ', AText) > 0) then
-  begin
-    Code := 'eo';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Welsh specific letters
-  if (Pos('ŵ', AText) > 0) or (Pos('ŷ', AText) > 0) or (Pos('Ŵ', AText) > 0) or (Pos('Ŷ', AText) > 0) then
-  begin
-    Code := 'cy';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Latvian specific letters
-  if (Pos('ā', AText) > 0) or (Pos('ē', AText) > 0) or (Pos('ī', AText) > 0) or (Pos('ū', AText) > 0) or
-    (Pos('ģ', AText) > 0) or (Pos('ķ', AText) > 0) or (Pos('ļ', AText) > 0) or (Pos('ņ', AText) > 0) or
-    (Pos('Ā', AText) > 0) or (Pos('Ē', AText) > 0) or (Pos('Ī', AText) > 0) or (Pos('Ū', AText) > 0) then
-  begin
-    Code := 'lv';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Lithuanian specific letters
-  if (Pos('ė', AText) > 0) or (Pos('į', AText) > 0) or (Pos('ų', AText) > 0) or (Pos('Ė', AText) > 0) or
-    (Pos('Į', AText) > 0) or (Pos('Ų', AText) > 0) then
-  begin
-    Code := 'lt';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Polish unique letters
-  if (Pos('ą', AText) > 0) or (Pos('ć', AText) > 0) or (Pos('ę', AText) > 0) or (Pos('ł', AText) > 0) or
-    (Pos('ń', AText) > 0) or (Pos('ó', AText) > 0) or (Pos('ś', AText) > 0) or (Pos('ź', AText) > 0) or
-    (Pos('ż', AText) > 0) or (Pos('Ą', AText) > 0) or (Pos('Ć', AText) > 0) or (Pos('Ę', AText) > 0) or
-    (Pos('Ł', AText) > 0) or (Pos('Ń', AText) > 0) or (Pos('Ó', AText) > 0) or (Pos('Ś', AText) > 0) or
-    (Pos('Ź', AText) > 0) or (Pos('Ż', AText) > 0) then
-  begin
-    Code := 'pl';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Turkish unique letters
-  if (Pos('ğ', AText) > 0) or (Pos('ı', AText) > 0) or (Pos('İ', AText) > 0) or (Pos('ş', AText) > 0) or
-    (Pos('Ğ', AText) > 0) or (Pos('Ş', AText) > 0) then
-  begin
-    Code := 'tr';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Hungarian exclusive letters
-  if (Pos('ő', AText) > 0) or (Pos('ű', AText) > 0) or (Pos('Ő', AText) > 0) or (Pos('Ű', AText) > 0) then
-  begin
-    Code := 'hu';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Spanish exclusive letters
-  if (Pos('ñ', AText) > 0) or (Pos('Ñ', AText) > 0) or (Pos('¿', AText) > 0) or (Pos('¡', AText) > 0) then
-  begin
-    Code := 'es';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Romanian letters
-  if (Pos('ă', AText) > 0) or (Pos('ș', AText) > 0) or (Pos('ț', AText) > 0) or (Pos('Ă', AText) > 0) or
-    (Pos('Ș', AText) > 0) or (Pos('Ț', AText) > 0) then
-  begin
-    Code := 'ro';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Czech letters
-  if (Pos('ř', AText) > 0) or (Pos('ů', AText) > 0) or (Pos('ě', AText) > 0) or (Pos('Ř', AText) > 0) or
-    (Pos('Ů', AText) > 0) or (Pos('Ě', AText) > 0) then
-  begin
-    Code := 'cs';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Slovak letters
-  if (Pos('ô', AText) > 0) or (Pos('ŕ', AText) > 0) or (Pos('ĺ', AText) > 0) or (Pos('Ô', AText) > 0) or
-    (Pos('Ŕ', AText) > 0) or (Pos('Ĺ', AText) > 0) then
-  begin
-    Code := 'sk';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Icelandic letters
-  if (Pos('þ', AText) > 0) or (Pos('ð', AText) > 0) or (Pos('Þ', AText) > 0) or (Pos('Ð', AText) > 0) then
-  begin
-    Code := 'is';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Vietnamese letters
-  if (Pos('đ', AText) > 0) or (Pos('ơ', AText) > 0) or (Pos('ư', AText) > 0) or (Pos('Đ', AText) > 0) or
-    (Pos('Ơ', AText) > 0) or (Pos('Ư', AText) > 0) then
-  begin
-    Code := 'vi';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Portuguese letters
-  if (Pos('ã', AText) > 0) or (Pos('õ', AText) > 0) or (Pos('Ã', AText) > 0) or (Pos('Õ', AText) > 0) then
-  begin
-    Code := 'pt';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // French letters
-  if (Pos('œ', AText) > 0) or (Pos('Œ', AText) > 0) then
-  begin
-    Code := 'fr';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // German eszett
-  if Pos('ß', AText) > 0 then
-  begin
-    Code := 'de';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Ukrainian letters
-  if (Pos('ї', AText) > 0) or (Pos('є', AText) > 0) or (Pos('ґ', AText) > 0) or (Pos('Ї', AText) > 0) or
-    (Pos('Є', AText) > 0) or (Pos('Ґ', AText) > 0) then
-  begin
-    Code := 'uk';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Belarusian letters
-  if (Pos('ў', AText) > 0) or (Pos('Ў', AText) > 0) then
-  begin
-    Code := 'be';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Kazakh letters
-  if (Pos('ғ', AText) > 0) or (Pos('қ', AText) > 0) or (Pos('ң', AText) > 0) or (Pos('ұ', AText) > 0) or
-    (Pos('һ', AText) > 0) or (Pos('Ғ', AText) > 0) or (Pos('Қ', AText) > 0) or (Pos('Ң', AText) > 0) or
-    (Pos('Ұ', AText) > 0) or (Pos('Һ', AText) > 0) then
-  begin
-    Code := 'kk';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Macedonian letters
-  if (Pos('ѓ', AText) > 0) or (Pos('ќ', AText) > 0) or (Pos('ѕ', AText) > 0) or (Pos('Ѓ', AText) > 0) or
-    (Pos('Ќ', AText) > 0) or (Pos('Ѕ', AText) > 0) then
-  begin
-    Code := 'mk';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Serbian letters
-  if (Pos('ђ', AText) > 0) or (Pos('љ', AText) > 0) or (Pos('њ', AText) > 0) or (Pos('ћ', AText) > 0) or
-    (Pos('џ', AText) > 0) or (Pos('Ђ', AText) > 0) or (Pos('Љ', AText) > 0) or (Pos('Њ', AText) > 0) or
-    (Pos('Ћ', AText) > 0) or (Pos('Џ', AText) > 0) then
-  begin
-    Code := 'sr';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  // Scandinavian fallback logic
-  HasAeOe := (Pos('æ', AText) > 0) or (Pos('ø', AText) > 0) or (Pos('Æ', AText) > 0) or (Pos('Ø', AText) > 0);
-  if HasAeOe then
-  begin
-    if Pos('af', AText) > 0 then
-      Code := 'da'
-    else if Pos('av', AText) > 0 then
-      Code := 'no'
-    else
-      Code := 'da'; // Default for nordic
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  HasAa := (Pos('å', AText) > 0) or (Pos('Å', AText) > 0);
-  if HasAa then
-  begin
-    Code := 'sv';
-    Confidence := 1.0;
-    Exit;
-  end;
-
-  HasUmlaut := (Pos('ä', AText) > 0) or (Pos('ö', AText) > 0) or (Pos('ü', AText) > 0) or (Pos('Ä', AText) > 0) or
-    (Pos('Ö', AText) > 0) or (Pos('Ü', AText) > 0);
-  if HasUmlaut then
-  begin
-    Code := 'de';
-    Confidence := 0.95;
-    Exit;
-  end;
-
-  // Cyrillic special handling for very short texts
-  HasI := (Pos('і', AText) > 0) or (Pos('І', AText) > 0);
-  HasY := (Pos('ы', AText) > 0) or (Pos('Ы', AText) > 0);
-  HasHardSign := (Pos('ъ', AText) > 0) or (Pos('Ъ', AText) > 0);
-  HasRus := (Pos('э', AText) > 0) or (Pos('Э', AText) > 0) or (Pos('ё', AText) > 0) or (Pos('Ё', AText) > 0);
-
-  // Belarusian, ukrainian, russian context check
-  if (Code = 'be') or (Code = 'uk') or (Code = 'ru') then
-  begin
-    if HasI then
+    if HasChar(['ẹ', 'ọ', 'ṣ', 'Ẹ', 'Ọ', 'Ṣ']) then
     begin
-      if HasY then
-        Code := 'be'
-      else
-        Code := 'uk';
+      Code := 'yo';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ï', 'ụ']) then
+    begin
+      Code := 'ig';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ƙ', 'ɗ']) then
+    begin
+      Code := 'ha';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ơ', 'ư', 'ă']) then
+    begin
+      Code := 'vi';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ı', 'İ', 'ş', 'ğ']) then
+    begin
+      Code := 'tr';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ł', 'ż', 'ź']) then
+    begin
+      Code := 'pl';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ř', 'ů']) then
+    begin
+      Code := 'cs';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ŕ', 'ĺ']) then
+    begin
+      Code := 'sk';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ā', 'ē', 'ī', 'ū', 'ģ', 'ķ', 'ļ', 'ņ']) then
+    begin
+      Code := 'lv';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['į', 'ų', 'ė']) then
+    begin
+      Code := 'lt';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ĉ', 'ĝ', 'ĥ', 'ĵ', 'ŝ', 'ŭ']) then
+    begin
+      Code := 'eo';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['œ', 'Œ']) then
+    begin
+      Code := 'fr';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ß', 'ä', 'ö', 'ü']) then
+    begin
+      Code := 'de';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['þ', 'ð']) then
+    begin
+      Code := 'is';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ő', 'ű']) then
+    begin
+      Code := 'hu';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ș', 'ț']) then
+    begin
+      Code := 'ro';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ñ', '¿', '¡']) then
+    begin
+      Code := 'es';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ã', 'õ', 'ç']) then
+    begin
+      Code := 'pt';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ŵ', 'ŷ']) then
+    begin
+      Code := 'cy';
+      Confidence := 1.0;
+      Exit;
+    end;
+    if HasChar(['ก']) then
+    begin
+      Code := 'th';
       Confidence := 1.0;
       Exit;
     end;
   end;
+  {%EndRegion}
 
-  // Bulgarian vs macedonian context check
-  if (Code = 'bg') or (Code = 'mk') then
+  {%Region -fold Hebrew script: Hebrew vs Yiddish}
+  if (Code = 'he') or (Code = 'iw') or (Code = 'yi') then
   begin
-    if HasHardSign and not HasY and not HasRus then
+    if HasChar([#$05F0, #$05F1, #$05F2]) then
     begin
-      Code := 'bg';
+      Code := 'yi';
       Confidence := 1.0;
       Exit;
     end;
+
+    if HasChar(['את ', 'על ', 'לא ', 'של ', 'הוא ', 'היא ']) then
+    begin
+      if (Code = 'he') or (Code = 'iw') then Confidence := 0.95;
+      // Do NOT force yi -> he; if the text is Yiddish it will be handled by Yiddish markers below
+      if Code = 'yi' then
+        Confidence := 0.50;   // lower confidence, but keep yi
+      Exit;
+    end;
+
+    if HasChar([' און ', ' איך ', ' נישט ', ' דאס ', ' איז ', ' מיט ', ' פון ',
+      ' צו ', ' מען ', ' זייער ', ' שוין ']) then
+    begin
+      Code := 'yi';
+      Confidence := 0.70;
+      Exit;
+    end;
+
+    if Code = 'yi' then Confidence := 0.5;
   end;
+  {%EndRegion}
+
+  {%Region -fold Global Kurdish detection (trigrams often fail for this language)}
+  if (Code <> 'ku') and HasChar(['ê', 'î', 'û']) then
+  begin
+    if CountWords(['xwe', 'heye', 'kirin', 'çawa', 'gelek', 'çend', 'hinek', 'rojbaş', 'baş']) >= 2 then
+    begin
+      Code := 'ku';
+      Confidence := 0.95;
+      Exit;
+    end;
+    // Also treat ê/î/û with the word 'ku' as strong signal
+    if HasWord('ku') and (CountChars(['ê', 'î', 'û']) >= 2) then
+    begin
+      Code := 'ku';
+      Confidence := 0.90;
+      Exit;
+    end;
+  end;
+  {%EndRegion}
+
+  {%Region -fold Tswana vs Northern Sotho}
+  if (Code = 'tn') or (Code = 'ns') then
+  begin
+    // Short function words that are highly frequent and language‑specific.
+    // Tswana: 'go' (class 15 infinitive), 'le' (and), 'mo' (in), 'ba' (they)
+    tnMarkers := CountWords(['go', 'le', 'mo', 'ba']);
+    // Northern Sotho: 'ho' (class 15 infinitive), 'ka' (with), 'se' (not), 'sa' (still)
+    nsMarkers := CountWords(['ho', 'ka', 'se', 'sa']);
+
+    // Switch only if markers of one language are present and the other are absent.
+    if (tnMarkers > 0) and (nsMarkers = 0) then
+    begin
+      Code := 'tn';
+      Confidence := 0.95;
+      Exit;
+    end;
+    if (nsMarkers > 0) and (tnMarkers = 0) then
+    begin
+      Code := 'ns';
+      Confidence := 0.95;
+      Exit;
+    end;
+
+    // If both or none present, keep trigram result with reduced confidence.
+    Confidence := 0.60;
+  end;
+  {%EndRegion}
 end;
 
 // Frequency-aware distance (lower = better).
@@ -1607,34 +1510,89 @@ var
   score: integer;                      // total accumulated score (negative = good)
   freq: integer;
   tested: integer;
+  {$IFDEF USE_BINARY_SEARCH}
+  L, R, M: integer;
+  {$ENDIF}
 begin
   score := 0;
   tested := 0;
+  {$IFDEF USE_BINARY_SEARCH}
+  // Binary search on sorted trigram list
+  if Length(Profile.SortedTrigrams) > 0 then
+  begin
+    for i := 0 to High(TextTrigrams) do
+    begin
+      L := 0;
+      R := Length(Profile.SortedTrigrams) - 1;
+      freq := -1;
+      while L <= R do
+      begin
+        M := (L + R) div 2;
+        if Profile.SortedTrigrams[M].Trig = TextTrigrams[i] then
+        begin
+          freq := Profile.SortedTrigrams[M].Weight;
+          Break;
+        end
+        else if Profile.SortedTrigrams[M].Trig < TextTrigrams[i] then
+          L := M + 1
+        else
+          R := M - 1;
+      end;
+      if freq >= 0 then
+        Dec(score, freq)
+      else
+        Inc(score, MISSING_PENALTY);
+      Inc(tested);
+    end;
+  end
+  else
+  begin
+    // Fallback to linear search if sorted list is empty (should not happen with USE_BINARY_SEARCH=1)
+    for i := 0 to High(TextTrigrams) do
+    begin
+      freq := -1;
+      for j := 0 to High(Profile.Trigrams) do
+        if Profile.Trigrams[j] = TextTrigrams[i] then
+        begin
+          if j < Length(Profile.Freqs) then
+            freq := Profile.Freqs[j]
+          else
+            freq := MAX_POS_WEIGHT - j;
+          Break;
+        end;
+      if freq >= 0 then
+        Dec(score, freq)
+      else
+        Inc(score, MISSING_PENALTY);
+      Inc(tested);
+    end;
+  end;
+  {$ELSE}
+  // Original linear search
   for i := 0 to High(TextTrigrams) do
   begin
-    freq := -1;                        // -1 means not found
+    freq := -1;
     for j := 0 to High(Profile.Trigrams) do
       if Profile.Trigrams[j] = TextTrigrams[i] then
       begin
-        // Use stored frequency if available, otherwise fallback to positional weight
         if j < Length(Profile.Freqs) then
           freq := Profile.Freqs[j]
         else
-          freq := MAX_POS_WEIGHT - j;   // first positions get higher weight
+          freq := MAX_POS_WEIGHT - j;
         Break;
       end;
-
     if freq >= 0 then
-      Dec(score, freq)                  // negative contribution (better)
+      Dec(score, freq)
     else
-      Inc(score, MISSING_PENALTY);     // positive contribution (worse)
+      Inc(score, MISSING_PENALTY);
     Inc(tested);
   end;
+  {$ENDIF}
 
   if tested = 0 then
     Result := MISSING_PENALTY
   else
-    Result := score / tested;           // average – lower (more negative) wins
+    Result := score / tested;
 end;
 
 // Uses the same tokenisation as BuildWordList in the generator.
@@ -1655,7 +1613,7 @@ begin
     seenTokens.Sorted := True;
     seenTokens.Duplicates := dupIgnore;
     p := 1;
-    token := '';
+    token := string.Empty;
     while p <= Length(Text) do
     begin
       {$NOTES OFF}
@@ -1686,7 +1644,7 @@ begin
               end;
           end;
         end;
-        token := '';
+        token := string.Empty;
       end;
     end;
     // Last token
@@ -1804,22 +1762,45 @@ begin
     Result[i] := chars[i] + chars[i + 1] + chars[i + 2];
 end;
 
-function DetectLanguageSafe(const AText: string; ACurrentLang: string = ''; MinConfidence: double = 0.5): string;
+function DetectLanguageSafe(const AText: string; ACurrentLang: string = string.Empty; MinConfidence: double = 0.5): string;
 const
   MIN_SCRIPT_CHANGE_CONFIDENCE = 0.25;   // lower threshold when script differs
+  SHORT_LEN_THRESHOLD = 10;             // below this length – require higher confidence
+  HIGH_SHORT_CONFIDENCE = 0.7;          // minimum confidence for very short texts
+  NORMAL_LEN_THRESHOLD = 20;            // above this length – use MinConfidence as is
 var
   conf: double;
+  effectiveMinConf: double;
+  textLen: integer;
   detectedScript, currentScript: TScriptType;
 begin
   Result := DetectLanguageWithConfidence(AText, conf);
 
+  // Adaptive confidence threshold based on text length:
+  // Shorter texts require higher confidence to avoid false positives.
+  textLen := UTF8Length(AText);
+  if textLen <= SHORT_LEN_THRESHOLD then
+    effectiveMinConf := HIGH_SHORT_CONFIDENCE
+  else if textLen >= NORMAL_LEN_THRESHOLD then
+    effectiveMinConf := MinConfidence
+  else
+    // Linear interpolation between SHORT_LEN_THRESHOLD and NORMAL_LEN_THRESHOLD
+    effectiveMinConf := MinConfidence + (HIGH_SHORT_CONFIDENCE - MinConfidence) * (NORMAL_LEN_THRESHOLD - textLen) /
+      (NORMAL_LEN_THRESHOLD - SHORT_LEN_THRESHOLD);
+
+  // User-specified MinConfidence always acts as a floor.
+  if effectiveMinConf < MinConfidence then
+    effectiveMinConf := MinConfidence;
+  if effectiveMinConf > 1.0 then
+    effectiveMinConf := 1.0;
+
   // If confidence is high enough, always accept
-  if conf >= MinConfidence then
+  if conf >= effectiveMinConf then
     Exit;
 
   // If a current language is given and confidence is not too low,
   // check whether the script changed
-  if (ACurrentLang <> '') and (conf >= MIN_SCRIPT_CHANGE_CONFIDENCE) then
+  if (ACurrentLang <> string.Empty) and (conf >= MIN_SCRIPT_CHANGE_CONFIDENCE) then
   begin
     detectedScript := GetScriptByLang(Result);
     currentScript := GetScriptByLang(ACurrentLang);
@@ -1840,10 +1821,8 @@ end;
 
 function DetectLanguageWithConfidence(const AText: string; out Confidence: double): string;
 const
-  SHORT_TEXT_THRESHOLD = 20;        // characters, below this trigrams are too noisy (disabled)
-  HIGH_TRIGRAM_CONFIDENCE = 0.9;    // If trigrams give such confidence, we trust them even in a short text
-  WORD_CORRECTION_ALWAYS = 100;     // always try word correction for texts <= this length
-  LOW_TRIGRAM_CONFIDENCE = 0.5;     // trigram confidence below which to try words for longer texts
+  WORD_CORRECTION_ALWAYS = 70;      // always try word correction for texts <= this length
+  LOW_TRIGRAM_CONFIDENCE = 0.7;     // trigram confidence below which to try words for longer texts
   WORD_GAP_RATIO = 1.05;            // best word score must exceed second best by this factor
 var
   textTrigrams: TStringArray;
@@ -1851,7 +1830,6 @@ var
   bestDist, secondDist, currentDist: double;
   ScriptInfo: TScriptInfo;
   Script: TScriptType = stOther;
-  bestPriority: word;
   wordScore, maxWordScore, secondWordScore: integer;
   wordIdx: integer;
   matchCount: integer;
@@ -1862,10 +1840,7 @@ var
   trigCount: integer;
   profileSize: integer;
   pos: integer;
-  rawConfidence: double;
-  separationFactor: double;
-  deltaDist: double;
-  sumAbsDist: double;
+  rawConfidence, separationFactor, deltaDist, sumAbsDist: double;
   i, j: integer;
 
   function IsCJKCodeAllowed(const Code: string): boolean;
@@ -1881,11 +1856,12 @@ var
 begin
   ScriptInfo := Default(TScriptInfo);
   Confidence := 0.0;
+  trigCount := 0;
   if Length(AText) < 3 then Exit(UNKNOWN);
 
   // 1. Quick script detection + CJK refinement
   Result := QuickScriptDetection(AText, ScriptInfo, Script, Confidence);
-  if Result <> '' then Exit;
+  if Result <> string.Empty then Exit;
 
   // 2. Extract trigrams
   textTrigrams := ExtractCharTrigrams(AText);
@@ -2032,7 +2008,7 @@ begin
   end;
 
   // 5. Word-based correction for short or low-confidence results
-  if (UTF8Length(AText) < WORD_CORRECTION_ALWAYS) and (Confidence < LOW_TRIGRAM_CONFIDENCE) then
+  if (UTF8Length(AText) <= WORD_CORRECTION_ALWAYS) or (Confidence < LOW_TRIGRAM_CONFIDENCE) then
   begin
     maxWordScore := 0;
     secondWordScore := 0;
@@ -2071,41 +2047,6 @@ begin
 
   // 6. Post-correction for difficult pairs
   ApplyPostCorrection(Result, Confidence, AText);
-
-  // 7. For very short texts, if trigram confidence is low, fall back to priority + special chars
-  if (UTF8Length(AText) < SHORT_TEXT_THRESHOLD) and (Confidence < HIGH_TRIGRAM_CONFIDENCE) then
-  begin
-    // Reset to priority-based guess (same logic as before, but only as fallback)
-    bestIdx := -1;
-    bestPriority := High(word);
-    for i := 0 to High(Profiles) do
-    begin
-      if IsLanguageMatchingScript(Profiles[i].Code, Script) then
-        if Profiles[i].Priority < bestPriority then
-        begin
-          bestPriority := Profiles[i].Priority;
-          bestIdx := i;
-        end;
-    end;
-    if bestIdx < 0 then
-    begin
-      bestIdx := 0;
-      for i := 1 to High(Profiles) do
-        if Profiles[i].Priority < Profiles[bestIdx].Priority then
-          bestIdx := i;
-    end;
-    if bestIdx >= 0 then
-    begin
-      Result := Profiles[bestIdx].Code;
-      Confidence := 0.7;
-    end
-    else
-    begin
-      Result := UNKNOWN;
-      Confidence := 0.0;
-    end;
-    ApplyShortTextCorrection(Result, Confidence, AText);
-  end;
 end;
 
 {%EndRegion}
@@ -2118,8 +2059,8 @@ end;
 // Internal routine that does the actual merge from any TStream
 procedure MergeProfilesFromStream(AStream: TStream);
 const
-  MAX_TRIGRAMS = 2000;
-  MAX_WORDS = 2000;            // safety limit
+  MAX_TRIGRAMS = 100000;
+  MAX_WORDS = 100000;            // safety limit
   MAGIC_COMPRESSED: cardinal = $4F525047; // 'GPRO' in little-endian
 var
   magic: cardinal;
@@ -2136,6 +2077,33 @@ var
   comprSize: cardinal;
   tempStream: TMemoryStream;
   plainStream: TMemoryStream;
+{$IFDEF USE_BINARY_SEARCH}
+// QuickSort for TTrigEntry array
+  procedure SortTrigEntries(var Arr: array of TTrigEntry; L, R: integer);
+  var
+    i, j: integer;
+    pivot, temp: TTrigEntry;
+  begin
+    if L >= R then Exit;
+    pivot := Arr[(L + R) div 2];
+    i := L;
+    j := R;
+    repeat
+      while Arr[i].Trig < pivot.Trig do Inc(i);
+      while Arr[j].Trig > pivot.Trig do Dec(j);
+      if i <= j then
+      begin
+        temp := Arr[i];
+        Arr[i] := Arr[j];
+        Arr[j] := temp;
+        Inc(i);
+        Dec(j);
+      end;
+    until i > j;
+    SortTrigEntries(Arr, L, j);
+    SortTrigEntries(Arr, i, R);
+  end;
+{$ENDIF}
 begin
   // Detect format: if first 4 bytes are 'GPRO', it's compressed
   magic := 0;
@@ -2186,7 +2154,7 @@ begin
           plainStream.ReadBuffer(trigCount, SizeOf(trigCount));
           if trigCount > MAX_TRIGRAMS then
           begin
-            fileProfiles[i].Code := '';
+            fileProfiles[i].Code := string.Empty;
             Continue;
           end;
           SetLength(fileProfiles[i].Trigrams, trigCount);
@@ -2260,7 +2228,7 @@ begin
           if trigLen > 0 then
             AStream.Seek(trigLen + SizeOf(freq), soFromCurrent);
         end;
-        fileProfiles[i].Code := '';
+        fileProfiles[i].Code := string.Empty;
         Continue;
       end;
 
@@ -2283,12 +2251,26 @@ begin
       SetLength(fileProfiles[i].Wrds, 0);
       SetLength(fileProfiles[i].WrdFreqs, 0);
     end;
+
+    // Build sorted trigram list for binary search if optimisation is enabled
+    {$IFDEF USE_BINARY_SEARCH}
+    if trigCount > 0 then
+    begin
+      SetLength(fileProfiles[i].SortedTrigrams, trigCount);
+      for j := 0 to trigCount - 1 do
+      begin
+        fileProfiles[i].SortedTrigrams[j].Trig := fileProfiles[i].Trigrams[j];
+        fileProfiles[i].SortedTrigrams[j].Weight := fileProfiles[i].Freqs[j];
+      end;
+      SortTrigEntries(fileProfiles[i].SortedTrigrams, 0, trigCount - 1);
+    end;
+    {$ENDIF}
   end;
 
   // Merge into global Profiles
   for i := 0 to High(fileProfiles) do
   begin
-    if fileProfiles[i].Code = '' then Continue;
+    if fileProfiles[i].Code = string.Empty then Continue;
     existingIdx := -1;
     for j := 0 to High(Profiles) do
       if Profiles[j].Code = fileProfiles[i].Code then
@@ -2302,6 +2284,9 @@ begin
       Profiles[existingIdx].Freqs := fileProfiles[i].Freqs;
       Profiles[existingIdx].Wrds := fileProfiles[i].Wrds;
       Profiles[existingIdx].WrdFreqs := fileProfiles[i].WrdFreqs;
+      {$IFDEF USE_BINARY_SEARCH}
+      Profiles[existingIdx].SortedTrigrams := fileProfiles[i].SortedTrigrams;
+      {$ENDIF}
     end
     else
     begin
@@ -2336,7 +2321,7 @@ var
 initialization
   InitDefaultProfiles;
 
-  // Set default priority for built‑in profiles: English gets 1, others 100
+  // Set default priority for built-in profiles: English gets 1, others 100
   for idx := 0 to High(Profiles) do
     Profiles[idx].Priority := GetLanguagePriority(Profiles[idx].Code);
 
@@ -2370,4 +2355,5 @@ initialization
   end;
 
   {%EndRegion}
+
 end.
