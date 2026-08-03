@@ -317,7 +317,7 @@ begin
   end;
 
   // Apply AlphaBlendValue only when it changes to avoid UI flicker
-  if Self.AlphaBlendValue <> TargetAlpha then
+  if not FPopupOpen and (Self.AlphaBlendValue <> TargetAlpha) then
   begin
     if not Self.AlphaBlend then
       Self.AlphaBlend := True;
