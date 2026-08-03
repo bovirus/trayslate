@@ -4164,22 +4164,21 @@ begin
   idxTar := FLanguages.IndexOf(ComboTarget.Text);
   //  if (idxSrc < 0) or (idxTar < 0) then Exit;
 
-  // Detect language in source memo
-  if BuiltInDetect then
-    langDetect := DetectLanguageSafe(AText.ExtractTextSample(5000))
-  else
-    langDetect := LowerCase(TranslateThread(TransDetect, AText.ExtractTextSample));
-
-  if FCancelled or (langDetect = string.Empty) or (Length(langDetect) > 5) or (langDetect = UNKNOWN) then Exit;
-
-  langPrimary := LowerCase(PrimaryLang);
-  langSecondary := LowerCase(SecondaryLang);
-
   // Check selected languages
   if (idxSrc >= 0) then
     langSrc := LowerCase(Trans.Languages.Names[idxSrc]);
   if (idxTar >= 0) then
     langTar := LowerCase(Trans.Languages.Names[idxTar]);
+  langPrimary := LowerCase(PrimaryLang);
+  langSecondary := LowerCase(SecondaryLang);
+
+  // Detect language in source memo
+  if BuiltInDetect then
+    langDetect := DetectLanguageSafe(AText.ExtractTextSample(5000), langSrc)
+  else
+    langDetect := LowerCase(TranslateThread(TransDetect, AText.ExtractTextSample));
+
+  if FCancelled or (langDetect = string.Empty) or (Length(langDetect) > 5) or (langDetect = UNKNOWN) then Exit;
 
   // Swap if needed
   if not SmartSwap then
