@@ -1367,9 +1367,6 @@ begin
   // Replace HTML codes (entities and <br>) with actual characters only if they were absent in the original text
   Result := CleanTranslatedText(FTextToTranslate, Result);
 
-  // Execute response handle script
-  ExecuteResponseScript(Result);
-
   if (Trim(Result) = string.Empty) then
   begin
     if not content.TryFormatJson(Result) then
@@ -1377,6 +1374,9 @@ begin
   end
   else
   if FIsTruncated then Result := Result + '...';
+
+  // Execute response handle script
+  ExecuteResponseScript(Result);
 end;
 
 {%EndRegion}

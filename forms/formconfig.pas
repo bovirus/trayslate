@@ -216,6 +216,7 @@ resourcestring
   rvaluetype4 = 'Currency Fiat Only';
   rvaluetype5 = 'Currency Crypto Only';
   rvaluetype6 = 'Measurement Units';
+
   rscripthint =
     'The script is a standard Pascal program: optional var section, then a main begin ... end. block.' +
     sLineBreak + sLineBreak + 'Example:' + sLineBreak + '  var s: string;' + sLineBreak + '  begin' +
@@ -229,18 +230,29 @@ resourcestring
     sLineBreak + '    Random integer with exactly Length decimal digits.' + sLineBreak + '  Random : Extended' +
     sLineBreak + '    Random float in the range [0, 1).' + sLineBreak + '  IntToHex(Value, Digits) : string' +
     sLineBreak + '    Convert integer to hexadecimal string with at least Digits characters.' + sLineBreak +
-    '  ReplaceAll(S, OldPattern, NewPattern, IgnoreCase=False) : string' + sLineBreak +
+    '  StrToInt(S) : Integer' + sLineBreak + '    Convert a string to an integer. Raises an exception on invalid input.' +
+    sLineBreak + '  IntToStr(Value) : string' + sLineBreak + '    Convert an integer to its string representation.' +
+    sLineBreak + '  Trim(S) : string' + sLineBreak + '    Remove leading and trailing whitespace from S.' +
+    sLineBreak + '  TrimLeft(S) : string' + sLineBreak + '    Remove leading whitespace from S.' + sLineBreak +
+    '  TrimRight(S) : string' + sLineBreak + '    Remove trailing whitespace from S.' + sLineBreak +
+    '  HtmlEncode(S) : string' + sLineBreak + '    Encode special HTML characters in S into entities.' +
+    sLineBreak + '  HtmlDecode(S) : string' + sLineBreak + '    Decode HTML entities in S back to characters.' +
+    sLineBreak + '  UrlEncode(S) : string' + sLineBreak + '    Percent-encode S for safe URL inclusion.' +
+    sLineBreak + '  UrlDecode(S) : string' + sLineBreak + '    Decode a percent-encoded string S.' +
+    sLineBreak + '  ReplaceAll(S, OldPattern, NewPattern, IgnoreCase=False) : string' + sLineBreak +
     '    Replace all occurrences of OldPattern with NewPattern in S.' + sLineBreak +
     '  RegexReplace(Input, Pattern, Replacement) : string' + sLineBreak +
-    '    Replace all matches of the regular expression Pattern in Input with Replacement.' + sLineBreak +
-    '    The search is case-insensitive by default. Use standard regex syntax.' + sLineBreak + sLineBreak +
+    '    Replace all regex matches of Pattern with Replacement in Input. Case-insensitive.' + sLineBreak +
+    '  RegexMatch(Input, Pattern) : Boolean' + sLineBreak + '    Check if Input matches the regex Pattern. Case-insensitive.' +
+    sLineBreak + '  ExtractBetween(S, StartMarker, EndMarker) : string' + sLineBreak +
+    '    Extract the substring of S between StartMarker and EndMarker.' + sLineBreak + sLineBreak +
     'Available parameters (retrieved with GetParam):' + sLineBreak +
-    '  text          - the input text to process (possibly truncated to MaxLength)' + sLineBreak +
-    '  source        - source language code (may be empty)' + sLineBreak + '  target        - target language code' +
-    sLineBreak + '  timestamp     - current Unix timestamp in milliseconds (string)' + sLineBreak +
-    '  random        - 9-digit random number (string)' + sLineBreak + '  rand          - same as random' +
-    sLineBreak + '  rand1..rand9  - first 1..9 digits of the random number' + sLineBreak +
-    'Additional user-defined and custom parameters are also available.';
+    '  text - the input text to process (possibly truncated to MaxLength)' + sLineBreak +
+    '  source - source language code (may be empty)' + sLineBreak + '  target - target language code' +
+    sLineBreak + '  timestamp - current Unix timestamp in milliseconds (string)' + sLineBreak +
+    '  random  - 9-digit random number (string)' + sLineBreak + '  rand - same as random' + sLineBreak +
+    '  rand1..rand9 - first 1..9 digits of the random number' + sLineBreak + sLineBreak +
+    'Additional initial and custom parameters are also available.';
 
   rscriptresponsehint =
     'This script processes the response data. All functions and parameters described in the script hint are available here as well.' +

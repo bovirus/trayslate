@@ -18,7 +18,8 @@ uses
   uPSComponent,
   uPSCompiler,
   uPSUtils, // uPSUtils provides btString, btS32
-  osutils;
+  osutils,
+  stringhelper;
 
 type
   { TScriptRunner
@@ -59,53 +60,10 @@ type
 
 implementation
 
-// ---------------------------------------------------------------------------
 // Global variable that points to the currently executing TScriptRunner instance.
 // It is set in OnExecute and used by the plain wrapper functions below.
-// ---------------------------------------------------------------------------
 var
   CurrentRunner: TScriptRunner;
-
-  // ---------------------------------------------------------------------------
-  // Standalone wrapper functions that call the static methods of TOS.
-  // They are regular routines (not methods) so they can be registered with
-  // AddFunction(Pointer, Declaration) directly.
-  // ---------------------------------------------------------------------------
-
-{ Returns the current Unix timestamp in milliseconds (UTC).
-  This is a direct wrapper around TOS.GetTimestamp. }
-function PS_GetTimestamp: int64;
-begin
-  Result := TOS.GetTimestamp;
-end;
-
-{ Returns a random integer with the given number of decimal digits.
-  Example: GetRandom(6) returns a value between 100000 and 999999.
-  This is a wrapper around TOS.GetRandom. }
-function PS_GetRandom(ALength: integer): int64;
-begin
-  Result := TOS.GetRandom(ALength);
-end;
-
-// ---------------------------------------------------------------------------
-// Plain wrapper functions that delegate to the CurrentRunner instance.
-// These are registered in OnCompile and can be called from the script.
-// ---------------------------------------------------------------------------
-
-{ Returns a pseudo-random floating-point number in the range [0, 1).
-  This is the same as the standard System.Random when called without arguments. }
-function PS_Random: extended;
-begin
-  Result := System.Random;
-end;
-
-{ Converts an integer value to a hexadecimal string representation,
-  exactly like SysUtils.IntToHex. Digits specifies the minimum number
-  of characters in the result (padded with leading zeros if needed). }
-function PS_IntToHex(Value: integer; Digits: integer): string;
-begin
-  Result := SysUtils.IntToHex(Value, Digits);
-end;
 
 { Retrieves a named input parameter that was passed by the host. }
 function PS_GetParam(const Name: string): string;
@@ -123,69 +81,120 @@ begin
     CurrentRunner.SetOutput(Name, Value);
 end;
 
+{ Returns the current Unix timestamp in milliseconds (UTC).
+  This is a direct wrapper around TOS.GetTimestamp. }
+function PS_GetTimestamp: int64;
+begin
+  Result := TOS.GetTimestamp;
+end;
+
+{ Returns a random integer with the given number of decimal digits.
+  Example: GetRandom(6) returns a value between 100000 and 999999.
+  This is a wrapper around TOS.GetRandom. }
+function PS_GetRandom(ALength: integer): int64;
+begin
+  Result := TOS.GetRandom(ALength);
+end;
+
+{ Returns a pseudo-random floating-point number in the range [0, 1).
+  This is the same as the standard System.Random when called without arguments. }
+function PS_Random: extended;
+begin
+  Result := System.Random;
+end;
+
+{ Converts an integer value to a hexadecimal string representation,
+  exactly like SysUtils.IntToHex. Digits specifies the minimum number
+  of characters in the result (padded with leading zeros if needed). }
+function PS_IntToHex(Value: integer; Digits: integer): string;
+begin
+  Result := SysUtils.IntToHex(Value, Digits);
+end;
+
+// Convert a string to an integer. Raises an exception if the string is not a valid integer.
+function PS_StrToInt(const S: string): integer;
+begin
+  Result := StrToInt(S);
+end;
+
+// Convert an integer to its string representation.
+function PS_IntToStr(Value: integer): string;
+begin
+  Result := IntToStr(Value);
+end;
+
 // Replaces all occurrences of OldPattern with NewPattern in S.
 function PS_ReplaceAll(const S, OldPattern, NewPattern: string; IgnoreCase: boolean = False): string;
-var
-  SearchStr, SearchPattern: string;
-  P, OldLen, Offset, SearchLen: integer;
 begin
-  Result := S;
-  if OldPattern = '' then Exit;
-  OldLen := Length(OldPattern);
-
-  if IgnoreCase then
-  begin
-    SearchStr := LowerCase(Result);
-    SearchPattern := LowerCase(OldPattern);
-  end
-  else
-  begin
-    SearchStr := Result;
-    SearchPattern := OldPattern;
-  end;
-
-  Offset := 1;
-  SearchLen := Length(SearchStr) - Offset + 1;
-  if SearchLen > 0 then
-    P := Pos(SearchPattern, Copy(SearchStr, Offset, SearchLen))
-  else
-    P := 0;
-
-  while P > 0 do
-  begin
-    P := P + Offset - 1;
-    Delete(Result, P, OldLen);
-    Insert(NewPattern, Result, P);
-
-    Offset := P + Length(NewPattern);
-
-    if IgnoreCase then
-      SearchStr := LowerCase(Result)
-    else
-      SearchStr := Result;
-
-    SearchLen := Length(SearchStr) - Offset + 1;
-    if SearchLen > 0 then
-      P := Pos(SearchPattern, Copy(SearchStr, Offset, SearchLen))
-    else
-      P := 0;
-  end;
+  Result := S.ReplaceAll(OldPattern, NewPattern, IgnoreCase);
 end;
 
 // Replace all occurrences matching a regular expression pattern with Replacement.
 // The search is case-insensitive by default.
 function PS_RegexReplace(const Input, Pattern, Replacement: string): string;
-var
-  RegExpr: TRegExpr;
 begin
-  RegExpr := TRegExpr.Create;
-  try
-    RegExpr.Expression := Pattern;
-    RegExpr.ModifierI := True; // case insensitive matching
-    Result := RegExpr.Replace(Input, Replacement, True);
-  finally
-    RegExpr.Free;
-  end;
+  Result := Input.RegexReplace(Pattern, Replacement);
+end;
+
+// Check if the input string matches the regular expression pattern.
+// Returns True if at least one match is found.
+function PS_RegexMatch(const Input, Pattern: string): boolean;
+begin
+  Result := Input.RegexMatch(Pattern);
+end;
+
+// Remove leading and trailing whitespace characters (spaces, tabs, etc.).
+function PS_Trim(const S: string): string;
+begin
+  Result := SysUtils.Trim(S);
+end;
+
+// Remove leading whitespace characters.
+function PS_TrimLeft(const S: string): string;
+begin
+  Result := SysUtils.TrimLeft(S);
+end;
+
+// Remove trailing whitespace characters.
+function PS_TrimRight(const S: string): string;
+begin
+  Result := SysUtils.TrimRight(S);
+end;
+
+// Encode special HTML characters into entities.
+procedure PS_HtmlEncode(var Self: string; var Result: string);
+begin
+  Result := Self.HtmlEncode;
+end;
+
+// Decode HTML entities back to characters.
+procedure PS_HtmlDecode(var Self: string; var Result: string);
+begin
+  Result := Self.HtmlDecode;
+end;
+
+// Percent-encode the string for safe URL inclusion.
+procedure PS_UrlEncode(var Self: string; var Result: string);
+begin
+  Result := Self.UrlEncode;
+end;
+
+// Decode a percent-encoded URL string.
+procedure PS_UrlDecode(var Self: string; var Result: string);
+begin
+  Result := Self.UrlDecode;
+end;
+
+// Check if the string matches the given regular expression pattern.
+procedure PS_RegexMatch(var Self: string; const Pattern: string; var Result: boolean);
+begin
+  Result := Self.RegexMatch(Pattern);
+end;
+
+// Wrapper: s.ExtractBetween(StartMarker, EndMarker)
+procedure PS_ExtractBetween(var Self: string; const StartMarker, EndMarker: string; var Result: string);
+begin
+  Result := Self.ExtractBetween(StartMarker, EndMarker);
 end;
 
 { TScriptRunner }
@@ -231,6 +240,12 @@ begin
   // Hexadecimal conversion
   Sender.AddFunction(@PS_IntToHex, 'function IntToHex(Value: Integer; Digits: Integer): string;');
 
+  // String to integer conversion
+  Sender.AddFunction(@PS_StrToInt, 'function StrToInt(const S: string): Integer;');
+
+  // Integer to string conversion
+  Sender.AddFunction(@PS_IntToStr, 'function IntToStr(Value: Integer): string;');
+
   // Input reader: allows the script to retrieve any parameter by name.
   Sender.AddFunction(@PS_GetParam, 'function GetParam(const Name: string): string;');
 
@@ -242,6 +257,25 @@ begin
 
   // Regular expression search and replace
   Sender.AddFunction(@PS_RegexReplace, 'function RegexReplace(const Input, Pattern, Replacement: string): string;');
+
+  // Regular expression match test
+  Sender.AddFunction(@PS_RegexMatch, 'function RegexMatch(const Input, Pattern: string): Boolean;');
+
+  // Trim whitespace
+  Sender.AddFunction(@PS_Trim, 'function Trim(const S: string): string;');
+  Sender.AddFunction(@PS_TrimLeft, 'function TrimLeft(const S: string): string;');
+  Sender.AddFunction(@PS_TrimRight, 'function TrimRight(const S: string): string;');
+
+  // HTML entity encoding and decoding
+  Sender.AddFunction(@PS_HtmlEncode, 'function HtmlEncode(const S: string): string;');
+  Sender.AddFunction(@PS_HtmlDecode, 'function HtmlDecode(const S: string): string;');
+
+  // URL percent encoding and decoding
+  Sender.AddFunction(@PS_UrlEncode, 'function UrlEncode(const S: string): string;');
+  Sender.AddFunction(@PS_UrlDecode, 'function UrlDecode(const S: string): string;');
+
+  // Extract substring between two markers
+  Sender.AddFunction(@PS_ExtractBetween, 'function ExtractBetween(const S, StartMarker, EndMarker: string): string;');
 end;
 
 { OnExecute event – called just before the script starts running.
