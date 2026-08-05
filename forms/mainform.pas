@@ -3328,7 +3328,7 @@ procedure TformTrayslate.ShowCustomHint(const AText: string; X: integer = 0; Y: 
 begin
   if not Assigned(FHint) then
     FHint := TOneShotHint.Create(Self);
-  FHint.ShowHintText(AText, X, Y, Duration);
+  FHint.ShowHintText(AText, X, Y, 0, 0, Duration);
 end;
 
 function TformTrayslate.GetParameterValue(AName: string; out ResultOk: boolean): string;

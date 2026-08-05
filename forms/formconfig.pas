@@ -44,8 +44,11 @@ type
     ActionList: TActionList;
     BtnClose: TButton;
     BtnInitParametersTest: TSpeedButton;
+    BtnResponseHelp: TSpeedButton;
+    BtnScriptResponseHelp: TSpeedButton;
     BtnScriptTest: TSpeedButton;
     BtnScriptHelp: TSpeedButton;
+    BtnScriptResponseTest: TSpeedButton;
     BtnUrlTest: TSpeedButton;
     BtnSave: TButton;
     BtnPostDataTest: TSpeedButton;
@@ -75,6 +78,7 @@ type
     GroupResponse: TGroupBox;
     GroupLanguages: TGroupBox;
     GroupScript: TGroupBox;
+    GroupScript1: TGroupBox;
     ImagePreview: TImage;
     LabelAccept: TLabel;
     LabelInitHeaders: TLabel;
@@ -82,7 +86,6 @@ type
     LabelInitParameters1: TLabel;
     LabelInitParameters4: TLabel;
     LabelInitParemeters: TLabel;
-    LabelScript: TLabel;
     LabelLanguages1: TLabel;
     LabelLanguagesTarget: TLabel;
     LabelFillLanguages: TLabel;
@@ -93,7 +96,6 @@ type
     LabelColorRecent: TLabel;
     LabelMaxLength: TLabel;
     LabelValueType: TLabel;
-    LabelJsonPointer2: TLabel;
     LabelHeaders: TLabel;
     LabelPostData: TLabel;
     LabelPostData1: TLabel;
@@ -122,6 +124,7 @@ type
     Pages: TPageControl;
     PanelResponse: TPanel;
     PanelScript: TPanel;
+    PanelScript1: TPanel;
     PanelTop: TPanel;
     SbCopyConfig: TSpeedButton;
     SbNewConfig: TSpeedButton;
@@ -143,9 +146,13 @@ type
     SpinMaxLength: TSpinEdit;
     PageInitialRequest: TTabSheet;
     SplitterParameters: TSplitter;
+    SplitterParameters1: TSplitter;
     SynPasSyn: TSynPasSyn;
     SynScriptParameters: TSynEdit;
+    SynScriptResponse: TSynEdit;
+    procedure BtnResponseHelpClick(Sender: TObject);
     procedure BtnScriptHelpClick(Sender: TObject);
+    procedure BtnScriptResponseHelpClick(Sender: TObject);
     procedure BtnScriptTestClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -208,8 +215,8 @@ resourcestring
   rscripthint =
     'The script is a standard Pascal program: optional var section, then a main begin ... end. block.' +
     sLineBreak + 'Example:' + sLineBreak + '  var s: string;' + sLineBreak + '  begin' + sLineBreak +
-    '    s := GetParam(''text'');' + sLineBreak + '    s := ReplaceAll(s, ''-'', ''_'', False);' +
-    sLineBreak + '    SetOutput(''text'', s);' + sLineBreak + '  end.' + sLineBreak +
+    '    s := GetParam(''text'');' + sLineBreak + '    s := ReplaceAll(s, ''-'', ''_'', False);' + sLineBreak +
+    '    SetOutput(''text'', s);' + sLineBreak + '  end.' + sLineBreak +
     'You can also use standard Pascal constructs (if, for, while, repeat, etc.).' + sLineBreak +
     'Available functions:' + sLineBreak + '  GetParam(''name'') : string' + sLineBreak +
     '    Retrieve an input parameter value.' + sLineBreak + '  SetOutput(''name'', ''value'')' + sLineBreak +
@@ -219,7 +226,27 @@ resourcestring
     sLineBreak + '    Random float in the range [0, 1).' + sLineBreak + '  IntToHex(Value, Digits) : string' +
     sLineBreak + '    Convert integer to hexadecimal string with at least Digits characters.' + sLineBreak +
     '  ReplaceAll(S, OldPattern, NewPattern, IgnoreCase=False) : string' + sLineBreak +
-    '    Replace all occurrences of OldPattern with NewPattern in S.';
+    '    Replace all occurrences of OldPattern with NewPattern in S.' + sLineBreak +
+    'Available parameters (retrieved with GetParam):' + sLineBreak +
+    '  text          - the input text to process (possibly truncated to MaxLength)' + sLineBreak +
+    '  source        - source language code (may be empty)' + sLineBreak + '  target        - target language code' +
+    sLineBreak + '  timestamp     - current Unix timestamp in milliseconds (string)' + sLineBreak +
+    '  random        - 9-digit random number (string)' + sLineBreak + '  rand          - same as random' +
+    sLineBreak + '  rand1..rand9  - first 1..9 digits of the random number' + sLineBreak +
+    'Additional user-defined and custom parameters are also available.';
+
+  rscriptresponsehint =
+    'This script processes the response data. All functions and parameters described in the script hint are available here as well.' +
+    sLineBreak + 'Use GetParam(''result'') to obtain the received text. Example:' + sLineBreak + '  var s: string;' +
+    sLineBreak + '  begin' + sLineBreak + '    s := GetParam(''result'');' + sLineBreak + '    SetOutput(''result'', s);' +
+    sLineBreak + '  end.';
+
+  rresponsehint =
+    'Json Pointer: Use / for levels, keys for objects, and numbers for indexes.' + sLineBreak +
+    'Use * for all items, *#10 to join items by newline. Use ~ at the end of the path to return the raw JSON branch.' +
+    sLineBreak + 'Separate multiple segments with semicolon ;.' + sLineBreak +
+    'Literal: Text block in {…}. Special tag #10 for newlines. Use {{regex}} inside to extract data directly into the text.' +
+    sLineBreak + 'Logic: If a Pointer in a segment is empty, the whole segment is skipped. If a segment has no Pointer, only literal text blocks with embedded regular expressions are processed.' + sLineBreak + 'Regex: {prefix {regex[index]} suffix} inside a text block. If no [index] is specified, the first match is used.' + sLineBreak + 'Index can be a number, [*] (join by space), or [*#10] (join by newline). If the regex finds no match, the entire {…} block is removed.' + sLineBreak + 'Using ~ inside a regex returns the entire text.' + sLineBreak + 'Inversion: Start a segment with ! (e.g. !/path{Error}) to show its text only if the Pointer data is missing or the JSON is invalid.' + sLineBreak + 'Commenting: /* text */ comments are stripped from the entire expression before any processing.' + sLineBreak + 'Examples:' + sLineBreak + 'responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\w+)})}; !/translations{Error: No data!#10}; /translations/0/text';
 
 implementation
 
@@ -416,6 +443,20 @@ begin
   if not Assigned(FHint) then
     FHint := TOneShotTooltip.Create(Self);
   FHint.ShowHintText(rscripthint, BtnScriptHelp.ClientOrigin.X, BtnScriptHelp.ClientOrigin.Y, 500);
+end;
+
+procedure TformConfigTrayslate.BtnScriptResponseHelpClick(Sender: TObject);
+begin
+  if not Assigned(FHint) then
+    FHint := TOneShotTooltip.Create(Self);
+  FHint.ShowHintText(rscriptresponsehint, BtnScriptResponseHelp.ClientOrigin.X, BtnScriptResponseHelp.ClientOrigin.Y, 500);
+end;
+
+procedure TformConfigTrayslate.BtnResponseHelpClick(Sender: TObject);
+begin
+  if not Assigned(FHint) then
+    FHint := TOneShotTooltip.Create(Self);
+  FHint.ShowHintText(rresponsehint, BtnResponseHelp.ClientOrigin.X, BtnResponseHelp.ClientOrigin.Y, 500);
 end;
 
 procedure TformConfigTrayslate.BtnCloseClick(Sender: TObject);

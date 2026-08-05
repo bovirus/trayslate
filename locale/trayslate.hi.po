@@ -103,6 +103,23 @@ msgstr "नई कॉन्फ़िग फ़ाइल का नाम दर�
 msgid "The configuration was modified. Save changes?"
 msgstr "कॉन्फ़िगरेशन बदल दिया गया था। क्या परिवर्तन सहेजें?"
 
+#: formconfig.rresponsehint
+msgctxt "formconfig.rresponsehint"
+msgid ""
+"Json Pointer: Use / for levels, keys for objects, and numbers for indexes.\n"
+"Use * for all items, *#10 to join items by newline. Use ~ at the end of the path to return the raw JSON branch.\n"
+"Separate multiple segments with semicolon ;.\n"
+"Literal: Text block in {…}. Special tag #10 for newlines. Use {{regex}} inside to extract data directly into the text.\n"
+"Logic: If a Pointer in a segment is empty, the whole segment is skipped. If a segment has no Pointer, only literal text blocks with embedded regular expressions are processed.\n"
+"Regex: {prefix {regex[index]} suffix} inside a text block. If no [index] is specified, the first match is used.\n"
+"Index can be a number, [*] (join by space), or [*#10] (join by newline). If the regex finds no match, the entire {…} block is removed.\n"
+"Using ~ inside a regex returns the entire text.\n"
+"Inversion: Start a segment with ! (e.g. !/path{Error}) to show its text only if the Pointer data is missing or the JSON is invalid.\n"
+"Commenting: /* text */ comments are stripped from the entire expression before any processing.\n"
+"Examples:\n"
+"responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!#10}; /translations/0/text"
+msgstr ""
+
 #: formconfig.rscripthint
 #, fuzzy
 #| msgid "The script can access any parameters defined above using GetParam('name') and return values with SetOutput('name', 'value'). Additional helper functions are available: GetTimestamp() and GetRandom(Length)."
@@ -131,8 +148,28 @@ msgid ""
 "  IntToHex(Value, Digits) : string\n"
 "    Convert integer to hexadecimal string with at least Digits characters.\n"
 "  ReplaceAll(S, OldPattern, NewPattern, IgnoreCase=False) : string\n"
-"    Replace all occurrences of OldPattern with NewPattern in S."
+"    Replace all occurrences of OldPattern with NewPattern in S.\n"
+"Available parameters (retrieved with GetParam):\n"
+"  text          - the input text to process (possibly truncated to MaxLength)\n"
+"  source        - source language code (may be empty)\n"
+"  target        - target language code\n"
+"  timestamp     - current Unix timestamp in milliseconds (string)\n"
+"  random        - 9-digit random number (string)\n"
+"  rand          - same as random\n"
+"  rand1..rand9  - first 1..9 digits of the random number\n"
+"Additional user-defined and custom parameters are also available."
 msgstr "स्क्रिप्ट ऊपर परिभाषित किसी भी पैरामीटर तक GetParam('name') का उपयोग करके पहुँच सकती है और SetOutput('name', 'value') के माध्यम से मान वापस कर सकती है। अतिरिक्त सहायक फ़ंक्शन भी उपलब्ध हैं: GetTimestamp() और GetRandom(Length)."
+
+#: formconfig.rscriptresponsehint
+msgid ""
+"This script processes the response data. All functions and parameters described in the script hint are available here as well.\n"
+"Use GetParam('result') to obtain the received text. Example:\n"
+"  var s: string;\n"
+"  begin\n"
+"    s := GetParam('result');\n"
+"    SetOutput('result', s);\n"
+"  end."
+msgstr ""
 
 #: formconfig.rvaluetype1
 msgctxt "formconfig.rvaluetype1"
@@ -462,6 +499,12 @@ msgstr "अनुरोध निष्पादित करें और प�
 msgid "Execute post request and view the result"
 msgstr "POST अनुरोध निष्पादित करें और परिणाम देखें"
 
+#: tformconfigtrayslate.btnresponsehelp.hint
+#, fuzzy
+msgctxt "tformconfigtrayslate.btnresponsehelp.hint"
+msgid "Help"
+msgstr "सहायता"
+
 #: tformconfigtrayslate.btnresponsetest.hint
 msgctxt "tformconfigtrayslate.btnresponsetest.hint"
 msgid "Converts the current response"
@@ -472,6 +515,17 @@ msgstr "वर्तमान उत्तर को परिवर्तित
 msgctxt "tformconfigtrayslate.btnscripthelp.hint"
 msgid "Help"
 msgstr "सहायता"
+
+#: tformconfigtrayslate.btnscriptresponsehelp.hint
+#, fuzzy
+msgctxt "tformconfigtrayslate.btnscriptresponsehelp.hint"
+msgid "Help"
+msgstr "सहायता"
+
+#: tformconfigtrayslate.btnscriptresponsetest.hint
+msgctxt "tformconfigtrayslate.btnscriptresponsetest.hint"
+msgid "Execute script and view the result"
+msgstr ""
 
 #: tformconfigtrayslate.btnscripttest.hint
 #, fuzzy
@@ -557,13 +611,19 @@ msgid "Request"
 msgstr "अनुरोध"
 
 #: tformconfigtrayslate.groupresponse.caption
+#, fuzzy
+#| msgid "Response"
 msgctxt "tformconfigtrayslate.groupresponse.caption"
-msgid "Response"
+msgid "Json Pointer Processing the Response"
 msgstr "प्रतिक्रिया"
 
 #: tformconfigtrayslate.groupscript.caption
 msgid "Script Retrieved Parameters"
 msgstr "स्क्रिप्ट द्वारा प्राप्त पैरामीटर"
+
+#: tformconfigtrayslate.groupscript1.caption
+msgid "Script Processing the Response"
+msgstr ""
 
 #: tformconfigtrayslate.imagepreview.hint
 msgid "Click to select the config icon, Middle-Click clears the icon"
@@ -635,26 +695,6 @@ msgctxt "tformconfigtrayslate.labelinituseragent.caption"
 msgid "User Agent"
 msgstr "User Agent"
 
-#: tformconfigtrayslate.labeljsonpointer2.caption
-msgid ""
-"Json Pointer: Use / for levels, keys for objects, and numbers for indexes. Use * for all items, *#10 to join items by newline. Use ~ at the end of the path to return the raw JSON branch. Separate multiple segments with semicolon ;.\n"
-"Literal: Text block in {…}. Special tag #10 for newlines. Use {{regex}} inside to extract data directly into the text.\n"
-"Logic: If a Pointer in a segment is empty, the whole segment is skipped. If a segment has no Pointer, only literal text blocks with embedded regular expressions are processed.\n"
-"Regex: {prefix {regex[index]} suffix} inside a text block. If no [index] is specified, the first match is used. Index can be a number, [*] (join by space), or [*#10] (join by newline). If the regex finds no match, the entire {…} block is removed. Using ~ inside a regex returns the entire text.\n"
-"Inversion: Start a segment with ! (e.g. !/path{Error}) to show its text only if the Pointer data is missing or the JSON is invalid.\n"
-"Commenting: /* text */ comments are stripped from the entire expression before any processing.\n"
-"Examples:\n"
-"responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!#10}; /translations/0/text"
-msgstr ""
-"Json Pointer: स्तरों के लिए / का उपयोग करें, ऑब्जेक्ट के लिए कुंजियाँ, और सूचकांकों के लिए संख्याएँ। सभी आइटम के लिए * का उपयोग करें, आइटम को नई पंक्ति से जोड़ने के लिए *#10 का उपयोग करें। पथ के अंत में ~ का उपयोग करके कच्ची JSON शाखा लौटाएँ। कई खंडों को अर्धविराम ; से अलग करें।\n"
-"शाब्दिक: {…} में टेक्स्ट ब्लॉक। नई पंक्तियों के लिए विशेष टैग #10। डेटा सीधे टेक्स्ट में निकालने के लिए अंदर {{regex}} का उपयोग करें।\n"
-"तर्क: यदि किसी खंड में पॉइंटर खाली है, तो पूरा खंड छोड़ दिया जाता है। यदि किसी खंड में पॉइंटर नहीं है, तो केवल एम्बेडेड रेगुलर एक्सप्रेशन वाले शाब्दिक टेक्स्ट ब्लॉक संसाधित किए जाते हैं।\n"
-"रेगुलर एक्सप्रेशन: टेक्स्ट ब्लॉक के अंदर {उपसर्ग {regex[सूचकांक]} प्रत्यय}। यदि [सूचकांक] निर्दिष्ट नहीं है, तो पहले मिलान का उपयोग किया जाता है। सूचकांक एक संख्या, [*] (स्पेस से जोड़ें), या [*#10] (नई पंक्ति से जोड़ें) हो सकता है। यदि regex कोई मिलान नहीं पाता है, तो पूरा {…} ब्लॉक हटा दिया जाता है। रेगुलर एक्सप्रेशन के अंदर ~ का उपयोग पूरा टेक्स्ट लौटाता है।\n"
-"उलटा: किसी खंड को ! से शुरू करें (जैसे !/path{Error}) ताकि उसका टेक्स्ट केवल तभी दिखे जब पॉइंटर डेटा गायब हो या JSON अमान्य हो।\n"
-"टिप्पणी: /* टेक्स्ट */ टिप्पणियाँ किसी भी प्रसंस्करण से पहले पूरी अभिव्यक्ति से हटा दी जाती हैं।\n"
-"उदाहरण:\n"
-"responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!#10}; /translations/0/text"
-
 #: tformconfigtrayslate.labellanguages.caption
 msgctxt "tformconfigtrayslate.labellanguages.caption"
 msgid "Supported languages e.g. en=en-US (en - internal, en-US - service). \"empty\" - do not send."
@@ -694,13 +734,6 @@ msgstr "Post Data"
 msgctxt "tformconfigtrayslate.labelpostdata1.caption"
 msgid "Headers"
 msgstr "Headers"
-
-#: tformconfigtrayslate.labelscript.caption
-#, fuzzy
-#| msgid "The script can access any parameters defined above using GetParam('name') and return values with SetOutput('name', 'value'). Additional helper functions are available: GetTimestamp() and GetRandom(Length)."
-msgctxt "tformconfigtrayslate.labelscript.caption"
-msgid "The script can access any parameters defined above using GetParam('name') and return values with SetOutput('name', 'value')."
-msgstr "स्क्रिप्ट ऊपर परिभाषित किसी भी पैरामीटर तक GetParam('name') का उपयोग करके पहुँच सकती है और SetOutput('name', 'value') के माध्यम से मान वापस कर सकती है। अतिरिक्त सहायक फ़ंक्शन भी उपलब्ध हैं: GetTimestamp() और GetRandom(Length)."
 
 #: tformconfigtrayslate.labelservicedescription.caption
 msgid "Description"
