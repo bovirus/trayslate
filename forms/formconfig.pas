@@ -28,6 +28,7 @@ uses
   Spin,
   ColorBox,
   SynEdit,
+  SynEditTypes,
   SynHighlighterPas,
   SynEditHighlighterFoldBase,
   LCLType,
@@ -153,6 +154,7 @@ type
     procedure BtnResponseHelpClick(Sender: TObject);
     procedure BtnScriptHelpClick(Sender: TObject);
     procedure BtnScriptResponseHelpClick(Sender: TObject);
+    procedure BtnScriptResponseTestClick(Sender: TObject);
     procedure BtnScriptTestClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -199,7 +201,7 @@ type
 var
   formConfigTrayslate: TformConfigTrayslate;
 
-{%Region -fold Resource strings}
+  {%Region -fold Resource strings}
 
 resourcestring
   rnamequestion = 'Enter new config file name:';
@@ -253,7 +255,7 @@ resourcestring
     'Literal: Text block in {…}. Special tag #10 for newlines. Use {{regex}} inside to extract data directly into the text.' +
     sLineBreak + 'Logic: If a Pointer in a segment is empty, the whole segment is skipped. If a segment has no Pointer, only literal text blocks with embedded regular expressions are processed.' + sLineBreak + 'Regex: {prefix {regex[index]} suffix} inside a text block. If no [index] is specified, the first match is used.' + sLineBreak + 'Index can be a number, [*] (join by space), or [*#10] (join by newline). If the regex finds no match, the entire {…} block is removed.' + sLineBreak + 'Using ~ inside a regex returns the entire text.' + sLineBreak + 'Inversion: Start a segment with ! (e.g. !/path{Error}) to show its text only if the Pointer data is missing or the JSON is invalid.' + sLineBreak + 'Commenting: /* text */ comments are stripped from the entire expression before any processing.' + sLineBreak + 'Examples:' + sLineBreak + 'responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\w+)})}; !/translations{Error: No data!#10}; /translations/0/text';
 
-{%EndRegion}
+  {%EndRegion}
 
 implementation
 
@@ -284,8 +286,18 @@ begin
   ComboValueType.Items.Add(rvaluetype6);
   ComboValueType.ItemIndex := Ord(formTrayslate.Trans.LangType);
 
+  SynScriptParameters.TabWidth := 2;
+  SynScriptParameters.Options := SynScriptParameters.Options + [eoTabsToSpaces];
   SynScriptParameters.Font.Color := clWindowText;
   SynScriptParameters.Gutter.LineNumberPart.MarkupInfo.Foreground := clWindowText;
+  for i := 0 to SynPasSyn.FoldConfigCount - 1 do
+    SynPasSyn.FoldConfig[i].Modes :=
+      SynPasSyn.FoldConfig[i].Modes - [fmHide];
+
+  SynScriptResponse.TabWidth := 2;
+  SynScriptResponse.Options := SynScriptResponse.Options + [eoTabsToSpaces];
+  SynScriptResponse.Font.Color := clWindowText;
+  SynScriptResponse.Gutter.LineNumberPart.MarkupInfo.Foreground := clWindowText;
   for i := 0 to SynPasSyn.FoldConfigCount - 1 do
     SynPasSyn.FoldConfig[i].Modes :=
       SynPasSyn.FoldConfig[i].Modes - [fmHide];
@@ -438,6 +450,23 @@ begin
       ParametersAge := Now + 3650;
       if GetParameters(GetInit) then
         ParameterValues.Text.OpenStringInTextEditor;
+    end;
+  finally
+    Enabled := True;
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TformConfigTrayslate.BtnScriptResponseTestClick(Sender: TObject);
+begin
+  Enabled := False;
+  Screen.Cursor := crHourGlass;
+  try
+    if (SynScriptResponse.Text = string.empty) or not TestChanges then exit;
+    with formTrayslate.Trans do
+    begin
+      ParametersAge := Now + 3650;
+      Translate.OpenStringInTextEditor;
     end;
   finally
     Enabled := True;
@@ -777,6 +806,7 @@ begin
     MemoHeaders.Lines.Assign(Headers);
     MemoCustomParameters.Lines.Assign(CustomParameters);
     SynScriptParameters.Lines.Assign(ScriptParameters);
+    SynScriptResponse.Lines.Assign(ScriptResponse);
     CheckEncodeText.Checked := EncodeText;
     SpinMaxLength.Value := MaxLength;
     CheckEncodeCustomParameters.Checked := EncodeCustomParameters;
@@ -870,6 +900,7 @@ begin
       EncodeCustomParameters := CheckEncodeCustomParameters.Checked;
       CustomParameters.Text := MemoCustomParameters.Text;
       ScriptParameters.Text := SynScriptParameters.Text;
+      ScriptResponse.Text := SynScriptResponse.Text;
       InitUserAgent := EditInitUserAgent.Text;
 
       TempHeaders := MemoInitHeaders.HeadersFromMemo;

@@ -69,6 +69,7 @@ type
     FHeaders: TStringList;
     FCustomParameters: TStringList;
     FScriptParameters: TStringList;
+    FScriptResponse: TStringList;
     FServiceColorRecent: TColor;
     FServiceDescription: TStringList;
     FEncodeText: boolean;
@@ -106,7 +107,8 @@ type
 
     procedure Clear;
     procedure AbortRequest;
-    procedure ExecuteScript;
+    procedure ExecuteParametersScript;
+    procedure ExecuteResponseScript(var Response: string);
     function GetParameters(Data: string): boolean;
     function SetParameters(Data: string; IncludeSet: boolean = True): string;
     procedure SetParametersList(Strings: TStrings);
@@ -160,6 +162,7 @@ type
     property EncodeCustomParameters: boolean read FEncodeCustomParameters write FEncodeCustomParameters;
     property CustomParameters: TStringList read FCustomParameters write FCustomParameters;
     property ScriptParameters: TStringList read FScriptParameters write FScriptParameters;
+    property ScriptResponse: TStringList read FScriptResponse write FScriptResponse;
     property ProxyEnabled: boolean read FProxyEnabled write FProxyEnabled;
     property Proxy: TProxy read FProxy write FProxy;
     property Timeout: TTimeout read FTimeout write FTimeout;
@@ -238,6 +241,9 @@ begin
   FScriptParameters := TStringList.Create;
   FScriptParameters.TrailingLineBreak := False;
   FScriptParameters.SkipLastLineBreak := True;
+  FScriptResponse := TStringList.Create;
+  FScriptResponse.TrailingLineBreak := False;
+  FScriptResponse.SkipLastLineBreak := True;
   FServiceDescription := TStringList.Create;
   FServiceDescription.TrailingLineBreak := False;
   FServiceDescription.SkipLastLineBreak := True;
@@ -286,6 +292,7 @@ begin
   FreeAndNil(FHeaders);
   FreeAndNil(FCustomParameters);
   FreeAndNil(FScriptParameters);
+  FreeAndNil(FScriptResponse);
   FreeAndNil(FServiceDescription);
   FreeAndNil(FLanguages);
   FreeAndNil(FLanguagesTarget);
@@ -331,6 +338,7 @@ begin
   FEncodeCustomParameters := False;
   FCustomParameters.Clear;
   FScriptParameters.Clear;
+  FScriptResponse.Clear;
   FLangType := vtNone;
   FLanguages.Clear;
   FLanguagesTarget.Clear;
@@ -361,7 +369,7 @@ begin
   FHTTPList.Clear;
 end;
 
-procedure TTranslate.ExecuteScript;
+procedure TTranslate.ExecuteParametersScript;
 var
   Runner: TScriptRunner;
   i: integer;
@@ -383,6 +391,32 @@ begin
     // 5. Retrieve all outputs in a loop
     for i := 0 to Runner.OutputList.Count - 1 do
       FParameterValues.Values[Runner.OutputList.Names[i]] := Runner.OutputList.ValueFromIndex[i];
+  finally
+    Runner.Free;
+  end;
+end;
+
+procedure TTranslate.ExecuteResponseScript(var Response: string);
+var
+  Runner: TScriptRunner;
+begin
+  if FScriptResponse.Count = 0 then Exit;
+
+  // 1. Create the script runner instance
+  Runner := TScriptRunner.Create;
+  try
+    // 2. Load the script source
+    Runner.LoadScript(FScriptResponse);
+
+    // 3. Pass input parameters
+    Runner.Params.Assign(FParameterValues);
+    Runner.Params.Values['result'] := Response;
+
+    // 4. Compile and run the script
+    Runner.Execute;   // automatically compiles if needed
+
+    // 5. Retrieve output Result
+    Response := Runner.OutputList.Values['result'];
   finally
     Runner.Free;
   end;
@@ -511,7 +545,7 @@ begin
   end;
 
   // ScriptParameters
-  ExecuteScript;
+  ExecuteParametersScript;
 end;
 
 function TTranslate.SetParameters(Data: string; IncludeSet: boolean = True): string;
@@ -1254,8 +1288,7 @@ begin
         Inc(i);
     end
     // Check for <br/> tag (case insensitive)
-    else if (TranslatedText[i] = '<') and (i + 5 <= Length(TranslatedText)) and
-      (LowerCase(Copy(TranslatedText, i, 5)) = '<br/>') then
+    else if (TranslatedText[i] = '<') and (i + 5 <= Length(TranslatedText)) and (LowerCase(Copy(TranslatedText, i, 5)) = '<br/>') then
     begin
       TagWasReplaced := Pos('<br/>', OriginalText) = 0;
       if TagWasReplaced then
@@ -1333,6 +1366,9 @@ begin
 
   // Replace HTML codes (entities and <br>) with actual characters only if they were absent in the original text
   Result := CleanTranslatedText(FTextToTranslate, Result);
+
+  // Execute response handle script
+  ExecuteResponseScript(Result);
 
   if (Trim(Result) = string.Empty) then
   begin
@@ -1461,6 +1497,14 @@ begin
         Ini.WriteString('Script Parameters',
           IntToStr(i),
           '#' + ScriptParameters[i]);
+
+    // Save script response
+    ClearSection(Ini, 'Script Response', not Assigned(ScriptResponse) or (ScriptResponse.Count = 0));
+    if Assigned(ScriptResponse) then
+      for i := 0 to ScriptResponse.Count - 1 do
+        Ini.WriteString('Script Response',
+          IntToStr(i),
+          '#' + ScriptResponse[i]);
 
     ClearSection(Ini, 'Initial Request', (Trim(InitUserAgent) = string.Empty) and (Trim(InitUrl) = string.Empty) and
       (InitLiveTime = 0));
@@ -1658,6 +1702,25 @@ begin
           Delete(Value, 1, 1);
 
         ScriptParameters.Add(Value);
+      end;
+    finally
+      Keys.Free;
+    end;
+
+    // Script Response
+    ScriptResponse.Clear;
+    Keys := TStringList.Create;
+    try
+      Ini.ReadSection('Script Response', Keys);
+
+      for i := 0 to Keys.Count - 1 do
+      begin
+        Value := Ini.ReadString('Script Response', Keys[i], '');
+
+        if (Value <> string.Empty) and (Value[1] = '#') then
+          Delete(Value, 1, 1);
+
+        ScriptResponse.Add(Value);
       end;
     finally
       Keys.Free;

@@ -164,11 +164,11 @@ object formConfigTrayslate: TformConfigTrayslate
     Height = 559
     Top = 41
     Width = 590
-    ActivePage = PageParameters
+    ActivePage = PageResponse
     Align = alClient
     BorderSpacing.Bottom = 35
     BorderSpacing.Around = 5
-    TabIndex = 3
+    TabIndex = 4
     TabOrder = 1
     object PageService: TTabSheet
       Caption = 'Service'
@@ -1566,6 +1566,7 @@ object formConfigTrayslate: TformConfigTrayslate
               MouseActions = <>
               MouseTextActions = <>
               MouseSelActions = <>
+              Options = [eoAutoIndent, eoBracketHighlight, eoGroupUndo, eoScrollPastEol, eoSmartTabs, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces]
               VisibleSpecialChars = [vscSpace, vscTabAtLast]
               SelectedColor.BackPriority = 50
               SelectedColor.ForePriority = 50
@@ -1585,7 +1586,7 @@ object formConfigTrayslate: TformConfigTrayslate
               MouseLinkColor.Foreground = clBlue
               LineHighlightColor.Background = clNone
               LineHighlightColor.Foreground = clNone
-              TabWidth = 2
+              TabWidth = 1
               OnChange = ValueChange
               inline SynLeftGutterPartList1: TSynGutterPartList
                 object SynGutterLineNumber1: TSynGutterLineNumber
@@ -1900,7 +1901,7 @@ object formConfigTrayslate: TformConfigTrayslate
               }
               ShowHint = True
               ParentShowHint = False
-              OnClick = BtnScriptTestClick
+              OnClick = BtnScriptResponseTestClick
             end
             inline SynScriptResponse: TSynEdit
               Left = 0
@@ -2346,6 +2347,7 @@ object formConfigTrayslate: TformConfigTrayslate
               MouseActions = <>
               MouseTextActions = <>
               MouseSelActions = <>
+              Options = [eoAutoIndent, eoBracketHighlight, eoGroupUndo, eoScrollPastEol, eoSmartTabs, eoTabIndent, eoTabsToSpaces, eoTrimTrailingSpaces]
               VisibleSpecialChars = [vscSpace, vscTabAtLast]
               SelectedColor.BackPriority = 50
               SelectedColor.ForePriority = 50
@@ -2365,7 +2367,7 @@ object formConfigTrayslate: TformConfigTrayslate
               MouseLinkColor.Foreground = clBlue
               LineHighlightColor.Background = clNone
               LineHighlightColor.Foreground = clNone
-              TabWidth = 2
+              TabWidth = 1
               OnChange = ValueChange
               inline SynLeftGutterPartList1: TSynGutterPartList
                 object SynGutterLineNumber1: TSynGutterLineNumber
@@ -2657,7 +2659,7 @@ object formConfigTrayslate: TformConfigTrayslate
     NestedComments = False
     TypeHelpers = True
     StringMultilineMode = []
-    Left = 72
-    Top = 416
+    Left = 88
+    Top = 392
   end
 end
