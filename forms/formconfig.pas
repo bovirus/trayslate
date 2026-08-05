@@ -199,6 +199,8 @@ type
 var
   formConfigTrayslate: TformConfigTrayslate;
 
+{%Region -fold Resource strings}
+
 resourcestring
   rnamequestion = 'Enter new config file name:';
   rneedsave = 'The configuration was modified. Save changes?';
@@ -227,6 +229,9 @@ resourcestring
     sLineBreak + '    Convert integer to hexadecimal string with at least Digits characters.' + sLineBreak +
     '  ReplaceAll(S, OldPattern, NewPattern, IgnoreCase=False) : string' + sLineBreak +
     '    Replace all occurrences of OldPattern with NewPattern in S.' + sLineBreak +
+    '  RegexReplace(Input, Pattern, Replacement) : string' + sLineBreak +
+    '    Replace all matches of the regular expression Pattern in Input with Replacement.' + sLineBreak +
+    '    The search is case-insensitive by default. Use standard regex syntax.' + sLineBreak +
     'Available parameters (retrieved with GetParam):' + sLineBreak +
     '  text          - the input text to process (possibly truncated to MaxLength)' + sLineBreak +
     '  source        - source language code (may be empty)' + sLineBreak + '  target        - target language code' +
@@ -247,6 +252,8 @@ resourcestring
     sLineBreak + 'Separate multiple segments with semicolon ;.' + sLineBreak +
     'Literal: Text block in {…}. Special tag #10 for newlines. Use {{regex}} inside to extract data directly into the text.' +
     sLineBreak + 'Logic: If a Pointer in a segment is empty, the whole segment is skipped. If a segment has no Pointer, only literal text blocks with embedded regular expressions are processed.' + sLineBreak + 'Regex: {prefix {regex[index]} suffix} inside a text block. If no [index] is specified, the first match is used.' + sLineBreak + 'Index can be a number, [*] (join by space), or [*#10] (join by newline). If the regex finds no match, the entire {…} block is removed.' + sLineBreak + 'Using ~ inside a regex returns the entire text.' + sLineBreak + 'Inversion: Start a segment with ! (e.g. !/path{Error}) to show its text only if the Pointer data is missing or the JSON is invalid.' + sLineBreak + 'Commenting: /* text */ comments are stripped from the entire expression before any processing.' + sLineBreak + 'Examples:' + sLineBreak + 'responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\w+)})}; !/translations{Error: No data!#10}; /translations/0/text';
+
+{%EndRegion}
 
 implementation
 

@@ -14,6 +14,7 @@ uses
   Classes,
   SysUtils,
   Variants,
+  RegExpr,
   uPSComponent,
   uPSCompiler,
   uPSUtils, // uPSUtils provides btString, btS32
@@ -123,7 +124,7 @@ begin
 end;
 
 // Replaces all occurrences of OldPattern with NewPattern in S.
-function ReplaceAll(const S, OldPattern, NewPattern: string; IgnoreCase: boolean = False): string;
+function PS_ReplaceAll(const S, OldPattern, NewPattern: string; IgnoreCase: boolean = False): string;
 var
   SearchStr, SearchPattern: string;
   P, OldLen, Offset, SearchLen: integer;
@@ -171,6 +172,22 @@ begin
   end;
 end;
 
+// Replace all occurrences matching a regular expression pattern with Replacement.
+// The search is case-insensitive by default.
+function PS_RegexReplace(const Input, Pattern, Replacement: string): string;
+var
+  RegExpr: TRegExpr;
+begin
+  RegExpr := TRegExpr.Create;
+  try
+    RegExpr.Expression := Pattern;
+    RegExpr.ModifierI := True; // case insensitive matching
+    Result := RegExpr.Replace(Input, Replacement, True);
+  finally
+    RegExpr.Free;
+  end;
+end;
+
 { TScriptRunner }
 
 constructor TScriptRunner.Create;
@@ -210,16 +227,21 @@ begin
 
   // Pseudo-random generator
   Sender.AddFunction(@PS_Random, 'function Random: Extended;');
+
   // Hexadecimal conversion
   Sender.AddFunction(@PS_IntToHex, 'function IntToHex(Value: Integer; Digits: Integer): string;');
 
   // Input reader: allows the script to retrieve any parameter by name.
   Sender.AddFunction(@PS_GetParam, 'function GetParam(const Name: string): string;');
+
   // Output writer: the script calls this to store a result.
   Sender.AddFunction(@PS_SetOutput, 'procedure SetOutput(const Name, Value: string);');
 
   // Substring replacement function
-  Sender.AddFunction(@ReplaceAll, 'function ReplaceAll(const S, OldPattern, NewPattern: string; IgnoreCase: Boolean): string;');
+  Sender.AddFunction(@PS_ReplaceAll, 'function ReplaceAll(const S, OldPattern, NewPattern: string; IgnoreCase: Boolean): string;');
+
+  // Regular expression search and replace
+  Sender.AddFunction(@PS_RegexReplace, 'function RegexReplace(const Input, Pattern, Replacement: string): string;');
 end;
 
 { OnExecute event – called just before the script starts running.
