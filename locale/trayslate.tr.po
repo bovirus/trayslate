@@ -103,6 +103,37 @@ msgstr "Yeni yapılandırma dosyası adını girin:"
 msgid "The configuration was modified. Save changes?"
 msgstr "Yapılandırma değiştirildi. Değişiklikler kaydedilsin mi?"
 
+#: formconfig.rscripthint
+#, fuzzy
+#| msgid "The script can access any parameters defined above using GetParam('name') and return values with SetOutput('name', 'value'). Additional helper functions are available: GetTimestamp() and GetRandom(Length)."
+msgctxt "formconfig.rscripthint"
+msgid ""
+"The script is a standard Pascal program: optional var section, then a main begin ... end. block.\n"
+"Example:\n"
+"  var s: string;\n"
+"  begin\n"
+"    s := GetParam('text');\n"
+"    s := ReplaceAll(s, '-', '_', False);\n"
+"    SetOutput('text', s);\n"
+"  end.\n"
+"You can also use standard Pascal constructs (if, for, while, repeat, etc.).\n"
+"Available functions:\n"
+"  GetParam('name') : string\n"
+"    Retrieve an input parameter value.\n"
+"  SetOutput('name', 'value')\n"
+"    Store an output value for the host.\n"
+"  GetTimestamp() : Int64\n"
+"    Current Unix timestamp in milliseconds (UTC).\n"
+"  GetRandom(Length) : Int64\n"
+"    Random integer with exactly Length decimal digits.\n"
+"  Random : Extended\n"
+"    Random float in the range [0, 1).\n"
+"  IntToHex(Value, Digits) : string\n"
+"    Convert integer to hexadecimal string with at least Digits characters.\n"
+"  ReplaceAll(S, OldPattern, NewPattern, IgnoreCase=False) : string\n"
+"    Replace all occurrences of OldPattern with NewPattern in S."
+msgstr "Betik, yukarıda tanımlanan tüm parametrelere GetParam('name') kullanarak erişebilir ve değerleri SetOutput('name', 'value') ile döndürebilir. Ek yardımcı işlevler de kullanılabilir: GetTimestamp() ve GetRandom(Length)."
+
 #: formconfig.rvaluetype1
 msgctxt "formconfig.rvaluetype1"
 msgid "None"
@@ -436,8 +467,15 @@ msgctxt "tformconfigtrayslate.btnresponsetest.hint"
 msgid "Converts the current response"
 msgstr "Geçerli yanıtı dönüştürür"
 
-#: tformconfigtrayslate.btnscropttest.hint
-msgctxt "tformconfigtrayslate.btnscropttest.hint"
+#: tformconfigtrayslate.btnscripthelp.hint
+#, fuzzy
+msgctxt "tformconfigtrayslate.btnscripthelp.hint"
+msgid "Help"
+msgstr "Yardım"
+
+#: tformconfigtrayslate.btnscripttest.hint
+#, fuzzy
+msgctxt "tformconfigtrayslate.btnscripttest.hint"
 msgid "Execute script and view the result"
 msgstr "Betiği çalıştır ve sonucu görüntüle"
 
@@ -658,7 +696,10 @@ msgid "Headers"
 msgstr "Headers"
 
 #: tformconfigtrayslate.labelscript.caption
-msgid "The script can access any parameters defined above using GetParam('name') and return values with SetOutput('name', 'value'). Additional helper functions are available: GetTimestamp() and GetRandom(Length)."
+#, fuzzy
+#| msgid "The script can access any parameters defined above using GetParam('name') and return values with SetOutput('name', 'value'). Additional helper functions are available: GetTimestamp() and GetRandom(Length)."
+msgctxt "tformconfigtrayslate.labelscript.caption"
+msgid "The script can access any parameters defined above using GetParam('name') and return values with SetOutput('name', 'value')."
 msgstr "Betik, yukarıda tanımlanan tüm parametrelere GetParam('name') kullanarak erişebilir ve değerleri SetOutput('name', 'value') ile döndürebilir. Ek yardımcı işlevler de kullanılabilir: GetTimestamp() ve GetRandom(Length)."
 
 #: tformconfigtrayslate.labelservicedescription.caption
@@ -1541,6 +1582,7 @@ msgid "Quick Settings"
 msgstr "Hızlı ayarlar"
 
 #: tformtrayslate.menuhelp.caption
+msgctxt "tformtrayslate.menuhelp.caption"
 msgid "Help"
 msgstr "Yardım"
 

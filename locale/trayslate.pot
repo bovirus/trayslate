@@ -93,6 +93,35 @@ msgstr ""
 msgid "The configuration was modified. Save changes?"
 msgstr ""
 
+#: formconfig.rscripthint
+msgctxt "formconfig.rscripthint"
+msgid ""
+"The script is a standard Pascal program: optional var section, then a main begin ... end. block.\n"
+"Example:\n"
+"  var s: string;\n"
+"  begin\n"
+"    s := GetParam('text');\n"
+"    s := ReplaceAll(s, '-', '_', False);\n"
+"    SetOutput('text', s);\n"
+"  end.\n"
+"You can also use standard Pascal constructs (if, for, while, repeat, etc.).\n"
+"Available functions:\n"
+"  GetParam('name') : string\n"
+"    Retrieve an input parameter value.\n"
+"  SetOutput('name', 'value')\n"
+"    Store an output value for the host.\n"
+"  GetTimestamp() : Int64\n"
+"    Current Unix timestamp in milliseconds (UTC).\n"
+"  GetRandom(Length) : Int64\n"
+"    Random integer with exactly Length decimal digits.\n"
+"  Random : Extended\n"
+"    Random float in the range [0, 1).\n"
+"  IntToHex(Value, Digits) : string\n"
+"    Convert integer to hexadecimal string with at least Digits characters.\n"
+"  ReplaceAll(S, OldPattern, NewPattern, IgnoreCase=False) : string\n"
+"    Replace all occurrences of OldPattern with NewPattern in S."
+msgstr ""
+
 #: formconfig.rvaluetype1
 msgctxt "formconfig.rvaluetype1"
 msgid "None"
@@ -406,8 +435,13 @@ msgctxt "tformconfigtrayslate.btnresponsetest.hint"
 msgid "Converts the current response"
 msgstr ""
 
-#: tformconfigtrayslate.btnscropttest.hint
-msgctxt "tformconfigtrayslate.btnscropttest.hint"
+#: tformconfigtrayslate.btnscripthelp.hint
+msgctxt "tformconfigtrayslate.btnscripthelp.hint"
+msgid "Help"
+msgstr ""
+
+#: tformconfigtrayslate.btnscripttest.hint
+msgctxt "tformconfigtrayslate.btnscripttest.hint"
 msgid "Execute script and view the result"
 msgstr ""
 
@@ -618,7 +652,8 @@ msgid "Headers"
 msgstr ""
 
 #: tformconfigtrayslate.labelscript.caption
-msgid "The script can access any parameters defined above using GetParam('name') and return values with SetOutput('name', 'value'). Additional helper functions are available: GetTimestamp() and GetRandom(Length)."
+msgctxt "tformconfigtrayslate.labelscript.caption"
+msgid "The script can access any parameters defined above using GetParam('name') and return values with SetOutput('name', 'value')."
 msgstr ""
 
 #: tformconfigtrayslate.labelservicedescription.caption
@@ -1496,6 +1531,7 @@ msgid "Quick Settings"
 msgstr ""
 
 #: tformtrayslate.menuhelp.caption
+msgctxt "tformtrayslate.menuhelp.caption"
 msgid "Help"
 msgstr ""
 

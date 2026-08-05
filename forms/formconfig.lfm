@@ -164,11 +164,11 @@ object formConfigTrayslate: TformConfigTrayslate
     Height = 559
     Top = 41
     Width = 590
-    ActivePage = PageService
+    ActivePage = PageParameters
     Align = alClient
     BorderSpacing.Bottom = 35
     BorderSpacing.Around = 5
-    TabIndex = 0
+    TabIndex = 3
     TabOrder = 1
     object PageService: TTabSheet
       Caption = 'Service'
@@ -975,8 +975,8 @@ object formConfigTrayslate: TformConfigTrayslate
         Width = 582
         HorzScrollBar.Page = 1
         HorzScrollBar.Visible = False
-        VertScrollBar.Increment = 40
-        VertScrollBar.Page = 408
+        VertScrollBar.Increment = 39
+        VertScrollBar.Page = 393
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
@@ -1054,14 +1054,14 @@ object formConfigTrayslate: TformConfigTrayslate
           TabOrder = 1
           object LabelScript: TLabel
             Left = 5
-            Height = 45
+            Height = 30
             Top = 5
             Width = 538
             Align = alTop
             BorderSpacing.Right = 20
             BorderSpacing.Bottom = 5
             BorderSpacing.Around = 5
-            Caption = 'The script can access any parameters defined above using GetParam(''name'') and return values with SetOutput(''name'', ''value''). Additional helper functions are available: GetTimestamp() and GetRandom(Length).'
+            Caption = 'The script can access any parameters defined above using GetParam(''name'') and return values with SetOutput(''name'', ''value'').'
             Color = clInfoBk
             ParentColor = False
             Transparent = False
@@ -1069,18 +1069,18 @@ object formConfigTrayslate: TformConfigTrayslate
           end
           object PanelScript: TPanel
             Left = 5
-            Height = 173
-            Top = 60
+            Height = 188
+            Top = 45
             Width = 563
             Align = alClient
             BorderSpacing.Left = 5
             BorderSpacing.Top = 10
             BorderSpacing.Bottom = 5
             BevelOuter = bvNone
-            ClientHeight = 173
+            ClientHeight = 188
             ClientWidth = 563
             TabOrder = 0
-            object BtnScroptTest: TSpeedButton
+            object BtnScriptTest: TSpeedButton
               Left = 540
               Height = 22
               Hint = 'Execute script and view the result'
@@ -1126,11 +1126,11 @@ object formConfigTrayslate: TformConfigTrayslate
               }
               ShowHint = True
               ParentShowHint = False
-              OnClick = BtnScroptTestClick
+              OnClick = BtnScriptTestClick
             end
             inline SynScriptParameters: TSynEdit
               Left = 0
-              Height = 173
+              Height = 188
               Top = 0
               Width = 538
               Align = alClient
@@ -1627,6 +1627,54 @@ object formConfigTrayslate: TformConfigTrayslate
                   MouseActionsCollapsed = <>
                 end
               end
+            end
+            object BtnScriptHelp: TSpeedButton
+              Left = 540
+              Height = 22
+              Hint = 'Help'
+              Top = 28
+              Width = 23
+              Anchors = [akTop, akRight]
+              Flat = True
+              Glyph.Data = {
+                36040000424D3604000000000000360000002800000010000000100000000100
+                2000000000000004000064000000640000000000000000000000000000000000
+                000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00FFFFFF000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000046515151FF515151FF515151FF515151FF5151
+                51FF515151FF0000004600000000000000000000000000000000000000000000
+                00000000000000000046515151FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFF515151FF00000046000000000000000000000000000000000000
+                000000000046515151FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFF515151FF000000460000000000000000000000000000
+                0046515151FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF515151FFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF0000004600000000000000005151
+                51FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF515151FFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF00000000FFFFFF005151
+                51FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF00000000FFFFFF005151
+                51FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF00000000FFFFFF005151
+                51FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF515151FFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF00000000FFFFFF005151
+                51FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF515151FFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF00000000FFFFFF005151
+                51FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF515151FFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FFFFFFFF00000000000000
+                0046515151FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF515151FFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFF515151FF0000004600000000FFFFFF00FFFF
+                FF0000000046515151FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFF515151FF00000046FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00FFFFFF0000000046515151FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFF515151FF00000046FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00000000000000000000000046515151FF515151FF515151FF515151FF5151
+                51FF515151FF00000046FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF0000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+                FF00FFFFFF00FFFFFF0000000000000000000000000000000000
+              }
+              ShowHint = True
+              ParentShowHint = False
+              OnClick = BtnScriptHelpClick
             end
           end
         end

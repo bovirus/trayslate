@@ -31,7 +31,8 @@ uses
   SynHighlighterPas,
   SynEditHighlighterFoldBase,
   LCLType,
-  LCLIntf;
+  LCLIntf,
+  oneshottooltip;
 
 type
 
@@ -43,7 +44,8 @@ type
     ActionList: TActionList;
     BtnClose: TButton;
     BtnInitParametersTest: TSpeedButton;
-    BtnScroptTest: TSpeedButton;
+    BtnScriptTest: TSpeedButton;
+    BtnScriptHelp: TSpeedButton;
     BtnUrlTest: TSpeedButton;
     BtnSave: TButton;
     BtnPostDataTest: TSpeedButton;
@@ -143,7 +145,8 @@ type
     SplitterParameters: TSplitter;
     SynPasSyn: TSynPasSyn;
     SynScriptParameters: TSynEdit;
-    procedure BtnScroptTestClick(Sender: TObject);
+    procedure BtnScriptHelpClick(Sender: TObject);
+    procedure BtnScriptTestClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -173,6 +176,7 @@ type
     FLastConfig: integer;
     FInUpdateConfig: boolean;
     FIconBase64: string;
+    FHint: TOneShotTooltip;
 
     procedure UpdateIconPreview;
   public
@@ -201,6 +205,21 @@ resourcestring
   rvaluetype4 = 'Currency Fiat Only';
   rvaluetype5 = 'Currency Crypto Only';
   rvaluetype6 = 'Measurement Units';
+  rscripthint =
+    'The script is a standard Pascal program: optional var section, then a main begin ... end. block.' +
+    sLineBreak + 'Example:' + sLineBreak + '  var s: string;' + sLineBreak + '  begin' + sLineBreak +
+    '    s := GetParam(''text'');' + sLineBreak + '    s := ReplaceAll(s, ''-'', ''_'', False);' +
+    sLineBreak + '    SetOutput(''text'', s);' + sLineBreak + '  end.' + sLineBreak +
+    'You can also use standard Pascal constructs (if, for, while, repeat, etc.).' + sLineBreak +
+    'Available functions:' + sLineBreak + '  GetParam(''name'') : string' + sLineBreak +
+    '    Retrieve an input parameter value.' + sLineBreak + '  SetOutput(''name'', ''value'')' + sLineBreak +
+    '    Store an output value for the host.' + sLineBreak + '  GetTimestamp() : Int64' + sLineBreak +
+    '    Current Unix timestamp in milliseconds (UTC).' + sLineBreak + '  GetRandom(Length) : Int64' +
+    sLineBreak + '    Random integer with exactly Length decimal digits.' + sLineBreak + '  Random : Extended' +
+    sLineBreak + '    Random float in the range [0, 1).' + sLineBreak + '  IntToHex(Value, Digits) : string' +
+    sLineBreak + '    Convert integer to hexadecimal string with at least Digits characters.' + sLineBreak +
+    '  ReplaceAll(S, OldPattern, NewPattern, IgnoreCase=False) : string' + sLineBreak +
+    '    Replace all occurrences of OldPattern with NewPattern in S.';
 
 implementation
 
@@ -261,6 +280,7 @@ end;
 procedure TformConfigTrayslate.FormDestroy(Sender: TObject);
 begin
   formConfigTrayslate := nil;
+  FreeAndNil(FHint);
 end;
 
 procedure TformConfigTrayslate.FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -373,7 +393,7 @@ begin
   end;
 end;
 
-procedure TformConfigTrayslate.BtnScroptTestClick(Sender: TObject);
+procedure TformConfigTrayslate.BtnScriptTestClick(Sender: TObject);
 begin
   Enabled := False;
   Screen.Cursor := crHourGlass;
@@ -389,6 +409,13 @@ begin
     Enabled := True;
     Screen.Cursor := crDefault;
   end;
+end;
+
+procedure TformConfigTrayslate.BtnScriptHelpClick(Sender: TObject);
+begin
+  if not Assigned(FHint) then
+    FHint := TOneShotTooltip.Create(Self);
+  FHint.ShowHintText(rscripthint, BtnScriptHelp.ClientOrigin.X, BtnScriptHelp.ClientOrigin.Y, 500);
 end;
 
 procedure TformConfigTrayslate.BtnCloseClick(Sender: TObject);
