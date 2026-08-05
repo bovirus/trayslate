@@ -164,11 +164,11 @@ object formConfigTrayslate: TformConfigTrayslate
     Height = 559
     Top = 41
     Width = 590
-    ActivePage = PageResponse
+    ActivePage = PageService
     Align = alClient
     BorderSpacing.Bottom = 35
     BorderSpacing.Around = 5
-    TabIndex = 4
+    TabIndex = 0
     TabOrder = 1
     object PageService: TTabSheet
       Caption = 'Service'
@@ -975,8 +975,8 @@ object formConfigTrayslate: TformConfigTrayslate
         Width = 582
         HorzScrollBar.Page = 1
         HorzScrollBar.Visible = False
-        VertScrollBar.Increment = 36
-        VertScrollBar.Page = 362
+        VertScrollBar.Increment = 33
+        VertScrollBar.Page = 338
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
@@ -986,19 +986,19 @@ object formConfigTrayslate: TformConfigTrayslate
         TabOrder = 0
         object GroupBoxCustomParameters: TGroupBox
           Left = 5
-          Height = 243
+          Height = 219
           Top = 5
           Width = 572
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Custom Parameters'
-          ClientHeight = 223
+          ClientHeight = 199
           ClientWidth = 568
           Constraints.MinHeight = 20
           TabOrder = 0
           object MemoCustomParameters: TMemo
             Left = 5
-            Height = 149
+            Height = 125
             Top = 74
             Width = 538
             Align = alClient
@@ -1042,28 +1042,29 @@ object formConfigTrayslate: TformConfigTrayslate
           Cursor = crVSplit
           Left = 0
           Height = 10
-          Top = 253
+          Top = 229
           Width = 582
           Align = alTop
           AutoSnap = False
           MinSize = 20
           ResizeAnchor = akTop
+          OnMoved = SplitterParametersMoved
         end
         object GroupScript: TGroupBox
           Left = 5
-          Height = 258
-          Top = 268
+          Height = 282
+          Top = 244
           Width = 572
           Align = alClient
           BorderSpacing.Around = 5
           Caption = 'Script Retrieved Parameters'
-          ClientHeight = 238
+          ClientHeight = 262
           ClientWidth = 568
           ParentBackground = False
           TabOrder = 1
           object PanelScript: TPanel
             Left = 5
-            Height = 223
+            Height = 247
             Top = 10
             Width = 563
             Align = alClient
@@ -1071,7 +1072,7 @@ object formConfigTrayslate: TformConfigTrayslate
             BorderSpacing.Top = 10
             BorderSpacing.Bottom = 5
             BevelOuter = bvNone
-            ClientHeight = 223
+            ClientHeight = 247
             ClientWidth = 563
             TabOrder = 0
             object BtnScriptTest: TSpeedButton
@@ -1124,7 +1125,7 @@ object formConfigTrayslate: TformConfigTrayslate
             end
             inline SynScriptParameters: TSynEdit
               Left = 0
-              Height = 223
+              Height = 247
               Top = 0
               Width = 538
               Align = alClient
@@ -1686,8 +1687,8 @@ object formConfigTrayslate: TformConfigTrayslate
         Width = 582
         HorzScrollBar.Page = 1
         HorzScrollBar.Visible = False
-        VertScrollBar.Increment = 23
-        VertScrollBar.Page = 234
+        VertScrollBar.Increment = 33
+        VertScrollBar.Page = 338
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
@@ -1697,19 +1698,19 @@ object formConfigTrayslate: TformConfigTrayslate
         TabOrder = 0
         object GroupResponse: TGroupBox
           Left = 5
-          Height = 115
+          Height = 219
           Top = 5
           Width = 572
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Json Pointer Processing the Response'
-          ClientHeight = 95
+          ClientHeight = 199
           ClientWidth = 568
           ParentBackground = False
           TabOrder = 0
           object PanelResponse: TPanel
             Left = 5
-            Height = 75
+            Height = 179
             Top = 10
             Width = 563
             Align = alClient
@@ -1717,12 +1718,12 @@ object formConfigTrayslate: TformConfigTrayslate
             BorderSpacing.Top = 10
             BorderSpacing.Bottom = 10
             BevelOuter = bvNone
-            ClientHeight = 75
+            ClientHeight = 179
             ClientWidth = 563
             TabOrder = 0
             object MemoJsonPointer: TMemo
               Left = 0
-              Height = 75
+              Height = 179
               Top = 0
               Width = 538
               Align = alClient
@@ -1830,21 +1831,33 @@ object formConfigTrayslate: TformConfigTrayslate
             end
           end
         end
-        object GroupScript1: TGroupBox
+        object SplitterResponse: TSplitter
+          Cursor = crVSplit
+          Left = 0
+          Height = 10
+          Top = 229
+          Width = 582
+          Align = alTop
+          AutoSnap = False
+          MinSize = 20
+          ResizeAnchor = akTop
+          OnMoved = SplitterResponseMoved
+        end
+        object GroupScriptResponse: TGroupBox
           Left = 5
-          Height = 386
-          Top = 140
+          Height = 282
+          Top = 244
           Width = 572
           Align = alClient
           BorderSpacing.Around = 5
           Caption = 'Script Processing the Response'
-          ClientHeight = 366
+          ClientHeight = 262
           ClientWidth = 568
           ParentBackground = False
           TabOrder = 1
           object PanelScript1: TPanel
             Left = 5
-            Height = 351
+            Height = 247
             Top = 10
             Width = 563
             Align = alClient
@@ -1852,7 +1865,7 @@ object formConfigTrayslate: TformConfigTrayslate
             BorderSpacing.Top = 10
             BorderSpacing.Bottom = 5
             BevelOuter = bvNone
-            ClientHeight = 351
+            ClientHeight = 247
             ClientWidth = 563
             TabOrder = 0
             object BtnScriptResponseTest: TSpeedButton
@@ -1905,7 +1918,7 @@ object formConfigTrayslate: TformConfigTrayslate
             end
             inline SynScriptResponse: TSynEdit
               Left = 0
-              Height = 351
+              Height = 247
               Top = 0
               Width = 538
               Align = alClient
@@ -2453,17 +2466,6 @@ object formConfigTrayslate: TformConfigTrayslate
               OnClick = BtnScriptResponseHelpClick
             end
           end
-        end
-        object SplitterParameters1: TSplitter
-          Cursor = crVSplit
-          Left = 0
-          Height = 10
-          Top = 125
-          Width = 582
-          Align = alTop
-          AutoSnap = False
-          MinSize = 20
-          ResizeAnchor = akTop
         end
       end
     end

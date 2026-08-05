@@ -655,7 +655,8 @@ msgstr "Phản hồi"
 msgid "Script Retrieved Parameters"
 msgstr "Các tham số được tập lệnh truy xuất"
 
-#: tformconfigtrayslate.groupscript1.caption
+#: tformconfigtrayslate.groupscriptresponse.caption
+msgctxt "tformconfigtrayslate.groupscriptresponse.caption"
 msgid "Script Processing the Response"
 msgstr ""
 

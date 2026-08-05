@@ -655,7 +655,8 @@ msgstr "응답"
 msgid "Script Retrieved Parameters"
 msgstr "스크립트에서 가져온 매개변수"
 
-#: tformconfigtrayslate.groupscript1.caption
+#: tformconfigtrayslate.groupscriptresponse.caption
+msgctxt "tformconfigtrayslate.groupscriptresponse.caption"
 msgid "Script Processing the Response"
 msgstr ""
 

@@ -403,6 +403,8 @@ type
     FFormConfigTop: integer;
     FFormConfigWidth: integer;
     FFormConfigHeight: integer;
+    FFormConfigSep1: integer;
+    FFormConfigSep2: integer;
     FFormPopupLeft: integer;
     FFormPopupTop: integer;
     FFormPopupWidth: integer;
@@ -595,6 +597,8 @@ type
     property FormConfigTop: integer read FFormConfigTop write FFormConfigTop;
     property FormConfigWidth: integer read FFormConfigWidth write FFormConfigWidth;
     property FormConfigHeight: integer read FFormConfigHeight write FFormConfigHeight;
+    property FormConfigSep1: integer read FFormConfigSep1 write FFormConfigSep1;
+    property FormConfigSep2: integer read FFormConfigSep2 write FFormConfigSep2;
     property FormPopupLeft: integer read FFormPopupLeft write FFormPopupLeft;
     property FormPopupTop: integer read FFormPopupTop write FFormPopupTop;
     property FormPopupWidth: integer read FFormPopupWidth write FFormPopupWidth;
@@ -658,6 +662,8 @@ begin
   FFormConfigTop := 0;
   FFormConfigWidth := 0;
   FFormConfigHeight := 0;
+  FFormConfigSep1 := 0;
+  FFormConfigSep2 := 0;
   FFormPopupLeft := 0;
   FFormPopupTop := 0;
   FFormPopupWidth := 0;
@@ -1384,6 +1390,12 @@ begin
 
   if FormConfigHeight > 0 then
     formConfigTrayslate.Height := FormConfigHeight;
+
+  if FormConfigSep1 > 0 then
+    formConfigTrayslate.GroupBoxCustomParameters.Height := FormConfigSep1;
+
+  if FormConfigSep2 > 0 then
+    formConfigTrayslate.GroupResponse.Height := FormConfigSep2;
 
   formConfigTrayslate.Show;
   formConfigTrayslate.BringToFront;

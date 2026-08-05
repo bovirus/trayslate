@@ -79,7 +79,7 @@ type
     GroupResponse: TGroupBox;
     GroupLanguages: TGroupBox;
     GroupScript: TGroupBox;
-    GroupScript1: TGroupBox;
+    GroupScriptResponse: TGroupBox;
     ImagePreview: TImage;
     LabelAccept: TLabel;
     LabelInitHeaders: TLabel;
@@ -147,7 +147,7 @@ type
     SpinMaxLength: TSpinEdit;
     PageInitialRequest: TTabSheet;
     SplitterParameters: TSplitter;
-    SplitterParameters1: TSplitter;
+    SplitterResponse: TSplitter;
     SynPasSyn: TSynPasSyn;
     SynScriptParameters: TSynEdit;
     SynScriptResponse: TSynEdit;
@@ -178,6 +178,8 @@ type
     procedure CustomEditEnter(Sender: TObject);
     procedure MemoKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure SbNewConfigClick(Sender: TObject);
+    procedure SplitterParametersMoved(Sender: TObject);
+    procedure SplitterResponseMoved(Sender: TObject);
     procedure ValueChange(Sender: TObject);
     procedure SbCopyConfigClick(Sender: TObject);
     {%EndRegion}
@@ -357,6 +359,8 @@ procedure TformConfigTrayslate.FormResize(Sender: TObject);
 begin
   formTrayslate.FormConfigWidth := Width;
   formTrayslate.FormConfigHeight := Height;
+  formTrayslate.FormConfigSep1 := GroupBoxCustomParameters.Height;
+  formTrayslate.FormConfigSep2 := GroupResponse.Height;
 end;
 
 procedure TformConfigTrayslate.FormChangeBounds(Sender: TObject);
@@ -626,6 +630,16 @@ end;
 procedure TformConfigTrayslate.SbNewConfigClick(Sender: TObject);
 begin
   CreateConfig;
+end;
+
+procedure TformConfigTrayslate.SplitterParametersMoved(Sender: TObject);
+begin
+  formTrayslate.FormConfigSep1 := GroupBoxCustomParameters.Height;
+end;
+
+procedure TformConfigTrayslate.SplitterResponseMoved(Sender: TObject);
+begin
+  formTrayslate.FormConfigSep2 := GroupResponse.Height;
 end;
 
 procedure TformConfigTrayslate.SbCopyConfigClick(Sender: TObject);

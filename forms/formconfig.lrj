@@ -55,7 +55,7 @@
 {"hash":129072005,"name":"tformconfigtrayslate.groupresponse.caption","sourcebytes":[74,115,111,110,32,80,111,105,110,116,101,114,32,80,114,111,99,101,115,115,105,110,103,32,116,104,101,32,82,101,115,112,111,110,115,101],"value":"Json Pointer Processing the Response"},
 {"hash":109427941,"name":"tformconfigtrayslate.btnresponsetest.hint","sourcebytes":[67,111,110,118,101,114,116,115,32,116,104,101,32,99,117,114,114,101,110,116,32,114,101,115,112,111,110,115,101],"value":"Converts the current response"},
 {"hash":322608,"name":"tformconfigtrayslate.btnresponsehelp.hint","sourcebytes":[72,101,108,112],"value":"Help"},
-{"hash":74305893,"name":"tformconfigtrayslate.groupscript1.caption","sourcebytes":[83,99,114,105,112,116,32,80,114,111,99,101,115,115,105,110,103,32,116,104,101,32,82,101,115,112,111,110,115,101],"value":"Script Processing the Response"},
+{"hash":74305893,"name":"tformconfigtrayslate.groupscriptresponse.caption","sourcebytes":[83,99,114,105,112,116,32,80,114,111,99,101,115,115,105,110,103,32,116,104,101,32,82,101,115,112,111,110,115,101],"value":"Script Processing the Response"},
 {"hash":50575348,"name":"tformconfigtrayslate.btnscriptresponsetest.hint","sourcebytes":[69,120,101,99,117,116,101,32,115,99,114,105,112,116,32,97,110,100,32,118,105,101,119,32,116,104,101,32,114,101,115,117,108,116],"value":"Execute script and view the result"},
 {"hash":322608,"name":"tformconfigtrayslate.btnscriptresponsehelp.hint","sourcebytes":[72,101,108,112],"value":"Help"},
 {"hash":82521923,"name":"tformconfigtrayslate.pagelanguages.caption","sourcebytes":[76,97,110,103,117,97,103,101,115],"value":"Languages"},

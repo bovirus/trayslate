@@ -655,7 +655,8 @@ msgstr "Odpowiedź"
 msgid "Script Retrieved Parameters"
 msgstr "Parametry pobrane przez skrypt"
 
-#: tformconfigtrayslate.groupscript1.caption
+#: tformconfigtrayslate.groupscriptresponse.caption
+msgctxt "tformconfigtrayslate.groupscriptresponse.caption"
 msgid "Script Processing the Response"
 msgstr ""
 
