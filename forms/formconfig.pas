@@ -218,10 +218,10 @@ resourcestring
   rvaluetype6 = 'Measurement Units';
   rscripthint =
     'The script is a standard Pascal program: optional var section, then a main begin ... end. block.' +
-    sLineBreak + 'Example:' + sLineBreak + '  var s: string;' + sLineBreak + '  begin' + sLineBreak +
-    '    s := GetParam(''text'');' + sLineBreak + '    s := ReplaceAll(s, ''-'', ''_'', False);' + sLineBreak +
-    '    SetOutput(''text'', s);' + sLineBreak + '  end.' + sLineBreak +
-    'You can also use standard Pascal constructs (if, for, while, repeat, etc.).' + sLineBreak +
+    sLineBreak + sLineBreak + 'Example:' + sLineBreak + '  var s: string;' + sLineBreak + '  begin' +
+    sLineBreak + '    s := GetParam(''text'');' + sLineBreak + '    s := ReplaceAll(s, ''-'', ''_'', False);' +
+    sLineBreak + '    SetOutput(''text'', s);' + sLineBreak + '  end.' + sLineBreak + sLineBreak +
+    'You can also use standard Pascal constructs (if, for, while, repeat, etc.).' + sLineBreak + sLineBreak +
     'Available functions:' + sLineBreak + '  GetParam(''name'') : string' + sLineBreak +
     '    Retrieve an input parameter value.' + sLineBreak + '  SetOutput(''name'', ''value'')' + sLineBreak +
     '    Store an output value for the host.' + sLineBreak + '  GetTimestamp() : Int64' + sLineBreak +
@@ -233,7 +233,7 @@ resourcestring
     '    Replace all occurrences of OldPattern with NewPattern in S.' + sLineBreak +
     '  RegexReplace(Input, Pattern, Replacement) : string' + sLineBreak +
     '    Replace all matches of the regular expression Pattern in Input with Replacement.' + sLineBreak +
-    '    The search is case-insensitive by default. Use standard regex syntax.' + sLineBreak +
+    '    The search is case-insensitive by default. Use standard regex syntax.' + sLineBreak + sLineBreak +
     'Available parameters (retrieved with GetParam):' + sLineBreak +
     '  text          - the input text to process (possibly truncated to MaxLength)' + sLineBreak +
     '  source        - source language code (may be empty)' + sLineBreak + '  target        - target language code' +
@@ -244,9 +244,11 @@ resourcestring
 
   rscriptresponsehint =
     'This script processes the response data. All functions and parameters described in the script hint are available here as well.' +
-    sLineBreak + 'Use GetParam(''result'') to obtain the received text. Example:' + sLineBreak + '  var s: string;' +
-    sLineBreak + '  begin' + sLineBreak + '    s := GetParam(''result'');' + sLineBreak + '    SetOutput(''result'', s);' +
-    sLineBreak + '  end.';
+    sLineBreak + 'Use GetParam(''result'') to obtain the received text.' + sLineBreak + sLineBreak + 'Example:' +
+    sLineBreak + '  var s: string;' + sLineBreak + '  begin' + sLineBreak + '    s := GetParam(''result'');' +
+    sLineBreak + '    SetOutput(''result'', s);' + sLineBreak + '  end.' + sLineBreak + sLineBreak +
+    'You can define custom parameters in the parameters script using SetParam(''name'', ''value''),' +
+    sLineBreak + 'and then retrieve them here with GetParam(''name'').';
 
   rresponsehint =
     'Json Pointer: Use / for levels, keys for objects, and numbers for indexes.' + sLineBreak +
@@ -478,21 +480,22 @@ procedure TformConfigTrayslate.BtnScriptHelpClick(Sender: TObject);
 begin
   if not Assigned(FHint) then
     FHint := TOneShotTooltip.Create(Self);
-  FHint.ShowHintText(rscripthint, BtnScriptHelp.ClientOrigin.X, BtnScriptHelp.ClientOrigin.Y, 500);
+  FHint.ShowHintText(rscripthint, BtnScriptHelp.ClientOrigin.X, BtnScriptHelp.ClientOrigin.Y + BtnScriptHelp.Height, 500, 300);
 end;
 
 procedure TformConfigTrayslate.BtnScriptResponseHelpClick(Sender: TObject);
 begin
   if not Assigned(FHint) then
     FHint := TOneShotTooltip.Create(Self);
-  FHint.ShowHintText(rscriptresponsehint, BtnScriptResponseHelp.ClientOrigin.X, BtnScriptResponseHelp.ClientOrigin.Y, 500);
+  FHint.ShowHintText(rscriptresponsehint, BtnScriptResponseHelp.ClientOrigin.X,
+    BtnScriptResponseHelp.ClientOrigin.Y + BtnScriptResponseHelp.Height, 500);
 end;
 
 procedure TformConfigTrayslate.BtnResponseHelpClick(Sender: TObject);
 begin
   if not Assigned(FHint) then
     FHint := TOneShotTooltip.Create(Self);
-  FHint.ShowHintText(rresponsehint, BtnResponseHelp.ClientOrigin.X, BtnResponseHelp.ClientOrigin.Y, 500);
+  FHint.ShowHintText(rresponsehint, BtnResponseHelp.ClientOrigin.X, BtnResponseHelp.ClientOrigin.Y + BtnResponseHelp.Height, 500);
 end;
 
 procedure TformConfigTrayslate.BtnCloseClick(Sender: TObject);
