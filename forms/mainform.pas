@@ -51,7 +51,8 @@ uses
   stringhelper,
   hotkeyhelper,
   stringshelper,
-  clipboardhelper;
+  clipboardhelper,
+  oneshothint;
 
 type
 
@@ -166,7 +167,6 @@ type
     Separator9: TMenuItem;
     Splitter: TSplitter;
     TimerUnapply: TTimer;
-    TimerHideHint: TTimer;
     TimerAnimate: TTimer;
     TimerTranslate: TTimer;
     TimerClick: TTimer;
@@ -286,7 +286,6 @@ type
     procedure TimerActiveTimer(Sender: TObject);
     procedure TimerAnimateStopTimer(Sender: TObject);
     procedure TimerAnimateTimer(Sender: TObject);
-    procedure TimerHideHintTimer(Sender: TObject);
     procedure TimerUnapplyTimer(Sender: TObject);
     procedure TimerTranslateTimer(Sender: TObject);
     procedure TimerClickTimer(Sender: TObject);
@@ -356,7 +355,7 @@ type
     FMouseHook: TGlobalMouseHook;
     FKeyHook: TGlobalKeyboardHook;
     FPopupOpen: boolean;
-    FHint: THintWindow;
+    FHint: TOneShotHint;
     FFontPopup: TFont;
     FUnapplyCtrl: boolean;
     FUnapplyC: boolean;
@@ -962,7 +961,8 @@ end;
 
 procedure TformTrayslate.ApplicationPropShowHint(var HintStr: string; var CanShow: boolean; var HintInfo: THintInfo);
 begin
-  TimerHideHintTimer(Self);
+  if Assigned(FHint) then
+    FHint.ReleaseHandle;
 end;
 
 procedure TformTrayslate.ApplicationPropException(Sender: TObject; E: Exception);
@@ -2027,13 +2027,6 @@ begin
   SetAnimate(TimerAnimate.Tag);
 end;
 
-procedure TformTrayslate.TimerHideHintTimer(Sender: TObject);
-begin
-  TimerHideHint.Enabled := False;
-  if Assigned(FHint) then
-    FHint.ReleaseHandle; // Correct way to hide THintWindow
-end;
-
 procedure TformTrayslate.TimerUnapplyTimer(Sender: TObject);
 begin
   TimerUnapply.Enabled := False;
@@ -2090,7 +2083,8 @@ end;
 
 procedure TformTrayslate.TrayIconMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
 begin
-  TimerHideHintTimer(Self);
+  if Assigned(FHint) then
+    FHint.ReleaseHandle;
 end;
 
 procedure TformTrayslate.TrayIconMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
@@ -3331,31 +3325,10 @@ begin
 end;
 
 procedure TformTrayslate.ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
-var
-  HintRect: TRect;
-  DisplayPos: TPoint;
 begin
   if not Assigned(FHint) then
-    FHint := THintWindow.Create(Self);
-
-  // Calculate the size of the hint window based on text
-  HintRect := FHint.CalcHintRect(Screen.Width, AText, nil);
-
-  // Position the hint near the system tray (bottom-right)
-  // Note: This is a generic position.
-  // Finding the exact coordinates of the icon is TOS-specific and complex.
-  DisplayPos.X := ifthen(X = 0, Screen.Width - (HintRect.Right - HintRect.Left) - 20, X);
-  DisplayPos.Y := ifthen(Y = 0, Screen.WorkAreaHeight - (HintRect.Bottom - HintRect.Top) - 5, Y);
-
-  OffsetRect(HintRect, DisplayPos.X, DisplayPos.Y);
-
-  // Show the hint window
-  FHint.ActivateHint(HintRect, AText);
-
-  // Set timer to hide it
-  TimerHideHint.Enabled := False;
-  TimerHideHint.Interval := Duration;
-  TimerHideHint.Enabled := True;
+    FHint := TOneShotHint.Create(Self);
+  FHint.ShowHintText(AText, X, Y, Duration);
 end;
 
 function TformTrayslate.GetParameterValue(AName: string; out ResultOk: boolean): string;
