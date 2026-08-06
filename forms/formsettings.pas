@@ -932,10 +932,6 @@ begin
     FLastFocused.SetFocus;
 
   Apply;
-
-  formTrayslate.UnregisterHotKeys;
-  formTrayslate.MouseHook.Enabled := False;
-  formTrayslate.KeyHook.Enabled := False;
 end;
 
 procedure TformSettingsTrayslate.ValueListUserParametersSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);

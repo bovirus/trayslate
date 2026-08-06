@@ -2616,7 +2616,7 @@ begin
   if ComboTarget.ItemIndex = -1 then
     ComboTarget.Text := string.Empty;
 
-  if MemoSource.Visible and MemoSource.CanFocus and MemoSource.CanSetFocus then
+  if Visible and Focused and Active and MemoSource.Visible and MemoSource.CanFocus and MemoSource.CanSetFocus then
     MemoSource.SetFocus;
 
   UpdateAutoDetect(AutoDetect, rautodetect);
