@@ -85,8 +85,7 @@ object formTrayslate: TformTrayslate
     object SbTranslate: TSpeedButton
       Left = 488
       Height = 24
-      Hint = 'Translate'
-      Top = 4
+      Top = 3
       Width = 24
       Action = aTranslate
       BorderSpacing.Around = 3

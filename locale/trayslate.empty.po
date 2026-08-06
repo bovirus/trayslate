@@ -1628,8 +1628,3 @@ msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr ""
 
-#: tformtrayslate.sbtranslate.hint
-msgctxt "tformtrayslate.sbtranslate.hint"
-msgid "Translate"
-msgstr ""
-
