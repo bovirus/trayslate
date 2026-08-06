@@ -111,18 +111,6 @@ begin
   Result := SysUtils.IntToHex(Value, Digits);
 end;
 
-// Convert a string to an integer. Raises an exception if the string is not a valid integer.
-function PS_StrToInt(const S: string): integer;
-begin
-  Result := StrToInt(S);
-end;
-
-// Convert an integer to its string representation.
-function PS_IntToStr(Value: integer): string;
-begin
-  Result := IntToStr(Value);
-end;
-
 // Replaces all occurrences of OldPattern with NewPattern in S.
 function PS_ReplaceAll(const S, OldPattern, NewPattern: string; IgnoreCase: boolean = False): string;
 begin
@@ -141,12 +129,6 @@ end;
 function PS_RegexMatch(const Input, Pattern: string): boolean;
 begin
   Result := Input.RegexMatch(Pattern);
-end;
-
-// Remove leading and trailing whitespace characters (spaces, tabs, etc.).
-function PS_Trim(const S: string): string;
-begin
-  Result := SysUtils.Trim(S);
 end;
 
 // Remove leading whitespace characters.
@@ -230,27 +212,23 @@ end;
   available inside the script. }
 procedure TScriptRunner.OnCompile(Sender: TPSScript);
 begin
-  // Basic utility functions from TOS
-  Sender.AddFunction(@PS_GetTimestamp, 'function GetTimestamp: Int64;');
-  Sender.AddFunction(@PS_GetRandom, 'function GetRandom(ALength: Integer): Int64;');
-
-  // Pseudo-random generator
-  Sender.AddFunction(@PS_Random, 'function Random: Extended;');
-
-  // Hexadecimal conversion
-  Sender.AddFunction(@PS_IntToHex, 'function IntToHex(Value: Integer; Digits: Integer): string;');
-
-  // String to integer conversion
-  Sender.AddFunction(@PS_StrToInt, 'function StrToInt(const S: string): Integer;');
-
-  // Integer to string conversion
-  Sender.AddFunction(@PS_IntToStr, 'function IntToStr(Value: Integer): string;');
-
   // Input reader: allows the script to retrieve any parameter by name.
   Sender.AddFunction(@PS_GetParam, 'function GetParam(const Name: string): string;');
 
   // Output writer: the script calls this to store a result.
   Sender.AddFunction(@PS_SetOutput, 'procedure SetOutput(const Name, Value: string);');
+
+  // Basic utility functions from TOS
+  Sender.AddFunction(@PS_GetTimestamp, 'function GetTimestamp: Int64;');
+
+  // Pseudo-random generator
+  Sender.AddFunction(@PS_Random, 'function Random: Extended;');
+
+  // Pseudo-random generator with length
+  Sender.AddFunction(@PS_GetRandom, 'function GetRandom(ALength: Integer): Int64;');
+
+  // Hexadecimal conversion
+  Sender.AddFunction(@PS_IntToHex, 'function IntToHex(Value: Integer; Digits: Integer): string;');
 
   // Substring replacement function
   Sender.AddFunction(@PS_ReplaceAll, 'function ReplaceAll(const S, OldPattern, NewPattern: string; IgnoreCase: Boolean): string;');
@@ -262,7 +240,6 @@ begin
   Sender.AddFunction(@PS_RegexMatch, 'function RegexMatch(const Input, Pattern: string): Boolean;');
 
   // Trim whitespace
-  Sender.AddFunction(@PS_Trim, 'function Trim(const S: string): string;');
   Sender.AddFunction(@PS_TrimLeft, 'function TrimLeft(const S: string): string;');
   Sender.AddFunction(@PS_TrimRight, 'function TrimRight(const S: string): string;');
 
