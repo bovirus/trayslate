@@ -640,7 +640,7 @@ var
 implementation
 
 uses formdonate, formabout, formsettings, formconfig, formpopup, formbutton, settings, languages, langdetect,
-  checkupdates, base64utils, localize, colorhelper, controlshelper, darkutils, pascalutils;
+  checkupdates, base64utils, localize, colorhelper, controlshelper, darkutils, pascalutils, flatbutton;
 
   {$R *.lfm}
 
@@ -1505,17 +1505,17 @@ var
   Pair: string;
   Dlg: boolean;
 begin
-  if (Sender is TSpeedButton) then
+  if (Sender is TFlatButton) then
   begin
-    Index := (Sender as TSpeedButton).Tag;
-    Pair := (Sender as TSpeedButton).Caption;
+    Index := (Sender as TFlatButton).Tag;
+    Pair := (Sender as TFlatButton).Caption;
     Dlg := False;
   end
   else
-  if (FPopupRecentPair is TSpeedButton) then
+  if (FPopupRecentPair is TFlatButton) then
   begin
-    Index := (FPopupRecentPair as TSpeedButton).Tag;
-    Pair := (FPopupRecentPair as TSpeedButton).Caption;
+    Index := (FPopupRecentPair as TFlatButton).Tag;
+    Pair := (FPopupRecentPair as TFlatButton).Caption;
     Dlg := True;
   end
   else
@@ -1555,10 +1555,10 @@ procedure TformTrayslate.aMoveFirstExecute(Sender: TObject);
 var
   Index: integer;
 begin
-  if not (FPopupRecentPair is TSpeedButton) then
+  if not (FPopupRecentPair is TFlatButton) then
     Exit;
 
-  Index := TSpeedButton(FPopupRecentPair).Tag;
+  Index := TFlatButton(FPopupRecentPair).Tag;
 
   while Index > 0 do
   begin
@@ -1573,10 +1573,10 @@ procedure TformTrayslate.aMoveLastExecute(Sender: TObject);
 var
   Index: integer;
 begin
-  if not (FPopupRecentPair is TSpeedButton) then
+  if not (FPopupRecentPair is TFlatButton) then
     Exit;
 
-  Index := TSpeedButton(FPopupRecentPair).Tag;
+  Index := TFlatButton(FPopupRecentPair).Tag;
 
   while Index < FLangPairs.Count - 1 do
   begin
@@ -1591,10 +1591,10 @@ procedure TformTrayslate.aMoveLeftExecute(Sender: TObject);
 var
   Index: integer;
 begin
-  if not (FPopupRecentPair is TSpeedButton) then
+  if not (FPopupRecentPair is TFlatButton) then
     Exit;
 
-  Index := TSpeedButton(FPopupRecentPair).Tag;
+  Index := TFlatButton(FPopupRecentPair).Tag;
 
   if Index > 0 then
     FLangPairs.Exchange(Index, Index - 1);
@@ -1606,10 +1606,10 @@ procedure TformTrayslate.aMoveRightExecute(Sender: TObject);
 var
   Index: integer;
 begin
-  if not (FPopupRecentPair is TSpeedButton) then
+  if not (FPopupRecentPair is TFlatButton) then
     Exit;
 
-  Index := TSpeedButton(FPopupRecentPair).Tag;
+  Index := TFlatButton(FPopupRecentPair).Tag;
 
   if Index < FLangPairs.Count - 1 then
     FLangPairs.Exchange(Index, Index + 1);
@@ -2166,7 +2166,7 @@ end;
 
 procedure TformTrayslate.ButtonLangMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
 begin
-  if not (Sender is TSpeedButton) or (Button = mbLeft) then Exit;
+  if not (Sender is TFlatButton) or (Button = mbLeft) then Exit;
 
   if Button = mbMiddle then
   begin
@@ -2174,23 +2174,23 @@ begin
     Exit;
   end;
 
-  if (Button = mbRight) and (MenuLangPairs.Items[TSpeedButton(Sender).Tag].Checked) then
+  if (Button = mbRight) and (MenuLangPairs.Items[TFlatButton(Sender).Tag].Checked) then
     Exit;
-  SelectPairConfig(TSpeedButton(Sender).Tag);
+  SelectPairConfig(TFlatButton(Sender).Tag);
 end;
 
 procedure TformTrayslate.ButtonLangClick(Sender: TObject);
 begin
-  if not (Sender is TSpeedButton) then Exit;
+  if not (Sender is TFlatButton) then Exit;
 
   // Execute only if the button is down (selected), not when it's being unselected
-  if TSpeedButton(Sender).Down then
+  if TFlatButton(Sender).Down then
   begin
-    TSpeedButton(Sender).Parent.Repaint;
-    SelectPairConfig(TSpeedButton(Sender).Tag);
+    TFlatButton(Sender).Parent.Repaint;
+    SelectPairConfig(TFlatButton(Sender).Tag);
   end
   else
-    TSpeedButton(Sender).Down := True;
+    TFlatButton(Sender).Down := True;
 end;
 
 procedure TFormTrayslate.MenuConfigItemClick(Sender: TObject);
@@ -2872,7 +2872,7 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
 
   procedure Build(Target: TFlowPanel; AFont: TFont; FillMenu: boolean = True);
   var
-    btn: TSpeedButton;
+    btn: TFlatButton;
     mi: TMenuItem;
     ColorRecent: TColor;
     ServiceIcon: integer;
@@ -2906,7 +2906,7 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
       // Create SpeedButtons (flat, group, allow all up) with icons from ImageList
       for i := 0 to FLangPairs.Count - 1 do
       begin
-        btn := TSpeedButton.Create(Target);
+        btn := TFlatButton.Create(Target);
         btn.Tag := i;
         btn.Parent := Target;
         btn.Flat := True;
@@ -2929,6 +2929,7 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
           btn.ImageIndex := ServiceIcon;
           btn.Layout := blGlyphLeft;
           btn.Margin := -1;
+          btn.OffsetY := -1;
         end
         else
           btn.ImageIndex := -1;
@@ -2941,7 +2942,7 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
         if SameText(FLangPairs[i], LangSource + ':' + LangTarget) then
           btn.Down := True;
 
-        // Mouse handler adapted for TSpeedButton
+        // Mouse handler adapted for TFlatButton
         btn.OnMouseDown := @ButtonLangMouseDown;
         btn.OnClick := @ButtonLangClick;
 
@@ -3189,14 +3190,14 @@ var
   procedure UpdateButton(Target: TFlowPanel);
   var
     j: integer;
-    btn: TSpeedButton;
+    btn: TFlatButton;
   begin
     // Find SpeedButton with Tag matching current pair index i
     btn := nil;
     for j := 0 to Target.ControlCount - 1 do
-      if (Target.Controls[j] is TSpeedButton) and (Target.Controls[j].Tag = i) then
+      if (Target.Controls[j] is TFlatButton) and (Target.Controls[j].Tag = i) then
       begin
-        btn := TSpeedButton(Target.Controls[j]);
+        btn := TFlatButton(Target.Controls[j]);
         Break;
       end;
 
