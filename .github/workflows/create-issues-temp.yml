@@ -1,4 +1,4 @@
-name: Create Issue from Commit
+name: Create Issue from Commit Temp
 on:
   push:
     branches:
