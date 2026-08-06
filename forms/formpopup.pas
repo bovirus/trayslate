@@ -204,6 +204,7 @@ begin
   formTrayslate.MemoSource.Text := SourceText;
   formTrayslate.MemoTarget.Text := MemoTarget.Text;
   formTrayslate.aShow.Execute;
+  Hide;
 end;
 
 procedure TformPopupTrayslate.aSwapPairExecute(Sender: TObject);
