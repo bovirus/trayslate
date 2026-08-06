@@ -449,9 +449,9 @@ type
     procedure SetAutoSwap(Value: boolean);
     procedure SetAllowHotkeys(Value: boolean);
     procedure SetEnableMouseMode(Value: boolean);
+    procedure SetMouseModeCtrl(Value: boolean);
     procedure SetAutoHeight(Value: boolean);
     procedure SetHideControls(Value: boolean);
-    procedure SetMouseModeCtrl(Value: boolean);
     procedure SetRealTime(Value: boolean);
     procedure SetVerticalSplit(Value: boolean);
     procedure SetAutoCopy(Value: boolean);
@@ -2296,15 +2296,40 @@ begin
 end;
 
 procedure TformTrayslate.SetEnableMouseMode(Value: boolean);
+var
+  OldValue: boolean;
 begin
   aFastEnableMouseMode.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
     formSettingsTrayslate.CheckEnableMouseMode.Checked := Value
   else
   begin
+    OldValue := FEnableMouseMode;
     FEnableMouseMode := Value;
-    FMouseHook.Enabled := EnableMouseMode and not FMouseModeCtrl;
-    FKeyHook.Enabled := EnableMouseMode;
+    if OldValue <> Value then
+    begin
+      FMouseHook.Enabled := EnableMouseMode and not FMouseModeCtrl;
+      FKeyHook.Enabled := EnableMouseMode;
+    end;
+  end;
+end;
+
+procedure TformTrayslate.SetMouseModeCtrl(Value: boolean);
+var
+  OldValue: boolean;
+begin
+  aFastMouseModeCtrl.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+    formSettingsTrayslate.CheckMouseModeCtrl.Checked := Value
+  else
+  begin
+    OldValue := FMouseModeCtrl;
+    FMouseModeCtrl := Value;
+    if OldValue <> Value then
+    begin
+      FMouseHook.Enabled := EnableMouseMode and not FMouseModeCtrl;
+      FKeyHook.Enabled := EnableMouseMode;
+    end;
   end;
 end;
 
@@ -2324,18 +2349,6 @@ begin
     formSettingsTrayslate.CheckHideControls.Checked := Value
   else
     FHideControls := Value;
-end;
-
-procedure TformTrayslate.SetMouseModeCtrl(Value: boolean);
-begin
-  aFastMouseModeCtrl.Checked := Value;
-  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckMouseModeCtrl.Checked := Value
-  else
-  begin
-    FMouseModeCtrl := Value;
-    FMouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
-  end;
 end;
 
 procedure TformTrayslate.SetRealTime(Value: boolean);
