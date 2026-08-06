@@ -225,6 +225,8 @@ type
     procedure aFastAutoHeightExecute(Sender: TObject);
     procedure aLangVietnameseExecute(Sender: TObject);
     procedure ApplicationPropUserInput(Sender: TObject; Msg: cardinal);
+    procedure FlowPairsMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
+    procedure FlowPairsMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -293,7 +295,8 @@ type
     procedure TrayIconMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure TrayIconClick(Sender: TObject);
     procedure ButtonLangMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
-    procedure ButtonLangClick(Sender: TObject);
+    procedure ButtonLangMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+    procedure ButtonLangMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
     procedure MenuConfigItemClick(Sender: TObject);
     procedure MenuPairClick(Sender: TObject);
     procedure PopupTrayClose(Sender: TObject);
@@ -443,6 +446,12 @@ type
     FIconFontName: string;
     FIconTwoLang: boolean;
 
+    // Drag recent button
+    FDragBtnIndex: integer;    // Index of the button being dragged
+    FDragBtnStartX: integer;   // X coordinate when mouse button was pressed
+    FDragBtnLastX: integer;    // Last X coordinate during drag, used for direction detection
+    FDragMoved: boolean;
+
     procedure SetAutoStart(Value: boolean);
     procedure SetAutoAddLangPairs(Value: boolean);
     procedure SetAutoSwap(Value: boolean);
@@ -465,6 +474,10 @@ type
     procedure SelectPairConfig(const LangPairIndex: integer; RunTranslate: boolean = True);
     procedure UpdateTranslateButtonState(ForceTranslateButton: boolean = False);
     procedure UpdatePopupState(SetWindowParam: boolean = True);
+
+    // Drag Recent Button
+    procedure MoveButtonTo(AFromIndex, AToIndex: integer);
+
     // Tray Icon
     function CreateTrayIconLang(Form: TForm; const ALang1: string; const ALang2: string = string.Empty;
       ABackgroundColor: TColor = clNone; AFontColor: TColor = clWhite; AFontName: string = string.Empty): Graphics.TBitmap;
@@ -694,6 +707,8 @@ begin
   FClickCount := 0;
   FSettingsPage := 0;
   FActiveThreads := TList.Create;
+  FDragBtnIndex := -1;
+  FDragMoved := False;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -1491,12 +1506,21 @@ begin
 end;
 
 procedure TformTrayslate.aAddPairExecute(Sender: TObject);
+var
+  pairKey: string;
 begin
-  if (FLangSource <> string.Empty) and (FLangTarget <> string.Empty) then
-  begin
-    AddLangPair(FLangSource + ':' + FLangTarget);
-    Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
-  end;
+  if (FLangSource = '') or (FLangTarget = '') then
+    Exit;
+
+  // Build the exact string that AddLangPair looks for ("ConfigFile=pair")
+  pairKey := FConfigFile + '=' + UpdatePairLanguage(FLangSource + ':' + FLangTarget);
+
+  // If the pair already exists – do nothing, keep its position
+  if FLangPairs.IndexOf(pairKey) >= 0 then
+    Exit;
+
+  AddLangPair(FLangSource + ':' + FLangTarget);
+  Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
 end;
 
 procedure TformTrayslate.aDeletePairExecute(Sender: TObject);
@@ -2164,33 +2188,117 @@ begin
   end;
 end;
 
-procedure TformTrayslate.ButtonLangMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+procedure TformTrayslate.FlowPairsMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
+var
+  panel: TFlowPanel;
+  ctrl: TControl;
+  targetIndex: integer;
 begin
-  if not (Sender is TFlatButton) or (Button = mbLeft) then Exit;
+  if not (ssLeft in Shift) or (FDragBtnIndex < 0) then
+    Exit;
 
+  // Sender is the TFlowPanel that generated the event
+  if not (Sender is TFlowPanel) then Exit;
+  panel := TFlowPanel(Sender);
+
+  ctrl := panel.ControlAtPos(Point(X, Y), []);
+  if (ctrl is TFlatButton) then
+  begin
+    targetIndex := TFlatButton(ctrl).Tag;
+    if targetIndex <> FDragBtnIndex then
+    begin
+      if targetIndex > FDragBtnIndex then
+        MoveButtonTo(FDragBtnIndex, targetIndex + 1)
+      else
+        MoveButtonTo(FDragBtnIndex, targetIndex);
+      FDragBtnLastX := X;   // Prevent repeated moves at same coordinate
+    end;
+  end;
+end;
+
+procedure TformTrayslate.FlowPairsMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+begin
+  if Button = mbLeft then
+  begin
+    FDragBtnIndex := -1;
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TformTrayslate.ButtonLangMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+var
+  CurPair: integer;
+begin
+  if not (Sender is TFlatButton) then Exit;
+
+  // Middle button - delete pair
   if Button = mbMiddle then
   begin
     aDeletePairExecute(Sender);
     Exit;
   end;
 
-  if (Button = mbRight) and (MenuLangPairs.Items[TFlatButton(Sender).Tag].Checked) then
+  // Right button - select pair if not already active
+  if Button = mbRight then
+  begin
+    CurPair := (Sender as TFlatButton).Tag;
+    if (MenuLangPairs.Items[CurPair].Checked) then
+      Exit;
+    SelectPairConfig(CurPair);
     Exit;
-  SelectPairConfig(TFlatButton(Sender).Tag);
+  end;
+
+  // Left button - prepare for possible drag, do not select pair here
+  if Button = mbLeft then
+  begin
+    FDragBtnIndex := (Sender as TFlatButton).Tag;
+    FDragBtnStartX := X;
+    FDragBtnLastX := X;
+    FDragMoved := False;
+  end;
 end;
 
-procedure TformTrayslate.ButtonLangClick(Sender: TObject);
+procedure TformTrayslate.ButtonLangMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
 begin
-  if not (Sender is TFlatButton) then Exit;
-
-  // Execute only if the button is down (selected), not when it's being unselected
-  if TFlatButton(Sender).Down then
+  if Button = mbLeft then
   begin
-    TFlatButton(Sender).Parent.Repaint;
-    SelectPairConfig(TFlatButton(Sender).Tag);
-  end
-  else
-    TFlatButton(Sender).Down := True;
+    // If no drag occurred and mouse didn't move much, treat as a click
+    if (FDragBtnIndex >= 0) and (not FDragMoved) and (Abs(X - FDragBtnStartX) < 5) then
+    begin
+      if not MenuLangPairs.Items[FDragBtnIndex].Checked then
+      begin
+        // Immediately show the button as pressed
+        TFlatButton(Sender).Down := True;
+        TFlatButton(Sender).Parent.Repaint;
+        SelectPairConfig(FDragBtnIndex);
+      end
+      else
+      begin
+        // Click on already active button: keep it pressed, prevent unpress
+        TFlatButton(Sender).Down := True;
+        TFlatButton(Sender).Parent.Repaint;
+      end;
+    end;
+    // Reset drag state
+    FDragBtnIndex := -1;
+    FDragMoved := False;
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TformTrayslate.ButtonLangMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
+var
+  pt: TPoint;
+  btn: TFlatButton;
+begin
+  if FDragBtnIndex < 0 then Exit;
+  if Sender is TFlatButton then
+  begin
+    btn := TFlatButton(Sender);
+    // Convert to parent panel coordinates and forward the event
+    pt := btn.ClientToParent(Point(X, Y), btn.Parent);
+    FlowPairsMouseMove(btn.Parent, Shift, pt.X, pt.Y);
+  end;
 end;
 
 procedure TFormTrayslate.MenuConfigItemClick(Sender: TObject);
@@ -2944,7 +3052,8 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
 
         // Mouse handler adapted for TFlatButton
         btn.OnMouseDown := @ButtonLangMouseDown;
-        btn.OnClick := @ButtonLangClick;
+        btn.OnMouseUp := @ButtonLangMouseUp;
+        btn.OnMouseMove := @ButtonLangMouseMove;
 
         // MenuLangPairs Item
         if FillMenu then
@@ -3835,6 +3944,29 @@ begin
     end;
     Application.QueueAsyncCall(@formPopupTrayslate.UpdateStayOnTop, iif(SetWindowParam, 1, 0));
   end;
+end;
+
+procedure TformTrayslate.MoveButtonTo(AFromIndex, AToIndex: integer);
+var
+  Pair: string;
+begin
+  if (AFromIndex < 0) or (AFromIndex >= FLangPairs.Count) or (AToIndex < 0) or (AToIndex > FLangPairs.Count) then Exit;
+  if AFromIndex = AToIndex then Exit;
+
+  // Remove the dragged pair from its current position
+  Pair := FLangPairs[AFromIndex];
+  FLangPairs.Delete(AFromIndex);
+
+  // Adjust target index because the list shifted after deletion
+  if AToIndex > AFromIndex then
+    Dec(AToIndex);
+
+  // Insert the pair at the target position
+  FLangPairs.Insert(AToIndex, Pair);
+
+  FDragBtnIndex := AToIndex;
+  Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
+  FDragMoved := True;
 end;
 
 {%EndRegion}

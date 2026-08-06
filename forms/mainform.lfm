@@ -167,6 +167,8 @@ object formTrayslate: TformTrayslate
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
+      OnMouseMove = FlowPairsMouseMove
+      OnMouseUp = FlowPairsMouseUp
     end
     object SbAddPair: TSpeedButton
       Left = 3
