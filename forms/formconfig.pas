@@ -131,8 +131,6 @@ type
     SbNewConfig: TSpeedButton;
     ScrollBoxInitialRequest: TScrollBox;
     ScrollBoxRequest: TScrollBox;
-    ScrollBoxResponse: TScrollBox;
-    ScrollBoxParameters: TScrollBox;
     ScrollBoxService: TScrollBox;
     PageService: TTabSheet;
     PageParameters: TTabSheet;
@@ -146,7 +144,7 @@ type
     PageRequest: TTabSheet;
     SpinMaxLength: TSpinEdit;
     PageInitialRequest: TTabSheet;
-    SplitterParameters: TSplitter;
+    SplitterCustomParameters: TSplitter;
     SplitterResponse: TSplitter;
     SynPasSyn: TSynPasSyn;
     SynScriptParameters: TSynEdit;
@@ -178,7 +176,7 @@ type
     procedure CustomEditEnter(Sender: TObject);
     procedure MemoKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure SbNewConfigClick(Sender: TObject);
-    procedure SplitterParametersMoved(Sender: TObject);
+    procedure SplitterCustomParametersMoved(Sender: TObject);
     procedure SplitterResponseMoved(Sender: TObject);
     procedure ValueChange(Sender: TObject);
     procedure SbCopyConfigClick(Sender: TObject);
@@ -275,8 +273,8 @@ resourcestring
 
 implementation
 
-uses Consts, mainform, formsettings, translate, settings, languages, network, stringhelper, base64utils,
-  localize, darkutils, controlshelper;
+uses Consts, mainform, formsettings, translate, languages, network, stringhelper, base64utils,
+  localize, darkutils, controlshelper, osutils;
 
   {$R *.lfm}
 
@@ -357,6 +355,11 @@ end;
 
 procedure TformConfigTrayslate.FormResize(Sender: TObject);
 begin
+  GroupBoxCustomParameters.Top := 0;
+  SplitterCustomParameters.Top := GroupBoxCustomParameters.Height;
+  GroupResponse.Top := 0;
+  SplitterResponse.Top := GroupResponse.Height;
+
   formTrayslate.FormConfigWidth := Width;
   formTrayslate.FormConfigHeight := Height;
   formTrayslate.FormConfigSep1 := GroupBoxCustomParameters.Height;
@@ -632,7 +635,7 @@ begin
   CreateConfig;
 end;
 
-procedure TformConfigTrayslate.SplitterParametersMoved(Sender: TObject);
+procedure TformConfigTrayslate.SplitterCustomParametersMoved(Sender: TObject);
 begin
   formTrayslate.FormConfigSep1 := GroupBoxCustomParameters.Height;
 end;
@@ -713,7 +716,7 @@ begin
   if NewName = ExtractFileName(ComboConfig.Text) then Exit;
 
   SourceFile := ComboConfig.Text;
-  DestFile := IncludeTrailingPathDelimiter(GetSettingsDirectory) + NewName;
+  DestFile := IncludeTrailingPathDelimiter(TOS.GetSettingsDirectory(APP_NAME)) + NewName;
 
   if FileExists(DestFile) then Exit;
 

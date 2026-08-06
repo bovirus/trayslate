@@ -973,6 +973,10 @@ end;
 
 procedure TformTrayslate.ApplicationPropException(Sender: TObject; E: Exception);
 begin
+  {$IFDEF DEBUG}
+  TOS.Log(APP_NAME,
+    'Unhandled exception (' + E.ClassName + '): ' + E.Message + LineEnding + TOS.GetExceptionStackTrace(E));
+  {$ENDIF}
   MessageDlg(rappname, E.Message, mtWarning, [mbOK], 0);
 end;
 

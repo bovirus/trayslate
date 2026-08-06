@@ -34,45 +34,13 @@ type
     ImageIndex: integer;
   end;
 
-function GetSettingsDirectory(fileName: string = string.Empty): string;
-
 procedure SaveFormSettings(Form: TformTrayslate);
 
 function LoadFormSettings(Form: TformTrayslate): boolean;
 
 implementation
 
-uses hotkeyhelper, localize, network, darkutils, controlshelper;
-
-function GetSettingsDirectory(fileName: string = string.Empty): string;
-  {$IFDEF WINDOWS}
-var
-  baseDir: string;
-  exeDir: string;
-  {$ENDIF}
-begin
-  {$IFDEF WINDOWS}
-  // Get directory where exe is located
-  exeDir := ExtractFilePath(ParamStr(0));
-
-  // Portable mode: settings file exists near exe
-  if FileExists(exeDir + 'form_settings.json') then
-  begin
-    Result := IncludeTrailingPathDelimiter(exeDir) + fileName;
-    Exit;
-  end;
-
-  // Default mode: use LOCALAPPDATA or APPDATA
-  baseDir := GetEnvironmentVariable('LOCALAPPDATA');
-  if baseDir = '' then
-    baseDir := GetEnvironmentVariable('APPDATA');
-
-  Result := IncludeTrailingPathDelimiter(baseDir) + 'trayslate\' + fileName;
-  {$ELSE}
-  // Unix-like systems: use ~/.config/trayslate
-  Result := IncludeTrailingPathDelimiter(GetUserDir) + '.config/trayslate/' + fileName;
-  {$ENDIF}
-end;
+uses hotkeyhelper, localize, network, darkutils, controlshelper, osutils, Consts;
 
 procedure SaveFormSettings(Form: TformTrayslate);
 var
@@ -84,8 +52,8 @@ var
   DPI, i: integer;
 begin
   DPI := Screen.PixelsPerInch;
-  FileName := GetSettingsDirectory('form_settings.json'); // Get settings file name
-  ForceDirectories(GetSettingsDirectory); // Ensure the directory exists
+  FileName := TOS.GetSettingsDirectory(APP_NAME, 'form_settings.json'); // Get settings file name
+  ForceDirectories(TOS.GetSettingsDirectory(APP_NAME)); // Ensure the directory exists
   JSONObj := TJSONObject.Create;
   try
     // Save form position and size
@@ -268,8 +236,8 @@ begin
     JSONObj.Free;
   end;
 
-  Form.MemoSource.SaveToFileSafe(GetSettingsDirectory('source.txt'));
-  Form.MemoTarget.SaveToFileSafe(GetSettingsDirectory('target.txt'));
+  Form.MemoSource.SaveToFileSafe(TOS.GetSettingsDirectory(APP_NAME, 'source.txt'));
+  Form.MemoTarget.SaveToFileSafe(TOS.GetSettingsDirectory(APP_NAME, 'target.txt'));
 end;
 
 function LoadFormSettings(Form: TformTrayslate): boolean;
@@ -291,7 +259,7 @@ begin
   try
     DPI := Screen.PixelsPerInch;
     FileContent := string.Empty;
-    FileName := GetSettingsDirectory('form_settings.json'); // Get the settings file name
+    FileName := TOS.GetSettingsDirectory(APP_NAME, 'form_settings.json'); // Get the settings file name
     if not FileExists(FileName) then Exit(True); // Exit if the file does not exist
 
     // Read from file
@@ -730,13 +698,13 @@ begin
       FileStream.Free;
     end;
 
-    FileName := GetSettingsDirectory('source.txt');
+    FileName := TOS.GetSettingsDirectory(APP_NAME, 'source.txt');
     if FileExists(FileName) then
     begin
       Form.MemoSource.Lines.TrailingLineBreak := False;
       Form.MemoSource.Lines.LoadFromFile(FileName);
     end;
-    FileName := GetSettingsDirectory('target.txt');
+    FileName := TOS.GetSettingsDirectory(APP_NAME, 'target.txt');
     if FileExists(FileName) then
     begin
       Form.MemoTarget.Lines.TrailingLineBreak := False;

@@ -215,7 +215,7 @@ const
 
 implementation
 
-uses mainform, settings, stringshelper, stringhelper, localize, osutils;
+uses consts, mainform, settings, stringshelper, stringhelper, localize, osutils;
 
   {%Region -fold TTranslate }
 
@@ -1819,7 +1819,7 @@ begin
   FindIniFiles(ExeDir, List);
 
   // Settings directory
-  SettingsDir := GetSettingsDirectory('');
+  SettingsDir := TOS.GetSettingsDirectory(APP_NAME, '');
   if CompareText(ExcludeTrailingPathDelimiter(ExeDir), ExcludeTrailingPathDelimiter(SettingsDir)) <> 0 then
     FindIniFiles(SettingsDir, List);
 end;
