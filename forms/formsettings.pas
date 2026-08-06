@@ -784,6 +784,9 @@ begin
   SetHotKeyByRow(GridHotkeys.Row, HK);
 
   GridHotkeys.Cells[1, GridHotkeys.Row] := HK.ToText;
+
+  if (HK.Key > 0) and (FOldKeyValue <> HK.ToText) then
+    SettingChange(Sender);
 end;
 
 procedure TformSettingsTrayslate.GridHotkeysSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);
