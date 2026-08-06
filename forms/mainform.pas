@@ -292,9 +292,8 @@ type
     procedure TrayIconMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
     procedure TrayIconMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure TrayIconClick(Sender: TObject);
-    procedure LabelMouseEnter(Sender: TObject);
-    procedure LabelMouseLeave(Sender: TObject);
-    procedure LabelLangMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+    procedure ButtonLangMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+    procedure ButtonLangClick(Sender: TObject);
     procedure MenuConfigItemClick(Sender: TObject);
     procedure MenuPairClick(Sender: TObject);
     procedure PopupTrayClose(Sender: TObject);
@@ -1506,17 +1505,17 @@ var
   Pair: string;
   Dlg: boolean;
 begin
-  if (Sender is TLabel) then
+  if (Sender is TSpeedButton) then
   begin
-    Index := (Sender as TLabel).Tag;
-    Pair := (Sender as TLabel).Caption;
+    Index := (Sender as TSpeedButton).Tag;
+    Pair := (Sender as TSpeedButton).Caption;
     Dlg := False;
   end
   else
-  if (FPopupRecentPair is TLabel) then
+  if (FPopupRecentPair is TSpeedButton) then
   begin
-    Index := (FPopupRecentPair as TLabel).Tag;
-    Pair := (FPopupRecentPair as TLabel).Caption;
+    Index := (FPopupRecentPair as TSpeedButton).Tag;
+    Pair := (FPopupRecentPair as TSpeedButton).Caption;
     Dlg := True;
   end
   else
@@ -1556,10 +1555,10 @@ procedure TformTrayslate.aMoveFirstExecute(Sender: TObject);
 var
   Index: integer;
 begin
-  if not (FPopupRecentPair is TLabel) then
+  if not (FPopupRecentPair is TSpeedButton) then
     Exit;
 
-  Index := TLabel(FPopupRecentPair).Tag;
+  Index := TSpeedButton(FPopupRecentPair).Tag;
 
   while Index > 0 do
   begin
@@ -1574,10 +1573,10 @@ procedure TformTrayslate.aMoveLastExecute(Sender: TObject);
 var
   Index: integer;
 begin
-  if not (FPopupRecentPair is TLabel) then
+  if not (FPopupRecentPair is TSpeedButton) then
     Exit;
 
-  Index := TLabel(FPopupRecentPair).Tag;
+  Index := TSpeedButton(FPopupRecentPair).Tag;
 
   while Index < FLangPairs.Count - 1 do
   begin
@@ -1592,10 +1591,10 @@ procedure TformTrayslate.aMoveLeftExecute(Sender: TObject);
 var
   Index: integer;
 begin
-  if not (FPopupRecentPair is TLabel) then
+  if not (FPopupRecentPair is TSpeedButton) then
     Exit;
 
-  Index := TLabel(FPopupRecentPair).Tag;
+  Index := TSpeedButton(FPopupRecentPair).Tag;
 
   if Index > 0 then
     FLangPairs.Exchange(Index, Index - 1);
@@ -1607,10 +1606,10 @@ procedure TformTrayslate.aMoveRightExecute(Sender: TObject);
 var
   Index: integer;
 begin
-  if not (FPopupRecentPair is TLabel) then
+  if not (FPopupRecentPair is TSpeedButton) then
     Exit;
 
-  Index := TLabel(FPopupRecentPair).Tag;
+  Index := TSpeedButton(FPopupRecentPair).Tag;
 
   if Index < FLangPairs.Count - 1 then
     FLangPairs.Exchange(Index, Index + 1);
@@ -2165,31 +2164,33 @@ begin
   end;
 end;
 
-procedure TformTrayslate.LabelMouseEnter(Sender: TObject);
+procedure TformTrayslate.ButtonLangMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
 begin
-  (Sender as TLabel).Font.Style := (Sender as TLabel).Font.Style + [fsUnderline];
-end;
+  if not (Sender is TSpeedButton) or (Button = mbLeft) then Exit;
 
-procedure TformTrayslate.LabelMouseLeave(Sender: TObject);
-begin
-  (Sender as TLabel).Font.Style := (Sender as TLabel).Font.Style - [fsUnderline];
-end;
-
-procedure TformTrayslate.LabelLangMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
-var
-  CurPair: integer;
-begin
   if Button = mbMiddle then
   begin
     aDeletePairExecute(Sender);
     Exit;
   end;
 
-  CurPair := (Sender as TLabel).Tag;
-  if (Button = mbRight) and (MenuLangPairs.Items[CurPair].Checked) then
+  if (Button = mbRight) and (MenuLangPairs.Items[TSpeedButton(Sender).Tag].Checked) then
     Exit;
+  SelectPairConfig(TSpeedButton(Sender).Tag);
+end;
 
-  SelectPairConfig(CurPair);
+procedure TformTrayslate.ButtonLangClick(Sender: TObject);
+begin
+  if not (Sender is TSpeedButton) then Exit;
+
+  // Execute only if the button is down (selected), not when it's being unselected
+  if TSpeedButton(Sender).Down then
+  begin
+    TSpeedButton(Sender).Parent.Repaint;
+    SelectPairConfig(TSpeedButton(Sender).Tag);
+  end
+  else
+    TSpeedButton(Sender).Down := True;
 end;
 
 procedure TFormTrayslate.MenuConfigItemClick(Sender: TObject);
@@ -2871,11 +2872,8 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
 
   procedure Build(Target: TFlowPanel; AFont: TFont; FillMenu: boolean = True);
   var
-    pnl: TPanel;
-    lbl: TLabel;
-    img: TImage;
+    btn: TSpeedButton;
     mi: TMenuItem;
-    totalWidth: integer;
     ColorRecent: TColor;
     ServiceIcon: integer;
     i: integer;
@@ -2905,71 +2903,53 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
           MenuLangPairs.Visible := True;
       end;
 
-      // Calculate total width
-      totalWidth := 0;
-      for i := 0 to FLangPairs.Count - 1 do
-        totalWidth := totalWidth + Target.Canvas.TextWidth(FLangPairs.ValueFromIndex[i]) + 10;
-      Target.Width := totalWidth;
-
-      // Create Panels (with Image + Label) and MenuFastEnableMouseMode Items
+      // Create SpeedButtons (flat, group, allow all up) with icons from ImageList
       for i := 0 to FLangPairs.Count - 1 do
       begin
-        Target.BorderSpacing.Top := Max(0, Min(4, 13 - AFont.Size));
-
-        pnl := TPanel.Create(Target);
-        pnl.Parent := Target;
-        pnl.BevelOuter := bvNone;
-        pnl.AutoSize := True;
-        pnl.BorderSpacing.Right := 12;
+        btn := TSpeedButton.Create(Target);
+        btn.Tag := i;
+        btn.Parent := Target;
+        btn.Flat := True;
+        btn.GroupIndex := 1;
+        btn.AllowAllUp := True;
+        btn.AutoSize := True;
+        btn.Transparent := False;
+        btn.Caption := FLangPairs.ValueFromIndex[i];
+        btn.Hint := FConfigTitles.Values[FLangPairs.Names[i]];
+        btn.ShowHint := True;
+        btn.PopupMenu := PopupRecentPair;
 
         if not TryStrToInt(FConfigImages.Values[FLangPairs.Names[i]], ServiceIcon) then
           ServiceIcon := -1;
 
+        // Use shared ImageList (must exist in the form, e.g. ImageList1) – no memory leak
+        btn.Images := ImageConfig;
         if ServiceIcon >= 0 then
         begin
-          // Image
-          img := TImage.Create(pnl);
-          img.Parent := pnl;
-          ImageConfig.GetBitmap(ServiceIcon, img.Picture.Bitmap);
-          img.Hint := FConfigTitles.Values[FLangPairs.Names[i]];
-          img.ShowHint := True;
-          img.Align := alLeft;
-          img.Width := 16;
-          img.Proportional := True;
-          img.Center := True;
-        end;
-
-        // Label
-        lbl := TLabel.Create(pnl);
-        lbl.Parent := pnl;
-        lbl.Caption := FLangPairs.ValueFromIndex[i];
-        lbl.Hint := FConfigTitles.Values[FLangPairs.Names[i]];
-
-        lbl.ShowHint := True;
-        lbl.Cursor := crHandPoint;
-        lbl.Layout := tlCenter;
-        if ServiceIcon >= 0 then
-          lbl.BorderSpacing.Left := 20;
-        lbl.BorderSpacing.Bottom := 3;
-        lbl.Top := 0;
-        lbl.Left := 0;
-        lbl.Tag := i;
-        lbl.PopupMenu := PopupRecentPair;
+          btn.ImageIndex := ServiceIcon;
+          btn.Layout := blGlyphLeft;
+          btn.Margin := -1;
+        end
+        else
+          btn.ImageIndex := -1;
 
         if not TryStrToInt(FConfigColors.Values[FLangPairs.Names[i]], ColorRecent) then
           ColorRecent := clBlue;
-        lbl.Font.Color := TDarkUtils.ThemeColor(ColorRecent, ColorRecent.ToDarkTheme);
+        btn.Font.Color := TDarkUtils.ThemeColor(ColorRecent, ColorRecent.ToDarkTheme);
 
-        // Events only on label
-        lbl.OnMouseEnter := @LabelMouseEnter;
-        lbl.OnMouseLeave := @LabelMouseLeave;
-        lbl.OnMouseDown := @LabelLangMouseDown;
+        // Set Down state for the currently active pair
+        if SameText(FLangPairs[i], LangSource + ':' + LangTarget) then
+          btn.Down := True;
+
+        // Mouse handler adapted for TSpeedButton
+        btn.OnMouseDown := @ButtonLangMouseDown;
+        btn.OnClick := @ButtonLangClick;
 
         // MenuLangPairs Item
         if FillMenu then
         begin
           mi := TMenuItem.Create(MenuLangPairs);
-          mi.Caption := lbl.Caption + ' - ' + lbl.Hint;
+          mi.Caption := btn.Caption + ' - ' + btn.Hint;
           mi.Hint := FLangPairs[i];
           if AllowHotKeys and (i < 9) then
           begin
@@ -3203,47 +3183,26 @@ end;
 procedure TformTrayslate.UpdateCheckMenuPair;
 var
   currentPair: string;
-  lbl: TLabel;
-  pnl: TPanel;
-  targetTag: integer;
   ServiceIcon: integer;
   i: integer;
 
-  procedure UpdateLbl(Target: TFlowPanel);
+  procedure UpdateButton(Target: TFlowPanel);
   var
-    j, k: integer;
+    j: integer;
+    btn: TSpeedButton;
   begin
-    targetTag := i;
-    lbl := nil;
-
-    // Find Panel -> then Label inside it
+    // Find SpeedButton with Tag matching current pair index i
+    btn := nil;
     for j := 0 to Target.ControlCount - 1 do
-    begin
-      if Target.Controls[j] is TPanel then
+      if (Target.Controls[j] is TSpeedButton) and (Target.Controls[j].Tag = i) then
       begin
-        pnl := TPanel(Target.Controls[j]);
-
-        for k := 0 to pnl.ControlCount - 1 do
-        begin
-          if (pnl.Controls[k] is TLabel) and (pnl.Controls[k].Tag = targetTag) then
-          begin
-            lbl := TLabel(pnl.Controls[k]);
-            Break;
-          end;
-        end;
-
-        if Assigned(lbl) then Break;
+        btn := TSpeedButton(Target.Controls[j]);
+        Break;
       end;
-    end;
 
-    // Update label font style
-    if Assigned(lbl) then
-    begin
-      if MenuLangPairs.Items[i].Checked then
-        lbl.Font.Style := lbl.Font.Style + [fsBold]
-      else
-        lbl.Font.Style := lbl.Font.Style - [fsBold];
-    end;
+    // Update Down state according to menu item checked
+    if Assigned(btn) then
+      btn.Down := MenuLangPairs.Items[i].Checked;
   end;
 
 begin
@@ -3265,9 +3224,9 @@ begin
     else
       MenuLangPairs.Items[i].ImageIndex := ServiceIcon;
 
-    UpdateLbl(FlowPairs);
+    UpdateButton(FlowPairs);
     if Assigned(formPopupTrayslate) and (formPopupTrayslate.FlowPairs <> nil) then
-      UpdateLbl(formPopupTrayslate.FlowPairs);
+      UpdateButton(formPopupTrayslate.FlowPairs);
   end;
 end;
 

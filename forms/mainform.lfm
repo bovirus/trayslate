@@ -138,8 +138,8 @@ object formTrayslate: TformTrayslate
     TabOrder = 4
     object SbMenu: TSpeedButton
       Left = 485
-      Height = 24
-      Top = 1
+      Height = 26
+      Top = 0
       Width = 24
       Action = aMenu
       Anchors = [akTop, akRight]
@@ -150,15 +150,15 @@ object formTrayslate: TformTrayslate
       ParentShowHint = False
     end
     object FlowPairs: TFlowPanel
-      Left = 32
+      Left = 30
       Height = 25
       Top = 0
-      Width = 453
+      Width = 454
       Align = alClient
       AutoSize = True
       BevelOuter = bvNone
-      BorderSpacing.Left = 32
-      BorderSpacing.Right = 27
+      BorderSpacing.Left = 30
+      BorderSpacing.Right = 28
       BorderSpacing.Bottom = 3
       Constraints.MinHeight = 5
       ControlList = <>
@@ -170,7 +170,7 @@ object formTrayslate: TformTrayslate
     end
     object SbAddPair: TSpeedButton
       Left = 3
-      Height = 24
+      Height = 26
       Top = 0
       Width = 24
       Action = aAddPair
@@ -896,8 +896,8 @@ object formTrayslate: TformTrayslate
     Enabled = False
     Interval = 700
     OnTimer = TimerTranslateTimer
-    Left = 345
-    Top = 384
+    Left = 272
+    Top = 456
   end
   object TimerAnimate: TTimer
     Enabled = False
@@ -922,7 +922,7 @@ object formTrayslate: TformTrayslate
     Enabled = False
     Interval = 200
     OnTimer = TimerUnapplyTimer
-    Left = 416
+    Left = 345
     Top = 384
   end
   object ApplicationProp: TApplicationProperties
