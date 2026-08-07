@@ -1,5 +1,5 @@
 name: Create Issue from Commit
-run-name: 'Issue: ${{ github.event.inputs.commit_sha }}'
+run-name: "${{ github.event_name == 'push' && github.event.head_commit.message || format('Issue: {0}', github.event.inputs.commit_sha) }}"
 on:
   push:
     branches:
@@ -70,7 +70,7 @@ jobs:
                 *"FEATURE:"*|*"FEAT:"*)
                     type="Feature"
                     ;;
-                *"ENHANCEMENT:"*|*"ENHANCE:"*)
+                *"ENHANCEMENT:"*|*"ENHANCE:"*|*"ENHACE:"*)
                     type="Enhancement"
                     ;;
                 *"DOC:"*|*"DOCUMENTATION:"*)
