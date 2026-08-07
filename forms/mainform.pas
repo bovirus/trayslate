@@ -370,6 +370,8 @@ type
     FPrevMouseDown: TMouseEventInfo;
     FPopupRecentPair: TComponent;
     FSettingsPage: integer;
+    FSettingTrayIcon: boolean;
+    FBlockTrayUpdate: boolean;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -709,6 +711,8 @@ begin
   FActiveThreads := TList.Create;
   FDragBtnIndex := -1;
   FDragMoved := False;
+  FSettingTrayIcon := False;
+  FBlockTrayUpdate := False;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -2054,6 +2058,8 @@ end;
 
 procedure TformTrayslate.TimerAnimateStopTimer(Sender: TObject);
 begin
+  if FBlockTrayUpdate then
+    Exit;
   SetTrayIcon;
 end;
 
@@ -3107,29 +3113,36 @@ var
   Bitmap: TBitmap;
   hintText: string;
 begin
-  Bitmap := CreateTrayIconLang(Self, ifthen(FIconTwoLang, UpperCase(UpdateSourceLanguage(Trans.LangSource)),
-    UpperCase(UpdateTargetLanguage(Trans.LangTarget))), ifthen(FIconTwoLang, UpperCase(Trans.LangTarget), string.Empty),
-    FIconBackgroundColor, FIconFontColor, FIconFontName);
+  if not Assigned(FTrans) or not Assigned(TrayIcon) then Exit;
+  if FSettingTrayIcon then Exit;
+  FSettingTrayIcon := True;
   try
-    TrayIcon.Icon.Assign(Bitmap);
-    TrayIcon.Visible := True;
+    Bitmap := CreateTrayIconLang(Self, ifthen(FIconTwoLang, UpperCase(UpdateSourceLanguage(Trans.LangSource)),
+      UpperCase(UpdateTargetLanguage(Trans.LangTarget))), ifthen(FIconTwoLang, UpperCase(Trans.LangTarget), string.Empty),
+      FIconBackgroundColor, FIconFontColor, FIconFontName);
+    try
+      TrayIcon.Icon.Assign(Bitmap);
+      TrayIcon.Visible := True;
+    finally
+      Bitmap.Free;
+    end;
+
+    // Set tray icon hint
+    hintText := string.Empty;
+    if ComboSource.Text <> string.Empty then
+      hintText += ComboSource.Text;
+    if ComboTarget.Text <> string.Empty then
+      hintText += ' : ' + ComboTarget.Text;
+    if FConfigTitles.Values[FConfigFile] <> string.Empty then
+      hintText += sLineBreak + FConfigTitles.Values[FConfigFile];
+    TrayIcon.Hint := rappname + ' - ' + hintText;
+
+    // Set popup window caption
+    if (Assigned(formPopupTrayslate)) then
+      formPopupTrayslate.Caption := hintText.Replace(LineEnding, ' - ');
   finally
-    Bitmap.Free;
+    FSettingTrayIcon := False;
   end;
-
-  // Set tray icon hint
-  hintText := string.Empty;
-  if ComboSource.Text <> string.Empty then
-    hintText += ComboSource.Text;
-  if ComboTarget.Text <> string.Empty then
-    hintText += ' : ' + ComboTarget.Text;
-  if FConfigTitles.Values[FConfigFile] <> string.Empty then
-    hintText += sLineBreak + FConfigTitles.Values[FConfigFile];
-  TrayIcon.Hint := rappname + ' - ' + hintText;
-
-  // Set popup window caption
-  if (Assigned(formPopupTrayslate)) then
-    formPopupTrayslate.Caption := hintText.Replace(LineEnding, ' - ');
 end;
 
 procedure TformTrayslate.SetHints;
@@ -4238,8 +4251,16 @@ begin
     TranslateTarget := nil;
   finally
     UpdateTranslateButtonState;
-    TimerAnimate.Enabled := False;
+
+    FBlockTrayUpdate := True;
+    try
+      TimerAnimate.Enabled := False;
+    finally
+      FBlockTrayUpdate := False;
+    end;
+
     Screen.Cursor := crDefault;
+    SetTrayIcon;
   end;
 end;
 
