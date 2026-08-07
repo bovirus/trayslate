@@ -279,7 +279,7 @@ var
 begin
   // Bottom-right of button in screen coords
   P := SbMenu.ClientToScreen(Classes.Point(SbMenu.Width, SbMenu.Height));
-
+  SbMenu.Down := True;
   Popup.PopUp(P.X, P.Y);
 end;
 
@@ -312,6 +312,7 @@ end;
 procedure TformPopupTrayslate.PopupClose(Sender: TObject);
 begin
   FPopupOpen := False;
+  SbMenu.Down := False;
 end;
 
 procedure TformPopupTrayslate.TimerTimer(Sender: TObject);

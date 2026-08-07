@@ -1572,6 +1572,8 @@ begin
   PopupTray.Alignment := paRight;
   aShow.Visible := False;
   MenuLangPairs.Visible := False;
+  SbMenu.GroupIndex := 2;
+  SbMenu.Down := True;
 
   // Bottom-right of button in screen coords
   P := SbMenu.ClientToScreen(Classes.Point(SbMenu.Width, SbMenu.Height));
@@ -2353,6 +2355,7 @@ begin
   PopupTray.Alignment := paLeft;
   aShow.Visible := True;
   MenuLangPairs.Visible := True;
+  SbMenu.Down := False;
 end;
 
 procedure TformTrayslate.PopupRecentPairPopup(Sender: TObject);

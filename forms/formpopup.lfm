@@ -124,7 +124,9 @@ object formPopupTrayslate: TformPopupTrayslate
       Width = 24
       Action = aMenu
       Align = alRight
+      AllowAllUp = True
       Flat = True
+      GroupIndex = 2
       Images = formTrayslate.ImageButtons
       ImageIndex = 6
       ShowHint = True

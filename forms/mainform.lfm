@@ -142,6 +142,7 @@ object formTrayslate: TformTrayslate
       Top = 0
       Width = 24
       Action = aMenu
+      AllowAllUp = True
       Anchors = [akTop, akRight]
       Flat = True
       Images = ImageButtons
@@ -843,7 +844,7 @@ object formTrayslate: TformTrayslate
     Enabled = False
     Interval = 300
     OnTimer = TimerClickTimer
-    Left = 272
+    Left = 288
     Top = 312
   end
   object ImageButtons: TImageList
@@ -898,14 +899,14 @@ object formTrayslate: TformTrayslate
     Enabled = False
     Interval = 300
     OnTimer = TimerActiveTimer
-    Left = 345
+    Left = 361
     Top = 312
   end
   object TimerTranslate: TTimer
     Enabled = False
     Interval = 700
     OnTimer = TimerTranslateTimer
-    Left = 272
+    Left = 288
     Top = 456
   end
   object TimerAnimate: TTimer
@@ -913,7 +914,7 @@ object formTrayslate: TformTrayslate
     Interval = 10
     OnTimer = TimerAnimateTimer
     OnStopTimer = TimerAnimateStopTimer
-    Left = 272
+    Left = 288
     Top = 384
   end
   object ImageConfig: TImageList
@@ -931,7 +932,7 @@ object formTrayslate: TformTrayslate
     Enabled = False
     Interval = 200
     OnTimer = TimerUnapplyTimer
-    Left = 345
+    Left = 361
     Top = 384
   end
   object ApplicationProp: TApplicationProperties
