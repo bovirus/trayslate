@@ -591,6 +591,25 @@ msgctxt "tformbuttontrayslate.imagetranslate.hint"
 msgid "Translate in Popup"
 msgstr "תרגם בחלון קופץ"
 
+#: tformbuttontrayslate.menucanceltranslate.caption
+msgid "Cancel Translate"
+msgstr "בטל תרגום"
+
+#: tformbuttontrayslate.menutranslatecontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatecontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "החלף את הבחירה בתרגום"
+
+#: tformbuttontrayslate.menutranslatefromcontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
+msgid "Translate Selected To Main Window"
+msgstr "תרגם את הבחירה לחלון הראשי"
+
+#: tformbuttontrayslate.menutranslatefromcontroltopopup.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "תרגם את הבחירה לחלון הקופץ"
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
@@ -990,6 +1009,16 @@ msgstr "שלח מקור ותרגום לחלון הראשי"
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
 msgstr "החלף זוג שפות"
+
+#: tformpopuptrayslate.atranslatefromcontroltopopup.caption
+msgctxt "tformpopuptrayslate.atranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "תרגם את הבחירה לחלון הקופץ"
+
+#: tformpopuptrayslate.atranslatetocontrol.caption
+msgctxt "tformpopuptrayslate.atranslatetocontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "החלף את הבחירה בתרגום"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"

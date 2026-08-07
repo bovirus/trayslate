@@ -91,7 +91,7 @@ The popup window can stay on top of other windows and supports adjustable transp
 
 Mouse Mode allows translating text by selecting it with the mouse in any application. After selecting text, a translation action becomes available depending on the selected mode.
 
-By default, a Translate button appears after text selection. Clicking this button opens the translation result in a popup window if needed.
+By default, the **Translate button** appears after text selection. Clicking this button opens the translation result in a popup window if needed.
 
 You can configure how translation is triggered after selection:
 
@@ -103,6 +103,9 @@ You can configure how translation is triggered after selection:
 
 ![popup2](samples/popup2.png)
 
+The **Translate button** also provides a **context menu**, allowing you to immediately choose where the translation will appear. You can display it in the popup window, send it to the main application window, or replace the selected text with its translation directly in any application.
+
+![popup3](samples/popup3.png)
 ---
 
 ## Hotkeys

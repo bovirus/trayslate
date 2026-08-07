@@ -38,7 +38,9 @@ type
   { TformPopupTrayslate }
 
   TformPopupTrayslate = class(TForm)
-    AApplyAutoHeight: TAction;
+    aApplyAutoHeight: TAction;
+    aTranslateFromControlToPopup: TAction;
+    aTranslateToControl: TAction;
     aSwapPair: TAction;
     aFastAutoHeight: TAction;
     aMenu: TAction;
@@ -51,6 +53,8 @@ type
     MemoTarget: TMemo;
     MenuFastAutoHeight: TMenuItem;
     MenuApplyAutoHeight: TMenuItem;
+    MenuTranslateFromControl: TMenuItem;
+    MenuTranslateControl: TMenuItem;
     MenuSwapPair: TMenuItem;
     MenuSendToMainWindow: TMenuItem;
     PanelTarget: TPanel;
@@ -63,15 +67,18 @@ type
     SbCopyTarget: TSpeedButton;
     SbMenu: TSpeedButton;
     Separator1: TMenuItem;
+    Separator2: TMenuItem;
     Timer: TTimer;
 
-    procedure AApplyAutoHeightExecute(Sender: TObject);
+    procedure aApplyAutoHeightExecute(Sender: TObject);
     procedure aCopyTargetExecute(Sender: TObject);
     procedure aFastAutoHeightExecute(Sender: TObject);
     procedure aMenuExecute(Sender: TObject);
     procedure aNewTranslateExecute(Sender: TObject);
     procedure aSendToMainWindowExecute(Sender: TObject);
     procedure aSwapPairExecute(Sender: TObject);
+    procedure aTranslateFromControlToPopupExecute(Sender: TObject);
+    procedure aTranslateToControlExecute(Sender: TObject);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -90,6 +97,7 @@ type
     FDropTarget: TTextDropTarget;
     FInWindow: boolean;
     FPopupOpen: boolean;
+    FPrevForegroundWnd: Handle;
 
     procedure UpdateControlsVisibility;
   protected
@@ -107,7 +115,7 @@ var
 
 implementation
 
-uses Consts, mainform, formsettings, localize, darkutils, controlshelper, pascalutils;
+uses Consts, mainform, formsettings, localize, darkutils, controlshelper, pascalutils, osutils;
 
   {$R *.lfm}
 
@@ -130,6 +138,8 @@ begin
   aSwapPair.ImageIndex := TDarkUtils.ThemeValue(0, 1);
   aMenu.ImageIndex := TDarkUtils.ThemeValue(6, 7);
   aCopyTarget.ImageIndex := TDarkUtils.ThemeValue(10, 11);
+  aTranslateFromControlToPopup.ImageIndex := TDarkUtils.ThemeValue(20, 21);
+  aTranslateToControl.ImageIndex := TDarkUtils.ThemeValue(22, 23);
   SbCopyTarget.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);
   SbCopyTargetPanel.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);
 
@@ -212,12 +222,32 @@ begin
   formTrayslate.aSwap.Execute;
 end;
 
+procedure TformPopupTrayslate.aTranslateFromControlToPopupExecute(Sender: TObject);
+begin
+  ActiveControl := nil;
+  {$IFDEF WINDOWS}
+    if FPrevForegroundWnd <> 0 then
+      TOS.ForceForegroundWindow(FPrevForegroundWnd);
+  {$ENDIF}
+  Application.QueueAsyncCall(@formTrayslate.TranslateFromControlPopup, 0);
+end;
+
+procedure TformPopupTrayslate.aTranslateToControlExecute(Sender: TObject);
+begin
+  ActiveControl := nil;
+  {$IFDEF WINDOWS}
+    if FPrevForegroundWnd <> 0 then
+      TOS.ForceForegroundWindow(FPrevForegroundWnd);
+  {$ENDIF}
+  Application.QueueAsyncCall(@formTrayslate.TranslateControl, 0);
+end;
+
 procedure TformPopupTrayslate.aCopyTargetExecute(Sender: TObject);
 begin
   Clipboard.AsText := MemoTarget.Text;
 end;
 
-procedure TformPopupTrayslate.AApplyAutoHeightExecute(Sender: TObject);
+procedure TformPopupTrayslate.aApplyAutoHeightExecute(Sender: TObject);
 begin
   formTrayslate.AdjustPopupHeight(MemoTarget.Text, True);
 end;
@@ -262,8 +292,17 @@ begin
 end;
 
 procedure TformPopupTrayslate.PopupPopup(Sender: TObject);
+var
+  hWnd: Handle;
+  pid: DWORD;
 begin
   FPopupOpen := True;
+  {$IFDEF WINDOWS}
+  hWnd := GetForegroundWindow;
+  GetWindowThreadProcessId(hWnd, @pid);
+  if pid <> GetCurrentProcessId then
+    FPrevForegroundWnd := hWnd;
+  {$ENDIF}
 end;
 
 procedure TformPopupTrayslate.PopupClose(Sender: TObject);

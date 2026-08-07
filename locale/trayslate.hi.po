@@ -591,6 +591,25 @@ msgctxt "tformbuttontrayslate.imagetranslate.hint"
 msgid "Translate in Popup"
 msgstr "पॉपअप में अनुवाद करें"
 
+#: tformbuttontrayslate.menucanceltranslate.caption
+msgid "Cancel Translate"
+msgstr "अनुवाद रद्द करें"
+
+#: tformbuttontrayslate.menutranslatecontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatecontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "चयनित को अनुवाद से बदलें"
+
+#: tformbuttontrayslate.menutranslatefromcontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
+msgid "Translate Selected To Main Window"
+msgstr "चयनित का मुख्य विंडो में अनुवाद करें"
+
+#: tformbuttontrayslate.menutranslatefromcontroltopopup.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "चयनित का पॉपअप में अनुवाद करें"
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
@@ -990,6 +1009,16 @@ msgstr "मुख्य विंडो में स्रोत और अन�
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
 msgstr "भाषा युग्म बदलें"
+
+#: tformpopuptrayslate.atranslatefromcontroltopopup.caption
+msgctxt "tformpopuptrayslate.atranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "चयनित का पॉपअप में अनुवाद करें"
+
+#: tformpopuptrayslate.atranslatetocontrol.caption
+msgctxt "tformpopuptrayslate.atranslatetocontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "चयनित को अनुवाद से बदलें"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"

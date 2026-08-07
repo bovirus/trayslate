@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: PoBatch 1.0.0\n"
 
 #: consts.rappname
 msgctxt "consts.rappname"
@@ -105,7 +105,8 @@ msgstr "A configuração foi modificada. Salvar alterações?"
 
 #: formconfig.rresponsehint
 msgctxt "formconfig.rresponsehint"
-msgid "Json Pointer: Use / for levels, keys for objects, and numbers for indexes.\n"
+msgid ""
+"Json Pointer: Use / for levels, keys for objects, and numbers for indexes.\n"
 "Use * for all items, *#10 to join items by newline. Use ~ at the end of the path to return the raw JSON branch.\n"
 "Separate multiple segments with semicolon ;.\n"
 "Literal: Text block in {…}. Special tag #10 for newlines. Use {{regex}} inside to extract data directly into the text.\n"
@@ -117,7 +118,8 @@ msgid "Json Pointer: Use / for levels, keys for objects, and numbers for indexes
 "Commenting: /* text */ comments are stripped from the entire expression before any processing.\n"
 "Examples:\n"
 "responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!#10}; /translations/0/text"
-msgstr "Ponteiro Json: Use / para níveis, chaves para objetos e números para índices. Use * para todos os itens, *#10 para unir itens por quebra de linha. Use ~ no final do caminho para retornar o branch JSON bruto. Separe vários segmentos com ponto e vírgula ;.\n"
+msgstr ""
+"Ponteiro Json: Use / para níveis, chaves para objetos e números para índices. Use * para todos os itens, *#10 para unir itens por quebra de linha. Use ~ no final do caminho para retornar o branch JSON bruto. Separe vários segmentos com ponto e vírgula ;.\n"
 "Literal: Bloco de texto em {…}. Etiqueta especial #10 para quebras de linha. Use {{regex}} dentro para extrair dados diretamente no texto.\n"
 "Lógica: Se um Ponteiro em um segmento estiver vazio, o segmento inteiro é ignorado. Se um segmento não tiver Pointer, apenas blocos de texto literal com expressões regulares incorporadas são processados.\n"
 "Regex: {prefixo {regex[índice]} sufixo} dentro de um bloco de texto. Se nenhum [índice] for especificado, a primeira correspondência é usada. O índice pode ser um número, [*] (unir por espaço) ou [*#10] (unir por quebra de linha). Se a expressão regular não encontrar nenhuma correspondência, o bloco {…} inteiro é removido. Usar ~ dentro de uma expressão regular retorna o texto inteiro.\n"
@@ -128,7 +130,8 @@ msgstr "Ponteiro Json: Use / para níveis, chaves para objetos e números para �
 
 #: formconfig.rscripthint
 msgctxt "formconfig.rscripthint"
-msgid "The script is a standard Pascal program: optional var section, then a main begin ... end. block.\n"
+msgid ""
+"The script is a standard Pascal program: optional var section, then a main begin ... end. block.\n"
 "\n"
 "Example:\n"
 "  var s: string;\n"
@@ -190,7 +193,8 @@ msgid "The script is a standard Pascal program: optional var section, then a mai
 "  rand1..rand9 - first 1..9 digits of the random number\n"
 "\n"
 "Additional initial and custom parameters are also available."
-msgstr "O script é um programa Pascal padrão: uma seção var opcional, seguida pelo bloco principal begin ... end.\n"
+msgstr ""
+"O script é um programa Pascal padrão: uma seção var opcional, seguida pelo bloco principal begin ... end.\n"
 "\n"
 "Exemplo:\n"
 "  var s: string;\n"
@@ -254,7 +258,8 @@ msgstr "O script é um programa Pascal padrão: uma seção var opcional, seguid
 "Parâmetros iniciais e personalizados adicionais também estão disponíveis."
 
 #: formconfig.rscriptresponsehint
-msgid "This script processes the response data. All functions and parameters described in the script hint are available here as well.\n"
+msgid ""
+"This script processes the response data. All functions and parameters described in the script hint are available here as well.\n"
 "Use GetParam('result') to obtain the received text.\n"
 "\n"
 "Example:\n"
@@ -266,7 +271,8 @@ msgid "This script processes the response data. All functions and parameters des
 "\n"
 "You can define custom parameters in the parameters script using SetParam('name', 'value'),\n"
 "and then retrieve them here with GetParam('name')."
-msgstr "Este script processa os dados da resposta. Todas as funções e parâmetros descritos na dica do script também estão disponíveis aqui.\n"
+msgstr ""
+"Este script processa os dados da resposta. Todas as funções e parâmetros descritos na dica do script também estão disponíveis aqui.\n"
 "Use GetParam('result') para obter o texto recebido.\n"
 "\n"
 "Exemplo:\n"
@@ -537,7 +543,8 @@ msgid "https://github.com/plaintool/trayslate"
 msgstr "https://github.com/plaintool/trayslate"
 
 #: tformabouttrayslate.lblabout.caption
-msgid "Trayslate is a tray-based client for translation services. You can enter text directly, translate clipboard content, or translate selected text in any application. You can also replace text in another app with its translation using a hotkey. The app lets you choose and fully configure the translation service you use.\n"
+msgid ""
+"Trayslate is a tray-based client for translation services. You can enter text directly, translate clipboard content, or translate selected text in any application. You can also replace text in another app with its translation using a hotkey. The app lets you choose and fully configure the translation service you use.\n"
 "\n"
 "This application uses third-party resources under the following licenses:\n"
 "\n"
@@ -557,7 +564,8 @@ msgid "Trayslate is a tray-based client for translation services. You can enter 
 "   License: BSD-style license\n"
 "   Copyright (c) 1999–2024, Lukas Gebauer\n"
 "   https://github.com/geby/synapse"
-msgstr "Trayslate é um cliente de bandeja do sistema para serviços de tradução. Você pode digitar o texto diretamente, traduzir o conteúdo da área de transferência ou traduzir o texto selecionado em qualquer aplicativo. Você também pode substituir o texto em outro aplicativo pela sua tradução usando uma tecla de atalho. O aplicativo permite que você escolha e configure totalmente o serviço de tradução que utiliza.\n"
+msgstr ""
+"Trayslate é um cliente de bandeja do sistema para serviços de tradução. Você pode digitar o texto diretamente, traduzir o conteúdo da área de transferência ou traduzir o texto selecionado em qualquer aplicativo. Você também pode substituir o texto em outro aplicativo pela sua tradução usando uma tecla de atalho. O aplicativo permite que você escolha e configure totalmente o serviço de tradução que utiliza.\n"
 "\n"
 "Este aplicativo utiliza recursos de terceiros sob as seguintes licenças:\n"
 "\n"
@@ -582,6 +590,25 @@ msgstr "Trayslate é um cliente de bandeja do sistema para serviços de traduç�
 msgctxt "tformbuttontrayslate.imagetranslate.hint"
 msgid "Translate in Popup"
 msgstr "Traduzir no Pop-up"
+
+#: tformbuttontrayslate.menucanceltranslate.caption
+msgid "Cancel Translate"
+msgstr "Cancelar tradução"
+
+#: tformbuttontrayslate.menutranslatecontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatecontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "Substituir seleção pela tradução"
+
+#: tformbuttontrayslate.menutranslatefromcontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
+msgid "Translate Selected To Main Window"
+msgstr "Traduzir seleção para a janela principal"
+
+#: tformbuttontrayslate.menutranslatefromcontroltopopup.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "Traduzir seleção para a janela pop-up"
 
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
@@ -806,9 +833,11 @@ msgid "Value type for populating names. None keeps originals; None and Unit are 
 msgstr "Tipo de valor para preenchimento de nomes. Nenhum mantém os originais; Nenhum e Unidade diferenciam maiúsculas de minúsculas."
 
 #: tformconfigtrayslate.labellanguagestarget.caption
-msgid "Target languages e.g. en=en-US, en - internal, en-US - service code.\n"
+msgid ""
+"Target languages e.g. en=en-US, en - internal, en-US - service code.\n"
 "If not specified, both source and target languages are taken from the languages section."
-msgstr "Idiomas de destino, por exemplo, en=en-US, en - interno, en-US - código do serviço.\n"
+msgstr ""
+"Idiomas de destino, por exemplo, en=en-US, en - interno, en-US - código do serviço.\n"
 "Se não especificado, tanto o idioma de origem quanto o de destino são obtidos da seção de idiomas."
 
 #: tformconfigtrayslate.labelmaxlength.caption
@@ -981,6 +1010,16 @@ msgstr "Enviar origem e tradução para a janela principal"
 msgid "Swap Language Pair"
 msgstr "Alternar Par de Idiomas"
 
+#: tformpopuptrayslate.atranslatefromcontroltopopup.caption
+msgctxt "tformpopuptrayslate.atranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "Traduzir seleção para a janela pop-up"
+
+#: tformpopuptrayslate.atranslatetocontrol.caption
+msgctxt "tformpopuptrayslate.atranslatetocontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "Substituir seleção pela tradução"
+
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
 msgid "Trayslate"
@@ -1143,9 +1182,11 @@ msgid "Always Prefer Primary/Secondary Language"
 msgstr "Sempre Preferir Idioma Primário/Secundário"
 
 #: tformsettingstrayslate.checksmarthard.hint
-msgid "Always prefer the Primary/Secondary language pair when the detected language matches the current target language.\n"
+msgid ""
+"Always prefer the Primary/Secondary language pair when the detected language matches the current target language.\n"
 "Restore the configured pair instead of performing a normal swap."
-msgstr "Sempre prefira o par de idioma Primário/Secundário quando o idioma detectado corresponder ao idioma de destino atual.\n"
+msgstr ""
+"Sempre prefira o par de idioma Primário/Secundário quando o idioma detectado corresponder ao idioma de destino atual.\n"
 "Restaure o par configurado em vez de realizar uma troca normal."
 
 #: tformsettingstrayslate.checksmartswap.caption
@@ -1155,9 +1196,11 @@ msgstr "Alternância Inteligente para Idiomas Fora do Par"
 
 #: tformsettingstrayslate.checksmartswap.hint
 msgctxt "tformsettingstrayslate.checksmartswap.hint"
-msgid "If Detected language is outside the current pair, the Source language is replaced with the Detected language and the Target language is set to Primary.\n"
+msgid ""
+"If Detected language is outside the current pair, the Source language is replaced with the Detected language and the Target language is set to Primary.\n"
 "If Detected language equals Primary, the translation pair is set to Primary - Secondary."
-msgstr "Se o idioma detectado estiver fora do par atual, o idioma de origem é substituído pelo idioma detectado e o idioma de destino é definido como Primário.\n"
+msgstr ""
+"Se o idioma detectado estiver fora do par atual, o idioma de origem é substituído pelo idioma detectado e o idioma de destino é definido como Primário.\n"
 "Se o idioma detectado for igual ao Primário, o par de tradução é definido como Primário - Secundário."
 
 #: tformsettingstrayslate.checkstayontop.caption

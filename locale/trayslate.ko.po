@@ -591,6 +591,25 @@ msgctxt "tformbuttontrayslate.imagetranslate.hint"
 msgid "Translate in Popup"
 msgstr "팝업에서 번역"
 
+#: tformbuttontrayslate.menucanceltranslate.caption
+msgid "Cancel Translate"
+msgstr "번역 취소"
+
+#: tformbuttontrayslate.menutranslatecontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatecontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "선택한 내용을 번역으로 바꾸기"
+
+#: tformbuttontrayslate.menutranslatefromcontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
+msgid "Translate Selected To Main Window"
+msgstr "선택한 내용을 기본 창으로 번역"
+
+#: tformbuttontrayslate.menutranslatefromcontroltopopup.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "선택한 내용을 팝업으로 번역"
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
@@ -990,6 +1009,16 @@ msgstr "원문과 번역을 메인 창으로 보내기"
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
 msgstr "언어 쌍 전환"
+
+#: tformpopuptrayslate.atranslatefromcontroltopopup.caption
+msgctxt "tformpopuptrayslate.atranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "선택한 내용을 팝업으로 번역"
+
+#: tformpopuptrayslate.atranslatetocontrol.caption
+msgctxt "tformpopuptrayslate.atranslatetocontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "선택한 내용을 번역으로 바꾸기"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"

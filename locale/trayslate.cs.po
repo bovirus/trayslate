@@ -591,6 +591,25 @@ msgctxt "tformbuttontrayslate.imagetranslate.hint"
 msgid "Translate in Popup"
 msgstr "Překlad ve vyskakovacím okně"
 
+#: tformbuttontrayslate.menucanceltranslate.caption
+msgid "Cancel Translate"
+msgstr "Zrušit překlad"
+
+#: tformbuttontrayslate.menutranslatecontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatecontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "Nahradit výběr překladem"
+
+#: tformbuttontrayslate.menutranslatefromcontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
+msgid "Translate Selected To Main Window"
+msgstr "Přeložit výběr do hlavního okna"
+
+#: tformbuttontrayslate.menutranslatefromcontroltopopup.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "Přeložit výběr do vyskakovacího okna"
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
@@ -990,6 +1009,16 @@ msgstr "Odeslat zdroj a překlad do hlavního okna"
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
 msgstr "Prohodit jazykovou dvojici"
+
+#: tformpopuptrayslate.atranslatefromcontroltopopup.caption
+msgctxt "tformpopuptrayslate.atranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "Přeložit výběr do vyskakovacího okna"
+
+#: tformpopuptrayslate.atranslatetocontrol.caption
+msgctxt "tformpopuptrayslate.atranslatetocontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "Nahradit výběr překladem"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"

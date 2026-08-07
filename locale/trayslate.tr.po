@@ -591,6 +591,25 @@ msgctxt "tformbuttontrayslate.imagetranslate.hint"
 msgid "Translate in Popup"
 msgstr "Açılır pencerede çevir"
 
+#: tformbuttontrayslate.menucanceltranslate.caption
+msgid "Cancel Translate"
+msgstr "Çeviriyi İptal Et"
+
+#: tformbuttontrayslate.menutranslatecontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatecontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "Seçimi Çeviriyle Değiştir"
+
+#: tformbuttontrayslate.menutranslatefromcontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
+msgid "Translate Selected To Main Window"
+msgstr "Seçimi Ana Pencereye Çevir"
+
+#: tformbuttontrayslate.menutranslatefromcontroltopopup.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "Seçimi Açılır Pencereye Çevir"
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
@@ -990,6 +1009,16 @@ msgstr "Kaynak ve çeviriyi ana pencereye gönder"
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
 msgstr "Dil çiftini değiştir"
+
+#: tformpopuptrayslate.atranslatefromcontroltopopup.caption
+msgctxt "tformpopuptrayslate.atranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "Seçimi Açılır Pencereye Çevir"
+
+#: tformpopuptrayslate.atranslatetocontrol.caption
+msgctxt "tformpopuptrayslate.atranslatetocontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "Seçimi Çeviriyle Değiştir"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"

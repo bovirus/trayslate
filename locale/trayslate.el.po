@@ -591,6 +591,25 @@ msgctxt "tformbuttontrayslate.imagetranslate.hint"
 msgid "Translate in Popup"
 msgstr "Μετάφραση σε αναδυόμενο"
 
+#: tformbuttontrayslate.menucanceltranslate.caption
+msgid "Cancel Translate"
+msgstr "Ακύρωση μετάφρασης"
+
+#: tformbuttontrayslate.menutranslatecontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatecontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "Αντικατάσταση επιλογής με μετάφραση"
+
+#: tformbuttontrayslate.menutranslatefromcontrol.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
+msgid "Translate Selected To Main Window"
+msgstr "Μετάφραση επιλογής στο κύριο παράθυρο"
+
+#: tformbuttontrayslate.menutranslatefromcontroltopopup.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "Μετάφραση επιλογής στο αναδυόμενο παράθυρο"
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
@@ -990,6 +1009,16 @@ msgstr "Αποστολή πηγής και μετάφρασης στο κύρι�
 #: tformpopuptrayslate.aswappair.caption
 msgid "Swap Language Pair"
 msgstr "Εναλλαγή ζεύγους γλωσσών"
+
+#: tformpopuptrayslate.atranslatefromcontroltopopup.caption
+msgctxt "tformpopuptrayslate.atranslatefromcontroltopopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "Μετάφραση επιλογής στο αναδυόμενο παράθυρο"
+
+#: tformpopuptrayslate.atranslatetocontrol.caption
+msgctxt "tformpopuptrayslate.atranslatetocontrol.caption"
+msgid "Replace Selected With Translate"
+msgstr "Αντικατάσταση επιλογής με μετάφραση"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"

@@ -22,7 +22,7 @@ uses
   Dialogs,
   Buttons,
   ExtCtrls,
-  LCLType;
+  LCLType, Menus;
 
 type
 
@@ -30,17 +30,33 @@ type
 
   TformButtonTrayslate = class(TForm)
     ImageTranslate: TImage;
+    MenuCancelTranslate: TMenuItem;
+    MenuTranslateFromControl: TMenuItem;
+    MenuTranslateFromControlToPopup: TMenuItem;
+    MenuTranslateControl: TMenuItem;
+    Popup: TPopupMenu;
+    Separator1: TMenuItem;
     TimerHide: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormPaint(Sender: TObject);
+    procedure ImageTranslateMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure ImageTranslateMouseEnter(Sender: TObject);
     procedure ImageTranslateMouseLeave(Sender: TObject);
     procedure ImageTranslateClick(Sender: TObject);
+    procedure MenuCancelTranslateClick(Sender: TObject);
+    procedure MenuTranslateControlClick(Sender: TObject);
+    procedure MenuTranslateFromControlToPopupClick(Sender: TObject);
+    procedure MenuTranslateFromControlClick(Sender: TObject);
+    procedure PopupClose(Sender: TObject);
+    procedure PopupPopup(Sender: TObject);
     procedure TimerHideTimer(Sender: TObject);
   private
     FSourceText: string;
     FHoverColor: TColor;
+    FPopupOpen: boolean;
+    FPopupClosed: boolean;
+    FPrevForegroundWnd: Handle;
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   public
@@ -55,7 +71,7 @@ const
 
 implementation
 
-uses consts, mainform, localize, darkutils;
+uses Consts, mainform, localize, darkutils, osutils;
 
   {$R *.lfm}
 
@@ -76,8 +92,16 @@ begin
   Width := 27;
   Height := 27;
 
+  menuTranslateFromControlToPopup.ImageIndex := TDarkUtils.ThemeValue(20, 21);
+  menuTranslateFromControl.ImageIndex := TDarkUtils.ThemeValue(20, 21);
+  menuTranslateControl.ImageIndex := TDarkUtils.ThemeValue(22, 23);
+
   // Remove standard window borders to allow custom rounded shape
   BorderStyle := bsNone;
+
+  // Variables defaults
+  FPopupClosed := False;
+  FPopupOpen := False;
 
   // Create a rounded-rectangle region for the form (radius = 6 pixels)
   {$IFDEF WINDOWS}
@@ -113,11 +137,80 @@ begin
   Canvas.RoundRect(-2, -2, Width - 2, Height - 2, 17, 17);
 end;
 
+procedure TformButtonTrayslate.ImageTranslateMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+begin
+  if FPopupOpen then
+  begin
+    Popup.Close;
+    FPopupClosed := True;
+  end;
+end;
+
 procedure TformButtonTrayslate.ImageTranslateClick(Sender: TObject);
 begin
-  // Hide the button and trigger the translation popup
-  TimerHideTimer(Self);
-  formTrayslate.TranslatePopup(SourceText, Left, Top);
+  if not FPopupOpen and not FPopupClosed then
+  begin
+    // Hide the button and trigger the translation popup
+    TimerHideTimer(Self);
+    formTrayslate.TranslatePopup(SourceText, Left, Top);
+  end;
+  FPopupClosed := False;
+end;
+
+procedure TformButtonTrayslate.MenuCancelTranslateClick(Sender: TObject);
+begin
+  TimerHide.Enabled := False;
+  Hide;
+end;
+
+procedure TformButtonTrayslate.MenuTranslateFromControlToPopupClick(Sender: TObject);
+begin
+  ActiveControl := nil;
+  {$IFDEF WINDOWS}
+    if FPrevForegroundWnd <> 0 then
+      TOS.ForceForegroundWindow(FPrevForegroundWnd);
+  {$ENDIF}
+  Application.QueueAsyncCall(@formTrayslate.TranslateFromControlPopup, 0);
+end;
+
+procedure TformButtonTrayslate.MenuTranslateControlClick(Sender: TObject);
+begin
+  ActiveControl := nil;
+  {$IFDEF WINDOWS}
+    if FPrevForegroundWnd <> 0 then
+      TOS.ForceForegroundWindow(FPrevForegroundWnd);
+  {$ENDIF}
+  Application.QueueAsyncCall(@formTrayslate.TranslateControl, 0);
+end;
+
+procedure TformButtonTrayslate.MenuTranslateFromControlClick(Sender: TObject);
+begin
+  ActiveControl := nil;
+  {$IFDEF WINDOWS}
+    if FPrevForegroundWnd <> 0 then
+      TOS.ForceForegroundWindow(FPrevForegroundWnd);
+  {$ENDIF}
+  Application.QueueAsyncCall(@formTrayslate.TranslateFromControl, 0);
+end;
+
+procedure TformButtonTrayslate.PopupClose(Sender: TObject);
+begin
+  FPopupOpen := False;
+  FPopupClosed := True;
+end;
+
+procedure TformButtonTrayslate.PopupPopup(Sender: TObject);
+var
+  hWnd: Handle;
+  pid: DWORD;
+begin
+  FPopupOpen := True;
+  {$IFDEF WINDOWS}
+  hWnd := GetForegroundWindow;
+  GetWindowThreadProcessId(hWnd, @pid);
+  if pid <> GetCurrentProcessId then
+    FPrevForegroundWnd := hWnd;
+  {$ENDIF}
 end;
 
 procedure TformButtonTrayslate.CreateParams(var Params: TCreateParams);
@@ -150,8 +243,11 @@ end;
 procedure TformButtonTrayslate.TimerHideTimer(Sender: TObject);
 begin
   // Automatically hide the form after a REQUEST_TIMEOUT
-  TimerHide.Enabled := False;
-  Hide;
+  if not FPopupOpen then
+  begin
+    TimerHide.Enabled := False;
+    Hide;
+  end;
 end;
 
 end.

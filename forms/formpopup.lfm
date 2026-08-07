@@ -177,7 +177,7 @@ object formPopupTrayslate: TformPopupTrayslate
   object Timer: TTimer
     Interval = 100
     OnTimer = TimerTimer
-    Left = 112
+    Left = 192
     Top = 152
   end
   object ActionList: TActionList
@@ -199,9 +199,19 @@ object formPopupTrayslate: TformPopupTrayslate
       ImageIndex = 6
       OnExecute = aMenuExecute
     end
-    object AApplyAutoHeight: TAction
+    object aTranslateFromControlToPopup: TAction
+      Caption = 'Translate Selected To Popup'
+      ImageIndex = 20
+      OnExecute = aTranslateFromControlToPopupExecute
+    end
+    object aTranslateToControl: TAction
+      Caption = 'Replace Selected With Translate'
+      ImageIndex = 22
+      OnExecute = aTranslateToControlExecute
+    end
+    object aApplyAutoHeight: TAction
       Caption = 'Apply Auto Height'
-      OnExecute = AApplyAutoHeightExecute
+      OnExecute = aApplyAutoHeightExecute
     end
     object aFastAutoHeight: TAction
       Caption = 'Lock Height'
@@ -225,22 +235,31 @@ object formPopupTrayslate: TformPopupTrayslate
     Alignment = paRight
     OnPopup = PopupPopup
     OnClose = PopupClose
-    Left = 184
+    Left = 120
     Top = 152
-    object MenuApplyAutoHeight: TMenuItem
-      Action = AApplyAutoHeight
+    object MenuTranslateFromControl: TMenuItem
+      Action = aTranslateFromControlToPopup
     end
-    object MenuFastAutoHeight: TMenuItem
-      Action = aFastAutoHeight
+    object MenuTranslateControl: TMenuItem
+      Action = aTranslateToControl
     end
-    object Separator1: TMenuItem
+    object MenuSwapPair: TMenuItem
+      Action = aSwapPair
+    end
+    object Separator2: TMenuItem
       Caption = '-'
     end
     object MenuSendToMainWindow: TMenuItem
       Action = aSendToMainWindow
     end
-    object MenuSwapPair: TMenuItem
-      Action = aSwapPair
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuApplyAutoHeight: TMenuItem
+      Action = aApplyAutoHeight
+    end
+    object MenuFastAutoHeight: TMenuItem
+      Action = aFastAutoHeight
     end
   end
 end

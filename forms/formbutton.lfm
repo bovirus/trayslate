@@ -2,12 +2,12 @@ object formButtonTrayslate: TformButtonTrayslate
   Left = 312
   Height = 91
   Top = 250
-  Width = 89
+  Width = 146
   AutoSize = True
   BorderIcons = []
   BorderStyle = bsNone
   ClientHeight = 91
-  ClientWidth = 89
+  ClientWidth = 146
   Color = clWhite
   FormStyle = fsSystemStayOnTop
   LCLVersion = '4.8.0.0'
@@ -25,10 +25,12 @@ object formButtonTrayslate: TformButtonTrayslate
     ImageIndex = 2
     Images = formTrayslate.ImageButtons
     ParentShowHint = False
+    PopupMenu = Popup
     ShowHint = True
     StretchOutEnabled = False
     StretchInEnabled = False
     OnClick = ImageTranslateClick
+    OnMouseDown = ImageTranslateMouseDown
     OnMouseEnter = ImageTranslateMouseEnter
     OnMouseLeave = ImageTranslateMouseLeave
   end
@@ -38,5 +40,34 @@ object formButtonTrayslate: TformButtonTrayslate
     OnTimer = TimerHideTimer
     Left = 24
     Top = 40
+  end
+  object Popup: TPopupMenu
+    Images = formTrayslate.ImageButtons
+    OnPopup = PopupPopup
+    OnClose = PopupClose
+    Left = 96
+    Top = 43
+    object MenuCancelTranslate: TMenuItem
+      Caption = 'Cancel Translate'
+      OnClick = MenuCancelTranslateClick
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuTranslateFromControlToPopup: TMenuItem
+      Caption = 'Translate Selected To Popup'
+      ImageIndex = 20
+      OnClick = MenuTranslateFromControlToPopupClick
+    end
+    object MenuTranslateFromControl: TMenuItem
+      Caption = 'Translate Selected To Main Window'
+      ImageIndex = 20
+      OnClick = MenuTranslateFromControlClick
+    end
+    object MenuTranslateControl: TMenuItem
+      Caption = 'Replace Selected With Translate'
+      ImageIndex = 22
+      OnClick = MenuTranslateControlClick
+    end
   end
 end

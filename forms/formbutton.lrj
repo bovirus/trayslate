@@ -1,3 +1,7 @@
 {"version":1,"strings":[
-{"hash":124097696,"name":"tformbuttontrayslate.imagetranslate.hint","sourcebytes":[84,114,97,110,115,108,97,116,101,32,105,110,32,80,111,112,117,112],"value":"Translate in Popup"}
+{"hash":124097696,"name":"tformbuttontrayslate.imagetranslate.hint","sourcebytes":[84,114,97,110,115,108,97,116,101,32,105,110,32,80,111,112,117,112],"value":"Translate in Popup"},
+{"hash":266660709,"name":"tformbuttontrayslate.menucanceltranslate.caption","sourcebytes":[67,97,110,99,101,108,32,84,114,97,110,115,108,97,116,101],"value":"Cancel Translate"},
+{"hash":83874688,"name":"tformbuttontrayslate.menutranslatefromcontroltopopup.caption","sourcebytes":[84,114,97,110,115,108,97,116,101,32,83,101,108,101,99,116,101,100,32,84,111,32,80,111,112,117,112],"value":"Translate Selected To Popup"},
+{"hash":19236647,"name":"tformbuttontrayslate.menutranslatefromcontrol.caption","sourcebytes":[84,114,97,110,115,108,97,116,101,32,83,101,108,101,99,116,101,100,32,84,111,32,77,97,105,110,32,87,105,110,100,111,119],"value":"Translate Selected To Main Window"},
+{"hash":63419285,"name":"tformbuttontrayslate.menutranslatecontrol.caption","sourcebytes":[82,101,112,108,97,99,101,32,83,101,108,101,99,116,101,100,32,87,105,116,104,32,84,114,97,110,115,108,97,116,101],"value":"Replace Selected With Translate"}
 ]}
