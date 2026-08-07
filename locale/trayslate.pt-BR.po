@@ -1618,7 +1618,7 @@ msgstr "Português"
 
 #: tformtrayslate.alangportuguesebrazil.caption
 msgid "Portuguese (Brazil)"
-msgstr ""
+msgstr "Português (Brasil)"
 
 #: tformtrayslate.alangromanian.caption
 msgid "Romanian"
@@ -1646,7 +1646,7 @@ msgstr "Українська"
 
 #: tformtrayslate.alangvietnamese.caption
 msgid "Vietnamese"
-msgstr ""
+msgstr "Tiếng Việt"
 
 #: tformtrayslate.amenu.hint
 msgctxt "tformtrayslate.amenu.hint"
