@@ -467,6 +467,7 @@ type
     procedure SetAutoCopy(Value: boolean);
     procedure SetProxy(Value: TProxy);
     procedure SetTranslateTarget(Value: TWinControl);
+    procedure SetBuiltInDetect(Value: boolean);
 
     procedure ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
     procedure ChangeTargetLang(NewLang: string; AddRecentPairs: boolean = True);
@@ -588,7 +589,7 @@ type
     property RealTime: boolean read FRealTime write SetRealTime;
     property RealTimeDelay: integer read FRealTimeDelay write FRealTimeDelay;
     property AutoSwap: boolean read FAutoSwap write SetAutoSwap;
-    property BuiltInDetect: boolean read FBuiltInDetect write FBuiltInDetect;
+    property BuiltInDetect: boolean read FBuiltInDetect write SetBuiltInDetect;
     property SmartSwap: boolean read FSmartSwap write FSmartSwap;
     property SmartHard: boolean read FSmartHard write FSmartHard;
     property PrimaryLang: string read FPrimaryLang write FPrimaryLang;
@@ -811,6 +812,10 @@ begin
 
   // Set language
   SetLanguage(Language);
+
+  // Load LangDetect Profiles
+  if BuiltInDetect then
+    TLangDetect.LoadProfiles;
 
   FTopMost := False;
 end;
@@ -2399,6 +2404,11 @@ begin
     formSettingsTrayslate.CheckAutoSwap.Checked := Value
   else
     FAutoSwap := Value;
+
+  if FBuiltInDetect and FAutoSwap then
+    TLangDetect.LoadProfiles
+  else
+    TLangDetect.UnloadProfiles;
 end;
 
 procedure TformTrayslate.SetAllowHotkeys(Value: boolean);
@@ -2529,6 +2539,15 @@ begin
     end;
     FTranslateTarget := nil;
   end;
+end;
+
+procedure TformTrayslate.SetBuiltInDetect(Value: boolean);
+begin
+  FBuiltInDetect := Value;
+  if FBuiltInDetect and FAutoSwap then
+    TLangDetect.LoadProfiles
+  else
+    TLangDetect.UnloadProfiles;
 end;
 
 {%EndRegion}
@@ -4292,7 +4311,7 @@ begin
 
   // Detect language in source memo
   if BuiltInDetect then
-    langDetect := DetectLanguageSafe(AText.ExtractTextSample(1000), langSrc)
+    langDetect := TLangDetect.DetectLanguageSafe(AText.ExtractTextSample(1000), langSrc)
   else
     langDetect := LowerCase(TranslateThread(TransDetect, AText.ExtractTextSample));
 
