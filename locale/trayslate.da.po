@@ -605,8 +605,8 @@ msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
 msgid "Translate Selected To Main Window"
 msgstr "Oversæt markering til hovedvinduet"
 
-#: tformbuttontrayslate.menutranslatefromcontroltopopup.caption
-msgctxt "tformbuttontrayslate.menutranslatefromcontroltopopup.caption"
+#: tformbuttontrayslate.menutranslatefromcontrolpopup.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "Oversæt markering til pop op-vinduet"
 
@@ -1010,15 +1010,15 @@ msgstr "Send kilde og oversættelse til hovedvinduet"
 msgid "Swap Language Pair"
 msgstr "Byt sprogpar"
 
-#: tformpopuptrayslate.atranslatefromcontroltopopup.caption
-msgctxt "tformpopuptrayslate.atranslatefromcontroltopopup.caption"
-msgid "Translate Selected To Popup"
-msgstr "Oversæt markering til pop op-vinduet"
-
-#: tformpopuptrayslate.atranslatetocontrol.caption
-msgctxt "tformpopuptrayslate.atranslatetocontrol.caption"
+#: tformpopuptrayslate.atranslatecontrol.caption
+msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"
 msgstr "Erstat markering med oversættelse"
+
+#: tformpopuptrayslate.atranslatefromcontrolpopup.caption
+msgctxt "tformpopuptrayslate.atranslatefromcontrolpopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "Oversæt markering til pop op-vinduet"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"

@@ -605,8 +605,8 @@ msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
 msgid "Translate Selected To Main Window"
 msgstr "Traduzir seleção para a janela principal"
 
-#: tformbuttontrayslate.menutranslatefromcontroltopopup.caption
-msgctxt "tformbuttontrayslate.menutranslatefromcontroltopopup.caption"
+#: tformbuttontrayslate.menutranslatefromcontrolpopup.caption
+msgctxt "tformbuttontrayslate.menutranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "Traduzir seleção para a janela pop-up"
 
@@ -1010,15 +1010,15 @@ msgstr "Enviar origem e tradução para a janela principal"
 msgid "Swap Language Pair"
 msgstr "Alternar Par de Idiomas"
 
-#: tformpopuptrayslate.atranslatefromcontroltopopup.caption
-msgctxt "tformpopuptrayslate.atranslatefromcontroltopopup.caption"
-msgid "Translate Selected To Popup"
-msgstr "Traduzir seleção para a janela pop-up"
-
-#: tformpopuptrayslate.atranslatetocontrol.caption
-msgctxt "tformpopuptrayslate.atranslatetocontrol.caption"
+#: tformpopuptrayslate.atranslatecontrol.caption
+msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"
 msgstr "Substituir seleção pela tradução"
+
+#: tformpopuptrayslate.atranslatefromcontrolpopup.caption
+msgctxt "tformpopuptrayslate.atranslatefromcontrolpopup.caption"
+msgid "Translate Selected To Popup"
+msgstr "Traduzir seleção para a janela pop-up"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"

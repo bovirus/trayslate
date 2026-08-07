@@ -32,7 +32,7 @@ type
     ImageTranslate: TImage;
     MenuCancelTranslate: TMenuItem;
     MenuTranslateFromControl: TMenuItem;
-    MenuTranslateFromControlToPopup: TMenuItem;
+    MenuTranslateFromControlPopup: TMenuItem;
     MenuTranslateControl: TMenuItem;
     Popup: TPopupMenu;
     Separator1: TMenuItem;
@@ -46,7 +46,7 @@ type
     procedure ImageTranslateClick(Sender: TObject);
     procedure MenuCancelTranslateClick(Sender: TObject);
     procedure MenuTranslateControlClick(Sender: TObject);
-    procedure MenuTranslateFromControlToPopupClick(Sender: TObject);
+    procedure MenuTranslateFromControlPopupClick(Sender: TObject);
     procedure MenuTranslateFromControlClick(Sender: TObject);
     procedure PopupClose(Sender: TObject);
     procedure PopupPopup(Sender: TObject);
@@ -71,7 +71,7 @@ const
 
 implementation
 
-uses Consts, mainform, localize, darkutils, osutils;
+uses Consts, mainform, localize, darkutils, osutils, hotkeyhelper;
 
   {$R *.lfm}
 
@@ -92,9 +92,13 @@ begin
   Width := 27;
   Height := 27;
 
-  menuTranslateFromControlToPopup.ImageIndex := TDarkUtils.ThemeValue(20, 21);
+  MenuTranslateFromControlPopup.ImageIndex := TDarkUtils.ThemeValue(20, 21);
   menuTranslateFromControl.ImageIndex := TDarkUtils.ThemeValue(20, 21);
   menuTranslateControl.ImageIndex := TDarkUtils.ThemeValue(22, 23);
+
+  menuTranslateFromControl.ShortCut := formTrayslate.HotKeyTransFromControl.ToShortCut;
+  MenuTranslateFromControlPopup.ShortCut := formTrayslate.HotKeyTransControlPopup.ToShortCut;
+  menuTranslateControl.ShortCut := formTrayslate.HotKeyTransControl.ToShortCut;
 
   // Remove standard window borders to allow custom rounded shape
   BorderStyle := bsNone;
@@ -163,7 +167,7 @@ begin
   Hide;
 end;
 
-procedure TformButtonTrayslate.MenuTranslateFromControlToPopupClick(Sender: TObject);
+procedure TformButtonTrayslate.MenuTranslateFromControlPopupClick(Sender: TObject);
 begin
   ActiveControl := nil;
   {$IFDEF WINDOWS}

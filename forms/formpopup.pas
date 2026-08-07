@@ -39,8 +39,8 @@ type
 
   TformPopupTrayslate = class(TForm)
     aApplyAutoHeight: TAction;
-    aTranslateFromControlToPopup: TAction;
-    aTranslateToControl: TAction;
+    aTranslateFromControlPopup: TAction;
+    aTranslateControl: TAction;
     aSwapPair: TAction;
     aFastAutoHeight: TAction;
     aMenu: TAction;
@@ -53,7 +53,7 @@ type
     MemoTarget: TMemo;
     MenuFastAutoHeight: TMenuItem;
     MenuApplyAutoHeight: TMenuItem;
-    MenuTranslateFromControl: TMenuItem;
+    MenuTranslateFromControlPopup: TMenuItem;
     MenuTranslateControl: TMenuItem;
     MenuSwapPair: TMenuItem;
     MenuSendToMainWindow: TMenuItem;
@@ -77,8 +77,8 @@ type
     procedure aNewTranslateExecute(Sender: TObject);
     procedure aSendToMainWindowExecute(Sender: TObject);
     procedure aSwapPairExecute(Sender: TObject);
-    procedure aTranslateFromControlToPopupExecute(Sender: TObject);
-    procedure aTranslateToControlExecute(Sender: TObject);
+    procedure aTranslateFromControlPopupExecute(Sender: TObject);
+    procedure aTranslateControlExecute(Sender: TObject);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -115,7 +115,7 @@ var
 
 implementation
 
-uses Consts, mainform, formsettings, localize, darkutils, controlshelper, pascalutils, osutils;
+uses Consts, mainform, formsettings, localize, darkutils, controlshelper, pascalutils, osutils, hotkeyhelper;
 
   {$R *.lfm}
 
@@ -138,10 +138,14 @@ begin
   aSwapPair.ImageIndex := TDarkUtils.ThemeValue(0, 1);
   aMenu.ImageIndex := TDarkUtils.ThemeValue(6, 7);
   aCopyTarget.ImageIndex := TDarkUtils.ThemeValue(10, 11);
-  aTranslateFromControlToPopup.ImageIndex := TDarkUtils.ThemeValue(20, 21);
-  aTranslateToControl.ImageIndex := TDarkUtils.ThemeValue(22, 23);
+  aTranslateFromControlPopup.ImageIndex := TDarkUtils.ThemeValue(20, 21);
+  aTranslateControl.ImageIndex := TDarkUtils.ThemeValue(22, 23);
   SbCopyTarget.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);
   SbCopyTargetPanel.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);
+
+  aTranslateFromControlPopup.ShortCut := formTrayslate.HotKeyTransControlPopup.ToShortCut;
+  aTranslateControl.ShortCut := formTrayslate.HotKeyTransControl.ToShortCut;
+  aSwapPair.ShortCut := formTrayslate.HotKeyTransSwap.ToShortCut;
 
   FPopupOpen := False;
   FInWindow := False;
@@ -222,7 +226,7 @@ begin
   formTrayslate.aSwap.Execute;
 end;
 
-procedure TformPopupTrayslate.aTranslateFromControlToPopupExecute(Sender: TObject);
+procedure TformPopupTrayslate.aTranslateFromControlPopupExecute(Sender: TObject);
 begin
   ActiveControl := nil;
   {$IFDEF WINDOWS}
@@ -232,7 +236,7 @@ begin
   Application.QueueAsyncCall(@formTrayslate.TranslateFromControlPopup, 0);
 end;
 
-procedure TformPopupTrayslate.aTranslateToControlExecute(Sender: TObject);
+procedure TformPopupTrayslate.aTranslateControlExecute(Sender: TObject);
 begin
   ActiveControl := nil;
   {$IFDEF WINDOWS}

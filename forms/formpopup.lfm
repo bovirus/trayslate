@@ -199,15 +199,15 @@ object formPopupTrayslate: TformPopupTrayslate
       ImageIndex = 6
       OnExecute = aMenuExecute
     end
-    object aTranslateFromControlToPopup: TAction
+    object aTranslateFromControlPopup: TAction
       Caption = 'Translate Selected To Popup'
       ImageIndex = 20
-      OnExecute = aTranslateFromControlToPopupExecute
+      OnExecute = aTranslateFromControlPopupExecute
     end
-    object aTranslateToControl: TAction
+    object aTranslateControl: TAction
       Caption = 'Replace Selected With Translate'
       ImageIndex = 22
-      OnExecute = aTranslateToControlExecute
+      OnExecute = aTranslateControlExecute
     end
     object aApplyAutoHeight: TAction
       Caption = 'Apply Auto Height'
@@ -237,11 +237,11 @@ object formPopupTrayslate: TformPopupTrayslate
     OnClose = PopupClose
     Left = 120
     Top = 152
-    object MenuTranslateFromControl: TMenuItem
-      Action = aTranslateFromControlToPopup
+    object MenuTranslateFromControlPopup: TMenuItem
+      Action = aTranslateFromControlPopup
     end
     object MenuTranslateControl: TMenuItem
-      Action = aTranslateToControl
+      Action = aTranslateControl
     end
     object MenuSwapPair: TMenuItem
       Action = aSwapPair

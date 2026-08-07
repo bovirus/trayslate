@@ -54,10 +54,10 @@ object formButtonTrayslate: TformButtonTrayslate
     object Separator1: TMenuItem
       Caption = '-'
     end
-    object MenuTranslateFromControlToPopup: TMenuItem
+    object MenuTranslateFromControlPopup: TMenuItem
       Caption = 'Translate Selected To Popup'
       ImageIndex = 20
-      OnClick = MenuTranslateFromControlToPopupClick
+      OnClick = MenuTranslateFromControlPopupClick
     end
     object MenuTranslateFromControl: TMenuItem
       Caption = 'Translate Selected To Main Window'
