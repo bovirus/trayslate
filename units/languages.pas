@@ -7,7 +7,6 @@
 unit languages;
 
 {$mode objfpc}{$H+}
-{$modeswitch advancedrecords}
 
 interface
 
@@ -31,11 +30,9 @@ const
   SpecialCodes: array[0..1] of string = ('auto', 'empty');
   AutoDetect = 'Auto Detect';
 
-type
-  TAppValueHelper = record helper for TAppValue
-    function DisplayText: string;                      // "DisplayName (Code)"
-    class function ExtractCode(const ItemText: string): string; static;
-  end;
+// Helper functions replacing the former record helper
+function AppValueDisplayText(const AValue: TAppValue): string;
+function ExtractCodeFromDisplayText(const ItemText: string): string;
 
 type
   // Static class that holds all language/currency/unit data and operations
@@ -72,14 +69,14 @@ uses stringshelper;
   {$include currencycrypto_data.inc}
   {$include units_data.inc}
 
-  {%Region -fold [TAppValue Helper Implementation]}
-
-function TAppValueHelper.DisplayText: string;
+// Replacement for TAppValueHelper.DisplayText
+function AppValueDisplayText(const AValue: TAppValue): string;
 begin
-  Result := Format('%s (%s)', [DisplayName, Code]);
+  Result := Format('%s (%s)', [AValue.DisplayName, AValue.Code]);
 end;
 
-class function TAppValueHelper.ExtractCode(const ItemText: string): string;
+// Replacement for TAppValueHelper.ExtractCode
+function ExtractCodeFromDisplayText(const ItemText: string): string;
 var
   P: SizeInt;
 begin
@@ -89,8 +86,6 @@ begin
   else
     Result := ItemText;
 end;
-
-{%EndRegion}
 
 {%Region -fold [TLanguages - Data Retrieval]}
 
@@ -163,10 +158,8 @@ var
 begin
   Result := [];
   case AValueType of
-    vtNone:
-      SetLength(Result, 0);
-    vtLanguage:
-      Result := GetLanguages;
+    vtNone: ;
+    vtLanguage: Result := GetLanguages;
     vtCurrencyAll:
     begin
       Fiat := GetCurrencyFiat;
@@ -177,14 +170,10 @@ begin
       for i := 0 to High(Crypto) do
         Result[Length(Fiat) + i] := Crypto[i];
     end;
-    vtCurrencyFiat:
-      Result := GetCurrencyFiat;
-    vtCurrencyCrypto:
-      Result := GetCurrencyCrypto;
-    vtUnit:
-      Result := GetUnits;
-    else
-      SetLength(Result, 0);
+    vtCurrencyFiat: Result := GetCurrencyFiat;
+    vtCurrencyCrypto: Result := GetCurrencyCrypto;
+    vtUnit: Result := GetUnits;
+    else SetLength(Result, 0);
   end;
 
   if ASort then
@@ -197,14 +186,14 @@ end;
 
 class function TLanguages.GetLanguageCodePairList(AValueType: TLangType): TStringList;
 var
-  Langs: array of TAppValue;
+  Langs: TValueArray;
   i: integer;
 begin
   Result := TStringList.Create;
   Result.TrailingLineBreak := False;
   try
     Langs := GetValues(AValueType, False);
-    for i := 0 to Length(Langs) - 1 do
+    for i := 0 to High(Langs) do
       Result.Add(Langs[i].Code + '=' + Langs[i].Code);
   except
     Result.Free;
@@ -214,7 +203,7 @@ end;
 
 class function TLanguages.GetLanguageDisplayStrings(AValueType: TLangType): TStringList;
 var
-  Langs: array of TAppValue;
+  Langs: TValueArray;
   L: TAppValue;
 begin
   Result := TStringList.Create;
@@ -225,7 +214,7 @@ end;
 
 class function TLanguages.GetDisplayNamesFromCodeMap(ACodeMap: TStringList; AValueType: TLangType; Sort: boolean): TStringList;
 var
-  Langs: array of TAppValue;
+  Langs: TValueArray;
   LangMap: TStringList;
   i, j, idx: integer;
   Key, ApiValue, DisplayString: string;
@@ -305,7 +294,7 @@ end;
 
 class function TLanguages.GetDisplayName(const ACode: string): string;
 var
-  Langs: array of TAppValue;
+  Langs: TValueArray;
   i: integer;
 begin
   Result := '';
@@ -317,7 +306,7 @@ end;
 
 class function TLanguages.GetLanguageCodeDisplayPairs(AValueType: TLangType; ASort: boolean; AIncludeSpecial: boolean): TStringList;
 var
-  Langs: array of TAppValue;
+  Langs: TValueArray;
   L: TAppValue;
 begin
   Result := TStringList.Create;
@@ -337,7 +326,7 @@ end;
 
 class function TLanguages.ExtractCodeFromItem(const ItemText: string): string;
 begin
-  Result := TAppValue.ExtractCode(ItemText);
+  Result := ExtractCodeFromDisplayText(ItemText);
 end;
 
 class function TLanguages.FindIndexByCode(const AStrings: TStrings; const ACode: string): integer;
