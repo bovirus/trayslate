@@ -36,7 +36,7 @@ msgstr "Nhập tham số cần thiết"
 #: consts.rlockheight
 msgctxt "consts.rlockheight"
 msgid "Lock Height"
-msgstr "Chiều cao khóa"
+msgstr "Khóa chiều cao"
 
 #: consts.rnoconfig
 msgctxt "consts.rnoconfig"
@@ -601,7 +601,7 @@ msgstr "Hủy dịch"
 #: tformbuttontrayslate.menutranslatecontrol.caption
 msgctxt "tformbuttontrayslate.menutranslatecontrol.caption"
 msgid "Replace Selected With Translate"
-msgstr "Thay thế đã chọn bằng dịch"
+msgstr "Thay thế đã chọn bằng bản dịch"
 
 #: tformbuttontrayslate.menutranslatefromcontrol.caption
 msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
@@ -1016,7 +1016,7 @@ msgstr "Hoán đổi cặp ngôn ngữ"
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"
-msgstr "Thay thế đã chọn bằng dịch"
+msgstr "Thay thế đã chọn bằng bản dịch"
 
 #: tformpopuptrayslate.atranslatefromcontrolpopup.caption
 msgctxt "tformpopuptrayslate.atranslatefromcontrolpopup.caption"
@@ -1546,7 +1546,7 @@ msgstr "Tự động sao chép bản dịch"
 #: tformtrayslate.afastautoheight.caption
 msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
-msgstr "Chiều cao tự động bật lên"
+msgstr "Cửa sổ bật lên chiều cao tự động"
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
@@ -1767,3 +1767,4 @@ msgstr "Các cặp gần đây"
 msgctxt "tformtrayslate.menulanguage.caption"
 msgid "Language"
 msgstr "Ngôn ngữ"
+
