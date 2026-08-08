@@ -610,10 +610,18 @@ msgctxt "tformbuttontrayslate.menutranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "선택한 내용을 팝업으로 번역"
 
+#: tformconfigtrayslate.aclearicon.caption
+msgid "Clear Icon"
+msgstr "아이콘 지우기"
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
 msgstr "저장"
+
+#: tformconfigtrayslate.asaveiconas.caption
+msgid "Save Icon As..."
+msgstr "아이콘을 다른 이름으로 저장..."
 
 #: tformconfigtrayslate.btnclose.caption
 msgctxt "tformconfigtrayslate.btnclose.caption"

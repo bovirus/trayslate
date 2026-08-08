@@ -610,10 +610,18 @@ msgctxt "tformbuttontrayslate.menutranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "Tradu selecția în fereastra pop-up"
 
+#: tformconfigtrayslate.aclearicon.caption
+msgid "Clear Icon"
+msgstr "Șterge pictograma"
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
 msgstr "Salvare"
+
+#: tformconfigtrayslate.asaveiconas.caption
+msgid "Save Icon As..."
+msgstr "Salvează pictograma ca..."
 
 #: tformconfigtrayslate.btnclose.caption
 msgctxt "tformconfigtrayslate.btnclose.caption"

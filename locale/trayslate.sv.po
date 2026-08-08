@@ -610,10 +610,18 @@ msgctxt "tformbuttontrayslate.menutranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "Översätt markering till popup-fönstret"
 
+#: tformconfigtrayslate.aclearicon.caption
+msgid "Clear Icon"
+msgstr "Rensa ikon"
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
 msgstr "Spara"
+
+#: tformconfigtrayslate.asaveiconas.caption
+msgid "Save Icon As..."
+msgstr "Spara ikon som..."
 
 #: tformconfigtrayslate.btnclose.caption
 msgctxt "tformconfigtrayslate.btnclose.caption"

@@ -610,10 +610,18 @@ msgctxt "tformbuttontrayslate.menutranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "चयनित का पॉपअप में अनुवाद करें"
 
+#: tformconfigtrayslate.aclearicon.caption
+msgid "Clear Icon"
+msgstr "सिस्टम आइकन साफ़ करें"
+
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
 msgstr "सहेजें"
+
+#: tformconfigtrayslate.asaveiconas.caption
+msgid "Save Icon As..."
+msgstr "आइकन इस रूप में सहेजें..."
 
 #: tformconfigtrayslate.btnclose.caption
 msgctxt "tformconfigtrayslate.btnclose.caption"

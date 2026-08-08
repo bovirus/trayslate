@@ -15,6 +15,7 @@ uses
   SysUtils,
   StrUtils,
   Forms,
+  Menus,
   Controls,
   Graphics,
   Clipbrd,
@@ -27,12 +28,12 @@ uses
   ComCtrls,
   Spin,
   ColorBox,
+  LCLType,
+  LCLIntf,
   SynEdit,
   SynEditTypes,
   SynHighlighterPas,
   SynEditHighlighterFoldBase,
-  LCLType,
-  LCLIntf,
   oneshottooltip;
 
 type
@@ -40,6 +41,11 @@ type
   { TformConfigTrayslate }
 
   TformConfigTrayslate = class(TForm)
+    AClearIcon: TAction;
+    ASaveIconAs: TAction;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    Popup: TPopupMenu;
     ReloadConfigs: TAction;
     {%Region -fold Form Common}
     aSave: TAction;
@@ -128,6 +134,7 @@ type
     PanelScript: TPanel;
     PanelScript1: TPanel;
     PanelTop: TPanel;
+    DialogSave: TSaveDialog;
     SbCopyConfig: TSpeedButton;
     SbNewConfig: TSpeedButton;
     SbUpdateConfigs: TSpeedButton;
@@ -151,6 +158,8 @@ type
     SynPasSyn: TSynPasSyn;
     SynScriptParameters: TSynEdit;
     SynScriptResponse: TSynEdit;
+    procedure AClearIconExecute(Sender: TObject);
+    procedure ASaveIconAsExecute(Sender: TObject);
     procedure ReloadConfigsExecute(Sender: TObject);
     procedure BtnResponseHelpClick(Sender: TObject);
     procedure BtnScriptHelpClick(Sender: TObject);
@@ -542,6 +551,31 @@ begin
   end;
 end;
 
+procedure TformConfigTrayslate.AClearIconExecute(Sender: TObject);
+begin
+  FIconBase64 := string.Empty;
+  UpdateIconPreview;
+  ValueChange(Self);
+end;
+
+procedure TformConfigTrayslate.ASaveIconAsExecute(Sender: TObject);
+var
+  Bmp: TBitmap;
+begin
+  if DialogSave.Execute then
+  begin
+    Bmp := TBase64.Base64ToBitmap(FIconBase64);
+    if Assigned(Bmp) then
+    begin
+      try
+        Bmp.SaveToFile(DialogSave.FileName);
+      finally
+        Bmp.Free;
+      end;
+    end;
+  end;
+end;
+
 procedure TformConfigTrayslate.BtnCloseClick(Sender: TObject);
 begin
   Close;
@@ -604,11 +638,7 @@ end;
 procedure TformConfigTrayslate.ImagePreviewMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
 begin
   if Button = mbMiddle then
-  begin
-    FIconBase64 := string.Empty;
-    UpdateIconPreview;
-    ValueChange(Self);
-  end;
+    AClearIcon.Execute;
 end;
 
 procedure TformConfigTrayslate.LabelFillLanguagesClick(Sender: TObject);

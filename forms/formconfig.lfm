@@ -308,6 +308,7 @@ object formConfigTrayslate: TformConfigTrayslate
             Anchors = [akTop, akRight]
             Center = True
             ParentShowHint = False
+            PopupMenu = Popup
             ShowHint = True
             Transparent = True
             OnClick = ImagePreviewClick
@@ -2608,6 +2609,14 @@ object formConfigTrayslate: TformConfigTrayslate
       ShortCut = 116
       OnExecute = ReloadConfigsExecute
     end
+    object AClearIcon: TAction
+      Caption = 'Clear Icon'
+      OnExecute = AClearIconExecute
+    end
+    object ASaveIconAs: TAction
+      Caption = 'Save Icon As...'
+      OnExecute = ASaveIconAsExecute
+    end
   end
   object ColorDialog: TColorDialog
     Color = clBlack
@@ -2637,10 +2646,12 @@ object formConfigTrayslate: TformConfigTrayslate
     Top = 368
   end
   object DialogOpen: TOpenDialog
+    FileName = 'E:\trayslate\img\setting_network.png'
     Filter = 'Images (*.png, *.jpg, *.jpeg, *.bmp, *.ico)|*.png;*.jpg;*.jpeg;*.bmp;*.ico|All files (*.*)|*.*'
+    InitialDir = 'E:\trayslate\img\'
     Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
-    Left = 400
-    Top = 440
+    Left = 328
+    Top = 368
   end
   object SynPasSyn: TSynPasSyn
     Enabled = False
@@ -2650,5 +2661,21 @@ object formConfigTrayslate: TformConfigTrayslate
     StringMultilineMode = []
     Left = 184
     Top = 368
+  end
+  object Popup: TPopupMenu
+    Left = 400
+    Top = 440
+    object MenuItem1: TMenuItem
+      Action = AClearIcon
+    end
+    object MenuItem2: TMenuItem
+      Action = ASaveIconAs
+    end
+  end
+  object DialogSave: TSaveDialog
+    Filter = 'Images (*.bmp)|*.bmp'
+    Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
+    Left = 328
+    Top = 440
   end
 end
