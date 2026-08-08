@@ -339,6 +339,140 @@ msgstr "هل أنت متأكد أنك تريد استعادة مفاتيح ال�
 msgid "Are you sure you want to restore default settings?"
 msgstr "هل أنت متأكد أنك تريد استعادة الإعدادات الافتراضية؟"
 
+#: formsettings.rfast
+msgid "Quick settings"
+msgstr "الإعدادات السريعة"
+
+#: formsettings.rfastallowhotkeys
+msgctxt "formsettings.rfastallowhotkeys"
+msgid "Enable Global Hotkeys"
+msgstr "تمكين مفاتيح الاختصار العامة"
+
+#: formsettings.rfastallowhotkeys_default
+msgid "Shift+F1"
+msgstr "Shift+F1"
+
+#: formsettings.rfastallowhotkeys_hint
+msgid "Enable or disable all global hotkeys"
+msgstr "تمكين أو تعطيل جميع مفاتيح الاختصار العامة"
+
+#: formsettings.rfastautoaddlangpairs
+msgctxt "formsettings.rfastautoaddlangpairs"
+msgid "Auto-Add Recent Language Pairs"
+msgstr "إضافة أزواج اللغات الأخيرة تلقائيًا"
+
+#: formsettings.rfastautoaddlangpairs_default
+msgid "Shift+F5"
+msgstr "Shift+F5"
+
+#: formsettings.rfastautoaddlangpairs_hint
+msgid "Auto-add recent language pairs for quick access"
+msgstr "إضافة أزواج اللغات الأخيرة تلقائيًا للوصول السريع"
+
+#: formsettings.rfastautocopy
+msgctxt "formsettings.rfastautocopy"
+msgid "Auto-Copy Translation"
+msgstr "نسخ الترجمة تلقائياً"
+
+#: formsettings.rfastautocopy_default
+msgid "Shift+F7"
+msgstr "Shift+F7"
+
+#: formsettings.rfastautocopy_hint
+msgid "Automatically copy translation to clipboard"
+msgstr "نسخ الترجمة تلقائيًا إلى الحافظة"
+
+#: formsettings.rfastautoheight
+msgctxt "formsettings.rfastautoheight"
+msgid "Popup Auto Height"
+msgstr "الارتفاع التلقائي للنافذة المنبثقة"
+
+#: formsettings.rfastautoheight_default
+msgid "Shift+F9"
+msgstr "Shift+F9"
+
+#: formsettings.rfastautoheight_hint
+msgid "Adjust popup height to content automatically"
+msgstr "ضبط ارتفاع النافذة المنبثقة تلقائيًا وفقًا للمحتوى"
+
+#: formsettings.rfastautoswap
+msgctxt "formsettings.rfastautoswap"
+msgid "Auto-Swap Language Pair"
+msgstr "تبديل زوج اللغات تلقائياً"
+
+#: formsettings.rfastautoswap_default
+msgid "Shift+F4"
+msgstr "Shift+F4"
+
+#: formsettings.rfastautoswap_hint
+msgid "Automatically swap the language pair direction"
+msgstr "تبديل اتجاه زوج اللغات تلقائيًا"
+
+#: formsettings.rfastenablemousemode
+msgctxt "formsettings.rfastenablemousemode"
+msgid "Enable Mouse Mode"
+msgstr "تفعيل وضع الماوس"
+
+#: formsettings.rfastenablemousemode_default
+msgid "Shift+F2"
+msgstr "Shift+F2"
+
+#: formsettings.rfastenablemousemode_hint
+msgid "Toggle mouse translation mode"
+msgstr "تبديل وضع الترجمة بالماوس"
+
+#: formsettings.rfasthidecontrols
+msgctxt "formsettings.rfasthidecontrols"
+msgid "Auto-Hide Popup Controls"
+msgstr "إخفاء عناصر النافذة المنبثقة تلقائيًا"
+
+#: formsettings.rfasthidecontrols_default
+msgid "Shift+F10"
+msgstr "Shift+F10"
+
+#: formsettings.rfasthidecontrols_hint
+msgid "Hide popup controls when not hovering"
+msgstr "إخفاء عناصر التحكم في النافذة المنبثقة عند عدم تمرير الماوس"
+
+#: formsettings.rfastmousemodectrl
+msgctxt "formsettings.rfastmousemodectrl"
+msgid "Only When Ctrl Is Pressed"
+msgstr "فقط عند الضغط على Ctrl"
+
+#: formsettings.rfastmousemodectrl_default
+msgid "Shift+F3"
+msgstr "Shift+F3"
+
+#: formsettings.rfastmousemodectrl_hint
+msgid "Mouse mode requires Ctrl key to be held"
+msgstr "يتطلب وضع الماوس الضغط باستمرار على مفتاح Ctrl"
+
+#: formsettings.rfastrealtime
+msgctxt "formsettings.rfastrealtime"
+msgid "Translate As You Type"
+msgstr "الترجمة أثناء الكتابة"
+
+#: formsettings.rfastrealtime_default
+msgid "Shift+F6"
+msgstr "Shift+F6"
+
+#: formsettings.rfastrealtime_hint
+msgid "Translate text as you type in the popup"
+msgstr "ترجمة النص أثناء الكتابة في النافذة المنبثقة"
+
+#: formsettings.rfastverticalsplit
+msgctxt "formsettings.rfastverticalsplit"
+msgid "Side-By-Side Layout"
+msgstr "تخطيط جنبًا إلى جنب"
+
+#: formsettings.rfastverticalsplit_default
+msgid "Shift+F8"
+msgstr "Shift+F8"
+
+#: formsettings.rfastverticalsplit_hint
+msgid "Switch between vertical and horizontal layout"
+msgstr "التبديل بين التخطيط الرأسي والأفقي"
+
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
 msgid "Global Hotkeys"
@@ -360,6 +494,14 @@ msgstr "إظهار النافذة الرئيسية"
 #: formsettings.rmousemodepopup
 msgid "Show Popup Translation"
 msgstr "إظهار الترجمة المنبثقة"
+
+#: formsettings.roff
+msgid "Off"
+msgstr "إيقاف"
+
+#: formsettings.ron
+msgid "On"
+msgstr "تشغيل"
 
 #: formsettings.rproxymodecustomproxy
 msgid "Custom Proxy"

@@ -339,6 +339,140 @@ msgstr "Er du sikker på, at du vil gendanne standardgenveje?"
 msgid "Are you sure you want to restore default settings?"
 msgstr "Er du sikker på, at du vil gendanne standardindstillinger?"
 
+#: formsettings.rfast
+msgid "Quick settings"
+msgstr "Hurtige indstillinger"
+
+#: formsettings.rfastallowhotkeys
+msgctxt "formsettings.rfastallowhotkeys"
+msgid "Enable Global Hotkeys"
+msgstr "Aktivér globale genvejstaster"
+
+#: formsettings.rfastallowhotkeys_default
+msgid "Shift+F1"
+msgstr "Shift+F1"
+
+#: formsettings.rfastallowhotkeys_hint
+msgid "Enable or disable all global hotkeys"
+msgstr "Aktivér eller deaktiver alle globale genvejstaster"
+
+#: formsettings.rfastautoaddlangpairs
+msgctxt "formsettings.rfastautoaddlangpairs"
+msgid "Auto-Add Recent Language Pairs"
+msgstr "Tilføj seneste sprogpar automatisk"
+
+#: formsettings.rfastautoaddlangpairs_default
+msgid "Shift+F5"
+msgstr "Shift+F5"
+
+#: formsettings.rfastautoaddlangpairs_hint
+msgid "Auto-add recent language pairs for quick access"
+msgstr "Tilføj automatisk nylige sprogpar for hurtig adgang"
+
+#: formsettings.rfastautocopy
+msgctxt "formsettings.rfastautocopy"
+msgid "Auto-Copy Translation"
+msgstr "Kopiér oversættelse automatisk"
+
+#: formsettings.rfastautocopy_default
+msgid "Shift+F7"
+msgstr "Shift+F7"
+
+#: formsettings.rfastautocopy_hint
+msgid "Automatically copy translation to clipboard"
+msgstr "Kopiér automatisk oversættelsen til udklipsholderen"
+
+#: formsettings.rfastautoheight
+msgctxt "formsettings.rfastautoheight"
+msgid "Popup Auto Height"
+msgstr "Automatisk popuphøjde"
+
+#: formsettings.rfastautoheight_default
+msgid "Shift+F9"
+msgstr "Shift+F9"
+
+#: formsettings.rfastautoheight_hint
+msgid "Adjust popup height to content automatically"
+msgstr "Tilpas automatisk pop op-vinduets højde til indholdet"
+
+#: formsettings.rfastautoswap
+msgctxt "formsettings.rfastautoswap"
+msgid "Auto-Swap Language Pair"
+msgstr "Automatisk byt sprogpar"
+
+#: formsettings.rfastautoswap_default
+msgid "Shift+F4"
+msgstr "Shift+F4"
+
+#: formsettings.rfastautoswap_hint
+msgid "Automatically swap the language pair direction"
+msgstr "Skift automatisk retningen for sprogparret"
+
+#: formsettings.rfastenablemousemode
+msgctxt "formsettings.rfastenablemousemode"
+msgid "Enable Mouse Mode"
+msgstr "Aktivér musetilstand"
+
+#: formsettings.rfastenablemousemode_default
+msgid "Shift+F2"
+msgstr "Shift+F2"
+
+#: formsettings.rfastenablemousemode_hint
+msgid "Toggle mouse translation mode"
+msgstr "Skift oversættelsestilstand med musen"
+
+#: formsettings.rfasthidecontrols
+msgctxt "formsettings.rfasthidecontrols"
+msgid "Auto-Hide Popup Controls"
+msgstr "Skjul popup-kontroller automatisk"
+
+#: formsettings.rfasthidecontrols_default
+msgid "Shift+F10"
+msgstr "Shift+F10"
+
+#: formsettings.rfasthidecontrols_hint
+msgid "Hide popup controls when not hovering"
+msgstr "Skjul kontrolelementer i pop op-vinduet, når musen ikke holdes over det"
+
+#: formsettings.rfastmousemodectrl
+msgctxt "formsettings.rfastmousemodectrl"
+msgid "Only When Ctrl Is Pressed"
+msgstr "Kun når Ctrl er trykket"
+
+#: formsettings.rfastmousemodectrl_default
+msgid "Shift+F3"
+msgstr "Shift+F3"
+
+#: formsettings.rfastmousemodectrl_hint
+msgid "Mouse mode requires Ctrl key to be held"
+msgstr "Musetilstand kræver, at Ctrl-tasten holdes nede"
+
+#: formsettings.rfastrealtime
+msgctxt "formsettings.rfastrealtime"
+msgid "Translate As You Type"
+msgstr "Oversæt mens du skriver"
+
+#: formsettings.rfastrealtime_default
+msgid "Shift+F6"
+msgstr "Shift+F6"
+
+#: formsettings.rfastrealtime_hint
+msgid "Translate text as you type in the popup"
+msgstr "Oversæt tekst, mens du skriver i pop op-vinduet"
+
+#: formsettings.rfastverticalsplit
+msgctxt "formsettings.rfastverticalsplit"
+msgid "Side-By-Side Layout"
+msgstr "Side-om-side layout"
+
+#: formsettings.rfastverticalsplit_default
+msgid "Shift+F8"
+msgstr "Shift+F8"
+
+#: formsettings.rfastverticalsplit_hint
+msgid "Switch between vertical and horizontal layout"
+msgstr "Skift mellem lodret og vandret layout"
+
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
 msgid "Global Hotkeys"
@@ -360,6 +494,14 @@ msgstr "Vis hovedvindue"
 #: formsettings.rmousemodepopup
 msgid "Show Popup Translation"
 msgstr "Vis popup-oversættelse"
+
+#: formsettings.roff
+msgid "Off"
+msgstr "Fra"
+
+#: formsettings.ron
+msgid "On"
+msgstr "Til"
 
 #: formsettings.rproxymodecustomproxy
 msgid "Custom Proxy"

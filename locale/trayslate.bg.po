@@ -339,6 +339,140 @@ msgstr "Да възстанови бързите клавиши по подра�
 msgid "Are you sure you want to restore default settings?"
 msgstr "Да възстанови настройките по подразбиране?"
 
+#: formsettings.rfast
+msgid "Quick settings"
+msgstr "Бързи настройки"
+
+#: formsettings.rfastallowhotkeys
+msgctxt "formsettings.rfastallowhotkeys"
+msgid "Enable Global Hotkeys"
+msgstr "Активирай глобални бързи клавиши"
+
+#: formsettings.rfastallowhotkeys_default
+msgid "Shift+F1"
+msgstr "Shift+F1"
+
+#: formsettings.rfastallowhotkeys_hint
+msgid "Enable or disable all global hotkeys"
+msgstr "Активиране или деактивиране на всички глобални клавишни комбинации"
+
+#: formsettings.rfastautoaddlangpairs
+msgctxt "formsettings.rfastautoaddlangpairs"
+msgid "Auto-Add Recent Language Pairs"
+msgstr "Автоматично добавяй последните езикови двойки"
+
+#: formsettings.rfastautoaddlangpairs_default
+msgid "Shift+F5"
+msgstr "Shift+F5"
+
+#: formsettings.rfastautoaddlangpairs_hint
+msgid "Auto-add recent language pairs for quick access"
+msgstr "Автоматично добавяне на последните езикови двойки за бърз достъп"
+
+#: formsettings.rfastautocopy
+msgctxt "formsettings.rfastautocopy"
+msgid "Auto-Copy Translation"
+msgstr "Автоматично копиране на превода"
+
+#: formsettings.rfastautocopy_default
+msgid "Shift+F7"
+msgstr "Shift+F7"
+
+#: formsettings.rfastautocopy_hint
+msgid "Automatically copy translation to clipboard"
+msgstr "Автоматично копиране на превода в клипборда"
+
+#: formsettings.rfastautoheight
+msgctxt "formsettings.rfastautoheight"
+msgid "Popup Auto Height"
+msgstr "Автоматична височина на изскачащия прозорец"
+
+#: formsettings.rfastautoheight_default
+msgid "Shift+F9"
+msgstr "Shift+F9"
+
+#: formsettings.rfastautoheight_hint
+msgid "Adjust popup height to content automatically"
+msgstr "Автоматично настройване на височината на изскачащия прозорец според съдържанието"
+
+#: formsettings.rfastautoswap
+msgctxt "formsettings.rfastautoswap"
+msgid "Auto-Swap Language Pair"
+msgstr "Автоматична смяна на езикова двойка"
+
+#: formsettings.rfastautoswap_default
+msgid "Shift+F4"
+msgstr "Shift+F4"
+
+#: formsettings.rfastautoswap_hint
+msgid "Automatically swap the language pair direction"
+msgstr "Автоматично обръщане на посоката на езиковата двойка"
+
+#: formsettings.rfastenablemousemode
+msgctxt "formsettings.rfastenablemousemode"
+msgid "Enable Mouse Mode"
+msgstr "Активирай режим на мишка"
+
+#: formsettings.rfastenablemousemode_default
+msgid "Shift+F2"
+msgstr "Shift+F2"
+
+#: formsettings.rfastenablemousemode_hint
+msgid "Toggle mouse translation mode"
+msgstr "Превключване на режима за превод с мишката"
+
+#: formsettings.rfasthidecontrols
+msgctxt "formsettings.rfasthidecontrols"
+msgid "Auto-Hide Popup Controls"
+msgstr "Автоматично скриване на изскачащи контроли"
+
+#: formsettings.rfasthidecontrols_default
+msgid "Shift+F10"
+msgstr "Shift+F10"
+
+#: formsettings.rfasthidecontrols_hint
+msgid "Hide popup controls when not hovering"
+msgstr "Скриване на контролите на изскачащия прозорец, когато мишката не е върху него"
+
+#: formsettings.rfastmousemodectrl
+msgctxt "formsettings.rfastmousemodectrl"
+msgid "Only When Ctrl Is Pressed"
+msgstr "Само с натиснат Ctrl"
+
+#: formsettings.rfastmousemodectrl_default
+msgid "Shift+F3"
+msgstr "Shift+F3"
+
+#: formsettings.rfastmousemodectrl_hint
+msgid "Mouse mode requires Ctrl key to be held"
+msgstr "Режимът на мишката изисква клавишът Ctrl да бъде задържан"
+
+#: formsettings.rfastrealtime
+msgctxt "formsettings.rfastrealtime"
+msgid "Translate As You Type"
+msgstr "Превеждай, докато се пише"
+
+#: formsettings.rfastrealtime_default
+msgid "Shift+F6"
+msgstr "Shift+F6"
+
+#: formsettings.rfastrealtime_hint
+msgid "Translate text as you type in the popup"
+msgstr "Превод на текста при въвеждане в изскачащия прозорец"
+
+#: formsettings.rfastverticalsplit
+msgctxt "formsettings.rfastverticalsplit"
+msgid "Side-By-Side Layout"
+msgstr "Едностранично оформление"
+
+#: formsettings.rfastverticalsplit_default
+msgid "Shift+F8"
+msgstr "Shift+F8"
+
+#: formsettings.rfastverticalsplit_hint
+msgid "Switch between vertical and horizontal layout"
+msgstr "Превключване между вертикално и хоризонтално оформление"
+
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
 msgid "Global Hotkeys"
@@ -360,6 +494,14 @@ msgstr "Показвай главния прозорец"
 #: formsettings.rmousemodepopup
 msgid "Show Popup Translation"
 msgstr "Показвай изскачащ превод"
+
+#: formsettings.roff
+msgid "Off"
+msgstr "Изкл."
+
+#: formsettings.ron
+msgid "On"
+msgstr "Вкл."
 
 #: formsettings.rproxymodecustomproxy
 msgid "Custom Proxy"

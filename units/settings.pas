@@ -170,7 +170,7 @@ begin
 
     JSONObj.Add('Timeout', TimeoutObj);
 
-    // Save hotkeys
+    // Save HotKeys Common
     JSONObj.Add('HotKeyApp_Modifiers', Form.HotKeyApp.Modifiers);
     JSONObj.Add('HotKeyApp_Key', Form.HotKeyApp.Key);
 
@@ -195,6 +195,38 @@ begin
     JSONObj.Add('HotKeyTransControlPopup_Modifiers', Form.HotKeyTransControlPopup.Modifiers);
     JSONObj.Add('HotKeyTransControlPopup_Key', Form.HotKeyTransControlPopup.Key);
 
+    // Save HotKeys Fast Settings
+    JSONObj.Add('HotKeyFastAllowHotKeys_Modifiers', Form.HotKeyFastAllowHotKeys.Modifiers);
+    JSONObj.Add('HotKeyFastAllowHotKeys_Key', Form.HotKeyFastAllowHotKeys.Key);
+
+    JSONObj.Add('HotKeyFastEnableMouseMode_Modifiers', Form.HotKeyFastEnableMouseMode.Modifiers);
+    JSONObj.Add('HotKeyFastEnableMouseMode_Key', Form.HotKeyFastEnableMouseMode.Key);
+
+    JSONObj.Add('HotKeyFastMouseModeCtrl_Modifiers', Form.HotKeyFastMouseModeCtrl.Modifiers);
+    JSONObj.Add('HotKeyFastMouseModeCtrl_Key', Form.HotKeyFastMouseModeCtrl.Key);
+
+    JSONObj.Add('HotKeyFastAutoSwap_Modifiers', Form.HotKeyFastAutoSwap.Modifiers);
+    JSONObj.Add('HotKeyFastAutoSwap_Key', Form.HotKeyFastAutoSwap.Key);
+
+    JSONObj.Add('HotKeyFastAutoAddLangPairs_Modifiers', Form.HotKeyFastAutoAddLangPairs.Modifiers);
+    JSONObj.Add('HotKeyFastAutoAddLangPairs_Key', Form.HotKeyFastAutoAddLangPairs.Key);
+
+    JSONObj.Add('HotKeyFastRealTime_Modifiers', Form.HotKeyFastRealTime.Modifiers);
+    JSONObj.Add('HotKeyFastRealTime_Key', Form.HotKeyFastRealTime.Key);
+
+    JSONObj.Add('HotKeyFastAutoCopy_Modifiers', Form.HotKeyFastAutoCopy.Modifiers);
+    JSONObj.Add('HotKeyFastAutoCopy_Key', Form.HotKeyFastAutoCopy.Key);
+
+    JSONObj.Add('HotKeyFastVerticalSplit_Modifiers', Form.HotKeyFastVerticalSplit.Modifiers);
+    JSONObj.Add('HotKeyFastVerticalSplit_Key', Form.HotKeyFastVerticalSplit.Key);
+
+    JSONObj.Add('HotKeyFastAutoHeight_Modifiers', Form.HotKeyFastAutoHeight.Modifiers);
+    JSONObj.Add('HotKeyFastAutoHeight_Key', Form.HotKeyFastAutoHeight.Key);
+
+    JSONObj.Add('HotKeyFastHideControls_Modifiers', Form.HotKeyFastHideControls.Modifiers);
+    JSONObj.Add('HotKeyFastHideControls_Key', Form.HotKeyFastHideControls.Key);
+
+    // Save HotKeys Recent Pairs
     JSONObj.Add('HotKeyRecent1_Modifiers', Form.HotKeyRecent1.Modifiers);
     JSONObj.Add('HotKeyRecent1_Key', Form.HotKeyRecent1.Key);
     JSONObj.Add('HotKeyRecent2_Modifiers', Form.HotKeyRecent2.Modifiers);
@@ -537,7 +569,8 @@ begin
           Form.Timeout := Timeout;
         end;
 
-        // Load HotKeys
+        // Load HotKeys Common
+
         // HotKeyApp
         HK := Form.HotKeyApp;
         if JSONObj.FindPath('HotKeyApp_Modifiers') <> nil then
@@ -601,6 +634,90 @@ begin
         if JSONObj.FindPath('HotKeyTransControlPopup_Key') <> nil then
           HK.Key := JSONObj.FindPath('HotKeyTransControlPopup_Key').AsInteger;
         Form.HotKeyTransControlPopup := HK;
+
+        // Load HotKeys Fast Settings
+
+        // HotKeyFastAllowHotKeys
+        HK := Form.HotKeyFastAllowHotKeys;
+        if JSONObj.FindPath('HotKeyFastAllowHotKeys_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastAllowHotKeys_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastAllowHotKeys_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastAllowHotKeys_Key').AsInteger;
+        Form.HotKeyFastAllowHotKeys := HK;
+
+        // HotKeyFastEnableMouseMode
+        HK := Form.HotKeyFastEnableMouseMode;
+        if JSONObj.FindPath('HotKeyFastEnableMouseMode_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastEnableMouseMode_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastEnableMouseMode_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastEnableMouseMode_Key').AsInteger;
+        Form.HotKeyFastEnableMouseMode := HK;
+
+        // HotKeyFastMouseModeCtrl
+        HK := Form.HotKeyFastMouseModeCtrl;
+        if JSONObj.FindPath('HotKeyFastMouseModeCtrl_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastMouseModeCtrl_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastMouseModeCtrl_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastMouseModeCtrl_Key').AsInteger;
+        Form.HotKeyFastMouseModeCtrl := HK;
+
+        // HotKeyFastAutoSwap
+        HK := Form.HotKeyFastAutoSwap;
+        if JSONObj.FindPath('HotKeyFastAutoSwap_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastAutoSwap_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastAutoSwap_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastAutoSwap_Key').AsInteger;
+        Form.HotKeyFastAutoSwap := HK;
+
+        // HotKeyFastAutoAddLangPairs
+        HK := Form.HotKeyFastAutoAddLangPairs;
+        if JSONObj.FindPath('HotKeyFastAutoAddLangPairs_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastAutoAddLangPairs_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastAutoAddLangPairs_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastAutoAddLangPairs_Key').AsInteger;
+        Form.HotKeyFastAutoAddLangPairs := HK;
+
+        // HotKeyFastRealTime
+        HK := Form.HotKeyFastRealTime;
+        if JSONObj.FindPath('HotKeyFastRealTime_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastRealTime_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastRealTime_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastRealTime_Key').AsInteger;
+        Form.HotKeyFastRealTime := HK;
+
+        // HotKeyFastAutoCopy
+        HK := Form.HotKeyFastAutoCopy;
+        if JSONObj.FindPath('HotKeyFastAutoCopy_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastAutoCopy_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastAutoCopy_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastAutoCopy_Key').AsInteger;
+        Form.HotKeyFastAutoCopy := HK;
+
+        // HotKeyFastVerticalSplit
+        HK := Form.HotKeyFastVerticalSplit;
+        if JSONObj.FindPath('HotKeyFastVerticalSplit_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastVerticalSplit_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastVerticalSplit_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastVerticalSplit_Key').AsInteger;
+        Form.HotKeyFastVerticalSplit := HK;
+
+        // HotKeyFastAutoHeight
+        HK := Form.HotKeyFastAutoHeight;
+        if JSONObj.FindPath('HotKeyFastAutoHeight_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastAutoHeight_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastAutoHeight_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastAutoHeight_Key').AsInteger;
+        Form.HotKeyFastAutoHeight := HK;
+
+        // HotKeyFastHideControls
+        HK := Form.HotKeyFastHideControls;
+        if JSONObj.FindPath('HotKeyFastHideControls_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastHideControls_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastHideControls_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastHideControls_Key').AsInteger;
+        Form.HotKeyFastHideControls := HK;
+
+        // Load HotKeys Recent Pairs
 
         // HotKeyRecent1
         HK := Form.HotKeyRecent1;

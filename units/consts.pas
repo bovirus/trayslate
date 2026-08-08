@@ -4,7 +4,7 @@
 //  You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.html
 //-----------------------------------------------------------------------------------
 
-unit consts;
+unit Consts;
 
 {$mode ObjFPC}{$H+}
 
@@ -15,6 +15,17 @@ uses
   SysUtils,
   LCLIntf;
 
+
+  { Commin Types }
+
+type
+  TMouseMode = (
+    mmShowTranslateButton,
+    mmShowBalloonTranslation,
+    mmShowPopupTranslation,
+    mmShowMainWindow
+    );
+
   { Common Consts }
 
 resourcestring
@@ -23,6 +34,38 @@ resourcestring
 const
   REPO = 'plaintool/trayslate';
   APP_NAME = 'trayslate';
+
+  {$IFDEF WINDOWS}
+  HOTKEY_APP = 1;
+  HOTKEY_TRANS_SWAP = 2;
+  HOTKEY_TRANS_FROM_CLIPBOARD = 3;
+  HOTKEY_TRANS_CLIPBOARD = 4;
+  HOTKEY_TRANS_CLIPBOARD_POPUP = 5;
+  HOTKEY_TRANS_FROM_CONTROL = 6;
+  HOTKEY_TRANS_CONTROL = 7;
+  HOTKEY_TRANS_CONTROL_POPUP = 8;
+
+  HOTKEY_RECENT1 = 11;
+  HOTKEY_RECENT2 = 12;
+  HOTKEY_RECENT3 = 13;
+  HOTKEY_RECENT4 = 14;
+  HOTKEY_RECENT5 = 15;
+  HOTKEY_RECENT6 = 16;
+  HOTKEY_RECENT7 = 17;
+  HOTKEY_RECENT8 = 18;
+  HOTKEY_RECENT9 = 19;
+
+  HOTKEY_FAST_ALLOW_HOTKEYS = 20;
+  HOTKEY_FAST_ENABLE_MOUSEMODE = 21;
+  HOTKEY_FAST_MOUSEMODE_CTRL = 22;
+  HOTKEY_FAST_AUTO_SWAP = 23;
+  HOTKEY_FAST_AUTO_ADD_LANG_PAIRS = 24;
+  HOTKEY_FAST_REAL_TIME = 25;
+  HOTKEY_FAST_AUTO_COPY = 26;
+  HOTKEY_FAST_VERTICAL_SPLIT = 27;
+  HOTKEY_FAST_AUTO_HEIGHT = 28;
+  HOTKEY_FAST_HIDE_CONTROLS = 29;
+  {$ENDIF}
 
   { Main Form }
 

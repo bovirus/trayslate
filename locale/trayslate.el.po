@@ -339,6 +339,140 @@ msgstr "Είστε βέβαιοι ότι θέλετε να επαναφέρετ�
 msgid "Are you sure you want to restore default settings?"
 msgstr "Είστε βέβαιοι ότι θέλετε να επαναφέρετε τις προεπιλεγμένες ρυθμίσεις;"
 
+#: formsettings.rfast
+msgid "Quick settings"
+msgstr "Γρήγορες ρυθμίσεις"
+
+#: formsettings.rfastallowhotkeys
+msgctxt "formsettings.rfastallowhotkeys"
+msgid "Enable Global Hotkeys"
+msgstr "Ενεργοποίηση καθολικών συντομεύσεων"
+
+#: formsettings.rfastallowhotkeys_default
+msgid "Shift+F1"
+msgstr "Shift+F1"
+
+#: formsettings.rfastallowhotkeys_hint
+msgid "Enable or disable all global hotkeys"
+msgstr "Ενεργοποίηση ή απενεργοποίηση όλων των καθολικών πλήκτρων συντόμευσης"
+
+#: formsettings.rfastautoaddlangpairs
+msgctxt "formsettings.rfastautoaddlangpairs"
+msgid "Auto-Add Recent Language Pairs"
+msgstr "Αυτόματη προσθήκη πρόσφατων ζευγών γλωσσών"
+
+#: formsettings.rfastautoaddlangpairs_default
+msgid "Shift+F5"
+msgstr "Shift+F5"
+
+#: formsettings.rfastautoaddlangpairs_hint
+msgid "Auto-add recent language pairs for quick access"
+msgstr "Αυτόματη προσθήκη πρόσφατων ζευγών γλωσσών για γρήγορη πρόσβαση"
+
+#: formsettings.rfastautocopy
+msgctxt "formsettings.rfastautocopy"
+msgid "Auto-Copy Translation"
+msgstr "Αυτόματη αντιγραφή μετάφρασης"
+
+#: formsettings.rfastautocopy_default
+msgid "Shift+F7"
+msgstr "Shift+F7"
+
+#: formsettings.rfastautocopy_hint
+msgid "Automatically copy translation to clipboard"
+msgstr "Αυτόματη αντιγραφή της μετάφρασης στο πρόχειρο"
+
+#: formsettings.rfastautoheight
+msgctxt "formsettings.rfastautoheight"
+msgid "Popup Auto Height"
+msgstr "Αυτόματο ύψος αναδυόμενου παραθύρου"
+
+#: formsettings.rfastautoheight_default
+msgid "Shift+F9"
+msgstr "Shift+F9"
+
+#: formsettings.rfastautoheight_hint
+msgid "Adjust popup height to content automatically"
+msgstr "Αυτόματη προσαρμογή του ύψους του αναδυόμενου παραθύρου στο περιεχόμενο"
+
+#: formsettings.rfastautoswap
+msgctxt "formsettings.rfastautoswap"
+msgid "Auto-Swap Language Pair"
+msgstr "Αυτόματη εναλλαγή ζεύγους γλωσσών"
+
+#: formsettings.rfastautoswap_default
+msgid "Shift+F4"
+msgstr "Shift+F4"
+
+#: formsettings.rfastautoswap_hint
+msgid "Automatically swap the language pair direction"
+msgstr "Αυτόματη εναλλαγή της κατεύθυνσης του ζεύγους γλωσσών"
+
+#: formsettings.rfastenablemousemode
+msgctxt "formsettings.rfastenablemousemode"
+msgid "Enable Mouse Mode"
+msgstr "Ενεργοποίηση λειτουργίας ποντικιού"
+
+#: formsettings.rfastenablemousemode_default
+msgid "Shift+F2"
+msgstr "Shift+F2"
+
+#: formsettings.rfastenablemousemode_hint
+msgid "Toggle mouse translation mode"
+msgstr "Εναλλαγή λειτουργίας μετάφρασης με το ποντίκι"
+
+#: formsettings.rfasthidecontrols
+msgctxt "formsettings.rfasthidecontrols"
+msgid "Auto-Hide Popup Controls"
+msgstr "Αυτόματη απόκρυψη στοιχείων αναδυόμενου"
+
+#: formsettings.rfasthidecontrols_default
+msgid "Shift+F10"
+msgstr "Shift+F10"
+
+#: formsettings.rfasthidecontrols_hint
+msgid "Hide popup controls when not hovering"
+msgstr "Απόκρυψη των στοιχείων ελέγχου του αναδυόμενου παραθύρου όταν το ποντίκι δεν βρίσκεται πάνω του"
+
+#: formsettings.rfastmousemodectrl
+msgctxt "formsettings.rfastmousemodectrl"
+msgid "Only When Ctrl Is Pressed"
+msgstr "Μόνο όταν πατηθεί το Ctrl"
+
+#: formsettings.rfastmousemodectrl_default
+msgid "Shift+F3"
+msgstr "Shift+F3"
+
+#: formsettings.rfastmousemodectrl_hint
+msgid "Mouse mode requires Ctrl key to be held"
+msgstr "Η λειτουργία ποντικιού απαιτεί να κρατάτε πατημένο το πλήκτρο Ctrl"
+
+#: formsettings.rfastrealtime
+msgctxt "formsettings.rfastrealtime"
+msgid "Translate As You Type"
+msgstr "Μετάφραση κατά την πληκτρολόγηση"
+
+#: formsettings.rfastrealtime_default
+msgid "Shift+F6"
+msgstr "Shift+F6"
+
+#: formsettings.rfastrealtime_hint
+msgid "Translate text as you type in the popup"
+msgstr "Μετάφραση του κειμένου καθώς πληκτρολογείτε στο αναδυόμενο παράθυρο"
+
+#: formsettings.rfastverticalsplit
+msgctxt "formsettings.rfastverticalsplit"
+msgid "Side-By-Side Layout"
+msgstr "Διάταξη δίπλα-δίπλα"
+
+#: formsettings.rfastverticalsplit_default
+msgid "Shift+F8"
+msgstr "Shift+F8"
+
+#: formsettings.rfastverticalsplit_hint
+msgid "Switch between vertical and horizontal layout"
+msgstr "Εναλλαγή μεταξύ κατακόρυφης και οριζόντιας διάταξης"
+
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
 msgid "Global Hotkeys"
@@ -360,6 +494,14 @@ msgstr "Εμφάνιση κύριου παραθύρου"
 #: formsettings.rmousemodepopup
 msgid "Show Popup Translation"
 msgstr "Εμφάνιση αναδυόμενης μετάφρασης"
+
+#: formsettings.roff
+msgid "Off"
+msgstr "Ανενεργό"
+
+#: formsettings.ron
+msgid "On"
+msgstr "Ενεργό"
 
 #: formsettings.rproxymodecustomproxy
 msgid "Custom Proxy"

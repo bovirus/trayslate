@@ -247,6 +247,140 @@ msgstr ""
 msgid "Are you sure you want to restore default settings?"
 msgstr ""
 
+#: formsettings.rfast
+msgid "Quick settings"
+msgstr ""
+
+#: formsettings.rfastallowhotkeys
+msgctxt "formsettings.rfastallowhotkeys"
+msgid "Enable Global Hotkeys"
+msgstr ""
+
+#: formsettings.rfastallowhotkeys_default
+msgid "Shift+F1"
+msgstr ""
+
+#: formsettings.rfastallowhotkeys_hint
+msgid "Enable or disable all global hotkeys"
+msgstr ""
+
+#: formsettings.rfastautoaddlangpairs
+msgctxt "formsettings.rfastautoaddlangpairs"
+msgid "Auto-Add Recent Language Pairs"
+msgstr ""
+
+#: formsettings.rfastautoaddlangpairs_default
+msgid "Shift+F5"
+msgstr ""
+
+#: formsettings.rfastautoaddlangpairs_hint
+msgid "Auto-add recent language pairs for quick access"
+msgstr ""
+
+#: formsettings.rfastautocopy
+msgctxt "formsettings.rfastautocopy"
+msgid "Auto-Copy Translation"
+msgstr ""
+
+#: formsettings.rfastautocopy_default
+msgid "Shift+F7"
+msgstr ""
+
+#: formsettings.rfastautocopy_hint
+msgid "Automatically copy translation to clipboard"
+msgstr ""
+
+#: formsettings.rfastautoheight
+msgctxt "formsettings.rfastautoheight"
+msgid "Popup Auto Height"
+msgstr ""
+
+#: formsettings.rfastautoheight_default
+msgid "Shift+F9"
+msgstr ""
+
+#: formsettings.rfastautoheight_hint
+msgid "Adjust popup height to content automatically"
+msgstr ""
+
+#: formsettings.rfastautoswap
+msgctxt "formsettings.rfastautoswap"
+msgid "Auto-Swap Language Pair"
+msgstr ""
+
+#: formsettings.rfastautoswap_default
+msgid "Shift+F4"
+msgstr ""
+
+#: formsettings.rfastautoswap_hint
+msgid "Automatically swap the language pair direction"
+msgstr ""
+
+#: formsettings.rfastenablemousemode
+msgctxt "formsettings.rfastenablemousemode"
+msgid "Enable Mouse Mode"
+msgstr ""
+
+#: formsettings.rfastenablemousemode_default
+msgid "Shift+F2"
+msgstr ""
+
+#: formsettings.rfastenablemousemode_hint
+msgid "Toggle mouse translation mode"
+msgstr ""
+
+#: formsettings.rfasthidecontrols
+msgctxt "formsettings.rfasthidecontrols"
+msgid "Auto-Hide Popup Controls"
+msgstr ""
+
+#: formsettings.rfasthidecontrols_default
+msgid "Shift+F10"
+msgstr ""
+
+#: formsettings.rfasthidecontrols_hint
+msgid "Hide popup controls when not hovering"
+msgstr ""
+
+#: formsettings.rfastmousemodectrl
+msgctxt "formsettings.rfastmousemodectrl"
+msgid "Only When Ctrl Is Pressed"
+msgstr ""
+
+#: formsettings.rfastmousemodectrl_default
+msgid "Shift+F3"
+msgstr ""
+
+#: formsettings.rfastmousemodectrl_hint
+msgid "Mouse mode requires Ctrl key to be held"
+msgstr ""
+
+#: formsettings.rfastrealtime
+msgctxt "formsettings.rfastrealtime"
+msgid "Translate As You Type"
+msgstr ""
+
+#: formsettings.rfastrealtime_default
+msgid "Shift+F6"
+msgstr ""
+
+#: formsettings.rfastrealtime_hint
+msgid "Translate text as you type in the popup"
+msgstr ""
+
+#: formsettings.rfastverticalsplit
+msgctxt "formsettings.rfastverticalsplit"
+msgid "Side-By-Side Layout"
+msgstr ""
+
+#: formsettings.rfastverticalsplit_default
+msgid "Shift+F8"
+msgstr ""
+
+#: formsettings.rfastverticalsplit_hint
+msgid "Switch between vertical and horizontal layout"
+msgstr ""
+
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
 msgid "Global Hotkeys"
@@ -267,6 +401,14 @@ msgstr ""
 
 #: formsettings.rmousemodepopup
 msgid "Show Popup Translation"
+msgstr ""
+
+#: formsettings.roff
+msgid "Off"
+msgstr ""
+
+#: formsettings.ron
+msgid "On"
 msgstr ""
 
 #: formsettings.rproxymodecustomproxy

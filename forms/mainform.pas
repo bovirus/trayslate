@@ -425,6 +425,7 @@ type
     FLastDarkMode: boolean;
     FCustomPoFile: string;
     FProxiedConfigs: TStringList;
+    // HotKeys Common
     FHotKeyApp: THotKeyData;
     FHotKeyTransSwap: THotKeyData;
     FHotKeyTransFromClipboard: THotKeyData;
@@ -433,6 +434,18 @@ type
     FHotKeyTransFromControl: THotKeyData;
     FHotKeyTransControl: THotKeyData;
     FHotKeyTransControlPopup: THotKeyData;
+    // HotKeys Fastsettings
+    FHotKeyFastAllowHotKeys: THotKeyData;
+    FHotKeyFastEnableMouseMode: THotKeyData;
+    FHotKeyFastMouseModeCtrl: THotKeyData;
+    FHotKeyFastAutoSwap: THotKeyData;
+    FHotKeyFastAutoAddLangPairs: THotKeyData;
+    FHotKeyFastRealTime: THotKeyData;
+    FHotKeyFastAutoCopy: THotKeyData;
+    FHotKeyFastVerticalSplit: THotKeyData;
+    FHotKeyFastAutoHeight: THotKeyData;
+    FHotKeyFastHideControls: THotKeyData;
+    // HotKey Recent Pairs
     FHotKeyRecent1: THotKeyData;
     FHotKeyRecent2: THotKeyData;
     FHotKeyRecent3: THotKeyData;
@@ -633,6 +646,7 @@ type
     property TranslateTarget: TWinControl read FTranslateTarget write SetTranslateTarget;
     property MouseHook: TGlobalMouseHook read FMouseHook write FMouseHook;
     property KeyHook: TGlobalKeyboardHook read FKeyHook write FKeyHook;
+    // HotKeys Common
     property HotKeyApp: THotKeyData read FHotKeyApp write FHotKeyApp;
     property HotKeyTransSwap: THotKeyData read FHotKeyTransSwap write FHotKeyTransSwap;
     property HotKeyTransFromClipboard: THotKeyData read FHotKeyTransFromClipboard write FHotKeyTransFromClipboard;
@@ -641,6 +655,18 @@ type
     property HotKeyTransFromControl: THotKeyData read FHotKeyTransFromControl write FHotKeyTransFromControl;
     property HotKeyTransControl: THotKeyData read FHotKeyTransControl write FHotKeyTransControl;
     property HotKeyTransControlPopup: THotKeyData read FHotKeyTransControlPopup write FHotKeyTransControlPopup;
+    // HotKeys Fast Settings
+    property HotKeyFastAllowHotKeys: THotKeyData read FHotKeyFastAllowHotKeys write FHotKeyFastAllowHotKeys;
+    property HotKeyFastEnableMouseMode: THotKeyData read FHotKeyFastEnableMouseMode write FHotKeyFastEnableMouseMode;
+    property HotKeyFastMouseModeCtrl: THotKeyData read FHotKeyFastMouseModeCtrl write FHotKeyFastMouseModeCtrl;
+    property HotKeyFastAutoSwap: THotKeyData read FHotKeyFastAutoSwap write FHotKeyFastAutoSwap;
+    property HotKeyFastAutoAddLangPairs: THotKeyData read FHotKeyFastAutoAddLangPairs write FHotKeyFastAutoAddLangPairs;
+    property HotKeyFastRealTime: THotKeyData read FHotKeyFastRealTime write FHotKeyFastRealTime;
+    property HotKeyFastAutoCopy: THotKeyData read FHotKeyFastAutoCopy write FHotKeyFastAutoCopy;
+    property HotKeyFastVerticalSplit: THotKeyData read FHotKeyFastVerticalSplit write FHotKeyFastVerticalSplit;
+    property HotKeyFastAutoHeight: THotKeyData read FHotKeyFastAutoHeight write FHotKeyFastAutoHeight;
+    property HotKeyFastHideControls: THotKeyData read FHotKeyFastHideControls write FHotKeyFastHideControls;
+    // Hotkeys Recent Pairs
     property HotKeyRecent1: THotKeyData read FHotKeyRecent1 write FHotKeyRecent1;
     property HotKeyRecent2: THotKeyData read FHotKeyRecent2 write FHotKeyRecent2;
     property HotKeyRecent3: THotKeyData read FHotKeyRecent3 write FHotKeyRecent3;
@@ -1058,6 +1084,7 @@ begin
 
     case TheMessage.WParam of
 
+      // HotKeys Common
       HOTKEY_APP:
       try
         if Showing then Hide
@@ -1118,6 +1145,87 @@ begin
         Application.QueueAsyncCall(@TranslateFromControlPopup, 0);
       finally
         ReleaseHotKeyModifiers(FHotKeyTransControlPopup);
+      end;
+
+      // HotKeys Fast Settings
+      HOTKEY_FAST_ALLOW_HOTKEYS:
+      try
+        aFastAllowHotKeys.Execute;
+        ShowCustomHint(rfastallowhotkeys + ' - '+ iif(aFastAllowHotKeys.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastAllowHotKeys);
+      end;
+
+      HOTKEY_FAST_ENABLE_MOUSEMODE:
+      try
+        aFastEnableMouseMode.Execute;
+        ShowCustomHint(rfastenablemousemode + ' - '+ iif(aFastEnableMouseMode.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastEnableMouseMode);
+      end;
+
+      HOTKEY_FAST_MOUSEMODE_CTRL:
+      try
+        aFastMouseModeCtrl.Execute;
+        ShowCustomHint(rfastmousemodectrl + ' - '+ iif(aFastMouseModeCtrl.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastMouseModeCtrl);
+      end;
+
+      HOTKEY_FAST_AUTO_SWAP:
+      try
+        aFastAutoSwap.Execute;
+        ShowCustomHint(rfastautoswap + ' - '+ iif(aFastAutoSwap.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastAutoSwap);
+      end;
+
+      HOTKEY_FAST_AUTO_ADD_LANG_PAIRS:
+      try
+        aFastAutoAddLangPairs.Execute;
+        ShowCustomHint(rfastautoaddlangpairs + ' - '+ iif(aFastAutoAddLangPairs.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastAutoAddLangPairs);
+      end;
+
+      HOTKEY_FAST_REAL_TIME:
+      try
+        aFastRealTime.Execute;
+        ShowCustomHint(rfastrealtime + ' - '+ iif(aFastRealTime.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastRealTime);
+      end;
+
+      HOTKEY_FAST_AUTO_COPY:
+      try
+        aFastAutoCopy.Execute;
+        ShowCustomHint(rfastautocopy + ' - '+ iif(aFastAutoCopy.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastAutoCopy);
+      end;
+
+      HOTKEY_FAST_VERTICAL_SPLIT:
+      try
+        aFastVerticalSplit.Execute;
+        ShowCustomHint(rfastverticalsplit + ' - '+ iif(aFastVerticalSplit.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastVerticalSplit);
+      end;
+
+      HOTKEY_FAST_AUTO_HEIGHT:
+      try
+        aFastAutoHeight.Execute;
+        ShowCustomHint(rfastautoheight + ' - '+ iif(aFastAutoHeight.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastAutoHeight);
+      end;
+
+      HOTKEY_FAST_HIDE_CONTROLS:
+      try
+        aFastHideControls.Execute;
+        ShowCustomHint(rfasthidecontrols + ' - '+ iif(aFastHideControls.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastHideControls);
       end;
 
       else
@@ -1307,7 +1415,7 @@ begin
 
   if not AllowHotKeys then Exit;
 
-  // Register AllowHotKeys if key is assigned
+  // HotKeys Common
   if FHotKeyApp.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_APP, FHotKeyApp.Modifiers, FHotKeyApp.Key);
 
@@ -1332,22 +1440,62 @@ begin
   if FHotKeyTransControlPopup.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_TRANS_CONTROL_POPUP, FHotKeyTransControlPopup.Modifiers, FHotKeyTransControlPopup.Key);
 
+  // HotKeys Fast Settings
+  if FHotKeyFastAllowHotKeys.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_ALLOW_HOTKEYS, FHotKeyFastAllowHotKeys.Modifiers, FHotKeyFastAllowHotKeys.Key);
+
+  if FHotKeyFastEnableMouseMode.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_ENABLE_MOUSEMODE, FHotKeyFastEnableMouseMode.Modifiers, FHotKeyFastEnableMouseMode.Key);
+
+  if FHotKeyFastMouseModeCtrl.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_MOUSEMODE_CTRL, FHotKeyFastMouseModeCtrl.Modifiers, FHotKeyFastMouseModeCtrl.Key);
+
+  if FHotKeyFastAutoSwap.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_AUTO_SWAP, FHotKeyFastAutoSwap.Modifiers, FHotKeyFastAutoSwap.Key);
+
+  if FHotKeyFastAutoAddLangPairs.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_AUTO_ADD_LANG_PAIRS, FHotKeyFastAutoAddLangPairs.Modifiers, FHotKeyFastAutoAddLangPairs.Key);
+
+  if FHotKeyFastRealTime.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_REAL_TIME, FHotKeyFastRealTime.Modifiers, FHotKeyFastRealTime.Key);
+
+  if FHotKeyFastAutoCopy.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_AUTO_COPY, FHotKeyFastAutoCopy.Modifiers, FHotKeyFastAutoCopy.Key);
+
+  if FHotKeyFastVerticalSplit.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_VERTICAL_SPLIT, FHotKeyFastVerticalSplit.Modifiers, FHotKeyFastVerticalSplit.Key);
+
+  if FHotKeyFastAutoHeight.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_AUTO_HEIGHT, FHotKeyFastAutoHeight.Modifiers, FHotKeyFastAutoHeight.Key);
+
+  if FHotKeyFastHideControls.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_HIDE_CONTROLS, FHotKeyFastHideControls.Modifiers, FHotKeyFastHideControls.Key);
+
+  // HotKeys Recent Pairs
   if FHotKeyRecent1.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_RECENT1, FHotKeyRecent1.Modifiers, FHotKeyRecent1.Key);
+
   if FHotKeyRecent2.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_RECENT2, FHotKeyRecent2.Modifiers, FHotKeyRecent2.Key);
+
   if FHotKeyRecent3.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_RECENT3, FHotKeyRecent3.Modifiers, FHotKeyRecent3.Key);
+
   if FHotKeyRecent4.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_RECENT4, FHotKeyRecent4.Modifiers, FHotKeyRecent4.Key);
+
   if FHotKeyRecent5.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_RECENT5, FHotKeyRecent5.Modifiers, FHotKeyRecent5.Key);
+
   if FHotKeyRecent6.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_RECENT6, FHotKeyRecent6.Modifiers, FHotKeyRecent6.Key);
+
   if FHotKeyRecent7.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_RECENT7, FHotKeyRecent7.Modifiers, FHotKeyRecent7.Key);
+
   if FHotKeyRecent8.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_RECENT8, FHotKeyRecent8.Modifiers, FHotKeyRecent8.Key);
+
   if FHotKeyRecent9.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_RECENT9, FHotKeyRecent9.Modifiers, FHotKeyRecent9.Key);
 end;
@@ -1356,6 +1504,7 @@ procedure TformTrayslate.UnregisterHotKeys;
 var
   i: integer;
 begin
+  // HotsKeys Common
   UnregisterHotKey(Handle, HOTKEY_APP);
   UnregisterHotKey(Handle, HOTKEY_TRANS_SWAP);
   UnregisterHotKey(Handle, HOTKEY_TRANS_FROM_CLIPBOARD);
@@ -1364,6 +1513,20 @@ begin
   UnregisterHotKey(Handle, HOTKEY_TRANS_FROM_CONTROL);
   UnregisterHotKey(Handle, HOTKEY_TRANS_CONTROL);
   UnregisterHotKey(Handle, HOTKEY_TRANS_CONTROL_POPUP);
+
+  // HotKeys Fast Settings
+  UnregisterHotKey(Handle, HOTKEY_FAST_ALLOW_HOTKEYS);
+  UnregisterHotKey(Handle, HOTKEY_FAST_ENABLE_MOUSEMODE);
+  UnregisterHotKey(Handle, HOTKEY_FAST_MOUSEMODE_CTRL);
+  UnregisterHotKey(Handle, HOTKEY_FAST_AUTO_SWAP);
+  UnregisterHotKey(Handle, HOTKEY_FAST_AUTO_ADD_LANG_PAIRS);
+  UnregisterHotKey(Handle, HOTKEY_FAST_REAL_TIME);
+  UnregisterHotKey(Handle, HOTKEY_FAST_AUTO_COPY);
+  UnregisterHotKey(Handle, HOTKEY_FAST_VERTICAL_SPLIT);
+  UnregisterHotKey(Handle, HOTKEY_FAST_AUTO_HEIGHT);
+  UnregisterHotKey(Handle, HOTKEY_FAST_HIDE_CONTROLS);
+
+  // HotKeys Recent Pairs
   for i := 0 to 8 do
     UnregisterHotKey(Handle, HOTKEY_RECENT1 + i);
 end;
@@ -2902,6 +3065,46 @@ begin
   FHotKeyTransControlPopup.Modifiers := MOD_CONTROL or MOD_SHIFT;
   FHotKeyTransControlPopup.Key := Ord('X');
 
+  // Alt+F1
+  FHotKeyFastAllowHotKeys.Modifiers := MOD_SHIFT;
+  FHotKeyFastAllowHotKeys.Key := VK_F1;
+
+  // Alt+F2
+  FHotKeyFastEnableMouseMode.Modifiers := MOD_SHIFT;
+  FHotKeyFastEnableMouseMode.Key := VK_F2;
+
+  // Alt+F3
+  FHotKeyFastMouseModeCtrl.Modifiers := MOD_SHIFT;
+  FHotKeyFastMouseModeCtrl.Key := VK_F3;
+
+  // Alt+F4
+  FHotKeyFastAutoSwap.Modifiers := MOD_SHIFT;
+  FHotKeyFastAutoSwap.Key := VK_F4;
+
+  // Alt+F5
+  FHotKeyFastAutoAddLangPairs.Modifiers := MOD_SHIFT;
+  FHotKeyFastAutoAddLangPairs.Key := VK_F5;
+
+  // Alt+F6
+  FHotKeyFastRealTime.Modifiers := MOD_SHIFT;
+  FHotKeyFastRealTime.Key := VK_F6;
+
+  // Alt+F7
+  FHotKeyFastAutoCopy.Modifiers := MOD_SHIFT;
+  FHotKeyFastAutoCopy.Key := VK_F7;
+
+  // Alt+F8
+  FHotKeyFastVerticalSplit.Modifiers := MOD_SHIFT;
+  FHotKeyFastVerticalSplit.Key := VK_F8;
+
+  // Alt+F9
+  FHotKeyFastAutoHeight.Modifiers := MOD_SHIFT;
+  FHotKeyFastAutoHeight.Key := VK_F9;
+
+  // Alt+F10
+  FHotKeyFastHideControls.Modifiers := MOD_SHIFT;
+  FHotKeyFastHideControls.Key := VK_F10;
+
   // Ctrl+Shift+1
   FHotKeyRecent1.Modifiers := MOD_CONTROL or MOD_SHIFT;
   FHotKeyRecent1.Key := Ord('1');
@@ -3252,6 +3455,18 @@ begin
     formSettingsTrayslate.FillProxyMode;
     formSettingsTrayslate.SetState;
   end;
+
+  // Assign shortcuts to Fast Settings menu items
+  aFastAllowHotKeys.ShortCut := FHotKeyFastAllowHotKeys.ToShortCut;
+  aFastEnableMouseMode.ShortCut := FHotKeyFastEnableMouseMode.ToShortCut;
+  aFastMouseModeCtrl.ShortCut := FHotKeyFastMouseModeCtrl.ToShortCut;
+  aFastAutoSwap.ShortCut := FHotKeyFastAutoSwap.ToShortCut;
+  aFastAutoAddLangPairs.ShortCut := FHotKeyFastAutoAddLangPairs.ToShortCut;
+  aFastRealTime.ShortCut := FHotKeyFastRealTime.ToShortCut;
+  aFastAutoCopy.ShortCut := FHotKeyFastAutoCopy.ToShortCut;
+  aFastVerticalSplit.ShortCut := FHotKeyFastVerticalSplit.ToShortCut;
+  aFastAutoHeight.ShortCut := FHotKeyFastAutoHeight.ToShortCut;
+  aFastHideControls.ShortCut := FHotKeyFastHideControls.ToShortCut;
 end;
 
 procedure TformTrayslate.SetAnimate(Angle: integer);

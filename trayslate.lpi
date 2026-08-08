@@ -199,6 +199,7 @@
       <Unit>
         <Filename Value="units\consts.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="Consts"/>
       </Unit>
       <Unit>
         <Filename Value="units\settings.pas"/>
