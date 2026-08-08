@@ -372,6 +372,8 @@ type
     FSettingsPage: integer;
     FSettingTrayIcon: boolean;
     FBlockTrayUpdate: boolean;
+    FProcessingPairClick: boolean;
+    FNeedRebuildPairs: boolean;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -714,6 +716,8 @@ begin
   FDragMoved := False;
   FSettingTrayIcon := False;
   FBlockTrayUpdate := False;
+  FProcessingPairClick := False;
+  FNeedRebuildPairs := False;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -2275,27 +2279,39 @@ procedure TformTrayslate.ButtonLangMouseUp(Sender: TObject; Button: TMouseButton
 begin
   if Button = mbLeft then
   begin
-    // If no drag occurred and mouse didn't move much, treat as a click
-    if (FDragBtnIndex >= 0) and (not FDragMoved) and (Abs(X - FDragBtnStartX) < 5) then
-    begin
-      if not MenuLangPairs.Items[FDragBtnIndex].Checked then
+    if FProcessingPairClick then Exit; // Prevent reentry during pair processing
+    FProcessingPairClick := True;
+    try
+      // If no drag occurred and mouse didn't move much, treat as a click
+      if (FDragBtnIndex >= 0) and (not FDragMoved) and (Abs(X - FDragBtnStartX) < 5) then
       begin
-        // Immediately show the button as pressed
-        TFlatButton(Sender).Down := True;
-        TFlatButton(Sender).Parent.Repaint;
-        SelectPairConfig(FDragBtnIndex);
-      end
-      else
+        if not MenuLangPairs.Items[FDragBtnIndex].Checked then
+        begin
+          // Immediately show the button as pressed
+          TFlatButton(Sender).Down := True;
+          TFlatButton(Sender).Parent.Repaint;
+          SelectPairConfig(FDragBtnIndex);
+        end
+        else
+        begin
+          // Click on already active button: keep it pressed, prevent unpress
+          TFlatButton(Sender).Down := True;
+          TFlatButton(Sender).Parent.Repaint;
+        end;
+      end;
+      // Reset drag state
+      FDragBtnIndex := -1;
+      FDragMoved := False;
+      Screen.Cursor := crDefault;
+    finally
+      FProcessingPairClick := False;
+      // If a panel rebuild was requested during the operation, process it now
+      if FNeedRebuildPairs then
       begin
-        // Click on already active button: keep it pressed, prevent unpress
-        TFlatButton(Sender).Down := True;
-        TFlatButton(Sender).Parent.Repaint;
+        FNeedRebuildPairs := False;
+        Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
       end;
     end;
-    // Reset drag state
-    FDragBtnIndex := -1;
-    FDragMoved := False;
-    Screen.Cursor := crDefault;
   end;
 end;
 
@@ -2346,7 +2362,18 @@ end;
 
 procedure TformTrayslate.MenuPairClick(Sender: TObject);
 begin
-  SelectPairConfig((Sender as TMenuItem).Tag);
+  if FProcessingPairClick then Exit;
+  FProcessingPairClick := True;
+  try
+    SelectPairConfig((Sender as TMenuItem).Tag);
+  finally
+    FProcessingPairClick := False;
+    if FNeedRebuildPairs then
+    begin
+      FNeedRebuildPairs := False;
+      Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
+    end;
+  end;
 end;
 
 procedure TformTrayslate.PopupTrayPopup(Sender: TObject);
@@ -3128,6 +3155,12 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
   end;
 
 begin
+  if FProcessingPairClick then
+  begin
+    FNeedRebuildPairs := True;
+    Exit;
+  end;
+
   try
     Build(FlowPairs, Font);
     if Assigned(formPopupTrayslate) then
