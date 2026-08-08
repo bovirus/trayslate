@@ -925,11 +925,16 @@ msgctxt "tformconfigtrayslate.pageservice.caption"
 msgid "Service"
 msgstr "Сервіс"
 
+#: tformconfigtrayslate.reloadconfigs.hint
+msgid "Reload configurations from disk"
+msgstr "Перезавантажити конфігурації з диска"
+
 #: tformconfigtrayslate.sbcopyconfig.hint
 msgid "Copy configuration"
 msgstr "Копіювати конфігурацію"
 
 #: tformconfigtrayslate.sbnewconfig.hint
+msgctxt "tformconfigtrayslate.sbnewconfig.hint"
 msgid "New configuration"
 msgstr "Нова конфігурація"
 

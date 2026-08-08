@@ -925,11 +925,16 @@ msgctxt "tformconfigtrayslate.pageservice.caption"
 msgid "Service"
 msgstr "Layanan"
 
+#: tformconfigtrayslate.reloadconfigs.hint
+msgid "Reload configurations from disk"
+msgstr "Muat ulang konfigurasi dari disk"
+
 #: tformconfigtrayslate.sbcopyconfig.hint
 msgid "Copy configuration"
 msgstr "Salin konfigurasi"
 
 #: tformconfigtrayslate.sbnewconfig.hint
+msgctxt "tformconfigtrayslate.sbnewconfig.hint"
 msgid "New configuration"
 msgstr "Konfigurasi baru"
 

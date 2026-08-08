@@ -925,11 +925,16 @@ msgctxt "tformconfigtrayslate.pageservice.caption"
 msgid "Service"
 msgstr "Palvelu"
 
+#: tformconfigtrayslate.reloadconfigs.hint
+msgid "Reload configurations from disk"
+msgstr "Lataa asetukset uudelleen levyltä"
+
 #: tformconfigtrayslate.sbcopyconfig.hint
 msgid "Copy configuration"
 msgstr "Kopioi konfiguraatio"
 
 #: tformconfigtrayslate.sbnewconfig.hint
+msgctxt "tformconfigtrayslate.sbnewconfig.hint"
 msgid "New configuration"
 msgstr "Uusi konfiguraatio"
 

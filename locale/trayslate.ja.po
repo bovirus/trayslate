@@ -925,11 +925,16 @@ msgctxt "tformconfigtrayslate.pageservice.caption"
 msgid "Service"
 msgstr "サービス"
 
+#: tformconfigtrayslate.reloadconfigs.hint
+msgid "Reload configurations from disk"
+msgstr "ディスクから設定を再読み込み"
+
 #: tformconfigtrayslate.sbcopyconfig.hint
 msgid "Copy configuration"
 msgstr "設定をコピー"
 
 #: tformconfigtrayslate.sbnewconfig.hint
+msgctxt "tformconfigtrayslate.sbnewconfig.hint"
 msgid "New configuration"
 msgstr "新規設定"
 

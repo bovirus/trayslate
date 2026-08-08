@@ -40,6 +40,7 @@ type
   { TformConfigTrayslate }
 
   TformConfigTrayslate = class(TForm)
+    ReloadConfigs: TAction;
     {%Region -fold Form Common}
     aSave: TAction;
     ActionList: TActionList;
@@ -129,6 +130,7 @@ type
     PanelTop: TPanel;
     SbCopyConfig: TSpeedButton;
     SbNewConfig: TSpeedButton;
+    SbUpdateConfigs: TSpeedButton;
     ScrollBoxInitialRequest: TScrollBox;
     ScrollBoxRequest: TScrollBox;
     ScrollBoxService: TScrollBox;
@@ -149,6 +151,7 @@ type
     SynPasSyn: TSynPasSyn;
     SynScriptParameters: TSynEdit;
     SynScriptResponse: TSynEdit;
+    procedure ReloadConfigsExecute(Sender: TObject);
     procedure BtnResponseHelpClick(Sender: TObject);
     procedure BtnScriptHelpClick(Sender: TObject);
     procedure BtnScriptResponseHelpClick(Sender: TObject);
@@ -290,6 +293,8 @@ begin
   BtnClose.Cancel := True;
   LabelFillLanguages.Font.Color := TDarkUtils.ThemeColor(clBlue, clSkyBlue);
   ColorServiceColorRecent.AddCustomColors;
+
+  ReloadConfigs.ImageIndex := TDarkUtils.ThemeValue(24, 25);
 
   ComboValueType.Items.Clear;
   ComboValueType.Items.Add(rvaluetype1);
@@ -515,6 +520,26 @@ begin
   if not Assigned(FHint) then
     FHint := TOneShotTooltip.Create(Self);
   FHint.ShowHintText(rresponsehint, BtnResponseHelp.ClientOrigin.X, BtnResponseHelp.ClientOrigin.Y + BtnResponseHelp.Height, 500);
+end;
+
+procedure TformConfigTrayslate.ReloadConfigsExecute(Sender: TObject);
+var
+  LastIndex: integer;
+begin
+  Screen.Cursor := crHourGlass;
+  try
+    LastIndex := ComboConfig.ItemIndex;
+    TTranslate.GetIniFiles(formTrayslate.ConfigFiles);
+    formTrayslate.BuildConfigMenu;
+    Application.QueueAsyncCall(@formTrayslate.RebuildLangPairsPanel, 0);
+    UpdateConfigList;
+    if (LastIndex >= ComboConfig.Items.Count) then Dec(LastIndex);
+    ComboConfig.ItemIndex := LastIndex;
+    ComboConfigChange(Self);
+    UpdateConfig;
+  finally
+    Screen.Cursor := crDefault;
+  end;
 end;
 
 procedure TformConfigTrayslate.BtnCloseClick(Sender: TObject);

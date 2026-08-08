@@ -28,10 +28,10 @@ object formConfigTrayslate: TformConfigTrayslate
     ParentBackground = False
     TabOrder = 0
     object ComboConfig: TComboBox
-      Left = 5
+      Left = 61
       Height = 23
       Top = 5
-      Width = 534
+      Width = 506
       Align = alClient
       BorderSpacing.Around = 5
       DropDownCount = 30
@@ -42,12 +42,12 @@ object formConfigTrayslate: TformConfigTrayslate
       OnKeyDown = ComboConfigKeyDown
     end
     object SbCopyConfig: TSpeedButton
-      Left = 572
+      Left = 33
       Height = 26
       Hint = 'Copy configuration'
       Top = 5
       Width = 23
-      Align = alRight
+      Align = alLeft
       BorderSpacing.Around = 5
       Flat = True
       Glyph.Data = {
@@ -91,12 +91,12 @@ object formConfigTrayslate: TformConfigTrayslate
       OnClick = SbCopyConfigClick
     end
     object SbNewConfig: TSpeedButton
-      Left = 544
+      Left = 5
       Height = 26
       Hint = 'New configuration'
       Top = 5
       Width = 23
-      Align = alRight
+      Align = alLeft
       BorderSpacing.Around = 5
       Flat = True
       Glyph.Data = {
@@ -138,6 +138,20 @@ object formConfigTrayslate: TformConfigTrayslate
       ShowHint = True
       ParentShowHint = False
       OnClick = SbNewConfigClick
+    end
+    object SbUpdateConfigs: TSpeedButton
+      Left = 572
+      Height = 26
+      Top = 5
+      Width = 23
+      Action = ReloadConfigs
+      Align = alRight
+      BorderSpacing.Around = 5
+      Flat = True
+      Images = formTrayslate.ImageButtons
+      ImageIndex = 24
+      ShowHint = True
+      ParentShowHint = False
     end
   end
   object Pages: TPageControl
@@ -2579,13 +2593,20 @@ object formConfigTrayslate: TformConfigTrayslate
     OnClick = BtnCloseClick
   end
   object ActionList: TActionList
-    Left = 464
-    Top = 40
+    Images = formTrayslate.ImageButtons
+    Left = 400
+    Top = 368
     object aSave: TAction
       Caption = 'Save'
       Enabled = False
       ShortCut = 16467
       OnExecute = aSaveExecute
+    end
+    object ReloadConfigs: TAction
+      Hint = 'Reload configurations from disk'
+      ImageIndex = 24
+      ShortCut = 116
+      OnExecute = ReloadConfigsExecute
     end
   end
   object ColorDialog: TColorDialog
@@ -2612,14 +2633,14 @@ object formConfigTrayslate: TformConfigTrayslate
       'ColorS=F0FBFF'
       'ColorT=A4A0A0'
     )
-    Left = 528
-    Top = 40
+    Left = 472
+    Top = 368
   end
   object DialogOpen: TOpenDialog
     Filter = 'Images (*.png, *.jpg, *.jpeg, *.bmp, *.ico)|*.png;*.jpg;*.jpeg;*.bmp;*.ico|All files (*.*)|*.*'
     Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
-    Left = 464
-    Top = 112
+    Left = 400
+    Top = 440
   end
   object SynPasSyn: TSynPasSyn
     Enabled = False
@@ -2627,7 +2648,7 @@ object formConfigTrayslate: TformConfigTrayslate
     NestedComments = False
     TypeHelpers = True
     StringMultilineMode = []
-    Left = 88
-    Top = 392
+    Left = 184
+    Top = 368
   end
 end
