@@ -22,11 +22,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
     Top = 5
     Width = 614
     TabStop = False
-    ActivePage = PageGeneral
+    ActivePage = PageParameters
     Align = alClient
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
-    TabIndex = 0
+    TabIndex = 4
     TabOrder = 1
     object PageGeneral: TTabSheet
       Caption = 'General'
@@ -1086,8 +1086,8 @@ object formSettingsTrayslate: TformSettingsTrayslate
           TitleStyle = tsNative
           OnColRowDeleted = ValueListUserParametersColRowDeleted
           OnColRowInserted = ValueListUserParametersColRowInserted
-          OnEditingDone = ValueListUserParametersEditingDone
           OnKeyDown = ValueListUserParametersKeyDown
+          OnKeyUp = ValueListUserParametersKeyUp
           OnSelectEditor = ValueListUserParametersSelectEditor
           KeyOptions = [keyEdit, keyAdd, keyDelete]
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goAutoAddRows, goAlwaysShowEditor, goThumbTracking, goSmoothScroll]
@@ -1096,7 +1096,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           )
           ColWidths = (
             200
-            365
+            382
           )
         end
       end

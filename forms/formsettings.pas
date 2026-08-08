@@ -168,8 +168,8 @@ type
     procedure BtnResetPopupClick(Sender: TObject);
     procedure ValueListUserParametersColRowDeleted(Sender: TObject; IsColumn: boolean; sIndex, tIndex: integer);
     procedure ValueListUserParametersColRowInserted(Sender: TObject; IsColumn: boolean; sIndex, tIndex: integer);
-    procedure ValueListUserParametersEditingDone(Sender: TObject);
     procedure ValueListUserParametersKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
+    procedure ValueListUserParametersKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure ValueListUserParametersSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);
     procedure ListPagesDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
     procedure ClbProxiedConfigsDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
@@ -437,7 +437,9 @@ begin
   if FApplySettings then Exit;
 
   // Save focus only if it is not the Apply button itself
-  if (Screen.ActiveControl <> nil) and (not (Screen.ActiveControl is TButton)) then
+  if (Screen.ActiveControl <> nil) and (not (Screen.ActiveControl is TButton)) and
+    //(not (Screen.ActiveControl = ValueListUserParameters)) and (not (Screen.ActiveControl is TStringCellEditor)) then
+    (not (Screen.ActiveControl is TStringCellEditor)) then
     FLastFocused := Screen.ActiveControl;
 end;
 
@@ -930,23 +932,27 @@ begin
 end;
 
 procedure TformSettingsTrayslate.BtnApplyClick(Sender: TObject);
+var
+  r, c: integer;
 begin
-  if Assigned(FLastFocused) and FLastFocused.Visible and FLastFocused.CanFocus and FLastFocused.CanSetFocus then
-    FLastFocused.SetFocus;
+  ValueListUserParameters.Options := ValueListUserParameters.Options - [goEditing];
+  r := ValueListUserParameters.Row;
+  c := ValueListUserParameters.Col;
+  try
+    if Assigned(FLastFocused) and FLastFocused.Visible and FLastFocused.CanFocus and FLastFocused.CanSetFocus then
+      FLastFocused.SetFocus;
 
-  Apply;
+    Apply;
+  finally
+    ValueListUserParameters.Row := r;
+    ValueListUserParameters.Col := c;
+    ValueListUserParameters.Options := ValueListUserParameters.Options + [goEditing];
+  end;
 end;
 
 procedure TformSettingsTrayslate.ValueListUserParametersSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);
 begin
   FOldValueList := ValueListUserParameters.Cells[aCol, aRow];
-end;
-
-procedure TformSettingsTrayslate.ValueListUserParametersEditingDone(Sender: TObject);
-begin
-  if ApplySettings then exit;
-  if (ValueListUserParameters.Cells[ValueListUserParameters.Col, ValueListUserParameters.Row] <> FOldValueList) then
-    BtnApply.Enabled := True;
 end;
 
 procedure TformSettingsTrayslate.ValueListUserParametersKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
@@ -957,6 +963,7 @@ begin
   if (Key = VK_DELETE) and (ssCtrl in Shift) then
   begin
     ValueList := Sender as TValueListEditor;
+
     Key := 0; // Block default processing
 
     // Safety check: row index must be valid
@@ -978,6 +985,13 @@ begin
     // Now safe to delete
     ValueList.DeleteRow(CurrentRow);
   end;
+end;
+
+procedure TformSettingsTrayslate.ValueListUserParametersKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
+begin
+  if (Sender as TValueListEditor).EditorMode and (ValueListUserParameters.Cells[ValueListUserParameters.Col,
+    ValueListUserParameters.Row] <> FOldValueList) then
+    BtnApply.Enabled := True;
 end;
 
 procedure TformSettingsTrayslate.ValueListUserParametersColRowDeleted(Sender: TObject; IsColumn: boolean; sIndex, tIndex: integer);
