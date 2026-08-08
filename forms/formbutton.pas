@@ -103,10 +103,6 @@ begin
   // Remove standard window borders to allow custom rounded shape
   BorderStyle := bsNone;
 
-  // Variables defaults
-  FPopupClosed := False;
-  FPopupOpen := False;
-
   // Create a rounded-rectangle region for the form (radius = 6 pixels)
   {$IFDEF WINDOWS}
   Rgn := CreateRoundRectRgn(0, 0, Width, Height, 17, 17);
@@ -118,6 +114,10 @@ end;
 procedure TformButtonTrayslate.FormShow(Sender: TObject);
 begin
   TimerHide.Enabled := True;
+
+  // Variables defaults
+  FPopupClosed := False;
+  FPopupOpen := False;
 end;
 
 procedure TformButtonTrayslate.FormPaint(Sender: TObject);
