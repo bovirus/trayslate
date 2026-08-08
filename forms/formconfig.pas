@@ -562,6 +562,8 @@ procedure TformConfigTrayslate.ASaveIconAsExecute(Sender: TObject);
 var
   Bmp: TBitmap;
 begin
+  if formTrayslate.Trans.ServiceName <> string.Empty then
+    DialogSave.FileName := formTrayslate.Trans.ServiceName;
   if DialogSave.Execute then
   begin
     Bmp := TBase64.Base64ToBitmap(FIconBase64);
