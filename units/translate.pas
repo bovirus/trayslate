@@ -215,7 +215,7 @@ const
 
 implementation
 
-uses consts, mainform, settings, stringshelper, stringhelper, localize, osutils;
+uses Consts, mainform, settings, stringshelper, stringhelper, localize, osutils;
 
   {%Region -fold TTranslate }
 
@@ -416,7 +416,8 @@ begin
     Runner.Execute;   // automatically compiles if needed
 
     // 5. Retrieve output Result
-    Response := Runner.OutputList.Values['result'];
+    if Runner.OutputList.Contains('result') then
+      Response := Runner.OutputList.Values['result'];
   finally
     Runner.Free;
   end;
@@ -1060,11 +1061,13 @@ begin
         while (pEnd <= Length(Segment)) and (Segment[pEnd] <> '{') do Inc(pEnd);
         PointerPath := Trim(Copy(Segment, SlashPos, pEnd - SlashPos));
 
-        if PointerPath = '~' then PointerValue := content
+        if PointerPath = '~' then
+          PointerValue := content
         else
+        begin
           PointerValue := ParseJsonByPointer(content, PointerPath);
-
-        PointerValue := PointerValue.HTTPDecode.UnescapeUnicode;
+          PointerValue := PointerValue.HTTPDecode.UnescapeUnicode;
+        end;
 
         // Temporarily replace literal '#10' in the extracted data with a unique marker.
         // This prevents the final '#10' -> newline substitution from altering user data.
@@ -1345,6 +1348,7 @@ end;
 function TTranslate.Translate: string;
 var
   content: string;
+  temp: string;
 begin
   Result := string.Empty;
 
@@ -1364,16 +1368,19 @@ begin
     Result := ParseResponse(content).PreserveIndentation(FTextToTranslate);
   end;
 
-  // Replace HTML codes (entities and <br>) with actual characters only if they were absent in the original text
-  Result := CleanTranslatedText(FTextToTranslate, Result);
-
   if (Trim(Result) = string.Empty) then
-  begin
-    if not content.TryFormatJson(Result) then
-      Result := content;
-  end
+    content.TryFormatJson(Result)
   else
-  if FIsTruncated then Result := Result + '...';
+  begin
+    Temp := Result;
+    // Replace HTML codes (entities and <br>) with actual characters only if they were absent in the original text
+    if not Temp.TryFormatJson(Result) then
+    begin
+      Result := CleanTranslatedText(FTextToTranslate, Result);
+
+      if FIsTruncated then Result := Result + '...';
+    end;
+  end;
 
   // Execute response handle script
   ExecuteResponseScript(Result);
