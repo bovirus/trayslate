@@ -90,21 +90,18 @@ jobs:
               # Remove the commit type prefix to create a cleaner issue title
               TITLE=$(echo "$COMMIT_MSG" | sed -E 's/^(FIX|FIXED|FEATURE|FEAT|ENHANCEMENT|ENHANCE|ENHACE|DOC|DOCUMENTATION|LOCALIZATION|LOCAL|LOC):\s*//i')
 
-              # --- Check for duplicate issue with the same title ---
-              # Encode the title for safe usage in the search query
-              ENCODED_TITLE=$(echo "$TITLE" | jq -sRr @uri)
+              # Check for duplicate issue containing this commit SHA in the body
+              SEARCH_QUERY="repo:${GITHUB_REPOSITORY}+is:issue+${COMMIT_ID}+in:body"
               SEARCH_RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
                 -H "Accept: application/vnd.github+json" \
-                "https://api.github.com/search/issues?q=repo:${GITHUB_REPOSITORY}+is:issue+in:title:%22${ENCODED_TITLE}%22")
+                "https://api.github.com/search/issues?q=${SEARCH_QUERY}")
               TOTAL_COUNT=$(echo "$SEARCH_RESPONSE" | jq -r '.total_count')
 
               if [ "$TOTAL_COUNT" -gt 0 ]; then
                 EXISTING_NUMBER=$(echo "$SEARCH_RESPONSE" | jq -r '.items[0].number')
-                echo "Duplicate issue #$EXISTING_NUMBER already exists with title '$TITLE'. Skipping creation."
+                echo "Issue for commit $COMMIT_ID already exists as #$EXISTING_NUMBER. Skipping creation."
                 continue
               fi
-              # ----------------------------------------------------
-
               BODY_TEXT="**Commit:** https://github.com/$GITHUB_REPOSITORY/commit/$COMMIT_ID\n**Author:** $COMMIT_AUTHOR\n\nThis issue was automatically created from commit $COMMIT_ID"
 
               # Build a valid JSON payload using jq to safely escape special characters
