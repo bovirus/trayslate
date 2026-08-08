@@ -29,6 +29,7 @@ type
 const
   SpecialCodes: array[0..1] of string = ('auto', 'empty');
   AutoDetect = 'Auto Detect';
+  MAX_LANG_LENGTH = 8;
 
 // Helper functions replacing the former record helper
 function AppValueDisplayText(const AValue: TAppValue): string;
@@ -173,7 +174,8 @@ begin
     vtCurrencyFiat: Result := GetCurrencyFiat;
     vtCurrencyCrypto: Result := GetCurrencyCrypto;
     vtUnit: Result := GetUnits;
-    else SetLength(Result, 0);
+    else
+      SetLength(Result, 0);
   end;
 
   if ASort then

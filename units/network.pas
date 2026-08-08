@@ -356,7 +356,9 @@ begin
     if Assigned(ACookies) and (ACookies.Count > 0) then
       HTTP.Cookies.Assign(ACookies);
 
+    // ***********************
     // Execute request
+    // ***********************
     rawStream.Clear;
     HTTP.OutputStream := rawStream;
     if AMethod = wmPost then
