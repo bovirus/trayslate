@@ -3058,6 +3058,7 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
         btn.GroupIndex := 1;
         btn.AllowAllUp := True;
         btn.AutoSize := True;
+        btn.Alignment := taCenter;
         btn.Transparent := False;
         btn.Caption := FLangPairs.ValueFromIndex[i];
         btn.Hint := FConfigTitles.Values[FLangPairs.Names[i]];
@@ -3068,16 +3069,14 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
           ServiceIcon := -1;
 
         // Use shared ImageList (must exist in the form, e.g. ImageList1) – no memory leak
-        btn.Images := ImageConfig;
         if ServiceIcon >= 0 then
         begin
+          btn.Images := ImageConfig;
           btn.ImageIndex := ServiceIcon;
           btn.Layout := blGlyphLeft;
           btn.Margin := -1;
           btn.OffsetY := -1;
-        end
-        else
-          btn.ImageIndex := -1;
+        end;
 
         if not TryStrToInt(FConfigColors.Values[FLangPairs.Names[i]], ColorRecent) then
           ColorRecent := clBlue;
