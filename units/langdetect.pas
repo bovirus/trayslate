@@ -37,6 +37,7 @@ const
   UNKNOWN = 'unknown';
 
   {%Region -fold Types}
+
 type
   TStringArray = array of string;
   TWordWeightArray = array of word;
@@ -56,6 +57,8 @@ type
     // Sorted list for binary search (only when USE_BINARY_SEARCH = 1)
     SortedTrigrams: array of TTrigEntry;
   end;
+
+  TProfileArray = array of TProfile;
 
   TScriptType = (
     stLatin,
@@ -117,52 +120,72 @@ type
     Other: integer;
     Total: integer;
   end;
+
   {%EndRegion}
 
   TLangDetect = class
   private
-  class var FProfiles: array of TProfile;
+    // Variables for working with profiles
+  class var FProfiles: TProfileArray;
   class var FProfilesLoaded: boolean;
 
     // Script detection by text
     class function DetectScript(const Txt: string): TScriptInfo; static;
+
     // Detects script, refines CJK classification, and returns script info.
     class function QuickScriptDetection(const AText: string; var Info: TScriptInfo; var Script: TScriptType;
       out Confidence: double): string; static;
+
     // Check if a UTF-8 character is in the CJK (Chinese/Japanese/Korean) range
     class function IsCJK(const s: string): boolean; static;
+
     // Returns the primary script associated with a language code.
     class function GetScriptByLang(const Code: string): TScriptType; static;
+
     // Checks if language code matches current script
     class function IsLanguageMatchingScript(const Code: string; Script: TScriptType): boolean; static;
+
     // Returns a priority value for a language code. Lower value = more widely spoken.
     class function GetLanguagePriority(const Code: string): word; static;
+
     // Post-correction for language pairs that trigrams alone have trouble separating.
     class procedure ApplyPostCorrection(var Code: string; var Confidence: double; const AText: string); static;
+
     // Frequency-aware distance (lower = better).
     class function DistanceToProfile(const TextTrigrams: TStringArray; const Profile: TProfile): double; static;
+
     // Score a language profile by counting word matches (each token once).
     class function ScoreByWrds(const Text: string; const Profile: TProfile): integer; static;
+
     // Default profiles (defined in separate include file)
     class procedure InitDefaultProfiles; static;
+
     // Internal routine that does the actual merge from any TStream
     class procedure MergeProfilesFromStream(AStream: TStream); static;
   public
     // Extract character trigrams from a UTF-8 text. For texts dominated by CJK characters, spaces are ignored.
     class function ExtractCharTrigrams(const AText: string): TStringArray; static;
+
     // Safe language detection with optional current language hint.
     class function DetectLanguageSafe(const AText: string; ACurrentLang: string = string.Empty;
       MinConfidence: double = 0.5): string; static;
+
     // Returns language code (e.g. 'en', 'ru') or UNKNOWN
     class function DetectLanguageForText(const AText: string): string; static;
+
     // Also returns a confidence value between 0.0 and 1.0
     class function DetectLanguageWithConfidence(const AText: string; out Confidence: double): string; static;
+
     // Public wrapper for file-based loading
     class procedure MergeProfilesFromFile(const FileName: string); static;
+
     // Load default profiles and merge external ones (file or resource). Must be called before detection.
     class procedure LoadProfiles; static;
+
     // Release all loaded profiles and reset initialization flag.
     class procedure UnloadProfiles; static;
+    // Property for accessing loaded profiles
+    class property Profiles: TProfileArray read FProfiles;
   end;
 
 implementation
