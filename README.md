@@ -114,7 +114,7 @@ Global hotkeys can be fully configured in the application settings. They are ava
 
 | Action | Shortcut |
 |--------|----------|
-| **Global Hotkeys** | |
+| **Translate Hotkeys** | |
 | Shows or hides the main application window | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>A</kbd> |
 | Swaps the source and target languages | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> |
 | Translates the current text from the clipboard | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>T</kbd> |
@@ -123,6 +123,17 @@ Global hotkeys can be fully configured in the application settings. They are ava
 | Translates the selected text from the active application | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> |
 | Replaces the selected text in the active application with the translation | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd> |
 | Translates selected text from the active application to a popup window | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd> |
+| **Quick Settings Hotkeys** | |
+| Enable or disable all global hotkeys | <kbd>Shift</kbd> + <kbd>F1</kbd> |
+| Toggle mouse translation mode | <kbd>Shift</kbd> + <kbd>F2</kbd> |
+| Mouse mode requires Ctrl key to be held | <kbd>Shift</kbd> + <kbd>F3</kbd> |
+| Automatically swap the language pair direction | <kbd>Shift</kbd> + <kbd>F4</kbd> |
+| Auto-add recent language pairs for quick access | <kbd>Shift</kbd> + <kbd>F5</kbd> |
+| Translate text as you type in the popup | <kbd>Shift</kbd> + <kbd>F6</kbd> |
+| Automatically copy translation to clipboard | <kbd>Shift</kbd> + <kbd>F7</kbd> |
+| Switch between vertical and horizontal layout | <kbd>Shift</kbd> + <kbd>F8</kbd> |
+| Adjust popup height to content automatically | <kbd>Shift</kbd> + <kbd>F9</kbd> |
+| Hide popup controls when not hovering | <kbd>Shift</kbd> + <kbd>F10</kbd> |
 | **Recent Language Pair Hotkeys** | |
 | Select recent language pair 1 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> |
 | Select recent language pair 2 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> |
@@ -136,7 +147,7 @@ Global hotkeys can be fully configured in the application settings. They are ava
 | **Main Window Hotkeys** | |
 | New Translate | <kbd>Ctrl</kbd> + <kbd>N</kbd> |
 | Add Current Pair To Recent Panel | <kbd>Ctrl</kbd> + <kbd>F</kbd> |
-| Translate | <kbd>Ctrl</kbd> + <kbd>Enter</kbd><br><kbd>Shift</kbd> + <kbd>Enter</kbd><br><kbd>Double Enter</kbd> |
+| Translate | <kbd>Ctrl</kbd> + <kbd>Enter</kbd><br><kbd>Shift</kbd> + <kbd>Enter</kbd><br><kbd>Triple Enter</kbd> |
 
 ---
 
