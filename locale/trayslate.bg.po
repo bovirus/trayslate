@@ -118,15 +118,7 @@ msgid ""
 "Commenting: /* text */ comments are stripped from the entire expression before any processing.\n"
 "Examples:\n"
 "responseData/translatedText; matches/*#10/translation; /texts/text; {literal text#10}; /result/text; /text{ ({(\\w+)})}; !/translations{Error: No data!#10}; /translations/0/text"
-msgstr ""
-"Json показалец: Използва / за нива, ключове за обекти и числа за индекси. Използва * за всички елементи, *#10 за свързване на елементи чрез нов ред. Използвайте ~ в края на пътя, за да върнете необработения JSON клон. Разделете няколко сегмента с точка и запетая ;.\n"
-"Литерал: Текстов блок в {…}. Специален етикет #10 за нови редове. Използвайте {{regex}} вътре, за да извлечете данни директно в текста.\n"
-"Логика: Ако указател в сегмент е празен, целият сегмент се пропуска. Ако даден сегмент няма указател, се обработват само буквални текстови блокове с вградени регулярни изрази.\n"
-"Regex: {префикс {regex[index]} суфикс} вътре в текстов блок. Ако не е зададен [индекс], се използва първото съвпадение. Индексът може да бъде число, [*] (съединяване чрез интервал) или [*#10] (съединяване чрез нов ред). Ако регулярният израз не намери съвпадение, целият блок {…} се премахва. Използването на ~ вътре в регулярен израз връща целия текст.\n"
-"Инверсия: Започнете сегмент с ! (напр. !/path{Error}), за да покаже текста му само ако липсват данните за указателя или JSON е невалиден.\n"
-"Коментиране: /* текст */ коментарите се премахват от целия израз преди обработка.\n"
-"Примери:\n"
-"responseData/translatedText; съвпадения/*#10/превод; /текстове/текст; {буквен текст#10}; /резултат/текст; /текст{ ({(\\w+)})}; !/translations{Грешка: Няма данни!#10}; /преводи/0/текст"
+msgstr "Json показалец: Използва / за нива, ключове за обекти и числа за индекси. Използва * за всички елементи, *#10 за свързване на елементи чрез нов ред. Използвайте ~ в края на пътя, за да върнете необработения JSON клон. Разделете няколко сегмента с точка и запетая ;.\nЛитерал: Текстов блок в {…}. Специален етикет #10 за нови редове. Използвайте {{regex}} вътре, за да извлечете данни директно в текста.\nЛогика: Ако указател в сегмент е празен, целият сегмент се пропуска. Ако даден сегмент няма указател, се обработват само буквални текстови блокове с вградени регулярни изрази.\nRegex: {префикс {regex[index]} суфикс} вътре в текстов блок. Ако не е зададен [индекс], се използва първото съвпадение. Индексът може да бъде число, [*] (съединяване чрез интервал) или [*#10] (съединяване чрез нов ред). Ако регулярният израз не намери съвпадение, целият блок {…} се премахва. Използването на ~ вътре в регулярен израз връща целия текст.\nИнверсия: Започнете сегмент с ! (напр. !/path{Error}), за да покаже текста му само ако липсват данните за указателя или JSON е невалиден.\nКоментиране: /* текст */ коментарите се премахват от целия израз преди обработка.\nПримери:\nresponseData/translatedText; съвпадения/*#10/превод; /текстове/текст; {буквен текст#10}; /резултат/текст; /текст{ ({(\\w+)})}; !/translations{Грешка: Няма данни!#10}; /преводи/0/текст"
 
 #: formconfig.rscripthint
 msgctxt "formconfig.rscripthint"
@@ -193,69 +185,7 @@ msgid ""
 "  rand1..rand9 - first 1..9 digits of the random number\n"
 "\n"
 "Additional initial and custom parameters are also available."
-msgstr ""
-"Скриптът е стандартна програма на Pascal: незадължителна секция var, следвана от основния блок begin ... end.\n"
-"\n"
-"Пример:\n"
-"  var s: string;\n"
-"  begin\n"
-"    s := GetParam('text');\n"
-"    s := ReplaceAll(s, '-', '_', False);\n"
-"    SetOutput('text', s);\n"
-"  end.\n"
-"\n"
-"Можете също така да използвате стандартните конструкции на Pascal (if, for, while, repeat и др.).\n"
-"\n"
-"Налични функции:\n"
-"  GetParam('name') : string\n"
-"    Получава стойността на входен параметър.\n"
-"  SetOutput('name', 'value')\n"
-"    Записва изходна стойност за хост приложението.\n"
-"  GetTimestamp() : Int64\n"
-"    Текущият Unix времеви печат в милисекунди (UTC).\n"
-"  GetRandom(Length) : Int64\n"
-"    Случайно цяло число с точно Length десетични цифри.\n"
-"  Random : Extended\n"
-"    Случайно число с плаваща запетая в диапазона [0, 1).\n"
-"  IntToHex(Value, Digits) : string\n"
-"    Преобразува цяло число в шестнадесетичен низ с поне Digits символа.\n"
-"  StrToInt(S) : Integer\n"
-"    Преобразува низ в цяло число. При невалиден вход се генерира изключение.\n"
-"  IntToStr(Value) : string\n"
-"    Преобразува цяло число в неговото текстово представяне.\n"
-"  Trim(S) : string\n"
-"    Премахва водещите и крайните интервали от S.\n"
-"  TrimLeft(S) : string\n"
-"    Премахва водещите интервали от S.\n"
-"  TrimRight(S) : string\n"
-"    Премахва крайните интервали от S.\n"
-"  HtmlEncode(S) : string\n"
-"    Кодира специалните HTML символи в S като HTML ентитети.\n"
-"  HtmlDecode(S) : string\n"
-"    Декодира HTML ентитетите в S обратно до символи.\n"
-"  UrlEncode(S) : string\n"
-"    Кодира S с процентно кодиране за безопасно използване в URL.\n"
-"  UrlDecode(S) : string\n"
-"    Декодира процентно кодиран низ S.\n"
-"  ReplaceAll(S, OldPattern, NewPattern, IgnoreCase=False) : string\n"
-"    Заменя всички срещания на OldPattern с NewPattern в S.\n"
-"  RegexReplace(Input, Pattern, Replacement) : string\n"
-"    Заменя всички съвпадения на регулярния израз Pattern с Replacement в Input. Без значение на регистъра.\n"
-"  RegexMatch(Input, Pattern) : Boolean\n"
-"    Проверява дали Input съвпада с регулярния израз Pattern. Без значение на регистъра.\n"
-"  ExtractBetween(S, StartMarker, EndMarker) : string\n"
-"    Извлича подниза от S между StartMarker и EndMarker.\n"
-"\n"
-"Налични параметри (получават се чрез GetParam):\n"
-"  text - входният текст за обработка (може да бъде съкратен до MaxLength)\n"
-"  source - код на изходния език (може да е празен)\n"
-"  target - код на целевия език\n"
-"  timestamp - текущият Unix времеви печат в милисекунди (низ)\n"
-"  random  - случайно 9-цифрено число (низ)\n"
-"  rand - същото като random\n"
-"  rand1..rand9 - първите 1..9 цифри на случайното число\n"
-"\n"
-"Налични са също и допълнителни начални и потребителски параметри."
+msgstr "Скриптът е стандартна програма на Pascal: незадължителна секция var, следвана от основния блок begin ... end.\n\nПример:\n  var s: string;\n  begin\n    s := GetParam('text');\n    s := ReplaceAll(s, '-', '_', False);\n    SetOutput('text', s);\n  end.\n\nМожете също така да използвате стандартните конструкции на Pascal (if, for, while, repeat и др.).\n\nНалични функции:\n  GetParam('name') : string\n    Получава стойността на входен параметър.\n  SetOutput('name', 'value')\n    Записва изходна стойност за хост приложението.\n  GetTimestamp() : Int64\n    Текущият Unix времеви печат в милисекунди (UTC).\n  GetRandom(Length) : Int64\n    Случайно цяло число с точно Length десетични цифри.\n  Random : Extended\n    Случайно число с плаваща запетая в диапазона [0, 1).\n  IntToHex(Value, Digits) : string\n    Преобразува цяло число в шестнадесетичен низ с поне Digits символа.\n  StrToInt(S) : Integer\n    Преобразува низ в цяло число. При невалиден вход се генерира изключение.\n  IntToStr(Value) : string\n    Преобразува цяло число в неговото текстово представяне.\n  Trim(S) : string\n    Премахва водещите и крайните интервали от S.\n  TrimLeft(S) : string\n    Премахва водещите интервали от S.\n  TrimRight(S) : string\n    Премахва крайните интервали от S.\n  HtmlEncode(S) : string\n    Кодира специалните HTML символи в S като HTML ентитети.\n  HtmlDecode(S) : string\n    Декодира HTML ентитетите в S обратно до символи.\n  UrlEncode(S) : string\n    Кодира S с процентно кодиране за безопасно използване в URL.\n  UrlDecode(S) : string\n    Декодира процентно кодиран низ S.\n  ReplaceAll(S, OldPattern, NewPattern, IgnoreCase=False) : string\n    Заменя всички срещания на OldPattern с NewPattern в S.\n  RegexReplace(Input, Pattern, Replacement) : string\n    Заменя всички съвпадения на регулярния израз Pattern с Replacement в Input. Без значение на регистъра.\n  RegexMatch(Input, Pattern) : Boolean\n    Проверява дали Input съвпада с регулярния израз Pattern. Без значение на регистъра.\n  ExtractBetween(S, StartMarker, EndMarker) : string\n    Извлича подниза от S между StartMarker и EndMarker.\n\nНалични параметри (получават се чрез GetParam):\n  text - входният текст за обработка (може да бъде съкратен до MaxLength)\n  source - код на изходния език (може да е празен)\n  target - код на целевия език\n  timestamp - текущият Unix времеви печат в милисекунди (низ)\n  random  - случайно 9-цифрено число (низ)\n  rand - същото като random\n  rand1..rand9 - първите 1..9 цифри на случайното число\n\nНалични са също и допълнителни начални и потребителски параметри."
 
 #: formconfig.rscriptresponsehint
 msgid ""
@@ -271,19 +201,7 @@ msgid ""
 "\n"
 "You can define custom parameters in the parameters script using SetParam('name', 'value'),\n"
 "and then retrieve them here with GetParam('name')."
-msgstr ""
-"Този скрипт обработва данните от отговора. Всички функции и параметри, описани в подсказката на скрипта, също са налични тук.\n"
-"Използвайте GetParam('result'), за да получите получения текст.\n"
-"\n"
-"Пример:\n"
-"  var s: string;\n"
-"  begin\n"
-"    s := GetParam('result');\n"
-"    SetOutput('result', s);\n"
-"  end.\n"
-"\n"
-"Можете да дефинирате потребителски параметри в скрипта за параметри чрез SetParam('name', 'value'),\n"
-"а след това да ги получите тук с GetParam('name')."
+msgstr "Този скрипт обработва данните от отговора. Всички функции и параметри, описани в подсказката на скрипта, също са налични тук.\nИзползвайте GetParam('result'), за да получите получения текст.\n\nПример:\n  var s: string;\n  begin\n    s := GetParam('result');\n    SetOutput('result', s);\n  end.\n\nМожете да дефинирате потребителски параметри в скрипта за параметри чрез SetParam('name', 'value'),\nа след това да ги получите тук с GetParam('name')."
 
 #: formconfig.rvaluetype1
 msgctxt "formconfig.rvaluetype1"
@@ -354,7 +272,7 @@ msgstr "Shift+F1"
 
 #: formsettings.rfastallowhotkeys_hint
 msgid "Enable or disable all global hotkeys"
-msgstr "Активиране или деактивиране на всички глобални клавишни комбинации"
+msgstr "Активиране или деактивиране на всички глобални бързи клавиши"
 
 #: formsettings.rfastautoaddlangpairs
 msgctxt "formsettings.rfastautoaddlangpairs"
@@ -367,7 +285,7 @@ msgstr "Shift+F5"
 
 #: formsettings.rfastautoaddlangpairs_hint
 msgid "Auto-add recent language pairs for quick access"
-msgstr "Автоматично добавяне на последните езикови двойки за бърз достъп"
+msgstr "Автоматично добави скорошни езикови двойки за бърз достъп"
 
 #: formsettings.rfastautocopy
 msgctxt "formsettings.rfastautocopy"
@@ -393,7 +311,7 @@ msgstr "Shift+F9"
 
 #: formsettings.rfastautoheight_hint
 msgid "Adjust popup height to content automatically"
-msgstr "Автоматично настройване на височината на изскачащия прозорец според съдържанието"
+msgstr "Автоматично регулиране на височината на изскачащия прозорец спрямо съдържанието"
 
 #: formsettings.rfastautoswap
 msgctxt "formsettings.rfastautoswap"
@@ -406,7 +324,7 @@ msgstr "Shift+F4"
 
 #: formsettings.rfastautoswap_hint
 msgid "Automatically swap the language pair direction"
-msgstr "Автоматично обръщане на посоката на езиковата двойка"
+msgstr "Автоматично сменяне на посоката на езиковата двойка"
 
 #: formsettings.rfastenablemousemode
 msgctxt "formsettings.rfastenablemousemode"
@@ -419,7 +337,7 @@ msgstr "Shift+F2"
 
 #: formsettings.rfastenablemousemode_hint
 msgid "Toggle mouse translation mode"
-msgstr "Превключване на режима за превод с мишката"
+msgstr "Превключване на режима на превод с мишката"
 
 #: formsettings.rfasthidecontrols
 msgctxt "formsettings.rfasthidecontrols"
@@ -432,7 +350,7 @@ msgstr "Shift+F10"
 
 #: formsettings.rfasthidecontrols_hint
 msgid "Hide popup controls when not hovering"
-msgstr "Скриване на контролите на изскачащия прозорец, когато мишката не е върху него"
+msgstr "Скриване на изскачащите контроли, когато не се задържа курсорът върху екрана"
 
 #: formsettings.rfastmousemodectrl
 msgctxt "formsettings.rfastmousemodectrl"
@@ -445,7 +363,7 @@ msgstr "Shift+F3"
 
 #: formsettings.rfastmousemodectrl_hint
 msgid "Mouse mode requires Ctrl key to be held"
-msgstr "Режимът на мишката изисква клавишът Ctrl да бъде задържан"
+msgstr "Режимът на мишка изисква задържане на клавиша Ctrl"
 
 #: formsettings.rfastrealtime
 msgctxt "formsettings.rfastrealtime"
@@ -458,12 +376,12 @@ msgstr "Shift+F6"
 
 #: formsettings.rfastrealtime_hint
 msgid "Translate text as you type in the popup"
-msgstr "Превод на текста при въвеждане в изскачащия прозорец"
+msgstr "Превеждайте текст, докато пишете в изскачащия прозорец"
 
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
-msgstr "Едностранично оформление"
+msgstr "Едностранно оформление"
 
 #: formsettings.rfastverticalsplit_default
 msgid "Shift+F8"
@@ -471,7 +389,7 @@ msgstr "Shift+F8"
 
 #: formsettings.rfastverticalsplit_hint
 msgid "Switch between vertical and horizontal layout"
-msgstr "Превключване между вертикално и хоризонтално оформление"
+msgstr "Превключи между вертикално и хоризонтално оформление"
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
@@ -497,11 +415,11 @@ msgstr "Показвай изскачащ превод"
 
 #: formsettings.roff
 msgid "Off"
-msgstr "Изкл."
+msgstr "Изключи"
 
 #: formsettings.ron
 msgid "On"
-msgstr "Вкл."
+msgstr "Включено"
 
 #: formsettings.rproxymodecustomproxy
 msgid "Custom Proxy"
@@ -706,27 +624,7 @@ msgid ""
 "   License: BSD-style license\n"
 "   Copyright (c) 1999–2024, Lukas Gebauer\n"
 "   https://github.com/geby/synapse"
-msgstr ""
-"Trayslate е базиран на трей клиент за преводачески услуги. Може да въвеждате текст директно, да превеждате съдържанието на клипборда или превеждате избран текст във всяко приложение. Може също да замените текст в друго приложение с неговия превод, като използвате клавишна комбинация. Приложението позволява да изберете и напълно да конфигурирате услугата за превод, която използвате.\n"
-"\n"
-"Това приложение използва ресурси на трети страни под лицензи:\n"
-"\n"
-"1. Основна икона, проектирана от Flaticon\n"
-"   https://www.flaticon.com/ru/free-icon/translator_682045\n"
-"\n"
-"2. Модули за поддръжка на тъмна тема от Double Commander\n"
-"   Използвани модули: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n"
-"   Лиценз: GNU General Public License v2.0 (GPL-2.0)\n"
-"   https://github.com/doublecmd/doublecmd\n"
-"   \n"
-"3. OpenSSL библиотеки (32-битови и 64-битови версии)\n"
-"   Лиценз: Apache License 2.0\n"
-"   https://www.openssl.org\n"
-"\n"
-"4. Мрежова библиотека Synapse (laz_synapse / synapse41.0)   \n"
-"   Лиценз: в стил BSD\n"
-"   Авторско право (c) 1999–2024, Лукас Гебауер\n"
-"   https://github.com/geby/synapse"
+msgstr "Trayslate е базиран на трей клиент за преводачески услуги. Може да въвеждате текст директно, да превеждате съдържанието на клипборда или превеждате избран текст във всяко приложение. Може също да замените текст в друго приложение с неговия превод, като използвате клавишна комбинация. Приложението позволява да изберете и напълно да конфигурирате услугата за превод, която използвате.\n\nТова приложение използва ресурси на трети страни под лицензи:\n\n1. Основна икона, проектирана от Flaticon\n   https://www.flaticon.com/ru/free-icon/translator_682045\n\n2. Модули за поддръжка на тъмна тема от Double Commander\n   Използвани модули: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n   Лиценз: GNU General Public License v2.0 (GPL-2.0)\n   https://github.com/doublecmd/doublecmd\n   \n3. OpenSSL библиотеки (32-битови и 64-битови версии)\n   Лиценз: Apache License 2.0\n   https://www.openssl.org\n\n4. Мрежова библиотека Synapse (laz_synapse / synapse41.0)   \n   Лиценз: в стил BSD\n   Авторско право (c) 1999–2024, Лукас Гебауер\n   https://github.com/geby/synapse"
 
 #: tformbuttontrayslate.imagetranslate.hint
 msgctxt "tformbuttontrayslate.imagetranslate.hint"
@@ -735,12 +633,12 @@ msgstr "Преведи в изскачащ прозорец"
 
 #: tformbuttontrayslate.menucanceltranslate.caption
 msgid "Cancel Translate"
-msgstr "Отказ на превода"
+msgstr "Отказ Превод"
 
 #: tformbuttontrayslate.menutranslatecontrol.caption
 msgctxt "tformbuttontrayslate.menutranslatecontrol.caption"
 msgid "Replace Selected With Translate"
-msgstr "Замени избраното с превода"
+msgstr "Замени избраното с превод"
 
 #: tformbuttontrayslate.menutranslatefromcontrol.caption
 msgctxt "tformbuttontrayslate.menutranslatefromcontrol.caption"
@@ -754,7 +652,7 @@ msgstr "Преведи избраното в изскачащия прозоре
 
 #: tformconfigtrayslate.aclearicon.caption
 msgid "Clear Icon"
-msgstr "Изчистване на иконата"
+msgstr "Икона за изчистване"
 
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
@@ -763,7 +661,7 @@ msgstr "Запазване"
 
 #: tformconfigtrayslate.asaveiconas.caption
 msgid "Save Icon As..."
-msgstr "Запазване на иконата като..."
+msgstr "Запази иконата като..."
 
 #: tformconfigtrayslate.btnclose.caption
 msgctxt "tformconfigtrayslate.btnclose.caption"
@@ -986,9 +884,7 @@ msgstr "Тип стойност попълване на имена. None зап�
 msgid ""
 "Target languages e.g. en=en-US, en - internal, en-US - service code.\n"
 "If not specified, both source and target languages are taken from the languages section."
-msgstr ""
-"Целеви езици, например en=en-US, en - вътрешен, en-US - сервизен код.\n"
-"Ако не е посочено, и двата езика, изходният и целевият, се вземат от секцията за езици."
+msgstr "Целеви езици, например en=en-US, en - вътрешен, en-US - сервизен код.\nАко не е посочено, и двата езика, изходният и целевият, се вземат от секцията за езици."
 
 #: tformconfigtrayslate.labelmaxlength.caption
 msgid "Max Length, bytes"
@@ -1077,7 +973,7 @@ msgstr "Сервиз"
 
 #: tformconfigtrayslate.reloadconfigs.hint
 msgid "Reload configurations from disk"
-msgstr "Презареждане на конфигурациите от диска"
+msgstr "Презаредете конфигурациите от диска"
 
 #: tformconfigtrayslate.sbcopyconfig.hint
 msgid "Copy configuration"
@@ -1091,7 +987,7 @@ msgstr "Нова конфигурация"
 #: tformdonatetrayslate.btnok.caption
 msgctxt "tformdonatetrayslate.btnok.caption"
 msgid "OK"
-msgstr "ОК"
+msgstr "OK"
 
 #: tformdonatetrayslate.caption
 msgid "Buy me a coffee"
@@ -1168,7 +1064,7 @@ msgstr "Размени езиковата двойка"
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"
-msgstr "Замени избраното с превода"
+msgstr "Замени избраното с превод"
 
 #: tformpopuptrayslate.atranslatefromcontrolpopup.caption
 msgctxt "tformpopuptrayslate.atranslatefromcontrolpopup.caption"
@@ -1340,9 +1236,7 @@ msgstr "Винаги предпочитай основен/вторичен ез
 msgid ""
 "Always prefer the Primary/Secondary language pair when the detected language matches the current target language.\n"
 "Restore the configured pair instead of performing a normal swap."
-msgstr ""
-"Винаги предпочитай двойка основен/вторичен език, когато откритият език съвпада с текущия целеви език. \n"
-"Възстанови конфигурирана двойка вместо нормална смяна."
+msgstr "Винаги предпочитай двойка основен/вторичен език, когато откритият език съвпада с текущия целеви език. \nВъзстанови конфигурирана двойка вместо нормална смяна."
 
 #: tformsettingstrayslate.checksmartswap.caption
 msgctxt "tformsettingstrayslate.checksmartswap.caption"
@@ -1354,9 +1248,7 @@ msgctxt "tformsettingstrayslate.checksmartswap.hint"
 msgid ""
 "If Detected language is outside the current pair, the Source language is replaced with the Detected language and the Target language is set to Primary.\n"
 "If Detected language equals Primary, the translation pair is set to Primary - Secondary."
-msgstr ""
-"Ако откритият език е извън текущата двойка, изходният се заменя с открития, а целевият е зададен на Основен.\n"
-"Ако Откритият език е Основен, двойката превод е зададена на Основен - Вторичен."
+msgstr "Ако откритият език е извън текущата двойка, изходният се заменя с открития, а целевият е зададен на Основен.\nАко Откритият език е Основен, двойката превод е зададена на Основен - Вторичен."
 
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
