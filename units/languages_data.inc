@@ -1,11 +1,11 @@
-//-----------------------------------------------------------------------------------
-//  Trayslate © 2026 by Alexander Tverskoy
-//  Licensed under the GNU General Public License, Version 3 (GPL-3.0)
-//  You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.html
-//-----------------------------------------------------------------------------------
+  //-----------------------------------------------------------------------------------
+  //  Trayslate © 2026 by Alexander Tverskoy
+  //  Licensed under the GNU General Public License, Version 3 (GPL-3.0)
+  //  You may obtain a copy of the License at https://www.gnu.org/licenses/gpl-3.0.html
+  //-----------------------------------------------------------------------------------
 
 const
-  Languages_Data: array[0..268] of TAppValue = (
+  Languages_Data: array[0..267] of TAppValue = (
     // Languages
     (Code: 'auto'; DisplayName: 'Auto Detect'),
     (Code: 'empty'; DisplayName: 'Auto Detect'),
@@ -71,7 +71,6 @@ const
     (Code: 'dyu'; DisplayName: 'Dyula'),
     (Code: 'zu'; DisplayName: 'Zulu'),
     (Code: 'iba'; DisplayName: 'Iban'),
-    (Code: 'iw'; DisplayName: 'Hebrew'),
     (Code: 'he'; DisplayName: 'Hebrew'),
     (Code: 'ig'; DisplayName: 'Igbo'),
     (Code: 'yi'; DisplayName: 'Yiddish'),
@@ -277,4 +276,3 @@ const
     (Code: 'kaa'; DisplayName: 'Karakalpak'),
     (Code: 'lmr'; DisplayName: 'Lamalera')
     );
-

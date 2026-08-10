@@ -4573,6 +4573,9 @@ begin
   else
     langDetect := LowerCase(TranslateThread(TransDetect, AText.ExtractTextSample));
 
+  // Update deprecated codes
+  langDetect := TLangDetect.NormalizeLanguageCode(langDetect);
+
   if FCancelled or (langDetect = string.Empty) or (Length(langDetect) > 5) or (langDetect = UNKNOWN) then Exit;
 
   // Swap if needed
