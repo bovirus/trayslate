@@ -159,11 +159,11 @@ object formConfigTrayslate: TformConfigTrayslate
     Height = 559
     Top = 41
     Width = 590
-    ActivePage = PageLanguagesTarget
+    ActivePage = PageService
     Align = alClient
     BorderSpacing.Bottom = 35
     BorderSpacing.Around = 5
-    TabIndex = 6
+    TabIndex = 0
     TabOrder = 1
     object PageService: TTabSheet
       Caption = 'Service'
@@ -2601,7 +2601,7 @@ object formConfigTrayslate: TformConfigTrayslate
         end
         object LabelFillTargetLanguages: TLabel
           Cursor = crHandPoint
-          Left = 8
+          Left = 5
           Height = 15
           Top = 48
           Width = 81
