@@ -335,6 +335,7 @@ type
     FTransDetect: TTranslate;
     FTranslateThread: TTranslateThread;
     FTranslateTarget: TWinControl;
+    FormSmallIcon: TIcon;
     FRawTranslate: string;
     FActiveThreads: TList;
     FProxy: TProxy;
@@ -493,6 +494,9 @@ type
     procedure UpdateTranslateButtonState(ForceTranslateButton: boolean = False);
     procedure UpdatePopupState(SetWindowParam: boolean = True);
 
+    function GetConfigIndex: integer;
+    function GetIconIndex: integer;
+
     // Drag Recent Button
     procedure MoveButtonTo(AFromIndex, AToIndex: integer);
 
@@ -578,6 +582,8 @@ type
     property Trans: TTranslate read FTrans write FTrans;
     property TransDetect: TTranslate read FTransDetect write FTransDetect;
     property TopMost: boolean read FTopMost write FTopMost;
+    property IndexConfig: integer read GetConfigIndex;
+    property IndexIcon: integer read GetIconIndex;
 
     // Settings properties
     property ConfigFile: string read FConfigFile write FConfigFile;
@@ -744,6 +750,7 @@ begin
   FBlockTrayUpdate := False;
   FProcessingPairClick := False;
   FNeedRebuildPairs := False;
+  FormSmallIcon := TIcon.Create;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -928,6 +935,7 @@ begin
   FreeAndNil(FTransDetect);
   FreeAndNil(FHint);
   FreeAndNil(FFontPopup);
+  FreeAndNil(FormSmallIcon);
 end;
 
 procedure TformTrayslate.FormShow(Sender: TObject);
@@ -3188,7 +3196,6 @@ begin
           Data^.Color := Ini.ReadInteger('Service', 'ColorRecent', clBlue);
           Data^.Visible := Ini.ReadBool('Service', 'Visible', True);
           Data^.Order := Ini.ReadInteger('Service', 'Order', 0);
-
           Data^.ImageIndex := TBase64.AddBase64ToImageList(Ini.ReadString('Service', 'Icon', string.Empty), ImageConfig);
         finally
           Ini.Free;
@@ -3381,6 +3388,32 @@ begin
   end;
 end;
 
+procedure SetFormSmallIcon(AForm: TForm; const AIcon: TIcon);
+{$IFDEF WINDOWS}
+var
+  BigIcon: HICON;
+{$ENDIF}
+begin
+  // Apply the new icon (or restore default if nil)
+  if AIcon = nil then
+    AForm.Icon.LoadFromResourceName(HInstance, 'MAINICON')
+  else
+    AForm.Icon.Assign(AIcon);
+
+  {$IFDEF WINDOWS}
+  // Retrieve the cached big icon handle (stored in Tag on first call)
+  BigIcon := HICON(AForm.Tag);
+  if BigIcon = 0 then
+  begin
+    BigIcon := SendMessage(AForm.Handle, WM_GETICON, ICON_BIG, 0);
+    AForm.Tag := PtrInt(BigIcon);  // cache it for future calls
+  end;
+  // Restore the big icon (taskbar) because Assign overwrites both
+  if BigIcon <> 0 then
+    SendMessage(AForm.Handle, WM_SETICON, ICON_BIG, BigIcon);
+  {$ENDIF}
+end;
+
 procedure TformTrayslate.SetTrayIcon;
 var
   Bitmap: TBitmap;
@@ -3400,7 +3433,7 @@ begin
       Bitmap.Free;
     end;
 
-    // Set tray icon hint
+    // Set tray AIcon hint
     hintText := string.Empty;
     if ComboSource.Text <> string.Empty then
       hintText += ComboSource.Text;
@@ -3413,6 +3446,10 @@ begin
     // Set popup window caption
     if (Assigned(formPopupTrayslate)) then
       formPopupTrayslate.Caption := hintText.Replace(LineEnding, ' - ');
+
+    // Set form small icon to config icon
+    ImageConfig.GetIcon(IndexIcon, FormSmallIcon);
+    SetFormSmallIcon(Self, FormSmallIcon);
   finally
     FSettingTrayIcon := False;
   end;
@@ -4244,6 +4281,16 @@ begin
     end;
     Application.QueueAsyncCall(@formPopupTrayslate.UpdateStayOnTop, iif(SetWindowParam, 1, 0));
   end;
+end;
+
+function TformTrayslate.GetConfigIndex: integer;
+begin
+  Result := ConfigFiles.FindIndex(FConfigFile);
+end;
+
+function TformTrayslate.GetIconIndex: integer;
+begin
+  Result := ConfigImages.ValueFromIndex[IndexConfig].ToInteger;
 end;
 
 procedure TformTrayslate.MoveButtonTo(AFromIndex, AToIndex: integer);
