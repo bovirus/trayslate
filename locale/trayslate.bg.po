@@ -381,7 +381,7 @@ msgstr "Превеждайте текст, докато пишете в изск
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
-msgstr "Едностранно оформление"
+msgstr "Странично оформление"
 
 #: formsettings.rfastverticalsplit_default
 msgid "Shift+F8"
@@ -1269,7 +1269,7 @@ msgstr "Показвай изходния и/или целевия език в �
 #: tformsettingstrayslate.checkverticalsplit.caption
 msgctxt "tformsettingstrayslate.checkverticalsplit.caption"
 msgid "Side-By-Side Layout"
-msgstr "Едностранично оформление"
+msgstr "Странично оформление"
 
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
@@ -1621,7 +1621,7 @@ msgstr "Превеждай, докато се пише"
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"
 msgid "Side-By-Side Layout"
-msgstr "Оформление едно до друго"
+msgstr "Странично оформление"
 
 #: tformtrayslate.alangarabic.caption
 msgid "Arabic"
