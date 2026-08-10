@@ -2381,6 +2381,9 @@ begin
   if not (Sender is TFlowPanel) then Exit;
   panel := TFlowPanel(Sender);
 
+  if (Screen.Cursor <> crDrag) and (Abs(X - FDragBtnStartX) >= 10) then
+    Screen.Cursor := crDrag;
+
   ctrl := panel.ControlAtPos(Point(X, Y), []);
   if (ctrl is TFlatButton) then
   begin
@@ -2430,15 +2433,18 @@ begin
 
   // Left button - prepare for possible drag, do not select pair here
   if Button = mbLeft then
-  begin
-    FDragBtnIndex := (Sender as TFlatButton).Tag;
-    FDragBtnStartX := X;
-    FDragBtnLastX := X;
-    FDragMoved := False;
-  end;
+    with (Sender as TFlatButton) do
+    begin
+      FDragBtnIndex := Tag;
+      FDragBtnStartX := ClientToParent(Point(X, Y), Parent).X;
+      FDragBtnLastX := FDragBtnStartX;
+      FDragMoved := False;
+    end;
 end;
 
 procedure TformTrayslate.ButtonLangMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
+var
+  btn: TFlatButton;
 begin
   if Button = mbLeft then
   begin
@@ -2446,7 +2452,8 @@ begin
     FProcessingPairClick := True;
     try
       // If no drag occurred and mouse didn't move much, treat as a click
-      if (FDragBtnIndex >= 0) and (not FDragMoved) and (Abs(X - FDragBtnStartX) < 5) then
+      btn := Sender as TFlatButton;
+      if (FDragBtnIndex >= 0) and (not FDragMoved) and (Abs(btn.ClientToParent(Point(X, Y), btn.Parent).X - FDragBtnStartX) < 5) then
       begin
         if not MenuLangPairs.Items[FDragBtnIndex].Checked then
         begin
