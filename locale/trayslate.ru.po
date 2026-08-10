@@ -475,8 +475,8 @@ msgstr "Переключаться между вертикальной и гор
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
-msgid "Global Hotkeys"
-msgstr "Глобальные горячие клавиши"
+msgid "Translate"
+msgstr "Перевести"
 
 #: formsettings.rmousemodeballon
 msgid "Show Balloon Translation"
@@ -921,6 +921,12 @@ msgid "Content Type"
 msgstr "Content Type"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
+msgctxt "tformconfigtrayslate.labelfilllanguages.caption"
+msgid "Fill with default"
+msgstr "Заполнить по умолчанию"
+
+#: tformconfigtrayslate.labelfilltargetlanguages.caption
+msgctxt "tformconfigtrayslate.labelfilltargetlanguages.caption"
 msgid "Fill with default"
 msgstr "Заполнить по умолчанию"
 
@@ -1025,6 +1031,16 @@ msgstr "Имя"
 #: tformconfigtrayslate.labelserviceorder.caption
 msgid "Order"
 msgstr "Порядок"
+
+#: tformconfigtrayslate.labelsort.caption
+msgctxt "tformconfigtrayslate.labelsort.caption"
+msgid "Sort"
+msgstr "Сортировать"
+
+#: tformconfigtrayslate.labeltargetsort.caption
+msgctxt "tformconfigtrayslate.labeltargetsort.caption"
+msgid "Sort"
+msgstr "Сортировать"
 
 #: tformconfigtrayslate.labelurl.caption
 msgctxt "tformconfigtrayslate.labelurl.caption"

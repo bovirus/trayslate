@@ -46,14 +46,14 @@ type
     class function GetCurrencyFiat: TValueArray; static;
     class function GetCurrencyCrypto: TValueArray; static;
     class function GetUnits: TValueArray; static;
-    class function GetValues(AValueType: TLangType; ASort: boolean = True): TValueArray; static;
+    class function GetValues(AValueType: TLangType; ASorted: boolean = True): TValueArray; static;
 
     // Utility methods
-    class function GetLanguageCodePairList(AValueType: TLangType): TStringList; static;
+    class function GetLanguageCodePairList(AValueType: TLangType; ASorted: boolean = False): TStringList;
     class function GetLanguageDisplayStrings(AValueType: TLangType): TStringList; static;
-    class function GetDisplayNamesFromCodeMap(ACodeMap: TStringList; AValueType: TLangType; Sort: boolean = False): TStringList; static;
+    class function GetDisplayNamesFromCodeMap(ACodeMap: TStringList; AValueType: TLangType; ASorted: boolean = False): TStringList; static;
     class function GetDisplayName(const ACode: string): string; static;
-    class function GetLanguageCodeDisplayPairs(AValueType: TLangType; ASort: boolean = False;
+    class function GetLanguageCodeDisplayPairs(AValueType: TLangType; ASorted: boolean = False;
       AIncludeSpecial: boolean = False): TStringList; static;
     class function ExtractCodeFromItem(const ItemText: string): string; static;
     class function FindIndexByCode(const AStrings: TStrings; const ACode: string): integer; static;
@@ -152,7 +152,7 @@ begin
   end;
 end;
 
-class function TLanguages.GetValues(AValueType: TLangType; ASort: boolean): TValueArray;
+class function TLanguages.GetValues(AValueType: TLangType; ASorted: boolean): TValueArray;
 var
   i: integer;
   Fiat, Crypto: TValueArray;
@@ -178,7 +178,7 @@ begin
       SetLength(Result, 0);
   end;
 
-  if ASort then
+  if ASorted then
     SortValues(Result);
 end;
 
@@ -186,7 +186,7 @@ end;
 
 {%Region -fold [TLanguages - Utility Methods]}
 
-class function TLanguages.GetLanguageCodePairList(AValueType: TLangType): TStringList;
+class function TLanguages.GetLanguageCodePairList(AValueType: TLangType; ASorted: boolean = False): TStringList;
 var
   Langs: TValueArray;
   i: integer;
@@ -194,9 +194,11 @@ begin
   Result := TStringList.Create;
   Result.TrailingLineBreak := False;
   try
-    Langs := GetValues(AValueType, False);
+    Langs := GetValues(AValueType);
     for i := 0 to High(Langs) do
       Result.Add(Langs[i].Code + '=' + Langs[i].Code);
+    if ASorted then
+      Result.Sort;
   except
     Result.Free;
     raise;
@@ -214,7 +216,7 @@ begin
     Result.Add(L.DisplayName + ' (' + L.Code + ')');
 end;
 
-class function TLanguages.GetDisplayNamesFromCodeMap(ACodeMap: TStringList; AValueType: TLangType; Sort: boolean): TStringList;
+class function TLanguages.GetDisplayNamesFromCodeMap(ACodeMap: TStringList; AValueType: TLangType; ASorted: boolean): TStringList;
 var
   Langs: TValueArray;
   LangMap: TStringList;
@@ -273,7 +275,7 @@ begin
             OthersList.Add(DisplayString);
         end;
 
-        if Sort then
+        if ASorted then
         begin
           SpecialsList.Sort;
           OthersList.Sort;
@@ -306,14 +308,14 @@ begin
       Exit(Langs[i].DisplayName);
 end;
 
-class function TLanguages.GetLanguageCodeDisplayPairs(AValueType: TLangType; ASort: boolean; AIncludeSpecial: boolean): TStringList;
+class function TLanguages.GetLanguageCodeDisplayPairs(AValueType: TLangType; ASorted: boolean; AIncludeSpecial: boolean): TStringList;
 var
   Langs: TValueArray;
   L: TAppValue;
 begin
   Result := TStringList.Create;
   try
-    Langs := GetValues(AValueType, ASort);
+    Langs := GetValues(AValueType, ASorted);
     for L in Langs do
     begin
       if not AIncludeSpecial and IsSpecialCode(L.Code) then

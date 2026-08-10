@@ -475,8 +475,8 @@ msgstr "Εναλλαγή μεταξύ κατακόρυφης και οριζόν
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
-msgid "Global Hotkeys"
-msgstr "Καθολικές συντομεύσεις πληκτρολογίου"
+msgid "Translate"
+msgstr "Μετάφραση"
 
 #: formsettings.rmousemodeballon
 msgid "Show Balloon Translation"
@@ -921,6 +921,12 @@ msgid "Content Type"
 msgstr "Content Type"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
+msgctxt "tformconfigtrayslate.labelfilllanguages.caption"
+msgid "Fill with default"
+msgstr "Συμπλήρωση με προεπιλογές"
+
+#: tformconfigtrayslate.labelfilltargetlanguages.caption
+msgctxt "tformconfigtrayslate.labelfilltargetlanguages.caption"
 msgid "Fill with default"
 msgstr "Συμπλήρωση με προεπιλογές"
 
@@ -1025,6 +1031,16 @@ msgstr "Όνομα"
 #: tformconfigtrayslate.labelserviceorder.caption
 msgid "Order"
 msgstr "Σειρά"
+
+#: tformconfigtrayslate.labelsort.caption
+msgctxt "tformconfigtrayslate.labelsort.caption"
+msgid "Sort"
+msgstr "Ταξινόμηση"
+
+#: tformconfigtrayslate.labeltargetsort.caption
+msgctxt "tformconfigtrayslate.labeltargetsort.caption"
+msgid "Sort"
+msgstr "Ταξινόμηση"
 
 #: tformconfigtrayslate.labelurl.caption
 msgctxt "tformconfigtrayslate.labelurl.caption"

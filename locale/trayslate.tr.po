@@ -475,8 +475,8 @@ msgstr "Dikey ve yatay düzen arasında geçiş yap"
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
-msgid "Global Hotkeys"
-msgstr "Genel kısayol tuşları"
+msgid "Translate"
+msgstr "Çevir"
 
 #: formsettings.rmousemodeballon
 msgid "Show Balloon Translation"
@@ -921,6 +921,12 @@ msgid "Content Type"
 msgstr "Content Type"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
+msgctxt "tformconfigtrayslate.labelfilllanguages.caption"
+msgid "Fill with default"
+msgstr "Varsayılanla doldur"
+
+#: tformconfigtrayslate.labelfilltargetlanguages.caption
+msgctxt "tformconfigtrayslate.labelfilltargetlanguages.caption"
 msgid "Fill with default"
 msgstr "Varsayılanla doldur"
 
@@ -1025,6 +1031,16 @@ msgstr "Ad"
 #: tformconfigtrayslate.labelserviceorder.caption
 msgid "Order"
 msgstr "Sıra"
+
+#: tformconfigtrayslate.labelsort.caption
+msgctxt "tformconfigtrayslate.labelsort.caption"
+msgid "Sort"
+msgstr "Sırala"
+
+#: tformconfigtrayslate.labeltargetsort.caption
+msgctxt "tformconfigtrayslate.labeltargetsort.caption"
+msgid "Sort"
+msgstr "Sırala"
 
 #: tformconfigtrayslate.labelurl.caption
 msgctxt "tformconfigtrayslate.labelurl.caption"

@@ -475,8 +475,8 @@ msgstr "Comută între aspectul vertical și orizontal"
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
-msgid "Global Hotkeys"
-msgstr "Taste rapide globale"
+msgid "Translate"
+msgstr "Traduce"
 
 #: formsettings.rmousemodeballon
 msgid "Show Balloon Translation"
@@ -921,6 +921,12 @@ msgid "Content Type"
 msgstr "Content Type"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
+msgctxt "tformconfigtrayslate.labelfilllanguages.caption"
+msgid "Fill with default"
+msgstr "Completează cu valorile implicite"
+
+#: tformconfigtrayslate.labelfilltargetlanguages.caption
+msgctxt "tformconfigtrayslate.labelfilltargetlanguages.caption"
 msgid "Fill with default"
 msgstr "Completează cu valorile implicite"
 
@@ -1025,6 +1031,16 @@ msgstr "Nume"
 #: tformconfigtrayslate.labelserviceorder.caption
 msgid "Order"
 msgstr "Ordine"
+
+#: tformconfigtrayslate.labelsort.caption
+msgctxt "tformconfigtrayslate.labelsort.caption"
+msgid "Sort"
+msgstr "Sortează"
+
+#: tformconfigtrayslate.labeltargetsort.caption
+msgctxt "tformconfigtrayslate.labeltargetsort.caption"
+msgid "Sort"
+msgstr "Sortează"
 
 #: tformconfigtrayslate.labelurl.caption
 msgctxt "tformconfigtrayslate.labelurl.caption"

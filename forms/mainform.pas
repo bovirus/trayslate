@@ -3440,6 +3440,8 @@ begin
       ComboValueType.Items.Add(rvaluetype5);
       ComboValueType.Items.Add(rvaluetype6);
       ComboValueType.ItemIndex := Ord(Trans.LangType);
+      LabelSort.Left := LabelFillLanguages.BoundsRect.Right + 10;
+      LabelTargetSort.Left := LabelFillTargetLanguages.BoundsRect.Right + 10;
     end;
   end;
 

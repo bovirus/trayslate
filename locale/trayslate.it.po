@@ -480,8 +480,8 @@ msgstr "Passa dal layout verticale a quello orizzontale e viceversa"
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
-msgid "Global Hotkeys"
-msgstr "Tasti scelta rapida globali"
+msgid "Translate"
+msgstr "Traduci"
 
 #: formsettings.rmousemodeballon
 msgid "Show Balloon Translation"
@@ -928,6 +928,12 @@ msgid "Content Type"
 msgstr "Tipo contenuto"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
+msgctxt "tformconfigtrayslate.labelfilllanguages.caption"
+msgid "Fill with default"
+msgstr "Compila con i valori predefiniti"
+
+#: tformconfigtrayslate.labelfilltargetlanguages.caption
+msgctxt "tformconfigtrayslate.labelfilltargetlanguages.caption"
 msgid "Fill with default"
 msgstr "Compila con i valori predefiniti"
 
@@ -1032,6 +1038,16 @@ msgstr "Nome"
 #: tformconfigtrayslate.labelserviceorder.caption
 msgid "Order"
 msgstr "Ordine"
+
+#: tformconfigtrayslate.labelsort.caption
+msgctxt "tformconfigtrayslate.labelsort.caption"
+msgid "Sort"
+msgstr "Ordina"
+
+#: tformconfigtrayslate.labeltargetsort.caption
+msgctxt "tformconfigtrayslate.labeltargetsort.caption"
+msgid "Sort"
+msgstr "Ordina"
 
 #: tformconfigtrayslate.labelurl.caption
 msgctxt "tformconfigtrayslate.labelurl.caption"

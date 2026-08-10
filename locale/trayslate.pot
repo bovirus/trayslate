@@ -383,7 +383,7 @@ msgstr ""
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
-msgid "Global Hotkeys"
+msgid "Translate"
 msgstr ""
 
 #: formsettings.rmousemodeballon
@@ -809,6 +809,12 @@ msgid "Content Type"
 msgstr ""
 
 #: tformconfigtrayslate.labelfilllanguages.caption
+msgctxt "tformconfigtrayslate.labelfilllanguages.caption"
+msgid "Fill with default"
+msgstr ""
+
+#: tformconfigtrayslate.labelfilltargetlanguages.caption
+msgctxt "tformconfigtrayslate.labelfilltargetlanguages.caption"
 msgid "Fill with default"
 msgstr ""
 
@@ -910,6 +916,16 @@ msgstr ""
 
 #: tformconfigtrayslate.labelserviceorder.caption
 msgid "Order"
+msgstr ""
+
+#: tformconfigtrayslate.labelsort.caption
+msgctxt "tformconfigtrayslate.labelsort.caption"
+msgid "Sort"
+msgstr ""
+
+#: tformconfigtrayslate.labeltargetsort.caption
+msgctxt "tformconfigtrayslate.labeltargetsort.caption"
+msgid "Sort"
 msgstr ""
 
 #: tformconfigtrayslate.labelurl.caption

@@ -43,6 +43,9 @@ type
   TformConfigTrayslate = class(TForm)
     AClearIcon: TAction;
     ASaveIconAs: TAction;
+    LabelFillTargetLanguages: TLabel;
+    LabelSort: TLabel;
+    LabelTargetSort: TLabel;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     Popup: TPopupMenu;
@@ -160,6 +163,9 @@ type
     SynScriptResponse: TSynEdit;
     procedure AClearIconExecute(Sender: TObject);
     procedure ASaveIconAsExecute(Sender: TObject);
+    procedure GroupLanguagesResize(Sender: TObject);
+    procedure GroupLanguagesTargetResize(Sender: TObject);
+    procedure LabelSortClick(Sender: TObject);
     procedure ReloadConfigsExecute(Sender: TObject);
     procedure BtnResponseHelpClick(Sender: TObject);
     procedure BtnScriptHelpClick(Sender: TObject);
@@ -578,6 +584,67 @@ begin
   end;
 end;
 
+procedure TformConfigTrayslate.GroupLanguagesResize(Sender: TObject);
+begin
+  LabelSort.Left := LabelFillLanguages.BoundsRect.Right + 10;
+end;
+
+procedure TformConfigTrayslate.GroupLanguagesTargetResize(Sender: TObject);
+begin
+  LabelTargetSort.Left := LabelFillTargetLanguages.BoundsRect.Right + 10;
+end;
+
+procedure TformConfigTrayslate.LabelFillLanguagesClick(Sender: TObject);
+var
+  List: TStringList;
+  AMemo: TMemo;
+begin
+  if Sender = LabelFillLanguages then
+    AMemo := MemoLanguages
+  else
+    AMemo := MemoLanguagesTarget;
+
+  if AMemo.Lines.Count > 0 then
+  begin
+    if MessageDlg(rclearlanguages, mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      Exit;
+
+    AMemo.Clear;
+  end;
+
+  List := TLanguages.GetLanguageCodePairList(TLangType(ComboValueType.ItemIndex), True);
+  try
+    AMemo.Lines.Assign(List);
+  finally
+    List.Free;
+  end;
+end;
+
+procedure TformConfigTrayslate.LabelSortClick(Sender: TObject);
+var
+  sl: TStringList;
+  AMemo: TMemo;
+begin
+  if Sender = LabelSort then
+    AMemo := MemoLanguages
+  else
+    AMemo := MemoLanguagesTarget;
+
+  sl := TStringList.Create;
+  try
+    sl.Assign(AMemo.Lines);
+    sl.Sort;
+    AMemo.Lines.BeginUpdate;
+    try
+      AMemo.Lines.Assign(sl);
+    finally
+      AMemo.Lines.EndUpdate;
+    end;
+  finally
+    sl.Free;
+  end;
+end;
+
 procedure TformConfigTrayslate.BtnCloseClick(Sender: TObject);
 begin
   Close;
@@ -641,26 +708,6 @@ procedure TformConfigTrayslate.ImagePreviewMouseUp(Sender: TObject; Button: TMou
 begin
   if Button = mbMiddle then
     AClearIcon.Execute;
-end;
-
-procedure TformConfigTrayslate.LabelFillLanguagesClick(Sender: TObject);
-var
-  List: TStringList;
-begin
-  if MemoLanguages.Lines.Count > 0 then
-  begin
-    if MessageDlg(rclearlanguages, mtConfirmation, [mbYes, mbNo], 0) = mrNo then
-      Exit;
-
-    MemoLanguages.Clear;
-  end;
-
-  List := TLanguages.GetLanguageCodePairList(TLangType(ComboValueType.ItemIndex));
-  try
-    MemoLanguages.Lines.Assign(List);
-  finally
-    List.Free;
-  end;
 end;
 
 procedure TformConfigTrayslate.CustomEditEnter(Sender: TObject);

@@ -159,11 +159,11 @@ object formConfigTrayslate: TformConfigTrayslate
     Height = 559
     Top = 41
     Width = 590
-    ActivePage = PageService
+    ActivePage = PageLanguagesTarget
     Align = alClient
     BorderSpacing.Bottom = 35
     BorderSpacing.Around = 5
-    TabIndex = 0
+    TabIndex = 6
     TabOrder = 1
     object PageService: TTabSheet
       Caption = 'Service'
@@ -2447,6 +2447,7 @@ object formConfigTrayslate: TformConfigTrayslate
         ClientWidth = 568
         ParentBackground = False
         TabOrder = 0
+        OnResize = GroupLanguagesResize
         object MemoLanguages: TMemo
           Left = 5
           Height = 381
@@ -2527,6 +2528,19 @@ object formConfigTrayslate: TformConfigTrayslate
           AutoSize = False
           Caption = 'Value Type'
         end
+        object LabelSort: TLabel
+          Cursor = crHandPoint
+          Left = 96
+          Height = 15
+          Top = 96
+          Width = 21
+          Caption = 'Sort'
+          Font.Color = clBlue
+          Font.Style = [fsUnderline]
+          ParentFont = False
+          WordWrap = True
+          OnClick = LabelSortClick
+        end
       end
     end
     object PageLanguagesTarget: TTabSheet
@@ -2545,13 +2559,14 @@ object formConfigTrayslate: TformConfigTrayslate
         ClientWidth = 568
         ParentBackground = False
         TabOrder = 0
+        OnResize = GroupLanguagesTargetResize
         object MemoLanguagesTarget: TMemo
           Left = 5
-          Height = 446
-          Top = 50
+          Height = 428
+          Top = 68
           Width = 543
           Align = alClient
-          BorderSpacing.Top = 45
+          BorderSpacing.Top = 63
           BorderSpacing.Right = 15
           BorderSpacing.Around = 5
           ScrollBars = ssAutoBoth
@@ -2570,6 +2585,32 @@ object formConfigTrayslate: TformConfigTrayslate
           Color = clInfoBk
           ParentColor = False
           Transparent = False
+        end
+        object LabelTargetSort: TLabel
+          Cursor = crHandPoint
+          Left = 96
+          Height = 15
+          Top = 48
+          Width = 21
+          Caption = 'Sort'
+          Font.Color = clBlue
+          Font.Style = [fsUnderline]
+          ParentFont = False
+          WordWrap = True
+          OnClick = LabelSortClick
+        end
+        object LabelFillTargetLanguages: TLabel
+          Cursor = crHandPoint
+          Left = 8
+          Height = 15
+          Top = 48
+          Width = 81
+          Caption = 'Fill with default'
+          Font.Color = clBlue
+          Font.Style = [fsUnderline]
+          ParentFont = False
+          WordWrap = True
+          OnClick = LabelFillLanguagesClick
         end
       end
     end

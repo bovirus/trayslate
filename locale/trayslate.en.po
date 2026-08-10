@@ -479,8 +479,8 @@ msgstr "Switch between vertical and horizontal layout"
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
-msgid "Global Hotkeys"
-msgstr "Global Hotkeys"
+msgid "Translate"
+msgstr "Translate"
 
 #: formsettings.rmousemodeballon
 msgid "Show Balloon Translation"
@@ -925,6 +925,12 @@ msgid "Content Type"
 msgstr "Content Type"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
+msgctxt "tformconfigtrayslate.labelfilllanguages.caption"
+msgid "Fill with default"
+msgstr "Fill with default"
+
+#: tformconfigtrayslate.labelfilltargetlanguages.caption
+msgctxt "tformconfigtrayslate.labelfilltargetlanguages.caption"
 msgid "Fill with default"
 msgstr "Fill with default"
 
@@ -1029,6 +1035,16 @@ msgstr "Name"
 #: tformconfigtrayslate.labelserviceorder.caption
 msgid "Order"
 msgstr "Order"
+
+#: tformconfigtrayslate.labelsort.caption
+msgctxt "tformconfigtrayslate.labelsort.caption"
+msgid "Sort"
+msgstr "Sort"
+
+#: tformconfigtrayslate.labeltargetsort.caption
+msgctxt "tformconfigtrayslate.labeltargetsort.caption"
+msgid "Sort"
+msgstr "Sort"
 
 #: tformconfigtrayslate.labelurl.caption
 msgctxt "tformconfigtrayslate.labelurl.caption"

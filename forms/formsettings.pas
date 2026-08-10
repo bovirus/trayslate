@@ -318,7 +318,7 @@ resourcestring
   rdefaultsettings = 'Are you sure you want to restore default settings?';
   rdefaulthotkeys = 'Are you sure you want to restore default hotkeys?';
 
-  rglobal = 'Global Hotkeys';
+  rglobal = 'Translate';
   rfast = 'Quick settings';
   rrecent = 'Recent Language Pairs';
 

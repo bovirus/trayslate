@@ -478,8 +478,8 @@ msgstr "Chuyển đổi giữa bố cục dọc và ngang"
 
 #: formsettings.rglobal
 msgctxt "formsettings.rglobal"
-msgid "Global Hotkeys"
-msgstr "Phím nóng toàn cầu"
+msgid "Translate"
+msgstr "Dịch"
 
 #: formsettings.rmousemodeballon
 msgid "Show Balloon Translation"
@@ -924,6 +924,12 @@ msgid "Content Type"
 msgstr "Loại nội dung"
 
 #: tformconfigtrayslate.labelfilllanguages.caption
+msgctxt "tformconfigtrayslate.labelfilllanguages.caption"
+msgid "Fill with default"
+msgstr "Điền mặc định"
+
+#: tformconfigtrayslate.labelfilltargetlanguages.caption
+msgctxt "tformconfigtrayslate.labelfilltargetlanguages.caption"
 msgid "Fill with default"
 msgstr "Điền mặc định"
 
@@ -1028,6 +1034,16 @@ msgstr "Tên"
 #: tformconfigtrayslate.labelserviceorder.caption
 msgid "Order"
 msgstr "Đặt hàng"
+
+#: tformconfigtrayslate.labelsort.caption
+msgctxt "tformconfigtrayslate.labelsort.caption"
+msgid "Sort"
+msgstr "Sắp xếp"
+
+#: tformconfigtrayslate.labeltargetsort.caption
+msgctxt "tformconfigtrayslate.labeltargetsort.caption"
+msgid "Sort"
+msgstr "Sắp xếp"
 
 #: tformconfigtrayslate.labelurl.caption
 msgctxt "tformconfigtrayslate.labelurl.caption"
