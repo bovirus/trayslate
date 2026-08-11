@@ -2839,36 +2839,6 @@ var
   List: TStringList;
   Id: integer;
 begin
-  // Fill ComboSource with display names
-  List := TLanguages.GetDisplayNamesFromCodeMap(Trans.Languages, Trans.LangType, True);
-  try
-    ComboSource.Items.Assign(List); // Text with large letter
-  finally
-    List.Free;
-  end;
-end;
-
-procedure TFormTrayslate.UpdateProxyState;
-begin
-  // Disable proxy if not in the proxied list
-  if ProxiedConfigs.Count > 0 then
-  begin
-    if not ProxiedConfigs.Contains(FConfigFile) then
-      FTrans.ProxyEnabled := False
-    else
-      FTrans.ProxyEnabled := FTrans.ServiceProxy;
-    if not ProxiedConfigs.Contains(FConfigLangDetect) then
-      FTransDetect.ProxyEnabled := False
-    else
-      FTransDetect.ProxyEnabled := FTransDetect.ServiceProxy;
-  end;
-end;
-
-procedure TFormTrayslate.UpdateComboState(ASetDefault: boolean = True);
-var
-  List: TStringList;
-  Id: integer;
-begin
   UpdateInputState(False, False);
   try
     // Fill ComboSource with display names
@@ -2916,11 +2886,16 @@ begin
       FLangSource := Trans.LangSource;
     end;
 
-  if ASetDefault then
-  begin
-    // Set default or saved languages
-    if LangSource <> string.Empty then
-      Trans.LangSource := LangSource
+    // Fill ComboTarget with display names
+    if (Assigned(Trans.LanguagesTarget)) and (Trans.LanguagesTarget.Count > 0) then
+    begin
+      List := TLanguages.GetDisplayNamesFromCodeMap(Trans.LanguagesTarget, Trans.LangType, True);
+      try
+        ComboTarget.Items.Assign(List); // Text with large letter
+      finally
+        List.Free;
+      end;
+    end
     else
       ComboTarget.Items.Assign(ComboSource.Items); // Use source if target list empty
 
@@ -3027,8 +3002,18 @@ begin
       end;
     end;
 
-  if Visible and Focused and Active and MemoSource.Visible and MemoSource.CanFocus and MemoSource.CanSetFocus then
-    MemoSource.SetFocus;
+    // Set combobox selection by language code
+    TLanguages.SetComboBoxByCode(ComboSource, Trans.LangSource);
+    TLanguages.SetComboBoxByCode(ComboTarget, Trans.LangTarget);
+
+    if ComboTarget.ItemIndex = -1 then
+      ComboTarget.Text := string.Empty;
+
+    if Visible and Focused and Active and MemoSource.Visible and MemoSource.CanFocus and MemoSource.CanSetFocus then
+      MemoSource.SetFocus;
+  finally
+    UpdateInputState(True, False);
+  end;
 end;
 
 procedure TFormTrayslate.SetDefaultSettings;
@@ -3766,7 +3751,8 @@ begin
   begin
     KeyHook.Enabled := False;
     MouseHook.Enabled := False;
-    UnregisterHotKeys;
+    if ReenableHotKeys then
+      UnregisterHotKeys;
   end;
 end;
 
