@@ -264,11 +264,11 @@ type
     procedure aAboutExecute(Sender: TObject);
     procedure aExitExecute(Sender: TObject);
     procedure aFastAllowHotKeysExecute(Sender: TObject);
+    procedure aFastEnableMouseModeExecute(Sender: TObject);
+    procedure aFastMouseModeCtrlExecute(Sender: TObject);
     procedure aFastAutoAddLangPairsExecute(Sender: TObject);
     procedure aFastAutoSwapExecute(Sender: TObject);
-    procedure aFastEnableMouseModeExecute(Sender: TObject);
     procedure aFastHideControlsExecute(Sender: TObject);
-    procedure aFastMouseModeCtrlExecute(Sender: TObject);
     procedure aFastRealTimeExecute(Sender: TObject);
     procedure aFastVerticalSplitExecute(Sender: TObject);
     procedure aFastAutoCopyExecute(Sender: TObject);
@@ -558,7 +558,7 @@ type
     function UpdateSourceLanguage(const Lang: string): string;
     function UpdateTargetLanguage(const Lang: string): string;
     function UpdatePairLanguage(const Pair: string): string;
-    procedure UpdateInputState(AEnabled: boolean);
+    procedure UpdateInputState(AEnabled: boolean; ReenableHotKeys: boolean = True);
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
     function GetParameterValue(AName: string; out ResultOk: boolean): string;
@@ -1894,6 +1894,16 @@ begin
   AllowHotKeys := aFastAllowHotKeys.Checked;
 end;
 
+procedure TformTrayslate.aFastEnableMouseModeExecute(Sender: TObject);
+begin
+  EnableMouseMode := aFastEnableMouseMode.Checked;
+end;
+
+procedure TformTrayslate.aFastMouseModeCtrlExecute(Sender: TObject);
+begin
+  MouseModeCtrl := aFastMouseModeCtrl.Checked;
+end;
+
 procedure TformTrayslate.aFastAutoAddLangPairsExecute(Sender: TObject);
 begin
   AutoAddLangPairs := aFastAutoAddLangPairs.Checked;
@@ -1904,11 +1914,6 @@ begin
   AutoSwap := aFastAutoSwap.Checked;
 end;
 
-procedure TformTrayslate.aFastEnableMouseModeExecute(Sender: TObject);
-begin
-  EnableMouseMode := aFastEnableMouseMode.Checked;
-end;
-
 procedure TformTrayslate.aFastHideControlsExecute(Sender: TObject);
 begin
   HideControls := aFastHideControls.Checked;
@@ -1917,11 +1922,6 @@ end;
 procedure TformTrayslate.aFastAutoHeightExecute(Sender: TObject);
 begin
   AutoHeight := aFastAutoHeight.Checked;
-end;
-
-procedure TformTrayslate.aFastMouseModeCtrlExecute(Sender: TObject);
-begin
-  MouseModeCtrl := aFastMouseModeCtrl.Checked;
 end;
 
 procedure TformTrayslate.aFastRealTimeExecute(Sender: TObject);
@@ -2846,128 +2846,75 @@ begin
   finally
     List.Free;
   end;
+end;
 
-  // Check if current ComboSource text is still valid
-  if ComboSource.Items.IndexOf(ComboSource.Text) < 0 then
+procedure TFormTrayslate.UpdateProxyState;
+begin
+  // Disable proxy if not in the proxied list
+  if ProxiedConfigs.Count > 0 then
   begin
-    if LangSource.Length < MAX_LANG_LENGTH then
-      Id := Trans.Languages.FindSubstringIndex(LangSource)
+    if not ProxiedConfigs.Contains(FConfigFile) then
+      FTrans.ProxyEnabled := False
     else
-      Id := Trans.Languages.IndexOfName(LangSource);
-    if (Id >= 0) and (Id < FLanguages.Count) then
-    begin
-      ComboSource.Text := FLanguages.ValueFromIndex[Id];
-      ChangeSourceLang(ComboSource.Text, False);
-    end
+      FTrans.ProxyEnabled := FTrans.ServiceProxy;
+    if not ProxiedConfigs.Contains(FConfigLangDetect) then
+      FTransDetect.ProxyEnabled := False
     else
-    if (Trans.Languages.Count = 1) then
-    begin
-      ComboSource.ItemIndex := 0; // Single item as default
-      ChangeSourceLang(ComboSource.Text, False);
-    end;
+      FTransDetect.ProxyEnabled := FTransDetect.ServiceProxy;
   end;
-  // If the text is not in the list, clear it
-  if ComboSource.Items.IndexOf(ComboSource.Text) < 0 then
-  begin
-    ComboSource.Text := string.Empty; // Clear if not in new list
-    LangSource := string.Empty;
-    Trans.LangSource := string.Empty;
-  end
-  else
-  begin
-    // Update the matched language in case of case change
-    id := Trans.Languages.FindEqualIndex(FLangSource);
-    if Id < 0 then
-      Trans.LangSource := Trans.Languages.Values[FLangSource]
-    else
-      Trans.LangSource := Trans.Languages.ValueFromIndex[Id];
-    FLangSource := Trans.LangSource;
-  end;
+end;
 
-  // Fill ComboTarget with display names
-  if (Assigned(Trans.LanguagesTarget)) and (Trans.LanguagesTarget.Count > 0) then
-  begin
-    List := TLanguages.GetDisplayNamesFromCodeMap(Trans.LanguagesTarget, Trans.LangType, True);
+procedure TFormTrayslate.UpdateComboState(ASetDefault: boolean = True);
+var
+  List: TStringList;
+  Id: integer;
+begin
+  UpdateInputState(False, False);
+  try
+    // Fill ComboSource with display names
+    List := TLanguages.GetDisplayNamesFromCodeMap(Trans.Languages, Trans.LangType, True);
     try
-      ComboTarget.Items.Assign(List); // Text with large letter
+      ComboSource.Items.Assign(List); // Text with large letter
     finally
       List.Free;
     end;
-  end
-  else
-    ComboTarget.Items.Assign(ComboSource.Items); // Use source if target list empty
 
-  // Check if current ComboTarget text is still valid
-  if ComboTarget.Items.IndexOf(ComboTarget.Text) < 0 then
-  begin
-    // If there are target languages
-    if Trans.LanguagesTarget.Count > 0 then
+    // Check if current ComboSource text is still valid
+    if ComboSource.Items.IndexOf(ComboSource.Text) < 0 then
     begin
-      if LangTarget.Length < MAX_LANG_LENGTH then
-        Id := Trans.LanguagesTarget.FindSubstringIndex(LangTarget)
+      if LangSource.Length < MAX_LANG_LENGTH then
+        Id := Trans.Languages.FindSubstringIndex(LangSource)
       else
-        Id := Trans.LanguagesTarget.IndexOfName(LangTarget);
-      if (Id >= 0) and (Id < FLanguagesTarget.Count) then
-      begin
-        ComboTarget.Text := FLanguagesTarget.ValueFromIndex[Id];
-        ChangeTargetLang(ComboTarget.Text, False);
-      end
-      else
-      if (Trans.LanguagesTarget.Count = 1) then
-      begin
-        ComboTarget.ItemIndex := 0; // Single item as default
-        ChangeTargetLang(ComboTarget.Text, False);
-      end;
-    end
-    else
-    begin
-      // If the languages are identical to sources
-      if LangTarget.Length < MAX_LANG_LENGTH then
-        Id := Trans.Languages.FindSubstringIndex(LangTarget)
-      else
-        Id := Trans.Languages.IndexOfName(LangTarget);
+        Id := Trans.Languages.IndexOfName(LangSource);
       if (Id >= 0) and (Id < FLanguages.Count) then
       begin
-        ComboTarget.Text := FLanguages.ValueFromIndex[Id];
-        ChangeTargetLang(ComboTarget.Text, False);
+        ComboSource.Text := FLanguages.ValueFromIndex[Id];
+        ChangeSourceLang(ComboSource.Text, False);
       end
       else
       if (Trans.Languages.Count = 1) then
       begin
-        ComboTarget.ItemIndex := 0; // Single item as default
-        ChangeTargetLang(ComboTarget.Text, False);
+        ComboSource.ItemIndex := 0; // Single item as default
+        ChangeSourceLang(ComboSource.Text, False);
       end;
     end;
-  end;
-
-  // If the text is not in the list, clear it
-  if ComboTarget.Items.IndexOf(ComboTarget.Text) < 0 then
-  begin
-    ComboTarget.Text := string.Empty; // Clear if not in new list
-    LangTarget := string.Empty;
-    Trans.LangTarget := string.Empty;
-  end
-  else
-  begin
-    // Update the matched language in case of case change
-    if Trans.LanguagesTarget.Count > 0 then
+    // If the text is not in the list, clear it
+    if ComboSource.Items.IndexOf(ComboSource.Text) < 0 then
     begin
-      id := Trans.LanguagesTarget.FindEqualIndex(FLangTarget);
-      if Id < 0 then
-        Trans.LangTarget := Trans.LanguagesTarget.Values[FLangTarget]
-      else
-        Trans.LangTarget := Trans.LanguagesTarget.ValueFromIndex[Id];
+      ComboSource.Text := string.Empty; // Clear if not in new list
+      LangSource := string.Empty;
+      Trans.LangSource := string.Empty;
     end
     else
     begin
-      id := Trans.Languages.FindEqualIndex(FLangTarget);
+      // Update the matched language in case of case change
+      id := Trans.Languages.FindEqualIndex(FLangSource);
       if Id < 0 then
-        Trans.LangTarget := Trans.Languages.Values[FLangTarget]
+        Trans.LangSource := Trans.Languages.Values[FLangSource]
       else
-        Trans.LangTarget := Trans.Languages.ValueFromIndex[Id];
+        Trans.LangSource := Trans.Languages.ValueFromIndex[Id];
+      FLangSource := Trans.LangSource;
     end;
-    FLangTarget := Trans.LangTarget;
-  end;
 
   if ASetDefault then
   begin
@@ -2975,37 +2922,110 @@ begin
     if LangSource <> string.Empty then
       Trans.LangSource := LangSource
     else
-    begin
-      ComboSource.ItemIndex := 0; // First item as default
-      ChangeSourceLang(ComboSource.Text);
-    end;
+      ComboTarget.Items.Assign(ComboSource.Items); // Use source if target list empty
 
-    if LangTarget <> string.Empty then
-      Trans.LangTarget := LangTarget
-    else
+    // Check if current ComboTarget text is still valid
+    if ComboTarget.Items.IndexOf(ComboTarget.Text) < 0 then
     begin
-      // if system language in lists
-      if (((FLanguagesTarget.Count > 0) and (FLanguagesTarget.FindIndex('(' + Language + ')') >= 0)) or
-        ((FLanguagesTarget.Count = 0) and (FLanguages.FindIndex('(' + Language + ')') >= 0))) then
+      // If there are target languages
+      if Trans.LanguagesTarget.Count > 0 then
       begin
-        FTrans.LangTarget := Language; // Default system language
-        FLangTarget := Language;
+        if LangTarget.Length < MAX_LANG_LENGTH then
+          Id := Trans.LanguagesTarget.FindSubstringIndex(LangTarget)
+        else
+          Id := Trans.LanguagesTarget.IndexOfName(LangTarget);
+        if (Id >= 0) and (Id < FLanguagesTarget.Count) then
+        begin
+          ComboTarget.Text := FLanguagesTarget.ValueFromIndex[Id];
+          ChangeTargetLang(ComboTarget.Text, False);
+        end
+        else
+        if (Trans.LanguagesTarget.Count = 1) then
+        begin
+          ComboTarget.ItemIndex := 0; // Single item as default
+          ChangeTargetLang(ComboTarget.Text, False);
+        end;
       end
       else
-      if (FLanguagesTarget.Count = 1) then
       begin
-        ComboTarget.ItemIndex := 0; // Single item as default
-        ChangeTargetLang(ComboTarget.Text);
+        // If the languages are identical to sources
+        if LangTarget.Length < MAX_LANG_LENGTH then
+          Id := Trans.Languages.FindSubstringIndex(LangTarget)
+        else
+          Id := Trans.Languages.IndexOfName(LangTarget);
+        if (Id >= 0) and (Id < FLanguages.Count) then
+        begin
+          ComboTarget.Text := FLanguages.ValueFromIndex[Id];
+          ChangeTargetLang(ComboTarget.Text, False);
+        end
+        else
+        if (Trans.Languages.Count = 1) then
+        begin
+          ComboTarget.ItemIndex := 0; // Single item as default
+          ChangeTargetLang(ComboTarget.Text, False);
+        end;
       end;
     end;
-  end;
 
-  // Set combobox selection by language code
-  TLanguages.SetComboBoxByCode(ComboSource, Trans.LangSource);
-  TLanguages.SetComboBoxByCode(ComboTarget, Trans.LangTarget);
+    // If the text is not in the list, clear it
+    if ComboTarget.Items.IndexOf(ComboTarget.Text) < 0 then
+    begin
+      ComboTarget.Text := string.Empty; // Clear if not in new list
+      LangTarget := string.Empty;
+      Trans.LangTarget := string.Empty;
+    end
+    else
+    begin
+      // Update the matched language in case of case change
+      if Trans.LanguagesTarget.Count > 0 then
+      begin
+        id := Trans.LanguagesTarget.FindEqualIndex(FLangTarget);
+        if Id < 0 then
+          Trans.LangTarget := Trans.LanguagesTarget.Values[FLangTarget]
+        else
+          Trans.LangTarget := Trans.LanguagesTarget.ValueFromIndex[Id];
+      end
+      else
+      begin
+        id := Trans.Languages.FindEqualIndex(FLangTarget);
+        if Id < 0 then
+          Trans.LangTarget := Trans.Languages.Values[FLangTarget]
+        else
+          Trans.LangTarget := Trans.Languages.ValueFromIndex[Id];
+      end;
+      FLangTarget := Trans.LangTarget;
+    end;
 
-  if ComboTarget.ItemIndex = -1 then
-    ComboTarget.Text := string.Empty;
+    if ASetDefault then
+    begin
+      // Set default or saved languages
+      if LangSource <> string.Empty then
+        Trans.LangSource := LangSource
+      else
+      begin
+        ComboSource.ItemIndex := 0; // First item as default
+        ChangeSourceLang(ComboSource.Text);
+      end;
+
+      if LangTarget <> string.Empty then
+        Trans.LangTarget := LangTarget
+      else
+      begin
+        // if system language in lists
+        if (((FLanguagesTarget.Count > 0) and (FLanguagesTarget.FindIndex('(' + Language + ')') >= 0)) or
+          ((FLanguagesTarget.Count = 0) and (FLanguages.FindIndex('(' + Language + ')') >= 0))) then
+        begin
+          FTrans.LangTarget := Language; // Default system language
+          FLangTarget := Language;
+        end
+        else
+        if (FLanguagesTarget.Count = 1) then
+        begin
+          ComboTarget.ItemIndex := 0; // Single item as default
+          ChangeTargetLang(ComboTarget.Text);
+        end;
+      end;
+    end;
 
   if Visible and Focused and Active and MemoSource.Visible and MemoSource.CanFocus and MemoSource.CanSetFocus then
     MemoSource.SetFocus;
@@ -3731,13 +3751,16 @@ begin
   end;
 end;
 
-procedure TFormTrayslate.UpdateInputState(AEnabled: boolean);
+procedure TFormTrayslate.UpdateInputState(AEnabled: boolean; ReenableHotKeys: boolean = True);
 begin
+  if not Assigned(KeyHook) or not Assigned(MouseHook) then Exit;
+
   if AEnabled then
   begin
     KeyHook.Enabled := FEnableMouseMode;
     MouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
-    RegisterHotKeys;
+    if ReenableHotKeys then
+      RegisterHotKeys;
   end
   else
   begin
