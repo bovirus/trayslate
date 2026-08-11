@@ -13,6 +13,7 @@ object formTrayslate: TformTrayslate
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnHide = FormHide
   OnKeyDown = FormKeyDown
   OnResize = FormResize
   OnShow = FormShow

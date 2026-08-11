@@ -52,7 +52,8 @@ uses
   hotkeyhelper,
   stringshelper,
   clipboardhelper,
-  oneshothint;
+  oneshothint,
+  textdroptarget;
 
 type
 
@@ -230,6 +231,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormHide(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormActivate(Sender: TObject);
     procedure FormResize(Sender: TObject);
@@ -240,6 +242,7 @@ type
     procedure ApplicationPropShowHint(var HintStr: string; var CanShow: boolean; var HintInfo: THintInfo);
     procedure ApplicationPropException(Sender: TObject; E: Exception);
     procedure PopupRecentPairPopup(Sender: TObject);
+    procedure OnTextDroppedHandler(Sender: TObject; const AText: string);
     procedure ScreenActiveFormChanged(Sender: TObject);
     procedure aConfigEditorExecute(Sender: TObject);
     procedure aSettingsExecute(Sender: TObject);
@@ -335,7 +338,8 @@ type
     FTransDetect: TTranslate;
     FTranslateThread: TTranslateThread;
     FTranslateTarget: TWinControl;
-    FormSmallIcon: TIcon;
+    FFormSmallIcon: TIcon;
+    FDropTarget: TTextDropTarget;
     FRawTranslate: string;
     FActiveThreads: TList;
     FProxy: TProxy;
@@ -537,6 +541,7 @@ type
     procedure UnregisterHotKeys;
     procedure ReleaseHotKeyModifiers(const AHotKey: THotKeyData);
     {$ENDIF}
+
     // Methods
     procedure LoadConfig(ASetDefault: boolean = True; AUpdateComboState: boolean = True);
     procedure LoadTranslate;
@@ -567,6 +572,7 @@ type
     procedure ClosePopupAsync(Data: PtrInt);
     procedure ShowButton(const SourceText: string; X: integer = 0; Y: integer = 0);
     procedure SetVerticalMode;
+    procedure DestroyWnd; override;
     // Translate Methods
     function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
     procedure ThreadDone(Sender: TObject);
@@ -754,7 +760,13 @@ begin
   FBlockTrayUpdate := False;
   FProcessingPairClick := False;
   FNeedRebuildPairs := False;
-  FormSmallIcon := TIcon.Create;
+  FFormSmallIcon := TIcon.Create;
+
+  // Drop Target
+  FDropTarget := TTextDropTarget.Create(Self);
+  FDropTarget.Target := MemoSource;
+  FDropTarget.InsertText := True;
+  FDropTarget.OnTextDropped := @OnTextDroppedHandler;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -880,66 +892,69 @@ begin
   FreeAndNil(FKeyHook);
   {$ENDIF}
 
-  // Wait for the thread
-  //if Assigned(FActiveThreads) then
-  //begin
-  //  for i := FActiveThreads.Count - 1 downto 0 do
-  //  begin
-  //    Th := TTranslateThread(FActiveThreads[i]);
-  //    if Assigned(Th) and not Th.Finished and not Th.IsTerminated then Th.WaitFor;
-  //    FActiveThreads.Delete(i);
-  //  end;
-  //  FreeAndNil(FActiveThreads);
-  //end;
+  try
+    // Wait for the thread
+    //if Assigned(FActiveThreads) then
+    //begin
+    //  for i := FActiveThreads.Count - 1 downto 0 do
+    //  begin
+    //    Th := TTranslateThread(FActiveThreads[i]);
+    //    if Assigned(Th) and not Th.Finished and not Th.IsTerminated then Th.WaitFor;
+    //    FActiveThreads.Delete(i);
+    //  end;
+    //  FreeAndNil(FActiveThreads);
+    //end;
 
-  // Wait for all active translation threads to finish, with a single global timeout.
-  if Assigned(FActiveThreads) then
-  begin
-    TotalDeadline := TOS.GetTickCountXp + THREADS_WAIT_TIME;
-    repeat
-      // Remove finished threads from the list (iterate backwards)
-      for i := FActiveThreads.Count - 1 downto 0 do
-      begin
-        Th := TTranslateThread(FActiveThreads[i]);
-        if not Assigned(Th) or Th.Finished or Th.IsTerminated then
-          FActiveThreads.Delete(i);
-      end;
-      // All threads have finished – exit the wait loop
-      if FActiveThreads.Count = 0 then Break;
-      // Total timeout expired – abandon any remaining threads
-      if TOS.GetTickCountXp >= TotalDeadline then
-      begin
-        {$IFDEF DEBUG}
+    // Wait for all active translation threads to finish, with a single global timeout.
+    if Assigned(FActiveThreads) then
+    begin
+      TotalDeadline := TOS.GetTickCountXp + THREADS_WAIT_TIME;
+      repeat
+        // Remove finished threads from the list (iterate backwards)
+        for i := FActiveThreads.Count - 1 downto 0 do
+        begin
+          Th := TTranslateThread(FActiveThreads[i]);
+          if not Assigned(Th) or Th.Finished or Th.IsTerminated then
+            FActiveThreads.Delete(i);
+        end;
+        // All threads have finished – exit the wait loop
+        if FActiveThreads.Count = 0 then Break;
+        // Total timeout expired – abandon any remaining threads
+        if TOS.GetTickCountXp >= TotalDeadline then
+        begin
+          {$IFDEF DEBUG}
         UseHeapTrace := False;
-        {$ENDIF}
-        Break;
-      end;
-      // Keep the message loop alive so threads can post Synchronize calls
-      Application.ProcessMessages;
-      Sleep(1);
-    until False;
+          {$ENDIF}
+          Break;
+        end;
+        // Keep the message loop alive so threads can post Synchronize calls
+        Application.ProcessMessages;
+        Sleep(1);
+      until False;
 
-    // Any threads still left are stuck; they will be reclaimed by the OS when the process exits.
-    FreeAndNil(FActiveThreads);
+      // Any threads still left are stuck; they will be reclaimed by the OS when the process exits.
+      FreeAndNil(FActiveThreads);
+    end;
+  finally
+    if FFormSettingsLoaded then
+      SaveFormSettings(Self);
+
+    FreeAndNil(FLangPairs);
+    FreeAndNil(FUserParameters);
+    FreeAndNil(FProxiedConfigs);
+    FreeAndNil(FLanguages);
+    FreeAndNil(FLanguagesTarget);
+    FreeAndNil(FConfigFiles);
+    FreeAndNil(FConfigTitles);
+    FreeAndNil(FConfigColors);
+    FreeAndNil(FConfigImages);
+    FreeAndNil(FTrans);
+    FreeAndNil(FTransDetect);
+    FreeAndNil(FHint);
+    FreeAndNil(FFontPopup);
+    FreeAndNil(FFormSmallIcon);
+    FreeAndNil(FDropTarget);
   end;
-
-  if FFormSettingsLoaded then
-    SaveFormSettings(Self);
-
-  FreeAndNil(FLangPairs);
-  FreeAndNil(FUserParameters);
-  FreeAndNil(FProxiedConfigs);
-  FreeAndNil(FLanguages);
-  FreeAndNil(FLanguagesTarget);
-  FreeAndNil(FConfigFiles);
-  FreeAndNil(FConfigTitles);
-  FreeAndNil(FConfigColors);
-  FreeAndNil(FConfigImages);
-  FreeAndNil(FTrans);
-  FreeAndNil(FTransDetect);
-  FreeAndNil(FHint);
-  FreeAndNil(FFontPopup);
-  FreeAndNil(FormSmallIcon);
 end;
 
 procedure TformTrayslate.FormShow(Sender: TObject);
@@ -964,9 +979,15 @@ begin
   end;
 
   // Configure state
+  FDropTarget.ForceRegister;
   SetHints;
   SetVerticalMode;
   UpdatePopupState;
+end;
+
+procedure TformTrayslate.FormHide(Sender: TObject);
+begin
+  FDropTarget.Unregister;
 end;
 
 procedure TformTrayslate.FormCloseQuery(Sender: TObject; var CanClose: boolean);
@@ -2577,6 +2598,11 @@ begin
   FPopupRecentPair := PopupRecentPair.PopupComponent;
 end;
 
+procedure TformTrayslate.OnTextDroppedHandler(Sender: TObject; const AText: string);
+begin
+  BringToFront;
+end;
+
 {%EndRegion}
 
 {%Region -fold Setters}
@@ -3449,8 +3475,8 @@ begin
       formPopupTrayslate.Caption := hintText.Replace(LineEnding, ' - ');
 
     // Set form small icon to config icon
-    ImageConfig.GetIcon(IndexIcon, FormSmallIcon);
-    TOS.SetFormSmallIcon(Self, FormSmallIcon);
+    ImageConfig.GetIcon(IndexIcon, FFormSmallIcon);
+    TOS.SetFormSmallIcon(Self, FFormSmallIcon);
   finally
     FSettingTrayIcon := False;
   end;
@@ -4021,6 +4047,13 @@ begin
 
     PanelSource.Height := Round((PanelSource.Height + PanelTarget.Height) * FSplitRatio);
   end;
+end;
+
+procedure TformTrayslate.DestroyWnd;
+begin
+  if Assigned(FDropTarget) then
+    FDropTarget.Unregister;
+  inherited DestroyWnd;
 end;
 
 procedure TformTrayslate.ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
