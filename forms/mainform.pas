@@ -264,11 +264,11 @@ type
     procedure aAboutExecute(Sender: TObject);
     procedure aExitExecute(Sender: TObject);
     procedure aFastAllowHotKeysExecute(Sender: TObject);
+    procedure aFastEnableMouseModeExecute(Sender: TObject);
+    procedure aFastMouseModeCtrlExecute(Sender: TObject);
     procedure aFastAutoAddLangPairsExecute(Sender: TObject);
     procedure aFastAutoSwapExecute(Sender: TObject);
-    procedure aFastEnableMouseModeExecute(Sender: TObject);
     procedure aFastHideControlsExecute(Sender: TObject);
-    procedure aFastMouseModeCtrlExecute(Sender: TObject);
     procedure aFastRealTimeExecute(Sender: TObject);
     procedure aFastVerticalSplitExecute(Sender: TObject);
     procedure aFastAutoCopyExecute(Sender: TObject);
@@ -538,7 +538,11 @@ type
     procedure ReleaseHotKeyModifiers(const AHotKey: THotKeyData);
     {$ENDIF}
     // Methods
-    procedure LoadConfig(SetDefault: boolean = True);
+    procedure LoadConfig(ASetDefault: boolean = True; AUpdateComboState: boolean = True);
+    procedure LoadTranslate;
+    procedure LoadLangDetect;
+    procedure UpdateProxyState;
+    procedure UpdateComboState(ASetDefault: boolean = True);
     procedure SetDefaultSettings;
     procedure SetDefaultHotKeys;
     procedure BuildConfigMenu;
@@ -1890,6 +1894,16 @@ begin
   AllowHotKeys := aFastAllowHotKeys.Checked;
 end;
 
+procedure TformTrayslate.aFastEnableMouseModeExecute(Sender: TObject);
+begin
+  EnableMouseMode := aFastEnableMouseMode.Checked;
+end;
+
+procedure TformTrayslate.aFastMouseModeCtrlExecute(Sender: TObject);
+begin
+  MouseModeCtrl := aFastMouseModeCtrl.Checked;
+end;
+
 procedure TformTrayslate.aFastAutoAddLangPairsExecute(Sender: TObject);
 begin
   AutoAddLangPairs := aFastAutoAddLangPairs.Checked;
@@ -1900,11 +1914,6 @@ begin
   AutoSwap := aFastAutoSwap.Checked;
 end;
 
-procedure TformTrayslate.aFastEnableMouseModeExecute(Sender: TObject);
-begin
-  EnableMouseMode := aFastEnableMouseMode.Checked;
-end;
-
 procedure TformTrayslate.aFastHideControlsExecute(Sender: TObject);
 begin
   HideControls := aFastHideControls.Checked;
@@ -1913,11 +1922,6 @@ end;
 procedure TformTrayslate.aFastAutoHeightExecute(Sender: TObject);
 begin
   AutoHeight := aFastAutoHeight.Checked;
-end;
-
-procedure TformTrayslate.aFastMouseModeCtrlExecute(Sender: TObject);
-begin
-  MouseModeCtrl := aFastMouseModeCtrl.Checked;
 end;
 
 procedure TformTrayslate.aFastRealTimeExecute(Sender: TObject);
@@ -2759,37 +2763,26 @@ end;
 
 {%Region -fold Methods}
 
-procedure TformTrayslate.LoadConfig(SetDefault: boolean = True);
-var
-  List: TStringList;
-  Id: integer;
+procedure TformTrayslate.LoadConfig(ASetDefault: boolean = True; AUpdateComboState: boolean = True);
 begin
   UpdateCheckConfigMenu;
+  LoadTranslate;
+  LoadLangDetect;
+  UpdateProxyState;
+  if AUpdateComboState then
+    UpdateComboState(ASetDefault);
+  UpdateAutoDetect(AutoDetect, rautodetect);
+  UpdateCheckMenuPair;
+  SetTrayIcon;
+  SetHints;
+end;
 
+procedure TFormTrayslate.LoadTranslate;
+var
+  List: TStringList;
+begin
   // Load settings from INI
   FTrans.LoadIniSettings(FConfigFile);
-
-  // Load language detection config settings
-  if (FConfigLangDetect <> string.Empty) then
-    FTransDetect.LoadIniSettings(FConfigLangDetect)
-  else
-  begin
-    FreeAndNil(FTransDetect);
-    FTransDetect := TTranslate.Create;
-  end;
-
-  // Disable proxy if not in the proxied list
-  if ProxiedConfigs.Count > 0 then
-  begin
-    if not ProxiedConfigs.Contains(FConfigFile) then
-      FTrans.ProxyEnabled := False
-    else
-      FTrans.ProxyEnabled := FTrans.ServiceProxy;
-    if not ProxiedConfigs.Contains(FConfigLangDetect) then
-      FTransDetect.ProxyEnabled := False
-    else
-      FTransDetect.ProxyEnabled := FTransDetect.ServiceProxy;
-  end;
 
   // Loading source languages from the config
   FLanguages.Clear;
@@ -2811,6 +2804,42 @@ begin
       List.Free;
     end;
   end;
+end;
+
+procedure TFormTrayslate.LoadLangDetect;
+begin
+  // Load language detection config settings
+  if (not FBuiltInDetect) and (FConfigLangDetect <> string.Empty) then
+    FTransDetect.LoadIniSettings(FConfigLangDetect)
+  else
+  begin
+    FreeAndNil(FTransDetect);
+    FTransDetect := TTranslate.Create;
+  end;
+end;
+
+procedure TFormTrayslate.UpdateProxyState;
+begin
+  // Disable proxy if not in the proxied list
+  if ProxiedConfigs.Count > 0 then
+  begin
+    if not ProxiedConfigs.Contains(FConfigFile) then
+      FTrans.ProxyEnabled := False
+    else
+      FTrans.ProxyEnabled := FTrans.ServiceProxy;
+    if not ProxiedConfigs.Contains(FConfigLangDetect) then
+      FTransDetect.ProxyEnabled := False
+    else
+      FTransDetect.ProxyEnabled := FTransDetect.ServiceProxy;
+  end;
+end;
+
+procedure TFormTrayslate.UpdateComboState(ASetDefault: boolean = True);
+var
+  List: TStringList;
+  Id: integer;
+begin
+  UpdateInputState(False);
 
   // Fill ComboSource with display names
   List := TLanguages.GetDisplayNamesFromCodeMap(Trans.Languages, Trans.LangType, True);
@@ -2942,7 +2971,7 @@ begin
     FLangTarget := Trans.LangTarget;
   end;
 
-  if SetDefault then
+  if ASetDefault then
   begin
     // Set default or saved languages
     if LangSource <> string.Empty then
@@ -2983,10 +3012,7 @@ begin
   if Visible and Focused and Active and MemoSource.Visible and MemoSource.CanFocus and MemoSource.CanSetFocus then
     MemoSource.SetFocus;
 
-  UpdateAutoDetect(AutoDetect, rautodetect);
-  UpdateCheckMenuPair;
-  SetTrayIcon;
-  SetHints;
+  UpdateInputState(True);
 end;
 
 procedure TFormTrayslate.SetDefaultSettings;
@@ -3711,6 +3737,8 @@ end;
 
 procedure TFormTrayslate.UpdateInputState(AEnabled: boolean);
 begin
+  if not Assigned(KeyHook) or not Assigned(MouseHook) then Exit;
+
   if AEnabled then
   begin
     KeyHook.Enabled := FEnableMouseMode;
@@ -3719,9 +3747,9 @@ begin
   end
   else
   begin
-    UnregisterHotKeys;
     KeyHook.Enabled := False;
     MouseHook.Enabled := False;
+    UnregisterHotKeys;
   end;
 end;
 
@@ -5110,7 +5138,7 @@ var
 
 begin
   FCancelled := False;
-  FMouseHook.Enabled := False;
+  //FMouseHook.Enabled := False;
   try
     // Save current clipboard to restore later
     SaveClipboad;
@@ -5189,7 +5217,7 @@ begin
     else
       TimerUnapplyTimer(Self);
   finally
-    FMouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
+    //FMouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
   end;
 end;
 
