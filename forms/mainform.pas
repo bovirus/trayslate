@@ -3388,32 +3388,6 @@ begin
   end;
 end;
 
-procedure SetFormSmallIcon(AForm: TForm; const AIcon: TIcon);
-{$IFDEF WINDOWS}
-var
-  BigIcon: HICON;
-{$ENDIF}
-begin
-  // Apply the new icon (or restore default if nil)
-  if AIcon = nil then
-    AForm.Icon.LoadFromResourceName(HInstance, 'MAINICON')
-  else
-    AForm.Icon.Assign(AIcon);
-
-  {$IFDEF WINDOWS}
-  // Retrieve the cached big icon handle (stored in Tag on first call)
-  BigIcon := HICON(AForm.Tag);
-  if BigIcon = 0 then
-  begin
-    BigIcon := SendMessage(AForm.Handle, WM_GETICON, ICON_BIG, 0);
-    AForm.Tag := PtrInt(BigIcon);  // cache it for future calls
-  end;
-  // Restore the big icon (taskbar) because Assign overwrites both
-  if BigIcon <> 0 then
-    SendMessage(AForm.Handle, WM_SETICON, ICON_BIG, BigIcon);
-  {$ENDIF}
-end;
-
 procedure TformTrayslate.SetTrayIcon;
 var
   Bitmap: TBitmap;
@@ -3449,7 +3423,7 @@ begin
 
     // Set form small icon to config icon
     ImageConfig.GetIcon(IndexIcon, FormSmallIcon);
-    SetFormSmallIcon(Self, FormSmallIcon);
+    TOS.SetFormSmallIcon(Self, FormSmallIcon);
   finally
     FSettingTrayIcon := False;
   end;
