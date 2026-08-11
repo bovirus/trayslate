@@ -1651,8 +1651,10 @@ begin
     end;
 
     Reset;
+
     formTrayslate.TimerTranslate.Interval := Max(formTrayslate.RealTimeDelay, 1);
-    formTrayslate.LoadConfig;
+    formTrayslate.LoadLangDetect;
+    formTrayslate.UpdateProxyState;
     formTrayslate.DoRealign(0);
     Application.QueueAsyncCall(@formTrayslate.RebuildLangPairsPanel, 0);
   finally
