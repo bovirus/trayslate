@@ -5,12 +5,13 @@
   //-----------------------------------------------------------------------------------
 
 const
-  Languages_Data: array[0..267] of TAppValue = (
+  Languages_Data: array[0..268] of TAppValue = (
     // Languages
     (Code: 'auto'; DisplayName: 'Auto Detect'),
     (Code: 'empty'; DisplayName: 'Auto Detect'),
     (Code: 'ab'; DisplayName: 'Abkhazian'),
     (Code: 'awa'; DisplayName: 'Awadhi'),
+    (Code: 'ast'; DisplayName: 'Asturian'),
     (Code: 'av'; DisplayName: 'Avar'),
     (Code: 'az'; DisplayName: 'Azerbaijani'),
     (Code: 'ay'; DisplayName: 'Aymara'),
