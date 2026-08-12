@@ -416,7 +416,7 @@ begin
     Runner.Execute;   // automatically compiles if needed
 
     // 5. Retrieve output Result
-    if Runner.OutputList.Contains('result') then
+    if Runner.OutputList.ContainsName('result') then
       Response := Runner.OutputList.Values['result'];
   finally
     Runner.Free;
