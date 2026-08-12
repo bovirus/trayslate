@@ -3475,7 +3475,10 @@ begin
       formPopupTrayslate.Caption := hintText.Replace(LineEnding, ' - ');
 
     // Set form small icon to config icon
-    ImageConfig.GetIcon(IndexIcon, FFormSmallIcon);
+    if IndexIcon >= 0 then
+      ImageConfig.GetIcon(IndexIcon, FFormSmallIcon)
+    else
+      FFormSmallIcon.Clear;
     TOS.SetFormSmallIcon(Self, FFormSmallIcon);
   finally
     FSettingTrayIcon := False;
