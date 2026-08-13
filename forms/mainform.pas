@@ -472,7 +472,9 @@ type
     // Drag recent button
     FDragBtnIndex: integer;    // Index of the button being dragged
     FDragBtnStartX: integer;   // X coordinate when mouse button was pressed
+    FDragBtnStartY: integer;   // Y coordinate when mouse button was pressed
     FDragBtnLastX: integer;    // Last X coordinate during drag, used for direction detection
+    FDragBtnLastY: integer;    // Last Y coordinate of the last successful move
     FDragMoved: boolean;
 
     procedure SetAutoStart(Value: boolean);
@@ -2427,16 +2429,23 @@ var
   panel: TFlowPanel;
   ctrl: TControl;
   targetIndex: integer;
+  threshold: integer;
+  allowMove: boolean;
 begin
   if not (ssLeft in Shift) or (FDragBtnIndex < 0) then
     Exit;
 
-  // Sender is the TFlowPanel that generated the event
   if not (Sender is TFlowPanel) then Exit;
   panel := TFlowPanel(Sender);
 
+  threshold := 5; // pixels threshold to avoid jitter
+
   if (Screen.Cursor <> crDrag) and (Abs(X - FDragBtnStartX) >= 10) then
     Screen.Cursor := crDrag;
+
+  // Process only when moved beyond horizontal or vertical threshold
+  if (Abs(X - FDragBtnLastX) < threshold) and (Abs(Y - FDragBtnLastY) < threshold) then
+    Exit;
 
   ctrl := panel.ControlAtPos(Point(X, Y), []);
   if (ctrl is TFlatButton) then
@@ -2444,13 +2453,37 @@ begin
     targetIndex := TFlatButton(ctrl).Tag;
     if targetIndex <> FDragBtnIndex then
     begin
-      if targetIndex > FDragBtnIndex then
-        MoveButtonTo(FDragBtnIndex, targetIndex + 1)
+      allowMove := False;
+
+      // If cursor moved significantly vertically, allow move regardless of horizontal direction
+      if Abs(Y - FDragBtnLastY) > ctrl.Height div 2 then
+        allowMove := True
       else
-        MoveButtonTo(FDragBtnIndex, targetIndex);
-      FDragBtnLastX := X;   // Prevent repeated moves at same coordinate
+      begin
+        // Otherwise apply horizontal direction check
+        if X > FDragBtnLastX then
+          allowMove := targetIndex > FDragBtnIndex
+        else if X < FDragBtnLastX then
+          allowMove := targetIndex < FDragBtnIndex;
+      end;
+
+      if allowMove then
+      begin
+        if targetIndex > FDragBtnIndex then
+          MoveButtonTo(FDragBtnIndex, targetIndex + 1)
+        else
+          MoveButtonTo(FDragBtnIndex, targetIndex);
+        FDragMoved := True;
+
+        // Remember point of successful move to avoid immediate re-trigger
+        FDragBtnLastX := X;
+        FDragBtnLastY := Y;
+      end;
     end;
   end;
+
+  // Always update last X to track horizontal direction
+  FDragBtnLastX := X;
 end;
 
 procedure TformTrayslate.FlowPairsMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
@@ -2465,6 +2498,7 @@ end;
 procedure TformTrayslate.ButtonLangMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
 var
   CurPair: integer;
+  pt: TPoint;
 begin
   if not (Sender is TFlatButton) then Exit;
 
@@ -2490,9 +2524,12 @@ begin
   if Button = mbLeft then
     with (Sender as TFlatButton) do
     begin
+      pt := ClientToParent(Point(X, Y), Parent);
       FDragBtnIndex := Tag;
-      FDragBtnStartX := ClientToParent(Point(X, Y), Parent).X;
-      FDragBtnLastX := FDragBtnStartX;
+      FDragBtnStartX := pt.X;
+      FDragBtnStartY := pt.Y;
+      FDragBtnLastX := pt.X;
+      FDragBtnLastY := pt.Y;
       FDragMoved := False;
     end;
 end;
