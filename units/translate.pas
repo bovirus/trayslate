@@ -1486,7 +1486,10 @@ begin
     if Trim(JsonPointer) <> string.Empty then
       Ini.WriteString('Response', 'JsonPointer', JsonPointer)
     else
+    begin
       Ini.DeleteKey('Response', 'JsonPointer');
+      ClearSection(Ini, 'Response', True);
+    end;
 
     // Parameters page
     Ini.WriteBool('Parameters', 'EncodeCustomParameters', EncodeCustomParameters);

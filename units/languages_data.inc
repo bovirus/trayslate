@@ -5,7 +5,7 @@
   //-----------------------------------------------------------------------------------
 
 const
-  Languages_Data: array[0..268] of TAppValue = (
+  Languages_Data: array[0..278] of TAppValue = (
     // Languages
     (Code: 'auto'; DisplayName: 'Auto Detect'),
     (Code: 'empty'; DisplayName: 'Auto Detect'),
@@ -20,8 +20,12 @@ const
     (Code: 'alz'; DisplayName: 'Alur'),
     (Code: 'am'; DisplayName: 'Amharic'),
     (Code: 'en'; DisplayName: 'English'),
-    (Code: 'en-gb'; DisplayName: 'English (British)'),
-    (Code: 'en-us'; DisplayName: 'English (American)'),
+    (Code: 'en-AU'; DisplayName: 'English (Australian)'),
+    (Code: 'en-CA'; DisplayName: 'English (Canadian)'),
+    (Code: 'en-GB'; DisplayName: 'English (British)'),
+    (Code: 'en-NZ'; DisplayName: 'English (New Zealand)'),
+    (Code: 'en-US'; DisplayName: 'English (American)'),
+    (Code: 'en-ZA'; DisplayName: 'English (South African)'),
     (Code: 'ar'; DisplayName: 'Arabic'),
     (Code: 'hy'; DisplayName: 'Armenian'),
     (Code: 'as'; DisplayName: 'Assamese'),
@@ -82,7 +86,10 @@ const
     (Code: 'ga'; DisplayName: 'Irish'),
     (Code: 'is'; DisplayName: 'Icelandic'),
     (Code: 'es'; DisplayName: 'Spanish'),
+    (Code: 'es-ES'; DisplayName: 'Spanish (Spain)'),
     (Code: 'es-419'; DisplayName: 'Spanish (Latin America)'),
+    (Code: 'es-AR'; DisplayName: 'Spanish (Argentina)'),
+    (Code: 'es-MX'; DisplayName: 'Spanish (Mexico)'),
     (Code: 'it'; DisplayName: 'Italian'),
     (Code: 'yo'; DisplayName: 'Yoruba'),
     (Code: 'kk'; DisplayName: 'Kazakh'),
@@ -92,6 +99,7 @@ const
     (Code: 'pam'; DisplayName: 'Kapampangan'),
     (Code: 'btx'; DisplayName: 'Karo'),
     (Code: 'ca'; DisplayName: 'Catalan'),
+    (Code: 'ca-ES-valencia'; DisplayName: 'Valencian'),
     (Code: 'kek'; DisplayName: 'Qʼeqchiʼ'),
     (Code: 'qu'; DisplayName: 'Quechua'),
     (Code: 'cgg'; DisplayName: 'Kiga'),
@@ -157,7 +165,9 @@ const
     (Code: 'nr'; DisplayName: 'Ndebele (South)'),
     (Code: 'new'; DisplayName: 'Newari'),
     (Code: 'de'; DisplayName: 'German'),
-    (Code: 'de-ch'; DisplayName: 'German (Switzerland)'),
+    (Code: 'de-DE'; DisplayName: 'German (Germany)'),
+    (Code: 'de-AT'; DisplayName: 'German (Switzerland)'),
+    (Code: 'de-CH'; DisplayName: 'German (Austria)'),
     (Code: 'ne'; DisplayName: 'Nepali'),
     (Code: 'nl'; DisplayName: 'Dutch'),
     (Code: 'bm-Nkoo'; DisplayName: 'NKo'),
