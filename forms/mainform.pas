@@ -4330,8 +4330,13 @@ begin
 end;
 
 function TformTrayslate.GetIconIndex: integer;
+var
+  idx: integer;
 begin
-  Result := ConfigImages.ValueFromIndex[IndexConfig].ToInteger;
+  Result := -1;
+  idx := IndexConfig;
+  if (idx >= 0) and (idx < ConfigImages.Count) then
+    Result := ConfigImages.ValueFromIndex[idx].ToInteger;
 end;
 
 procedure TformTrayslate.MoveButtonTo(AFromIndex, AToIndex: integer);
