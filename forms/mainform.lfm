@@ -944,6 +944,7 @@ object formTrayslate: TformTrayslate
     OnActivate = ApplicationPropActivate
     OnDeactivate = ApplicationPropDeactivate
     OnException = ApplicationPropException
+    OnEndSession = ApplicationPropEndSession
     OnShowHint = ApplicationPropShowHint
     OnUserInput = ApplicationPropUserInput
     Left = 208

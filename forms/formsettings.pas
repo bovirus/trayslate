@@ -757,6 +757,11 @@ begin
   begin
     if (Key in [VK_RETURN, VK_F2]) then
     begin
+      if (GridHotkeys.Row < GridHotkeys.FixedRows) or (GridHotkeys.Row in HeaderRows) then
+      begin
+        Key := 0;
+        Exit;
+      end;
       GridHotkeys.Col := 1;
       GridHotkeys.EditorMode := True;
       Key := 0;
@@ -765,12 +770,15 @@ begin
     else
     if (Key = VK_DELETE) and (Shift = []) then
     begin
+      if (GridHotkeys.Row < GridHotkeys.FixedRows) or (GridHotkeys.Row in HeaderRows) then
+      begin
+        Key := 0;
+        Exit;
+      end;
       HK.Modifiers := 0;
       HK.Key := 0;
-
       SetHotKeyByRow(GridHotkeys.Row, HK);
       GridHotkeys.Cells[1, GridHotkeys.Row] := string.Empty;
-
       BtnApply.Enabled := True;
       Key := 0;
       Exit;
@@ -861,7 +869,7 @@ end;
 
 procedure TformSettingsTrayslate.GridHotkeysSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);
 begin
-  if ((ACol = 1) and (ARow in HeaderRows)) or (ACol <> 1) then
+  if (ACol <> 1) or (ARow < GridHotkeys.FixedRows) or (ARow in HeaderRows) then
     Editor := nil;
 
   FOldKeyValue := GridHotkeys.Cells[1, aRow];
@@ -871,6 +879,9 @@ procedure TformSettingsTrayslate.GridHotkeysEditingDone(Sender: TObject);
 var
   HK, OriginalHK: THotKeyData;
 begin
+  if (GridHotkeys.Row < GridHotkeys.FixedRows) or (GridHotkeys.Row in HeaderRows) then
+    Exit;
+
   HK := GetHotKeyByRow(GridHotkeys.Row);
   OriginalHK := GetOriginalHotKey(GridHotkeys.Row);
   if (HK.Key = 0) and (HK.Modifiers <> 0) then
@@ -1578,13 +1589,13 @@ begin
     formTrayslate.MaxHeight := SpinMaxHeight.Value;
     formTrayslate.OpacityHover := TrackOpacityHover.Position;
     formTrayslate.OpacityIdle := TrackOpacityIdle.Position;
-    if ComboLangDetect.ItemIndex > 0 then
+    if (ComboLangDetect.ItemIndex > 0) and (ComboLangDetect.ItemIndex - 1 < formTrayslate.ConfigFiles.Count) then
       formTrayslate.ConfigLangDetect := formTrayslate.ConfigFiles[ComboLangDetect.ItemIndex - 1]
     else
       formTrayslate.ConfigLangDetect := string.Empty;
     formTrayslate.ProxiedConfigs.Clear;
     for i := 0 to ClbProxiedConfigs.Count - 1 do
-      if ClbProxiedConfigs.Checked[i] then
+      if ClbProxiedConfigs.Checked[i] and (i < formTrayslate.ConfigFiles.Count) then
         formTrayslate.ProxiedConfigs.Add(formTrayslate.ConfigFiles[i]);
     formTrayslate.UserParameters.Assign(ValueListUserParameters.Strings);
     T := formTrayslate.Timeout;

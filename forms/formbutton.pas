@@ -78,10 +78,6 @@ uses Consts, mainform, localize, darkutils, osutils, hotkeyhelper;
   { TformButtonTrayslate }
 
 procedure TformButtonTrayslate.FormCreate(Sender: TObject);
-{$IFDEF WINDOWS}
-var
-  Rgn: HRGN;
-{$ENDIF}
 begin
   // Apply localization
   TLocalize.ApplicationTranslate(APP_NAME, language, self, TLocalize.LoadCustomPoFile(formTrayslate.CustomPoFile));
@@ -102,17 +98,21 @@ begin
 
   // Remove standard window borders to allow custom rounded shape
   BorderStyle := bsNone;
-
-  // Create a rounded-rectangle region for the form (radius = 6 pixels)
-  {$IFDEF WINDOWS}
-  Rgn := CreateRoundRectRgn(0, 0, Width, Height, 17, 17);
-  SetWindowRgn(Handle, Rgn, True); // The system takes ownership of the region
-  {$ENDIF}
-  // For other platforms, TForm.SetShape with a bitmap can be used instead.
 end;
 
 procedure TformButtonTrayslate.FormShow(Sender: TObject);
+{$IFDEF WINDOWS}
+var
+  Rgn: HRGN;
+{$ENDIF}
 begin
+  // Create a rounded-rectangle region for the form (radius = 6 pixels)
+  // For other platforms, TForm.SetShape with a bitmap can be used instead.
+  {$IFDEF WINDOWS}
+  Rgn := CreateRoundRectRgn(0, 0, Width, Height, 17, 17);
+  SetWindowRgn(Handle, Rgn, True);
+  {$ENDIF}
+
   TimerHide.Enabled := True;
 
   // Variables defaults

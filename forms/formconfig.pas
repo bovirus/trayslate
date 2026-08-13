@@ -664,7 +664,8 @@ begin
   try
     if not TestChanges then
     begin
-      ComboConfig.ItemIndex := FLastConfig;
+      if (FLastConfig >= 0) and (FLastConfig < ComboConfig.Items.Count) then
+        ComboConfig.ItemIndex := FLastConfig;
       exit;
     end;
     formTrayslate.ConfigFile := ComboConfig.Text;
@@ -776,8 +777,7 @@ var
   res: TModalResult;
 begin
   Result := True;
-
-  if not aSave.Enabled then
+  if not Assigned(aSave) or not aSave.Enabled then
     Exit;
 
   res := MessageDlg(rneedsave, mtConfirmation, AButtons, 0);
@@ -871,7 +871,7 @@ end;
 procedure TformConfigTrayslate.DeleteConfig;
 var
   FileName: string;
-  LastIndex: integer;
+  idx, LastIndex: integer;
 begin
   FileName := ComboConfig.Text;
   LastIndex := ComboConfig.ItemIndex;
@@ -888,8 +888,9 @@ begin
       DeleteFile(FileName);
 
     // Remove from list
-    formTrayslate.ConfigFiles.Delete(
-      formTrayslate.ConfigFiles.IndexOf(FileName));
+    idx := formTrayslate.ConfigFiles.IndexOf(FileName);
+    if idx >= 0 then
+      formTrayslate.ConfigFiles.Delete(idx);
 
     // Reset current config
     formTrayslate.ConfigFile := string.Empty;
@@ -911,10 +912,18 @@ begin
 end;
 
 procedure TformConfigTrayslate.UpdateConfigList(UpdateItemIndex: boolean = True);
+var
+  idx: integer;
 begin
   ComboConfig.Items.Assign(formTrayslate.ConfigFiles);
-  if (UpdateItemIndex) then
-    ComboConfig.ItemIndex := ComboConfig.Items.IndexOf(formTrayslate.ConfigFile);
+  if UpdateItemIndex then
+  begin
+    idx := ComboConfig.Items.IndexOf(formTrayslate.ConfigFile);
+    if idx >= 0 then
+      ComboConfig.ItemIndex := idx
+    else
+      ComboConfig.ItemIndex := -1;
+  end;
   FLastConfig := ComboConfig.ItemIndex;
 
   if Assigned(formSettingsTrayslate) and formSettingsTrayslate.Visible then

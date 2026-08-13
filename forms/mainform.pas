@@ -223,11 +223,6 @@ type
     MenuUkrainian: TMenuItem;
     MenuBelarusian: TMenuItem;
     MenuHindi: TMenuItem;
-    procedure aFastAutoHeightExecute(Sender: TObject);
-    procedure aLangVietnameseExecute(Sender: TObject);
-    procedure ApplicationPropUserInput(Sender: TObject; Msg: cardinal);
-    procedure FlowPairsMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
-    procedure FlowPairsMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -241,6 +236,8 @@ type
     procedure ApplicationPropDeactivate(Sender: TObject);
     procedure ApplicationPropShowHint(var HintStr: string; var CanShow: boolean; var HintInfo: THintInfo);
     procedure ApplicationPropException(Sender: TObject; E: Exception);
+    procedure ApplicationPropUserInput(Sender: TObject; Msg: cardinal);
+    procedure ApplicationPropEndSession(Sender: TObject);
     procedure PopupRecentPairPopup(Sender: TObject);
     procedure OnTextDroppedHandler(Sender: TObject; const AText: string);
     procedure ScreenActiveFormChanged(Sender: TObject);
@@ -275,6 +272,7 @@ type
     procedure aFastRealTimeExecute(Sender: TObject);
     procedure aFastVerticalSplitExecute(Sender: TObject);
     procedure aFastAutoCopyExecute(Sender: TObject);
+    procedure aFastAutoHeightExecute(Sender: TObject);
     procedure ComboSourceCloseUp(Sender: TObject);
     procedure ComboTargetCloseUp(Sender: TObject);
     procedure ComboSourceDropDown(Sender: TObject);
@@ -297,6 +295,8 @@ type
     procedure TrayIconMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
     procedure TrayIconMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure TrayIconClick(Sender: TObject);
+    procedure FlowPairsMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
+    procedure FlowPairsMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure ButtonLangMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure ButtonLangMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure ButtonLangMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
@@ -332,6 +332,7 @@ type
     procedure aLangUkrainianExecute(Sender: TObject);
     procedure aLangBelarusianExecute(Sender: TObject);
     procedure aLangHindiExecute(Sender: TObject);
+    procedure aLangVietnameseExecute(Sender: TObject);
     {%EndRegion}
   private
     FTrans: TTranslate;
@@ -1092,6 +1093,12 @@ begin
   end;
 end;
 
+procedure TformTrayslate.ApplicationPropEndSession(Sender: TObject);
+begin
+  if FFormSettingsLoaded then
+    SaveFormSettings(Self);
+end;
+
 {%EndRegion}
 
 {%Region -fold Windows Specific Events}
@@ -1754,10 +1761,12 @@ begin
   else
     Exit;
 
+  if (Index < 0) or (Index >= FLangPairs.Count) then
+    Exit;
+
   if Dlg and (MessageDlg(Format(rremovepair, [Pair]), mtConfirmation, [mbYes, mbNo], 0) <> mrYes) then
     Exit;
 
-  // Remove pair from list
   FLangPairs.Delete(Index);
 
   // Rebuild panel
@@ -1795,6 +1804,9 @@ begin
 
   Index := TFlatButton(FPopupRecentPair).Tag;
 
+  if (Index < 0) or (Index >= FLangPairs.Count) then
+    Exit;
+
   while Index > 0 do
   begin
     FLangPairs.Exchange(Index, Index - 1);
@@ -1812,6 +1824,9 @@ begin
     Exit;
 
   Index := TFlatButton(FPopupRecentPair).Tag;
+
+  if (Index < 0) or (Index >= FLangPairs.Count) then
+    Exit;
 
   while Index < FLangPairs.Count - 1 do
   begin
@@ -1831,6 +1846,9 @@ begin
 
   Index := TFlatButton(FPopupRecentPair).Tag;
 
+  if (Index < 0) or (Index >= FLangPairs.Count) then
+    Exit;
+
   if Index > 0 then
     FLangPairs.Exchange(Index, Index - 1);
 
@@ -1845,6 +1863,9 @@ begin
     Exit;
 
   Index := TFlatButton(FPopupRecentPair).Tag;
+
+  if (Index < 0) or (Index >= FLangPairs.Count) then
+    Exit;
 
   if Index < FLangPairs.Count - 1 then
     FLangPairs.Exchange(Index, Index + 1);
@@ -2458,6 +2479,7 @@ begin
   if Button = mbRight then
   begin
     CurPair := (Sender as TFlatButton).Tag;
+    if (CurPair < 0) or (CurPair >= MenuLangPairs.Count) then Exit;
     if (MenuLangPairs.Items[CurPair].Checked) then
       Exit;
     SelectPairConfig(CurPair);
@@ -2493,7 +2515,9 @@ begin
           // Immediately show the button as pressed
           TFlatButton(Sender).Down := True;
           TFlatButton(Sender).Parent.Repaint;
-          SelectPairConfig(FDragBtnIndex);
+
+          if (FDragBtnIndex >= 0) and (FDragBtnIndex < FLangPairs.Count) then
+            SelectPairConfig(FDragBtnIndex);
         end
         else
         begin
@@ -2542,6 +2566,7 @@ begin
     Exit;
 
   Item := TMenuItem(Sender);
+  if (Item.Tag < 0) or (Item.Tag >= FConfigFiles.Count) then Exit;
 
   // Update current config and load it
   FConfigFile := FConfigFiles[Item.Tag];
@@ -3645,6 +3670,8 @@ var
 begin
   for i := 0 to MenuConfig.Count - 1 do
   begin
+    if i >= FConfigFiles.Count then Break;
+
     if (FConfigFiles.Count > i) and SameText(FConfigFiles[i], FConfigFile) then
       MenuConfig.Items[i].Checked := True
     else
@@ -3690,6 +3717,8 @@ begin
 
   for i := 0 to MenuLangPairs.Count - 1 do
   begin
+    if i >= FLangPairs.Count then Break;
+
     // Update MenuFastEnableMouseMode item check state
     MenuLangPairs.Items[i].Checked :=
       SameText(MenuLangPairs.Items[i].Hint, FConfigFile + '=' + currentPair);

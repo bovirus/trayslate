@@ -186,8 +186,11 @@ end;
 
 procedure TformPopupTrayslate.FormResize(Sender: TObject);
 begin
-  formTrayslate.FormPopupWidth := Width;
-  formTrayslate.FormPopupHeight := Height;
+  if Assigned(formTrayslate) then
+  begin
+    formTrayslate.FormPopupWidth := Width;
+    formTrayslate.FormPopupHeight := Height;
+  end;
 
   PanelWatermark.Left := PanelTarget.Left + (PanelTarget.Width - PanelWatermark.Width) div 2;
   PanelWatermark.Top := PanelTarget.Top + (PanelTarget.Height - ifthen(PanelPairs.Visible, 0, PanelPairs.Height) -
@@ -215,15 +218,19 @@ end;
 procedure TformPopupTrayslate.aSendToMainWindowExecute(Sender: TObject);
 begin
   if MemoTarget.Text = string.Empty then exit;
-  formTrayslate.MemoSource.Text := SourceText;
-  formTrayslate.MemoTarget.Text := MemoTarget.Text;
-  formTrayslate.aShow.Execute;
+  if Assigned(formTrayslate) then
+  begin
+    formTrayslate.MemoSource.Text := SourceText;
+    formTrayslate.MemoTarget.Text := MemoTarget.Text;
+    formTrayslate.aShow.Execute;
+  end;
   Hide;
 end;
 
 procedure TformPopupTrayslate.aSwapPairExecute(Sender: TObject);
 begin
-  formTrayslate.aSwap.Execute;
+  if Assigned(formTrayslate) then
+    formTrayslate.aSwap.Execute;
 end;
 
 procedure TformPopupTrayslate.aTranslateFromControlPopupExecute(Sender: TObject);
@@ -233,7 +240,8 @@ begin
     if FPrevForegroundWnd <> 0 then
       TOS.ForceForegroundWindow(FPrevForegroundWnd);
   {$ENDIF}
-  Application.QueueAsyncCall(@formTrayslate.TranslateFromControlPopup, 0);
+  if Assigned(formTrayslate) then
+    Application.QueueAsyncCall(@formTrayslate.TranslateFromControlPopup, 0);
 end;
 
 procedure TformPopupTrayslate.aTranslateControlExecute(Sender: TObject);
@@ -243,7 +251,8 @@ begin
     if FPrevForegroundWnd <> 0 then
       TOS.ForceForegroundWindow(FPrevForegroundWnd);
   {$ENDIF}
-  Application.QueueAsyncCall(@formTrayslate.TranslateControl, 0);
+  if Assigned(formTrayslate) then
+    Application.QueueAsyncCall(@formTrayslate.TranslateControl, 0);
 end;
 
 procedure TformPopupTrayslate.aCopyTargetExecute(Sender: TObject);
@@ -263,10 +272,11 @@ begin
   Check := not formTrayslate.FAutoHeight;
   formTrayslate.FAutoHeight := Check;
   formTrayslate.aFastAutoHeight.Checked := Check;
+
   if Assigned(formSettingsTrayslate) and formSettingsTrayslate.Visible then
     formSettingsTrayslate.CheckAutoHeight.Checked := Check;
 
-  if formTrayslate.AutoHeight then
+  if Assigned(formSettingsTrayslate) and formTrayslate.AutoHeight then
     formTrayslate.AdjustPopupHeight(MemoTarget.Text);
 
   aFastAutoHeight.ImageIndex := iif(Check, 19, 18);
@@ -379,7 +389,8 @@ end;
 
 procedure TformPopupTrayslate.OnTextDroppedHandler(Sender: TObject; const AText: string);
 begin
-  formTrayslate.TranslatePopup(AText);
+  if Assigned(formTrayslate) then
+    formTrayslate.TranslatePopup(AText);
 end;
 
 procedure TformPopupTrayslate.UpdateControlsVisibility;
@@ -387,6 +398,8 @@ var
   SizeOk: boolean;
   EnoughSpace: boolean;
 begin
+  if not Assigned(formTrayslate) then Exit;
+
   // Watermark
   PanelWatermark.Visible := (MemoTarget.Text = '') and (Width >= PanelWatermark.Width) and
     (Height >= PanelWatermark.Height + FlowPairs.Height);
@@ -431,10 +444,13 @@ var
   ExStyle: LONG_PTR;
 {$ENDIF}
 begin
-  if formTrayslate.StayOnTop then
-    FormStyle := fsSystemStayOnTop
-  else
-    FormStyle := fsNormal;
+  if Assigned(formTrayslate) then
+  begin
+    if formTrayslate.StayOnTop then
+      FormStyle := fsSystemStayOnTop
+    else
+      FormStyle := fsNormal;
+  end;
 
   {$IFDEF WINDOWS}
   // Applying WS_EX_NOACTIVATE in a real window
