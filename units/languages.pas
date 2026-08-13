@@ -29,7 +29,7 @@ type
 const
   SpecialCodes: array[0..1] of string = ('auto', 'empty');
   AutoDetect = 'Auto Detect';
-  MAX_LANG_LENGTH = 8;
+  MAX_LANG_LENGTH = 15;
 
 // Helper functions replacing the former record helper
 function AppValueDisplayText(const AValue: TAppValue): string;
