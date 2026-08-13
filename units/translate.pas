@@ -1384,6 +1384,8 @@ begin
 
   // Execute response handle script
   ExecuteResponseScript(Result);
+  Temp := Result;
+  Temp.TryFormatJson(Result);
 end;
 
 {%EndRegion}
