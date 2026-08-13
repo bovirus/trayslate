@@ -1303,6 +1303,15 @@ msgstr "Gunakan mesin deteksi bahasa bawaan"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Menggunakan mesin deteksi bahasa bawaan sebagai pengganti konfigurasi layanan terjemahan. Cara ini lebih cepat, tetapi hanya mendukung sejumlah bahasa yang terbatas."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Ikon Lingkaran"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Ikon ditampilkan dalam bentuk lingkaran"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "Tampilkan Pasangan Bahasa"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Tampilkan bahasa sumber dan/atau sasaran pada ikon baki"
 
@@ -1398,6 +1408,22 @@ msgstr "Tata letak berdampingan"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Beralih ke tata letak berdampingan dengan teks sumber di samping terjemahan"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Warna latar belakang ikon baki sistem"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Warna font ikon baki sistem"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Warna bingkai di sekitar ikon saat mode mouse diaktifkan"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Nama font yang digunakan untuk ikon baki sistem"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "Pasangan Maks"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Mode mouse"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Bingkai Mode Mouse"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

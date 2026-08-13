@@ -118,9 +118,11 @@ begin
     JSONObj.Add('ConfigLangDetect', Form.ConfigLangDetect);
     JSONObj.Add('AutoStart', Form.AutoStart);
     JSONObj.Add('IconBackgroundColor', Form.IconBackgroundColor);
+    JSONObj.Add('IconMouseModeFrameColor', Form.IconMouseModeFrameColor);
     JSONObj.Add('IconFontColor', Form.IconFontColor);
     JSONObj.Add('IconFontName', Form.IconFontName);
     JSONObj.Add('IconTwoLang', Form.IconTwoLang);
+    JSONObj.Add('IconCircular', Form.IconCircular);
     JSONObj.Add('LangSource', Form.LangSource);
     JSONObj.Add('LangTarget', Form.LangTarget);
     JSONObj.Add('MaxLangPairs', Form.MaxLangPairs);
@@ -426,6 +428,9 @@ begin
         if JSONObj.FindPath('IconBackgroundColor') <> nil then
           Form.IconBackgroundColor := JSONObj.FindPath('IconBackgroundColor').AsInteger;
 
+        if JSONObj.FindPath('IconMouseModeFrameColor') <> nil then
+          Form.IconMouseModeFrameColor := JSONObj.FindPath('IconMouseModeFrameColor').AsInteger;
+
         if JSONObj.FindPath('IconFontColor') <> nil then
           Form.IconFontColor := JSONObj.FindPath('IconFontColor').AsInteger;
 
@@ -434,6 +439,9 @@ begin
 
         if JSONObj.FindPath('IconTwoLang') <> nil then
           Form.IconTwoLang := JSONObj.FindPath('IconTwoLang').AsBoolean;
+
+        if JSONObj.FindPath('IconCircular') <> nil then
+          Form.IconCircular := JSONObj.FindPath('IconCircular').AsBoolean;
 
         if (JSONObj.FindPath('LangSource') <> nil) and (JSONObj.FindPath('LangSource').AsString <> string.Empty) then
           Form.LangSource := JSONObj.FindPath('LangSource').AsString;

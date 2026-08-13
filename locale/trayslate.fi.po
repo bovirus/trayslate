@@ -1303,6 +1303,15 @@ msgstr "Käytä sisäänrakennettua kielentunnistusmoottoria"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Käyttää sisäänrakennettua kielentunnistusmoottoria käännöspalvelun asetusten sijaan. Tämä on nopeampaa, mutta tukee vain rajoitettua määrää kieliä."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Pyöreä kuvake"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Kuvake näytetään pyöreässä muodossa"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "Näytä kielipari"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Näytä lähde- ja/tai kohdekieli järjestelmäkuvakkeessa"
 
@@ -1398,6 +1408,22 @@ msgstr "Rinnakkainen asettelu"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Vaihtaa rinnakkaiseen asetteluun, jossa lähdeteksti on käännöksen vieressä"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Ilmaisinalueen kuvakkeen taustaväri"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Ilmaisinalueen kuvakkeen fontin väri"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Kuvakkeen ympärillä olevan kehyksen väri, kun hiiritila on käytössä"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Ilmaisinalueen kuvakkeessa käytettävän fontin nimi"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "Maks. parit"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Hiiritila"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Hiiritilan kehys"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

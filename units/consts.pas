@@ -86,6 +86,11 @@ const
   DEF_FONT = 'Tahoma';
   DEF_NA = 'N/A';
   DEF_AUTO = '*';
+  DEF_AUTO_TEXT = 'auto';
+  DEF_SMALL = 8;
+  DEF_MINI = 7;
+  DEF_TINY = 6;
+  DEF_MICRO = 5;
 
 resourcestring
   rswap = 'Swap (%s) with text (%s)';

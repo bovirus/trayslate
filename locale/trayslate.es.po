@@ -1303,6 +1303,15 @@ msgstr "Usar el motor integrado de detección de idioma"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Utiliza el motor integrado de detección de idioma en lugar de la configuración del servicio de traducción. Es más rápido, pero solo admite un número limitado de idiomas."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Icono circular"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Icono mostrado en forma circular"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "Mostrar par de idiomas"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Mostrar el idioma de origen y/o destino en el icono de la bandeja"
 
@@ -1398,6 +1408,22 @@ msgstr "Diseño lado a lado"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Cambia a diseño lado a lado con el texto original junto a la traducción"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Color de fondo del icono de la bandeja del sistema"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Color de fuente del icono de la bandeja del sistema"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Color del marco alrededor del icono cuando el modo de ratón está activado"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Nombre de la fuente utilizada para el icono de la bandeja del sistema"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "Máx. pares"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Modo ratón"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Marco del modo de ratón"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

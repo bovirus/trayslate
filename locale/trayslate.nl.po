@@ -1303,6 +1303,15 @@ msgstr "Ingebouwde taalherkenningsengine gebruiken"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Gebruikt de ingebouwde taalherkenningsengine in plaats van de configuratie van de vertaaldienst. Dit is sneller, maar ondersteunt slechts een beperkt aantal talen."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Rond pictogram"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Pictogram weergegeven in een ronde vorm"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "Toon taalpaar"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Toon bron- en/of doeltaal op het systeemvakpictogram"
 
@@ -1398,6 +1408,22 @@ msgstr "Zij-aan-zij weergave"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Schakelt naar zij-aan-zij weergave met brontekst naast vertaling"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Achtergrondkleur van het systeemvakpictogram"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Tekstkleur van het systeemvakpictogram"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Kleur van het kader rond het pictogram wanneer de muismodus is ingeschakeld"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Naam van het lettertype dat voor het systeemvakpictogram wordt gebruikt"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "Max. paren"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Muismodus"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Kader van de muismodus"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

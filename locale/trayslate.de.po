@@ -1303,6 +1303,15 @@ msgstr "Integrierte Spracherkennung verwenden"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Verwendet die integrierte Spracherkennung anstelle der Konfiguration des Übersetzungsdienstes. Dies ist schneller, unterstützt jedoch nur eine begrenzte Anzahl von Sprachen."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Kreisförmiges Symbol"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Symbol wird in kreisförmiger Form angezeigt"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "Sprachpaar anzeigen"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Zeigt Quell- und/oder Zielsprache auf dem Tray-Symbol an"
 
@@ -1398,6 +1408,22 @@ msgstr "Nebeneinander-Layout"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Wechselt zum Nebeneinander-Layout mit Quelltext neben der Übersetzung"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Hintergrundfarbe des Taskleistensymbols"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Schriftfarbe des Taskleistensymbols"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Farbe des Rahmens um das Symbol bei aktiviertem Mausmodus"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Name der für das Taskleistensymbol verwendeten Schriftart"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "Max. Paare"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Mausmodus"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Mausmodus-Rahmen"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

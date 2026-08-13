@@ -55,6 +55,7 @@ type
     CheckAllowHotkeys: TCheckBox;
     CheckAutoHeight: TCheckBox;
     CheckBuiltInDetect: TCheckBox;
+    CheckCircularIcon: TCheckBox;
     ClbProxiedConfigs: TCheckListBox;
     CheckProxyAuthentication: TCheckBox;
     CheckSmartSwap: TCheckBox;
@@ -71,6 +72,7 @@ type
     CheckVerticalSplit: TCheckBox;
     CheckAutoCopy: TCheckBox;
     ColorIconBackground: TColorBox;
+    ColorMouseModeFrame: TColorBox;
     ColorIconFont: TColorBox;
     ColorDialog: TColorDialog;
     ComboProxyMode: TComboBox;
@@ -98,6 +100,7 @@ type
     GroupRealTime: TGroupBox;
     GroupTrayIcon: TGroupBox;
     ImagesPages: TImageList;
+    LabelMouseModeFrame: TLabel;
     LabelLangDetectConfig: TLabel;
     LabelMaxHeight: TLabel;
     LabelConnectTimeout: TLabel;
@@ -190,9 +193,11 @@ type
     FOriginalFont: TFont;
     FOriginalFontPopup: TFont;
     FOriginalIconBackgroundColor: TColor;
+    FOriginalIconMouseModeFrameColor: TColor;
     FOriginalIconFontColor: TColor;
     FOriginalIconFontName: string;
     FOriginalIconTwoLang: boolean;
+    FOriginalIconCircular: boolean;
     FOriginalMaxLangPairs: integer;
     FOriginalAutoAddLangPairs: boolean;
     FOriginalAllowHotkeys: boolean;
@@ -457,6 +462,7 @@ begin
 
   ColorIconBackground.AddCustomColors;
   ColorIconFont.AddCustomColors;
+  ColorMouseModeFrame.AddCustomColors;
   ComboIconFontName.FillFontCombo;
   Reset;
   FillListPages;
@@ -527,13 +533,16 @@ begin
       (Sender as TSpinEdit).Value := 0;
   end;
 
-  if (Sender = ColorIconBackground) or (Sender = ColorIconFont) or (Sender = ComboIconFontName) or (Sender = CheckTwoLang) then
+  if (Sender = ColorIconBackground) or (Sender = ColorMouseModeFrame) or (Sender = ColorIconFont) or
+    (Sender = ComboIconFontName) or (Sender = CheckTwoLang) or (Sender = CheckCircularIcon) then
   begin
     // Apply real time properies
     formTrayslate.IconBackgroundColor := ColorIconBackground.Selected;
+    formTrayslate.IconMouseModeFrameColor := ColorMouseModeFrame.Selected;
     formTrayslate.IconFontColor := ColorIconFont.Selected;
     formTrayslate.IconFontName := ComboIconFontName.Text;
     formTrayslate.IconTwoLang := CheckTwoLang.Checked;
+    formTrayslate.IconCircular := CheckCircularIcon.Checked;
     formTrayslate.SetTrayIcon;
   end
   else
@@ -1262,9 +1271,11 @@ end;
 procedure TformSettingsTrayslate.ResetRealTimeSettings;
 begin
   formTrayslate.IconBackgroundColor := FOriginalIconBackgroundColor;
+  formTrayslate.IconMouseModeFrameColor := FOriginalIconMouseModeFrameColor;
   formTrayslate.IconFontColor := FOriginalIconFontColor;
   formTrayslate.IconFontName := FOriginalIconFontName;
   formTrayslate.IconTwoLang := FOriginalIconTwoLang;
+  formTrayslate.IconCircular := FOriginalIconCircular;
   formTrayslate.SetTrayIcon;
 
   formTrayslate.OpacityHover := FOriginalOpacityHover;
@@ -1615,9 +1626,11 @@ begin
     formTrayslate.Font.Assign(PanelFont.Font);
     formTrayslate.FontPopup.Assign(PanelFontPopup.Font);
     formTrayslate.IconBackgroundColor := ColorIconBackground.Selected;
+    formTrayslate.IconMouseModeFrameColor := ColorMouseModeFrame.Selected;
     formTrayslate.IconFontColor := ColorIconFont.Selected;
     formTrayslate.IconFontName := ComboIconFontName.Text;
     formTrayslate.IconTwoLang := CheckTwoLang.Checked;
+    formTrayslate.IconCircular := CheckCircularIcon.Checked;
     formTrayslate.SetTrayIcon;
 
     // HotKeys Common
@@ -1778,9 +1791,11 @@ begin
   FOriginalFont := formTrayslate.Font;
   FOriginalFontPopup := formTrayslate.FontPopup;
   FOriginalIconBackgroundColor := formTrayslate.IconBackgroundColor;
+  FOriginalIconMouseModeFrameColor := formTrayslate.IconMouseModeFrameColor;
   FOriginalIconFontColor := formTrayslate.IconFontColor;
   FOriginalIconFontName := formTrayslate.IconFontName;
   FOriginalIconTwoLang := formTrayslate.IconTwoLang;
+  FOriginalIconCircular := formTrayslate.IconCircular;
 
   ResetHotKeys;
 
@@ -1830,9 +1845,11 @@ begin
   PanelFontPopup.Font.Assign(FOriginalFontPopup);
   SetPanelFont(PanelFontPopup, FOriginalFontPopup);
   ColorIconBackground.Selected := FOriginalIconBackgroundColor;
+  ColorMouseModeFrame.Selected := FOriginalIconMouseModeFrameColor;
   ColorIconFont.Selected := FOriginalIconFontColor;
   ComboIconFontName.Text := FOriginalIconFontName;
   CheckTwoLang.Checked := FOriginalIconTwoLang;
+  CheckCircularIcon.Checked := FOriginalIconCircular;
 
   BtnApply.Enabled := False;
   SetState;

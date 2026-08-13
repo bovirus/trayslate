@@ -1303,6 +1303,15 @@ msgstr "השתמש במנוע זיהוי השפה המובנה"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "משתמש במנוע זיהוי השפה המובנה במקום בתצורת שירות התרגום. פעולה זו מהירה יותר, אך תומכת רק במספר מוגבל של שפות."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "סמל עגול"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "סמל המוצג בצורה עגולה"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "הצג זוג שפות"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "הצג שפת מקור ו/או יעד על סמל המגש"
 
@@ -1398,6 +1408,22 @@ msgstr "תצוגה זה לצד זה"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "עובר לתצוגה זה לצד זה עם טקסט המקור ליד התרגום"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "צבע הרקע של סמל מגש המערכת"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "צבע הגופן של סמל מגש המערכת"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "צבע המסגרת סביב הסמל כאשר מצב עכבר מופעל"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "שם הגופן המשמש עבור סמל מגש המערכת"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "זוגות מקסימום"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "מצב עכבר"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "מסגרת מצב עכבר"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

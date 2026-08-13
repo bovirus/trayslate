@@ -1303,6 +1303,15 @@ msgstr "Выкарыстоўваць убудаваны механізм выз�
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Выкарыстоўвае ўбудаваны механізм вызначэння мовы замест канфігурацыі службы перакладу. Гэта хутчэй, але падтрымліваецца толькі абмежаваная колькасць моў."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Круглая іконка"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Абарона адлюстроўваецца ў круглай форме"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "Паказваць моўную пару"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Адлюстроўваць зыходную і/або мэтавую мову на іконцы трэя"
 
@@ -1398,6 +1408,22 @@ msgstr "Макет побач"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Пераключае на макет побач з зыходным тэкстам каля перакладу"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Колер фону іконкі ў сістэмным трэі"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Колер шрыфта іконкі ў сістэмным трэі"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Колер рамкі вакол іконкі пры ўключаным рэжыме мышы"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Назва шрыфта, які выкарыстоўваецца для іконкі ў сістэмным трэі"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "Макс. пар"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Рэжым мышы"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Рамка рэжыму мышы"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

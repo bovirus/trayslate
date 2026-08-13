@@ -465,9 +465,11 @@ type
     // TrayIcon
     FAutoStart: boolean;
     FIconBackgroundColor: TColor;
+    FIconMouseModeFrameColor: TColor;
     FIconFontColor: TColor;
     FIconFontName: string;
     FIconTwoLang: boolean;
+    FIconCircular: boolean;
 
     // Drag recent button
     FDragBtnIndex: integer;    // Index of the button being dragged
@@ -508,8 +510,7 @@ type
     procedure MoveButtonTo(AFromIndex, AToIndex: integer);
 
     // Tray Icon
-    function CreateTrayIconLang(Form: TForm; const ALang1: string; const ALang2: string = string.Empty;
-      ABackgroundColor: TColor = clNone; AFontColor: TColor = clWhite; AFontName: string = string.Empty): Graphics.TBitmap;
+    function CreateTrayIconLang(const ALang1: string; const ALang2: string = string.Empty): Graphics.TBitmap;
     function CreateTrayIconProgress(AAngle: integer; ABackgroundColor: TColor = clNone; APenColor: TColor = clWhite): Graphics.TBitmap;
     // Action Languages
     procedure SetLanguage(aLanguage: string = string.Empty);
@@ -610,9 +611,11 @@ type
     property Timeout: TTimeout read FTimeout write FTimeout;
     property AutoStart: boolean read FAutoStart write SetAutoStart;
     property IconBackgroundColor: TColor read FIconBackgroundColor write FIconBackgroundColor;
+    property IconMouseModeFrameColor: TColor read FIconMouseModeFrameColor write FIconMouseModeFrameColor;
     property IconFontColor: TColor read FIconFontColor write FIconFontColor;
     property IconFontName: string read FIconFontName write FIconFontName;
     property IconTwoLang: boolean read FIconTwoLang write FIconTwoLang;
+    property IconCircular: boolean read FIconCircular write FIconCircular;
     property LangSource: string read FLangSource write FLangSource;
     property LangTarget: string read FLangTarget write FLangTarget;
     property LangPairs: TStringList read FLangPairs write FLangPairs;
@@ -1311,7 +1314,10 @@ begin
 
   // Turn off the mouse mode if Ctrl is not pressed and it requires Ctrl
   if MouseModeCtrl and (Info.KeyCode in [VK_CONTROL, VK_LCONTROL, VK_RCONTROL]) then
+  begin
     MouseHook.Enabled := Info.IsDown;
+    SetTrayIcon;
+  end;
 
   if not Info.IsDown then Exit;
   if Info.IsInjected then Exit;
@@ -2735,6 +2741,7 @@ begin
     begin
       FMouseHook.Enabled := EnableMouseMode and not FMouseModeCtrl;
       FKeyHook.Enabled := EnableMouseMode;
+      SetTrayIcon;
     end;
   end;
 end;
@@ -2754,6 +2761,7 @@ begin
     begin
       FMouseHook.Enabled := EnableMouseMode and not FMouseModeCtrl;
       FKeyHook.Enabled := EnableMouseMode;
+      SetTrayIcon;
     end;
   end;
 end;
@@ -3120,9 +3128,11 @@ begin
   {$ELSE}
   FIconFontColor := clWhite;
   {$ENDIF}
+  FIconMouseModeFrameColor := clNone;
   FIconFontName := DEF_FONT;
   FFontPopup := TFont.Create;
   FIconTwoLang := True;
+  FIconCircular := False;
   FMaxLangPairs := 10;
   FAutoAddLangPairs := True;
   FAllowHotKeys := True;
@@ -3508,13 +3518,12 @@ var
   Bitmap: TBitmap;
   hintText: string;
 begin
-  if not Assigned(FTrans) or not Assigned(TrayIcon) then Exit;
+  if (csDestroying in ComponentState) or not Assigned(FTrans) or not Assigned(TrayIcon) then Exit;
   if FSettingTrayIcon then Exit;
   FSettingTrayIcon := True;
   try
-    Bitmap := CreateTrayIconLang(Self, ifthen(FIconTwoLang, UpperCase(UpdateSourceLanguage(Trans.LangSource)),
-      UpperCase(UpdateTargetLanguage(Trans.LangTarget))), ifthen(FIconTwoLang, UpperCase(Trans.LangTarget), string.Empty),
-      FIconBackgroundColor, FIconFontColor, FIconFontName);
+    Bitmap := CreateTrayIconLang(ifthen(FIconTwoLang, UpperCase(UpdateSourceLanguage(Trans.LangSource)),
+      UpperCase(UpdateTargetLanguage(Trans.LangTarget))), ifthen(FIconTwoLang, UpperCase(Trans.LangTarget)));
     try
       TrayIcon.Icon.Assign(Bitmap);
       TrayIcon.Visible := True;
@@ -3849,6 +3858,8 @@ begin
     if ReenableHotKeys then
       UnregisterHotKeys;
   end;
+
+  SetTrayIcon;
 end;
 
 procedure TformTrayslate.DoCheckUpdates(Data: PtrInt);
@@ -4432,8 +4443,7 @@ end;
 
 {%Region -fold Tray Icon}
 
-function TformTrayslate.CreateTrayIconLang(Form: TForm; const ALang1: string; const ALang2: string = string.Empty;
-  ABackgroundColor: TColor = clNone; AFontColor: TColor = clWhite; AFontName: string = string.Empty): Graphics.TBitmap;
+function TformTrayslate.CreateTrayIconLang(const ALang1: string; const ALang2: string = string.Empty): Graphics.TBitmap;
 var
   Bmp: Graphics.TBitmap;
   IntfImg: TLazIntfImage;
@@ -4442,27 +4452,26 @@ var
   delta: integer;
   Value: string;
 
-  function FormatValue(const Value: string; DefSize: integer = 8): string;
+  function FormatValue(const Value: string; DefSize: integer = DEF_SMALL): string;
   begin
     Result := Value;
-
     if Result = string.Empty then Result := DEF_NA;
 
     if Pos('-', Result) > 0 then
       Result := LeftStr(Result, Pos('-', Result + '-') - 1);
 
     if (Length(Result) = 3) then
-      Bmp.Canvas.Font.Size := Form.ScaleScreenTo96(5)
+      Bmp.Canvas.Font.Size := ScaleScreenTo96(DEF_MICRO)
     else
     begin
-      if (LowerCase(Result) = 'auto') then
+      if (LowerCase(Result) = DEF_AUTO_TEXT) then
       begin
-        Bmp.Canvas.Font.Size := Form.ScaleScreenTo96(8);
+        Bmp.Canvas.Font.Size := ScaleScreenTo96(iif(FIconCircular, DEF_MINI, DEF_SMALL));
         Result := DEF_AUTO;
       end
       else
       begin
-        Bmp.Canvas.Font.Size := Form.ScaleScreenTo96(DefSize);
+        Bmp.Canvas.Font.Size := ScaleScreenTo96(DefSize);
         Result := Result.Substring(0, 2);
       end;
     end;
@@ -4474,43 +4483,79 @@ begin
   try
     Bmp.SetSize(ICON_SIZE, ICON_SIZE);  // standard tray icon size
 
-    // set background
-    if ABackgroundColor = clNone then
+    // Set background
+    rect := Types.Rect(0, 0, Bmp.Width, Bmp.Height);
+    if FIconCircular then
     begin
+      // For circular icon use transparent color outside the circle
       Bmp.Canvas.Brush.Color := clFuchsia;
-      Bmp.Canvas.Font.Quality := fqNonAntialiased;
       Bmp.TransparentColor := clFuchsia;
       Bmp.Transparent := True;
+      Bmp.Canvas.Font.Quality := fqNonAntialiased;
+      Bmp.Canvas.Brush.Style := bsSolid;
+      Bmp.Canvas.FillRect(rect);
+      if FIconBackgroundColor <> clNone then
+      begin
+        Bmp.Canvas.Brush.Color := FIconBackgroundColor;
+        Bmp.Canvas.Pen.Color := FIconBackgroundColor;
+        Bmp.Canvas.Pen.Style := psSolid;
+        Bmp.Canvas.Ellipse(rect);
+      end;
     end
     else
-      Bmp.Canvas.Brush.Color := ABackgroundColor;
-    Bmp.Canvas.Brush.Style := bsSolid;
-    rect := Types.Rect(0, 0, Bmp.Width, Bmp.Height);
-    Bmp.Canvas.FillRect(rect);
+    begin
+      if FIconBackgroundColor = clNone then
+      begin
+        Bmp.Canvas.Brush.Color := clFuchsia;
+        Bmp.Canvas.Font.Quality := fqNonAntialiased;
+        Bmp.TransparentColor := clFuchsia;
+        Bmp.Transparent := True;
+      end
+      else
+        Bmp.Canvas.Brush.Color := FIconBackgroundColor;
+      Bmp.Canvas.Brush.Style := bsSolid;
+      Bmp.Canvas.FillRect(rect);
+    end;
 
-    // set text style
-    Bmp.Canvas.Font.Name := ifthen(AFontName = string.Empty, DEF_FONT, AFontName);
-    Bmp.Canvas.Font.Color := AFontColor;
+    // Draw mouse mode frame if enabled, before text so text stays on top
+    if Assigned(MouseHook) and MouseHook.Enabled and FEnableMouseMode and (FIconMouseModeFrameColor <> clNone) then
+    begin
+      Bmp.Canvas.Pen.Color := FIconMouseModeFrameColor;
+      Bmp.Canvas.Pen.Width := 1;
+      Bmp.Canvas.Brush.Style := bsClear;
+      if FIconCircular then
+        Bmp.Canvas.Ellipse(rect)
+      else
+        Bmp.Canvas.Rectangle(rect);
+    end;
+
+    // Set text style
+    Bmp.Canvas.Font.Name := ifthen(FIconFontName = string.Empty, DEF_FONT, FIconFontName);
+    Bmp.Canvas.Font.Color := FIconFontColor;
     Bmp.Canvas.Font.Style := [fsBold];
+    Bmp.Canvas.Brush.Style := bsClear;
 
     if (ALang2 = string.Empty) then
     begin
-      // draw text centered
-      Value := FormatValue(ALang1);
+      // Draw text centered
+      Value := FormatValue(ALang1, iif(FIconCircular, DEF_MINI, DEF_SMALL));
       DrawText(Bmp.Canvas.Handle, PChar(Value), Length(Value), rect,
         DT_CENTER or DT_VCENTER or DT_SINGLELINE);
     end
     else
     begin
-      // upper half
-      Value := FormatValue(ALang1, 7);
-      rect1 := Types.Rect(rect.Left, rect.Top, rect.Right, (rect.Top + rect.Bottom) div 2);
+      // Upper half
+      Value := FormatValue(ALang1, iif(FIconCircular, DEF_TINY, DEF_MINI));
+      delta := 0;
+      delta += iif(FIconCircular, 1, 0);
+      rect1 := Types.Rect(rect.Left, rect.Top + delta, rect.Right, (rect.Top + rect.Bottom) div 2 + delta);
       DrawText(Bmp.Canvas.Handle, PChar(Value), Length(Value), rect1,
         DT_CENTER or DT_VCENTER or DT_SINGLELINE);
 
-      // lower half
-      Value := FormatValue(ALang2, 7);
+      // Lower half
+      Value := FormatValue(ALang2, iif(FIconCircular, DEF_TINY, DEF_MINI));
       delta := ifthen(Value = DEF_AUTO, 3, 0);
+      delta += iif(FIconCircular, -1, 0);
       rect2 := Types.Rect(rect.Left, (rect.Top + rect.Bottom) div 2 + delta, rect.Right, rect.Bottom + delta);
       DrawText(Bmp.Canvas.Handle, PChar(Value), Length(Value), rect2,
         DT_CENTER or DT_VCENTER or DT_SINGLELINE);
@@ -4523,7 +4568,7 @@ begin
     Bmp.Handle := ImgHandle;
     Bmp.MaskHandle := ImgMaskHandle;
 
-    // create icon from bitmap
+    // Create icon from bitmap
     Result := Bmp;
   finally
     IntfImg.Free;
@@ -5248,7 +5293,7 @@ var
 
 begin
   FCancelled := False;
-  //FMouseHook.Enabled := False;
+  FMouseHook.Enabled := False;
   try
     // Save current clipboard to restore later
     SaveClipboad;
@@ -5327,7 +5372,7 @@ begin
     else
       TimerUnapplyTimer(Self);
   finally
-    //FMouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
+    FMouseHook.Enabled := FEnableMouseMode and not FMouseModeCtrl;
   end;
 end;
 

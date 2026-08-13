@@ -323,20 +323,20 @@ object formSettingsTrayslate: TformSettingsTrayslate
         TabOrder = 0
         object GroupTrayIcon: TGroupBox
           Left = 5
-          Height = 155
+          Height = 219
           Top = 165
           Width = 579
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Tray Icon'
-          ClientHeight = 135
+          ClientHeight = 199
           ClientWidth = 575
           TabOrder = 1
           object CheckTwoLang: TCheckBox
             Left = 16
             Height = 19
             Hint = 'Display source and/or target language on the tray icon'
-            Top = 104
+            Top = 136
             Width = 125
             Caption = 'Show Language Pair'
             TabOrder = 3
@@ -345,6 +345,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           object ColorIconBackground: TColorBox
             Left = 152
             Height = 22
+            Hint = 'Background color of the tray icon'
             Top = 8
             Width = 400
             Style = [cbIncludeNone, cbCustomColor, cbPrettyNames, cbCustomColors]
@@ -378,6 +379,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           object ColorIconFont: TColorBox
             Left = 152
             Height = 22
+            Hint = 'Font color of the tray icon'
             Top = 40
             Width = 400
             Style = [cbCustomColor, cbPrettyNames, cbCustomColors]
@@ -401,6 +403,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           object ComboIconFontName: TComboBox
             Left = 152
             Height = 23
+            Hint = 'Name of the font used for the tray icon'
             Top = 72
             Width = 400
             Anchors = [akTop, akLeft, akRight]
@@ -411,11 +414,45 @@ object formSettingsTrayslate: TformSettingsTrayslate
             OnChange = SettingChange
             OnMouseWheel = ComboIconFontNameMouseWheel
           end
+          object CheckCircularIcon: TCheckBox
+            Left = 16
+            Height = 19
+            Hint = 'Icon displayed in a circular shape'
+            Top = 168
+            Width = 85
+            Caption = 'Circular Icon'
+            TabOrder = 4
+            OnChange = SettingChange
+          end
+          object LabelMouseModeFrame: TLabel
+            Left = 8
+            Height = 32
+            Top = 104
+            Width = 136
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Mouse Mode Frame'
+            WordWrap = True
+          end
+          object ColorMouseModeFrame: TColorBox
+            Left = 152
+            Height = 22
+            Hint = 'Color of the frame around the icon when mouse mode is enabled'
+            Top = 104
+            Width = 400
+            Style = [cbIncludeNone, cbCustomColor, cbPrettyNames, cbCustomColors]
+            ColorDialog = ColorDialog
+            Anchors = [akTop, akLeft, akRight]
+            DropDownCount = 15
+            ItemHeight = 16
+            TabOrder = 5
+            OnChange = SettingChange
+          end
         end
         object GroupLangPairs: TGroupBox
           Left = 5
           Height = 91
-          Top = 325
+          Top = 389
           Width = 579
           Align = alTop
           BorderSpacing.Around = 5
@@ -459,7 +496,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
         object GroupPopup: TGroupBox
           Left = 5
           Height = 299
-          Top = 421
+          Top = 485
           Width = 579
           Align = alTop
           BorderSpacing.Around = 5
@@ -1096,7 +1133,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           )
           ColWidths = (
             200
-            382
+            365
           )
         end
       end

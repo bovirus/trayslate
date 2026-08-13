@@ -1303,6 +1303,15 @@ msgstr "Brug den indbyggede sproggenkendelsesmotor"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Bruger den indbyggede sproggenkendelsesmotor i stedet for oversættelsestjenestens konfiguration. Det er hurtigere, men understøtter kun et begrænset antal sprog."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Cirkulært ikon"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Ikon vist i cirkulær form"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "Vis sprogpar"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Vis kilde- og/eller målsprog på systembakkeikonet"
 
@@ -1398,6 +1408,22 @@ msgstr "Side-om-side layout"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Skifter til side-om-side layout med kildetekst ved siden af oversættelsen"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Baggrundsfarve for ikonet i systembakken"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Skriftfarve for ikonet i systembakken"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Farve på rammen omkring ikonet, når musetilstand er aktiveret"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Navn på den skrifttype, der bruges til ikonet i systembakken"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "Maks. par"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Musetilstand"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Ramme for musetilstand"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

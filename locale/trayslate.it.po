@@ -1313,6 +1313,15 @@ msgstr "Usa motore integrato rilevamento lingua"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Usa il motore integrato di rilevamento della lingua invece della configurazione del servizio di traduzione. È più veloce, ma supporta solo un numero limitato di lingue."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Icona circolare"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Icona visualizzata in forma circolare"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1397,6 +1406,7 @@ msgid "Show Language Pair"
 msgstr "Visualizza coppia di lingue"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Visualizza lingua sorgente e/o destinazione nell'icona nella barra applicazioni"
 
@@ -1408,6 +1418,22 @@ msgstr "Visualizza pulsante 'Traduci'"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Passa alla disposizione affiancata con il testo sorgente accanto alla traduzione"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Colore di sfondo dell'icona nell'area di notifica"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Colore del carattere dell'icona nell'area di notifica"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Colore della cornice intorno all'icona quando la modalità mouse è abilitata"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Nome del carattere utilizzato per l'icona nell'area di notifica"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1559,6 +1585,10 @@ msgstr "Coppie massime"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Modalità mouse"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Cornice della modalità mouse"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

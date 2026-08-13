@@ -1303,6 +1303,15 @@ msgstr "Χρήση ενσωματωμένης μηχανής ανίχνευση�
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Χρησιμοποιεί την ενσωματωμένη μηχανή ανίχνευσης γλώσσας αντί για τη διαμόρφωση της υπηρεσίας μετάφρασης. Είναι ταχύτερη, αλλά υποστηρίζει μόνο περιορισμένο αριθμό γλωσσών."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Κυκλικό εικονίδιο"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Το εικονίδιο εμφανίζεται σε κυκλικό σχήμα"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "Εμφάνιση ζεύγους γλωσσών"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Εμφάνιση γλώσσας πηγής και/ή στόχου στο εικονίδιο δίσκου συστήματος"
 
@@ -1398,6 +1408,22 @@ msgstr "Διάταξη δίπλα-δίπλα"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Αλλάζει σε διάταξη δίπλα-δίπλα με το αρχικό κείμενο δίπλα στη μετάφραση"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Χρώμα φόντου του εικονιδίου στη γραμμή συστήματος"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Χρώμα γραμματοσειράς του εικονιδίου στη γραμμή συστήματος"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Χρώμα του πλαισίου γύρω από το εικονίδιο όταν είναι ενεργοποιημένη η λειτουργία ποντικιού"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Όνομα της γραμματοσειράς που χρησιμοποιείται για το εικονίδιο στη γραμμή συστήματος"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "Μέγιστος αριθμός ζευγών"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Λειτουργία ποντικιού"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Πλαίσιο λειτουργίας ποντικιού"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

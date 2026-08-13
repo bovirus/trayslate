@@ -1303,6 +1303,15 @@ msgstr "내장 언어 감지 엔진 사용"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "번역 서비스 구성을 사용하는 대신 내장 언어 감지 엔진을 사용합니다. 더 빠르지만 지원하는 언어 수는 제한되어 있습니다."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "원형 아이콘"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "원형으로 표시되는 아이콘"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "언어 쌍 표시"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "트레이 아이콘에 소스 및/또는 대상 언어를 표시합니다"
 
@@ -1398,6 +1408,22 @@ msgstr "나란히 레이아웃"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "원문과 번역을 나란히 표시하는 레이아웃으로 전환합니다"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "트레이 아이콘의 배경색"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "트레이 아이콘의 글꼴 색상"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "마우스 모드가 활성화되었을 때 아이콘 주위 프레임의 색상"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "트레이 아이콘에 사용되는 글꼴 이름"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "최대 쌍 수"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "마우스 모드"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "마우스 모드 프레임"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

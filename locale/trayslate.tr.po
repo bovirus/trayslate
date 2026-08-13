@@ -1303,6 +1303,15 @@ msgstr "Yerleşik dil algılama motorunu kullan"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Çeviri hizmeti yapılandırması yerine yerleşik dil algılama motorunu kullanır. Bu daha hızlıdır, ancak yalnızca sınırlı sayıda dili destekler."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Dairesel Simge"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Dairesel biçimde görüntülenen simge"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "Dil Çiftini Göster"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Sistem tepsisindeki simgede kaynak ve/veya hedef dili göster"
 
@@ -1398,6 +1408,22 @@ msgstr "Yan yana düzen"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Kaynak metni çevirinin yanında gösteren yan yana düzene geçer"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Tepsi simgesinin arka plan rengi"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Tepsi simgesinin yazı tipi rengi"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Fare modu etkinleştirildiğinde simgenin etrafındaki çerçevenin rengi"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Tepsi simgesi için kullanılan yazı tipinin adı"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1550,6 +1576,10 @@ msgstr "Maks. Çift"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Fare modu"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Fare Modu Çerçevesi"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

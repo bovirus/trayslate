@@ -1306,6 +1306,15 @@ msgstr "Sử dụng Công cụ phát hiện ngôn ngữ tích hợp"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Sử dụng công cụ phát hiện ngôn ngữ tích hợp thay vì cấu hình dịch vụ dịch thuật. Điều này nhanh hơn nhưng chỉ hỗ trợ một số ngôn ngữ hạn chế."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Biểu tượng hình tròn"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Biểu tượng được hiển thị theo hình tròn"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1390,6 +1399,7 @@ msgid "Show Language Pair"
 msgstr "Hiển thị cặp ngôn ngữ"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Hiển thị ngôn ngữ nguồn và/hoặc ngôn ngữ đích trên biểu tượng khay"
 
@@ -1401,6 +1411,22 @@ msgstr "Bố cục cạnh nhau"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Chuyển sang bố cục cạnh nhau với văn bản nguồn bên cạnh bản dịch"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Màu nền của biểu tượng khay hệ thống"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Màu phông chữ của biểu tượng khay hệ thống"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Màu của khung xung quanh biểu tượng khi chế độ chuột được bật"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Tên phông chữ được sử dụng cho biểu tượng khay hệ thống"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1552,6 +1578,10 @@ msgstr "Cặp tối đa"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Chế độ chuột"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Khung chế độ chuột"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

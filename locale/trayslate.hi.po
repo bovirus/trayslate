@@ -1303,6 +1303,15 @@ msgstr "अंतर्निहित भाषा पहचान इंजन
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "अनुवाद सेवा के कॉन्फ़िगरेशन के बजाय अंतर्निहित भाषा पहचान इंजन का उपयोग करता है। यह तेज़ है, लेकिन केवल सीमित संख्या में भाषाओं का समर्थन करता है।"
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "गोलाकार आइकन"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "गोलाकार आकार में प्रदर्शित आइकन"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "भाषा युग्म दिखाएँ"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "ट्रे आइकन पर स्रोत और/या लक्ष्य भाषा प्रदर्शित करें"
 
@@ -1398,6 +1408,22 @@ msgstr "साइड-बाय-साइड लेआउट"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "अनुवाद के साथ स्रोत पाठ को बगल में दिखाने के लिए साइड-बाय-साइड लेआउट में बदलता है"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "ट्रे आइकन का पृष्ठभूमि रंग"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "ट्रे आइकन के फ़ॉन्ट का रंग"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "माउस मोड सक्षम होने पर आइकन के चारों ओर फ़्रेम का रंग"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "ट्रे आइकन के लिए उपयोग किए जाने वाले फ़ॉन्ट का नाम"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "अधिकतम युग्म"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "माउस मोड"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "माउस मोड फ़्रेम"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"

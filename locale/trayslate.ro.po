@@ -1303,6 +1303,15 @@ msgstr "Utilizează motorul integrat de detectare a limbii"
 msgid "Uses the built-in language detection engine instead of the translation service configuration. This is faster, but supports only a limited number of languages."
 msgstr "Folosește motorul integrat de detectare a limbii în locul configurației serviciului de traducere. Este mai rapid, dar acceptă doar un număr limitat de limbi."
 
+#: tformsettingstrayslate.checkcircularicon.caption
+msgid "Circular Icon"
+msgstr "Pictogramă circulară"
+
+#: tformsettingstrayslate.checkcircularicon.hint
+msgctxt "tformsettingstrayslate.checkcircularicon.hint"
+msgid "Icon displayed in a circular shape"
+msgstr "Pictogramă afișată într-o formă circulară"
+
 #: tformsettingstrayslate.checkenablemousemode.caption
 msgctxt "tformsettingstrayslate.checkenablemousemode.caption"
 msgid "Enable Mouse Mode"
@@ -1387,6 +1396,7 @@ msgid "Show Language Pair"
 msgstr "Afișează perechea de limbi"
 
 #: tformsettingstrayslate.checktwolang.hint
+msgctxt "tformsettingstrayslate.checktwolang.hint"
 msgid "Display source and/or target language on the tray icon"
 msgstr "Afișează limba sursă și/sau țintă pe pictograma din bara de sistem"
 
@@ -1398,6 +1408,22 @@ msgstr "Afișare alăturată"
 #: tformsettingstrayslate.checkverticalsplit.hint
 msgid "Switches to side-by-side layout with source text beside translation"
 msgstr "Trece la afișare alăturată cu textul sursă lângă traducere"
+
+#: tformsettingstrayslate.coloriconbackground.hint
+msgid "Background color of the tray icon"
+msgstr "Culoarea de fundal a pictogramei din bara de sistem"
+
+#: tformsettingstrayslate.coloriconfont.hint
+msgid "Font color of the tray icon"
+msgstr "Culoarea fontului pictogramei din bara de sistem"
+
+#: tformsettingstrayslate.colormousemodeframe.hint
+msgid "Color of the frame around the icon when mouse mode is enabled"
+msgstr "Culoarea cadrului din jurul pictogramei când modul mouse este activat"
+
+#: tformsettingstrayslate.comboiconfontname.hint
+msgid "Name of the font used for the tray icon"
+msgstr "Numele fontului utilizat pentru pictograma din bara de sistem"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1549,6 +1575,10 @@ msgstr "Nr. maxim de perechi"
 msgctxt "tformsettingstrayslate.labelmousemode.caption"
 msgid "Mouse Mode"
 msgstr "Mod mouse"
+
+#: tformsettingstrayslate.labelmousemodeframe.caption
+msgid "Mouse Mode Frame"
+msgstr "Cadru pentru modul mouse"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"
