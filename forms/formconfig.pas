@@ -240,8 +240,9 @@ resourcestring
     sLineBreak + sLineBreak + 'Example:' + sLineBreak + '  var s: string;' + sLineBreak + '  begin' +
     sLineBreak + '    s := GetParam(''text'');' + sLineBreak + '    s := ReplaceAll(s, ''-'', ''_'', False);' +
     sLineBreak + '    SetOutput(''text'', s);' + sLineBreak + '  end.' + sLineBreak + sLineBreak +
-    'You can also use standard Pascal constructs (if, for, while, repeat, etc.).' + sLineBreak + sLineBreak +
-    'Available functions:' + sLineBreak + '  GetParam(''name'') : string' + sLineBreak +
+    'You can also use standard Pascal constructs (if, for, while, repeat, etc.). ' +
+    'You can define your own functions and procedures before the main begin ... end. block.' + sLineBreak +
+    sLineBreak + 'Available functions:' + sLineBreak + '  GetParam(''name'') : string' + sLineBreak +
     '    Retrieve an input parameter value.' + sLineBreak + '  SetOutput(''name'', ''value'')' + sLineBreak +
     '    Store an output value for the host.' + sLineBreak + '  GetTimestamp() : Int64' + sLineBreak +
     '    Current Unix timestamp in milliseconds (UTC).' + sLineBreak + '  GetRandom(Length) : Int64' +
@@ -264,8 +265,33 @@ resourcestring
     '  RegexMatch(Input, Pattern) : Boolean' + sLineBreak + '    Check if Input matches the regex Pattern. Case-insensitive.' +
     sLineBreak + '  ExtractBetween(S, StartMarker, EndMarker) : string' + sLineBreak +
     '    Extract the substring of S between StartMarker and EndMarker.' + sLineBreak + sLineBreak +
-    'Available parameters (retrieved with GetParam):' + sLineBreak +
-    '  text - the input text to process (possibly truncated to MaxLength)' + sLineBreak +
+    'JSON functions (use a handle returned by JSONParse):' + sLineBreak + '  JSONParse(S) : Integer' +
+    sLineBreak + '    Parse a JSON string and return a handle (>=0). Returns -1 on error.' + sLineBreak +
+    '  JSONFree(Handle)' + sLineBreak + '    Release the handle after use.' + sLineBreak +
+    '  JSONGetString(Handle, Path) : string' + sLineBreak + '    Get a string value at the specified Path.' +
+    sLineBreak + '  JSONGetInt(Handle, Path) : Integer' + sLineBreak + '    Get an integer value at the specified Path.' +
+    sLineBreak + '  JSONGetFloat(Handle, Path) : Extended' + sLineBreak + '    Get a floating-point value at the specified Path.' +
+    sLineBreak + '  JSONGetBool(Handle, Path) : Boolean' + sLineBreak + '    Get a boolean value at the specified Path.' +
+    sLineBreak + '  JSONGetArrayCount(Handle, Path) : Integer' + sLineBreak +
+    '    Get the number of elements in an array at the specified Path.' + sLineBreak +
+    '  JSONGetArrayString(Handle, Path, Index) : string' + sLineBreak +
+    '    Get the string value of an array element at the given Index.' + sLineBreak +
+    '  JSONGetArrayInt(Handle, Path, Index) : Integer' + sLineBreak +
+    '    Get the integer value of an array element at the given Index.' + sLineBreak + '  JSONGetType(Handle, Path) : string' +
+    sLineBreak + '    Return the type of the value at Path: "object", "array", "string", "int", "float", "bool", "null".' +
+    sLineBreak + '  JSONPathExists(Handle, Path) : Boolean' + sLineBreak + '    Check if the specified Path exists.' +
+    sLineBreak + '  JSONResultInit' + sLineBreak + '    Initialize an empty JSON array for building a standard error result.' +
+    sLineBreak + '  JSONResultAddError(Offset, Length, Message, Replacements)' + sLineBreak +
+    '    Add an error object to the result array. Replacements is a string of values separated by "|".' +
+    sLineBreak + '  JSONResultGet : string' + sLineBreak + '    Return the current result array as a JSON string.' +
+    sLineBreak + '  JSONResultClear' + sLineBreak + '    Clear the result array.' + sLineBreak +
+    '  Always call JSONFree to release the handle after you are done.' + sLineBreak + sLineBreak +
+    'Example of working with JSON:' + sLineBreak + '  var h: Integer;' + sLineBreak + '      s: string;' +
+    sLineBreak + '  begin' + sLineBreak + '    h := JSONParse(GetParam(''result''));' + sLineBreak +
+    '    if h >= 0 then' + sLineBreak + '    begin' + sLineBreak + '      s := JSONGetString(h, ''some.path'');' +
+    sLineBreak + '      SetOutput(''text'', s);' + sLineBreak + '      JSONFree(h);' + sLineBreak + '    end;' +
+    sLineBreak + '  end.' + sLineBreak + sLineBreak + 'Available parameters (retrieved with GetParam):' +
+    sLineBreak + '  text - the input text to process (possibly truncated to MaxLength)' + sLineBreak +
     '  source - source language code (may be empty)' + sLineBreak + '  target - target language code' +
     sLineBreak + '  timestamp - current Unix timestamp in milliseconds (string)' + sLineBreak +
     '  random  - 9-digit random number (string)' + sLineBreak + '  rand - same as random' + sLineBreak +
