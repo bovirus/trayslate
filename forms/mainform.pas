@@ -4514,6 +4514,104 @@ var
     end;
   end;
 
+  // Draw a filled circle with a subtle vertical gradient for a 3D effect
+  procedure DrawFilledCircle(ACanvas: TCanvas; const ARect: TRect; AColor: TColor);
+  var
+    Cx, Cy, R: double;
+    Y: integer;
+    Dy, Dx: double;
+    XStart, XEnd: integer;
+    LineColor: TColor;
+    Factor: double;
+  begin
+    // Center is placed between pixels for even dimensions to avoid offset
+    Cx := (ARect.Left + ARect.Right - 1) / 2;
+    Cy := (ARect.Top + ARect.Bottom - 1) / 2;
+    R := (ARect.Right - ARect.Left) / 2;
+    ACanvas.Brush.Color := AColor;
+    ACanvas.Pen.Style := psClear;
+    for Y := ARect.Top to ARect.Bottom - 1 do
+    begin
+      Dy := Abs(Y - Cy);
+      if Dy > R then Continue;
+      Dx := Sqrt(R * R - Dy * Dy);
+      XStart := Max(ARect.Left, Round(Cx - Dx + 0.5));
+      XEnd := Min(ARect.Right - 1, Round(Cx + Dx - 0.5));
+      if XStart <= XEnd then
+      begin
+        // Calculate gradient factor from 1 at top to 0 at bottom
+        Factor := 1 - (Y - ARect.Top) / Max(1, ARect.Bottom - ARect.Top - 1);
+        // Slight lightening at top and darkening at bottom
+        LineColor := AColor.AdjustBrightness(Round((Factor - 0.5) * 100));
+        ACanvas.Brush.Color := LineColor;
+        ACanvas.FillRect(XStart, Y, XEnd + 1, Y + 1);
+      end;
+    end;
+  end;
+
+  // Draw a 1-pixel circle outline by detecting boundary pixels with 8-connectivity
+  procedure DrawCircleOutline(ACanvas: TCanvas; const ARect: TRect; AColor: TColor);
+  var
+    Inside: array of array of boolean = nil;
+    Cx, Cy, R: double;
+    W, H, X, Y: integer;
+    AbsX, AbsY: integer;
+    HasOutsideNeighbor: boolean;
+    DX, DY: integer;
+  begin
+    W := ARect.Right - ARect.Left;
+    H := ARect.Bottom - ARect.Top;
+    SetLength(Inside, W, H);
+
+    Cx := (ARect.Left + ARect.Right - 1) / 2;
+    Cy := (ARect.Top + ARect.Bottom - 1) / 2;
+    R := (ARect.Right - ARect.Left) / 2;
+
+    // Build the inside mask using the same formula as DrawFilledCircle
+    for Y := 0 to H - 1 do
+      for X := 0 to W - 1 do
+      begin
+        AbsX := ARect.Left + X;
+        AbsY := ARect.Top + Y;
+        Inside[X, Y] := ((AbsX - Cx) * (AbsX - Cx) + (AbsY - Cy) * (AbsY - Cy)) <= R * R;
+      end;
+
+    // Draw only boundary pixels: inside but at least one of 8 neighbors is outside
+    ACanvas.Pen.Style := psClear;
+    ACanvas.Brush.Style := bsSolid;
+    ACanvas.Brush.Color := AColor;
+
+    for Y := 0 to H - 1 do
+      for X := 0 to W - 1 do
+      begin
+        if not Inside[X, Y] then Continue;
+
+        HasOutsideNeighbor := False;
+        for DY := -1 to 1 do
+          for DX := -1 to 1 do
+          begin
+            if (DX = 0) and (DY = 0) then Continue;
+            if (X + DX >= 0) and (X + DX < W) and (Y + DY >= 0) and (Y + DY < H) then
+            begin
+              if not Inside[X + DX, Y + DY] then
+              begin
+                HasOutsideNeighbor := True;
+                Break;
+              end;
+            end
+            else
+            begin
+              // Neighbor outside the bitmap is considered outside
+              HasOutsideNeighbor := True;
+              Break;
+            end;
+          end;
+
+        if HasOutsideNeighbor then
+          ACanvas.FillRect(ARect.Left + X, ARect.Top + Y, ARect.Left + X + 1, ARect.Top + Y + 1);
+      end;
+  end;
+
 begin
   IntfImg := TLazIntfImage.Create(ICON_SIZE, ICON_SIZE);
   Bmp := Graphics.TBitmap.Create;
@@ -4536,7 +4634,7 @@ begin
         Bmp.Canvas.Brush.Color := FIconBackgroundColor;
         Bmp.Canvas.Pen.Color := FIconBackgroundColor;
         Bmp.Canvas.Pen.Style := psSolid;
-        Bmp.Canvas.Ellipse(rect);
+        DrawFilledCircle(Bmp.Canvas, rect, FIconBackgroundColor);
       end;
     end
     else
@@ -4559,9 +4657,10 @@ begin
     begin
       Bmp.Canvas.Pen.Color := FIconMouseModeFrameColor;
       Bmp.Canvas.Pen.Width := 1;
+      Bmp.Canvas.Pen.Style := psSolid;
       Bmp.Canvas.Brush.Style := bsClear;
       if FIconCircular then
-        Bmp.Canvas.Ellipse(rect)
+        DrawCircleOutline(Bmp.Canvas, rect, FIconMouseModeFrameColor)
       else
         Bmp.Canvas.Rectangle(rect);
     end;
