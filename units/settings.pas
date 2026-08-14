@@ -293,7 +293,7 @@ begin
   try
     DPI := Screen.PixelsPerInch;
     FileContent := string.Empty;
-    FileName := TOS.GetSettingsDirectory(APP_NAME, 'form_settings.json'); // Get the settings file name
+    FileName := TOS.GetSettingsDirectory(APP_NAME, 'form_settings.json', 'form_settings.json'); // Get the settings file name
     if not FileExists(FileName) then Exit(True); // Exit if the file does not exist
 
     // Read from file

@@ -387,6 +387,7 @@ type
 
     // Settings
     FFormSettingsLoaded: boolean;
+    FPortable: boolean;
     FConfigFile: string;
     FConfigFiles: TStringList;
     FConfigTitles: TStringList;
@@ -716,6 +717,9 @@ uses formdonate, formabout, formsettings, formconfig, formpopup, formbutton, set
 
 procedure TformTrayslate.FormCreate(Sender: TObject);
 begin
+  // Check if the application is portable
+  FPortable := TOS.IsPortable;
+
   // Default values
   SetDefaultSettings;
 
@@ -2688,7 +2692,7 @@ begin
   // Build unique registry key per installation path
   AppName := 'Trayslate (' + AppPath + ')';
 
-  TOS.RegAutoStart(FAutoStart, AppName);
+  TOS.RegAutoStart(FAutoStart, AppName, 'Trayslate');
 end;
 
 procedure TformTrayslate.SetAutoAddLangPairs(Value: boolean);
@@ -3144,7 +3148,7 @@ end;
 
 procedure TFormTrayslate.SetDefaultSettings;
 begin
-  FAutoStart := True;
+  AutoStart := not FPortable;
   FConfigLangDetect := DEF_LANGDETECT;
   if TOS.IsWindows7 then
     FIconBackgroundColor := $00905000
