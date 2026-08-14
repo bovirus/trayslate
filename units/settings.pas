@@ -270,8 +270,18 @@ begin
     JSONObj.Free;
   end;
 
-  Form.MemoSource.SaveToFileSafe(TOS.GetSettingsDirectory(APP_NAME, 'source.txt'));
-  Form.MemoTarget.SaveToFileSafe(TOS.GetSettingsDirectory(APP_NAME, 'target.txt'));
+  try
+    FileName := TOS.GetSettingsDirectory(APP_NAME, 'source.txt');
+    if FileExists(FileName) then DeleteFile(FileName);
+    if (Length(Form.MemoSource.Text) > 0) then
+      Form.MemoSource.SaveToFileSafe(FileName);
+    FileName := TOS.GetSettingsDirectory(APP_NAME, 'target.txt');
+    if FileExists(FileName) then DeleteFile(FileName);
+    if (Length(Form.MemoTarget.Text) > 0) then
+      Form.MemoTarget.SaveToFileSafe(FileName);
+  except
+    ;
+  end;
 end;
 
 function LoadFormSettings(Form: TformTrayslate): boolean;
@@ -823,17 +833,21 @@ begin
       FileStream.Free;
     end;
 
-    FileName := TOS.GetSettingsDirectory(APP_NAME, 'source.txt');
-    if FileExists(FileName) then
-    begin
-      Form.MemoSource.Lines.TrailingLineBreak := False;
-      Form.MemoSource.Lines.LoadFromFile(FileName);
-    end;
-    FileName := TOS.GetSettingsDirectory(APP_NAME, 'target.txt');
-    if FileExists(FileName) then
-    begin
-      Form.MemoTarget.Lines.TrailingLineBreak := False;
-      Form.MemoTarget.Lines.LoadFromFile(FileName);
+    try
+      FileName := TOS.GetSettingsDirectory(APP_NAME, 'source.txt');
+      if FileExists(FileName) then
+      begin
+        Form.MemoSource.Lines.TrailingLineBreak := False;
+        Form.MemoSource.Lines.LoadFromFile(FileName);
+      end;
+      FileName := TOS.GetSettingsDirectory(APP_NAME, 'target.txt');
+      if FileExists(FileName) then
+      begin
+        Form.MemoTarget.Lines.TrailingLineBreak := False;
+        Form.MemoTarget.Lines.LoadFromFile(FileName);
+      end;
+    except
+      ;
     end;
 
     Result := True;
