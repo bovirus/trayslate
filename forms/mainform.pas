@@ -2695,7 +2695,10 @@ procedure TformTrayslate.SetAutoAddLangPairs(Value: boolean);
 begin
   aFastAutoAddLangPairs.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckAutoAddLangPairs.Checked := Value
+  begin
+    formSettingsTrayslate.CheckAutoAddLangPairs.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
   else
     FAutoAddLangPairs := Value;
 end;
@@ -2704,7 +2707,10 @@ procedure TformTrayslate.SetAutoSwap(Value: boolean);
 begin
   aFastAutoSwap.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckAutoSwap.Checked := Value
+  begin
+    formSettingsTrayslate.CheckAutoSwap.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
   else
     FAutoSwap := Value;
 
@@ -2718,7 +2724,10 @@ procedure TformTrayslate.SetAllowHotkeys(Value: boolean);
 begin
   aFastAllowHotkeys.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckAllowHotkeys.Checked := Value
+  begin
+    formSettingsTrayslate.CheckAllowHotkeys.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
   else
   begin
     FAllowHotkeys := Value;
@@ -2732,7 +2741,10 @@ var
 begin
   aFastEnableMouseMode.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckEnableMouseMode.Checked := Value
+  begin
+    formSettingsTrayslate.CheckEnableMouseMode.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
   else
   begin
     OldValue := FEnableMouseMode;
@@ -2752,7 +2764,10 @@ var
 begin
   aFastMouseModeCtrl.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckMouseModeCtrl.Checked := Value
+  begin
+    formSettingsTrayslate.CheckMouseModeCtrl.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
   else
   begin
     OldValue := FMouseModeCtrl;
@@ -2770,7 +2785,10 @@ procedure TformTrayslate.SetAutoHeight(Value: boolean);
 begin
   aFastAutoHeight.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckAutoHeight.Checked := Value
+  begin
+    formSettingsTrayslate.CheckAutoHeight.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
   else
     FAutoHeight := Value;
 end;
@@ -2779,7 +2797,10 @@ procedure TformTrayslate.SetHideControls(Value: boolean);
 begin
   aFastHideControls.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckHideControls.Checked := Value
+  begin
+    formSettingsTrayslate.CheckHideControls.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
   else
     FHideControls := Value;
 end;
@@ -2788,7 +2809,10 @@ procedure TformTrayslate.SetRealTime(Value: boolean);
 begin
   aFastRealTime.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckRealTime.Checked := Value
+  begin
+    formSettingsTrayslate.CheckRealTime.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
   else
     FRealTime := Value;
 end;
@@ -2797,7 +2821,10 @@ procedure TformTrayslate.SetVerticalSplit(Value: boolean);
 begin
   aFastVerticalSplit.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckVerticalSplit.Checked := Value
+  begin
+    formSettingsTrayslate.CheckVerticalSplit.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
   else
   begin
     FVerticalSplit := Value;
@@ -2810,7 +2837,10 @@ procedure TformTrayslate.SetAutoCopy(Value: boolean);
 begin
   aFastAutoCopy.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
-    formSettingsTrayslate.CheckAutoCopy.Checked := Value
+  begin
+    formSettingsTrayslate.CheckAutoCopy.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
   else
     FAutoCopy := Value;
 end;
@@ -4445,7 +4475,7 @@ end;
 
 function TformTrayslate.CreateTrayIconLang(const ALang1: string; const ALang2: string = string.Empty): Graphics.TBitmap;
 var
-  Bmp: Graphics.TBitmap;
+  Bmp: TBitmap;
   IntfImg: TLazIntfImage;
   ImgHandle, ImgMaskHandle: HBitmap;
   rect, rect1, rect2: TRect;
@@ -4461,7 +4491,10 @@ var
       Result := LeftStr(Result, Pos('-', Result + '-') - 1);
 
     if (Length(Result) = 3) then
-      Bmp.Canvas.Font.Size := ScaleScreenTo96(DEF_MICRO)
+    begin
+      Bmp.Canvas.Font.Size := ScaleScreenTo96(iif(FIconCircular, DEF_MICRO, DEF_TINY));
+      if (Bmp.Canvas.TextWidth(Result) > ICON_SIZE + 1) then Bmp.Canvas.Font.Size := ScaleScreenTo96(DEF_MICRO);
+    end
     else
     begin
       if (LowerCase(Result) = DEF_AUTO_TEXT) then
