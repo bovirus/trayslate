@@ -123,7 +123,15 @@ uses Consts, mainform, formsettings, localize, darkutils, controlshelper, pascal
 
 procedure TformPopupTrayslate.FormCreate(Sender: TObject);
 begin
-  TLocalize.ApplicationTranslate(APP_NAME, language, self, TLocalize.LoadCustomPoFile(formTrayslate.CustomPoFile));
+  if Assigned(formTrayslate) then
+  begin
+    TLocalize.ApplicationTranslate(APP_NAME, language, self, TLocalize.LoadCustomPoFile(formTrayslate.CustomPoFile));
+    aTranslateFromControlPopup.ShortCut := formTrayslate.HotKeyTransControlPopup.ToShortCut;
+    aTranslateControl.ShortCut := formTrayslate.HotKeyTransControl.ToShortCut;
+    aSwapPair.ShortCut := formTrayslate.HotKeyTransSwap.ToShortCut;
+    aFastAutoHeight.ImageIndex := iif(formTrayslate.AutoHeight, 19, 18);
+    aFastAutoHeight.Caption := iif(formTrayslate.AutoHeight, rlockheight, runlockheight);
+  end;
 
   FDropTarget := TTextDropTarget.Create(Self);
   FDropTarget.Target := MemoTarget;
@@ -143,15 +151,8 @@ begin
   SbCopyTarget.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);
   SbCopyTargetPanel.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);
 
-  aTranslateFromControlPopup.ShortCut := formTrayslate.HotKeyTransControlPopup.ToShortCut;
-  aTranslateControl.ShortCut := formTrayslate.HotKeyTransControl.ToShortCut;
-  aSwapPair.ShortCut := formTrayslate.HotKeyTransSwap.ToShortCut;
-
   FPopupOpen := False;
   FInWindow := False;
-
-  aFastAutoHeight.ImageIndex := iif(formTrayslate.AutoHeight, 19, 18);
-  aFastAutoHeight.Caption := iif(formTrayslate.AutoHeight, rlockheight, runlockheight);
 
   UpdateControlsVisibility;
 end;
@@ -163,6 +164,8 @@ end;
 
 procedure TformPopupTrayslate.FormShow(Sender: TObject);
 begin
+  // Ensure no control gets focus, as the form is shown without activation
+  ActiveControl := nil;
   FDropTarget.ForceRegister;
 end;
 
