@@ -173,7 +173,7 @@ procedure TformPopupTrayslate.FormHide(Sender: TObject);
 begin
   FDropTarget.Unregister;
 
-  if Assigned(formTrayslate.TranslateTarget) and (formTrayslate.TranslateTarget is TMemo) and
+  if Assigned(formTrayslate) and Assigned(formTrayslate.TranslateTarget) and (formTrayslate.TranslateTarget is TMemo) and
     (formTrayslate.TranslateTarget = MemoTarget) then
     formTrayslate.CancelTranslate;
 end;
@@ -207,8 +207,11 @@ end;
 
 procedure TformPopupTrayslate.FormChangeBounds(Sender: TObject);
 begin
-  formTrayslate.FormPopupLeft := Left;
-  formTrayslate.FormPopupTop := Top;
+  if Assigned(formTrayslate) then
+  begin
+    formTrayslate.FormPopupLeft := Left;
+    formTrayslate.FormPopupTop := Top;
+  end;
 end;
 
 procedure TformPopupTrayslate.aNewTranslateExecute(Sender: TObject);
@@ -265,13 +268,16 @@ end;
 
 procedure TformPopupTrayslate.aApplyAutoHeightExecute(Sender: TObject);
 begin
-  formTrayslate.AdjustPopupHeight(MemoTarget.Text, True);
+  if Assigned(formTrayslate) then
+    formTrayslate.AdjustPopupHeight(MemoTarget.Text, True);
 end;
 
 procedure TformPopupTrayslate.aFastAutoHeightExecute(Sender: TObject);
 var
   Check: boolean;
 begin
+  if not Assigned(formTrayslate) then Exit;
+
   Check := not formTrayslate.FAutoHeight;
   formTrayslate.FAutoHeight := Check;
   formTrayslate.aFastAutoHeight.Checked := Check;
