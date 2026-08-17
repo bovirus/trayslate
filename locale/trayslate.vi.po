@@ -876,7 +876,7 @@ msgstr "Xóa biểu tượng"
 #: tformconfigtrayslate.asave.caption
 msgctxt "tformconfigtrayslate.asave.caption"
 msgid "Save"
-msgstr "Cứu"
+msgstr "Lưu"
 
 #: tformconfigtrayslate.asaveiconas.caption
 msgid "Save Icon As..."
