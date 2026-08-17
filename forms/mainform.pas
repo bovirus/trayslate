@@ -4564,7 +4564,7 @@ begin
       Bmp.Canvas.Pen.Style := psSolid;
       Bmp.Canvas.Brush.Style := bsClear;
       if FIconCircular then
-        Bmp.Canvas.CircleOutline(rect, FIconMouseModeFrameColor)
+        Bmp.Canvas.CircleOutline(rect, FIconMouseModeFrameColor, FIconBackgroundColor)
       else
         Bmp.Canvas.Rectangle(rect);
     end;
