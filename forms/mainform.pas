@@ -4522,15 +4522,17 @@ begin
 
     // Set background
     rect := Types.Rect(0, 0, Bmp.Width, Bmp.Height);
+
     if FIconCircular then
     begin
       // For circular icon use transparent color outside the circle
       Bmp.Canvas.Brush.Color := clFuchsia;
       Bmp.TransparentColor := clFuchsia;
       Bmp.Transparent := True;
-      Bmp.Canvas.Font.Quality := fqNonAntialiased;
       Bmp.Canvas.Brush.Style := bsSolid;
       Bmp.Canvas.FillRect(rect);
+      if FIconBackgroundColor = clNone then
+        Bmp.Canvas.Font.Quality := fqNonAntialiased;
       if FIconBackgroundColor <> clNone then
       begin
         Bmp.Canvas.Brush.Color := FIconBackgroundColor;
