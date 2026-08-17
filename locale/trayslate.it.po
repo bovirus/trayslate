@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Trayslate - Italian - 28.07.2026\n"
+"Project-Id-Version: Trayslate - Italian - 15.08.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -67,7 +67,7 @@ msgstr " per rimuovere la coppia"
 #: consts.rtranslate
 msgctxt "consts.rtranslate"
 msgid "Translate (Ctrl ¦ Shift + Enter, Triple Enter)"
-msgstr "Traduci (Ctrl ¦ Shift + Enter, Triple Enter)"
+msgstr "Traduci (Ctrl ¦ Maiusc + Invio, Triplo Invio)"
 
 #: consts.rtranslatestop
 msgid "Stop Translation (Esc)"
@@ -263,23 +263,23 @@ msgstr ""
 "  SetOutput('name', 'value')\n"
 "    Memorizza un valore di output per l'host.\n"
 "  GetTimestamp() : Int64\n"
-"    Timestamp Unix corrente in millisecondi (UTC).\n"
+"    Timestamp Unix attuale in millisecondi (UTC).\n"
 "  GetRandom(Length) : Int64\n"
-"    Numero intero casuale con esattamente Length cifre decimali.\n"
+"    Numero intero casuale con esattamente Lenght cifre decimali.\n"
 "  Random : Extended\n"
-"    Numero a virgola mobile casuale nell'intervallo [0, 1).\n"
+"    Numero in virgola mobile casuale nell'intervallo [0, 1).\n"
 "  IntToHex(Value, Digits) : string\n"
 "    Converte un numero intero in una stringa esadecimale con almeno Digits caratteri.\n"
 "  StrToInt(S) : Integer\n"
-"    Converte una stringa in un numero intero. Genera un'eccezione in caso di input non valido.\n"
+"    Converte una stringa in un numero intero. In caso di input non valido genera un'eccezione.\n"
 "  IntToStr(Value) : string\n"
 "    Converte un numero intero nella sua rappresentazione come stringa.\n"
 "  Trim(S) : string\n"
-"    Rimuove gli spazi iniziali e finali da S.\n"
+"    Rimuove da S gli spazi iniziali e finali.\n"
 "  TrimLeft(S) : string\n"
-"    Rimuove gli spazi iniziali da S.\n"
+"    Rimuove da S gli spazi iniziali.\n"
 "  TrimRight(S) : string\n"
-"    Rimuove gli spazi finali da S.\n"
+"    Rimuove da S gli spazi finali.\n"
 "  HtmlEncode(S) : string\n"
 "    Codifica i caratteri HTML speciali presenti in S come entità.\n"
 "  HtmlDecode(S) : string\n"
@@ -297,9 +297,9 @@ msgstr ""
 "  ExtractBetween(S, StartMarker, EndMarker) : string\n"
 "    Estrae la sottostringa di S compresa tra StartMarker e EndMarker.\n"
 "\n"
-"Funzioni JSON (utilizzare un handle restituito da JSONParse):\n"
+"Funzioni JSON (usare un handle restituito da JSONParse):\n"
 "  JSONParse(S) : Integer\n"
-"    Analizza una stringa JSON e restituisce un handle (>=0). Restituisce -1 in caso di errore.\n"
+"    Analizza una stringa JSON e restituisce un handle (>=0). In caso di errore restituisce -1.\n"
 "  JSONFree(Handle)\n"
 "    Rilascia l'handle dopo l'uso.\n"
 "  JSONGetString(Handle, Path) : string\n"
@@ -323,14 +323,14 @@ msgstr ""
 "  JSONResultInit\n"
 "    Inizializza un array JSON vuoto per creare un risultato di errore standard.\n"
 "  JSONResultAddError(Offset, Length, Message, Replacements)\n"
-"    Aggiunge un oggetto di errore all'array dei risultati. Replacements è una stringa di valori separati da \"|\".\n"
+"    Aggiunge un oggetto errore all'array risultati. Replacements è una stringa di valori separati da \"|\".\n"
 "  JSONResultGet : string\n"
-"    Restituisce l'array dei risultati corrente come stringa JSON.\n"
+"    Restituisce l'array dei risultati attuale come stringa JSON.\n"
 "  JSONResultClear\n"
-"    Cancella l'array dei risultati.\n"
-"  Chiama sempre JSONFree per rilasciare l'handle dopo aver terminato di utilizzarlo.\n"
+"    Cancella l'array risultati.\n"
+"  Chiama sempre JSONFree per rilasciare l'handle dopo aver terminato di usarlo.\n"
 "\n"
-"Esempio di utilizzo di JSON:\n"
+"Esempio uso JSON:\n"
 "  var h: Integer;\n"
 "      s: string;\n"
 "  begin\n"
@@ -344,10 +344,10 @@ msgstr ""
 "  end.\n"
 "\n"
 "Parametri disponibili (recuperati con GetParam):\n"
-"  text - il testo di input da elaborare (potrebbe essere troncato a MaxLength)\n"
-"  source - codice della lingua sorgente (può essere vuoto)\n"
-"  target - codice della lingua di destinazione\n"
-"  timestamp - timestamp Unix corrente in millisecondi (stringa)\n"
+"  text - il testo in input da elaborare (potrebbe essere troncato a MaxLength)\n"
+"  source - codice lingua sorgente (può essere vuoto)\n"
+"  target - codice lingua destinazione\n"
+"  timestamp - timestamp Unix attuale in millisecondi (stringa)\n"
 "  random  - numero casuale di 9 cifre (stringa)\n"
 "  rand - uguale a random\n"
 "  rand1..rand9 - le prime 1..9 cifre del numero casuale\n"
@@ -370,7 +370,7 @@ msgid ""
 "and then retrieve them here with GetParam('name')."
 msgstr ""
 "Questo script elabora i dati della risposta. Tutte le funzioni e i parametri descritti nel suggerimento dello script sono disponibili anche qui.\n"
-"Usare GetParam('result') per ottenere il testo ricevuto.\n"
+"Per ottenere il testo ricevuto usa GetParam('result') .\n"
 "\n"
 "Esempio:\n"
 "  var s: string;\n"
@@ -379,7 +379,7 @@ msgstr ""
 "    SetOutput('result', s);\n"
 "  end.\n"
 "\n"
-"È possibile definire parametri personalizzati nello script dei parametri utilizzando SetParam('name', 'value'),\n"
+"È possibile definire parametri personalizzati nello script parametri usando SetParam('name', 'value'),\n"
 "e quindi recuperarli qui con GetParam('name')."
 
 #: formconfig.rvaluetype1
@@ -447,11 +447,11 @@ msgstr "Abilita tasti scelta rapida globali"
 
 #: formsettings.rfastallowhotkeys_default
 msgid "Shift+F1"
-msgstr "Shift+F1"
+msgstr "Maiusc+F1"
 
 #: formsettings.rfastallowhotkeys_hint
 msgid "Enable or disable all global hotkeys"
-msgstr "Abilita o disabilita tutti i tasti di scelta rapida globali"
+msgstr "Abilita/disabilita tutti i tasti scelta rapida globali"
 
 #: formsettings.rfastautoaddlangpairs
 msgctxt "formsettings.rfastautoaddlangpairs"
@@ -460,11 +460,11 @@ msgstr "Aggiungi automaticamente coppie lingue recenti"
 
 #: formsettings.rfastautoaddlangpairs_default
 msgid "Shift+F5"
-msgstr "Shift+F5"
+msgstr "Maiusc+F5"
 
 #: formsettings.rfastautoaddlangpairs_hint
 msgid "Auto-add recent language pairs for quick access"
-msgstr "Aggiungi automaticamente le coppie di lingue recenti per un accesso rapido"
+msgstr "Per un accesso rapido aggiungi automaticamente coppie di lingue recenti"
 
 #: formsettings.rfastautocopy
 msgctxt "formsettings.rfastautocopy"
@@ -473,7 +473,7 @@ msgstr "Copia automatica traduzione"
 
 #: formsettings.rfastautocopy_default
 msgid "Shift+F7"
-msgstr "Shift+F7"
+msgstr "Maiusc+F7"
 
 #: formsettings.rfastautocopy_hint
 msgid "Automatically copy translation to clipboard"
@@ -482,11 +482,11 @@ msgstr "Copia automaticamente la traduzione negli appunti"
 #: formsettings.rfastautoheight
 msgctxt "formsettings.rfastautoheight"
 msgid "Popup Auto Height"
-msgstr "Altezza automatica del popup"
+msgstr "Altezza automatica popup"
 
 #: formsettings.rfastautoheight_default
 msgid "Shift+F9"
-msgstr "Shift+F9"
+msgstr "Maiusc+F9"
 
 #: formsettings.rfastautoheight_hint
 msgid "Adjust popup height to content automatically"
@@ -499,7 +499,7 @@ msgstr "Scambia automaticamente la coppia di lingue"
 
 #: formsettings.rfastautoswap_default
 msgid "Shift+F4"
-msgstr "Shift+F4"
+msgstr "Maiusc+F4"
 
 #: formsettings.rfastautoswap_hint
 msgid "Automatically swap the language pair direction"
@@ -512,11 +512,11 @@ msgstr "Abilita modalità mouse"
 
 #: formsettings.rfastenablemousemode_default
 msgid "Shift+F2"
-msgstr "Shift+F2"
+msgstr "Maiusc+F2"
 
 #: formsettings.rfastenablemousemode_hint
 msgid "Toggle mouse translation mode"
-msgstr "Attiva o disattiva la modalità di traduzione con il mouse"
+msgstr "Attiva/disattiva la modalità traduzione con il mouse"
 
 #: formsettings.rfasthidecontrols
 msgctxt "formsettings.rfasthidecontrols"
@@ -525,20 +525,20 @@ msgstr "Nascondi automaticamente controlli popup"
 
 #: formsettings.rfasthidecontrols_default
 msgid "Shift+F10"
-msgstr "Shift+F10"
+msgstr "Maiusc+F10"
 
 #: formsettings.rfasthidecontrols_hint
 msgid "Hide popup controls when not hovering"
-msgstr "Nascondi i controlli del popup quando il mouse non si trova sopra di esso"
+msgstr "Quando il mouse non si trova sopra i controlli popup nascondili"
 
 #: formsettings.rfastmousemodectrl
 msgctxt "formsettings.rfastmousemodectrl"
 msgid "Only When Ctrl Is Pressed"
-msgstr "Solo quando si preme 'Ctrl'"
+msgstr "Solo quando premi 'Ctrl'"
 
 #: formsettings.rfastmousemodectrl_default
 msgid "Shift+F3"
-msgstr "Shift+F3"
+msgstr "Maiusc+F3"
 
 #: formsettings.rfastmousemodectrl_hint
 msgid "Mouse mode requires Ctrl key to be held"
@@ -551,7 +551,7 @@ msgstr "Traduci mentre scrivi"
 
 #: formsettings.rfastrealtime_default
 msgid "Shift+F6"
-msgstr "Shift+F6"
+msgstr "Maiusc+F6"
 
 #: formsettings.rfastrealtime_hint
 msgid "Translate text as you type in the popup"
@@ -564,7 +564,7 @@ msgstr "Visualizza pulsante 'Traduci'"
 
 #: formsettings.rfastverticalsplit_default
 msgid "Shift+F8"
-msgstr "Shift+F8"
+msgstr "Maiusc+F8"
 
 #: formsettings.rfastverticalsplit_hint
 msgid "Switch between vertical and horizontal layout"
@@ -594,11 +594,11 @@ msgstr "Visualizza popup traduzione"
 
 #: formsettings.roff
 msgid "Off"
-msgstr "Disattivato"
+msgstr "OFF"
 
 #: formsettings.ron
 msgid "On"
-msgstr "Attivato"
+msgstr "ON"
 
 #: formsettings.rproxymodecustomproxy
 msgid "Custom Proxy"
@@ -814,15 +814,15 @@ msgid ""
 "     https://huggingface.co/datasets/HuggingFaceFW/fineweb-2\n"
 "     https://opendatacommons.org/licenses/by/1-0/"
 msgstr ""
-"Trayslate è un client basato sulla barra delle applicazioni per i servizi di traduzione. Puoi inserire direttamente il testo, tradurre il contenuto degli appunti oppure tradurre il testo selezionato in qualsiasi applicazione. Puoi anche sostituire il testo in un'altra app con la relativa traduzione utilizzando un tasto di scelta rapida. L'applicazione consente di scegliere e configurare completamente il servizio di traduzione utilizzato.\n"
+"Trayslate è un client basato sulla barra delle applicazioni per i servizi di traduzione. Puoi inserire direttamente il testo, tradurre il contenuto degli appunti oppure tradurre il testo selezionato in qualsiasi applicazione. Puoi anche sostituire il testo in un'altra app con la relativa traduzione usndo un tasto di scelta rapida. L'applicazione consente di scegliere e configurare completamente il servizio di traduzione usato.\n"
 "\n"
-"Questa applicazione utilizza risorse di terze parti secondo le seguenti licenze:\n"
+"Questa applicazione usa risorse di terze parti secondo le seguenti licenze:\n"
 "\n"
 "1.  Icona principale progettata da Flaticon\n"
 "     https://www.flaticon.com/ru/free-icon/translator_682045\n"
 "\n"
 "2.  Moduli per il supporto del tema scuro di Double Commander\n"
-"     Moduli utilizzati: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n"
+"     Moduli usati: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas\n"
 "     Licenza: GNU General Public License v2.0 (GPL-2.0)\n"
 "     https://github.com/doublecmd/doublecmd\n"
 "   \n"
@@ -838,7 +838,7 @@ msgstr ""
 "     Copyright (c) 1999–2024, Lukas Gebauer\n"
 "     https://github.com/geby/synapse\n"
 "\n"
-"5.  Dati linguistici FineWeb2 utilizzati per generare i profili linguistici\n"
+"5.  Dati linguistici FineWeb2 usati per generare i profili linguistici\n"
 "     Licenza: Open Data Commons Attribution License v1.0 (ODC-By)\n"
 "     FineWeb2 proviene da Common Crawl ed è inoltre soggetto\n"
 "     ai Termini di utilizzo di Common Crawl.\n"
@@ -1009,7 +1009,7 @@ msgstr "Richiesta"
 #: tformconfigtrayslate.groupresponse.caption
 msgctxt "tformconfigtrayslate.groupresponse.caption"
 msgid "Json Pointer Processing the Response"
-msgstr "Elaborazione della risposta con Json Pointer"
+msgstr "Elaborazione risposta con Json Pointer"
 
 #: tformconfigtrayslate.groupscript.caption
 msgid "Script Retrieved Parameters"
@@ -1018,7 +1018,7 @@ msgstr "Parametri recuperati dallo script"
 #: tformconfigtrayslate.groupscriptresponse.caption
 msgctxt "tformconfigtrayslate.groupscriptresponse.caption"
 msgid "Script Processing the Response"
-msgstr "Elaborazione della risposta tramite script"
+msgstr "Elaborazione risposta tramite script"
 
 #: tformconfigtrayslate.imagepreview.hint
 msgid "Click to select the config icon, Middle-Click clears the icon"
@@ -1040,7 +1040,7 @@ msgstr "Tipo contenuto"
 #: tformconfigtrayslate.labelfilllanguages.caption
 msgctxt "tformconfigtrayslate.labelfilllanguages.caption"
 msgid "Fill with default"
-msgstr "Compila con i valori predefiniti"
+msgstr "Compila con valori predefiniti"
 
 #: tformconfigtrayslate.labelfilltargetlanguages.caption
 msgctxt "tformconfigtrayslate.labelfilltargetlanguages.caption"
@@ -1210,7 +1210,7 @@ msgstr "Servizio"
 
 #: tformconfigtrayslate.reloadconfigs.hint
 msgid "Reload configurations from disk"
-msgstr "Ricarica le configurazioni dal disco"
+msgstr "Ricarica configurazioni dal disco"
 
 #: tformconfigtrayslate.sbcopyconfig.hint
 msgid "Copy configuration"
@@ -1531,19 +1531,19 @@ msgstr "Passa alla disposizione affiancata con il testo sorgente accanto alla tr
 
 #: tformsettingstrayslate.coloriconbackground.hint
 msgid "Background color of the tray icon"
-msgstr "Colore di sfondo dell'icona nell'area di notifica"
+msgstr "Colore sfondo dell'icona nell'area di notifica"
 
 #: tformsettingstrayslate.coloriconfont.hint
 msgid "Font color of the tray icon"
-msgstr "Colore del carattere dell'icona nell'area di notifica"
+msgstr "Colore carattere dell'icona nell'area di notifica"
 
 #: tformsettingstrayslate.colormousemodeframe.hint
 msgid "Color of the frame around the icon when mouse mode is enabled"
-msgstr "Colore della cornice intorno all'icona quando la modalità mouse è abilitata"
+msgstr "Colore cornice intorno all'icona quando la modalità mouse è abilitata"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
-msgstr "Nome del carattere utilizzato per l'icona nell'area di notifica"
+msgstr "Nome font usato per l'icona nell'area di notifica"
 
 #: tformsettingstrayslate.combolangdetect.hint
 msgid "Config that auto-detects language for the source text"
@@ -1556,7 +1556,7 @@ msgstr "Scegli come appare la traduzione quando selezioni il testo con il mouse"
 #: tformsettingstrayslate.combomousemode.text
 msgctxt "tformsettingstrayslate.combomousemode.text"
 msgid "Show Translate Button"
-msgstr "Viusalizza pulsante 'Traduci'"
+msgstr "Visualizza pulsante 'Traduci'"
 
 #: tformsettingstrayslate.comboproxymode.hint
 msgid "Defines how proxy is used no proxy system proxy or custom configuration"
@@ -1625,7 +1625,7 @@ msgstr "Popup finestra"
 
 #: tformsettingstrayslate.groupproxiedconfigs.caption
 msgid "Proxied Configs (Default: All)"
-msgstr "Konfigurasi melalui proxy (Bawaan: Semua)"
+msgstr "Configurazioni proxy (predefinita: tutte)"
 
 #: tformsettingstrayslate.groupproxy.caption
 msgid "Proxy"
@@ -1698,7 +1698,7 @@ msgstr "Modalità mouse"
 
 #: tformsettingstrayslate.labelmousemodeframe.caption
 msgid "Mouse Mode Frame"
-msgstr "Cornice della modalità mouse"
+msgstr "Cornice modalità mouse"
 
 #: tformsettingstrayslate.labelopacityhover.caption
 msgid "Opacity On Hover"
@@ -1864,7 +1864,7 @@ msgstr "Copia automatica traduzione"
 #: tformtrayslate.afastautoheight.caption
 msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
-msgstr "Altezza automatica del popup"
+msgstr "Altezza automatica popup"
 
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
