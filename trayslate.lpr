@@ -19,6 +19,7 @@ uses
   openssl,
   opensslsockets,
   Consts,
+  AppInstance,
   mainform,
   localize
   {$IFDEF WINDOWS}
@@ -33,11 +34,17 @@ begin
   {$IFDEF DEBUG}
   GlobalSkipIfNoLeaks := True;
   {$ENDIF}
+
   RequireDerivedFormResource := True;
   Language := TLocalize.GetOSLanguage;
   Application.Title := 'Trayslate';
   Application.Scaled := True;
   Application.Initialize;
+  if not AcquireSingleInstance then
+  begin
+    SendToExistingInstance(ParamStr(1));
+    Halt;
+  end;
   Randomize;
   InitSSLInterface;
   {$IFDEF WINDOWS}
@@ -45,6 +52,7 @@ begin
   {$ENDIF}
   Application.ShowMainForm := False;
   Application.CreateForm(TformTrayslate, formTrayslate);
+  SetAppInstanceMessageEvent(@formTrayslate.OnAppInstanceMessage);
   TLocalize.ApplicationTranslate(APP_NAME, Language, nil, TLocalize.LoadCustomPoFile(formTrayslate.CustomPoFile));
   TLocalize.UpdatePackageTranslations(APP_NAME, 'checkupdates', Language, ['checkupdates']);
   Application.Run;

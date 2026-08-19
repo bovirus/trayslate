@@ -535,6 +535,8 @@ type
     FHideControls: boolean;
 
     {$IFDEF WINDOWS}
+    procedure OnAppInstanceMessage(Sender: TObject; const AMessage: string);
+    procedure DestroyWnd; override;
     // MouseHook Events
     procedure OnKeyboardEvent(Sender: TObject; var Info: TKeyboardEventInfo);
     procedure OnHookLeftDown(Sender: TObject; const Info: TMouseEventInfo);
@@ -577,7 +579,7 @@ type
     procedure ClosePopupAsync(Data: PtrInt);
     procedure ShowButton(const SourceText: string; X: integer = 0; Y: integer = 0);
     procedure SetVerticalMode;
-    procedure DestroyWnd; override;
+
     // Translate Methods
     function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
     procedure ThreadDone(Sender: TObject);
@@ -1113,6 +1115,8 @@ end;
 {%Region -fold Windows Specific Events}
 {$IFDEF WINDOWS}
 
+{ Protected }
+
 procedure TformTrayslate.WMActivate(var Message: TLMActivate);
 begin
   inherited;
@@ -1305,6 +1309,21 @@ begin
   end;
 
   inherited WndProc(TheMessage);
+end;
+
+{ Public }
+
+procedure TformTrayslate.OnAppInstanceMessage(Sender: TObject; const AMessage: string);
+begin
+  TopMost := False;
+  Show;
+end;
+
+procedure TformTrayslate.DestroyWnd;
+begin
+  if Assigned(FDropTarget) then
+    FDropTarget.Unregister;
+  inherited DestroyWnd;
 end;
 
 { MouseHook Events }
@@ -4161,13 +4180,6 @@ begin
 
     PanelSource.Height := Round((PanelSource.Height + PanelTarget.Height) * FSplitRatio);
   end;
-end;
-
-procedure TformTrayslate.DestroyWnd;
-begin
-  if Assigned(FDropTarget) then
-    FDropTarget.Unregister;
-  inherited DestroyWnd;
 end;
 
 procedure TformTrayslate.ChangeSourceLang(NewLang: string; AddRecentPairs: boolean = True);
