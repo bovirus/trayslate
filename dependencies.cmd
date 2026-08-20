@@ -75,9 +75,10 @@ set "revert=%~5"
 set "pullflag=%~6"
 set "buildflag=%~7"
 
-:: If lpk file is specified, form full path; otherwise leave empty
+:: If lpk file(s) are specified, pass them as a comma-separated list
+:: relative to the submodule root; otherwise leave empty.
 if not "%lpkname%"=="" (
-    set "lpkfull=%~dp0libs\%lower%\%lpkname%"
+    set "lpkfull=%lpkname%"
 ) else (
     set "lpkfull="
 )
@@ -113,7 +114,7 @@ call :BuildComponent OpenSSL openssl main "" "" %DO_PULL% nobuild
 call :BuildComponent RichKit richkit main richkit.lpk "" %DO_PULL% %DO_BUILD%
 
 :: Build RichMemo
-call :BuildComponent RichMemo richmemo master richmemopackage.lpk "" %DO_PULL% %DO_BUILD%
+call :BuildComponent RichMemo richmemo master "richmemopackage.lpk, ide\richmemo_design.lpk" "" %DO_PULL% %DO_BUILD%
 
 :: Build Synapse (with revert file laz_synapse.pas)
 call :BuildComponent Synapse synapse master laz_synapse.lpk laz_synapse.pas %DO_PULL% %DO_BUILD%
