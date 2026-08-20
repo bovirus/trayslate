@@ -110,11 +110,11 @@ call :BuildComponent Helpers helpers main helpers.lpk "" %DO_PULL% %DO_BUILD%
 :: Build OpenSSL (no lpk, no revert, build disabled)
 call :BuildComponent OpenSSL openssl main "" "" %DO_PULL% nobuild
 
-:: Build RichKit
-call :BuildComponent RichKit richkit main richkit.lpk "" %DO_PULL% %DO_BUILD%
-
 :: Build RichMemo
 call :BuildComponent RichMemo richmemo master "richmemopackage.lpk, ide\richmemo_design.lpk" "" %DO_PULL% %DO_BUILD%
+
+:: Build RichKit
+call :BuildComponent RichKit richkit main richkit.lpk "" %DO_PULL% %DO_BUILD%
 
 :: Build Synapse (with revert file laz_synapse.pas)
 call :BuildComponent Synapse synapse master laz_synapse.lpk laz_synapse.pas %DO_PULL% %DO_BUILD%
