@@ -1365,7 +1365,7 @@ begin
     // Workaround for an FPC 3.2.2 fpjson bug when parsing consecutive \u200B sequences.
     content := StringReplace(content, '\u200b', string.Empty, [rfReplaceAll, rfIgnoreCase]);
 
-    Result := ParseResponse(content).PreserveIndentation(FTextToTranslate);
+    Result := ParseResponse(content);
   end;
 
   if (Trim(Result) = string.Empty) then
@@ -1384,7 +1384,7 @@ begin
 
   // Execute response handle script
   ExecuteResponseScript(Result);
-  Temp := Result;
+  Temp := Result.PreserveIndentation(FTextToTranslate);
   Temp.TryFormatJson(Result);
 end;
 
