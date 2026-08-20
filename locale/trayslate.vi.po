@@ -1818,11 +1818,21 @@ msgstr "Tự động kiểm tra cập nhật"
 msgid "Check For Updates"
 msgstr "Kiểm tra cập nhật"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "Xóa"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "Trình chỉnh sửa cấu hình..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Sao chép"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "Sao chép"
 
@@ -1830,6 +1840,10 @@ msgstr "Sao chép"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Sao chép bản dịch"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "Cắt"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2035,9 +2049,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Dịch mới"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "Dán"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "Dịch cửa sổ bật lên"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "Chọn tất cả"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2047,6 +2069,16 @@ msgstr "Cài đặt..."
 msgid "Show"
 msgstr "Hiển thị"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Thứ tự đọc từ phải sang trái"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Thứ tự đọc từ phải sang trái"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2055,6 +2087,10 @@ msgstr "Dịch (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Dịch Clipboard"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "Hoàn tác"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

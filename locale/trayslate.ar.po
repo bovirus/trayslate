@@ -1813,11 +1813,21 @@ msgstr "التحقق التلقائي من التحديثات"
 msgid "Check For Updates"
 msgstr "التحقق من التحديثات"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "مسح"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "محرر التكوين..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "نسخ"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "نسخ"
 
@@ -1825,6 +1835,10 @@ msgstr "نسخ"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "نسخ الترجمة"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "قص"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "ترجمة جديدة"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "لصق"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "ترجمة منبثقة"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "تحديد الكل"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "الإعدادات..."
 msgid "Show"
 msgstr "إظهار"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "ترتيب القراءة من اليمين إلى اليسار"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "ترتيب القراءة من اليمين إلى اليسار"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "ترجمة (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "ترجمة الحافظة"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "تراجع"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

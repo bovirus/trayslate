@@ -1813,11 +1813,21 @@ msgstr "自动更新检查"
 msgid "Check For Updates"
 msgstr "检查更新"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "清除"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "配置编辑器..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "复制"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "复制"
 
@@ -1825,6 +1835,10 @@ msgstr "复制"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "复制翻译"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "剪切"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "新建翻译"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "粘贴"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "弹出翻译"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "全选"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "设置..."
 msgid "Show"
 msgstr "显示"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "从右到左的阅读顺序"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "从右到左的阅读顺序"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "翻译（Ctrl ¦ Shift ¦ Enter + Enter）"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "翻译剪贴板"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "撤销"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

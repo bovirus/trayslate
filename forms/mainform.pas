@@ -69,6 +69,14 @@ type
     aAutoCheckUpdates: TAction;
     aCopySource: TAction;
     aCopyTarget: TAction;
+    aCopy: TAction;
+    aTargetBidiRightToLeft: TAction;
+    aSourceBidiRightToLeft: TAction;
+    aSelectAll: TAction;
+    aClear: TAction;
+    aPaste: TAction;
+    aUndo: TAction;
+    aCut: TAction;
     aFastAutoHeight: TAction;
     aLangVietnamese: TAction;
     aDeletePair: TAction;
@@ -104,6 +112,14 @@ type
     MenuBulgarian: TMenuItem;
     MenuItem1: TMenuItem;
     MenuFastMouseModeCtrl: TMenuItem;
+    MenuSourceBidiMode: TMenuItem;
+    MenuTargetUndo: TMenuItem;
+    MenuTargetCut: TMenuItem;
+    MenuTargetCopy: TMenuItem;
+    MenuTargetPaste: TMenuItem;
+    MenuTargetClear: TMenuItem;
+    MenuTargetSelectAll: TMenuItem;
+    MenuTargetBidiMode: TMenuItem;
     MenuItem2: TMenuItem;
     MenuFastSettings: TMenuItem;
     MenuFastAllowHotKeys: TMenuItem;
@@ -115,6 +131,12 @@ type
     MenuFastHideControls: TMenuItem;
     MenuItem3: TMenuItem;
     MenuFastAutoHeight: TMenuItem;
+    MenuSourceUndo: TMenuItem;
+    MenuSourceCut: TMenuItem;
+    MenuSourceCopy: TMenuItem;
+    MenuSourcePaste: TMenuItem;
+    MenuSourceClear: TMenuItem;
+    MenuSourceSelectAll: TMenuItem;
     MenuRecentConfigEditor: TMenuItem;
     MenuVietnamese: TMenuItem;
     MenuMoveLeft: TMenuItem;
@@ -124,7 +146,9 @@ type
     MenuDeletePair: TMenuItem;
     MenuPortugueseBrazil: TMenuItem;
     OpenPo: TOpenDialog;
+    PopupSource: TPopupMenu;
     PopupRecentPair: TPopupMenu;
+    PopupTarget: TPopupMenu;
     SbCopySource: TSpeedButton;
     SbCopyTarget: TSpeedButton;
     ComboSource: TComboBox;
@@ -157,6 +181,12 @@ type
     SbNewTranslate: TSpeedButton;
     SbAddPair: TSpeedButton;
     Separator1: TMenuItem;
+    Separator10: TMenuItem;
+    Separator11: TMenuItem;
+    Separator12: TMenuItem;
+    Separator13: TMenuItem;
+    Separator14: TMenuItem;
+    Separator15: TMenuItem;
     Separator2: TMenuItem;
     SbSwap: TSpeedButton;
     SbTranslate: TSpeedButton;
@@ -259,6 +289,14 @@ type
     procedure aMoveLastExecute(Sender: TObject);
     procedure aMoveLeftExecute(Sender: TObject);
     procedure aMoveRightExecute(Sender: TObject);
+    procedure aUndoExecute(Sender: TObject);
+    procedure aCutExecute(Sender: TObject);
+    procedure aCopyExecute(Sender: TObject);
+    procedure aPasteExecute(Sender: TObject);
+    procedure aClearExecute(Sender: TObject);
+    procedure aSelectAllExecute(Sender: TObject);
+    procedure aSourceBidiRightToLeftExecute(Sender: TObject);
+    procedure aTargetBidiRightToLeftExecute(Sender: TObject);
     procedure aAutoCheckUpdatesExecute(Sender: TObject);
     procedure aCheckForUpdatesExecute(Sender: TObject);
     procedure aDonateExecute(Sender: TObject);
@@ -283,6 +321,7 @@ type
     procedure MemoSourceKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure MemoSourceKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure MemoTargetKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
+    procedure MemoTargetChange(Sender: TObject);
     procedure SettingsFormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure PanelLangResize(Sender: TObject);
     procedure SplitterMoved(Sender: TObject);
@@ -1910,6 +1949,96 @@ begin
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
 end;
 
+procedure TformTrayslate.aUndoExecute(Sender: TObject);
+var
+  Memo: TRichMemo;
+begin
+  if Self.ActiveControl is TRichMemo then
+  begin
+    Memo := Self.ActiveControl as TRichMemo;
+    Memo.Undo;
+  end;
+end;
+
+procedure TformTrayslate.aCutExecute(Sender: TObject);
+var
+  Memo: TRichMemo;
+begin
+  if Self.ActiveControl is TRichMemo then
+  begin
+    Memo := Self.ActiveControl as TRichMemo;
+    Memo.CutToClipboard;
+  end;
+end;
+
+procedure TformTrayslate.aCopyExecute(Sender: TObject);
+var
+  Memo: TRichMemo;
+begin
+  if Self.ActiveControl is TRichMemo then
+  begin
+    Memo := Self.ActiveControl as TRichMemo;
+    Memo.CopyToClipboard;
+  end;
+end;
+
+procedure TformTrayslate.aPasteExecute(Sender: TObject);
+var
+  Memo: TRichMemo;
+begin
+  if Self.ActiveControl is TRichMemo then
+  begin
+    Memo := Self.ActiveControl as TRichMemo;
+    Memo.PasteFromClipboard;
+  end;
+end;
+
+procedure TformTrayslate.aClearExecute(Sender: TObject);
+var
+  Memo: TRichMemo;
+begin
+  if Self.ActiveControl is TRichMemo then
+  begin
+    Memo := Self.ActiveControl as TRichMemo;
+    Memo.ClearSelection;
+  end;
+end;
+
+procedure TformTrayslate.aSelectAllExecute(Sender: TObject);
+var
+  Memo: TRichMemo;
+begin
+  if Self.ActiveControl is TRichMemo then
+  begin
+    Memo := Self.ActiveControl as TRichMemo;
+    Memo.SelectAll;
+  end;
+end;
+
+procedure TformTrayslate.aSourceBidiRightToLeftExecute(Sender: TObject);
+var
+  Memo: TRichMemo;
+begin
+  Memo := PopupSource.PopupComponent as TRichMemo;
+  if aSourceBidiRightToLeft.Checked then
+    Memo.BiDiMode := bdRightToLeft
+  else
+    Memo.BiDiMode := bdLeftToRight;
+  Memo.ApplyBidiMode;
+end;
+
+procedure TformTrayslate.aTargetBidiRightToLeftExecute(Sender: TObject);
+var
+  Memo: TRichMemo;
+begin
+  Memo := PopupTarget.PopupComponent as TRichMemo;
+  if aTargetBidiRightToLeft.Checked then
+    Memo.BiDiMode := bdRightToLeft
+  else
+    Memo.BiDiMode := bdLeftToRight;
+  Memo.ApplyBidiMode;
+end;
+
 procedure TformTrayslate.aAutoCheckUpdatesExecute(Sender: TObject);
 begin
   FAutoCheckUpdates := aAutoCheckUpdates.Checked;
@@ -2258,6 +2387,12 @@ begin
     (Sender as TRichMemo).PasteWithLineEnding;
     Key := 0;
   end;
+end;
+
+procedure TformTrayslate.MemoTargetChange(Sender: TObject);
+begin
+  if MemoTarget.BiDiMode = bdRightToLeft then
+    MemoTarget.ApplyBidiMode;
 end;
 
 procedure TformTrayslate.SettingsFormClose(Sender: TObject; var CloseAction: TCloseAction);

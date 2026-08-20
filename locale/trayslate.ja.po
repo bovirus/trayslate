@@ -1813,11 +1813,21 @@ msgstr "自動更新チェック"
 msgid "Check For Updates"
 msgstr "アップデートを確認"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "クリア"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "設定エディタ..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "コピー"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "コピー"
 
@@ -1825,6 +1835,10 @@ msgstr "コピー"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "翻訳をコピー"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "切り取り"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "新規翻訳"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "貼り付け"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "ポップアップ翻訳"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "すべて選択"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "設定..."
 msgid "Show"
 msgstr "表示"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "右から左への読み取り順序"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "右から左への読み取り順序"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "翻訳 (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "クリップボードを翻訳"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "元に戻す"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

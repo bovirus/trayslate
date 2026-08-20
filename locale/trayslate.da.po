@@ -1813,11 +1813,21 @@ msgstr "Automatisk kontrol af opdateringer"
 msgid "Check For Updates"
 msgstr "Søg efter opdateringer"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "Ryd"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "Konfigurationseditor..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Kopiér"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "Kopiér"
 
@@ -1825,6 +1835,10 @@ msgstr "Kopiér"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Copy Translation"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "Klip"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Ny oversættelse"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "Indsæt"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "Popup-oversættelse"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "Markér alt"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "Indstillinger..."
 msgid "Show"
 msgstr "Vis"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Læseretning fra højre mod venstre"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Læseretning fra højre mod venstre"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "Oversæt (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Oversæt udklipsholder"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "Fortryd"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

@@ -1813,11 +1813,21 @@ msgstr "Verificare auto a actualizărilor"
 msgid "Check For Updates"
 msgstr "Verifică actualizări"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "Șterge"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "Editor de configurații..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Copiază"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "Copiază"
 
@@ -1825,6 +1835,10 @@ msgstr "Copiază"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Copiază traducerea"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "Decupează"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Traducere nouă"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "Lipește"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "Traducere popup"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "Selectează tot"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "Setări..."
 msgid "Show"
 msgstr "Afișare"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Ordine de citire de la dreapta la stânga"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Ordine de citire de la dreapta la stânga"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "Traduceți (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Traduceți clipboard-ul"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "Anulează"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

@@ -1813,11 +1813,21 @@ msgstr "Авто перевірка оновлень"
 msgid "Check For Updates"
 msgstr "Перевірити оновлення"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "Очистити"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "Редактор конфігурації..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Копіювати"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "Копіювати"
 
@@ -1825,6 +1835,10 @@ msgstr "Копіювати"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Копіювати переклад"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "Вирізати"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Новий переклад"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "Вставити"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "Спливаючий переклад"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "Вибрати все"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "Налаштування..."
 msgid "Show"
 msgstr "Показати"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Порядок читання справа наліво"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Порядок читання справа наліво"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "Перекласти (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Перекласти буфер обміну"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "Скасувати"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

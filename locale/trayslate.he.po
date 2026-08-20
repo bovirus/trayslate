@@ -1813,11 +1813,21 @@ msgstr "בדיקה אוטומטית של עדכונים"
 msgid "Check For Updates"
 msgstr "בדוק עדכונים"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "נקה"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "עורך תצורה..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "העתק"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "העתק"
 
@@ -1825,6 +1835,10 @@ msgstr "העתק"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "העתק תרגום"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "גזור"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "תרגום חדש"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "הדבק"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "תרגום קופץ"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "בחר הכול"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "הגדרות..."
 msgid "Show"
 msgstr "הצג"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "סדר קריאה מימין לשמאל"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "סדר קריאה מימין לשמאל"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "תרגם (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "תרגם לוח גזירים"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "בטל"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

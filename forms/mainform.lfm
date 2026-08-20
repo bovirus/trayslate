@@ -209,6 +209,7 @@ object formTrayslate: TformTrayslate
       HideSelection = False
       OnKeyDown = MemoSourceKeyDown
       OnKeyUp = MemoSourceKeyUp
+      PopupMenu = PopupSource
       ScrollBars = ssAutoBoth
       TabOrder = 0
       ZoomFactor = 1
@@ -267,7 +268,9 @@ object formTrayslate: TformTrayslate
       Align = alClient
       BorderStyle = bsNone
       HideSelection = False
+      OnChange = MemoTargetChange
       OnKeyDown = MemoTargetKeyDown
+      PopupMenu = PopupTarget
       ScrollBars = ssAutoBoth
       TabOrder = 0
       ZoomFactor = 1
@@ -308,7 +311,7 @@ object formTrayslate: TformTrayslate
     OnClick = TrayIconClick
     OnMouseMove = TrayIconMouseMove
     OnMouseUp = TrayIconMouseUp
-    Left = 208
+    Left = 216
     Top = 312
   end
   object PopupTray: TPopupMenu
@@ -842,6 +845,48 @@ object formTrayslate: TformTrayslate
       Caption = 'Auto-Hide Popup Controls'
       OnExecute = aFastHideControlsExecute
     end
+    object aUndo: TAction
+      Category = 'Memo'
+      Caption = 'Undo'
+      OnExecute = aUndoExecute
+    end
+    object aCut: TAction
+      Category = 'Memo'
+      Caption = 'Cut'
+      OnExecute = aCutExecute
+    end
+    object aCopy: TAction
+      Category = 'Memo'
+      Caption = 'Copy'
+      OnExecute = aCopyExecute
+    end
+    object aPaste: TAction
+      Category = 'Memo'
+      Caption = 'Paste'
+      OnExecute = aPasteExecute
+    end
+    object aClear: TAction
+      Category = 'Memo'
+      Caption = 'Clear'
+      OnExecute = aClearExecute
+    end
+    object aSelectAll: TAction
+      Category = 'Memo'
+      Caption = 'Select All'
+      OnExecute = aSelectAllExecute
+    end
+    object aSourceBidiRightToLeft: TAction
+      Category = 'Memo'
+      AutoCheck = True
+      Caption = 'Right-To-Left Reading Order'
+      OnExecute = aSourceBidiRightToLeftExecute
+    end
+    object aTargetBidiRightToLeft: TAction
+      Category = 'Memo'
+      AutoCheck = True
+      Caption = 'Right-To-Left Reading Order'
+      OnExecute = aTargetBidiRightToLeftExecute
+    end
   end
   object TimerClick: TTimer
     Enabled = False
@@ -949,7 +994,7 @@ object formTrayslate: TformTrayslate
     OnEndSession = ApplicationPropEndSession
     OnShowHint = ApplicationPropShowHint
     OnUserInput = ApplicationPropUserInput
-    Left = 208
+    Left = 216
     Top = 240
   end
   object PopupRecentPair: TPopupMenu
@@ -979,6 +1024,76 @@ object formTrayslate: TformTrayslate
     end
     object MenuRecentConfigEditor: TMenuItem
       Action = aConfigEditor
+    end
+  end
+  object PopupSource: TPopupMenu
+    Left = 128
+    Top = 168
+    object MenuSourceUndo: TMenuItem
+      Action = aUndo
+    end
+    object Separator12: TMenuItem
+      Caption = '-'
+    end
+    object MenuSourceCut: TMenuItem
+      Action = aCut
+    end
+    object MenuSourceCopy: TMenuItem
+      Action = aCopy
+    end
+    object MenuSourcePaste: TMenuItem
+      Action = aPaste
+    end
+    object MenuSourceClear: TMenuItem
+      Action = aClear
+    end
+    object Separator11: TMenuItem
+      Caption = '-'
+    end
+    object MenuSourceSelectAll: TMenuItem
+      Action = aSelectAll
+    end
+    object Separator10: TMenuItem
+      Caption = '-'
+    end
+    object MenuSourceBidiMode: TMenuItem
+      Action = aSourceBidiRightToLeft
+      AutoCheck = True
+    end
+  end
+  object PopupTarget: TPopupMenu
+    Left = 128
+    Top = 240
+    object MenuTargetUndo: TMenuItem
+      Action = aUndo
+    end
+    object Separator13: TMenuItem
+      Caption = '-'
+    end
+    object MenuTargetCut: TMenuItem
+      Action = aCut
+    end
+    object MenuTargetCopy: TMenuItem
+      Action = aCopy
+    end
+    object MenuTargetPaste: TMenuItem
+      Action = aPaste
+    end
+    object MenuTargetClear: TMenuItem
+      Action = aClear
+    end
+    object Separator14: TMenuItem
+      Caption = '-'
+    end
+    object MenuTargetSelectAll: TMenuItem
+      Action = aSelectAll
+    end
+    object Separator15: TMenuItem
+      Caption = '-'
+    end
+    object MenuTargetBidiMode: TMenuItem
+      Action = aTargetBidiRightToLeft
+      AutoCheck = True
     end
   end
 end

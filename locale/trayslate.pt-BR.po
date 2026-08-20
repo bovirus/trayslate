@@ -1817,11 +1817,21 @@ msgstr "Verificar Atualizações Automaticamente"
 msgid "Check For Updates"
 msgstr "Verificar Atualizações"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "Limpar"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "Editor de Configurações..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Copiar"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "Copiar"
 
@@ -1829,6 +1839,10 @@ msgstr "Copiar"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Copiar Tradução"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "Recortar"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2034,9 +2048,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Nova Tradução"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "Colar"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "Tradução em Pop-up"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "Selecionar tudo"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2046,6 +2068,16 @@ msgstr "Configurações…"
 msgid "Show"
 msgstr "Exibir"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Ordem de leitura da direita para a esquerda"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Ordem de leitura da direita para a esquerda"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2054,6 +2086,10 @@ msgstr "Traduzir (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Traduzir Área de Transferência"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "Desfazer"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

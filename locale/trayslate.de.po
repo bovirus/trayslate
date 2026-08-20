@@ -1813,11 +1813,21 @@ msgstr "Automatische Updates-Prüfung"
 msgid "Check For Updates"
 msgstr "Nach Updates suchen"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "Löschen"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "Konfigurationseditor..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Kopieren"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "Kopieren"
 
@@ -1825,6 +1835,10 @@ msgstr "Kopieren"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Übersetzung kopieren"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "Ausschneiden"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Neue Übersetzung"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "Einfügen"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "Popup-Übersetzung"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "Alles auswählen"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "Einstellungen..."
 msgid "Show"
 msgstr "Anzeigen"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Leserichtung von rechts nach links"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Leserichtung von rechts nach links"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "Übersetzen (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Zwischenablage übersetzen"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "Rückgängig"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

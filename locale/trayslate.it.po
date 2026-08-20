@@ -1821,11 +1821,21 @@ msgstr "Controllo automatico aggiornamenti"
 msgid "Check For Updates"
 msgstr "Controlla aggiornamenti"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "Cancella"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "Editor configurazione..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Copia"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "Copia"
 
@@ -1833,6 +1843,10 @@ msgstr "Copia"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Copia traduzione"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "Taglia"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2038,9 +2052,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Nuova traduzione"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "Incolla"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "Popup traduzione"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "Seleziona tutto"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2050,6 +2072,16 @@ msgstr "Impostazioni..."
 msgid "Show"
 msgstr "Apri finestra Trayslate"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Ordine di lettura da destra a sinistra"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Ordine di lettura da destra a sinistra"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2058,6 +2090,10 @@ msgstr "Traduci (Ctrl ¦ Maiusc ¦ Inserisci + Invio)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Traduci dagli appunti"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "Annulla"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

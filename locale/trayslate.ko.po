@@ -1813,11 +1813,21 @@ msgstr "자동 업데이트 확인"
 msgid "Check For Updates"
 msgstr "업데이트 확인"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "지우기"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "설정 편집기..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "복사"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "복사"
 
@@ -1825,6 +1835,10 @@ msgstr "복사"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "번역 복사"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "잘라내기"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "새 번역"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "붙여넣기"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "팝업 번역"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "모두 선택"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "설정..."
 msgid "Show"
 msgstr "표시"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "오른쪽에서 왼쪽으로 읽기 순서"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "오른쪽에서 왼쪽으로 읽기 순서"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "번역 (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "클립보드 번역"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "실행 취소"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

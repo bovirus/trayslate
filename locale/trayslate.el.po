@@ -1813,11 +1813,21 @@ msgstr "Αυτόματος έλεγχος ενημερώσεων"
 msgid "Check For Updates"
 msgstr "Έλεγχος για ενημερώσεις"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "Εκκαθάριση"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "Επεξεργαστής ρυθμίσεων..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Αντιγραφή"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "Αντιγραφή"
 
@@ -1825,6 +1835,10 @@ msgstr "Αντιγραφή"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Αντιγραφή μετάφρασης"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "Αποκοπή"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Νέα μετάφραση"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "Επικόλληση"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "Αναδυόμενη μετάφραση"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "Επιλογή όλων"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "Ρυθμίσεις..."
 msgid "Show"
 msgstr "Εμφάνιση"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Σειρά ανάγνωσης από δεξιά προς τα αριστερά"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Σειρά ανάγνωσης από δεξιά προς τα αριστερά"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "Μετάφραση (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "Μετάφραση πρόχειρου"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "Αναίρεση"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"

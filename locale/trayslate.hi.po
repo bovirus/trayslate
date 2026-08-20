@@ -1813,11 +1813,21 @@ msgstr "अपडेट्स की ऑटो जांच"
 msgid "Check For Updates"
 msgstr "अद्यतन जाँचें"
 
+#: tformtrayslate.aclear.caption
+msgid "Clear"
+msgstr "साफ़ करें"
+
 #: tformtrayslate.aconfigeditor.caption
 msgid "Config Editor..."
 msgstr "कॉन्फ़िग संपादक..."
 
+#: tformtrayslate.acopy.caption
+msgctxt "tformtrayslate.acopy.caption"
+msgid "Copy"
+msgstr "कॉपी करें"
+
 #: tformtrayslate.acopysource.hint
+msgctxt "tformtrayslate.acopysource.hint"
 msgid "Copy"
 msgstr "कॉपी"
 
@@ -1825,6 +1835,10 @@ msgstr "कॉपी"
 msgctxt "tformtrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "अनुवाद कॉपी करें"
+
+#: tformtrayslate.acut.caption
+msgid "Cut"
+msgstr "काटें"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"
@@ -2030,9 +2044,17 @@ msgctxt "tformtrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "नया अनुवाद"
 
+#: tformtrayslate.apaste.caption
+msgid "Paste"
+msgstr "पेस्ट करें"
+
 #: tformtrayslate.apopuptranslate.caption
 msgid "Popup Translate"
 msgstr "पॉपअप अनुवाद"
+
+#: tformtrayslate.aselectall.caption
+msgid "Select All"
+msgstr "सभी चुनें"
 
 #: tformtrayslate.asettings.caption
 msgid "Settings..."
@@ -2042,6 +2064,16 @@ msgstr "सेटिंग्स..."
 msgid "Show"
 msgstr "दिखाएँ"
 
+#: tformtrayslate.asourcebidirighttoleft.caption
+msgctxt "tformtrayslate.asourcebidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "दाएँ से बाएँ पढ़ने का क्रम"
+
+#: tformtrayslate.atargetbidirighttoleft.caption
+msgctxt "tformtrayslate.atargetbidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "दाएँ से बाएँ पढ़ने का क्रम"
+
 #: tformtrayslate.atranslate.hint
 msgctxt "tformtrayslate.atranslate.hint"
 msgid "Translate (Ctrl ¦ Shift ¦ Enter + Enter)"
@@ -2050,6 +2082,10 @@ msgstr "अनुवाद करें (Ctrl ¦ Shift ¦ Enter + Enter)"
 #: tformtrayslate.atranslateclipboard.caption
 msgid "Translate Clipboard"
 msgstr "क्लिपबोर्ड अनुवाद करें"
+
+#: tformtrayslate.aundo.caption
+msgid "Undo"
+msgstr "पूर्ववत करें"
 
 #: tformtrayslate.caption
 msgctxt "tformtrayslate.caption"
