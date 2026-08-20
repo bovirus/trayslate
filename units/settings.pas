@@ -40,7 +40,7 @@ function LoadFormSettings(Form: TformTrayslate): boolean;
 
 implementation
 
-uses hotkeyhelper, localize, network, darkutils, controlshelper, osutils, Consts;
+uses hotkeyhelper, localize, network, darkutils, osutils, consts, RichMemoHelper;
 
 procedure SaveFormSettings(Form: TformTrayslate);
 var

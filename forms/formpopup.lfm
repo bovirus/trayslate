@@ -31,7 +31,7 @@ object formPopupTrayslate: TformPopupTrayslate
     ClientHeight = 208
     ClientWidth = 474
     TabOrder = 1
-    object MemoTarget: TMemo
+    object MemoTarget: TRichMemo
       Left = 0
       Height = 208
       Top = 0
@@ -40,9 +40,10 @@ object formPopupTrayslate: TformPopupTrayslate
       BorderStyle = bsNone
       Color = clWindow
       HideSelection = False
+      OnChange = MemoTargetChange
       ScrollBars = ssAutoBoth
       TabOrder = 0
-      OnChange = MemoTargetChange
+      ZoomFactor = 1
     end
     object PanelButtonTarget: TPanel
       Left = 435

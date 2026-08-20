@@ -27,6 +27,7 @@ uses
   LCLType,
   LCLIntf,
   LMessages,
+  RichMemo,
   textdroptarget
   {$IFDEF WINDOWS}
   ,Windows
@@ -50,7 +51,7 @@ type
     ActionList: TActionList;
     FlowPairs: TFlowPanel;
     LabelWatermark: TLabel;
-    MemoTarget: TMemo;
+    MemoTarget: TRichMemo;
     MenuFastAutoHeight: TMenuItem;
     MenuApplyAutoHeight: TMenuItem;
     MenuTranslateFromControlPopup: TMenuItem;
@@ -115,7 +116,7 @@ var
 
 implementation
 
-uses Consts, mainform, formsettings, localize, darkutils, controlshelper, pascalutils, osutils, hotkeyhelper;
+uses Consts, mainform, formsettings, localize, darkutils, pascalutils, osutils, hotkeyhelper, RichMemoHelper;
 
   {$R *.lfm}
 
@@ -133,6 +134,7 @@ begin
     aFastAutoHeight.Caption := iif(formTrayslate.AutoHeight, rlockheight, runlockheight);
   end;
 
+  MemoTarget.DisableBuiltInDragDrop;
   FDropTarget := TTextDropTarget.Create(Self);
   FDropTarget.Target := MemoTarget;
   FDropTarget.AddSubTarget(PanelTarget);
@@ -166,6 +168,7 @@ procedure TformPopupTrayslate.FormShow(Sender: TObject);
 begin
   // Ensure no control gets focus, as the form is shown without activation
   ActiveControl := nil;
+
   FDropTarget.ForceRegister;
 end;
 
@@ -173,7 +176,7 @@ procedure TformPopupTrayslate.FormHide(Sender: TObject);
 begin
   FDropTarget.Unregister;
 
-  if Assigned(formTrayslate) and Assigned(formTrayslate.TranslateTarget) and (formTrayslate.TranslateTarget is TMemo) and
+  if Assigned(formTrayslate) and Assigned(formTrayslate.TranslateTarget) and (formTrayslate.TranslateTarget is TRichMemo) and
     (formTrayslate.TranslateTarget = MemoTarget) then
     formTrayslate.CancelTranslate;
 end;
@@ -387,6 +390,8 @@ begin
       Self.AlphaBlend := True;
 
     Self.AlphaBlendValue := TargetAlpha;
+
+    MemoTarget.DisableBuiltInDragDrop;
   end;
 
   if PanelWatermark.Color <> MemoTarget.Color then
@@ -482,6 +487,8 @@ begin
         SWP_FRAMECHANGED or SWP_NOMOVE or SWP_NOSIZE or SWP_NOACTIVATE);
   end;
   {$ENDIF}
+
+  MemoTarget.DisableBuiltInDragDrop;
 end;
 
 end.

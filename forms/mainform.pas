@@ -41,6 +41,7 @@ uses
   LCLType,
   LMessages,
   MouseAndKeyInput,
+  RichMemo,
   OneShotTimer,
   globalkeyboardhook,
   globalmousehook,
@@ -130,8 +131,8 @@ type
     ComboTarget: TComboBox;
     FlowPairs: TFlowPanel;
     ImageButtons: TImageList;
-    MemoSource: TMemo;
-    MemoTarget: TMemo;
+    MemoSource: TRichMemo;
+    MemoTarget: TRichMemo;
     MenuExit: TMenuItem;
     MenuSettings: TMenuItem;
     MenuLangPairs: TMenuItem;
@@ -581,7 +582,7 @@ type
     procedure SetVerticalMode;
 
     // Translate Methods
-    function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
+    function TranslateThread(ATrans: TTranslate; AText: string; AMemo: TRichMemo = nil): string;
     procedure ThreadDone(Sender: TObject);
     procedure CancelTranslate;
     procedure DetectLanguage(AText: string);
@@ -709,7 +710,7 @@ var
 implementation
 
 uses formdonate, formabout, formsettings, formconfig, formpopup, formbutton, settings, languages, langdetect,
-  checkupdates, base64utils, localize, colorhelper, controlshelper, darkutils, pascalutils, flatbutton;
+  checkupdates, base64utils, localize, colorhelper, darkutils, pascalutils, flatbutton, RichMemoHelper;
 
   {$R *.lfm}
 
@@ -773,12 +774,6 @@ begin
   FProcessingPairClick := False;
   FNeedRebuildPairs := False;
   FFormSmallIcon := TIcon.Create;
-
-  // Drop Target
-  FDropTarget := TTextDropTarget.Create(Self);
-  FDropTarget.Target := MemoSource;
-  FDropTarget.InsertText := True;
-  FDropTarget.OnTextDropped := @OnTextDroppedHandler;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -864,15 +859,26 @@ begin
   Screen.OnActiveFormChange := @ScreenActiveFormChanged;
 
   {$IFDEF WINDOWS}
+  // Mouse hooks
   FMouseHook := TGlobalMouseHook.Create;
   FMouseHook.OnLeftDown := @OnHookLeftDown;
   FMouseHook.OnLeftUp := @OnHookLeftUp;
   FMouseHook.EditFieldOnly := True;
 
+  // Keyboard hooks
   FKeyHook:=TGlobalKeyboardHook.Create;
   FKeyHook.OnKeyEvent := @OnKeyboardEvent;
 
+  // Global hotkeys
   UpdateInputState(True);
+
+  // Drop target
+  MemoSource.DisableBuiltInDragDrop;
+  MemoTarget.DisableBuiltInDragDrop;
+  FDropTarget := TTextDropTarget.Create(Self);
+  FDropTarget.Target := MemoSource;
+  FDropTarget.InsertText := True;
+  FDropTarget.OnTextDropped := @OnTextDroppedHandler;
   {$ENDIF}
 
   // Set language
@@ -1814,7 +1820,7 @@ begin
     Exit;
   end;
 
-  PopupTray.Alignment := paRight;
+  PopupTray.Alignment := TPopupAlignment.paRight;
   aShow.Visible := False;
   MenuLangPairs.Visible := False;
   SbMenu.GroupIndex := 2;
@@ -2127,7 +2133,7 @@ begin
   // Allow pasting with Ctrl+V (custom paste that handles line endings)
   if (ssCtrl in Shift) and (Key = VK_V) then
   begin
-    (Sender as TMemo).PasteWithLineEnding;
+    (Sender as TRichMemo).PasteWithLineEnding;
     Key := 0;
     Exit;
   end;
@@ -2249,7 +2255,7 @@ procedure TformTrayslate.MemoTargetKeyDown(Sender: TObject; var Key: word; Shift
 begin
   if (ssCtrl in Shift) and (Key = VK_V) then // Ctrl + V
   begin
-    (Sender as TMemo).PasteWithLineEnding;
+    (Sender as TRichMemo).PasteWithLineEnding;
     Key := 0;
   end;
 end;
@@ -2678,7 +2684,7 @@ end;
 procedure TformTrayslate.PopupTrayClose(Sender: TObject);
 begin
   FPopupOpen := False;
-  PopupTray.Alignment := paLeft;
+  PopupTray.Alignment := TPopupAlignment.paLeft;
   aShow.Visible := True;
   MenuLangPairs.Visible := True;
   SbMenu.Down := False;
@@ -4696,7 +4702,7 @@ end;
 
 {%Region -fold Translate Methods}
 
-function TformTrayslate.TranslateThread(ATrans: TTranslate; AText: string; AMemo: TMemo = nil): string;
+function TformTrayslate.TranslateThread(ATrans: TTranslate; AText: string; AMemo: TRichMemo = nil): string;
 var
   Th: TTranslateThread;
   ThDone: boolean;
