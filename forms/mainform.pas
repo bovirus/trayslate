@@ -5083,7 +5083,7 @@ begin
   Clipboard.AddExcludeFlag;
   TOS.SleepLoop(1, 1);
   Clipboard.AddExcludeFlag;
-  TOS.SleepLoop(6, 1);
+  TOS.SleepLoop(9, 1);
 
   FUnapplyC := True;
   if not ctrl then
@@ -5113,7 +5113,7 @@ begin
     KeyInput.Unapply([ssAlt]);
 
   KeyInput.Down(Ord('V'));
-  TOS.SleepLoop(6, 1);
+  TOS.SleepLoop(10, 1);
 
   FUnapplyV := True;
   if not ctrl then
