@@ -1558,6 +1558,14 @@ msgctxt "tformsettingstrayslate.checkspellcheck.hint"
 msgid "Enable spell checking in the source text"
 msgstr "Enable spell checking in the source text"
 
+#: tformsettingstrayslate.checkspellcheckemptysuggestions.caption
+msgid "Underline errors without suggestions"
+msgstr "Underline errors without suggestions"
+
+#: tformsettingstrayslate.checkspellcheckemptysuggestions.hint
+msgid "Underline errors for which no corrections have been suggested"
+msgstr "Underline errors for which no corrections have been suggested"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Stay On Top"
@@ -1735,7 +1743,7 @@ msgstr "Font Name"
 
 #: tformsettingstrayslate.labelinstalledlang.caption
 msgid "Installed Languages"
-msgstr ""
+msgstr "Installed Languages"
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"

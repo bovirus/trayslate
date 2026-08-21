@@ -40,7 +40,7 @@ function LoadFormSettings(Form: TformTrayslate): boolean;
 
 implementation
 
-uses hotkeyhelper, localize, network, darkutils, osutils, consts, RichMemoHelper;
+uses hotkeyhelper, localize, network, darkutils, osutils, Consts, RichMemoHelper;
 
 procedure SaveFormSettings(Form: TformTrayslate);
 var
@@ -137,6 +137,8 @@ begin
     JSONObj.Add('EnableMouseMode', Form.EnableMouseMode);
     JSONObj.Add('MouseModeCtrl', Form.MouseModeCtrl);
     JSONObj.Add('MouseMode', Ord(Form.MouseMode));
+    JSONObj.Add('SpellCheck', Form.SpellCheck);
+    JSONObj.Add('SpellCheckEmptySuggestions', Form.SpellCheckEmptySuggestions);
     JSONObj.Add('VerticalSplit', Form.VerticalSplit);
     JSONObj.Add('AutoCopy', Form.AutoCopy);
     JSONObj.Add('StayOnTop', Form.StayOnTop);
@@ -494,6 +496,12 @@ begin
 
         if (JSONObj.FindPath('MouseMode') <> nil) then
           Form.MouseMode := TMouseMode(JSONObj.FindPath('MouseMode').AsInteger);
+
+        if (JSONObj.FindPath('SpellCheck') <> nil) then
+          Form.FSpellCheck := JSONObj.FindPath('SpellCheck').AsBoolean;
+
+        if (JSONObj.FindPath('SpellCheckEmptySuggestions') <> nil) then
+          Form.FSpellCheckEmptySuggestions := JSONObj.FindPath('SpellCheckEmptySuggestions').AsBoolean;
 
         if (JSONObj.FindPath('VerticalSplit') <> nil) then
           Form.FVerticalSplit := JSONObj.FindPath('VerticalSplit').AsBoolean;

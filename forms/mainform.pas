@@ -586,6 +586,7 @@ type
     FAutoHeight: boolean;
     FHideControls: boolean;
     FSpellCheck: boolean;
+    FSpellCheckEmptySuggestions: boolean;
 
     {$IFDEF WINDOWS}
     procedure OnAppInstanceMessage(Sender: TObject; const AMessage: string);
@@ -692,6 +693,7 @@ type
     property MouseModeCtrl: boolean read FMouseModeCtrl write SetMouseModeCtrl;
     property MouseMode: TMouseMode read FMouseMode write FMouseMode;
     property SpellCheck: boolean read FSpellCheck write SetSpellCheck;
+    property SpellCheckEmptySuggestions: boolean read FSpellCheckEmptySuggestions write FSpellCheckEmptySuggestions;
     property VerticalSplit: boolean read FVerticalSplit write SetVerticalSplit;
     property AutoCopy: boolean read FAutoCopy write SetAutoCopy;
     property StayOnTop: boolean read FStayOnTop write FStayOnTop;
@@ -2478,6 +2480,7 @@ begin
     FTransDetect.Timeout := FTimeout;
 
     UpdatePopupState;
+    UpdateSpellCheck;
   finally
     CloseAction := caFree;
     formSettingsTrayslate := nil;
@@ -3424,6 +3427,7 @@ begin
   FMouseMode := mmShowTranslateButton;
   FVerticalSplit := False;
   FSpellCheck := True;
+  FSpellCheckEmptySuggestions := True;
   FStayOnTop := True;
   FHideControls := True;
   FAutoHeight := True;
@@ -4147,7 +4151,7 @@ procedure TformTrayslate.UpdateSpellCheck;
 begin
   FUpdatingSpellCheck := True;
   try
-    if not FSpellCheck or not TSpell.WinCheck(MemoSource, FSpellChecker, FLangSource) then
+    if not FSpellCheck or not TSpell.WinCheck(MemoSource, FSpellChecker, FLangSource, [scoSpelling], FSpellCheckEmptySuggestions) then
       FSpellChecker.Clear;
   finally
     FUpdatingSpellCheck := False;

@@ -299,13 +299,13 @@ object formSettingsTrayslate: TformSettingsTrayslate
         end
         object GroupSpellCheck: TGroupBox
           Left = 5
-          Height = 59
+          Height = 83
           Top = 581
           Width = 579
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Spell Check'
-          ClientHeight = 39
+          ClientHeight = 63
           ClientWidth = 575
           TabOrder = 4
           object CheckSpellCheck: TCheckBox
@@ -330,6 +330,16 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Font.Style = [fsUnderline]
             ParentFont = False
             OnClick = LabelInstalledLangClick
+          end
+          object CheckSpellCheckEmptySuggestions: TCheckBox
+            Left = 16
+            Height = 19
+            Hint = 'Underline errors for which no corrections have been suggested'
+            Top = 36
+            Width = 212
+            Caption = 'Underline errors without suggestions'
+            TabOrder = 1
+            OnChange = SettingChange
           end
         end
       end

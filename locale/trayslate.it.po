@@ -1562,6 +1562,14 @@ msgctxt "tformsettingstrayslate.checkspellcheck.hint"
 msgid "Enable spell checking in the source text"
 msgstr "Abilita il controllo ortografico nel testo sorgente"
 
+#: tformsettingstrayslate.checkspellcheckemptysuggestions.caption
+msgid "Underline errors without suggestions"
+msgstr "Sottolinea gli errori senza suggerimenti"
+
+#: tformsettingstrayslate.checkspellcheckemptysuggestions.hint
+msgid "Underline errors for which no corrections have been suggested"
+msgstr "Sottolinea gli errori per i quali non sono state suggerite correzioni"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Sempre in primo piano"
@@ -1738,7 +1746,7 @@ msgstr "Nome font"
 
 #: tformsettingstrayslate.labelinstalledlang.caption
 msgid "Installed Languages"
-msgstr ""
+msgstr "Lingue installate"
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"

@@ -57,6 +57,7 @@ type
     CheckBuiltInDetect: TCheckBox;
     CheckCircularIcon: TCheckBox;
     CheckSpellCheck: TCheckBox;
+    CheckSpellCheckEmptySuggestions: TCheckBox;
     ClbProxiedConfigs: TCheckListBox;
     CheckProxyAuthentication: TCheckBox;
     CheckSmartSwap: TCheckBox;
@@ -217,6 +218,7 @@ type
     FOriginalMouseModeCtrl: boolean;
     FOriginalMouseMode: TMouseMode;
     FOriginalSpellCheck: boolean;
+    FOriginalSpellCheckEmptySuggestions: boolean;
     FOriginalVerticalSplit: boolean;
     FOriginalAutocopy: boolean;
     FOriginalStayOnTop: boolean;
@@ -1624,6 +1626,7 @@ begin
     formTrayslate.MouseModeCtrl := CheckMouseModeCtrl.Checked;
     formTrayslate.MouseMode := TMouseMode(ComboMouseMode.ItemIndex);
     formTrayslate.SpellCheck := CheckSpellCheck.Checked;
+    formTrayslate.SpellCheckEmptySuggestions := CheckSpellCheckEmptySuggestions.Checked;
     formTrayslate.VerticalSplit := CheckVerticalSplit.Checked;
     formTrayslate.AutoCopy := CheckAutoCopy.Checked;
     formTrayslate.StayOnTop := CheckStayOnTop.Checked;
@@ -1714,6 +1717,7 @@ begin
     formTrayslate.UpdateProxyState;
     formTrayslate.DoRealign(0);
     Application.QueueAsyncCall(@formTrayslate.RebuildLangPairsPanel, 0);
+    formTrayslate.UpdateSpellCheck;
   finally
     FApplySettings := False;
   end;
@@ -1811,6 +1815,7 @@ begin
   FOriginalMouseModeCtrl := formTrayslate.MouseModeCtrl;
   FOriginalMouseMode := formTrayslate.MouseMode;
   FOriginalSpellCheck := formTrayslate.SpellCheck;
+  FOriginalSpellCheckEmptySuggestions := formTrayslate.SpellCheckEmptySuggestions;
   FOriginalVerticalSplit := formTrayslate.VerticalSplit;
   FOriginalAutoCopy := formTrayslate.AutoCopy;
   FOriginalStayOnTop := formTrayslate.StayOnTop;
@@ -1851,6 +1856,7 @@ begin
   CheckMouseModeCtrl.Checked := FOriginalMouseModeCtrl;
   ComboMouseMode.ItemIndex := Ord(FOriginalMouseMode);
   CheckSpellCheck.Checked := FOriginalSpellCheck;
+  CheckSpellCheckEmptySuggestions.Checked := FOriginalSpellCheckEmptySuggestions;
   CheckVerticalSplit.Checked := FOriginalVerticalSplit;
   CheckAutoCopy.Checked := FOriginalAutoCopy;
   CheckStayOnTop.Checked := FOriginalStayOnTop;

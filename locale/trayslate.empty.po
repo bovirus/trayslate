@@ -1390,6 +1390,14 @@ msgctxt "tformsettingstrayslate.checkspellcheck.hint"
 msgid "Enable spell checking in the source text"
 msgstr ""
 
+#: tformsettingstrayslate.checkspellcheckemptysuggestions.caption
+msgid "Underline errors without suggestions"
+msgstr ""
+
+#: tformsettingstrayslate.checkspellcheckemptysuggestions.hint
+msgid "Underline errors for which no corrections have been suggested"
+msgstr ""
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr ""

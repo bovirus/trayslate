@@ -1559,6 +1559,14 @@ msgctxt "tformsettingstrayslate.checkspellcheck.hint"
 msgid "Enable spell checking in the source text"
 msgstr "Bật kiểm tra chính tả trong văn bản nguồn"
 
+#: tformsettingstrayslate.checkspellcheckemptysuggestions.caption
+msgid "Underline errors without suggestions"
+msgstr "Gạch chân lỗi không có đề xuất"
+
+#: tformsettingstrayslate.checkspellcheckemptysuggestions.hint
+msgid "Underline errors for which no corrections have been suggested"
+msgstr "Gạch chân các lỗi chưa có đề xuất sửa lỗi"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Luôn trên cùng"
@@ -1735,7 +1743,7 @@ msgstr "Tên phông chữ"
 
 #: tformsettingstrayslate.labelinstalledlang.caption
 msgid "Installed Languages"
-msgstr ""
+msgstr "Ngôn ngữ đã cài đặt"
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
