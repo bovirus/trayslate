@@ -552,6 +552,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "Översätt text medan du skriver i popupfönstret"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "Aktivera stavningskontroll"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "Aktivera stavningskontroll i källtexten"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1530,6 +1544,16 @@ msgstr ""
 "Om detekterat språk är utanför nuvarande par ersätts källspråket och målspråket sätts till primärt.\n"
 "Om detekterat språk är primärt sätts paret till primärt - sekundärt."
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Aktivera stavningskontroll"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "Aktivera stavningskontroll i källtexten"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Alltid överst"
@@ -1662,6 +1686,10 @@ msgstr "Proxy"
 msgid "Real-Time Translation"
 msgstr "Realtidsöversättning"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "Stavningskontroll"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "Tidsgräns"
@@ -1699,6 +1727,10 @@ msgstr "Teckensnittsfärg"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "Teckensnittsnamn"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1933,6 +1965,11 @@ msgstr "Endast när Ctrl är nedtryckt"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Översätt medan du skriver"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Aktivera stavningskontroll"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"

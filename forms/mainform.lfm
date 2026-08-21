@@ -208,6 +208,8 @@ object formTrayslate: TformTrayslate
       Align = alClient
       BorderStyle = bsNone
       HideSelection = False
+      OnChange = MemoSourceChange
+      OnContextPopup = MemoSourceContextPopup
       OnKeyDown = MemoSourceKeyDown
       OnKeyUp = MemoSourceKeyUp
       PopupMenu = PopupSource
@@ -393,6 +395,13 @@ object formTrayslate: TformTrayslate
       end
       object MenuFastHideControls: TMenuItem
         Action = aFastHideControls
+        AutoCheck = True
+      end
+      object Separator16: TMenuItem
+        Caption = '-'
+      end
+      object MenuFastSpellCheck: TMenuItem
+        Action = aFastSpellCheck
         AutoCheck = True
       end
     end
@@ -888,6 +897,12 @@ object formTrayslate: TformTrayslate
       AutoCheck = True
       Caption = 'Right-To-Left Reading Order'
       OnExecute = aTargetBidiRightToLeftExecute
+    end
+    object aFastSpellCheck: TAction
+      Category = 'FastSettings'
+      AutoCheck = True
+      Caption = 'Enable Spell Check'
+      OnExecute = aFastSpellCheckExecute
     end
   end
   object TimerClick: TTimer

@@ -552,6 +552,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "Käännä tekstiä sitä kirjoitettaessa ponnahdusikkunassa"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "Ota oikeinkirjoituksen tarkistus käyttöön"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "Ota oikeinkirjoituksen tarkistus käyttöön lähdetekstissä"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1530,6 +1544,16 @@ msgstr ""
 "Jos havaittu kieli on nykyisen parin ulkopuolella, lähdekieli korvataan havaitulla kielellä ja kohde asetetaan ensisijaiseksi.\n"
 "Jos havaittu kieli on ensisijainen, pariksi asetetaan ensisijainen - toissijainen."
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Ota oikeinkirjoituksen tarkistus käyttöön"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "Ota oikeinkirjoituksen tarkistus käyttöön lähdetekstissä"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Aina päällimmäisenä"
@@ -1662,6 +1686,10 @@ msgstr "Välityspalvelin"
 msgid "Real-Time Translation"
 msgstr "Reaaliaikainen käännös"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "Oikeinkirjoituksen tarkistus"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "Aikakatkaisu"
@@ -1699,6 +1727,10 @@ msgstr "Fontin väri"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "Fontin nimi"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1933,6 +1965,11 @@ msgstr "Vain kun Ctrl on painettuna"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Käännä kirjoittaessasi"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Ota oikeinkirjoituksen tarkistus käyttöön"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"

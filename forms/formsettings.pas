@@ -56,6 +56,7 @@ type
     CheckAutoHeight: TCheckBox;
     CheckBuiltInDetect: TCheckBox;
     CheckCircularIcon: TCheckBox;
+    CheckSpellCheck: TCheckBox;
     ClbProxiedConfigs: TCheckListBox;
     CheckProxyAuthentication: TCheckBox;
     CheckSmartSwap: TCheckBox;
@@ -88,6 +89,7 @@ type
     FontDialog: TFontDialog;
     GroupAutoSwap: TGroupBox;
     GroupAutostart: TGroupBox;
+    GroupSpellCheck: TGroupBox;
     GroupProxiedConfigs: TGroupBox;
     GroupUserParameters: TGroupBox;
     GroupTimeouts: TGroupBox;
@@ -100,6 +102,7 @@ type
     GroupRealTime: TGroupBox;
     GroupTrayIcon: TGroupBox;
     ImagesPages: TImageList;
+    LabelInstalledLang: TLabel;
     LabelMouseModeFrame: TLabel;
     LabelLangDetectConfig: TLabel;
     LabelMaxHeight: TLabel;
@@ -155,6 +158,7 @@ type
     procedure FormResize(Sender: TObject);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+    procedure LabelInstalledLangClick(Sender: TObject);
     procedure ScreenActiveControlChanged(Sender: TObject);
     procedure SettingChange(Sender: TObject);
     procedure ListPagesClick(Sender: TObject);
@@ -212,6 +216,7 @@ type
     FOriginalEnableMouseMode: boolean;
     FOriginalMouseModeCtrl: boolean;
     FOriginalMouseMode: TMouseMode;
+    FOriginalSpellCheck: boolean;
     FOriginalVerticalSplit: boolean;
     FOriginalAutocopy: boolean;
     FOriginalStayOnTop: boolean;
@@ -241,6 +246,7 @@ type
     FOriginalHotKeyFastAutoAddLangPairs: THotKeyData;
     FOriginalHotKeyFastRealTime: THotKeyData;
     FOriginalHotKeyFastAutoCopy: THotKeyData;
+    FOriginalHotKeyFastSpellCheck: THotKeyData;
     FOriginalHotKeyFastVerticalSplit: THotKeyData;
     FOriginalHotKeyFastAutoHeight: THotKeyData;
     FOriginalHotKeyFastHideControls: THotKeyData;
@@ -269,6 +275,7 @@ type
     FHotKeyFastAutoAddLangPairs: THotKeyData;
     FHotKeyFastRealTime: THotKeyData;
     FHotKeyFastAutoCopy: THotKeyData;
+    FHotKeyFastSpellCheck: THotKeyData;
     FHotKeyFastVerticalSplit: THotKeyData;
     FHotKeyFastAutoHeight: THotKeyData;
     FHotKeyFastHideControls: THotKeyData;
@@ -312,7 +319,7 @@ var
   formSettingsTrayslate: TformSettingsTrayslate;
 
 const
-  HeaderRows: set of byte = [1, 10, 21];
+  HeaderRows: set of byte = [1, 10, 22];
   ColorBevel = $00D9D9D9;
   ColorBevelDark = $00555555;
 
@@ -404,6 +411,10 @@ resourcestring
   rfasthidecontrols_hint = 'Hide popup controls when not hovering';
   rfasthidecontrols_default = 'Shift+F10';
 
+  rfastspellcheck = 'Enable Spell Check';
+  rfastspellcheck_hint = 'Enable spell checking in the source text';
+  rfastspellcheck_default = 'Shift+F11';
+
   // HotKeys Recent Pairs
   rrecentpair = 'Recent Language Pair';
   rrecentpair_hint = 'Select Recent Language Pair';
@@ -425,7 +436,8 @@ resourcestring
 
 implementation
 
-uses mainform, formpopup, languages, translate, localize, darkutils, controlshelper, stringshelper, pascalutils;
+uses mainform, formpopup, languages, translate, localize, darkutils, controlshelper, stringshelper, pascalutils,
+  OneShotTooltip, SpellUtils;
 
   {$R *.lfm}
 
@@ -596,6 +608,9 @@ begin
   else
   if Sender = CheckRealTime then
     formTrayslate.aFastRealTime.Checked := CheckRealTime.Checked
+  else
+  if Sender = CheckSpellCheck then
+    formTrayslate.aFastSpellCheck.Checked := CheckSpellCheck.Checked
   else
   if Sender = CheckVerticalSplit then
     formTrayslate.aFastVerticalSplit.Checked := CheckVerticalSplit.Checked
@@ -1258,6 +1273,18 @@ begin
   Handled := True;
 end;
 
+procedure TformSettingsTrayslate.LabelInstalledLangClick(Sender: TObject);
+var
+  Langs: TStrings;
+begin
+  Langs := TSpell.WinSupportedLanguages;
+  try
+    TOneShotTooltip.Show(Langs.Text, 100, clWhite);
+  finally
+    Langs.Free; // Free the returned TStrings object
+  end;
+end;
+
 {%EndRegion}
 
 {%Region -fold Methods}
@@ -1305,16 +1332,17 @@ begin
     18: Result := FHotKeyFastVerticalSplit;
     19: Result := FHotKeyFastAutoHeight;
     20: Result := FHotKeyFastHideControls;
-    // Recent HotKeys (rows 22-30, header at row 21)
-    22: Result := FHotKeyRecent1;
-    23: Result := FHotKeyRecent2;
-    24: Result := FHotKeyRecent3;
-    25: Result := FHotKeyRecent4;
-    26: Result := FHotKeyRecent5;
-    27: Result := FHotKeyRecent6;
-    28: Result := FHotKeyRecent7;
-    29: Result := FHotKeyRecent8;
-    30: Result := FHotKeyRecent9;
+    21: Result := FHotKeyFastSpellCheck;
+    // Recent HotKeys (rows 22-30, header at row 22)
+    23: Result := FHotKeyRecent1;
+    24: Result := FHotKeyRecent2;
+    25: Result := FHotKeyRecent3;
+    26: Result := FHotKeyRecent4;
+    27: Result := FHotKeyRecent5;
+    28: Result := FHotKeyRecent6;
+    29: Result := FHotKeyRecent7;
+    30: Result := FHotKeyRecent8;
+    31: Result := FHotKeyRecent9;
     else
       Result := Default(THotKeyData);
   end;
@@ -1343,16 +1371,17 @@ begin
     18: FHotKeyFastVerticalSplit := HK;
     19: FHotKeyFastAutoHeight := HK;
     20: FHotKeyFastHideControls := HK;
-    // Recent HotKeys (rows 22-30, header at row 21)
-    22: FHotKeyRecent1 := HK;
-    23: FHotKeyRecent2 := HK;
-    24: FHotKeyRecent3 := HK;
-    25: FHotKeyRecent4 := HK;
-    26: FHotKeyRecent5 := HK;
-    27: FHotKeyRecent6 := HK;
-    28: FHotKeyRecent7 := HK;
-    29: FHotKeyRecent8 := HK;
-    30: FHotKeyRecent9 := HK;
+    21: FHotKeyFastSpellCheck := HK;
+    // Recent HotKeys (rows 22-30, header at row 22)
+    23: FHotKeyRecent1 := HK;
+    24: FHotKeyRecent2 := HK;
+    25: FHotKeyRecent3 := HK;
+    26: FHotKeyRecent4 := HK;
+    27: FHotKeyRecent5 := HK;
+    28: FHotKeyRecent6 := HK;
+    29: FHotKeyRecent7 := HK;
+    30: FHotKeyRecent8 := HK;
+    31: FHotKeyRecent9 := HK;
     else
       ; // ignore
   end;
@@ -1381,16 +1410,17 @@ begin
     18: Result := FOriginalHotKeyFastVerticalSplit;
     19: Result := FOriginalHotKeyFastAutoHeight;
     20: Result := FOriginalHotKeyFastHideControls;
-    // Recent HotKeys (rows 22-30, header at row 21)
-    22: Result := FOriginalHotKeyRecent1;
-    23: Result := FOriginalHotKeyRecent2;
-    24: Result := FOriginalHotKeyRecent3;
-    25: Result := FOriginalHotKeyRecent4;
-    26: Result := FOriginalHotKeyRecent5;
-    27: Result := FOriginalHotKeyRecent6;
-    28: Result := FOriginalHotKeyRecent7;
-    29: Result := FOriginalHotKeyRecent8;
-    30: Result := FOriginalHotKeyRecent9;
+    21: Result := FOriginalHotKeyFastSpellCheck;
+    // Recent HotKeys (rows 22-30, header at row 22)
+    23: Result := FOriginalHotKeyRecent1;
+    24: Result := FOriginalHotKeyRecent2;
+    25: Result := FOriginalHotKeyRecent3;
+    26: Result := FOriginalHotKeyRecent4;
+    27: Result := FOriginalHotKeyRecent5;
+    28: Result := FOriginalHotKeyRecent6;
+    29: Result := FOriginalHotKeyRecent7;
+    30: Result := FOriginalHotKeyRecent8;
+    31: Result := FOriginalHotKeyRecent9;
     else
       Result := Default(THotKeyData);
   end;
@@ -1456,20 +1486,21 @@ begin
   GridHotkeys.InsertRowWithValues(19, [rfastautoheight, FHotKeyFastAutoHeight.ToText, rfastautoheight_hint, rfastautoheight_default]);
   GridHotkeys.InsertRowWithValues(20, [rfasthidecontrols, FHotKeyFastHideControls.ToText, rfasthidecontrols_hint,
     rfasthidecontrols_default]);
+  GridHotkeys.InsertRowWithValues(21, [rfastspellcheck, FHotKeyFastSpellCheck.ToText, rfastspellcheck_hint, rfastspellcheck_default]);
 
   // Row 21: Recent header
-  GridHotkeys.InsertRowWithValues(21, [rrecent]);
+  GridHotkeys.InsertRowWithValues(22, [rrecent]);
 
   // Rows 22-30: Recent hotkeys
-  GridHotkeys.InsertRowWithValues(22, [rrecentpair + ' 1', FHotKeyRecent1.ToText, rrecentpair_hint + ' 1', rrecentpair_default + '1']);
-  GridHotkeys.InsertRowWithValues(23, [rrecentpair + ' 2', FHotKeyRecent2.ToText, rrecentpair_hint + ' 2', rrecentpair_default + '2']);
-  GridHotkeys.InsertRowWithValues(24, [rrecentpair + ' 3', FHotKeyRecent3.ToText, rrecentpair_hint + ' 3', rrecentpair_default + '3']);
-  GridHotkeys.InsertRowWithValues(25, [rrecentpair + ' 4', FHotKeyRecent4.ToText, rrecentpair_hint + ' 4', rrecentpair_default + '4']);
-  GridHotkeys.InsertRowWithValues(26, [rrecentpair + ' 5', FHotKeyRecent5.ToText, rrecentpair_hint + ' 5', rrecentpair_default + '5']);
-  GridHotkeys.InsertRowWithValues(27, [rrecentpair + ' 6', FHotKeyRecent6.ToText, rrecentpair_hint + ' 6', rrecentpair_default + '6']);
-  GridHotkeys.InsertRowWithValues(28, [rrecentpair + ' 7', FHotKeyRecent7.ToText, rrecentpair_hint + ' 7', rrecentpair_default + '7']);
-  GridHotkeys.InsertRowWithValues(29, [rrecentpair + ' 8', FHotKeyRecent8.ToText, rrecentpair_hint + ' 8', rrecentpair_default + '8']);
-  GridHotkeys.InsertRowWithValues(30, [rrecentpair + ' 9', FHotKeyRecent9.ToText, rrecentpair_hint + ' 9', rrecentpair_default + '9']);
+  GridHotkeys.InsertRowWithValues(23, [rrecentpair + ' 1', FHotKeyRecent1.ToText, rrecentpair_hint + ' 1', rrecentpair_default + '1']);
+  GridHotkeys.InsertRowWithValues(24, [rrecentpair + ' 2', FHotKeyRecent2.ToText, rrecentpair_hint + ' 2', rrecentpair_default + '2']);
+  GridHotkeys.InsertRowWithValues(25, [rrecentpair + ' 3', FHotKeyRecent3.ToText, rrecentpair_hint + ' 3', rrecentpair_default + '3']);
+  GridHotkeys.InsertRowWithValues(26, [rrecentpair + ' 4', FHotKeyRecent4.ToText, rrecentpair_hint + ' 4', rrecentpair_default + '4']);
+  GridHotkeys.InsertRowWithValues(27, [rrecentpair + ' 5', FHotKeyRecent5.ToText, rrecentpair_hint + ' 5', rrecentpair_default + '5']);
+  GridHotkeys.InsertRowWithValues(28, [rrecentpair + ' 6', FHotKeyRecent6.ToText, rrecentpair_hint + ' 6', rrecentpair_default + '6']);
+  GridHotkeys.InsertRowWithValues(29, [rrecentpair + ' 7', FHotKeyRecent7.ToText, rrecentpair_hint + ' 7', rrecentpair_default + '7']);
+  GridHotkeys.InsertRowWithValues(30, [rrecentpair + ' 8', FHotKeyRecent8.ToText, rrecentpair_hint + ' 8', rrecentpair_default + '8']);
+  GridHotkeys.InsertRowWithValues(31, [rrecentpair + ' 9', FHotKeyRecent9.ToText, rrecentpair_hint + ' 9', rrecentpair_default + '9']);
 
   // Restore safely
   if SavedRow < GridHotkeys.RowCount then
@@ -1592,6 +1623,7 @@ begin
     formTrayslate.EnableMouseMode := CheckEnableMouseMode.Checked;
     formTrayslate.MouseModeCtrl := CheckMouseModeCtrl.Checked;
     formTrayslate.MouseMode := TMouseMode(ComboMouseMode.ItemIndex);
+    formTrayslate.SpellCheck := CheckSpellCheck.Checked;
     formTrayslate.VerticalSplit := CheckVerticalSplit.Checked;
     formTrayslate.AutoCopy := CheckAutoCopy.Checked;
     formTrayslate.StayOnTop := CheckStayOnTop.Checked;
@@ -1653,6 +1685,7 @@ begin
     formTrayslate.HotKeyFastVerticalSplit := FHotKeyFastVerticalSplit;
     formTrayslate.HotKeyFastAutoHeight := FHotKeyFastAutoHeight;
     formTrayslate.HotKeyFastHideControls := FHotKeyFastHideControls;
+    formTrayslate.HotKeyFastSpellCheck := FHotKeyFastSpellCheck;
     // HotKeys Recent Pairs
     formTrayslate.HotKeyRecent1 := FHotKeyRecent1;
     formTrayslate.HotKeyRecent2 := FHotKeyRecent2;
@@ -1709,6 +1742,7 @@ begin
   FOriginalHotKeyFastVerticalSplit := formTrayslate.HotKeyFastVerticalSplit;
   FOriginalHotKeyFastAutoHeight := formTrayslate.HotKeyFastAutoHeight;
   FOriginalHotKeyFastHideControls := formTrayslate.HotKeyFastHideControls;
+  FOriginalHotKeyFastSpellCheck := formTrayslate.HotKeyFastSpellCheck;
 
   // HotKeys Recent Pairs
   FOriginalHotKeyRecent1 := formTrayslate.HotKeyRecent1;
@@ -1743,6 +1777,7 @@ begin
   FHotKeyFastVerticalSplit := formTrayslate.HotKeyFastVerticalSplit;
   FHotKeyFastAutoHeight := formTrayslate.HotKeyFastAutoHeight;
   FHotKeyFastHideControls := formTrayslate.HotKeyFastHideControls;
+  FHotKeyFastSpellCheck := formTrayslate.HotKeyFastSpellCheck;
 
   // HotKeys Recent Pairs
   FHotKeyRecent1 := formTrayslate.HotKeyRecent1;
@@ -1775,6 +1810,7 @@ begin
   FOriginalEnableMouseMode := formTrayslate.EnableMouseMode;
   FOriginalMouseModeCtrl := formTrayslate.MouseModeCtrl;
   FOriginalMouseMode := formTrayslate.MouseMode;
+  FOriginalSpellCheck := formTrayslate.SpellCheck;
   FOriginalVerticalSplit := formTrayslate.VerticalSplit;
   FOriginalAutoCopy := formTrayslate.AutoCopy;
   FOriginalStayOnTop := formTrayslate.StayOnTop;
@@ -1814,6 +1850,7 @@ begin
   CheckEnableMouseMode.Checked := FOriginalEnableMouseMode;
   CheckMouseModeCtrl.Checked := FOriginalMouseModeCtrl;
   ComboMouseMode.ItemIndex := Ord(FOriginalMouseMode);
+  CheckSpellCheck.Checked := FOriginalSpellCheck;
   CheckVerticalSplit.Checked := FOriginalVerticalSplit;
   CheckAutoCopy.Checked := FOriginalAutoCopy;
   CheckStayOnTop.Checked := FOriginalStayOnTop;

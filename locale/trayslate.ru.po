@@ -552,6 +552,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "Переводить текст по мере ввода во всплывающем окне"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "Включить проверку орфографии"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "Включить проверку орфографии в исходном тексте"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1530,6 +1544,16 @@ msgstr ""
 "Если распознанный язык вне текущей пары, исходный язык заменяется на него, а целевым становится основной.\n"
 "Если язык основной, пара устанавливается как основной - вторичный."
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Включить проверку орфографии"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "Включить проверку орфографии в исходном тексте"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Поверх всех окон"
@@ -1662,6 +1686,10 @@ msgstr "Прокси"
 msgid "Real-Time Translation"
 msgstr "Перевод по мере ввода"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "Проверка орфографии"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "Таймаут"
@@ -1699,6 +1727,10 @@ msgstr "Цвет шрифта"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "Название шрифта"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1933,6 +1965,11 @@ msgstr "Только при нажатом Ctrl"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Перевод по мере ввода"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Включить проверку орфографии"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"

@@ -556,6 +556,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "Traduzir texto ao digitar no pop-up"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "Ativar verificação ortográfica"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "Ativar a verificação ortográfica no texto de origem"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1534,6 +1548,16 @@ msgstr ""
 "Se o idioma detectado estiver fora do par atual, o idioma de origem é substituído pelo idioma detectado e o idioma de destino é definido como Primário.\n"
 "Se o idioma detectado for igual ao Primário, o par de tradução é definido como Primário - Secundário."
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Ativar verificação ortográfica"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "Ativar a verificação ortográfica no texto de origem"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Sempre Visível"
@@ -1666,6 +1690,10 @@ msgstr "Proxy"
 msgid "Real-Time Translation"
 msgstr "Tradução em Tempo Real"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "Verificação ortográfica"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "Tempo Limite"
@@ -1703,6 +1731,10 @@ msgstr "Cor da Fonte"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "Nome da Fonte"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1937,6 +1969,11 @@ msgstr "Somente Quando Ctrl Estiver Pressionado"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Traduzir Durante a Digitação"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Ativar verificação ortográfica"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"

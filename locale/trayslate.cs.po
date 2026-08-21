@@ -552,6 +552,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "Překládat text při psaní ve vyskakovacím okně"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "Povolit kontrolu pravopisu"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "Povolit kontrolu pravopisu ve zdrojovém textu"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1530,6 +1544,16 @@ msgstr ""
 "Pokud je zjištěný jazyk mimo aktuální dvojici, zdrojový jazyk se nahradí zjištěným a cílový se nastaví na Primární.\n"
 "Pokud je zjištěný jazyk Primární, nastaví se dvojice Primární - Sekundární."
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Povolit kontrolu pravopisu"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "Povolit kontrolu pravopisu ve zdrojovém textu"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Vždy nahoře"
@@ -1662,6 +1686,10 @@ msgstr "Proxy"
 msgid "Real-Time Translation"
 msgstr "Překládání v reálném čase"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "Kontrola pravopisu"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "Časový limit"
@@ -1699,6 +1727,10 @@ msgstr "Barva písma"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "Název písma"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1933,6 +1965,11 @@ msgstr "Pouze při stisknutém Ctrl"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Překládat při psaní"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Povolit kontrolu pravopisu"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"

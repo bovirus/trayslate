@@ -557,6 +557,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "Dịch văn bản khi bạn nhập trong cửa sổ bật lên"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "Bật kiểm tra chính tả"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "Bật kiểm tra chính tả trong văn bản nguồn"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1535,6 +1549,16 @@ msgstr ""
 "Nếu ngôn ngữ được phát hiện nằm ngoài cặp hiện tại, ngôn ngữ Nguồn được thay thế bằng ngôn ngữ được phát hiện và ngôn ngữ đích được đặt thành Chính.\n"
 "Nếu ngôn ngữ được phát hiện bằng Chính, cặp dịch được đặt thành Chính - Phụ."
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Bật kiểm tra chính tả"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "Bật kiểm tra chính tả trong văn bản nguồn"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Luôn trên cùng"
@@ -1667,6 +1691,10 @@ msgstr "Proxy"
 msgid "Real-Time Translation"
 msgstr "Dịch thời gian thực"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "Kiểm tra chính tả"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "Hết giờ"
@@ -1704,6 +1732,10 @@ msgstr "Màu chữ"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "Tên phông chữ"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1938,6 +1970,11 @@ msgstr "Chỉ khi nhấn Ctrl"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Dịch khi bạn gõ"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Bật kiểm tra chính tả"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"

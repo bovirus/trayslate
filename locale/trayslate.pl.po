@@ -552,6 +552,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "Tłumacz tekst podczas pisania w wyskakującym oknie"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "Włącz sprawdzanie pisowni"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "Włącz sprawdzanie pisowni w tekście źródłowym"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1530,6 +1544,16 @@ msgstr ""
 "Jeśli wykryty język jest poza bieżącą parą, język źródłowy zostaje zastąpiony wykrytym, a docelowy ustawiony na główny.\n"
 "Jeśli wykryty język to główny, para staje się główny - pomocniczy."
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Włącz sprawdzanie pisowni"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "Włącz sprawdzanie pisowni w tekście źródłowym"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Zawsze na wierzchu"
@@ -1662,6 +1686,10 @@ msgstr "Proxy"
 msgid "Real-Time Translation"
 msgstr "Tłumaczenie w czasie rzeczywistym"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "Sprawdzanie pisowni"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "Limit czasu"
@@ -1699,6 +1727,10 @@ msgstr "Kolor czcionki"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "Nazwa czcionki"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1933,6 +1965,11 @@ msgstr "Tylko gdy Ctrl jest wciśnięty"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Tłumacz podczas pisania"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Włącz sprawdzanie pisowni"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"

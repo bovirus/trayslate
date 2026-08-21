@@ -552,6 +552,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "Μετάφραση του κειμένου καθώς πληκτρολογείτε στο αναδυόμενο παράθυρο"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "Ενεργοποίηση ορθογραφικού ελέγχου"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "Ενεργοποίηση ορθογραφικού ελέγχου στο κείμενο προέλευσης"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1530,6 +1544,16 @@ msgstr ""
 "Αν η ανιχνευμένη γλώσσα είναι εκτός του τρέχοντος ζεύγους, η γλώσσα πηγής αντικαθίσταται και ο στόχος γίνεται Κύρια.\n"
 "Αν η ανιχνευμένη γλώσσα είναι η Κύρια, το ζεύγος γίνεται Κύρια - Δευτερεύουσα."
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Ενεργοποίηση ορθογραφικού ελέγχου"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "Ενεργοποίηση ορθογραφικού ελέγχου στο κείμενο προέλευσης"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Πάντα στην κορυφή"
@@ -1662,6 +1686,10 @@ msgstr "Διακομιστής μεσολάβησης"
 msgid "Real-Time Translation"
 msgstr "Μετάφραση σε πραγματικό χρόνο"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "Ορθογραφικός έλεγχος"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "Χρονικό όριο"
@@ -1699,6 +1727,10 @@ msgstr "Χρώμα γραμματοσειράς"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "Όνομα γραμματοσειράς"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1933,6 +1965,11 @@ msgstr "Μόνο όταν πατηθεί το Ctrl"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Μετάφραση κατά την πληκτρολόγηση"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Ενεργοποίηση ορθογραφικού ελέγχου"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"

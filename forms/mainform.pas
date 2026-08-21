@@ -42,6 +42,7 @@ uses
   LMessages,
   MouseAndKeyInput,
   RichMemo,
+  RichSpellChecker,
   OneShotTimer,
   globalkeyboardhook,
   globalmousehook,
@@ -70,6 +71,7 @@ type
     aCopySource: TAction;
     aCopyTarget: TAction;
     aCopy: TAction;
+    aFastSpellCheck: TAction;
     aTargetBidiRightToLeft: TAction;
     aSourceBidiRightToLeft: TAction;
     aSelectAll: TAction;
@@ -112,6 +114,7 @@ type
     MenuBulgarian: TMenuItem;
     MenuItem1: TMenuItem;
     MenuFastMouseModeCtrl: TMenuItem;
+    MenuFastSpellCheck: TMenuItem;
     MenuSourceBidiMode: TMenuItem;
     MenuTargetUndo: TMenuItem;
     MenuTargetCut: TMenuItem;
@@ -187,6 +190,7 @@ type
     Separator13: TMenuItem;
     Separator14: TMenuItem;
     Separator15: TMenuItem;
+    Separator16: TMenuItem;
     Separator2: TMenuItem;
     SbSwap: TSpeedButton;
     SbTranslate: TSpeedButton;
@@ -312,12 +316,15 @@ type
     procedure aFastVerticalSplitExecute(Sender: TObject);
     procedure aFastAutoCopyExecute(Sender: TObject);
     procedure aFastAutoHeightExecute(Sender: TObject);
+    procedure aFastSpellCheckExecute(Sender: TObject);
     procedure ComboSourceCloseUp(Sender: TObject);
     procedure ComboTargetCloseUp(Sender: TObject);
     procedure ComboSourceDropDown(Sender: TObject);
     procedure ComboTargetDropDown(Sender: TObject);
     procedure ComboSourceKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure ComboTargetKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
+    procedure MemoSourceChange(Sender: TObject);
+    procedure MemoSourceContextPopup(Sender: TObject; MousePos: TPoint; var Handled: boolean);
     procedure MemoSourceKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure MemoSourceKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure MemoTargetKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
@@ -420,6 +427,9 @@ type
     FBlockTrayUpdate: boolean;
     FProcessingPairClick: boolean;
     FNeedRebuildPairs: boolean;
+    FSpellChecker: TRichSpellChecker;
+    FSpellTimer: TTimer;
+    FUpdatingSpellCheck: boolean;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -492,6 +502,7 @@ type
     FHotKeyFastVerticalSplit: THotKeyData;
     FHotKeyFastAutoHeight: THotKeyData;
     FHotKeyFastHideControls: THotKeyData;
+    FHotKeyFastSpellCheck: THotKeyData;
     // HotKey Recent Pairs
     FHotKeyRecent1: THotKeyData;
     FHotKeyRecent2: THotKeyData;
@@ -529,6 +540,7 @@ type
     procedure SetAutoHeight(Value: boolean);
     procedure SetHideControls(Value: boolean);
     procedure SetRealTime(Value: boolean);
+    procedure SetSpellCheck(Value: boolean);
     procedure SetVerticalSplit(Value: boolean);
     procedure SetAutoCopy(Value: boolean);
     procedure SetProxy(Value: TProxy);
@@ -573,6 +585,7 @@ type
     FAutoCopy: boolean;
     FAutoHeight: boolean;
     FHideControls: boolean;
+    FSpellCheck: boolean;
 
     {$IFDEF WINDOWS}
     procedure OnAppInstanceMessage(Sender: TObject; const AMessage: string);
@@ -611,6 +624,7 @@ type
     function UpdateTargetLanguage(const Lang: string): string;
     function UpdatePairLanguage(const Pair: string): string;
     procedure UpdateInputState(AEnabled: boolean; ReenableHotKeys: boolean = True);
+    procedure UpdateSpellCheck;
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
     function GetParameterValue(AName: string; out ResultOk: boolean): string;
@@ -677,6 +691,7 @@ type
     property EnableMouseMode: boolean read FEnableMouseMode write SetEnableMouseMode;
     property MouseModeCtrl: boolean read FMouseModeCtrl write SetMouseModeCtrl;
     property MouseMode: TMouseMode read FMouseMode write FMouseMode;
+    property SpellCheck: boolean read FSpellCheck write SetSpellCheck;
     property VerticalSplit: boolean read FVerticalSplit write SetVerticalSplit;
     property AutoCopy: boolean read FAutoCopy write SetAutoCopy;
     property StayOnTop: boolean read FStayOnTop write FStayOnTop;
@@ -731,6 +746,7 @@ type
     property HotKeyFastVerticalSplit: THotKeyData read FHotKeyFastVerticalSplit write FHotKeyFastVerticalSplit;
     property HotKeyFastAutoHeight: THotKeyData read FHotKeyFastAutoHeight write FHotKeyFastAutoHeight;
     property HotKeyFastHideControls: THotKeyData read FHotKeyFastHideControls write FHotKeyFastHideControls;
+    property HotKeyFastSpellCheck: THotKeyData read FHotKeyFastSpellCheck write FHotKeyFastSpellCheck;
     // Hotkeys Recent Pairs
     property HotKeyRecent1: THotKeyData read FHotKeyRecent1 write FHotKeyRecent1;
     property HotKeyRecent2: THotKeyData read FHotKeyRecent2 write FHotKeyRecent2;
@@ -749,7 +765,7 @@ var
 implementation
 
 uses formdonate, formabout, formsettings, formconfig, formpopup, formbutton, settings, languages, langdetect,
-  checkupdates, base64utils, localize, colorhelper, darkutils, pascalutils, flatbutton, RichMemoHelper;
+  checkupdates, base64utils, localize, colorhelper, darkutils, pascalutils, flatbutton, RichMemoHelper, SpellUtils;
 
   {$R *.lfm}
 
@@ -813,6 +829,8 @@ begin
   FProcessingPairClick := False;
   FNeedRebuildPairs := False;
   FFormSmallIcon := TIcon.Create;
+  FSpellChecker := TRichSpellChecker.Create(MemoSource);
+  FUpdatingSpellCheck := False;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -844,8 +862,8 @@ begin
   MemoSource.SelStart := Length(MemoSource.Text);
   MemoSource.SelLength := 0;
 
-  MemoSource.SetLeftIndent(3);
-  MemoTarget.SetLeftIndent(3);
+  MemoSource.SetLeftIndent;
+  MemoTarget.SetLeftIndent;
 
   if FLastDarkMode <> TDarkUtils.IsDarkMode then
   begin
@@ -860,6 +878,7 @@ begin
   aFastAllowHotKeys.Checked := FAllowHotKeys;
   aFastEnableMouseMode.Checked := FEnableMouseMode;
   aFastMouseModeCtrl.Checked := FMouseModeCtrl;
+  aFastSpellCheck.Checked := FSpellCheck;
   aFastVerticalSplit.Checked := FVerticalSplit;
   aFastHideControls.Checked := FHideControls;
   aFastAutoSwap.Checked := FAutoSwap;
@@ -945,6 +964,8 @@ begin
   TimerClick.Enabled := False;
   if TimerUnapply.Enabled then
     TimerUnapplyTimer(Self);
+  ClearTimeout(FClickTimer);
+  ClearTimeout(FSpellTimer);
 
   {$IFDEF WINDOWS}
   UpdateInputState(False);
@@ -1014,6 +1035,7 @@ begin
     FreeAndNil(FFontPopup);
     FreeAndNil(FFormSmallIcon);
     FreeAndNil(FDropTarget);
+    FreeAndNil(FSpellChecker);
   end;
 end;
 
@@ -1329,6 +1351,14 @@ begin
         ReleaseHotKeyModifiers(FHotKeyFastHideControls);
       end;
 
+      HOTKEY_FAST_SPELL_CHECK:
+      try
+        aFastSpellCheck.Execute;
+        ShowCustomHint(rfastspellcheck + ' - '+ iif(aFastSpellCheck.Checked, ron, roff));
+      finally
+        ReleaseHotKeyModifiers(FHotKeyFastSpellCheck);
+      end;
+
       else
         if (TheMessage.WParam >= HOTKEY_RECENT1) and (TheMessage.WParam <= HOTKEY_RECENT9) then
         begin
@@ -1589,6 +1619,9 @@ begin
 
   if FHotKeyFastHideControls.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_FAST_HIDE_CONTROLS, FHotKeyFastHideControls.Modifiers, FHotKeyFastHideControls.Key);
+
+  if FHotKeyFastSpellCheck.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_SPELL_CHECK, FHotKeyFastSpellCheck.Modifiers, FHotKeyFastSpellCheck.Key);
 
   // HotKeys Recent Pairs
   if FHotKeyRecent1.Key <> 0 then
@@ -2150,6 +2183,11 @@ begin
   AutoCopy := aFastAutoCopy.Checked;
 end;
 
+procedure TformTrayslate.aFastSpellCheckExecute(Sender: TObject);
+begin
+  SpellCheck := aFastSpellCheck.Checked;
+end;
+
 {%EndRegion}
 
 {%Region -fold Control Events}
@@ -2193,6 +2231,8 @@ begin
     if not Trans.ServiceOnlyButton then
       TranslateMemo(False);
   end;
+
+  UpdateSpellCheck;
 end;
 
 procedure TformTrayslate.ComboTargetCloseUp(Sender: TObject);
@@ -2258,17 +2298,38 @@ begin
     ComboTarget.DroppedDown := True;
 end;
 
+procedure TformTrayslate.MemoSourceChange(Sender: TObject);
+begin
+  if FSpellCheck and not FUpdatingSpellCheck then
+  begin
+    ClearTimeout(FSpellTimer);
+    SetTimeout(FSpellTimer, 1000, @UpdateSpellCheck);
+  end;
+  if MemoSource.Lines.Count = 0 then
+    MemoSource.SetLeftIndent;
+end;
+
+procedure TformTrayslate.MemoSourceContextPopup(Sender: TObject; MousePos: TPoint; var Handled: boolean);
+var
+  P: TPoint;
+begin
+  P := MemoSource.ClientToScreen(MousePos);
+  if not FSpellChecker.ShowContextMenu(MousePos.X, MousePos.Y) then
+    PopupSource.PopUp(P.X, P.Y);
+  Handled := True;
+end;
+
 procedure TformTrayslate.MemoSourceKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
 var
   NowTime: DWORD;
 begin
   // Allow pasting with Ctrl+V (custom paste that handles line endings)
-  if (ssCtrl in Shift) and (Key = VK_V) then
-  begin
-    (Sender as TRichMemo).PasteWithLineEnding;
-    Key := 0;
-    Exit;
-  end;
+  //if (ssCtrl in Shift) and (Key = VK_V) then
+  //begin
+  //  (Sender as TRichMemo).PasteWithLineEnding;
+  //  Key := 0;
+  //  Exit;
+  //end;
 
   // Ctrl+Enter or Shift+Enter triggers immediate translation
   if ((ssCtrl in Shift) or (ssShift in Shift)) and (Key = VK_RETURN) then
@@ -2396,6 +2457,8 @@ procedure TformTrayslate.MemoTargetChange(Sender: TObject);
 begin
   if MemoTarget.BiDiMode = bdRightToLeft then
     MemoTarget.ApplyBidiMode;
+  if MemoTarget.Lines.Count = 0 then
+    MemoTarget.SetLeftIndent;
 end;
 
 procedure TformTrayslate.SettingsFormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -2984,6 +3047,21 @@ begin
     FRealTime := Value;
 end;
 
+procedure TformTrayslate.SetSpellCheck(Value: boolean);
+begin
+  aFastSpellCheck.Checked := Value;
+  if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
+  begin
+    formSettingsTrayslate.CheckSpellCheck.Checked := Value;
+    formSettingsTrayslate.BringToFront;
+  end
+  else
+  begin
+    FSpellCheck := Value;
+    UpdateSpellCheck;
+  end;
+end;
+
 procedure TformTrayslate.SetVerticalSplit(Value: boolean);
 begin
   aFastVerticalSplit.Checked := Value;
@@ -3345,6 +3423,7 @@ begin
   FMouseModeCtrl := False;
   FMouseMode := mmShowTranslateButton;
   FVerticalSplit := False;
+  FSpellCheck := True;
   FStayOnTop := True;
   FHideControls := True;
   FAutoHeight := True;
@@ -3441,6 +3520,10 @@ begin
   // Alt+F10
   FHotKeyFastHideControls.Modifiers := MOD_SHIFT;
   FHotKeyFastHideControls.Key := VK_F10;
+
+  // Alt+F11
+  FHotKeyFastSpellCheck.Modifiers := MOD_SHIFT;
+  FHotKeyFastSpellCheck.Key := VK_F11;
 
   // Ctrl+Shift+1
   FHotKeyRecent1.Modifiers := MOD_CONTROL or MOD_SHIFT;
@@ -3811,6 +3894,7 @@ begin
   aFastVerticalSplit.ShortCut := FHotKeyFastVerticalSplit.ToShortCut;
   aFastAutoHeight.ShortCut := FHotKeyFastAutoHeight.ToShortCut;
   aFastHideControls.ShortCut := FHotKeyFastHideControls.ToShortCut;
+  aFastSpellCheck.ShortCut := FHotKeyFastSpellCheck.ToShortCut;
 end;
 
 procedure TformTrayslate.SetAnimate(Angle: integer);
@@ -4057,6 +4141,17 @@ begin
   end;
 
   SetTrayIcon;
+end;
+
+procedure TformTrayslate.UpdateSpellCheck;
+begin
+  FUpdatingSpellCheck := True;
+  try
+    if not FSpellCheck or not TSpell.WinCheck(MemoSource, FSpellChecker, FLangSource) then
+      FSpellChecker.Clear;
+  finally
+    FUpdatingSpellCheck := False;
+  end;
 end;
 
 procedure TformTrayslate.DoCheckUpdates(Data: PtrInt);
@@ -4436,7 +4531,9 @@ begin
   begin
     srcMemoText := MemoSource.Text;
     MemoSource.Text := MemoTarget.Text;
+    MemoSource.SetLeftIndent;
     MemoTarget.Text := srcMemoText;
+    MemoTarget.SetLeftIndent;
   end;
 
   Result := True;
@@ -4516,6 +4613,7 @@ begin
   end;
 
   UpdateCheckMenuPair;
+  UpdateSpellCheck;
 
   if RunTranslate and not Trans.ServiceOnlyButton then
     TranslateMemo(False);
@@ -4890,7 +4988,10 @@ begin
       begin
         Result := FRawTranslate;
         if Assigned(AMemo) then
+        begin
           AMemo.Text := FRawTranslate;
+          AMemo.SetLeftIndent;
+        end;
       end;
     finally
       if Assigned(Th) then
@@ -5065,6 +5166,8 @@ begin
       end;
     end;
   end;
+
+  UpdateSpellCheck;
 end;
 
 procedure TformTrayslate.TranslateMemo(ADetectLanguage: boolean = True);

@@ -414,6 +414,20 @@ msgstr ""
 msgid "Translate text as you type in the popup"
 msgstr ""
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr ""
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr ""
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr ""
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1356,6 +1370,16 @@ msgid ""
 "If Detected language equals Primary, the translation pair is set to Primary - Secondary."
 msgstr ""
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr ""
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr ""
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr ""
@@ -1488,6 +1512,10 @@ msgstr ""
 msgid "Real-Time Translation"
 msgstr ""
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr ""
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr ""
@@ -1524,6 +1552,10 @@ msgstr ""
 
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
+msgstr ""
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
 msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
@@ -1758,6 +1790,11 @@ msgstr ""
 #: tformtrayslate.afastrealtime.caption
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
+msgstr ""
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
 msgstr ""
 
 #: tformtrayslate.afastverticalsplit.caption

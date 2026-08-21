@@ -297,6 +297,41 @@ object formSettingsTrayslate: TformSettingsTrayslate
             OnChange = SettingChange
           end
         end
+        object GroupSpellCheck: TGroupBox
+          Left = 5
+          Height = 59
+          Top = 581
+          Width = 579
+          Align = alTop
+          BorderSpacing.Around = 5
+          Caption = 'Spell Check'
+          ClientHeight = 39
+          ClientWidth = 575
+          TabOrder = 4
+          object CheckSpellCheck: TCheckBox
+            Left = 16
+            Height = 19
+            Hint = 'Enable spell checking in the source text'
+            Top = 8
+            Width = 117
+            Caption = 'Enable Spell Check'
+            TabOrder = 0
+            OnChange = SettingChange
+          end
+          object LabelInstalledLang: TLabel
+            Cursor = crHandPoint
+            Left = 448
+            Height = 15
+            Top = 8
+            Width = 104
+            Anchors = [akTop, akRight]
+            Caption = 'Installed Languages'
+            Font.Color = clHighlight
+            Font.Style = [fsUnderline]
+            ParentFont = False
+            OnClick = LabelInstalledLangClick
+          end
+        end
       end
     end
     object PageInterface: TTabSheet
@@ -1133,7 +1168,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           )
           ColWidths = (
             200
-            365
+            382
           )
         end
       end

@@ -553,6 +553,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "Terjemahkan teks saat Anda mengetik di popup"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "Aktifkan Pemeriksaan Ejaan"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "Aktifkan pemeriksaan ejaan dalam teks sumber"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1531,6 +1545,16 @@ msgstr ""
 "Jika bahasa terdeteksi berada di luar pasangan saat ini, bahasa sumber diganti dengan bahasa tersebut dan bahasa target menjadi utama.\n"
 "Jika bahasa terdeteksi adalah utama, pasangan diatur menjadi utama - sekunder."
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Aktifkan Pemeriksaan Ejaan"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "Aktifkan pemeriksaan ejaan dalam teks sumber"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Tetap di Atas"
@@ -1663,6 +1687,10 @@ msgstr "Proxy"
 msgid "Real-Time Translation"
 msgstr "Terjemahan Waktu Nyata"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "Pemeriksaan Ejaan"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "Batas Waktu"
@@ -1700,6 +1728,10 @@ msgstr "Warna Font"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "Nama Font"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1934,6 +1966,11 @@ msgstr "Hanya saat Ctrl ditekan"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Terjemahkan Saat Mengetik"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Aktifkan Pemeriksaan Ejaan"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"

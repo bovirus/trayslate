@@ -552,6 +552,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "पॉपअप में टाइप करते समय टेक्स्ट का अनुवाद करें"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "वर्तनी जाँच सक्षम करें"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "स्रोत पाठ में वर्तनी जाँच सक्षम करें"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1530,6 +1544,16 @@ msgstr ""
 "यदि पहचानी गई भाषा वर्तमान जोड़ी के बाहर है, तो स्रोत भाषा को पहचानी गई भाषा से बदल दिया जाता है और लक्ष्य को प्राथमिक सेट किया जाता है।\n"
 "यदि पहचानी गई भाषा प्राथमिक है, तो जोड़ी प्राथमिक - द्वितीयक सेट की जाती है।"
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "वर्तनी जाँच सक्षम करें"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "स्रोत पाठ में वर्तनी जाँच सक्षम करें"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "हमेशा ऊपर रखें"
@@ -1662,6 +1686,10 @@ msgstr "प्रॉक्सी"
 msgid "Real-Time Translation"
 msgstr "रीयल-टाइम अनुवाद"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "वर्तनी जाँच"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "समय सीमा"
@@ -1699,6 +1727,10 @@ msgstr "फ़ॉन्ट का रंग"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "फ़ॉन्ट का नाम"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1933,6 +1965,11 @@ msgstr "केवल Ctrl दबाने पर"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "टाइप करते ही अनुवाद करें"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "वर्तनी जाँच सक्षम करें"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"

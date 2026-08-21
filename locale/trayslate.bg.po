@@ -556,6 +556,20 @@ msgstr "Shift+F6"
 msgid "Translate text as you type in the popup"
 msgstr "Превеждайте текст, докато пишете в изскачащия прозорец"
 
+#: formsettings.rfastspellcheck
+msgctxt "formsettings.rfastspellcheck"
+msgid "Enable Spell Check"
+msgstr "Активиране на проверката на правописа"
+
+#: formsettings.rfastspellcheck_default
+msgid "Shift+F11"
+msgstr "Shift+F11"
+
+#: formsettings.rfastspellcheck_hint
+msgctxt "formsettings.rfastspellcheck_hint"
+msgid "Enable spell checking in the source text"
+msgstr "Активиране на проверката на правописа в изходния текст"
+
 #: formsettings.rfastverticalsplit
 msgctxt "formsettings.rfastverticalsplit"
 msgid "Side-By-Side Layout"
@@ -1534,6 +1548,16 @@ msgstr ""
 "Ако откритият език е извън текущата двойка, изходният се заменя с открития, а целевият е зададен на Основен.\n"
 "Ако Откритият език е Основен, двойката превод е зададена на Основен - Вторичен."
 
+#: tformsettingstrayslate.checkspellcheck.caption
+msgctxt "tformsettingstrayslate.checkspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Активиране на проверката на правописа"
+
+#: tformsettingstrayslate.checkspellcheck.hint
+msgctxt "tformsettingstrayslate.checkspellcheck.hint"
+msgid "Enable spell checking in the source text"
+msgstr "Активиране на проверката на правописа в изходния текст"
+
 #: tformsettingstrayslate.checkstayontop.caption
 msgid "Stay On Top"
 msgstr "Най Отгоре"
@@ -1667,6 +1691,10 @@ msgstr "Прокси"
 msgid "Real-Time Translation"
 msgstr "Превод при въвеждане"
 
+#: tformsettingstrayslate.groupspellcheck.caption
+msgid "Spell Check"
+msgstr "Проверка на правописа"
+
 #: tformsettingstrayslate.grouptimeouts.caption
 msgid "Timeout"
 msgstr "Време за изчакване"
@@ -1704,6 +1732,10 @@ msgstr "Цвят на шрифта"
 #: tformsettingstrayslate.labeliconfont1.caption
 msgid "Font Name"
 msgstr "Име на шрифта"
+
+#: tformsettingstrayslate.labelinstalledlang.caption
+msgid "Installed Languages"
+msgstr ""
 
 #: tformsettingstrayslate.labellangdetectconfig.caption
 msgctxt "tformsettingstrayslate.labellangdetectconfig.caption"
@@ -1938,6 +1970,11 @@ msgstr "Само с натиснат Ctrl"
 msgctxt "tformtrayslate.afastrealtime.caption"
 msgid "Translate As You Type"
 msgstr "Превеждай, докато се пише"
+
+#: tformtrayslate.afastspellcheck.caption
+msgctxt "tformtrayslate.afastspellcheck.caption"
+msgid "Enable Spell Check"
+msgstr "Активиране на проверката на правописа"
 
 #: tformtrayslate.afastverticalsplit.caption
 msgctxt "tformtrayslate.afastverticalsplit.caption"
