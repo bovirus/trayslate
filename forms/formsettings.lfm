@@ -22,11 +22,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
     Top = 5
     Width = 614
     TabStop = False
-    ActivePage = PageNetwork
+    ActivePage = PageHotkeys
     Align = alClient
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
-    TabIndex = 3
+    TabIndex = 2
     TabOrder = 1
     object PageGeneral: TTabSheet
       Caption = 'General'
@@ -623,6 +623,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             MaxValue = 100
             TabOrder = 4
             OnChange = SettingChange
+            OnMouseWheel = ComboMouseWheel
           end
           object SpinIdle: TSpinEdit
             Left = 485
@@ -633,6 +634,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             MaxValue = 100
             TabOrder = 6
             OnChange = SettingChange
+            OnMouseWheel = ComboMouseWheel
           end
           object CheckHideControls: TCheckBox
             Left = 16
@@ -698,6 +700,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Anchors = [akTop, akLeft, akRight]
             TabOrder = 10
             OnChange = SettingChange
+            OnMouseWheel = ComboMouseWheel
           end
           object CheckAutoHeight: TCheckBox
             Left = 16
@@ -854,6 +857,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             OnEditingDone = GridHotkeysEditingDone
             OnGetCellHint = GridHotkeysGetCellHint
             OnKeyDown = GridHotkeysKeyDown
+            OnMouseWheel = GridHotkeysMouseWheel
             OnSelectEditor = GridHotkeysSelectEditor
           end
           object CheckAllowHotkeys: TCheckBox

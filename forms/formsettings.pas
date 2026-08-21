@@ -159,7 +159,6 @@ type
     procedure FormResize(Sender: TObject);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
-    procedure LabelInstalledLangClick(Sender: TObject);
     procedure ScreenActiveControlChanged(Sender: TObject);
     procedure SettingChange(Sender: TObject);
     procedure ListPagesClick(Sender: TObject);
@@ -180,17 +179,19 @@ type
     procedure ValueListUserParametersKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure ValueListUserParametersKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure ValueListUserParametersSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);
-    procedure ListPagesDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
-    procedure ClbProxiedConfigsDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
-    procedure ClbProxiedConfigsMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer;
-      MousePos: TPoint; var Handled: boolean);
     procedure GridHotkeysDrawCell(Sender: TObject; aCol, aRow: integer; aRect: TRect; aState: TGridDrawState);
     procedure GridHotkeysEditingDone(Sender: TObject);
     procedure GridHotkeysGetCellHint(Sender: TObject; ACol, ARow: integer; var HintText: string);
     procedure GridHotkeysKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure GridHotkeysSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);
     procedure SplitterPagesMoved(Sender: TObject);
+    procedure ListPagesDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
+    procedure LabelInstalledLangClick(Sender: TObject);
+    procedure ClbProxiedConfigsDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
+    procedure ClbProxiedConfigsMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer;
+      MousePos: TPoint; var Handled: boolean);
     procedure ComboMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
+    procedure GridHotkeysMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
     {%EndRegion}
   private
     FOriginalAutoStart: boolean;
@@ -437,7 +438,7 @@ resourcestring
 
 implementation
 
-uses mainform, formpopup, languages, translate, localize, darkutils, controlshelper, stringshelper, pascalutils,
+uses mainform, formpopup, languages, translate, localize, darkutils, controlshelper, stringshelper, stringgridhelper, pascalutils,
   OneShotTooltip, SpellUtils;
 
   {$R *.lfm}
@@ -1148,6 +1149,18 @@ begin
   ListBox.Canvas.TextRect(TextRect, TextRect.Left, TextRect.Top, ListBox.Items[Index], TextStyle);
 end;
 
+procedure TformSettingsTrayslate.LabelInstalledLangClick(Sender: TObject);
+var
+  Langs: TStrings;
+begin
+  Langs := TSpell.WinSupportedLanguages;
+  try
+    TOneShotTooltip.Show(Langs.Text, 100, clWhite);
+  finally
+    Langs.Free; // Free the returned TStrings object
+  end;
+end;
+
 procedure TformSettingsTrayslate.ClbProxiedConfigsDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
 const
   PADDING = 4; // Spacing between elements
@@ -1284,16 +1297,16 @@ begin
   end;
 end;
 
-procedure TformSettingsTrayslate.LabelInstalledLangClick(Sender: TObject);
-var
-  Langs: TStrings;
+procedure TformSettingsTrayslate.GridHotkeysMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer;
+  MousePos: TPoint; var Handled: boolean);
 begin
-  Langs := TSpell.WinSupportedLanguages;
-  try
-    TOneShotTooltip.Show(Langs.Text, 100, clWhite);
-  finally
-    Langs.Free; // Free the returned TStrings object
-  end;
+  GridHotkeys.EditorMode := False;
+
+  // Call our helper method
+  GridHotkeys.ScrollByWheel(WheelDelta);
+
+  // Prevent default grid behavior (moving selection)
+  Handled := True;
 end;
 
 {%EndRegion}
