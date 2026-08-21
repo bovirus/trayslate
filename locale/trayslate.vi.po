@@ -1269,10 +1269,30 @@ msgstr "Bạn có thể hỗ trợ phát triển thông qua một trong các tù
 msgid "Apply Auto Height"
 msgstr "Áp dụng chiều cao tự động"
 
+#: tformpopuptrayslate.abidirighttoleft.caption
+msgctxt "tformpopuptrayslate.abidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Thứ tự đọc từ phải sang trái"
+
+#: tformpopuptrayslate.aclear.caption
+msgctxt "tformpopuptrayslate.aclear.caption"
+msgid "Clear"
+msgstr "Xóa"
+
+#: tformpopuptrayslate.acopy.caption
+msgctxt "tformpopuptrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Sao chép"
+
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Sao chép bản dịch"
+
+#: tformpopuptrayslate.acut.caption
+msgctxt "tformpopuptrayslate.acut.caption"
+msgid "Cut"
+msgstr "Cắt"
 
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
@@ -1283,6 +1303,16 @@ msgstr "Chiều cao khóa"
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Dịch mới"
+
+#: tformpopuptrayslate.apaste.caption
+msgctxt "tformpopuptrayslate.apaste.caption"
+msgid "Paste"
+msgstr "Dán"
+
+#: tformpopuptrayslate.aselectall.caption
+msgctxt "tformpopuptrayslate.aselectall.caption"
+msgid "Select All"
+msgstr "Chọn tất cả"
 
 #: tformpopuptrayslate.asendtomainwindow.caption
 msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
@@ -1307,6 +1337,11 @@ msgstr "Thay thế đã chọn bằng bản dịch"
 msgctxt "tformpopuptrayslate.atranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "Dịch đã chọn sang cửa sổ bật lên"
+
+#: tformpopuptrayslate.aundo.caption
+msgctxt "tformpopuptrayslate.aundo.caption"
+msgid "Undo"
+msgstr "Hoàn tác"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1819,6 +1854,7 @@ msgid "Check For Updates"
 msgstr "Kiểm tra cập nhật"
 
 #: tformtrayslate.aclear.caption
+msgctxt "tformtrayslate.aclear.caption"
 msgid "Clear"
 msgstr "Xóa"
 
@@ -1842,6 +1878,7 @@ msgid "Copy Translation"
 msgstr "Sao chép bản dịch"
 
 #: tformtrayslate.acut.caption
+msgctxt "tformtrayslate.acut.caption"
 msgid "Cut"
 msgstr "Cắt"
 
@@ -2050,6 +2087,7 @@ msgid "New Translate"
 msgstr "Dịch mới"
 
 #: tformtrayslate.apaste.caption
+msgctxt "tformtrayslate.apaste.caption"
 msgid "Paste"
 msgstr "Dán"
 
@@ -2058,6 +2096,7 @@ msgid "Popup Translate"
 msgstr "Dịch cửa sổ bật lên"
 
 #: tformtrayslate.aselectall.caption
+msgctxt "tformtrayslate.aselectall.caption"
 msgid "Select All"
 msgstr "Chọn tất cả"
 
@@ -2089,6 +2128,7 @@ msgid "Translate Clipboard"
 msgstr "Dịch Clipboard"
 
 #: tformtrayslate.aundo.caption
+msgctxt "tformtrayslate.aundo.caption"
 msgid "Undo"
 msgstr "Hoàn tác"
 

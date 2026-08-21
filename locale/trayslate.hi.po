@@ -1264,10 +1264,30 @@ msgstr "आप निम्न विकल्पों में से कि�
 msgid "Apply Auto Height"
 msgstr "स्वचालित ऊँचाई लागू करें"
 
+#: tformpopuptrayslate.abidirighttoleft.caption
+msgctxt "tformpopuptrayslate.abidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "दाएँ से बाएँ पढ़ने का क्रम"
+
+#: tformpopuptrayslate.aclear.caption
+msgctxt "tformpopuptrayslate.aclear.caption"
+msgid "Clear"
+msgstr "साफ़ करें"
+
+#: tformpopuptrayslate.acopy.caption
+msgctxt "tformpopuptrayslate.acopy.caption"
+msgid "Copy"
+msgstr "कॉपी करें"
+
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "अनुवाद कॉपी करें"
+
+#: tformpopuptrayslate.acut.caption
+msgctxt "tformpopuptrayslate.acut.caption"
+msgid "Cut"
+msgstr "काटें"
 
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
@@ -1278,6 +1298,16 @@ msgstr "ऊँचाई लॉक करें"
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "नया अनुवाद"
+
+#: tformpopuptrayslate.apaste.caption
+msgctxt "tformpopuptrayslate.apaste.caption"
+msgid "Paste"
+msgstr "पेस्ट करें"
+
+#: tformpopuptrayslate.aselectall.caption
+msgctxt "tformpopuptrayslate.aselectall.caption"
+msgid "Select All"
+msgstr "सभी चुनें"
 
 #: tformpopuptrayslate.asendtomainwindow.caption
 msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
@@ -1302,6 +1332,11 @@ msgstr "चयनित को अनुवाद से बदलें"
 msgctxt "tformpopuptrayslate.atranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "चयनित का पॉपअप में अनुवाद करें"
+
+#: tformpopuptrayslate.aundo.caption
+msgctxt "tformpopuptrayslate.aundo.caption"
+msgid "Undo"
+msgstr "पूर्ववत करें"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1814,6 +1849,7 @@ msgid "Check For Updates"
 msgstr "अद्यतन जाँचें"
 
 #: tformtrayslate.aclear.caption
+msgctxt "tformtrayslate.aclear.caption"
 msgid "Clear"
 msgstr "साफ़ करें"
 
@@ -1837,6 +1873,7 @@ msgid "Copy Translation"
 msgstr "अनुवाद कॉपी करें"
 
 #: tformtrayslate.acut.caption
+msgctxt "tformtrayslate.acut.caption"
 msgid "Cut"
 msgstr "काटें"
 
@@ -2045,6 +2082,7 @@ msgid "New Translate"
 msgstr "नया अनुवाद"
 
 #: tformtrayslate.apaste.caption
+msgctxt "tformtrayslate.apaste.caption"
 msgid "Paste"
 msgstr "पेस्ट करें"
 
@@ -2053,6 +2091,7 @@ msgid "Popup Translate"
 msgstr "पॉपअप अनुवाद"
 
 #: tformtrayslate.aselectall.caption
+msgctxt "tformtrayslate.aselectall.caption"
 msgid "Select All"
 msgstr "सभी चुनें"
 
@@ -2084,6 +2123,7 @@ msgid "Translate Clipboard"
 msgstr "क्लिपबोर्ड अनुवाद करें"
 
 #: tformtrayslate.aundo.caption
+msgctxt "tformtrayslate.aundo.caption"
 msgid "Undo"
 msgstr "पूर्ववत करें"
 

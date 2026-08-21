@@ -1264,10 +1264,30 @@ msgstr "Вы можаце падтрымаць распрацоўку адным
 msgid "Apply Auto Height"
 msgstr "Ужыць аўтавышыню"
 
+#: tformpopuptrayslate.abidirighttoleft.caption
+msgctxt "tformpopuptrayslate.abidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Парадак чытання справа налева"
+
+#: tformpopuptrayslate.aclear.caption
+msgctxt "tformpopuptrayslate.aclear.caption"
+msgid "Clear"
+msgstr "Ачысціць"
+
+#: tformpopuptrayslate.acopy.caption
+msgctxt "tformpopuptrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Капіяваць"
+
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Капіяваць пераклад"
+
+#: tformpopuptrayslate.acut.caption
+msgctxt "tformpopuptrayslate.acut.caption"
+msgid "Cut"
+msgstr "Выразаць"
 
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
@@ -1278,6 +1298,16 @@ msgstr "Заблакаваць вышыню"
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Новы пераклад"
+
+#: tformpopuptrayslate.apaste.caption
+msgctxt "tformpopuptrayslate.apaste.caption"
+msgid "Paste"
+msgstr "Уставіць"
+
+#: tformpopuptrayslate.aselectall.caption
+msgctxt "tformpopuptrayslate.aselectall.caption"
+msgid "Select All"
+msgstr "Выбраць усё"
 
 #: tformpopuptrayslate.asendtomainwindow.caption
 msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
@@ -1302,6 +1332,11 @@ msgstr "Замяніць выдзеленае перакладам"
 msgctxt "tformpopuptrayslate.atranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "Перакласці выдзеленае ва ўсплывальнае акно"
+
+#: tformpopuptrayslate.aundo.caption
+msgctxt "tformpopuptrayslate.aundo.caption"
+msgid "Undo"
+msgstr "Адмяніць"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1814,6 +1849,7 @@ msgid "Check For Updates"
 msgstr "Праверыць абнаўленні"
 
 #: tformtrayslate.aclear.caption
+msgctxt "tformtrayslate.aclear.caption"
 msgid "Clear"
 msgstr "Ачысціць"
 
@@ -1837,6 +1873,7 @@ msgid "Copy Translation"
 msgstr "Капіяваць пераклад"
 
 #: tformtrayslate.acut.caption
+msgctxt "tformtrayslate.acut.caption"
 msgid "Cut"
 msgstr "Выразаць"
 
@@ -2045,6 +2082,7 @@ msgid "New Translate"
 msgstr "Новы пераклад"
 
 #: tformtrayslate.apaste.caption
+msgctxt "tformtrayslate.apaste.caption"
 msgid "Paste"
 msgstr "Уставіць"
 
@@ -2053,6 +2091,7 @@ msgid "Popup Translate"
 msgstr "Усплывальны пераклад"
 
 #: tformtrayslate.aselectall.caption
+msgctxt "tformtrayslate.aselectall.caption"
 msgid "Select All"
 msgstr "Выбраць усё"
 
@@ -2084,6 +2123,7 @@ msgid "Translate Clipboard"
 msgstr "Перакласці буфер абмену"
 
 #: tformtrayslate.aundo.caption
+msgctxt "tformtrayslate.aundo.caption"
 msgid "Undo"
 msgstr "Адмяніць"
 

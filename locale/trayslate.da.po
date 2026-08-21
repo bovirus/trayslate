@@ -1264,10 +1264,30 @@ msgstr "Du kan støtte udviklingen på en af følgende måder:"
 msgid "Apply Auto Height"
 msgstr "Anvend automatisk højde"
 
+#: tformpopuptrayslate.abidirighttoleft.caption
+msgctxt "tformpopuptrayslate.abidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Læseretning fra højre mod venstre"
+
+#: tformpopuptrayslate.aclear.caption
+msgctxt "tformpopuptrayslate.aclear.caption"
+msgid "Clear"
+msgstr "Ryd"
+
+#: tformpopuptrayslate.acopy.caption
+msgctxt "tformpopuptrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Kopiér"
+
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Copy Translation"
+
+#: tformpopuptrayslate.acut.caption
+msgctxt "tformpopuptrayslate.acut.caption"
+msgid "Cut"
+msgstr "Klip"
 
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
@@ -1278,6 +1298,16 @@ msgstr "Lås højde"
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Ny oversættelse"
+
+#: tformpopuptrayslate.apaste.caption
+msgctxt "tformpopuptrayslate.apaste.caption"
+msgid "Paste"
+msgstr "Indsæt"
+
+#: tformpopuptrayslate.aselectall.caption
+msgctxt "tformpopuptrayslate.aselectall.caption"
+msgid "Select All"
+msgstr "Markér alt"
 
 #: tformpopuptrayslate.asendtomainwindow.caption
 msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
@@ -1302,6 +1332,11 @@ msgstr "Erstat markering med oversættelse"
 msgctxt "tformpopuptrayslate.atranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "Oversæt markering til pop op-vinduet"
+
+#: tformpopuptrayslate.aundo.caption
+msgctxt "tformpopuptrayslate.aundo.caption"
+msgid "Undo"
+msgstr "Fortryd"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1814,6 +1849,7 @@ msgid "Check For Updates"
 msgstr "Søg efter opdateringer"
 
 #: tformtrayslate.aclear.caption
+msgctxt "tformtrayslate.aclear.caption"
 msgid "Clear"
 msgstr "Ryd"
 
@@ -1837,6 +1873,7 @@ msgid "Copy Translation"
 msgstr "Copy Translation"
 
 #: tformtrayslate.acut.caption
+msgctxt "tformtrayslate.acut.caption"
 msgid "Cut"
 msgstr "Klip"
 
@@ -2045,6 +2082,7 @@ msgid "New Translate"
 msgstr "Ny oversættelse"
 
 #: tformtrayslate.apaste.caption
+msgctxt "tformtrayslate.apaste.caption"
 msgid "Paste"
 msgstr "Indsæt"
 
@@ -2053,6 +2091,7 @@ msgid "Popup Translate"
 msgstr "Popup-oversættelse"
 
 #: tformtrayslate.aselectall.caption
+msgctxt "tformtrayslate.aselectall.caption"
 msgid "Select All"
 msgstr "Markér alt"
 
@@ -2084,6 +2123,7 @@ msgid "Translate Clipboard"
 msgstr "Oversæt udklipsholder"
 
 #: tformtrayslate.aundo.caption
+msgctxt "tformtrayslate.aundo.caption"
 msgid "Undo"
 msgstr "Fortryd"
 

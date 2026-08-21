@@ -1265,10 +1265,30 @@ msgstr "Anda dapat mendukung pengembangan melalui salah satu opsi berikut:"
 msgid "Apply Auto Height"
 msgstr "Terapkan tinggi otomatis"
 
+#: tformpopuptrayslate.abidirighttoleft.caption
+msgctxt "tformpopuptrayslate.abidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr "Urutan Baca Kanan ke Kiri"
+
+#: tformpopuptrayslate.aclear.caption
+msgctxt "tformpopuptrayslate.aclear.caption"
+msgid "Clear"
+msgstr "Hapus"
+
+#: tformpopuptrayslate.acopy.caption
+msgctxt "tformpopuptrayslate.acopy.caption"
+msgid "Copy"
+msgstr "Salin"
+
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
 msgstr "Salin terjemahan"
+
+#: tformpopuptrayslate.acut.caption
+msgctxt "tformpopuptrayslate.acut.caption"
+msgid "Cut"
+msgstr "Potong"
 
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
@@ -1279,6 +1299,16 @@ msgstr "Kunci tinggi"
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
 msgstr "Terjemahan Baru"
+
+#: tformpopuptrayslate.apaste.caption
+msgctxt "tformpopuptrayslate.apaste.caption"
+msgid "Paste"
+msgstr "Tempel"
+
+#: tformpopuptrayslate.aselectall.caption
+msgctxt "tformpopuptrayslate.aselectall.caption"
+msgid "Select All"
+msgstr "Pilih Semua"
 
 #: tformpopuptrayslate.asendtomainwindow.caption
 msgctxt "tformpopuptrayslate.asendtomainwindow.caption"
@@ -1303,6 +1333,11 @@ msgstr "Ganti Pilihan dengan Terjemahan"
 msgctxt "tformpopuptrayslate.atranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
 msgstr "Terjemahkan Pilihan ke Popup"
+
+#: tformpopuptrayslate.aundo.caption
+msgctxt "tformpopuptrayslate.aundo.caption"
+msgid "Undo"
+msgstr "Urungkan"
 
 #: tformpopuptrayslate.caption
 msgctxt "tformpopuptrayslate.caption"
@@ -1815,6 +1850,7 @@ msgid "Check For Updates"
 msgstr "Periksa Pembaruan"
 
 #: tformtrayslate.aclear.caption
+msgctxt "tformtrayslate.aclear.caption"
 msgid "Clear"
 msgstr "Hapus"
 
@@ -1838,6 +1874,7 @@ msgid "Copy Translation"
 msgstr "Salin terjemahan"
 
 #: tformtrayslate.acut.caption
+msgctxt "tformtrayslate.acut.caption"
 msgid "Cut"
 msgstr "Potong"
 
@@ -2046,6 +2083,7 @@ msgid "New Translate"
 msgstr "Terjemahan Baru"
 
 #: tformtrayslate.apaste.caption
+msgctxt "tformtrayslate.apaste.caption"
 msgid "Paste"
 msgstr "Tempel"
 
@@ -2054,6 +2092,7 @@ msgid "Popup Translate"
 msgstr "Terjemahan Popup"
 
 #: tformtrayslate.aselectall.caption
+msgctxt "tformtrayslate.aselectall.caption"
 msgid "Select All"
 msgstr "Pilih Semua"
 
@@ -2085,6 +2124,7 @@ msgid "Translate Clipboard"
 msgstr "Terjemahkan Papan Klip"
 
 #: tformtrayslate.aundo.caption
+msgctxt "tformtrayslate.aundo.caption"
 msgid "Undo"
 msgstr "Urungkan"
 

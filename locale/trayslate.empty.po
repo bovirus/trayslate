@@ -1104,9 +1104,29 @@ msgstr ""
 msgid "Apply Auto Height"
 msgstr ""
 
+#: tformpopuptrayslate.abidirighttoleft.caption
+msgctxt "tformpopuptrayslate.abidirighttoleft.caption"
+msgid "Right-To-Left Reading Order"
+msgstr ""
+
+#: tformpopuptrayslate.aclear.caption
+msgctxt "tformpopuptrayslate.aclear.caption"
+msgid "Clear"
+msgstr ""
+
+#: tformpopuptrayslate.acopy.caption
+msgctxt "tformpopuptrayslate.acopy.caption"
+msgid "Copy"
+msgstr ""
+
 #: tformpopuptrayslate.acopytarget.hint
 msgctxt "tformpopuptrayslate.acopytarget.hint"
 msgid "Copy Translation"
+msgstr ""
+
+#: tformpopuptrayslate.acut.caption
+msgctxt "tformpopuptrayslate.acut.caption"
+msgid "Cut"
 msgstr ""
 
 #: tformpopuptrayslate.afastautoheight.caption
@@ -1117,6 +1137,16 @@ msgstr ""
 #: tformpopuptrayslate.anewtranslate.hint
 msgctxt "tformpopuptrayslate.anewtranslate.hint"
 msgid "New Translate"
+msgstr ""
+
+#: tformpopuptrayslate.apaste.caption
+msgctxt "tformpopuptrayslate.apaste.caption"
+msgid "Paste"
+msgstr ""
+
+#: tformpopuptrayslate.aselectall.caption
+msgctxt "tformpopuptrayslate.aselectall.caption"
+msgid "Select All"
 msgstr ""
 
 #: tformpopuptrayslate.asendtomainwindow.caption
@@ -1141,6 +1171,11 @@ msgstr ""
 #: tformpopuptrayslate.atranslatefromcontrolpopup.caption
 msgctxt "tformpopuptrayslate.atranslatefromcontrolpopup.caption"
 msgid "Translate Selected To Popup"
+msgstr ""
+
+#: tformpopuptrayslate.aundo.caption
+msgctxt "tformpopuptrayslate.aundo.caption"
+msgid "Undo"
 msgstr ""
 
 #: tformpopuptrayslate.caption
@@ -1650,6 +1685,7 @@ msgid "Check For Updates"
 msgstr ""
 
 #: tformtrayslate.aclear.caption
+msgctxt "tformtrayslate.aclear.caption"
 msgid "Clear"
 msgstr ""
 
@@ -1673,6 +1709,7 @@ msgid "Copy Translation"
 msgstr ""
 
 #: tformtrayslate.acut.caption
+msgctxt "tformtrayslate.acut.caption"
 msgid "Cut"
 msgstr ""
 
@@ -1881,6 +1918,7 @@ msgid "New Translate"
 msgstr ""
 
 #: tformtrayslate.apaste.caption
+msgctxt "tformtrayslate.apaste.caption"
 msgid "Paste"
 msgstr ""
 
@@ -1889,6 +1927,7 @@ msgid "Popup Translate"
 msgstr ""
 
 #: tformtrayslate.aselectall.caption
+msgctxt "tformtrayslate.aselectall.caption"
 msgid "Select All"
 msgstr ""
 
@@ -1920,6 +1959,7 @@ msgid "Translate Clipboard"
 msgstr ""
 
 #: tformtrayslate.aundo.caption
+msgctxt "tformtrayslate.aundo.caption"
 msgid "Undo"
 msgstr ""
 

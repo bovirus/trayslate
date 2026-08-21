@@ -41,6 +41,7 @@ object formPopupTrayslate: TformPopupTrayslate
       Color = clWindow
       HideSelection = False
       OnChange = MemoTargetChange
+      PopupMenu = PopupMemo
       ScrollBars = ssAutoBoth
       TabOrder = 0
       ZoomFactor = 1
@@ -89,6 +90,7 @@ object formPopupTrayslate: TformPopupTrayslate
       ParentBackground = False
       ParentColor = False
       ParentFont = False
+      PopupMenu = PopupMemo
       TabOrder = 2
       OnClick = PanelWatermarkClick
       object LabelWatermark: TLabel
@@ -180,7 +182,7 @@ object formPopupTrayslate: TformPopupTrayslate
   object Timer: TTimer
     Interval = 100
     OnTimer = TimerTimer
-    Left = 192
+    Left = 280
     Top = 152
   end
   object ActionList: TActionList
@@ -188,49 +190,94 @@ object formPopupTrayslate: TformPopupTrayslate
     Left = 40
     Top = 152
     object aNewTranslate: TAction
+      Category = 'Form'
       Hint = 'New Translate'
       ImageIndex = 8
       ShortCut = 16462
       OnExecute = aNewTranslateExecute
     end
     object aCopyTarget: TAction
+      Category = 'Form'
       Hint = 'Copy Translation'
       ImageIndex = 10
       OnExecute = aCopyTargetExecute
     end
     object aMenu: TAction
+      Category = 'Form'
       ImageIndex = 6
       OnExecute = aMenuExecute
     end
     object aTranslateFromControlPopup: TAction
+      Category = 'Menu'
       Caption = 'Translate Selected To Popup'
       ImageIndex = 20
       OnExecute = aTranslateFromControlPopupExecute
     end
     object aTranslateControl: TAction
+      Category = 'Menu'
       Caption = 'Replace Selected With Translate'
       ImageIndex = 22
       OnExecute = aTranslateControlExecute
     end
-    object aApplyAutoHeight: TAction
-      Caption = 'Apply Auto Height'
-      OnExecute = aApplyAutoHeightExecute
-    end
-    object aFastAutoHeight: TAction
-      Caption = 'Lock Height'
-      ImageIndex = 19
-      OnExecute = aFastAutoHeightExecute
+    object aSwapPair: TAction
+      Category = 'Menu'
+      Caption = 'Swap Language Pair'
+      ImageIndex = 0
+      OnExecute = aSwapPairExecute
     end
     object aSendToMainWindow: TAction
+      Category = 'Menu'
       Caption = 'Send To Main Window'
       Hint = 'Send source and translation to main window'
       ImageIndex = 14
       OnExecute = aSendToMainWindowExecute
     end
-    object aSwapPair: TAction
-      Caption = 'Swap Language Pair'
-      ImageIndex = 0
-      OnExecute = aSwapPairExecute
+    object aApplyAutoHeight: TAction
+      Category = 'Menu'
+      Caption = 'Apply Auto Height'
+      OnExecute = aApplyAutoHeightExecute
+    end
+    object aFastAutoHeight: TAction
+      Category = 'Menu'
+      Caption = 'Lock Height'
+      ImageIndex = 19
+      OnExecute = aFastAutoHeightExecute
+    end
+    object aUndo: TAction
+      Category = 'Memo'
+      Caption = 'Undo'
+      OnExecute = aUndoExecute
+    end
+    object aCut: TAction
+      Category = 'Memo'
+      Caption = 'Cut'
+      OnExecute = aCutExecute
+    end
+    object aCopy: TAction
+      Category = 'Memo'
+      Caption = 'Copy'
+      OnExecute = aCopyExecute
+    end
+    object aPaste: TAction
+      Category = 'Memo'
+      Caption = 'Paste'
+      OnExecute = aPasteExecute
+    end
+    object aClear: TAction
+      Category = 'Memo'
+      Caption = 'Clear'
+      OnExecute = aClearExecute
+    end
+    object aSelectAll: TAction
+      Category = 'Memo'
+      Caption = 'Select All'
+      OnExecute = aSelectAllExecute
+    end
+    object aBidiRightToLeft: TAction
+      Category = 'Memo'
+      AutoCheck = True
+      Caption = 'Right-To-Left Reading Order'
+      OnExecute = aBidiRightToLeftExecute
     end
   end
   object Popup: TPopupMenu
@@ -263,6 +310,46 @@ object formPopupTrayslate: TformPopupTrayslate
     end
     object MenuFastAutoHeight: TMenuItem
       Action = aFastAutoHeight
+    end
+  end
+  object PopupMemo: TPopupMenu
+    Left = 200
+    Top = 152
+    object MenuUndo: TMenuItem
+      Action = aUndo
+      Visible = False
+    end
+    object Separator3: TMenuItem
+      Caption = '-'
+      Visible = False
+    end
+    object MenuCut: TMenuItem
+      Action = aCut
+      Visible = False
+    end
+    object MenuCopy: TMenuItem
+      Action = aCopy
+    end
+    object MenuPaste: TMenuItem
+      Action = aPaste
+      Visible = False
+    end
+    object MenuClear: TMenuItem
+      Action = aClear
+      Visible = False
+    end
+    object Separator4: TMenuItem
+      Caption = '-'
+    end
+    object MenuSelectAll: TMenuItem
+      Action = aSelectAll
+    end
+    object Separator5: TMenuItem
+      Caption = '-'
+    end
+    object MenuBidiRightToLeft: TMenuItem
+      Action = aBidiRightToLeft
+      AutoCheck = True
     end
   end
 end

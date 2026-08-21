@@ -40,6 +40,13 @@ type
 
   TformPopupTrayslate = class(TForm)
     aApplyAutoHeight: TAction;
+    aCopy: TAction;
+    aClear: TAction;
+    aBidiRightToLeft: TAction;
+    aSelectAll: TAction;
+    aPaste: TAction;
+    aCut: TAction;
+    aUndo: TAction;
     aTranslateFromControlPopup: TAction;
     aTranslateControl: TAction;
     aSwapPair: TAction;
@@ -54,6 +61,13 @@ type
     MemoTarget: TRichMemo;
     MenuFastAutoHeight: TMenuItem;
     MenuApplyAutoHeight: TMenuItem;
+    MenuUndo: TMenuItem;
+    MenuCut: TMenuItem;
+    MenuCopy: TMenuItem;
+    MenuPaste: TMenuItem;
+    MenuClear: TMenuItem;
+    MenuSelectAll: TMenuItem;
+    MenuBidiRightToLeft: TMenuItem;
     MenuTranslateFromControlPopup: TMenuItem;
     MenuTranslateControl: TMenuItem;
     MenuSwapPair: TMenuItem;
@@ -63,23 +77,34 @@ type
     PanelWatermark: TPanel;
     PanelButtonTarget: TPanel;
     Popup: TPopupMenu;
+    PopupMemo: TPopupMenu;
     SbCopyTargetPanel: TSpeedButton;
     SbNewTranslate: TSpeedButton;
     SbCopyTarget: TSpeedButton;
     SbMenu: TSpeedButton;
     Separator1: TMenuItem;
     Separator2: TMenuItem;
+    Separator3: TMenuItem;
+    Separator4: TMenuItem;
+    Separator5: TMenuItem;
     Timer: TTimer;
 
     procedure aApplyAutoHeightExecute(Sender: TObject);
+    procedure aBidiRightToLeftExecute(Sender: TObject);
+    procedure aClearExecute(Sender: TObject);
+    procedure aCopyExecute(Sender: TObject);
     procedure aCopyTargetExecute(Sender: TObject);
+    procedure aCutExecute(Sender: TObject);
     procedure aFastAutoHeightExecute(Sender: TObject);
     procedure aMenuExecute(Sender: TObject);
     procedure aNewTranslateExecute(Sender: TObject);
+    procedure aPasteExecute(Sender: TObject);
+    procedure aSelectAllExecute(Sender: TObject);
     procedure aSendToMainWindowExecute(Sender: TObject);
     procedure aSwapPairExecute(Sender: TObject);
     procedure aTranslateFromControlPopupExecute(Sender: TObject);
     procedure aTranslateControlExecute(Sender: TObject);
+    procedure aUndoExecute(Sender: TObject);
     procedure FormChangeBounds(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -275,6 +300,45 @@ begin
     formTrayslate.AdjustPopupHeight(MemoTarget.Text, True);
 end;
 
+procedure TformPopupTrayslate.aUndoExecute(Sender: TObject);
+begin
+  MemoTarget.Undo;
+end;
+
+procedure TformPopupTrayslate.aCutExecute(Sender: TObject);
+begin
+  MemoTarget.CutToClipboard;
+end;
+
+procedure TformPopupTrayslate.aCopyExecute(Sender: TObject);
+begin
+  MemoTarget.CopyToClipboard;
+end;
+
+procedure TformPopupTrayslate.aPasteExecute(Sender: TObject);
+begin
+  MemoTarget.PasteFromClipboard;
+end;
+
+procedure TformPopupTrayslate.aClearExecute(Sender: TObject);
+begin
+  MemoTarget.Clear;
+end;
+
+procedure TformPopupTrayslate.aSelectAllExecute(Sender: TObject);
+begin
+  MemoTarget.SelectAll;
+end;
+
+procedure TformPopupTrayslate.aBidiRightToLeftExecute(Sender: TObject);
+begin
+  if aBidiRightToLeft.Checked then
+    MemoTarget.BiDiMode := bdRightToLeft
+  else
+    MemoTarget.BiDiMode := bdLeftToRight;
+  MemoTarget.ApplyBidiMode;
+end;
+
 procedure TformPopupTrayslate.aFastAutoHeightExecute(Sender: TObject);
 var
   Check: boolean;
@@ -309,6 +373,8 @@ procedure TformPopupTrayslate.MemoTargetChange(Sender: TObject);
 begin
   UpdateControlsVisibility;
   TimerTimer(Self);
+  if MemoTarget.BiDiMode = bdRightToLeft then
+    MemoTarget.ApplyBidiMode;
 end;
 
 procedure TformPopupTrayslate.PanelWatermarkClick(Sender: TObject);
