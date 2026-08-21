@@ -120,7 +120,6 @@ object formTrayslate: TformTrayslate
     Color = clBtnFace
     ParentColor = False
     ResizeAnchor = akBottom
-    OnCanResize = SplitterCanResize
     OnMoved = SplitterMoved
   end
   object PanelPairs: TPanel
@@ -201,7 +200,6 @@ object formTrayslate: TformTrayslate
     ClientWidth = 506
     ParentBackground = False
     TabOrder = 0
-    OnResize = PanelSourceResize
     object MemoSource: TRichMemo
       Left = 0
       Height = 203
