@@ -276,6 +276,7 @@ type
     procedure ApplicationPropException(Sender: TObject; E: Exception);
     procedure ApplicationPropUserInput(Sender: TObject; Msg: cardinal);
     procedure ApplicationPropEndSession(Sender: TObject);
+    procedure PanelSourceResize(Sender: TObject);
     procedure PopupRecentPairPopup(Sender: TObject);
     procedure OnTextDroppedHandler(Sender: TObject; const AText: string);
     procedure ScreenActiveFormChanged(Sender: TObject);
@@ -335,6 +336,7 @@ type
     procedure MemoTargetChange(Sender: TObject);
     procedure SettingsFormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure PanelLangResize(Sender: TObject);
+    procedure SplitterCanResize(Sender: TObject; var NewSize: integer; var Accept: boolean);
     procedure SplitterMoved(Sender: TObject);
     procedure SbSwapMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: integer);
     procedure TimerActiveTimer(Sender: TObject);
@@ -434,6 +436,8 @@ type
     FSpellChecker: TRichSpellChecker;
     FSpellTimer: TTimer;
     FUpdatingSpellCheck: boolean;
+    FLastPulseTime: cardinal;
+    FFormLocked: boolean;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -773,7 +777,7 @@ var
 implementation
 
 uses formdonate, formabout, formsettings, formconfig, formpopup, formbutton, settings, languages, langdetect,
-  checkupdates, base64utils, localize, colorhelper, darkutils, pascalutils, flatbutton, RichMemoHelper, SpellUtils;
+  checkupdates, base64utils, localize, colorhelper, controlshelper, darkutils, pascalutils, flatbutton, RichMemoHelper, SpellUtils;
 
   {$R *.lfm}
 
@@ -839,6 +843,8 @@ begin
   FFormSmallIcon := TIcon.Create;
   FSpellChecker := TRichSpellChecker.Create(MemoSource);
   FUpdatingSpellCheck := False;
+  FLastPulseTime := 0;
+  FFormLocked := False;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -2512,8 +2518,31 @@ begin
   Application.QueueAsyncCall(@DoRealign, 0);
 end;
 
+procedure TformTrayslate.PanelSourceResize(Sender: TObject);
+const
+  INTERVAL_MS = 40;
+begin
+  if FFormLocked and ((GetTickCount64 - FLastPulseTime) >= INTERVAL_MS) then
+  begin
+    Self.PulseUpdate;
+    FLastPulseTime := GetTickCount64;
+  end;
+end;
+
+procedure TformTrayslate.SplitterCanResize(Sender: TObject; var NewSize: integer; var Accept: boolean);
+begin
+  if not FFormLocked then
+  begin
+    FFormLocked := True;
+    Self.LockUpdate;
+  end;
+end;
+
 procedure TformTrayslate.SplitterMoved(Sender: TObject);
 begin
+  FFormLocked := False;
+  Self.UnlockUpdate;
+
   case PanelTarget.Align of
     alBottom:
       FSplitRatio := PanelTarget.Height / (PanelSource.Height + PanelTarget.Height);
