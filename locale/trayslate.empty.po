@@ -1143,6 +1143,11 @@ msgctxt "tformpopuptrayslate.acut.caption"
 msgid "Cut"
 msgstr ""
 
+#: tformpopuptrayslate.adefaultzoom.caption
+msgctxt "tformpopuptrayslate.adefaultzoom.caption"
+msgid "Default Zoom"
+msgstr ""
+
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
 msgid "Lock Height"
@@ -1751,6 +1756,11 @@ msgstr ""
 #: tformtrayslate.acut.caption
 msgctxt "tformtrayslate.acut.caption"
 msgid "Cut"
+msgstr ""
+
+#: tformtrayslate.adefaultzoom.caption
+msgctxt "tformtrayslate.adefaultzoom.caption"
+msgid "Default Zoom"
 msgstr ""
 
 #: tformtrayslate.adeletepair.caption

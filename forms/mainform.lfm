@@ -904,6 +904,11 @@ object formTrayslate: TformTrayslate
       Caption = 'Enable Spell Check'
       OnExecute = aFastSpellCheckExecute
     end
+    object aDefaultZoom: TAction
+      Category = 'Memo'
+      Caption = 'Default Zoom'
+      OnExecute = aDefaultZoomExecute
+    end
   end
   object TimerClick: TTimer
     Enabled = False
@@ -1077,6 +1082,9 @@ object formTrayslate: TformTrayslate
       Action = aSourceBidiRightToLeft
       AutoCheck = True
     end
+    object MenuSourceDefaultZoom: TMenuItem
+      Action = aDefaultZoom
+    end
   end
   object PopupTarget: TPopupMenu
     Left = 128
@@ -1111,6 +1119,9 @@ object formTrayslate: TformTrayslate
     object MenuTargetBidiMode: TMenuItem
       Action = aTargetBidiRightToLeft
       AutoCheck = True
+    end
+    object MenuTargetDefaultZoom: TMenuItem
+      Action = aDefaultZoom
     end
   end
 end

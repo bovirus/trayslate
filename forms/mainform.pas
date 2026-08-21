@@ -71,6 +71,7 @@ type
     aCopySource: TAction;
     aCopyTarget: TAction;
     aCopy: TAction;
+    aDefaultZoom: TAction;
     aFastSpellCheck: TAction;
     aTargetBidiRightToLeft: TAction;
     aSourceBidiRightToLeft: TAction;
@@ -115,6 +116,8 @@ type
     MenuItem1: TMenuItem;
     MenuFastMouseModeCtrl: TMenuItem;
     MenuFastSpellCheck: TMenuItem;
+    MenuSourceDefaultZoom: TMenuItem;
+    MenuTargetDefaultZoom: TMenuItem;
     MenuSourceBidiMode: TMenuItem;
     MenuTargetUndo: TMenuItem;
     MenuTargetCut: TMenuItem;
@@ -301,6 +304,7 @@ type
     procedure aSelectAllExecute(Sender: TObject);
     procedure aSourceBidiRightToLeftExecute(Sender: TObject);
     procedure aTargetBidiRightToLeftExecute(Sender: TObject);
+    procedure aDefaultZoomExecute(Sender: TObject);
     procedure aAutoCheckUpdatesExecute(Sender: TObject);
     procedure aCheckForUpdatesExecute(Sender: TObject);
     procedure aDonateExecute(Sender: TObject);
@@ -472,6 +476,7 @@ type
     FFormPopupTop: integer;
     FFormPopupWidth: integer;
     FFormPopupHeight: integer;
+    FFormPopupZoomFactor: double;
     FFormAboutWidth: integer;
     FFormAboutHeight: integer;
     FFormSettingsLeft: integer;
@@ -715,6 +720,7 @@ type
     property FormPopupTop: integer read FFormPopupTop write FFormPopupTop;
     property FormPopupWidth: integer read FFormPopupWidth write FFormPopupWidth;
     property FormPopupHeight: integer read FFormPopupHeight write FFormPopupHeight;
+    property FormPopupZoomFactor: double read FFormPopupZoomFactor write FFormPopupZoomFactor;
     property FormSettingsLeft: integer read FFormSettingsLeft write FFormSettingsLeft;
     property FormSettingsTop: integer read FFormSettingsTop write FFormSettingsTop;
     property FormSettingsWidth: integer read FFormSettingsWidth write FFormSettingsWidth;
@@ -2075,6 +2081,17 @@ begin
   else
     Memo.BiDiMode := bdLeftToRight;
   Memo.ApplyBidiMode;
+end;
+
+procedure TformTrayslate.aDefaultZoomExecute(Sender: TObject);
+var
+  Memo: TRichMemo;
+begin
+  if Self.ActiveControl is TRichMemo then
+  begin
+    Memo := Self.ActiveControl as TRichMemo;
+    Memo.ZoomFactor := 1;
+  end;
 end;
 
 procedure TformTrayslate.aAutoCheckUpdatesExecute(Sender: TObject);
@@ -4256,8 +4273,10 @@ begin
       DT_WORDBREAK or DT_CALCRECT or DT_NOPREFIX
       );
 
+    NewHeight := Round(R.Height * FormPopupZoomFactor);
+
     // Add top/bottom padding + controls
-    NewHeight := R.Height + formPopupTrayslate.PanelPairs.Height + 10;
+    NewHeight := NewHeight + formPopupTrayslate.PanelPairs.Height + 10;
 
     // Limit height
     if NewHeight > MaxH then
@@ -4946,6 +4965,7 @@ function TformTrayslate.TranslateThread(ATrans: TTranslate; AText: string; AMemo
 var
   Th: TTranslateThread;
   ThDone: boolean;
+  Zoom: double;
 begin
   Result := string.Empty;
   if FCancelled then
@@ -4993,8 +5013,10 @@ begin
         Result := FRawTranslate;
         if Assigned(AMemo) then
         begin
+          Zoom := AMemo.ZoomFactor;
           AMemo.Text := FRawTranslate;
           AMemo.SetLeftIndent;
+          AMemo.ZoomFactor := Zoom;
         end;
       end;
     finally

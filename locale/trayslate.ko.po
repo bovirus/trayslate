@@ -1303,6 +1303,11 @@ msgctxt "tformpopuptrayslate.acut.caption"
 msgid "Cut"
 msgstr "잘라내기"
 
+#: tformpopuptrayslate.adefaultzoom.caption
+msgctxt "tformpopuptrayslate.adefaultzoom.caption"
+msgid "Default Zoom"
+msgstr "기본 확대/축소"
+
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
 msgid "Lock Height"
@@ -1916,6 +1921,11 @@ msgstr "번역 복사"
 msgctxt "tformtrayslate.acut.caption"
 msgid "Cut"
 msgstr "잘라내기"
+
+#: tformtrayslate.adefaultzoom.caption
+msgctxt "tformtrayslate.adefaultzoom.caption"
+msgid "Default Zoom"
+msgstr "기본 확대/축소"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"

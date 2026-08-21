@@ -1303,6 +1303,11 @@ msgctxt "tformpopuptrayslate.acut.caption"
 msgid "Cut"
 msgstr "Klipp ut"
 
+#: tformpopuptrayslate.adefaultzoom.caption
+msgctxt "tformpopuptrayslate.adefaultzoom.caption"
+msgid "Default Zoom"
+msgstr "Standardzoom"
+
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
 msgid "Lock Height"
@@ -1916,6 +1921,11 @@ msgstr "Kopiera översättning"
 msgctxt "tformtrayslate.acut.caption"
 msgid "Cut"
 msgstr "Klipp ut"
+
+#: tformtrayslate.adefaultzoom.caption
+msgctxt "tformtrayslate.adefaultzoom.caption"
+msgid "Default Zoom"
+msgstr "Standardzoom"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"

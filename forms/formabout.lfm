@@ -247,6 +247,7 @@ object formAboutTrayslate: TformAboutTrayslate
     Width = 485
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clBtnFace
+    ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 1
   end

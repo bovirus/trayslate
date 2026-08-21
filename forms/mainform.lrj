@@ -73,5 +73,6 @@
 {"hash":195288076,"name":"tformtrayslate.aselectall.caption","sourcebytes":[83,101,108,101,99,116,32,65,108,108],"value":"Select All"},
 {"hash":205357346,"name":"tformtrayslate.asourcebidirighttoleft.caption","sourcebytes":[82,105,103,104,116,45,84,111,45,76,101,102,116,32,82,101,97,100,105,110,103,32,79,114,100,101,114],"value":"Right-To-Left Reading Order"},
 {"hash":205357346,"name":"tformtrayslate.atargetbidirighttoleft.caption","sourcebytes":[82,105,103,104,116,45,84,111,45,76,101,102,116,32,82,101,97,100,105,110,103,32,79,114,100,101,114],"value":"Right-To-Left Reading Order"},
-{"hash":232257691,"name":"tformtrayslate.afastspellcheck.caption","sourcebytes":[69,110,97,98,108,101,32,83,112,101,108,108,32,67,104,101,99,107],"value":"Enable Spell Check"}
+{"hash":232257691,"name":"tformtrayslate.afastspellcheck.caption","sourcebytes":[69,110,97,98,108,101,32,83,112,101,108,108,32,67,104,101,99,107],"value":"Enable Spell Check"},
+{"hash":131063453,"name":"tformtrayslate.adefaultzoom.caption","sourcebytes":[68,101,102,97,117,108,116,32,90,111,111,109],"value":"Default Zoom"}
 ]}

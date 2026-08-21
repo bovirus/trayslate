@@ -1303,6 +1303,11 @@ msgctxt "tformpopuptrayslate.acut.caption"
 msgid "Cut"
 msgstr "剪切"
 
+#: tformpopuptrayslate.adefaultzoom.caption
+msgctxt "tformpopuptrayslate.adefaultzoom.caption"
+msgid "Default Zoom"
+msgstr "默认缩放"
+
 #: tformpopuptrayslate.afastautoheight.caption
 msgctxt "tformpopuptrayslate.afastautoheight.caption"
 msgid "Lock Height"
@@ -1916,6 +1921,11 @@ msgstr "复制翻译"
 msgctxt "tformtrayslate.acut.caption"
 msgid "Cut"
 msgstr "剪切"
+
+#: tformtrayslate.adefaultzoom.caption
+msgctxt "tformtrayslate.adefaultzoom.caption"
+msgid "Default Zoom"
+msgstr "默认缩放"
 
 #: tformtrayslate.adeletepair.caption
 msgid "Delete Pair"

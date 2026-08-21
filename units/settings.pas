@@ -73,6 +73,9 @@ begin
     end;
     JSONObj.Add('WindowState', Ord(Form.WindowState));
     JSONObj.Add('SplitRatio', Form.SplitRatio);
+    JSONObj.Add('SourceZoomFactor', Form.MemoSource.ZoomFactor);
+    JSONObj.Add('TargetZoomFactor', Form.MemoTarget.ZoomFactor);
+    JSONObj.Add('PopupZoomFactor', Form.FormPopupZoomFactor);
 
     JSONObj.Add('FormConfigLeft', Round(Form.FormConfigLeft * 96 / DPI));
     JSONObj.Add('FormConfigTop', Round(Form.FormConfigTop * 96 / DPI));
@@ -337,6 +340,15 @@ begin
           Form.SplitRatio := JSONObj.FindPath('SplitRatio').AsFloat
         else
           Form.SplitRatio := 0.5;
+
+        if JSONObj.FindPath('SourceZoomFactor') <> nil then
+          Form.MemoSource.ZoomFactor := JSONObj.FindPath('SourceZoomFactor').AsFloat;
+
+        if JSONObj.FindPath('TargetZoomFactor') <> nil then
+          Form.MemoTarget.ZoomFactor := JSONObj.FindPath('TargetZoomFactor').AsFloat;
+
+        if JSONObj.FindPath('PopupZoomFactor') <> nil then
+          Form.FormPopupZoomFactor := JSONObj.FindPath('PopupZoomFactor').AsFloat;
 
         if JSONObj.FindPath('FormConfigLeft') <> nil then
           Form.FormConfigLeft := Round(JSONObj.FindPath('FormConfigLeft').AsInteger * DPI / 96);

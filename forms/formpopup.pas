@@ -32,7 +32,7 @@ uses
   {$IFDEF WINDOWS}
   ,Windows
   {$ENDIF}
-  ;
+  , Types;
 
 type
 
@@ -43,6 +43,7 @@ type
     aCopy: TAction;
     aClear: TAction;
     aBidiRightToLeft: TAction;
+    aDefaultZoom: TAction;
     aSelectAll: TAction;
     aPaste: TAction;
     aCut: TAction;
@@ -61,6 +62,7 @@ type
     MemoTarget: TRichMemo;
     MenuFastAutoHeight: TMenuItem;
     MenuApplyAutoHeight: TMenuItem;
+    MenuDefaultZoom: TMenuItem;
     MenuUndo: TMenuItem;
     MenuCut: TMenuItem;
     MenuCopy: TMenuItem;
@@ -95,6 +97,7 @@ type
     procedure aCopyExecute(Sender: TObject);
     procedure aCopyTargetExecute(Sender: TObject);
     procedure aCutExecute(Sender: TObject);
+    procedure aDefaultZoomExecute(Sender: TObject);
     procedure aFastAutoHeightExecute(Sender: TObject);
     procedure aMenuExecute(Sender: TObject);
     procedure aNewTranslateExecute(Sender: TObject);
@@ -113,6 +116,7 @@ type
     procedure FormShortCut(var Msg: TLMKey; var Handled: boolean);
     procedure FormShow(Sender: TObject);
     procedure MemoTargetChange(Sender: TObject);
+    procedure MemoTargetMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
     procedure PanelWatermarkClick(Sender: TObject);
     procedure PopupClose(Sender: TObject);
     procedure PopupPopup(Sender: TObject);
@@ -157,6 +161,7 @@ begin
     aSwapPair.ShortCut := formTrayslate.HotKeyTransSwap.ToShortCut;
     aFastAutoHeight.ImageIndex := iif(formTrayslate.AutoHeight, 19, 18);
     aFastAutoHeight.Caption := iif(formTrayslate.AutoHeight, rlockheight, runlockheight);
+    MemoTarget.ZoomFactor := formTrayslate.FormPopupZoomFactor;
   end;
 
   MemoTarget.DisableBuiltInDragDrop;
@@ -341,6 +346,13 @@ begin
   MemoTarget.ApplyBidiMode;
 end;
 
+procedure TformPopupTrayslate.aDefaultZoomExecute(Sender: TObject);
+begin
+  MemoTarget.ZoomFactor := 1;
+  if Assigned(formTrayslate) then
+    formTrayslate.FormPopupZoomFactor := 1;
+end;
+
 procedure TformPopupTrayslate.aFastAutoHeightExecute(Sender: TObject);
 var
   Check: boolean;
@@ -377,6 +389,13 @@ begin
   TimerTimer(Self);
   if MemoTarget.BiDiMode = bdRightToLeft then
     MemoTarget.ApplyBidiMode;
+end;
+
+procedure TformPopupTrayslate.MemoTargetMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer;
+  MousePos: TPoint; var Handled: boolean);
+begin
+  if Assigned(formTrayslate) then
+    formTrayslate.FormPopupZoomFactor := MemoTarget.ZoomFactor;
 end;
 
 procedure TformPopupTrayslate.PanelWatermarkClick(Sender: TObject);
