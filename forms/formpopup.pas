@@ -181,6 +181,8 @@ begin
   FPopupOpen := False;
   FInWindow := False;
 
+  MemoTarget.SetLeftIndent(3);
+
   UpdateControlsVisibility;
 end;
 
@@ -462,6 +464,8 @@ begin
 
   if PanelWatermark.Color <> MemoTarget.Color then
     PanelWatermark.Color := MemoTarget.Color;
+  if PanelTarget.Color <> MemoTarget.Color then
+    PanelTarget.Color := MemoTarget.Color;
 
   if not FPopupOpen then
     UpdateControlsVisibility;

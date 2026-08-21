@@ -844,6 +844,9 @@ begin
   MemoSource.SelStart := Length(MemoSource.Text);
   MemoSource.SelLength := 0;
 
+  MemoSource.SetLeftIndent(3);
+  MemoTarget.SetLeftIndent(3);
+
   if FLastDarkMode <> TDarkUtils.IsDarkMode then
   begin
     Font.Color := InvertColor(Font.Color);
@@ -1512,7 +1515,7 @@ begin
   FClickPoint := Point(Data and $FFFF, Data shr 16);
   ClearTimeout(FClickTimer);
   if (FClickCount >= 1) and (FClickCount < 4) then
-    SetTimeoutSafe(FClickTimer, 100, @OnTranslateMouseModeTimer)
+    SetTimeout(FClickTimer, 100, @OnTranslateMouseModeTimer)
   else
     OnTranslateMouseModeTimer;
 end;

@@ -114,7 +114,7 @@ object formTrayslate: TformTrayslate
     Cursor = crVSplit
     Left = 0
     Height = 10
-    Top = 269
+    Top = 266
     Width = 512
     Align = alBottom
     Color = clBtnFace
@@ -188,20 +188,21 @@ object formTrayslate: TformTrayslate
   end
   object PanelSource: TPanel
     Left = 3
-    Height = 209
-    Top = 60
+    Height = 203
+    Top = 63
     Width = 506
     Align = alClient
     BorderSpacing.Left = 3
+    BorderSpacing.Top = 3
     BorderSpacing.Right = 3
     BevelOuter = bvNone
-    ClientHeight = 209
+    ClientHeight = 203
     ClientWidth = 506
     ParentBackground = False
     TabOrder = 0
     object MemoSource: TRichMemo
       Left = 0
-      Height = 209
+      Height = 203
       Top = 0
       Width = 506
       Align = alClient
@@ -217,7 +218,7 @@ object formTrayslate: TformTrayslate
     object PanelButtonSource: TPanel
       Left = 465
       Height = 16
-      Top = 176
+      Top = 170
       Width = 16
       Anchors = [akRight, akBottom]
       BevelOuter = bvNone
@@ -251,6 +252,7 @@ object formTrayslate: TformTrayslate
     Width = 506
     Align = alBottom
     BorderSpacing.Left = 3
+    BorderSpacing.Top = 3
     BorderSpacing.Right = 3
     BorderSpacing.Bottom = 3
     BevelOuter = bvNone
