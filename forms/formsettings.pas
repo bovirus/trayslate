@@ -190,8 +190,7 @@ type
     procedure GridHotkeysKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure GridHotkeysSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);
     procedure SplitterPagesMoved(Sender: TObject);
-    procedure ComboIconFontNameMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer;
-      MousePos: TPoint; var Handled: boolean);
+    procedure ComboMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
     {%EndRegion}
   private
     FOriginalAutoStart: boolean;
@@ -1269,10 +1268,20 @@ begin
   Handled := True; // Block parent ScrollBox
 end;
 
-procedure TformSettingsTrayslate.ComboIconFontNameMouseWheel(Sender: TObject; Shift: TShiftState;
-  WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
+procedure TformSettingsTrayslate.ComboMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer;
+  MousePos: TPoint; var Handled: boolean);
+var
+  SB: TScrollBox;
 begin
-  Handled := True;
+  // Find the parent ScrollBox (assuming ComboBox.Parent is GroupBox, and its Parent is ScrollBox)
+  if (Sender as TWinControl).Parent.Parent is TScrollBox then
+  begin
+    SB := TScrollBox((Sender as TWinControl).Parent.Parent);
+    // Change the vertical scroll position directly.
+    // WheelDelta > 0 means scroll up (decrease position), so we subtract it.
+    SB.VertScrollBar.Position := SB.VertScrollBar.Position - WheelDelta div 2;
+    Handled := True; // Prevent the ComboBox from processing the wheel itself
+  end;
 end;
 
 procedure TformSettingsTrayslate.LabelInstalledLangClick(Sender: TObject);

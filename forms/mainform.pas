@@ -2520,7 +2520,7 @@ end;
 
 procedure TformTrayslate.PanelSourceResize(Sender: TObject);
 const
-  INTERVAL_MS = 40;
+  INTERVAL_MS = 35;
 begin
   if FFormLocked and ((GetTickCount64 - FLastPulseTime) >= INTERVAL_MS) then
   begin
