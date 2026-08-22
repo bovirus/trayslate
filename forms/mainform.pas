@@ -43,6 +43,7 @@ uses
   MouseAndKeyInput,
   RichMemo,
   RichSpellChecker,
+  SpellUtils,
   OneShotTimer,
   globalkeyboardhook,
   globalmousehook,
@@ -434,8 +435,8 @@ type
     FSpellChecker: TRichSpellChecker;
     FSpellTimer: TTimer;
     FUpdatingSpellCheck: boolean;
-    FLastPulseTime: cardinal;
-    FFormLocked: boolean;
+    FSpellErrors: TSpellErrorArray;
+    FSpellText: string;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -633,6 +634,8 @@ type
     function UpdatePairLanguage(const Pair: string): string;
     procedure UpdateInputState(AEnabled: boolean; ReenableHotKeys: boolean = True);
     procedure UpdateSpellCheck;
+    procedure DoSpellCheck;
+    procedure ApplySpellCheck;
     procedure SpellCheckNeeded(Sender: TObject);
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
@@ -776,7 +779,8 @@ var
 implementation
 
 uses formdonate, formabout, formsettings, formconfig, formpopup, formbutton, settings, languages, langdetect,
-  checkupdates, base64utils, localize, colorhelper, controlshelper, darkutils, pascalutils, flatbutton, RichMemoHelper, SpellUtils;
+  checkupdates, base64utils, localize, colorhelper, controlshelper, darkutils, pascalutils, flatbutton,
+  RichMemoHelper, OneShotThread;
 
   {$R *.lfm}
 
@@ -843,8 +847,6 @@ begin
   FSpellChecker := TRichSpellChecker.Create(MemoSource);
   FSpellChecker.OnSpellCheckNeeded := @SpellCheckNeeded;
   FUpdatingSpellCheck := False;
-  FLastPulseTime := 0;
-  FFormLocked := False;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -989,6 +991,9 @@ begin
     TimerUnapplyTimer(Self);
   ClearTimeout(FClickTimer);
   ClearTimeout(FSpellTimer);
+  ShutdownThreads;
+  WaitForThreads;
+  FreeAndNil(FSpellChecker);
 
   {$IFDEF WINDOWS}
   UpdateInputState(False);
@@ -1058,7 +1063,6 @@ begin
     FreeAndNil(FFontPopup);
     FreeAndNil(FFormSmallIcon);
     FreeAndNil(FDropTarget);
-    FreeAndNil(FSpellChecker);
   end;
 end;
 
@@ -2364,6 +2368,7 @@ begin
   begin
     (Sender as TRichMemo).PasteFromClipboard;
     (Sender as TRichMemo).SetLeftIndent;
+    Key := 0;
     Exit;
   end;
 
@@ -4183,17 +4188,40 @@ end;
 
 procedure TformTrayslate.UpdateSpellCheck;
 begin
-  if not Assigned(FSpellChecker) then Exit;
-
-  FUpdatingSpellCheck := True;
-  FSpellChecker.BeginUpdate;
-  try
-    if not FSpellCheck or not TSpell.WinCheck(MemoSource, FSpellChecker, FLangSource, [scoSpelling], FSpellCheckEmptySuggestions) then
+  // If spell checking is disabled, clear underlines immediately in the main thread
+  if not FSpellCheck then
+  begin
+    if Assigned(FSpellChecker) then
       FSpellChecker.Clear;
-  finally
-    FSpellChecker.EndUpdate;
-    FUpdatingSpellCheck := False;
+    Exit;
   end;
+
+  if FUpdatingSpellCheck then Exit;
+  FUpdatingSpellCheck := True;
+  // Copy text in the main thread before starting the background task
+  FSpellText := MemoSource.Text;
+  // Run spell check in background and apply results in the main thread
+  RunAsync(@DoSpellCheck, @ApplySpellCheck);
+end;
+
+procedure TformTrayslate.DoSpellCheck;
+begin
+  // This method runs in a background thread and must not touch GUI
+  FSpellErrors := TSpell.CheckText(FSpellText, FLangSource, [scoSpelling], FSpellCheckEmptySuggestions);
+end;
+
+procedure TformTrayslate.ApplySpellCheck;
+begin
+  // This method is called in the main thread via Synchronize
+  if not Assigned(FSpellChecker) then
+  begin
+    FUpdatingSpellCheck := False;
+    Exit;
+  end;
+
+  // Apply the collected errors using the shared utility method
+  TSpell.ApplyErrors(FSpellChecker, FSpellErrors);
+  FUpdatingSpellCheck := False;
 end;
 
 procedure TformTrayslate.SpellCheckNeeded(Sender: TObject);
