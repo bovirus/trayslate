@@ -72,7 +72,7 @@ const
 
 const
   DOUBLE_ENTER_INTERVAL = 200; // ms
-  HOTKEY_INTERVAL = 500; // ms
+  HOTKEY_INTERVAL = 100; // ms
   MOUSE_MODE_INTERVAL = 100; // ms
   MOUSE_MODE_DELTA = 10; // pixel
   MOUSE_DBL_INTERVAL = 500; // ms

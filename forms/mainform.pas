@@ -4460,35 +4460,38 @@ begin
 end;
 
 procedure TformTrayslate.SetVerticalMode;
+var
+  TotalSize: integer;
 begin
-  SplitterMoved(Splitter);
   if FVerticalSplit then
   begin
     // Switch to vertical layout
+    TotalSize := PanelSource.Width + PanelTarget.Width;
+
     PanelSource.Align := alClient;
     PanelTarget.Align := alRight;
     Splitter.Align := alRight;
-    Splitter.Left := PanelSource.Width;
 
     PanelSource.BorderSpacing.Right := 0;
     PanelSource.BorderSpacing.Bottom := 3;
     PanelTarget.BorderSpacing.Left := 0;
 
-    PanelSource.Width := Round((PanelSource.Width + PanelTarget.Width) * FSplitRatio);
+    PanelSource.Width := Round(TotalSize * (1 - FSplitRatio));
   end
   else
   begin
     // Switch to horizontal layout
+    TotalSize := PanelSource.Height + PanelTarget.Height;
+
     PanelSource.Align := alClient;
     PanelTarget.Align := alBottom;
     Splitter.Align := alBottom;
-    Splitter.Top := PanelSource.Height + PanelPairs.Height;
 
     PanelSource.BorderSpacing.Right := 3;
     PanelSource.BorderSpacing.Bottom := 0;
     PanelTarget.BorderSpacing.Left := 3;
 
-    PanelSource.Height := Round((PanelSource.Height + PanelTarget.Height) * FSplitRatio);
+    PanelSource.Height := Round(TotalSize * (1 - FSplitRatio));
   end;
 end;
 
