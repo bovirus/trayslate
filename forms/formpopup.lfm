@@ -36,11 +36,11 @@ object formPopupTrayslate: TformPopupTrayslate
     TabOrder = 1
     object MemoTarget: TRichMemo
       Left = 0
-      Height = 205
-      Top = 3
+      Height = 207
+      Top = 1
       Width = 474
       Align = alClient
-      BorderSpacing.Top = 3
+      BorderSpacing.Top = 1
       BorderStyle = bsNone
       Color = clWindow
       HideSelection = False

@@ -1469,6 +1469,7 @@ begin
     if Info.CtrlDown and (Info.KeyCode = VK_V) then
     begin
       formPopupTrayslate.MemoTarget.PasteFromClipboard;
+      formPopupTrayslate.MemoTarget.SetLeftIndent;
       Info.Handled := True;
     end
     else
@@ -2049,6 +2050,7 @@ begin
   begin
     Memo := Self.ActiveControl as TRichMemo;
     Memo.PasteFromClipboard;
+    Memo.SetLeftIndent;
   end;
 end;
 
@@ -2357,13 +2359,13 @@ procedure TformTrayslate.MemoSourceKeyDown(Sender: TObject; var Key: word; Shift
 var
   NowTime: DWORD;
 begin
-  // Allow pasting with Ctrl+V (custom paste that handles line endings)
-  //if (ssCtrl in Shift) and (Key = VK_V) then
-  //begin
-  //  (Sender as TRichMemo).PasteWithLineEnding;
-  //  Key := 0;
-  //  Exit;
-  //end;
+  // On pasting with Ctrl+V
+  if (ssCtrl in Shift) and (Key = VK_V) then
+  begin
+    (Sender as TRichMemo).PasteFromClipboard;
+    (Sender as TRichMemo).SetLeftIndent;
+    Exit;
+  end;
 
   // Ctrl+Enter or Shift+Enter triggers immediate translation
   if ((ssCtrl in Shift) or (ssShift in Shift)) and (Key = VK_RETURN) then
@@ -4267,11 +4269,11 @@ end;
 
 procedure TformTrayslate.AdjustPopupHeight(AText: string; Force: boolean = False);
 var
-  R: TRect;
   NewHeight: integer;
   MaxH: integer;
-  TextWidth: integer;
 begin
+  if not Assigned(formPopupTrayslate) then Exit;
+
   if (FAutoHeight or Force) and (AText <> string.Empty) then
   begin
     // Maximum allowed height
@@ -4280,27 +4282,11 @@ begin
     else
       MaxH := Min(FMaxHeight, Screen.WorkAreaRect.Height);
 
-    // Use current form font
-    formPopupTrayslate.Canvas.Font.Assign(formPopupTrayslate.Font);
-
-    // Available text width inside form
-    TextWidth := formPopupTrayslate.ClientWidth - formPopupTrayslate.BorderSpacing.Left - formPopupTrayslate.BorderSpacing.Right - 30;
-
-    // Calculate text rectangle height
-    R := Rect(0, 0, TextWidth, 0);
-
-    DrawTextW(
-      formPopupTrayslate.Canvas.Handle,
-      pwidechar(UTF8Decode(AText)),
-      Length(UTF8Decode(AText)),
-      R,
-      DT_WORDBREAK or DT_CALCRECT or DT_NOPREFIX
-      );
-
-    NewHeight := Round(R.Height * FormPopupZoomFactor);
+    // Get actual text height from RichMemo
+    NewHeight := formPopupTrayslate.MemoTarget.GetTextHeight;
 
     // Add top/bottom padding + controls
-    NewHeight := NewHeight + formPopupTrayslate.PanelPairs.Height + 10;
+    NewHeight := NewHeight + formPopupTrayslate.PanelPairs.Height + Round(10 * formPopupTrayslate.MemoTarget.ZoomFactor);
 
     // Limit height
     if NewHeight > MaxH then
@@ -5474,6 +5460,7 @@ begin
     FTopMost := True;
     TOS.SleepLoop(0, 1);
     MemoSource.Text := SelectedText;
+    MemoSource.SetLeftIndent;
     TranslateMemo;
   end;
 end;
