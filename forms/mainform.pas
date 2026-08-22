@@ -633,6 +633,7 @@ type
     function UpdatePairLanguage(const Pair: string): string;
     procedure UpdateInputState(AEnabled: boolean; ReenableHotKeys: boolean = True);
     procedure UpdateSpellCheck;
+    procedure SpellCheckNeeded(Sender: TObject);
     procedure DoCheckUpdates(Data: PtrInt);
     procedure ShowCustomHint(const AText: string; X: integer = 0; Y: integer = 0; Duration: integer = 3000);
     function GetParameterValue(AName: string; out ResultOk: boolean): string;
@@ -840,6 +841,7 @@ begin
   FNeedRebuildPairs := False;
   FFormSmallIcon := TIcon.Create;
   FSpellChecker := TRichSpellChecker.Create(MemoSource);
+  FSpellChecker.OnSpellCheckNeeded := @SpellCheckNeeded;
   FUpdatingSpellCheck := False;
   FLastPulseTime := 0;
   FFormLocked := False;
@@ -870,10 +872,6 @@ begin
   // Load form settings
   FFormSettingsLoaded := LoadFormSettings(Self);
 
-  // Set cursor to end of text
-  MemoSource.SelStart := Length(MemoSource.Text);
-  MemoSource.SelLength := 0;
-
   MemoSource.SetLeftIndent;
   MemoTarget.SetLeftIndent;
 
@@ -882,6 +880,13 @@ begin
 
   MemoSource.EnableScrollbarFix(PanelSource);
   MemoTarget.EnableScrollbarFix(PanelTarget);
+
+  // Set cursor to end of text
+  if MemoSource.GetBottomSpace > 0 then
+  begin
+    MemoSource.SelStart := Length(MemoSource.Text);
+    MemoSource.SelLength := 0;
+  end;
 
   if FLastDarkMode <> TDarkUtils.IsDarkMode then
   begin
@@ -4176,13 +4181,22 @@ end;
 
 procedure TformTrayslate.UpdateSpellCheck;
 begin
+  if not Assigned(FSpellChecker) then Exit;
+
   FUpdatingSpellCheck := True;
+  FSpellChecker.BeginUpdate;
   try
     if not FSpellCheck or not TSpell.WinCheck(MemoSource, FSpellChecker, FLangSource, [scoSpelling], FSpellCheckEmptySuggestions) then
       FSpellChecker.Clear;
   finally
+    FSpellChecker.EndUpdate;
     FUpdatingSpellCheck := False;
   end;
+end;
+
+procedure TformTrayslate.SpellCheckNeeded(Sender: TObject);
+begin
+  UpdateSpellCheck;
 end;
 
 procedure TformTrayslate.DoCheckUpdates(Data: PtrInt);
