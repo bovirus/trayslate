@@ -2084,24 +2084,34 @@ procedure TformTrayslate.aSourceBidiRightToLeftExecute(Sender: TObject);
 var
   Memo: TRichMemo;
 begin
-  Memo := PopupSource.PopupComponent as TRichMemo;
-  if aSourceBidiRightToLeft.Checked then
-    Memo.BiDiMode := bdRightToLeft
-  else
-    Memo.BiDiMode := bdLeftToRight;
-  Memo.ApplyBidiMode;
+  if Self.ActiveControl is TRichMemo then
+  begin
+    Memo := Self.ActiveControl as TRichMemo;
+
+    if aSourceBidiRightToLeft.Checked then
+      Memo.BiDiMode := bdRightToLeft
+    else
+      Memo.BiDiMode := bdLeftToRight;
+
+    Memo.ApplyBidiMode;
+  end;
 end;
 
 procedure TformTrayslate.aTargetBidiRightToLeftExecute(Sender: TObject);
 var
   Memo: TRichMemo;
 begin
-  Memo := PopupTarget.PopupComponent as TRichMemo;
-  if aTargetBidiRightToLeft.Checked then
-    Memo.BiDiMode := bdRightToLeft
-  else
-    Memo.BiDiMode := bdLeftToRight;
-  Memo.ApplyBidiMode;
+  if Self.ActiveControl is TRichMemo then
+  begin
+    Memo := Self.ActiveControl as TRichMemo;
+
+    if aTargetBidiRightToLeft.Checked then
+      Memo.BiDiMode := bdRightToLeft
+    else
+      Memo.BiDiMode := bdLeftToRight;
+
+    Memo.ApplyBidiMode;
+  end;
 end;
 
 procedure TformTrayslate.aDefaultZoomExecute(Sender: TObject);
