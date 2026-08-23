@@ -1425,6 +1425,8 @@ procedure TformTrayslate.OnAppInstanceMessage(Sender: TObject; const AMessage: s
 begin
   if Application.Terminated or not Self.Enabled then
   begin
+     if FFormSettingsLoaded then
+      SaveFormSettings(Self);
     TOS.ForceRestartApp;
     Exit;
   end;
