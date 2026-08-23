@@ -4952,6 +4952,7 @@ var
   cx, cy, r: integer;
   p1x, p1y, p2x, p2y: integer;
   a1, a2: double;
+  rect: TRect;
 begin
   TempIntfImg := TLazIntfImage.Create(ICON_SIZE, ICON_SIZE);
   TempBitmap := Graphics.TBitmap.Create;
@@ -4962,16 +4963,48 @@ begin
     // transparent background
     TempBitmap.Canvas.AntialiasingMode := amOn;
 
-    if ABackgroundColor = clNone then
+    rect := Types.Rect(0, 0, ICON_SIZE, ICON_SIZE);
+
+    if FIconCircular then
     begin
+      // Use transparent color outside the circle
       TempBitmap.Canvas.Brush.Color := clFuchsia;
       TempBitmap.Transparent := True;
       TempBitmap.TransparentColor := clFuchsia;
+      TempBitmap.Canvas.Brush.Style := bsSolid;
+      TempBitmap.Canvas.FillRect(rect);
+      if ABackgroundColor <> clNone then
+        TempBitmap.Canvas.CircleFilled(rect, ABackgroundColor);
     end
     else
-      TempBitmap.Canvas.Brush.Color := ABackgroundColor;
+    begin
+      if ABackgroundColor = clNone then
+      begin
+        TempBitmap.Canvas.Brush.Color := clFuchsia;
+        TempBitmap.Transparent := True;
+        TempBitmap.TransparentColor := clFuchsia;
+      end
+      else
+        TempBitmap.Canvas.Brush.Color := ABackgroundColor;
+      TempBitmap.Canvas.Brush.Style := bsSolid;
+      TempBitmap.Canvas.FillRect(rect);
+    end;
 
-    TempBitmap.Canvas.FillRect(Types.Rect(0, 0, ICON_SIZE, ICON_SIZE));
+    // Draw mouse mode frame if enabled, before progress arc so arc stays on top
+    if Assigned(MouseHook) and MouseHook.Enabled and FEnableMouseMode and (FIconMouseModeFrameColor <> clNone) then
+    begin
+      TempBitmap.Canvas.Pen.Color := FIconMouseModeFrameColor;
+      TempBitmap.Canvas.Pen.Width := 1;
+      TempBitmap.Canvas.Pen.Style := psSolid;
+      TempBitmap.Canvas.Brush.Style := bsClear;
+      if FIconCircular then
+        TempBitmap.Canvas.CircleOutline(rect, FIconMouseModeFrameColor, ABackgroundColor)
+      else
+        TempBitmap.Canvas.Rectangle(rect);
+    end;
+
+    // Ensure the pen is solid for drawing the arc
+    TempBitmap.Canvas.Pen.Style := psSolid;
     TempBitmap.Canvas.Pen.Color := APenColor;
     TempBitmap.Canvas.Pen.Width := 3;
 
