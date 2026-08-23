@@ -5211,7 +5211,7 @@ begin
 
   // Detect language in source memo
   if BuiltInDetect then
-    langDetect := TLangDetect.DetectLanguageSafe(AText.ExtractTextSample(1000), langSrc)
+    langDetect := TLangDetect.DetectLanguageSafe(AText.ExtractTextSample(1000), langSrc, 0.5, Trans.LanguageCodes)
   else
     langDetect := LowerCase(TranslateThread(TransDetect, AText.ExtractTextSample));
 

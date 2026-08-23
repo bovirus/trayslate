@@ -15,6 +15,8 @@
 //    MergeProfilesFromFile
 //    LoadProfiles
 //    UnloadProfiles
+//  All detection methods accept an optional AAllowedLangs array to restrict
+//  detection to a specific subset of languages. Pass nil to use all loaded profiles.
 //  Cross-platform: Windows, Linux, macOS.  Lazarus / FPC 3.2.2+
 //-----------------------------------------------------------------------------------
 
@@ -39,7 +41,6 @@ const
   {%Region -fold Types}
 
 type
-  TStringArray = array of string;
   TWordWeightArray = array of word;
 
   TTrigEntry = record
@@ -172,15 +173,18 @@ type
     // Normalize language codes and regional variants to canonical language codes.
     class function NormalizeLanguageCode(const Code: string): string;
 
-    // Safe language detection with optional current language hint.
+    // Safe language detection with optional current language hint and allowed languages list.
     class function DetectLanguageSafe(const AText: string; ACurrentLang: string = string.Empty;
-      MinConfidence: double = 0.5): string; static;
+      MinConfidence: double = 0.5; AAllowedLangs: TStringArray = nil): string; static;
 
-    // Returns language code (e.g. 'en', 'ru') or UNKNOWN
-    class function DetectLanguageForText(const AText: string): string; static;
+    // Returns language code (e.g. 'en', 'ru') or UNKNOWN.
+    // AAllowedLangs, when not nil, restricts detection to the specified languages.
+    class function DetectLanguageForText(const AText: string; AAllowedLangs: TStringArray = nil): string; static;
 
-    // Also returns a confidence value between 0.0 and 1.0
-    class function DetectLanguageWithConfidence(const AText: string; out Confidence: double): string; static;
+    // Also returns a confidence value between 0.0 and 1.0.
+    // AAllowedLangs, when not nil, restricts detection to the specified languages.
+    class function DetectLanguageWithConfidence(const AText: string; out Confidence: double;
+      AAllowedLangs: TStringArray = nil): string; static;
 
     // Public wrapper for file-based loading
     class procedure MergeProfilesFromFile(const FileName: string); static;
@@ -1886,7 +1890,7 @@ begin
 end;
 
 class function TLangDetect.DetectLanguageSafe(const AText: string; ACurrentLang: string = string.Empty;
-  MinConfidence: double = 0.5): string;
+  MinConfidence: double = 0.5; AAllowedLangs: TStringArray = nil): string;
 const
   MIN_SCRIPT_CHANGE_CONFIDENCE = 0.25;   // lower threshold when script differs
   SHORT_LEN_THRESHOLD = 10;             // below this length – require higher confidence
@@ -1898,7 +1902,7 @@ var
   textLen: integer;
   detectedScript, currentScript: TScriptType;
 begin
-  Result := DetectLanguageWithConfidence(AText, conf);
+  Result := DetectLanguageWithConfidence(AText, conf, AAllowedLangs);
 
   // Adaptive confidence threshold based on text length:
   // Shorter texts require higher confidence to avoid false positives.
@@ -1936,14 +1940,15 @@ begin
   Result := UNKNOWN;
 end;
 
-class function TLangDetect.DetectLanguageForText(const AText: string): string;
+class function TLangDetect.DetectLanguageForText(const AText: string; AAllowedLangs: TStringArray = nil): string;
 var
   dummy: double;
 begin
-  Result := DetectLanguageWithConfidence(AText, dummy);
+  Result := DetectLanguageWithConfidence(AText, dummy, AAllowedLangs);
 end;
 
-class function TLangDetect.DetectLanguageWithConfidence(const AText: string; out Confidence: double): string;
+class function TLangDetect.DetectLanguageWithConfidence(const AText: string; out Confidence: double;
+  AAllowedLangs: TStringArray = nil): string;
 const
   WORD_CORRECTION_ALWAYS = 70;      // always try word correction for texts <= this length
   LOW_TRIGRAM_CONFIDENCE = 0.7;     // trigram confidence below which to try words for longer texts
@@ -1966,6 +1971,10 @@ var
   pos: integer;
   rawConfidence, separationFactor, deltaDist, sumAbsDist: double;
   i, j: integer;
+  allowedNormalized: TStringArray = nil;
+  jAllowed: integer;
+  oldResult: string;
+  oldConfidence: double;
 
   function IsCJKCodeAllowed(const Code: string): boolean;
   begin
@@ -1977,11 +1986,34 @@ var
       Result := (Code = 'zh') or (Code = 'zh-CN');
   end;
 
+  // Helper to test whether a language code is in the allowed list
+  function IsAllowed(const Code: string): boolean;
+  var
+    k: integer;
+  begin
+    if allowedNormalized = nil then Exit(True);
+    Result := False;
+    for k := 0 to High(allowedNormalized) do
+      if allowedNormalized[k] = NormalizeLanguageCode(Code) then Exit(True);
+  end;
+
 begin
   ScriptInfo := Default(TScriptInfo);
   Confidence := 0.0;
   trigCount := 0;
   if Length(AText) < 3 then Exit(UNKNOWN);
+
+  // Treat an empty allowed-languages array as no restriction.
+  if (AAllowedLangs <> nil) and (Length(AAllowedLangs) = 0) then
+    AAllowedLangs := nil;
+
+  // Prepare normalized allowed language codes for fast checking
+  if AAllowedLangs <> nil then
+  begin
+    SetLength(allowedNormalized, Length(AAllowedLangs));
+    for jAllowed := 0 to High(AAllowedLangs) do
+      allowedNormalized[jAllowed] := NormalizeLanguageCode(AAllowedLangs[jAllowed]);
+  end;
 
   // 1. Quick script detection + CJK refinement
   Result := QuickScriptDetection(AText, ScriptInfo, Script, Confidence);
@@ -2000,6 +2032,7 @@ begin
 
   for i := 0 to High(FProfiles) do
   begin
+    if not IsAllowed(FProfiles[i].Code) then Continue;
     if Script = stCJK then
     begin
       if not IsCJKCodeAllowed(FProfiles[i].Code) then
@@ -2027,11 +2060,12 @@ begin
     end;
   end;
 
-  // Fallback: no script match – compare against all profiles
+  // Fallback: no script match – compare against all profiles (but still respect allowed list)
   if bestIdx = -1 then
   begin
     for i := 0 to High(FProfiles) do
     begin
+      if not IsAllowed(FProfiles[i].Code) then Continue;
       currentDist := DistanceToProfile(textTrigrams, FProfiles[i]);
       if currentDist < bestDist then
       begin
@@ -2139,6 +2173,7 @@ begin
     wordIdx := -1;
     for i := 0 to High(FProfiles) do
     begin
+      if not IsAllowed(FProfiles[i].Code) then Continue;
       if (Script <> stOther) and not IsLanguageMatchingScript(FProfiles[i].Code, Script) then
         Continue;
       wordScore := ScoreByWrds(AText, FProfiles[i]);
@@ -2170,7 +2205,19 @@ begin
   end;
 
   // 6. Post-correction for difficult pairs
+  oldResult := Result;
+  oldConfidence := Confidence;
   ApplyPostCorrection(Result, Confidence, AText);
+  // Ensure the post-correction result stays within the allowed languages
+  if (AAllowedLangs <> nil) and not IsAllowed(Result) then
+  begin
+    Result := oldResult;
+    Confidence := oldConfidence;
+  end;
+
+  // Final safety: if something went wrong, return unknown
+  if Result = '' then
+    Result := UNKNOWN;
 end;
 
 {%EndRegion}

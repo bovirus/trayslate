@@ -55,6 +55,7 @@ type
     class function GetDisplayName(const ACode: string): string; static;
     class function GetLanguageCodeDisplayPairs(AValueType: TLangType; ASorted: boolean = False;
       AIncludeSpecial: boolean = False): TStringList; static;
+    class function GetCodeArrayFromStringList(ACodeMap: TStringList): TStringArray;
     class function ExtractCodeFromItem(const ItemText: string): string; static;
     class function FindIndexByCode(const AStrings: TStrings; const ACode: string): integer; static;
     class function IsSpecialCode(const Value: string): boolean; static;
@@ -326,6 +327,28 @@ begin
     Result.Free;
     raise;
   end;
+end;
+
+class function TLanguages.GetCodeArrayFromStringList(ACodeMap: TStringList): TStringArray;
+var
+  i, Count: integer;
+begin
+  Result := nil;
+  if ACodeMap = nil then Exit;
+
+  SetLength(Result, ACodeMap.Count);
+  Count := 0;
+  for i := 0 to ACodeMap.Count - 1 do
+  begin
+    // Names[i] returns the substring before the first '=' character.
+    // For lines without '=', Names[i] returns the whole line, which we skip.
+    if (Pos('=', ACodeMap[i]) > 0) and (ACodeMap.Names[i] <> '') then
+    begin
+      Result[Count] := ACodeMap.Names[i];
+      Inc(Count);
+    end;
+  end;
+  SetLength(Result, Count);
 end;
 
 class function TLanguages.ExtractCodeFromItem(const ItemText: string): string;

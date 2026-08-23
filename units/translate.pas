@@ -83,6 +83,7 @@ type
     FRegexp: string;
     FLanguages: TStringList;
     FLanguagesTarget: TStringList;
+    FLanguageCodes: TStringArray;
     FLangType: TLangType;
     FProxy: TProxy;
     FTimeout: TTimeout;
@@ -170,6 +171,7 @@ type
     // Languages from config, eg en=en
     property Languages: TStringList read FLanguages write FLanguages;
     property LanguagesTarget: TStringList read FLanguagesTarget write FLanguagesTarget;
+    property LanguageCodes: TStringArray read FLanguageCodes write FLanguageCodes;
     property LangType: TLangType read FLangType write FLangType;
 
     property InitUserAgent: string read FInitUserAgent write FInitUserAgent;
@@ -215,7 +217,7 @@ const
 
 implementation
 
-uses Consts, mainform, settings, stringshelper, stringhelper, localize, osutils;
+uses Consts, mainform, settings, stringshelper, stringhelper, localize, osutils, languages;
 
   {%Region -fold TTranslate }
 
@@ -298,6 +300,8 @@ begin
   FreeAndNil(FLanguagesTarget);
   AbortRequest;
   FreeAndNil(FHTTPList);
+  SetLength(FLanguageCodes, 0);
+  FLanguageCodes := nil;
 
   FInitHeaders.Free;
   FInitParameters.Free;
@@ -1751,6 +1755,8 @@ begin
 
     Languages.RemoveEmptyValues;
     LanguagesTarget.RemoveEmptyValues;
+
+    FLanguageCodes := TLanguages.GetCodeArrayFromStringList(Languages);
   finally
     Ini.Free;
   end;
