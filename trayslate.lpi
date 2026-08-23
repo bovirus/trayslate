@@ -299,6 +299,9 @@
         <IgnoredMessages idx5024="True"/>
       </CompilerMessages>
       <CustomOptions Value="-dDEBUG"/>
+      <ExecuteBefore>
+        <Command Value="cmd /C &quot;taskkill /F /IM trayslate.exe >nul 2>nul &amp;&amp; echo taskkill trayslate.exe &amp; exit /b 0&quot;"/>
+      </ExecuteBefore>
     </Other>
   </CompilerOptions>
   <Debugging>
