@@ -874,10 +874,7 @@ begin
   // Load form settings
   FFormSettingsLoaded := LoadFormSettings(Self);
 
-  // Controls Setup
-  ComboSource.AdjustComboHeight;
-  ComboTarget.AdjustComboHeight;
-
+  // RichMemo Setup
   MemoSource.SetLeftIndent;
   MemoTarget.SetLeftIndent;
 
@@ -914,6 +911,11 @@ begin
   aFastAutoAddLangPairs.Checked := FAutoAddLangPairs;
   aFastRealTime.Checked := FRealTime;
   aFastAutoCopy.Checked := FAutoCopy;
+
+  ComboSource.Font.Assign(Font);
+  ComboTarget.Font.Assign(Font);
+  ComboSource.AdjustComboHeight;
+  ComboTarget.AdjustComboHeight;
 
   // Load config files
   FConfigFiles := TStringList.Create;

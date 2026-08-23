@@ -28,3 +28,14 @@ This application uses third-party resources under the following licenses:
     Common Crawl's Terms of Use.   
     https://huggingface.co/datasets/HuggingFaceFW/fineweb-2
     https://opendatacommons.org/licenses/by/1-0/
+
+6. Country flags used for language selection
+   Country flags are used to represent languages that do not have a dedicated language flag.
+   Source: stevenrskelton/flag-icon
+   License: MIT
+   https://github.com/stevenrskelton/flag-icon
+
+   The Esperanto flag is sourced separately:
+   Source: Wikimedia Commons, "Flag of Esperanto.svg"
+   License: Public domain
+   https://commons.wikimedia.org/wiki/File:Flag_of_Esperanto.svg
