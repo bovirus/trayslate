@@ -4324,7 +4324,7 @@ begin
     NewHeight := formPopupTrayslate.MemoTarget.GetTextHeight;
 
     // Add top/bottom padding + controls
-    NewHeight := NewHeight + formPopupTrayslate.PanelPairs.Height + integer(Round(10 * formPopupTrayslate.MemoTarget.ZoomFactor));
+    NewHeight := NewHeight + formPopupTrayslate.PanelPairs.Height;
 
     // Limit height
     if NewHeight > MaxH then
