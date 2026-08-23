@@ -991,9 +991,6 @@ begin
     TimerUnapplyTimer(Self);
   ClearTimeout(FClickTimer);
   ClearTimeout(FSpellTimer);
-  ShutdownThreads;
-  WaitForThreads;
-  FreeAndNil(FSpellChecker);
 
   {$IFDEF WINDOWS}
   UpdateInputState(False);
@@ -1023,7 +1020,7 @@ begin
         for i := FActiveThreads.Count - 1 downto 0 do
         begin
           Th := TTranslateThread(FActiveThreads[i]);
-          if not Assigned(Th) or Th.Finished or Th.IsTerminated then
+          if not Assigned(Th) or Th.IsTerminated then
             FActiveThreads.Delete(i);
         end;
         // All threads have finished – exit the wait loop
@@ -1032,7 +1029,7 @@ begin
         if TOS.GetTickCountXp >= TotalDeadline then
         begin
           {$IFDEF DEBUG}
-        UseHeapTrace := False;
+          UseHeapTrace := False;
           {$ENDIF}
           Break;
         end;
@@ -1047,6 +1044,9 @@ begin
   finally
     if FFormSettingsLoaded then
       SaveFormSettings(Self);
+
+    ShutdownThreads;
+    WaitForThreads;
 
     FreeAndNil(FLangPairs);
     FreeAndNil(FUserParameters);
@@ -1063,6 +1063,7 @@ begin
     FreeAndNil(FFontPopup);
     FreeAndNil(FFormSmallIcon);
     FreeAndNil(FDropTarget);
+    FreeAndNil(FSpellChecker);
   end;
 end;
 
@@ -1101,6 +1102,8 @@ end;
 
 procedure TformTrayslate.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
+  if Application.Terminated then Exit;
+
   CanClose := False;
   Hide;
 end;
@@ -1420,6 +1423,12 @@ end;
 
 procedure TformTrayslate.OnAppInstanceMessage(Sender: TObject; const AMessage: string);
 begin
+  if Application.Terminated or not Self.Enabled then
+  begin
+    TOS.ForceRestartApp;
+    Exit;
+  end;
+
   TopMost := False;
   Show;
 end;
@@ -2167,8 +2176,13 @@ end;
 
 procedure TformTrayslate.aExitExecute(Sender: TObject);
 begin
+  if Application.Terminated or not Self.Enabled then Exit;
+
   if Assigned(formPopupTrayslate) then
     formPopupTrayslate.Close;
+
+  if not FCancelled then
+    CancelTranslate;
 
   Self.Enabled := False;
   Self.Visible := False;
@@ -5068,10 +5082,11 @@ begin
     ATrans.TextToTranslate := AText;
     FRawTranslate := string.Empty;
     ThDone := False;
+
     Th := TTranslateThread.Create(ATrans, @FRawTranslate, @ThDone, ATrans = TransDetect);
     FTranslateThread := Th;
-
     FActiveThreads.Add(Th);
+
     TranslateTarget := AMemo;
     UpdateTranslateButtonState;
     Screen.Cursor := crAppStart;
@@ -5122,8 +5137,15 @@ end;
 
 procedure TformTrayslate.ThreadDone(Sender: TObject);
 begin
-  if Sender <> FTranslateThread then
+  if (Sender <> FTranslateThread) then
     Exit;
+
+  if Assigned(FTranslateThread) and FTranslateThread.IsCancelled then
+  begin
+    FTranslateThread := nil;
+    TranslateTarget := nil;
+    exit;
+  end;
 
   if FAutoCopy then
     Clipboard.AsText := FRawTranslate;
@@ -5141,10 +5163,10 @@ end;
 procedure TformTrayslate.CancelTranslate;
 begin
   try
+    FCancelled := True;
+
     if Assigned(FTranslateThread) then
       FTranslateThread.Cancel;
-
-    FCancelled := True;
 
     TranslateTarget := nil;
   finally

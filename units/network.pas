@@ -95,7 +95,7 @@ type
 
 const
   CONNECT_TIMEOUT = 10000;
-  REQUEST_TIMEOUT = 300000;
+  REQUEST_TIMEOUT = 30000;
 
 implementation
 
@@ -310,7 +310,7 @@ begin
 
     // Timeouts
     HTTP.Timeout := IfThen(ATimeout.Request > 0, ATimeout.Request, REQUEST_TIMEOUT);
-    HTTP.Sock.InterPacketTimeout := False;
+    HTTP.Sock.InterPacketTimeout := True;
     HTTP.Sock.ConnectionTimeout := IfThen(ATimeout.Connection > 0, ATimeout.Connection, CONNECT_TIMEOUT);
     HTTP.Sock.HTTPTunnelTimeout := HTTP.Sock.ConnectionTimeout;
     HTTP.Sock.SocksTimeout := HTTP.Timeout;
