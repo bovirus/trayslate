@@ -1738,6 +1738,8 @@ begin
     formTrayslate.LoadLangDetect;
     formTrayslate.UpdateProxyState;
     formTrayslate.DoRealign(0);
+    formTrayslate.ComboSource.AdjustComboHeight;
+    formTrayslate.ComboTarget.AdjustComboHeight;
     Application.QueueAsyncCall(@formTrayslate.RebuildLangPairsPanel, 0);
     formTrayslate.UpdateSpellCheck;
   finally

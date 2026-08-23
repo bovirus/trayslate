@@ -35,37 +35,43 @@ object formTrayslate: TformTrayslate
     OnResize = PanelLangResize
     object ComboTarget: TComboBox
       Left = 264
-      Height = 23
+      Height = 22
       Top = 3
       Width = 225
       AutoComplete = True
       AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
       AutoDropDown = True
+      AutoSize = False
       BorderSpacing.Around = 3
       DropDownCount = 20
-      ItemHeight = 15
+      ItemHeight = 16
       ParentShowHint = False
       ShowHint = True
+      Style = csOwnerDrawFixed
       TabOrder = 1
       OnCloseUp = ComboTargetCloseUp
+      OnDrawItem = ComboDrawItem
       OnDropDown = ComboTargetDropDown
       OnKeyDown = ComboTargetKeyDown
     end
     object ComboSource: TComboBox
       Left = 32
-      Height = 23
+      Height = 22
       Top = 3
       Width = 209
       AutoComplete = True
       AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
       AutoDropDown = True
+      AutoSize = False
       BorderSpacing.Around = 3
       DropDownCount = 20
-      ItemHeight = 15
+      ItemHeight = 16
       ParentShowHint = False
       ShowHint = True
+      Style = csOwnerDrawFixed
       TabOrder = 0
       OnCloseUp = ComboSourceCloseUp
+      OnDrawItem = ComboDrawItem
       OnDropDown = ComboSourceDropDown
       OnKeyDown = ComboSourceKeyDown
     end

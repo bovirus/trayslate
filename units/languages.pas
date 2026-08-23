@@ -15,6 +15,10 @@ uses
   SysUtils,
   StrUtils,
   StdCtrls,
+  Graphics,
+  FPImage,
+  FPReadPNG,
+  LResources,
   translate;
 
 type
@@ -47,6 +51,7 @@ type
     class function GetCurrencyCrypto: TValueArray; static;
     class function GetUnits: TValueArray; static;
     class function GetValues(AValueType: TLangType; ASorted: boolean = True): TValueArray; static;
+    class function GetFlag(const LangCode: string): TBitmap;
 
     // Utility methods
     class function GetLanguageCodePairList(AValueType: TLangType; ASorted: boolean = False): TStringList;
@@ -88,6 +93,28 @@ begin
   else
     Result := ItemText;
 end;
+
+{%Region -fold [TLanguages - Sorting]}
+
+class procedure TLanguages.SortValues(var AValues: TValueArray);
+var
+  i, j: integer;
+  Temp: TAppValue;
+begin
+  for i := 1 to High(AValues) do
+  begin
+    Temp := AValues[i];
+    j := i - 1;
+    while (j >= 1) and (AValues[j].DisplayName > Temp.DisplayName) do
+    begin
+      AValues[j + 1] := AValues[j];
+      Dec(j);
+    end;
+    AValues[j + 1] := Temp;
+  end;
+end;
+
+{%EndRegion}
 
 {%Region -fold [TLanguages - Data Retrieval]}
 
@@ -131,28 +158,6 @@ begin
     Result[i] := Units_Data[i];
 end;
 
-{%EndRegion}
-
-{%Region -fold [TLanguages - GetValues and Sorting]}
-
-class procedure TLanguages.SortValues(var AValues: TValueArray);
-var
-  i, j: integer;
-  Temp: TAppValue;
-begin
-  for i := 1 to High(AValues) do
-  begin
-    Temp := AValues[i];
-    j := i - 1;
-    while (j >= 1) and (AValues[j].DisplayName > Temp.DisplayName) do
-    begin
-      AValues[j + 1] := AValues[j];
-      Dec(j);
-    end;
-    AValues[j + 1] := Temp;
-  end;
-end;
-
 class function TLanguages.GetValues(AValueType: TLangType; ASorted: boolean): TValueArray;
 var
   i: integer;
@@ -181,6 +186,45 @@ begin
 
   if ASorted then
     SortValues(Result);
+end;
+
+class function TLanguages.GetFlag(const LangCode: string): TBitmap;
+var
+  Res: TLResource;
+  Stream: TMemoryStream;
+  Pic: TPicture;
+  ResName: string;
+begin
+  Result := nil;
+
+  // Build resource name from language code
+  ResName := 'flag-' + LangCode;
+
+  // Find resource in the compiled LRS data
+  Res := LazarusResources.Find(ResName);
+  if Res = nil then
+    Exit;
+
+  Stream := TMemoryStream.Create;
+  try
+    // Copy binary data from resource string to stream
+    if Length(Res.Value) > 0 then
+      Stream.WriteBuffer(Res.Value[1], Length(Res.Value));
+
+    Stream.Position := 0;
+
+    // Use TPicture to auto-detect image format
+    Pic := TPicture.Create;
+    try
+      Pic.LoadFromStream(Stream);
+      Result := TBitmap.Create;
+      Result.Assign(Pic.Bitmap);
+    finally
+      Pic.Free;
+    end;
+  finally
+    Stream.Free;
+  end;
 end;
 
 {%EndRegion}
@@ -391,5 +435,8 @@ begin
 end;
 
 {%EndRegion}
+
+initialization
+  {$I flags.lrs}
 
 end.

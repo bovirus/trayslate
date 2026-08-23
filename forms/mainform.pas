@@ -262,6 +262,7 @@ type
     MenuUkrainian: TMenuItem;
     MenuBelarusian: TMenuItem;
     MenuHindi: TMenuItem;
+    procedure ComboDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -563,12 +564,11 @@ type
     procedure SelectPairConfig(const LangPairIndex: integer; RunTranslate: boolean = True);
     procedure UpdateTranslateButtonState(ForceTranslateButton: boolean = False);
     procedure UpdatePopupState(SetWindowParam: boolean = True);
+    procedure MoveButtonTo(AFromIndex, AToIndex: integer);
 
     function GetConfigIndex: integer;
     function GetIconIndex: integer;
-
-    // Drag Recent Button
-    procedure MoveButtonTo(AFromIndex, AToIndex: integer);
+    function GetLangCode(ComboValue: string; Target: boolean = False): string;
 
     // Tray Icon
     function CreateTrayIconLang(const ALang1: string; const ALang2: string = string.Empty): Graphics.TBitmap;
@@ -873,6 +873,10 @@ begin
 
   // Load form settings
   FFormSettingsLoaded := LoadFormSettings(Self);
+
+  // Controls Setup
+  ComboSource.AdjustComboHeight;
+  ComboTarget.AdjustComboHeight;
 
   MemoSource.SetLeftIndent;
   MemoTarget.SetLeftIndent;
@@ -2258,6 +2262,79 @@ end;
 
 {%Region -fold Control Events}
 
+procedure TformTrayslate.ComboDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
+var
+  Combo: TComboBox;
+  ItemText: string;
+  LangCode: string;
+  Flag: TBitmap;
+  TextRect: TRect;
+  FlagRect: TRect;
+  FlagWidth: integer;
+  FlagHeight: integer;
+  Spacing: integer;
+  BgColor: TColor;
+  TextColor: TColor;
+begin
+  // Get the combo box and item text
+  Combo := Control as TComboBox;
+  ItemText := Combo.Items[Index];
+
+  // Get language code from item text
+  LangCode := GetLangCode(ItemText, Combo = ComboTarget);
+
+  // Load the flag bitmap if available
+  Flag := TLanguages.GetFlag(LangCode);
+
+  // Fixed flag dimensions
+  FlagWidth := 16;
+  FlagHeight := 11;
+  Spacing := 4;
+
+  // Set background and text colors based on selection state
+  if odSelected in State then
+  begin
+    BgColor := clHighlight;
+    TextColor := clHighlightText;
+  end
+  else
+  begin
+    BgColor := clWindow;
+    TextColor := clWindowText;
+  end;
+
+  // Draw the background of the item
+  Combo.Canvas.Brush.Color := BgColor;
+  Combo.Canvas.FillRect(ARect);
+
+  if Assigned(Flag) then
+  begin
+    // Calculate flag drawing rectangle: 16x11 centered vertically
+    FlagRect := Rect(ARect.Left + Spacing, ARect.Top + (ARect.Height - FlagHeight) div 2, ARect.Left +
+      Spacing + FlagWidth, ARect.Top + (ARect.Height - FlagHeight) div 2 + FlagHeight);
+
+    // Draw flag
+    Combo.Canvas.StretchDraw(FlagRect, Flag);
+
+    // Text rectangle starts after flag
+    TextRect := Rect(FlagRect.Right + Spacing, ARect.Top, ARect.Right - Spacing, ARect.Bottom);
+
+    // Free flag after drawing
+    Flag.Free;
+  end
+  else
+  begin
+    // No flag, text uses full rect with left padding
+    TextRect := Rect(ARect.Left + Spacing, ARect.Top, ARect.Right - Spacing, ARect.Bottom);
+  end;
+
+  // Draw item text with correct colors
+  Combo.Canvas.Font.Assign(Combo.Font);
+  Combo.Canvas.Font.Color := TextColor;
+  Combo.Canvas.Brush.Style := bsClear; // Prevent text background from covering item background
+  Combo.Canvas.TextRect(TextRect, TextRect.Left, TextRect.Top, ItemText);
+end;
+
 procedure TformTrayslate.ComboSourceCloseUp(Sender: TObject);
 //var
 //  P: TPoint;
@@ -2543,6 +2620,9 @@ begin
     FTrans.Timeout := FTimeout;
     FTransDetect.Proxy := FProxy;
     FTransDetect.Timeout := FTimeout;
+
+    ComboSource.AdjustComboHeight;
+    ComboTarget.AdjustComboHeight;
 
     UpdatePopupState;
     UpdateSpellCheck;
@@ -4779,21 +4859,6 @@ begin
   end;
 end;
 
-function TformTrayslate.GetConfigIndex: integer;
-begin
-  Result := ConfigFiles.FindIndex(FConfigFile);
-end;
-
-function TformTrayslate.GetIconIndex: integer;
-var
-  idx: integer;
-begin
-  Result := -1;
-  idx := IndexConfig;
-  if (idx >= 0) and (idx < ConfigImages.Count) then
-    Result := ConfigImages.ValueFromIndex[idx].ToInteger;
-end;
-
 procedure TformTrayslate.MoveButtonTo(AFromIndex, AToIndex: integer);
 var
   Pair: string;
@@ -4815,6 +4880,38 @@ begin
   FDragBtnIndex := AToIndex;
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
   FDragMoved := True;
+end;
+
+function TformTrayslate.GetConfigIndex: integer;
+begin
+  Result := ConfigFiles.FindIndex(FConfigFile);
+end;
+
+function TformTrayslate.GetIconIndex: integer;
+var
+  idx: integer;
+begin
+  Result := -1;
+  idx := IndexConfig;
+  if (idx >= 0) and (idx < ConfigImages.Count) then
+    Result := ConfigImages.ValueFromIndex[idx].ToInteger;
+end;
+
+function TformTrayslate.GetLangCode(ComboValue: string; Target: boolean = False): string;
+var
+  idnative: integer;
+begin
+  Result := string.Empty;
+  if Target and (FLanguagesTarget.Count > 0) then
+    idnative := FLanguagesTarget.IndexOf(ComboValue)
+  else
+    idnative := FLanguages.IndexOf(ComboValue);
+  if (idnative < 0) then Exit;
+
+  if Target and (Trans.LanguagesTarget.Count > 0) then
+    Result := Trans.LanguagesTarget.ValueFromIndex[idnative]
+  else
+    Result := Trans.Languages.ValueFromIndex[idnative];
 end;
 
 {%EndRegion}
