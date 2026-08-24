@@ -2623,9 +2623,6 @@ begin
     FTransDetect.Proxy := FProxy;
     FTransDetect.Timeout := FTimeout;
 
-    ComboSource.AdjustComboHeight;
-    ComboTarget.AdjustComboHeight;
-
     UpdatePopupState;
     UpdateSpellCheck;
   finally

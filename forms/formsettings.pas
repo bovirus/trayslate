@@ -1737,9 +1737,9 @@ begin
     formTrayslate.TimerTranslate.Interval := Max(formTrayslate.RealTimeDelay, 1);
     formTrayslate.LoadLangDetect;
     formTrayslate.UpdateProxyState;
-    formTrayslate.DoRealign(0);
     formTrayslate.ComboSource.AdjustComboHeight;
     formTrayslate.ComboTarget.AdjustComboHeight;
+    formTrayslate.DoRealign(0);
     Application.QueueAsyncCall(@formTrayslate.RebuildLangPairsPanel, 0);
     formTrayslate.UpdateSpellCheck;
   finally
