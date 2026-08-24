@@ -1605,6 +1605,10 @@ msgstr "لون خط أيقونة شريط النظام"
 msgid "Color of the frame around the icon when mouse mode is enabled"
 msgstr "لون الإطار حول الأيقونة عند تمكين وضع الماوس"
 
+#: tformsettingstrayslate.comboapplang.hint
+msgid "Application interface language"
+msgstr ""
+
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
 msgstr "اسم الخط المستخدم لأيقونة شريط النظام"
@@ -1661,6 +1665,10 @@ msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
 msgstr "اختصار"
 
+#: tformsettingstrayslate.groupapplang.caption
+msgid "Application Language"
+msgstr ""
+
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
 msgstr "تشغيل تلقائي"
@@ -1668,6 +1676,10 @@ msgstr "تشغيل تلقائي"
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
 msgstr "تبديل اللغات تلقائياً"
+
+#: tformsettingstrayslate.groupenabledlang.caption
+msgid "Enabled Languages (Default: All)"
+msgstr ""
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1720,6 +1732,10 @@ msgstr "أيقونة العلبة"
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
 msgid "User Parameters"
 msgstr "معلمات المستخدم"
+
+#: tformsettingstrayslate.labelapplang.caption
+msgid "Interface Language"
+msgstr ""
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1825,6 +1841,12 @@ msgstr "مفاتيح الاختصار"
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
 msgstr "الواجهة"
+
+#: tformsettingstrayslate.pagelanguages.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.pagelanguages.caption"
+msgid "Languages"
+msgstr "اللغات"
 
 #: tformsettingstrayslate.pagenetwork.caption
 msgid "Network"

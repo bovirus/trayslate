@@ -1613,6 +1613,10 @@ msgstr "Colore carattere dell'icona nell'area di notifica"
 msgid "Color of the frame around the icon when mouse mode is enabled"
 msgstr "Colore cornice intorno all'icona quando la modalità mouse è abilitata"
 
+#: tformsettingstrayslate.comboapplang.hint
+msgid "Application interface language"
+msgstr ""
+
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
 msgstr "Nome font usato per l'icona nell'area di notifica"
@@ -1669,6 +1673,10 @@ msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
 msgstr "Tasto rapido"
 
+#: tformsettingstrayslate.groupapplang.caption
+msgid "Application Language"
+msgstr ""
+
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
 msgstr "Avvio automatico"
@@ -1676,6 +1684,10 @@ msgstr "Avvio automatico"
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
 msgstr "Scambio automatico lingue"
+
+#: tformsettingstrayslate.groupenabledlang.caption
+msgid "Enabled Languages (Default: All)"
+msgstr ""
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1728,6 +1740,10 @@ msgstr "Icona barra applicazioni"
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
 msgid "User Parameters"
 msgstr "Parametri utente"
+
+#: tformsettingstrayslate.labelapplang.caption
+msgid "Interface Language"
+msgstr ""
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1833,6 +1849,12 @@ msgstr "Tasti scelta rapida"
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
 msgstr "Interfaccia"
+
+#: tformsettingstrayslate.pagelanguages.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.pagelanguages.caption"
+msgid "Languages"
+msgstr "Lingue"
 
 #: tformsettingstrayslate.pagenetwork.caption
 msgid "Network"

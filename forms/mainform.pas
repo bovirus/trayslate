@@ -491,6 +491,7 @@ type
     FLastDarkMode: boolean;
     FCustomPoFile: string;
     FProxiedConfigs: TStringList;
+    FEnabledLanguages: TStringList;
     // HotKeys Common
     FHotKeyApp: THotKeyData;
     FHotKeyTransSwap: THotKeyData;
@@ -573,8 +574,7 @@ type
     // Tray Icon
     function CreateTrayIconLang(const ALang1: string; const ALang2: string = string.Empty): Graphics.TBitmap;
     function CreateTrayIconProgress(AAngle: integer; ABackgroundColor: TColor = clNone; APenColor: TColor = clWhite): Graphics.TBitmap;
-    // Action Languages
-    procedure SetLanguage(aLanguage: string = string.Empty);
+
     procedure GlobalCtrlC;
     procedure GlobalCtrlV;
   protected
@@ -614,6 +614,8 @@ type
     // Methods
     procedure LoadConfig(ASetDefault: boolean = True; AUpdateComboState: boolean = True);
     procedure LoadTranslate;
+    procedure LoadLanguages;
+    procedure RestrictTranslate;
     procedure LoadLangDetect;
     procedure UpdateProxyState;
     procedure UpdateComboState(ASetDefault: boolean = True);
@@ -661,6 +663,9 @@ type
     procedure TranslateFromControlPopup(Data: PtrInt);
     procedure TranslateMouseMode(ACursorPos: TPoint);
 
+    // Action Languages
+    procedure SetLanguage(ALangCode: string = string.Empty);
+
     // Base properties
     property Trans: TTranslate read FTrans write FTrans;
     property TransDetect: TTranslate read FTransDetect write FTransDetect;
@@ -688,6 +693,7 @@ type
     property LangSource: string read FLangSource write FLangSource;
     property LangTarget: string read FLangTarget write FLangTarget;
     property LangPairs: TStringList read FLangPairs write FLangPairs;
+    property EnabledLanguages: TStringList read FEnabledLanguages write FEnabledLanguages;
     property UserParameters: TStringList read FUserParameters write FUserParameters;
     property MaxLangPairs: integer read FMaxLangPairs write FMaxLangPairs;
     property AutoAddLangPairs: boolean read FAutoAddLangPairs write SetAutoAddLangPairs;
@@ -870,6 +876,7 @@ begin
   FLangPairs := TStringList.Create;
   FUserParameters := TStringList.Create;
   FProxiedConfigs := TStringList.Create;
+  FEnabledLanguages := TStringList.Create;
 
   // Load form settings
   FFormSettingsLoaded := LoadFormSettings(Self);
@@ -1060,6 +1067,7 @@ begin
     FreeAndNil(FLangPairs);
     FreeAndNil(FUserParameters);
     FreeAndNil(FProxiedConfigs);
+    FreeAndNil(FEnabledLanguages);
     FreeAndNil(FLanguages);
     FreeAndNil(FLanguagesTarget);
     FreeAndNil(FConfigFiles);
@@ -3293,6 +3301,8 @@ procedure TformTrayslate.LoadConfig(ASetDefault: boolean = True; AUpdateComboSta
 begin
   UpdateCheckConfigMenu;
   LoadTranslate;
+  RestrictTranslate;
+  LoadLanguages;
   LoadLangDetect;
   UpdateProxyState;
   if AUpdateComboState then
@@ -3304,12 +3314,30 @@ begin
 end;
 
 procedure TFormTrayslate.LoadTranslate;
-var
-  List: TStringList;
 begin
   // Load settings from INI
   FTrans.LoadIniSettings(FConfigFile);
+end;
 
+procedure TFormTrayslate.RestrictTranslate;
+begin
+  // Restrict Languages to Languages Settings
+  if FTrans.LangType = vtLanguage then
+  begin
+    if FTrans.Languages.MaxValueLength <= MAX_LANG_LENGTH then
+    begin
+      FTrans.Languages.RestrictToNames(FEnabledLanguages.ToStringArray, SpecialCodes);
+      FTrans.LanguageCodes := TLanguages.GetCodeArrayFromStringList(FTrans.Languages);
+    end;
+    if FTrans.LanguagesTarget.MaxValueLength <= MAX_LANG_LENGTH then
+      FTrans.LanguagesTarget.RestrictToNames(FEnabledLanguages.ToStringArray, SpecialCodes);
+  end;
+end;
+
+procedure TFormTrayslate.LoadLanguages;
+var
+  List: TStringList;
+begin
   // Loading source languages from the config
   FLanguages.Clear;
   List := TLanguages.GetDisplayNamesFromCodeMap(Trans.Languages, Trans.LangType);
@@ -4916,9 +4944,15 @@ begin
   if (idnative < 0) then Exit;
 
   if Target and (Trans.LanguagesTarget.Count > 0) then
-    Result := Trans.LanguagesTarget.ValueFromIndex[idnative]
+  begin
+    if Trans.LanguagesTarget.Count > idnative then
+      Result := Trans.LanguagesTarget.Names[idnative];
+  end
   else
-    Result := Trans.Languages.ValueFromIndex[idnative];
+  begin
+    if Trans.Languages.Count > idnative then
+      Result := Trans.Languages.Names[idnative];
+  end;
 end;
 
 {%EndRegion}
@@ -5918,13 +5952,13 @@ end;
 
 {%Region -fold Action Languages}
 
-procedure TformTrayslate.SetLanguage(aLanguage: string = string.Empty);
+procedure TformTrayslate.SetLanguage(ALangCode: string = string.Empty);
 var
   OldAutoDetect: string = string.Empty;
   LangCode: string;
   PoText: string;
 begin
-  LangCode := aLanguage;
+  LangCode := ALangCode;
   PoText := string.Empty;
 
   aLangArabic.Checked := False;

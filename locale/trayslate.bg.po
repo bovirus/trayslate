@@ -1609,6 +1609,10 @@ msgstr "Цвят на шрифта за иконата в системния т�
 msgid "Color of the frame around the icon when mouse mode is enabled"
 msgstr "Цвят на рамката около иконата, при активиран режим на мишката"
 
+#: tformsettingstrayslate.comboapplang.hint
+msgid "Application interface language"
+msgstr ""
+
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
 msgstr "Име на шрифта, използван за иконата в системния трей"
@@ -1665,6 +1669,10 @@ msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
 msgstr "Клавишни комбинации"
 
+#: tformsettingstrayslate.groupapplang.caption
+msgid "Application Language"
+msgstr ""
+
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
 msgstr "Авто-старт"
@@ -1672,6 +1680,10 @@ msgstr "Авто-старт"
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
 msgstr "Автоматична смяна на езиците"
+
+#: tformsettingstrayslate.groupenabledlang.caption
+msgid "Enabled Languages (Default: All)"
+msgstr ""
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1725,6 +1737,10 @@ msgstr "Икона в системния трей"
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
 msgid "User Parameters"
 msgstr "Потребителски параметри"
+
+#: tformsettingstrayslate.labelapplang.caption
+msgid "Interface Language"
+msgstr ""
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1830,6 +1846,12 @@ msgstr "Бързи клавиши"
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
 msgstr "Интерфейс"
+
+#: tformsettingstrayslate.pagelanguages.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.pagelanguages.caption"
+msgid "Languages"
+msgstr "Езици"
 
 #: tformsettingstrayslate.pagenetwork.caption
 msgid "Network"

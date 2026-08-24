@@ -1605,6 +1605,10 @@ msgstr "צבע הגופן של סמל מגש המערכת"
 msgid "Color of the frame around the icon when mouse mode is enabled"
 msgstr "צבע המסגרת סביב הסמל כאשר מצב עכבר מופעל"
 
+#: tformsettingstrayslate.comboapplang.hint
+msgid "Application interface language"
+msgstr ""
+
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
 msgstr "שם הגופן המשמש עבור סמל מגש המערכת"
@@ -1661,6 +1665,10 @@ msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
 msgstr "קיצור"
 
+#: tformsettingstrayslate.groupapplang.caption
+msgid "Application Language"
+msgstr ""
+
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
 msgstr "הפעלה אוטומטית"
@@ -1668,6 +1676,10 @@ msgstr "הפעלה אוטומטית"
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
 msgstr "החלפת שפות אוטומטית"
+
+#: tformsettingstrayslate.groupenabledlang.caption
+msgid "Enabled Languages (Default: All)"
+msgstr ""
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1720,6 +1732,10 @@ msgstr "סמל מגש"
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
 msgid "User Parameters"
 msgstr "פרמטרי משתמש"
+
+#: tformsettingstrayslate.labelapplang.caption
+msgid "Interface Language"
+msgstr ""
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1825,6 +1841,12 @@ msgstr "צירופי מקשים גלובלייםמקשי קיצור"
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
 msgstr "ממשק"
+
+#: tformsettingstrayslate.pagelanguages.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.pagelanguages.caption"
+msgid "Languages"
+msgstr "שפות"
 
 #: tformsettingstrayslate.pagenetwork.caption
 msgid "Network"

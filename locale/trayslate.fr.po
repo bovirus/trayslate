@@ -1605,6 +1605,10 @@ msgstr "Couleur de police de l’icône de la zone de notification"
 msgid "Color of the frame around the icon when mouse mode is enabled"
 msgstr "Couleur du cadre autour de l’icône lorsque le mode souris est activé"
 
+#: tformsettingstrayslate.comboapplang.hint
+msgid "Application interface language"
+msgstr ""
+
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
 msgstr "Nom de la police utilisée pour l’icône de la zone de notification"
@@ -1661,6 +1665,10 @@ msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
 msgstr "Raccourci"
 
+#: tformsettingstrayslate.groupapplang.caption
+msgid "Application Language"
+msgstr ""
+
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
 msgstr "Démarrage automatique"
@@ -1668,6 +1676,10 @@ msgstr "Démarrage automatique"
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
 msgstr "Échange automatique des langues"
+
+#: tformsettingstrayslate.groupenabledlang.caption
+msgid "Enabled Languages (Default: All)"
+msgstr ""
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1720,6 +1732,10 @@ msgstr "Icône de la barre d'état système"
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
 msgid "User Parameters"
 msgstr "Paramètres utilisateur"
+
+#: tformsettingstrayslate.labelapplang.caption
+msgid "Interface Language"
+msgstr ""
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1825,6 +1841,12 @@ msgstr "Raccourcis clavier"
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
 msgstr "Interface"
+
+#: tformsettingstrayslate.pagelanguages.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.pagelanguages.caption"
+msgid "Languages"
+msgstr "Langues"
 
 #: tformsettingstrayslate.pagenetwork.caption
 msgid "Network"

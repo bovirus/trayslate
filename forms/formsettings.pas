@@ -73,10 +73,12 @@ type
     CheckAutoAddLangPairs: TCheckBox;
     CheckVerticalSplit: TCheckBox;
     CheckAutoCopy: TCheckBox;
+    ClbEnabledLang: TCheckListBox;
     ColorIconBackground: TColorBox;
     ColorMouseModeFrame: TColorBox;
     ColorIconFont: TColorBox;
     ColorDialog: TColorDialog;
+    ComboAppLang: TComboBox;
     ComboProxyMode: TComboBox;
     ComboPrimaryLang: TComboBox;
     ComboProxyType: TComboBox;
@@ -90,6 +92,8 @@ type
     FontDialog: TFontDialog;
     GroupAutoSwap: TGroupBox;
     GroupAutostart: TGroupBox;
+    GroupAppLang: TGroupBox;
+    GroupEnabledLang: TGroupBox;
     GroupSpellCheck: TGroupBox;
     GroupProxiedConfigs: TGroupBox;
     GroupUserParameters: TGroupBox;
@@ -104,6 +108,7 @@ type
     GroupTrayIcon: TGroupBox;
     ImagesPages: TImageList;
     LabelInstalledLang: TLabel;
+    LabelAppLang: TLabel;
     LabelMouseModeFrame: TLabel;
     LabelLangDetectConfig: TLabel;
     LabelMaxHeight: TLabel;
@@ -150,6 +155,7 @@ type
     GridHotkeys: TStringGrid;
     PageNetwork: TTabSheet;
     PageParameters: TTabSheet;
+    PageLanguages: TTabSheet;
     TrackOpacityHover: TTrackBar;
     TrackOpacityIdle: TTrackBar;
     ValueListUserParameters: TValueListEditor;
@@ -185,13 +191,15 @@ type
     procedure GridHotkeysKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure GridHotkeysSelectEditor(Sender: TObject; aCol, aRow: integer; var Editor: TWinControl);
     procedure SplitterPagesMoved(Sender: TObject);
-    procedure ListPagesDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
     procedure LabelInstalledLangClick(Sender: TObject);
-    procedure ClbProxiedConfigsDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
     procedure ClbProxiedConfigsMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer;
       MousePos: TPoint; var Handled: boolean);
     procedure ComboMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
     procedure GridHotkeysMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer; MousePos: TPoint; var Handled: boolean);
+    procedure ClbEnabledLangKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
+    procedure ListPagesDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
+    procedure ClbEnabledLangDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
+    procedure ClbProxiedConfigsDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
     {%EndRegion}
   private
     FOriginalAutoStart: boolean;
@@ -232,6 +240,8 @@ type
     FOriginalTimeout: TTimeout;
     FOriginalUserParameters: TStringList;
     FOriginalProxiedConfigs: TStringList;
+    FOriginalLanguage: string;
+    FOriginalEnabledLanguages: TStringList;
 
     FOriginalHotKeyApp: THotKeyData;
     FOriginalHotKeyTransSwap: THotKeyData;
@@ -305,11 +315,14 @@ type
     function GetHotKeyByRow(Row: integer): THotKeyData;
     procedure SetHotKeyByRow(Row: integer; const HK: THotKeyData);
     function GetOriginalHotKey(Row: integer): THotKeyData;
+    function GetLanguage: string;
+    procedure FillLanguage(ALangCode: string);
     procedure FillListPages;
     procedure FillGridHotkeys;
     procedure FillUserParameters;
     procedure FillMouseMode;
     procedure FillProxyMode;
+    procedure FillLanguages;
     procedure FillConfigs;
     procedure SetPopup;
     procedure SetState;
@@ -471,19 +484,26 @@ begin
     List.Free;
   end;
 
+  ClbEnabledLang.SetComposited(True);
+  ClbProxiedConfigs.SetComposited(True);
+
   FOriginalUserParameters := TStringList.Create;
   FOriginalProxiedConfigs := TStringList.Create;
+  FOriginalEnabledLanguages := TStringList.Create;
 
   ColorIconBackground.AddCustomColors;
   ColorIconFont.AddCustomColors;
   ColorMouseModeFrame.AddCustomColors;
   ComboIconFontName.FillFontCombo;
+
   Reset;
   FillListPages;
   FillGridHotkeys;
   FillUserParameters;
   FillMouseMode;
   FillProxyMode;
+  FillLanguage(Language);
+  FillLanguages;
 
   Screen.OnActiveControlChange := @ScreenActiveControlChanged;
 end;
@@ -492,6 +512,7 @@ procedure TformSettingsTrayslate.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(FOriginalUserParameters);
   FreeAndNil(FOriginalProxiedConfigs);
+  FreeAndNil(FOriginalEnabledLanguages);
 end;
 
 procedure TformSettingsTrayslate.FormShow(Sender: TObject);
@@ -1109,46 +1130,6 @@ begin
   BtnApply.Enabled := True;
 end;
 
-procedure TformSettingsTrayslate.ListPagesDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
-var
-  ListBox: TListBox;
-  ImgY: integer;
-  TextOffset: integer;
-  TextRect: TRect;
-  TextStyle: TTextStyle;
-begin
-  ListBox := Control as TListBox;
-
-  // Draw item background
-  ListBox.Canvas.FillRect(ARect);
-
-  TextOffset := 4;
-
-  // Calculate vertical centering for the image
-  ImgY := ARect.Top + (ARect.Height - ImagesPages.Height) div 2;
-
-  // Draw image if index is valid
-  if (Index >= 0) and (Index < ImagesPages.Count) then
-  begin
-    ImagesPages.Draw(ListBox.Canvas, ARect.Left + TextOffset, ImgY, Index);
-  end;
-
-  // Prepare text rectangle
-  TextRect := ARect;
-  TextRect.Left := ARect.Left + ImagesPages.Width + (TextOffset * 2);
-  TextRect.Right := ARect.Right - TextOffset;
-
-  // Configure text style for LCL (Lazarus)
-  TextStyle := ListBox.Canvas.TextStyle;
-  TextStyle.Wordbreak := True;
-  TextStyle.SingleLine := False;
-  TextStyle.Layout := tlCenter; // In LCL use 'Layout' and 'tlCenter' for vertical centering
-
-  // Draw wrapped text
-  ListBox.Canvas.Brush.Style := bsClear;
-  ListBox.Canvas.TextRect(TextRect, TextRect.Left, TextRect.Top, ListBox.Items[Index], TextStyle);
-end;
-
 procedure TformSettingsTrayslate.LabelInstalledLangClick(Sender: TObject);
 var
   Langs: TStrings;
@@ -1158,107 +1139,6 @@ begin
     TOneShotTooltip.Show(Langs.Text, 100, clWhite);
   finally
     Langs.Free; // Free the returned TStrings object
-  end;
-end;
-
-procedure TformSettingsTrayslate.ClbProxiedConfigsDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
-const
-  PADDING = 4; // Spacing between elements
-var
-  CheckRect, IconRect: TRect;
-  Txt: string;
-  Bmp: TBitmap;
-  IconIdx: integer;
-  Details: TThemedElementDetails;
-  CheckSize: TSize;
-begin
-  with ClbProxiedConfigs.Canvas do
-  begin
-    // Draw background according to selection state
-    if odSelected in State then
-    begin
-      Brush.Color := clHighlight;
-      Font.Color := clHighlightText;
-    end
-    else
-    begin
-      Brush.Color := ClbProxiedConfigs.Color;
-      Font.Color := ClbProxiedConfigs.Font.Color;
-    end;
-    FillRect(ARect);
-
-    // Get standard checkbox size from system metrics (themed or classic)
-    CheckSize.cx := GetSystemMetrics(SM_CXMENUCHECK);
-    CheckSize.cy := GetSystemMetrics(SM_CYMENUCHECK);
-
-    // Calculate checkbox rectangle (vertically centered)
-    CheckRect := Bounds(ARect.Left + 2, ARect.Top + (ARect.Height - CheckSize.cy) div 2, CheckSize.cx, CheckSize.cy);
-
-    // Draw themed checkbox
-    if ThemeServices.ThemesEnabled then
-    begin
-      if ClbProxiedConfigs.Checked[Index] then
-      begin
-        if not ClbProxiedConfigs.Enabled then
-          Details := ThemeServices.GetElementDetails(tbCheckBoxCheckedDisabled)
-        else if (odSelected in State) and ClbProxiedConfigs.Focused then
-          Details := ThemeServices.GetElementDetails(tbCheckBoxCheckedHot)
-        else
-          Details := ThemeServices.GetElementDetails(tbCheckBoxCheckedNormal);
-      end
-      else
-      begin
-        if not ClbProxiedConfigs.Enabled then
-          Details := ThemeServices.GetElementDetails(tbCheckBoxUncheckedDisabled)
-        else if (odSelected in State) and ClbProxiedConfigs.Focused then
-          Details := ThemeServices.GetElementDetails(tbCheckBoxUncheckedHot)
-        else
-          Details := ThemeServices.GetElementDetails(tbCheckBoxUncheckedNormal);
-      end;
-      ThemeServices.DrawElement(Handle, Details, CheckRect, nil);
-    end
-    else
-    begin
-      // Fallback to classic DrawFrameControl if themes are off
-      DrawFrameControl(Handle, CheckRect, DFC_BUTTON,
-        DFCS_BUTTONCHECK or IfThen(ClbProxiedConfigs.Checked[Index], DFCS_CHECKED, 0));
-    end;
-
-    // Draw icon if available for this item
-    if Assigned(formTrayslate.ImageConfig) and Assigned(formTrayslate.ConfigImages) and
-      (Index < formTrayslate.ConfigImages.Count) then
-    begin
-      IconIdx := formTrayslate.ConfigImages.ValueFromIndex[Index].ToInteger;
-      if (IconIdx >= 0) and (IconIdx < formTrayslate.ImageConfig.Count) then
-      begin
-        Bmp := TBitmap.Create;
-        try
-          formTrayslate.ImageConfig.GetBitmap(IconIdx, Bmp);
-          Bmp.Transparent := True;
-          Bmp.TransparentColor := clWhite;   // Adjust if needed
-
-          IconRect := Bounds(CheckRect.Right + PADDING, ARect.Top + (ARect.Height - formTrayslate.ImageConfig.Height) div
-            2, formTrayslate.ImageConfig.Width, formTrayslate.ImageConfig.Height);
-          Draw(IconRect.Left, IconRect.Top, Bmp);
-        finally
-          Bmp.Free;
-        end;
-      end;
-    end;
-
-    // Draw item text after checkbox and optional icon
-    Txt := ClbProxiedConfigs.Items[Index];
-    // Calculate horizontal position of text
-    if (IconIdx >= 0) and (IconIdx < formTrayslate.ImageConfig.Count) and Assigned(formTrayslate.ImageConfig) then
-      TextOut(CheckRect.Right + PADDING + formTrayslate.ImageConfig.Width + PADDING,
-        ARect.Top + (ARect.Height - TextHeight(Txt)) div 2, Txt)
-    else
-      TextOut(CheckRect.Right + PADDING,
-        ARect.Top + (ARect.Height - TextHeight(Txt)) div 2, Txt);
-
-    // Draw focus rectangle if the item has focus
-    if odFocused in State then
-      DrawFocusRect(ARect);
   end;
 end;
 
@@ -1307,6 +1187,147 @@ begin
 
   // Prevent default grid behavior (moving selection)
   Handled := True;
+end;
+
+procedure TformSettingsTrayslate.ClbEnabledLangKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
+begin
+  if (Key = VK_SPACE) and (ssShift in Shift) then
+  begin
+    ClbEnabledLang.CheckSelection(False);
+    SettingChange(Self);
+    Key := 0;
+  end
+  else
+  if (Key = VK_SPACE) and (ssCtrl in Shift) then
+  begin
+    ClbEnabledLang.CheckSelection(True);
+    SettingChange(Self);
+    Key := 0;
+  end
+  else if Key = VK_SPACE then
+  begin
+    ClbEnabledLang.CheckSelection(True, True);
+    SettingChange(Self);
+    Key := 0;
+  end
+  else if (Key = VK_A) and (ssCtrl in Shift) then
+  begin
+    ClbEnabledLang.SelectAll;
+    Key := 0;
+  end;
+end;
+
+procedure TformSettingsTrayslate.ListPagesDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
+var
+  ListBox: TListBox;
+  ImgY: integer;
+  TextOffset: integer;
+  TextRect: TRect;
+  TextStyle: TTextStyle;
+begin
+  ListBox := Control as TListBox;
+
+  // Draw item background
+  ListBox.Canvas.FillRect(ARect);
+
+  TextOffset := 4;
+
+  // Calculate vertical centering for the image
+  ImgY := ARect.Top + (ARect.Height - ImagesPages.Height) div 2;
+
+  // Draw image if index is valid
+  if (Index >= 0) and (Index < ImagesPages.Count) then
+  begin
+    ImagesPages.Draw(ListBox.Canvas, ARect.Left + TextOffset, ImgY, Index);
+  end;
+
+  // Prepare text rectangle
+  TextRect := ARect;
+  TextRect.Left := ARect.Left + ImagesPages.Width + (TextOffset * 2);
+  TextRect.Right := ARect.Right - TextOffset;
+
+  // Configure text style for LCL (Lazarus)
+  TextStyle := ListBox.Canvas.TextStyle;
+  TextStyle.Wordbreak := True;
+  TextStyle.SingleLine := False;
+  TextStyle.Layout := tlCenter; // In LCL use 'Layout' and 'tlCenter' for vertical centering
+
+  // Draw wrapped text
+  ListBox.Canvas.Brush.Style := bsClear;
+  ListBox.Canvas.TextRect(TextRect, TextRect.Left, TextRect.Top, ListBox.Items[Index], TextStyle);
+end;
+
+procedure TformSettingsTrayslate.ClbEnabledLangDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
+var
+  code: string;
+  flag: TBitmap;
+begin
+  // Extract language code from item text
+  code := TLanguages.ExtractCodeFromItem(ClbEnabledLang.Items[Index]);
+
+  // Get flag bitmap (may be nil if not found)
+  flag := TLanguages.GetFlag(code);
+
+  try
+    // Delegate drawing to the helper method
+    ClbEnabledLang.DrawCheckListItem(
+      ClbEnabledLang.Canvas,
+      ARect,
+      State,
+      ClbEnabledLang.Checked[Index],
+      ClbEnabledLang.Enabled,
+      ClbEnabledLang.Focused,
+      ClbEnabledLang.Color,
+      ClbEnabledLang.Font.Color,
+      ClbEnabledLang.Items[Index],
+      flag,
+      TDarkUtils.IsDarkMode
+      );
+  finally
+    // Free the flag bitmap if it was created by GetFlag
+    // If GetFlag returns a cached object, remove this line
+    if Assigned(flag) then
+      flag.Free;
+  end;
+end;
+
+procedure TformSettingsTrayslate.ClbProxiedConfigsDrawItem(Control: TWinControl; Index: integer; ARect: TRect; State: TOwnerDrawState);
+var
+  Bmp: TBitmap;
+  IconIdx: integer;
+begin
+  // Prepare optional icon
+  Bmp := nil;
+  if Assigned(formTrayslate.ImageConfig) and Assigned(formTrayslate.ConfigImages) and (Index < formTrayslate.ConfigImages.Count) then
+  begin
+    IconIdx := formTrayslate.ConfigImages.ValueFromIndex[Index].ToInteger;
+    if (IconIdx >= 0) and (IconIdx < formTrayslate.ImageConfig.Count) then
+    begin
+      Bmp := TBitmap.Create;
+      formTrayslate.ImageConfig.GetBitmap(IconIdx, Bmp);
+      Bmp.Transparent := True;
+      Bmp.TransparentColor := clWhite;
+    end;
+  end;
+
+  try
+    // Draw the whole item using the helper method
+    ClbProxiedConfigs.DrawCheckListItem(
+      ClbProxiedConfigs.Canvas,
+      ARect,
+      State,
+      ClbProxiedConfigs.Checked[Index],
+      ClbProxiedConfigs.Enabled,
+      ClbProxiedConfigs.Focused,
+      ClbProxiedConfigs.Color,
+      ClbProxiedConfigs.Font.Color,
+      ClbProxiedConfigs.Items[Index],
+      Bmp,
+      TDarkUtils.IsDarkMode);
+  finally
+    if Assigned(Bmp) then
+      Bmp.Free;
+  end;
 end;
 
 {%EndRegion}
@@ -1450,6 +1471,83 @@ begin
   end;
 end;
 
+function TformSettingsTrayslate.GetLanguage: string;
+begin
+  // Return language code from selected combobox item
+  case ComboAppLang.ItemIndex of
+    0: Result := 'ar';
+    1: Result := 'be';
+    2: Result := 'bg';
+    3: Result := 'zh';
+    4: Result := 'cs';
+    5: Result := 'da';
+    6: Result := 'nl';
+    7: Result := 'en';
+    8: Result := 'fi';
+    9: Result := 'fr';
+    10: Result := 'de';
+    11: Result := 'el';
+    12: Result := 'he';
+    13: Result := 'hi';
+    14: Result := 'id';
+    15: Result := 'it';
+    16: Result := 'ja';
+    17: Result := 'ko';
+    18: Result := 'pl';
+    19: Result := 'pt';
+    20: Result := 'pt-BR';
+    21: Result := 'ro';
+    22: Result := 'ru';
+    23: Result := 'es';
+    24: Result := 'sv';
+    25: Result := 'tr';
+    26: Result := 'uk';
+    27: Result := 'vi';
+    else
+      Result := string.Empty; // no language selected or custom language
+  end;
+end;
+
+procedure TformSettingsTrayslate.FillLanguage(ALangCode: string);
+begin
+  if formTrayslate.CustomPoFile <> string.Empty then
+    ComboAppLang.ItemIndex := -1
+  else
+    // Select current language in the combobox
+    case ALangCode of
+      'ar': ComboAppLang.ItemIndex := 0;
+      'be': ComboAppLang.ItemIndex := 1;
+      'bg': ComboAppLang.ItemIndex := 2;
+      'zh': ComboAppLang.ItemIndex := 3;
+      'cs': ComboAppLang.ItemIndex := 4;
+      'da': ComboAppLang.ItemIndex := 5;
+      'nl': ComboAppLang.ItemIndex := 6;
+      'en': ComboAppLang.ItemIndex := 7;
+      'fi': ComboAppLang.ItemIndex := 8;
+      'fr': ComboAppLang.ItemIndex := 9;
+      'de': ComboAppLang.ItemIndex := 10;
+      'el': ComboAppLang.ItemIndex := 11;
+      'he': ComboAppLang.ItemIndex := 12;
+      'hi': ComboAppLang.ItemIndex := 13;
+      'id': ComboAppLang.ItemIndex := 14;
+      'it': ComboAppLang.ItemIndex := 15;
+      'ja': ComboAppLang.ItemIndex := 16;
+      'ko': ComboAppLang.ItemIndex := 17;
+      'pl': ComboAppLang.ItemIndex := 18;
+      'pt': ComboAppLang.ItemIndex := 19;
+      'pt-BR': ComboAppLang.ItemIndex := 20;
+      'ro': ComboAppLang.ItemIndex := 21;
+      'ru': ComboAppLang.ItemIndex := 22;
+      'es': ComboAppLang.ItemIndex := 23;
+      'sv': ComboAppLang.ItemIndex := 24;
+      'tr': ComboAppLang.ItemIndex := 25;
+      'uk': ComboAppLang.ItemIndex := 26;
+      'vi': ComboAppLang.ItemIndex := 27;
+      else
+        ComboAppLang.ItemIndex := -1; // no selection for unknown or custom language
+    end;
+end;
+
 procedure TformSettingsTrayslate.FillListPages;
 var
   i: integer;
@@ -1581,6 +1679,26 @@ begin
     ComboProxyMode.ItemIndex := Ord(formTrayslate.Proxy.ProxyMode);
 end;
 
+procedure TformSettingsTrayslate.FillLanguages;
+var
+  List: TStringList;
+  code: string;
+  i: integer;
+begin
+  ClbEnabledLang.Items.Clear;
+  List := TLanguages.GetLanguageCodeDisplayPairs(vtLanguage, True, False);
+  try
+    ClbEnabledLang.Items.Assign(List);
+    for i := 0 to ClbEnabledLang.Items.Count - 1 do
+    begin
+      code := TLanguages.ExtractCodeFromItem(ClbEnabledLang.Items[i]);
+      ClbEnabledLang.Checked[i] := formTrayslate.EnabledLanguages.Contains(code);
+    end;
+  finally
+    List.Free;
+  end;
+end;
+
 procedure TformSettingsTrayslate.FillConfigs;
 var
   i: integer;
@@ -1628,6 +1746,7 @@ var
   T: TTimeout;
   P: TProxy;
   i: integer;
+  LangCode: string;
 begin
   FApplySettings := True;
   ValueListUserParameters.EditingDone;
@@ -1657,15 +1776,32 @@ begin
     formTrayslate.MaxHeight := SpinMaxHeight.Value;
     formTrayslate.OpacityHover := TrackOpacityHover.Position;
     formTrayslate.OpacityIdle := TrackOpacityIdle.Position;
+
     if (ComboLangDetect.ItemIndex > 0) and (ComboLangDetect.ItemIndex - 1 < formTrayslate.ConfigFiles.Count) then
       formTrayslate.ConfigLangDetect := formTrayslate.ConfigFiles[ComboLangDetect.ItemIndex - 1]
     else
       formTrayslate.ConfigLangDetect := string.Empty;
+
+    LangCode := GetLanguage;
+    if LangCode <> string.Empty then
+    begin
+      Language := LangCode;
+      formTrayslate.CustomPoFile := string.Empty;
+      formTrayslate.SetLanguage(LangCode);
+    end;
+
+    formTrayslate.EnabledLanguages.Clear;
+    for i := 0 to ClbEnabledLang.Count - 1 do
+      if ClbEnabledLang.Checked[i] then
+        formTrayslate.EnabledLanguages.Add(TLanguages.ExtractCodeFromItem(ClbEnabledLang.Items[i]));
+
     formTrayslate.ProxiedConfigs.Clear;
     for i := 0 to ClbProxiedConfigs.Count - 1 do
       if ClbProxiedConfigs.Checked[i] and (i < formTrayslate.ConfigFiles.Count) then
         formTrayslate.ProxiedConfigs.Add(formTrayslate.ConfigFiles[i]);
+
     formTrayslate.UserParameters.Assign(ValueListUserParameters.Strings);
+
     T := formTrayslate.Timeout;
     T.Connection := SpinConnectTimeout.Value * 1000;
     T.Request := SpinRequestTimeout.Value * 1000;
@@ -1733,6 +1869,12 @@ begin
     end;
 
     Reset;
+
+    formTrayslate.Trans.Languages.Assign(formTrayslate.Trans.LanguagesOriginal);
+    formTrayslate.Trans.LanguagesTarget.Assign(formTrayslate.Trans.LanguagesTargetOriginal);
+    formTrayslate.RestrictTranslate;
+    formTrayslate.LoadLanguages;
+    formTrayslate.UpdateComboState(False);
 
     formTrayslate.TimerTranslate.Interval := Max(formTrayslate.RealTimeDelay, 1);
     formTrayslate.LoadLangDetect;
@@ -1849,6 +1991,8 @@ begin
   FOriginalOpacityHover := formTrayslate.OpacityHover;
   FOriginalOpacityIdle := formTrayslate.OpacityIdle;
   FOriginalConfigLangDetect := formTrayslate.ConfigLangDetect;
+  FOriginalLanguage := Language;
+  FOriginalEnabledLanguages.Assign(formTrayslate.EnabledLanguages);
   FOriginalProxiedConfigs.Assign(formTrayslate.ProxiedConfigs);
   FOriginalProxy := formTrayslate.Proxy;
   FOriginalTimeout := formTrayslate.Timeout;
@@ -1889,14 +2033,22 @@ begin
   SpinMaxHeight.Value := FOriginalMaxHeight;
   TrackOpacityHover.Position := FOriginalOpacityHover;
   TrackOpacityIdle.Position := FOriginalOpacityIdle;
+
   if FOriginalConfigLangDetect <> string.Empty then
     ComboLangDetect.ItemIndex := Max(formTrayslate.ConfigFiles.IndexOf(FOriginalConfigLangDetect) + 1, 0)
   else
     ComboLangDetect.ItemIndex := 0;
+
+  FillLanguage(FOriginalLanguage);
+  for i := 0 to ClbEnabledLang.Count - 1 do
+    ClbEnabledLang.Checked[i] := FOriginalEnabledLanguages.Contains(TLanguages.ExtractCodeFromItem(ClbEnabledLang.Items[i]));
+
   for i := 0 to ClbProxiedConfigs.Count - 1 do
     if formTrayslate.ConfigFiles.Count > i then
       ClbProxiedConfigs.Checked[i] := FOriginalProxiedConfigs.Contains(formTrayslate.ConfigFiles[i]);
+
   ValueListUserParameters.Strings.Assign(FOriginalUserParameters);
+
   SpinConnectTimeout.Value := FOriginalTimeout.Connection div 1000;
   SpinRequestTimeout.Value := FOriginalTimeout.Request div 1000;
   ComboProxyMode.ItemIndex := Ord(FOriginalProxy.ProxyMode);

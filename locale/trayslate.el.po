@@ -1605,6 +1605,10 @@ msgstr "Χρώμα γραμματοσειράς του εικονιδίου στ
 msgid "Color of the frame around the icon when mouse mode is enabled"
 msgstr "Χρώμα του πλαισίου γύρω από το εικονίδιο όταν είναι ενεργοποιημένη η λειτουργία ποντικιού"
 
+#: tformsettingstrayslate.comboapplang.hint
+msgid "Application interface language"
+msgstr ""
+
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
 msgstr "Όνομα της γραμματοσειράς που χρησιμοποιείται για το εικονίδιο στη γραμμή συστήματος"
@@ -1661,6 +1665,10 @@ msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
 msgstr "Συντόμευση"
 
+#: tformsettingstrayslate.groupapplang.caption
+msgid "Application Language"
+msgstr ""
+
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
 msgstr "Αυτόματη εκκίνηση"
@@ -1668,6 +1676,10 @@ msgstr "Αυτόματη εκκίνηση"
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
 msgstr "Αυτόματη εναλλαγή γλωσσών"
+
+#: tformsettingstrayslate.groupenabledlang.caption
+msgid "Enabled Languages (Default: All)"
+msgstr ""
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1720,6 +1732,10 @@ msgstr "Εικονίδιο δίσκου συστήματος"
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
 msgid "User Parameters"
 msgstr "Παράμετροι χρήστη"
+
+#: tformsettingstrayslate.labelapplang.caption
+msgid "Interface Language"
+msgstr ""
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1825,6 +1841,12 @@ msgstr "Συντομεύσεις πληκτρολογίου"
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
 msgstr "Διεπαφή"
+
+#: tformsettingstrayslate.pagelanguages.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.pagelanguages.caption"
+msgid "Languages"
+msgstr "Γλώσσες"
 
 #: tformsettingstrayslate.pagenetwork.caption
 msgid "Network"

@@ -1605,6 +1605,10 @@ msgstr "ट्रे आइकन के फ़ॉन्ट का रंग"
 msgid "Color of the frame around the icon when mouse mode is enabled"
 msgstr "माउस मोड सक्षम होने पर आइकन के चारों ओर फ़्रेम का रंग"
 
+#: tformsettingstrayslate.comboapplang.hint
+msgid "Application interface language"
+msgstr ""
+
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
 msgstr "ट्रे आइकन के लिए उपयोग किए जाने वाले फ़ॉन्ट का नाम"
@@ -1661,6 +1665,10 @@ msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
 msgstr "शॉर्टकट"
 
+#: tformsettingstrayslate.groupapplang.caption
+msgid "Application Language"
+msgstr ""
+
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
 msgstr "स्वतः प्रारंभ"
@@ -1668,6 +1676,10 @@ msgstr "स्वतः प्रारंभ"
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
 msgstr "स्वतः भाषाएँ बदलें"
+
+#: tformsettingstrayslate.groupenabledlang.caption
+msgid "Enabled Languages (Default: All)"
+msgstr ""
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1720,6 +1732,10 @@ msgstr "ट्रे आइकन"
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
 msgid "User Parameters"
 msgstr "उपयोगकर्ता पैरामीटर"
+
+#: tformsettingstrayslate.labelapplang.caption
+msgid "Interface Language"
+msgstr ""
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1825,6 +1841,12 @@ msgstr "शॉर्टकट कुंजियाँ"
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
 msgstr "इंटरफ़ेस"
+
+#: tformsettingstrayslate.pagelanguages.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.pagelanguages.caption"
+msgid "Languages"
+msgstr "भाषाएँ"
 
 #: tformsettingstrayslate.pagenetwork.caption
 msgid "Network"

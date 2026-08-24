@@ -155,6 +155,11 @@ begin
     JSONObj.Add('AutoCheckUpdates', Form.AutoCheckUpdates);
     JSONObj.Add('CustomPoFile', Form.CustomPoFile);
 
+    arrParams := TJSONArray.Create;
+    for i := 0 to Form.EnabledLanguages.Count - 1 do
+      arrParams.Add(Form.EnabledLanguages[i]);
+    JSONObj.Add('EnabledLanguages', arrParams);
+
     ProxyObj := TJSONObject.Create;
     ProxyObj.Add('ProxyMode', Ord(Form.Proxy.ProxyMode));
     ProxyObj.Add('ProxyType', Ord(Form.Proxy.ProxyType));
@@ -550,6 +555,15 @@ begin
 
         if (JSONObj.FindPath('CustomPoFile') <> nil) then
           Form.CustomPoFile := JSONObj.FindPath('CustomPoFile').AsString;
+
+        // Load enabled languages
+        Form.EnabledLanguages.Clear;
+        if JSONObj.FindPath('EnabledLanguages') <> nil then
+        begin
+          arrParams := JSONObj.FindPath('EnabledLanguages') as TJSONArray;
+          for i := 0 to arrParams.Count - 1 do
+            Form.EnabledLanguages.Add(arrParams.Items[i].AsString);
+        end;
 
         // Proxy settings
         if JSONObj.FindPath('Proxy') <> nil then

@@ -1605,6 +1605,10 @@ msgstr "Tepsi simgesinin yazı tipi rengi"
 msgid "Color of the frame around the icon when mouse mode is enabled"
 msgstr "Fare modu etkinleştirildiğinde simgenin etrafındaki çerçevenin rengi"
 
+#: tformsettingstrayslate.comboapplang.hint
+msgid "Application interface language"
+msgstr ""
+
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
 msgstr "Tepsi simgesi için kullanılan yazı tipinin adı"
@@ -1661,6 +1665,10 @@ msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
 msgstr "Kısayol"
 
+#: tformsettingstrayslate.groupapplang.caption
+msgid "Application Language"
+msgstr ""
+
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
 msgstr "Otomatik Başlatma"
@@ -1668,6 +1676,10 @@ msgstr "Otomatik Başlatma"
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
 msgstr "Dilleri Otomatik Değiştir"
+
+#: tformsettingstrayslate.groupenabledlang.caption
+msgid "Enabled Languages (Default: All)"
+msgstr ""
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1721,6 +1733,10 @@ msgstr "Sistem Tepsi Simgesi"
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
 msgid "User Parameters"
 msgstr "Kullanıcı Parametreleri"
+
+#: tformsettingstrayslate.labelapplang.caption
+msgid "Interface Language"
+msgstr ""
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1826,6 +1842,12 @@ msgstr "Kısayol tuşları"
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
 msgstr "Arayüz"
+
+#: tformsettingstrayslate.pagelanguages.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.pagelanguages.caption"
+msgid "Languages"
+msgstr "Diller"
 
 #: tformsettingstrayslate.pagenetwork.caption
 msgid "Network"

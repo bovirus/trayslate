@@ -1610,6 +1610,10 @@ msgstr "Màu phông chữ của biểu tượng khay hệ thống"
 msgid "Color of the frame around the icon when mouse mode is enabled"
 msgstr "Màu của khung xung quanh biểu tượng khi chế độ chuột được bật"
 
+#: tformsettingstrayslate.comboapplang.hint
+msgid "Application interface language"
+msgstr ""
+
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
 msgstr "Tên phông chữ được sử dụng cho biểu tượng khay hệ thống"
@@ -1666,6 +1670,10 @@ msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
 msgstr "Phím tắt"
 
+#: tformsettingstrayslate.groupapplang.caption
+msgid "Application Language"
+msgstr ""
+
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
 msgstr "Tự khởi động"
@@ -1673,6 +1681,10 @@ msgstr "Tự khởi động"
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
 msgstr "Tự động hoán đổi ngôn ngữ"
+
+#: tformsettingstrayslate.groupenabledlang.caption
+msgid "Enabled Languages (Default: All)"
+msgstr ""
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1725,6 +1737,10 @@ msgstr "Biểu tượng khay"
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
 msgid "User Parameters"
 msgstr "Thông số người dùng"
+
+#: tformsettingstrayslate.labelapplang.caption
+msgid "Interface Language"
+msgstr ""
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1830,6 +1846,12 @@ msgstr "Phím nóng"
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
 msgstr "Giao diện"
+
+#: tformsettingstrayslate.pagelanguages.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.pagelanguages.caption"
+msgid "Languages"
+msgstr "Ngôn ngữ"
 
 #: tformsettingstrayslate.pagenetwork.caption
 msgid "Network"

@@ -987,10 +987,10 @@ begin
     EditAccept.Text := Accept;
     MemoJsonPointer.Text := JsonPointer;
 
-    MemoLanguages.Lines.Assign(Languages);
+    MemoLanguages.Lines.Assign(LanguagesOriginal);
     MemoLanguages.RemoveSameNameValueFromMemo;
 
-    MemoLanguagesTarget.Lines.Assign(LanguagesTarget);
+    MemoLanguagesTarget.Lines.Assign(LanguagesTargetOriginal);
     MemoLanguagesTarget.RemoveSameNameValueFromMemo;
 
     ComboValueType.ItemIndex := Ord(LangType);
@@ -1065,8 +1065,10 @@ begin
       PostData := MemoPostData.Text;
       Accept := EditAccept.Text;
       JsonPointer := MemoJsonPointer.Text;
-      Languages.Text := MemoLanguages.Text;
-      LanguagesTarget.Text := MemoLanguagesTarget.Text;
+      LanguagesOriginal.Text := MemoLanguages.Text;
+      LanguagesTargetOriginal.Text := MemoLanguagesTarget.Text;
+      Languages.Assign(LanguagesOriginal);
+      LanguagesTarget.Assign(LanguagesTargetOriginal);
       LangType := TLangType(ComboValueType.ItemIndex);
       EncodeCustomParameters := CheckEncodeCustomParameters.Checked;
       CustomParameters.Text := MemoCustomParameters.Text;

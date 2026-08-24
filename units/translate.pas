@@ -83,6 +83,8 @@ type
     FRegexp: string;
     FLanguages: TStringList;
     FLanguagesTarget: TStringList;
+    FLanguagesOriginal: TStringList;
+    FLanguagesTargetOriginal: TStringList;
     FLanguageCodes: TStringArray;
     FLangType: TLangType;
     FProxy: TProxy;
@@ -171,6 +173,8 @@ type
     // Languages from config, eg en=en
     property Languages: TStringList read FLanguages write FLanguages;
     property LanguagesTarget: TStringList read FLanguagesTarget write FLanguagesTarget;
+    property LanguagesOriginal: TStringList read FLanguagesOriginal write FLanguagesOriginal;
+    property LanguagesTargetOriginal: TStringList read FLanguagesTargetOriginal write FLanguagesTargetOriginal;
     property LanguageCodes: TStringArray read FLanguageCodes write FLanguageCodes;
     property LangType: TLangType read FLangType write FLangType;
 
@@ -263,6 +267,12 @@ begin
   FLanguagesTarget := TStringList.Create;
   FLanguagesTarget.TrailingLineBreak := False;
   FLanguagesTarget.SkipLastLineBreak := True;
+  FLanguagesOriginal := TStringList.Create;
+  FLanguagesOriginal.TrailingLineBreak := False;
+  FLanguagesOriginal.SkipLastLineBreak := True;
+  FLanguagesTargetOriginal := TStringList.Create;
+  FLanguagesTargetOriginal.TrailingLineBreak := False;
+  FLanguagesTargetOriginal.SkipLastLineBreak := True;
   FLangType := vtLanguage;
 
   FInitUserAgent := 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:148.0) Gecko/20100101 Firefox/148.0';
@@ -298,6 +308,8 @@ begin
   FreeAndNil(FServiceDescription);
   FreeAndNil(FLanguages);
   FreeAndNil(FLanguagesTarget);
+  FreeAndNil(FLanguagesOriginal);
+  FreeAndNil(FLanguagesTargetOriginal);
   AbortRequest;
   FreeAndNil(FHTTPList);
   SetLength(FLanguageCodes, 0);
@@ -346,6 +358,8 @@ begin
   FLangType := vtNone;
   FLanguages.Clear;
   FLanguagesTarget.Clear;
+  FLanguagesOriginal.Clear;
+  FLanguagesTargetOriginal.Clear;
   FInitUserAgent := string.Empty;
   FInitHeaders.Clear;
   FInitUrl := string.Empty;
@@ -1557,24 +1571,25 @@ begin
 
     // Languages Page
     // Save language mappings (code=apiCode)
-    ClearSection(Ini, 'Languages', not Assigned(Languages) or (Languages.Count = 0));
-    if Assigned(Languages) then
-      for i := 0 to Languages.Count - 1 do
+    ClearSection(Ini, 'Languages', not Assigned(LanguagesOriginal) or (LanguagesOriginal.Count = 0));
+    if Assigned(LanguagesOriginal) then
+      for i := 0 to LanguagesOriginal.Count - 1 do
         Ini.WriteString('Languages',
-          IfThen(Languages.Names[i] = string.Empty, Languages[i] + '_' + IntToStr(i), Languages.Names[i] + '_' + IntToStr(i)),
-          IfThen(Languages.ValueFromIndex[i] = string.Empty, IfThen(Languages.Names[i] = string.Empty,
-          Languages[i], Languages.Names[i]), Languages.ValueFromIndex[i]));
+          IfThen(LanguagesOriginal.Names[i] = string.Empty, LanguagesOriginal[i] + '_' + IntToStr(i),
+          LanguagesOriginal.Names[i] + '_' + IntToStr(i)),
+          IfThen(LanguagesOriginal.ValueFromIndex[i] = string.Empty, IfThen(LanguagesOriginal.Names[i] =
+          string.Empty, LanguagesOriginal[i], LanguagesOriginal.Names[i]), LanguagesOriginal.ValueFromIndex[i]));
 
     // Target Languages Page
     // Save language target mappings (code=apiCode)
-    ClearSection(Ini, 'LanguagesTarget', not Assigned(LanguagesTarget) or (LanguagesTarget.Count = 0));
-    if Assigned(LanguagesTarget) then
-      for i := 0 to LanguagesTarget.Count - 1 do
+    ClearSection(Ini, 'LanguagesTarget', not Assigned(LanguagesTargetOriginal) or (LanguagesTargetOriginal.Count = 0));
+    if Assigned(LanguagesTargetOriginal) then
+      for i := 0 to LanguagesTargetOriginal.Count - 1 do
         Ini.WriteString('LanguagesTarget',
-          IfThen(LanguagesTarget.Names[i] = string.Empty, LanguagesTarget[i] + '_' + IntToStr(i),
-          LanguagesTarget.Names[i] + '_' + IntToStr(i)),
-          IfThen(LanguagesTarget.ValueFromIndex[i] = string.Empty, IfThen(LanguagesTarget.Names[i] =
-          string.Empty, LanguagesTarget[i], LanguagesTarget.Names[i]), LanguagesTarget.ValueFromIndex[i]));
+          IfThen(LanguagesTargetOriginal.Names[i] = string.Empty, LanguagesTargetOriginal[i] + '_' + IntToStr(i),
+          LanguagesTargetOriginal.Names[i] + '_' + IntToStr(i)),
+          IfThen(LanguagesTargetOriginal.ValueFromIndex[i] = string.Empty, IfThen(LanguagesTargetOriginal.Names[i] =
+          string.Empty, LanguagesTargetOriginal[i], LanguagesTargetOriginal.Names[i]), LanguagesTargetOriginal.ValueFromIndex[i]));
 
     Ini.UpdateFile;
   finally
@@ -1750,11 +1765,14 @@ begin
     InitParameters.Clear;
     Ini.ReadSectionValues('Initial Parameters', InitParameters);
 
-    LoadSection('Languages', Languages);
-    LoadSection('LanguagesTarget', LanguagesTarget);
+    LoadSection('Languages', LanguagesOriginal);
+    LoadSection('LanguagesTarget', LanguagesTargetOriginal);
 
-    Languages.RemoveEmptyValues;
-    LanguagesTarget.RemoveEmptyValues;
+    LanguagesOriginal.RemoveEmptyValues;
+    LanguagesTargetOriginal.RemoveEmptyValues;
+
+    Languages.Assign(LanguagesOriginal);
+    LanguagesTarget.Assign(LanguagesTargetOriginal);
 
     FLanguageCodes := TLanguages.GetCodeArrayFromStringList(Languages);
   finally

@@ -1606,6 +1606,10 @@ msgstr "Warna font ikon baki sistem"
 msgid "Color of the frame around the icon when mouse mode is enabled"
 msgstr "Warna bingkai di sekitar ikon saat mode mouse diaktifkan"
 
+#: tformsettingstrayslate.comboapplang.hint
+msgid "Application interface language"
+msgstr ""
+
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
 msgstr "Nama font yang digunakan untuk ikon baki sistem"
@@ -1662,6 +1666,10 @@ msgctxt "tformsettingstrayslate.gridhotkeys.columns[1].title.caption"
 msgid "Shortcut"
 msgstr "Tombol pintas"
 
+#: tformsettingstrayslate.groupapplang.caption
+msgid "Application Language"
+msgstr ""
+
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
 msgstr "Mulai Otomatis"
@@ -1669,6 +1677,10 @@ msgstr "Mulai Otomatis"
 #: tformsettingstrayslate.groupautoswap.caption
 msgid "Auto-Swap Languages"
 msgstr "Tukar Bahasa Secara Otomatis"
+
+#: tformsettingstrayslate.groupenabledlang.caption
+msgid "Enabled Languages (Default: All)"
+msgstr ""
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1721,6 +1733,10 @@ msgstr "Ikon Baki"
 msgctxt "tformsettingstrayslate.groupuserparameters.caption"
 msgid "User Parameters"
 msgstr "Parameter Pengguna"
+
+#: tformsettingstrayslate.labelapplang.caption
+msgid "Interface Language"
+msgstr ""
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1826,6 +1842,12 @@ msgstr "Tombol pintas"
 msgctxt "tformsettingstrayslate.pageinterface.caption"
 msgid "Interface"
 msgstr "Antarmuka"
+
+#: tformsettingstrayslate.pagelanguages.caption
+#, fuzzy
+msgctxt "tformsettingstrayslate.pagelanguages.caption"
+msgid "Languages"
+msgstr "Bahasa"
 
 #: tformsettingstrayslate.pagenetwork.caption
 msgid "Network"
