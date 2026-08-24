@@ -2282,11 +2282,16 @@ begin
   Combo := Control as TComboBox;
   ItemText := Combo.Items[Index];
 
-  // Get language code from item text
-  LangCode := GetLangCode(ItemText, Combo = ComboTarget);
+  if Trans.LangType = vtLanguage then
+  begin
+    // Get language code from item text
+    LangCode := GetLangCode(ItemText, Combo = ComboTarget);
 
-  // Load the flag bitmap if available
-  Flag := TLanguages.GetFlag(LangCode);
+    // Load the flag bitmap if available
+    Flag := TLanguages.GetFlag(LangCode);
+  end
+  else
+    Flag := nil;
 
   // Fixed flag dimensions
   FlagWidth := 16;
