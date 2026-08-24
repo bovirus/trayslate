@@ -1607,7 +1607,7 @@ msgstr "Колір рамки навколо іконки при ввімкне�
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr ""
+msgstr "Мова інтерфейсу програми"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1667,7 +1667,7 @@ msgstr "Комбінація клавіш"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr ""
+msgstr "Мова програми"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1679,7 +1679,7 @@ msgstr "Авто-перемикання мов"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr ""
+msgstr "Увімкнені мови (за замовчуванням: усі)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1735,7 +1735,7 @@ msgstr "Параметри користувача"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr ""
+msgstr "Мова інтерфейсу"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1843,7 +1843,6 @@ msgid "Interface"
 msgstr "Інтерфейс"
 
 #: tformsettingstrayslate.pagelanguages.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.pagelanguages.caption"
 msgid "Languages"
 msgstr "Мови"

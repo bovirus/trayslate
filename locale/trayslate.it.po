@@ -1615,7 +1615,7 @@ msgstr "Colore cornice intorno all'icona quando la modalità mouse è abilitata"
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr ""
+msgstr "Lingua dell'interfaccia dell'applicazione"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1675,7 +1675,7 @@ msgstr "Tasto rapido"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr ""
+msgstr "Lingua dell'applicazione"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1687,7 +1687,7 @@ msgstr "Scambio automatico lingue"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr ""
+msgstr "Lingue abilitate (predefinito: tutte)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1743,7 +1743,7 @@ msgstr "Parametri utente"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr ""
+msgstr "Lingua dell'interfaccia"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1851,7 +1851,6 @@ msgid "Interface"
 msgstr "Interfaccia"
 
 #: tformsettingstrayslate.pagelanguages.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.pagelanguages.caption"
 msgid "Languages"
 msgstr "Lingue"

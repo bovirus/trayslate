@@ -1607,7 +1607,7 @@ msgstr "माउस मोड सक्षम होने पर आइकन 
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr ""
+msgstr "एप्लिकेशन इंटरफ़ेस भाषा"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1667,7 +1667,7 @@ msgstr "शॉर्टकट"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr ""
+msgstr "एप्लिकेशन भाषा"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1679,7 +1679,7 @@ msgstr "स्वतः भाषाएँ बदलें"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr ""
+msgstr "सक्षम भाषाएँ (डिफ़ॉल्ट: सभी)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1735,7 +1735,7 @@ msgstr "उपयोगकर्ता पैरामीटर"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr ""
+msgstr "इंटरफ़ेस भाषा"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1843,7 +1843,6 @@ msgid "Interface"
 msgstr "इंटरफ़ेस"
 
 #: tformsettingstrayslate.pagelanguages.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.pagelanguages.caption"
 msgid "Languages"
 msgstr "भाषाएँ"

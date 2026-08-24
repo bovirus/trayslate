@@ -1607,7 +1607,7 @@ msgstr "Kolor ramki wokół ikony po włączeniu trybu myszy"
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr ""
+msgstr "Język interfejsu aplikacji"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1667,7 +1667,7 @@ msgstr "Skrót"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr ""
+msgstr "Język aplikacji"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1679,7 +1679,7 @@ msgstr "Automatyczna zmiana języków"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr ""
+msgstr "Włączone języki (domyślnie: wszystkie)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1735,7 +1735,7 @@ msgstr "Parametry użytkownika"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr ""
+msgstr "Język interfejsu"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1843,7 +1843,6 @@ msgid "Interface"
 msgstr "Interfejs"
 
 #: tformsettingstrayslate.pagelanguages.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.pagelanguages.caption"
 msgid "Languages"
 msgstr "Języki"

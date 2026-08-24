@@ -1611,7 +1611,7 @@ msgstr "Color of the frame around the icon when mouse mode is enabled"
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr ""
+msgstr "Application interface language"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1671,7 +1671,7 @@ msgstr "Shortcut"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr ""
+msgstr "Application Language"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1683,7 +1683,7 @@ msgstr "Auto Swap Languages"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr ""
+msgstr "Enabled Languages (Default: All)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1740,7 +1740,7 @@ msgstr "User Parameters"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr ""
+msgstr "Interface Language"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1848,7 +1848,6 @@ msgid "Interface"
 msgstr "Interface"
 
 #: tformsettingstrayslate.pagelanguages.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.pagelanguages.caption"
 msgid "Languages"
 msgstr "Languages"

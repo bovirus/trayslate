@@ -1612,7 +1612,7 @@ msgstr "Màu của khung xung quanh biểu tượng khi chế độ chuột đư
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr ""
+msgstr "Ngôn ngữ giao diện ứng dụng"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1672,7 +1672,7 @@ msgstr "Phím tắt"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr ""
+msgstr "Ngôn ngữ ứng dụng"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1684,7 +1684,7 @@ msgstr "Tự động hoán đổi ngôn ngữ"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr ""
+msgstr "Ngôn ngữ được bật (mặc định: tất cả)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1740,7 +1740,7 @@ msgstr "Thông số người dùng"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr ""
+msgstr "Ngôn ngữ giao diện"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1848,7 +1848,6 @@ msgid "Interface"
 msgstr "Giao diện"
 
 #: tformsettingstrayslate.pagelanguages.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.pagelanguages.caption"
 msgid "Languages"
 msgstr "Ngôn ngữ"

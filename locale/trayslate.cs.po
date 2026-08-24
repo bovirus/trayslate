@@ -1607,7 +1607,7 @@ msgstr "Barva rámečku kolem ikony při zapnutém režimu myši"
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr ""
+msgstr "Jazyk rozhraní aplikace"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1667,7 +1667,7 @@ msgstr "Klávesová zkratka"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr ""
+msgstr "Jazyk aplikace"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1679,7 +1679,7 @@ msgstr "Automatické prohazování jazyků"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr ""
+msgstr "Povolené jazyky (výchozí: všechny)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1735,7 +1735,7 @@ msgstr "Uživatelské parametry"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr ""
+msgstr "Jazyk rozhraní"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1843,7 +1843,6 @@ msgid "Interface"
 msgstr "Rozhraní"
 
 #: tformsettingstrayslate.pagelanguages.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.pagelanguages.caption"
 msgid "Languages"
 msgstr "Jazyky"

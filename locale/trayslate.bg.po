@@ -1611,7 +1611,7 @@ msgstr "Цвят на рамката около иконата, при акти�
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr ""
+msgstr "Език на интерфейса на приложението"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1671,7 +1671,7 @@ msgstr "Клавишни комбинации"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr ""
+msgstr "Език на приложението"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1683,7 +1683,7 @@ msgstr "Автоматична смяна на езиците"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr ""
+msgstr "Активирани езици (по подразбиране: всички)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1740,7 +1740,7 @@ msgstr "Потребителски параметри"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr ""
+msgstr "Език на интерфейса"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1848,7 +1848,6 @@ msgid "Interface"
 msgstr "Интерфейс"
 
 #: tformsettingstrayslate.pagelanguages.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.pagelanguages.caption"
 msgid "Languages"
 msgstr "Езици"

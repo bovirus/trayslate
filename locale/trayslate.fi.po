@@ -1607,7 +1607,7 @@ msgstr "Kuvakkeen ympärillä olevan kehyksen väri, kun hiiritila on käytöss�
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr ""
+msgstr "Sovelluksen käyttöliittymän kieli"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1667,7 +1667,7 @@ msgstr "Pikanäppäin"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr ""
+msgstr "Sovelluksen kieli"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1679,7 +1679,7 @@ msgstr "Kielten automaattinen vaihto"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr ""
+msgstr "Käytössä olevat kielet (oletus: kaikki)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1735,7 +1735,7 @@ msgstr "Käyttäjäparametrit"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr ""
+msgstr "Käyttöliittymän kieli"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1843,7 +1843,6 @@ msgid "Interface"
 msgstr "Käyttöliittymä"
 
 #: tformsettingstrayslate.pagelanguages.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.pagelanguages.caption"
 msgid "Languages"
 msgstr "Kielet"

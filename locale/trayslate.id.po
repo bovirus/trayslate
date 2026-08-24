@@ -1608,7 +1608,7 @@ msgstr "Warna bingkai di sekitar ikon saat mode mouse diaktifkan"
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr ""
+msgstr "Bahasa antarmuka aplikasi"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1668,7 +1668,7 @@ msgstr "Tombol pintas"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr ""
+msgstr "Bahasa Aplikasi"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1680,7 +1680,7 @@ msgstr "Tukar Bahasa Secara Otomatis"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr ""
+msgstr "Bahasa yang Diaktifkan (Bawaan: Semua)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1736,7 +1736,7 @@ msgstr "Parameter Pengguna"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr ""
+msgstr "Bahasa Antarmuka"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
@@ -1844,7 +1844,6 @@ msgid "Interface"
 msgstr "Antarmuka"
 
 #: tformsettingstrayslate.pagelanguages.caption
-#, fuzzy
 msgctxt "tformsettingstrayslate.pagelanguages.caption"
 msgid "Languages"
 msgstr "Bahasa"
