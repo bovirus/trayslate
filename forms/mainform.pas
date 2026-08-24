@@ -891,6 +891,9 @@ begin
     MemoSource.SelLength := 0;
   end;
 
+  MemoSource.Font.Color := TDarkUtils.ThemeColor(clBlack, clWhite);
+  MemoTarget.Font.Color := MemoSource.Font.Color;
+
   if FLastDarkMode <> TDarkUtils.IsDarkMode then
   begin
     Font.Color := InvertColor(Font.Color);

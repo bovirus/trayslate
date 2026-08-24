@@ -213,6 +213,7 @@ object formTrayslate: TformTrayslate
       Width = 506
       Align = alClient
       BorderStyle = bsNone
+      Color = clWindow
       HideSelection = False
       OnChange = MemoSourceChange
       OnContextPopup = MemoSourceContextPopup
@@ -277,6 +278,7 @@ object formTrayslate: TformTrayslate
       Width = 506
       Align = alClient
       BorderStyle = bsNone
+      Color = clWindow
       HideSelection = False
       OnChange = MemoTargetChange
       OnKeyDown = MemoTargetKeyDown
