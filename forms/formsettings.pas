@@ -1175,8 +1175,9 @@ begin
     // Change the vertical scroll position directly.
     // WheelDelta > 0 means scroll up (decrease position), so we subtract it.
     SB.VertScrollBar.Position := SB.VertScrollBar.Position - WheelDelta div 2;
-    Handled := True; // Prevent the ComboBox from processing the wheel itself
   end;
+
+  Handled := True; // Prevent the ComboBox from processing the wheel itself
 end;
 
 procedure TformSettingsTrayslate.GridHotkeysMouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: integer;
