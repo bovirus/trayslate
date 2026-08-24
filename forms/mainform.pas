@@ -881,6 +881,13 @@ begin
   // Load form settings
   FFormSettingsLoaded := LoadFormSettings(Self);
 
+  // Invert color if mode chanded
+  if FLastDarkMode <> TDarkUtils.IsDarkMode then
+  begin
+    Font.Color := InvertColor(Font.Color);
+    FontPopup.Color := InvertColor(FontPopup.Color);
+  end;
+
   // RichMemo Setup
   MemoSource.SetLeftIndent;
   MemoTarget.SetLeftIndent;
@@ -896,15 +903,6 @@ begin
   begin
     MemoSource.SelStart := Length(MemoSource.Text);
     MemoSource.SelLength := 0;
-  end;
-
-  MemoSource.Font.Color := TDarkUtils.ThemeColor(clBlack, clWhite);
-  MemoTarget.Font.Color := MemoSource.Font.Color;
-
-  if FLastDarkMode <> TDarkUtils.IsDarkMode then
-  begin
-    Font.Color := InvertColor(Font.Color);
-    FontPopup.Color := InvertColor(FontPopup.Color);
   end;
 
   // Components config after load settings

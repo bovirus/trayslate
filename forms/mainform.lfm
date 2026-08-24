@@ -213,12 +213,12 @@ object formTrayslate: TformTrayslate
       Width = 506
       Align = alClient
       BorderStyle = bsNone
-      Color = clWindow
       HideSelection = False
       OnChange = MemoSourceChange
       OnContextPopup = MemoSourceContextPopup
       OnKeyDown = MemoSourceKeyDown
       OnKeyUp = MemoSourceKeyUp
+      ParentColor = True
       PopupMenu = PopupSource
       ScrollBars = ssAutoBoth
       TabOrder = 0
@@ -278,10 +278,10 @@ object formTrayslate: TformTrayslate
       Width = 506
       Align = alClient
       BorderStyle = bsNone
-      Color = clWindow
       HideSelection = False
       OnChange = MemoTargetChange
       OnKeyDown = MemoTargetKeyDown
+      ParentColor = True
       PopupMenu = PopupTarget
       ScrollBars = ssAutoBoth
       TabOrder = 0

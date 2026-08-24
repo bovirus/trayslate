@@ -1017,6 +1017,7 @@ end;
 procedure TformSettingsTrayslate.BtnResetClick(Sender: TObject);
 begin
   PanelFont.Font.SetDefault;
+  PanelFont.Font.Color := TDarkUtils.ThemeColor(clBlack, clWhite);
   SetPanelFont(PanelFont, PanelFont.Font);
   SettingChange(Self);
 end;
@@ -1036,6 +1037,7 @@ end;
 procedure TformSettingsTrayslate.BtnResetPopupClick(Sender: TObject);
 begin
   PanelFontPopup.Font.SetDefault;
+  PanelFontPopup.Font.Color := TDarkUtils.ThemeColor(clBlack, clWhite);
   SetPanelFont(PanelFontPopup, PanelFontPopup.Font);
   SettingChange(Self);
 end;
