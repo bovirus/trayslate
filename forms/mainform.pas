@@ -438,6 +438,7 @@ type
     FUpdatingSpellCheck: boolean;
     FSpellErrors: TSpellErrorArray;
     FSpellText: string;
+    FIgnoreKeyUpCode: word;
 
     // Non sorted combo named languages
     FLanguages: TStringList;
@@ -853,6 +854,7 @@ begin
   FSpellChecker := TRichSpellChecker.Create(MemoSource);
   FSpellChecker.OnSpellCheckNeeded := @SpellCheckNeeded;
   FUpdatingSpellCheck := False;
+  FIgnoreKeyUpCode := 0;
 
   // Components config
   Left := Screen.WorkAreaRect.Right - Width - 30;
@@ -2494,6 +2496,12 @@ begin
     Exit;
   end;
 
+  // Remember key code if this is a Ctrl combination that does not edit text
+  if (ssCtrl in Shift) and not (Key in [VK_V, VK_X, VK_Z, VK_Y, VK_BACK, VK_DELETE]) then
+    FIgnoreKeyUpCode := Key
+  else
+    FIgnoreKeyUpCode := 0;
+
   // Ctrl+Enter or Shift+Enter triggers immediate translation
   if ((ssCtrl in Shift) or (ssShift in Shift)) and (Key = VK_RETURN) then
   begin
@@ -2575,36 +2583,51 @@ end;
 procedure TformTrayslate.MemoSourceKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
   // Check if real-time translation is enabled
-  if not FRealTime or not Trans.ServiceRealTime then
-    Exit;
-
-  // Ignore KeyUp if it happened right after a global hotkey
-  if TOS.GetTickCountXp - FLastHotkeyTime < HOTKEY_INTERVAL then
+  if FRealTime and Trans.ServiceRealTime then
   begin
-    TimerTranslate.Enabled := False;
-    Exit;
+    // Ignore KeyUp if it happened right after a global hotkey
+    if TOS.GetTickCountXp - FLastHotkeyTime < HOTKEY_INTERVAL then
+    begin
+      TimerTranslate.Enabled := False;
+      Exit;
+    end;
+
+    // If this KeyUp corresponds to a previously detected non-editing Ctrl combo, ignore it
+    if (FIgnoreKeyUpCode <> 0) and (Key = FIgnoreKeyUpCode) then
+    begin
+      FIgnoreKeyUpCode := 0;
+      TimerTranslate.Enabled := False;
+      Exit;
+    end;
+
+    // Ignore key combinations with Ctrl that do not modify text, like Ctrl+C
+    if (ssCtrl in Shift) and not (Key in [VK_V, VK_X, VK_Z, VK_Y, VK_BACK, VK_DELETE]) then
+    begin
+      TimerTranslate.Enabled := False;
+      Exit;
+    end;
+
+    // List of keys that do not modify text content (Navigation, System, Modifiers)
+    // We include VK_RETURN here as per your requirement to ignore it for translation triggers
+    if THotKeyData.Create(Key).IsSystemKey and not (Key in [VK_RETURN, VK_DELETE, VK_BACK, VK_SHIFT, VK_LSHIFT, VK_RSHIFT]) then
+    begin
+      TimerTranslate.Enabled := False;
+      Exit;
+    end;
+
+    // If a text-modifying key is pressed, reset the translation timer
+    if TimerTranslate.Enabled then
+    begin
+      TimerTranslate.Enabled := False;
+
+      // Cancel the current translation thread if it is still running
+      if Assigned(FTranslateThread) then
+        FTranslateThread.Cancel;
+    end;
+
+    // Start the timer to trigger translation after a short delay (debounce)
+    TimerTranslate.Enabled := True;
   end;
-
-  // List of keys that do not modify text content (Navigation, System, Modifiers)
-  // We include VK_RETURN here as per your requirement to ignore it for translation triggers
-  if THotKeyData.Create(Key).IsSystemKey and not (Key in [VK_RETURN, VK_DELETE, VK_BACK, VK_SHIFT, VK_LSHIFT, VK_RSHIFT]) then
-  begin
-    TimerTranslate.Enabled := False;
-    Exit;
-  end;
-
-  // If a text-modifying key is pressed, reset the translation timer
-  if TimerTranslate.Enabled then
-  begin
-    TimerTranslate.Enabled := False;
-
-    // Cancel the current translation thread if it is still running
-    if Assigned(FTranslateThread) then
-      FTranslateThread.Cancel;
-  end;
-
-  // Start the timer to trigger translation after a short delay (debounce)
-  TimerTranslate.Enabled := True;
 end;
 
 procedure TformTrayslate.MemoTargetKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
@@ -4369,6 +4392,9 @@ end;
 procedure TformTrayslate.SpellCheckNeeded(Sender: TObject);
 begin
   UpdateSpellCheck;
+
+  if FRealTime and Trans.ServiceRealTime then
+    TimerTranslate.Enabled := True;
 end;
 
 procedure TformTrayslate.DoCheckUpdates(Data: PtrInt);

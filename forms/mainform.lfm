@@ -981,7 +981,7 @@ object formTrayslate: TformTrayslate
     Enabled = False
     Interval = 300
     OnTimer = TimerActiveTimer
-    Left = 361
+    Left = 376
     Top = 312
   end
   object TimerTranslate: TTimer
@@ -1014,7 +1014,7 @@ object formTrayslate: TformTrayslate
     Enabled = False
     Interval = 200
     OnTimer = TimerUnapplyTimer
-    Left = 361
+    Left = 376
     Top = 384
   end
   object ApplicationProp: TApplicationProperties
