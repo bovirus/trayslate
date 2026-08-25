@@ -261,8 +261,8 @@ begin
   if MemoTarget.Text = string.Empty then exit;
   if Assigned(formTrayslate) then
   begin
-    formTrayslate.MemoSource.Text := SourceText;
-    formTrayslate.MemoTarget.Text := MemoTarget.Text;
+    formTrayslate.MemoSource.SetTextSafe(SourceText);
+    formTrayslate.MemoTarget.SetTextSafe(MemoTarget.Text);
     formTrayslate.aShow.Execute;
   end;
   Hide;

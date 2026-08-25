@@ -4736,9 +4736,9 @@ begin
   if ASwapTranslate and ((MemoSource.Text <> string.Empty) or (MemoTarget.Text <> string.Empty)) then
   begin
     srcMemoText := MemoSource.Text;
-    MemoSource.Text := MemoTarget.Text;
+    MemoSource.SetTextSafe(MemoTarget.Text);
     MemoSource.SetLeftIndent;
-    MemoTarget.Text := srcMemoText;
+    MemoTarget.SetTextSafe(srcMemoText);
     MemoTarget.SetLeftIndent;
   end;
 
@@ -5506,7 +5506,7 @@ begin
   TOS.SleepLoop(0, 1);
   if (Clipboard.AsText <> string.empty) then
   begin
-    MemoSource.Text := Clipboard.AsText;
+    MemoSource.SetTextSafe(Clipboard.AsText);
     TranslateMemo;
   end;
 end;
@@ -5696,7 +5696,7 @@ begin
 
     FTopMost := True;
     TOS.SleepLoop(0, 1);
-    MemoSource.Text := SelectedText;
+    MemoSource.SetTextSafe(SelectedText);
     MemoSource.SetLeftIndent;
     TranslateMemo;
   end;
@@ -5935,7 +5935,7 @@ begin
           BringToFront;
           FTopMost := True;
           TOS.SleepLoop(0, 1);
-          MemoSource.Text := SelectedText;
+          MemoSource.SetTextSafe(SelectedText);
           TranslateMemo;
         end;
         else
