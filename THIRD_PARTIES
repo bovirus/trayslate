@@ -5,31 +5,37 @@ This application uses third-party resources under the following licenses:
 1.  Main icon designed by Flaticon
     https://www.flaticon.com/ru/free-icon/translator_682045
 
-2.  Dark theme support modules from Double Commander
+2.  RichMemo component
+    License: GNU Library General Public License v2 (LGPL-2.0)
+    with the Lazarus modified LGPL exception
+    Copyright (c) RichMemo contributors
+    https://github.com/skalogryz/richmemo
+
+3.  Dark theme support modules from Double Commander
     Modules used: udarkstyle.pas, uimport.pas, uwin32widgetsetdark.pas
     License: GNU General Public License v2.0 (GPL-2.0)
     https://github.com/doublecmd/doublecmd
    
-3.  OpenSSL libraries (32-bit and 64-bit versions)
+4.  OpenSSL libraries (32-bit and 64-bit versions)
     OpenSSL 1.1.x
       License: OpenSSL License + Original SSLeay License
     OpenSSL 3.x
       License: Apache License 2.0
     https://www.openssl.org
 
-4.  Synapse networking library (laz_synapse / synapse41.0)   
+5.  Synapse networking library (laz_synapse / synapse41.0)   
     License: BSD-style license
     Copyright (c) 1999–2024, Lukas Gebauer
     https://github.com/geby/synapse
 
-5.  FineWeb2 language data used to generate language profiles
+6.  FineWeb2 language data used to generate language profiles
     License: Open Data Commons Attribution License v1.0 (ODC-By)
     FineWeb2 is sourced from Common Crawl and is also subject to
     Common Crawl's Terms of Use.   
     https://huggingface.co/datasets/HuggingFaceFW/fineweb-2
     https://opendatacommons.org/licenses/by/1-0/
 
-6. Country flags used for language selection
+7. Country flags used for language selection
    Country flags are used to represent languages that do not have a dedicated language flag.
    Source: stevenrskelton/flag-icon
    License: MIT
