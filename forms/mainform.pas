@@ -868,6 +868,9 @@ begin
   SbCopySource.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);
   SbCopyTarget.PressedImageIndex := TDarkUtils.ThemeValue(12, 13);
   FLeftButton := True;
+  //PanelLang.Color := TDarkUtils.ThemeValue(clBtnFace, clBtnHighlight);
+  //PanelPairs.Color := TDarkUtils.ThemeValue(clBtnFace, clBtnHighlight);
+  //Splitter.Color := TDarkUtils.ThemeValue(clBtnFace, clBtnHighlight);
 
   FTrans := TTranslate.Create;
   FTransDetect := TTranslate.Create;
