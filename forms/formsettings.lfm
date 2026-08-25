@@ -1297,7 +1297,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           )
           ColWidths = (
             200
-            382
+            365
           )
         end
       end

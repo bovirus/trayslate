@@ -1785,14 +1785,6 @@ begin
     else
       formTrayslate.ConfigLangDetect := string.Empty;
 
-    LangCode := GetLanguage;
-    if LangCode <> string.Empty then
-    begin
-      Language := LangCode;
-      formTrayslate.CustomPoFile := string.Empty;
-      formTrayslate.SetLanguage(LangCode);
-    end;
-
     formTrayslate.EnabledLanguages.Clear;
     for i := 0 to ClbEnabledLang.Count - 1 do
       if ClbEnabledLang.Checked[i] then
@@ -1802,8 +1794,6 @@ begin
     for i := 0 to ClbProxiedConfigs.Count - 1 do
       if ClbProxiedConfigs.Checked[i] and (i < formTrayslate.ConfigFiles.Count) then
         formTrayslate.ProxiedConfigs.Add(formTrayslate.ConfigFiles[i]);
-
-    formTrayslate.UserParameters.Assign(ValueListUserParameters.Strings);
 
     T := formTrayslate.Timeout;
     T.Connection := SpinConnectTimeout.Value * 1000;
@@ -1818,6 +1808,8 @@ begin
     P.Login := EditProxyLogin.Text;
     P.Password := EditProxyPassword.Text;
     formTrayslate.Proxy := P;
+
+    formTrayslate.UserParameters.Assign(ValueListUserParameters.Strings);
 
     formTrayslate.Font.Assign(PanelFont.Font);
     formTrayslate.FontPopup.Assign(PanelFontPopup.Font);
@@ -1869,6 +1861,15 @@ begin
       formPopupTrayslate.Font.Assign(PanelFontPopup.Font);
       formPopupTrayslate.PanelWatermark.Font.Size := PanelFontPopup.Font.Size;
       formPopupTrayslate.PanelWatermark.Font.Name := PanelFontPopup.Font.Name;
+    end;
+
+    // Change the language at the end to avoid resetting the settings
+    LangCode := GetLanguage;
+    if (LangCode <> string.Empty) and (FOriginalLanguage <> LangCode) then
+    begin
+      Language := LangCode;
+      formTrayslate.CustomPoFile := string.Empty;
+      formTrayslate.SetLanguage(LangCode);
     end;
 
     Reset;
