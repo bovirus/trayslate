@@ -23,6 +23,7 @@ on:
 permissions:
   contents: write
   issues: read
+  pull-requests: read
 
 jobs:
   release:
@@ -30,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -79,6 +80,14 @@ jobs:
               }
           output: CHANGELOG.md
 
+      - name: Add localization PRs to changelog
+        if: steps.check_tags.outputs.HAS_TAGS == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CURRENT_TAG: ${{ inputs.tag_name || github.event.inputs.tag_name }}
+        run: |         
+          python3 .github/scripts/add_localization_prs.py
+
       - name: Create placeholder changelog when not enough tags
         if: steps.check_tags.outputs.HAS_TAGS == 'false'
         run: |
@@ -117,7 +126,7 @@ jobs:
           EOF
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           pattern: ${{ inputs.artifact_name || github.event.inputs.artifact_name }}
           path: dist
