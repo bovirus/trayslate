@@ -4506,7 +4506,7 @@ begin
       MaxH := Min(FMaxHeight, Screen.WorkAreaRect.Height);
 
     // Get actual text height from RichMemo
-    NewHeight := formPopupTrayslate.MemoTarget.GetTextHeight;
+    NewHeight := formPopupTrayslate.MemoTarget.GetTextHeight(AText);
 
     // Add top/bottom padding + controls
     NewHeight := NewHeight + formPopupTrayslate.PanelPairs.Height;
@@ -4519,14 +4519,15 @@ begin
   end;
 
   // Keep inside screen always
-  if formPopupTrayslate.Position <> poDesktopCenter then
-  begin
-    if formPopupTrayslate.Left + formPopupTrayslate.Width > Screen.WorkAreaRect.Right then
-      formPopupTrayslate.Left := Screen.WorkAreaRect.Right - formPopupTrayslate.Width - 10;
+  with formPopupTrayslate do
+    if Position <> poDesktopCenter then
+    begin
+      if Left + Width > Screen.WorkAreaRect.Right then
+        Left := Screen.WorkAreaRect.Right - Width - 10;
 
-    if formPopupTrayslate.Top + formPopupTrayslate.Height > Screen.WorkAreaRect.Bottom then
-      formPopupTrayslate.Top := Screen.WorkAreaRect.Bottom - formPopupTrayslate.Height + 8;
-  end;
+      if Top + Height > Screen.WorkAreaRect.Bottom then
+        Top := Screen.WorkAreaRect.Bottom - Height + 8;
+    end;
 end;
 
 procedure TformTrayslate.ShowPopup(const SourceText: string; X: integer = 0; Y: integer = 0);
@@ -4561,7 +4562,7 @@ begin
     if FormPopupHeight > 0 then
       formPopupTrayslate.Height := FormPopupHeight;
 
-    // Auto-height only when form is hidden
+    // Auto-height by source text only when form is hidden
     AdjustPopupHeight(SourceText);
 
     formPopupTrayslate.Font.Assign(FontPopup);
@@ -4939,7 +4940,7 @@ procedure TformTrayslate.UpdatePopupState(SetWindowParam: boolean = True);
 begin
   if Assigned(formPopupTrayslate) and (formPopupTrayslate.Visible) then
   begin
-    if (FAutoHeightAfter) then
+    if FAutoHeightAfter then
     begin
       FAutoHeightAfter := False;
       AdjustPopupHeight(FRawTranslate);
