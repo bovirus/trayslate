@@ -1274,7 +1274,6 @@ begin
   try
     // Delegate drawing to the helper method
     ClbEnabledLang.DrawCheckListItem(
-      ClbEnabledLang.Canvas,
       ARect,
       State,
       ClbEnabledLang.Checked[Index],
@@ -1316,7 +1315,6 @@ begin
   try
     // Draw the whole item using the helper method
     ClbProxiedConfigs.DrawCheckListItem(
-      ClbProxiedConfigs.Canvas,
       ARect,
       State,
       ClbProxiedConfigs.Checked[Index],
