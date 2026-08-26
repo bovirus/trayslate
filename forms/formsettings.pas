@@ -1876,7 +1876,7 @@ begin
     formTrayslate.Trans.LanguagesTarget.Assign(formTrayslate.Trans.LanguagesTargetOriginal);
     formTrayslate.RestrictTranslate;
     formTrayslate.LoadLanguages;
-    formTrayslate.UpdateComboState(False);
+    formTrayslate.UpdateComboState;
 
     formTrayslate.TimerTranslate.Interval := Max(formTrayslate.RealTimeDelay, 1);
     formTrayslate.LoadLangDetect;

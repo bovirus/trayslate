@@ -3030,7 +3030,7 @@ begin
 
   // Update current config and load it
   FConfigFile := FConfigFiles[Item.Tag];
-  LoadConfig(False);
+  LoadConfig;
 
   if (Assigned(formConfigTrayslate)) and formConfigTrayslate.HandleAllocated and (formConfigTrayslate.Showing) then
   begin
@@ -3556,23 +3556,50 @@ begin
         Trans.LangSource := LangSource
       else
       begin
-        ComboSource.ItemIndex := 0; // First item as default
-        ChangeSourceLang(ComboSource.Text);
+        if (FLanguages.FindIndex('(' + PrimaryLang + ')', False) >= 0) then
+        begin
+          FTrans.LangSource := PrimaryLang; // Default system language
+          FLangSource := PrimaryLang;
+        end
+        else
+        if (FLanguages.FindIndex('(' + SecondaryLang + ')', False) >= 0) then
+        begin
+          FTrans.LangSource := SecondaryLang; // Default system language
+          FLangSource := SecondaryLang;
+        end
+        else
+        begin
+          ComboSource.ItemIndex := 0; // First item as default
+          ChangeSourceLang(ComboSource.Text);
+        end;
       end;
 
       if LangTarget <> string.Empty then
         Trans.LangTarget := LangTarget
       else
       begin
+        if (((FLanguagesTarget.Count > 0) and (FLanguagesTarget.FindIndex('(' + SecondaryLang + ')', False) >= 0)) or
+          ((FLanguagesTarget.Count = 0) and (FLanguages.FindIndex('(' + SecondaryLang + ')', False) >= 0))) then
+        begin
+          FTrans.LangTarget := SecondaryLang; // Secondary language
+          FLangTarget := SecondaryLang;
+        end
+        else
+        if (((FLanguagesTarget.Count > 0) and (FLanguagesTarget.FindIndex('(' + PrimaryLang + ')', False) >= 0)) or
+          ((FLanguagesTarget.Count = 0) and (FLanguages.FindIndex('(' + PrimaryLang + ')', False) >= 0))) then
+        begin
+          FTrans.LangTarget := PrimaryLang; // Secondary language
+          FLangTarget := PrimaryLang;
+        end
+        else
         // if system language in lists
-        if (((FLanguagesTarget.Count > 0) and (FLanguagesTarget.FindIndex('(' + Language + ')') >= 0)) or
-          ((FLanguagesTarget.Count = 0) and (FLanguages.FindIndex('(' + Language + ')') >= 0))) then
+        if (((FLanguagesTarget.Count > 0) and (FLanguagesTarget.FindIndex('(' + Language + ')', False) >= 0)) or
+          ((FLanguagesTarget.Count = 0) and (FLanguages.FindIndex('(' + Language + ')', False) >= 0))) then
         begin
           FTrans.LangTarget := Language; // Default system language
           FLangTarget := Language;
         end
         else
-        if (FLanguagesTarget.Count = 1) then
         begin
           ComboTarget.ItemIndex := 0; // Single item as default
           ChangeTargetLang(ComboTarget.Text);
@@ -5084,10 +5111,10 @@ begin
     Bmp.Canvas.Font.Style := [fsBold];
     Bmp.Canvas.Brush.Style := bsClear;
 
-    if (ALang2 = string.Empty) then
+    if (ALang1 = string.Empty) then
     begin
       // Draw text centered
-      Value := FormatValue(ALang1, iif(FIconCircular, DEF_MINI, DEF_SMALL));
+      Value := FormatValue(ALang2, iif(FIconCircular, DEF_MINI, DEF_SMALL));
       DrawText(Bmp.Canvas.Handle, PChar(Value), Length(Value), rect,
         DT_CENTER or DT_VCENTER or DT_SINGLELINE);
     end
