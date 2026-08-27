@@ -3639,6 +3639,8 @@ begin
   {$ENDIF}
   FIconMouseModeFrameColor := clNone;
   FIconFontName := DEF_FONT;
+  if Assigned(FFontPopup) then
+    FreeAndNil(FFontPopup);
   FFontPopup := TFont.Create;
   FIconTwoLang := True;
   FIconCircular := False;
@@ -3665,6 +3667,10 @@ begin
   FMaxHeight := 0;
   FOpacityHover := 70;
   FOpacityIdle := 40;
+  if Assigned(FEnabledLanguages) then
+    FEnabledLanguages.Clear;
+  if Assigned(FProxiedConfigs) then
+    FProxiedConfigs.Clear;
 
   FTimeout.Connection := CONNECT_TIMEOUT;
   FTimeout.Request := REQUEST_TIMEOUT;

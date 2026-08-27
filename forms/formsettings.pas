@@ -988,7 +988,8 @@ begin
   PanelFontPopup.Font.SetDefault;
   SetPanelFont(PanelFontPopup, PanelFontPopup.Font);
   FillGridHotkeys;
-
+  FillLanguages;
+  FillUserParameters;
   Apply;
 end;
 
@@ -1686,9 +1687,10 @@ var
   code: string;
   i: integer;
 begin
-  ClbEnabledLang.Items.Clear;
+  ClbEnabledLang.LockUpdate;
   List := TLanguages.GetLanguageCodeDisplayPairs(vtLanguage, True, False);
   try
+    ClbEnabledLang.Items.Clear;
     ClbEnabledLang.Items.Assign(List);
     for i := 0 to ClbEnabledLang.Items.Count - 1 do
     begin
@@ -1697,6 +1699,7 @@ begin
     end;
   finally
     List.Free;
+    ClbEnabledLang.UnlockUpdate;
   end;
 end;
 
