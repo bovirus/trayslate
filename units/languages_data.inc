@@ -5,7 +5,7 @@
   //-----------------------------------------------------------------------------------
 
 const
-  Languages_Data: array[0..278] of TAppValue = (
+  Languages_Data: array[0..281] of TAppValue = (
     // Languages
     (Code: 'auto'; DisplayName: 'Auto Detect'),
     (Code: 'empty'; DisplayName: 'Auto Detect'),
@@ -26,6 +26,9 @@ const
     (Code: 'en-NZ'; DisplayName: 'English (New Zealand)'),
     (Code: 'en-US'; DisplayName: 'English (American)'),
     (Code: 'en-ZA'; DisplayName: 'English (South African)'),
+    (Code: 'en-IN'; DisplayName: 'English (Indian)'),
+    (Code: 'en-IE'; DisplayName: 'English (Irish)'),
+    (Code: 'en-SG'; DisplayName: 'English (Singaporean)'),
     (Code: 'ar'; DisplayName: 'Arabic'),
     (Code: 'hy'; DisplayName: 'Armenian'),
     (Code: 'as'; DisplayName: 'Assamese'),

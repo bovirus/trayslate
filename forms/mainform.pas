@@ -3350,11 +3350,11 @@ begin
   begin
     if FTrans.Languages.MaxValueLength <= MAX_LANG_LENGTH then
     begin
-      FTrans.Languages.RestrictToNames(FEnabledLanguages.ToStringArray, SpecialCodes);
+      FTrans.Languages.RestrictToNames(FEnabledLanguages.ToStringArray, SpecialCodes, False);
       FTrans.LanguageCodes := TLanguages.GetCodeArrayFromStringList(FTrans.Languages);
     end;
     if FTrans.LanguagesTarget.MaxValueLength <= MAX_LANG_LENGTH then
-      FTrans.LanguagesTarget.RestrictToNames(FEnabledLanguages.ToStringArray, SpecialCodes);
+      FTrans.LanguagesTarget.RestrictToNames(FEnabledLanguages.ToStringArray, SpecialCodes, False);
   end;
 end;
 
@@ -5112,10 +5112,10 @@ begin
     Bmp.Canvas.Font.Style := [fsBold];
     Bmp.Canvas.Brush.Style := bsClear;
 
-    if (ALang1 = string.Empty) then
+    if (ALang2 = string.Empty) then
     begin
       // Draw text centered
-      Value := FormatValue(ALang2, iif(FIconCircular, DEF_MINI, DEF_SMALL));
+      Value := FormatValue(ALang1, iif(FIconCircular, DEF_MINI, DEF_SMALL));
       DrawText(Bmp.Canvas.Handle, PChar(Value), Length(Value), rect,
         DT_CENTER or DT_VCENTER or DT_SINGLELINE);
     end
