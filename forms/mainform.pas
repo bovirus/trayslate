@@ -3402,13 +3402,20 @@ begin
   if ProxiedConfigs.Count > 0 then
   begin
     if not ProxiedConfigs.Contains(FConfigFile) then
-      FTrans.ProxyEnabled := False
+      FTrans.AllowProxy := False
     else
-      FTrans.ProxyEnabled := FTrans.ServiceProxy;
+      FTrans.AllowProxy := FTrans.ServiceProxy;
+
+    // LangDetect Proxy
     if not ProxiedConfigs.Contains(FConfigLangDetect) then
-      FTransDetect.ProxyEnabled := False
+      FTransDetect.AllowProxy := False
     else
-      FTransDetect.ProxyEnabled := FTransDetect.ServiceProxy;
+      FTransDetect.AllowProxy := FTransDetect.ServiceProxy;
+  end
+  else
+  begin
+    FTrans.AllowProxy := FTrans.ServiceProxy;
+    FTransDetect.AllowProxy := FTransDetect.ServiceProxy;
   end;
 end;
 

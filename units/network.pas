@@ -310,14 +310,13 @@ begin
 
     // Timeouts
     HTTP.Timeout := IfThen(ATimeout.Request > 0, ATimeout.Request, REQUEST_TIMEOUT);
-    HTTP.Sock.InterPacketTimeout := True;
     HTTP.Sock.ConnectionTimeout := IfThen(ATimeout.Connection > 0, ATimeout.Connection, CONNECT_TIMEOUT);
     HTTP.Sock.HTTPTunnelTimeout := HTTP.Sock.ConnectionTimeout;
     HTTP.Sock.SocksTimeout := HTTP.Timeout;
     HTTP.Sock.NonblockSendTimeout := HTTP.Timeout;
-    HTTP.Sock.SetTimeout(HTTP.Timeout);
     HTTP.Sock.SetSendTimeout(HTTP.Timeout);
     HTTP.Sock.SetRecvTimeout(HTTP.Timeout);
+    HTTP.Sock.SetTimeout(HTTP.Timeout);
 
     if AllowProxy then
       ApplyProxy(HTTP, AProxy);
