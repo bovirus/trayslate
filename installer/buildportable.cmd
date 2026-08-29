@@ -28,7 +28,7 @@ echo.
     "$tmp='%~dp0temp_dist';" ^
     "$exe64='%~dp0..\\trayslate.exe';" ^
     "$exe32='%~dp0..\\trayslate32.exe';" ^
-    "$settings='%~dp0form_settings.json';" ^
+    "$settings='%~dp0portable';" ^
     "$license='%~dp0LICENSE.rtf';" ^
     "$dlls=@('%~dp0..\\libcrypto-1_1-x64.dll','%~dp0..\\libssl-1_1-x64.dll','%~dp0..\\libcrypto-1_1.dll','%~dp0..\\libssl-1_1.dll');" ^
     "$configDir='%~dp0..\\config';" ^
