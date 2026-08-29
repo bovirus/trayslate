@@ -609,7 +609,10 @@ begin
     formTrayslate.aFastAutoAddLangPairs.Checked := CheckAutoAddLangPairs.Checked
   else
   if Sender = CheckAutoSwap then
-    formTrayslate.aFastAutoSwap.Checked := CheckAutoSwap.Checked
+  begin
+    formTrayslate.aFastAutoSwap.Checked := CheckAutoSwap.Checked;
+    SetState;
+  end
   else
   if Sender = CheckBuiltInDetect then
     SetState
@@ -621,7 +624,10 @@ begin
   end
   else
   if Sender = CheckEnableMouseMode then
-    formTrayslate.aFastEnableMouseMode.Checked := CheckEnableMouseMode.Checked
+  begin
+    formTrayslate.aFastEnableMouseMode.Checked := CheckEnableMouseMode.Checked;
+    SetState;
+  end
   else
   if Sender = CheckHideControls then
     formTrayslate.aFastHideControls.Checked := CheckHideControls.Checked
@@ -630,10 +636,16 @@ begin
     formTrayslate.aFastMouseModeCtrl.Checked := CheckMouseModeCtrl.Checked
   else
   if Sender = CheckRealTime then
-    formTrayslate.aFastRealTime.Checked := CheckRealTime.Checked
+  begin
+    formTrayslate.aFastRealTime.Checked := CheckRealTime.Checked;
+    SetState;
+  end
   else
   if Sender = CheckSpellCheck then
-    formTrayslate.aFastSpellCheck.Checked := CheckSpellCheck.Checked
+  begin
+    formTrayslate.aFastSpellCheck.Checked := CheckSpellCheck.Checked;
+    SetState;
+  end
   else
   if Sender = CheckVerticalSplit then
     formTrayslate.aFastVerticalSplit.Checked := CheckVerticalSplit.Checked
@@ -1732,17 +1744,48 @@ end;
 
 procedure TformSettingsTrayslate.SetState;
 begin
-  ComboLangDetect.Enabled := not CheckBuiltInDetect.Checked;
+  // AutoSwap
+  CheckBuiltInDetect.Enabled := CheckAutoSwap.Checked;
+  LabelLangDetectConfig.Enabled := CheckAutoSwap.Checked;
+  ComboLangDetect.Enabled := CheckAutoSwap.Checked and not CheckBuiltInDetect.Checked; // LangDetect Config
+  CheckSmartSwap.Enabled := CheckAutoSwap.Checked;
+  CheckSmartHard.Enabled := CheckAutoSwap.Checked;
+  LabelPrimaryLang.Enabled := CheckAutoSwap.Checked;
+  ComboPrimaryLang.Enabled := CheckAutoSwap.Checked;
+  LabelSecondaryLang.Enabled := CheckAutoSwap.Checked;
+  ComboSecondaryLang.Enabled := CheckAutoSwap.Checked;
 
+  // RealTime
+  LabelRealTimeDelay.Enabled := CheckRealTime.Checked;
+  SpinRealTimeDelay.Enabled := LabelRealTimeDelay.Enabled;
+
+  // MouseMode
+  CheckMouseModeCtrl.Enabled := CheckEnableMouseMode.Checked;
+  LabelMouseMode.Enabled := CheckMouseModeCtrl.Enabled;
+  ComboMouseMode.Enabled := CheckMouseModeCtrl.Enabled;
+
+  // SpellCheck
+  CheckSpellCheckEmptySuggestions.Enabled := CheckSpellCheck.Checked;
+
+  // Grid HotKeys
   GridHotkeys.Enabled := CheckAllowHotkeys.Checked;
   GridHotkeys.Color := ifthen(GridHotkeys.Enabled, clWindow, clBtnFace);
 
-  ComboProxyType.Enabled := ComboProxyMode.ItemIndex > 1;
-  EditProxyHost.Enabled := ComboProxyMode.ItemIndex > 1;
-  SpinProxyPort.Enabled := ComboProxyMode.ItemIndex > 1;
+  // Proxy
+  LabelProxyType.Enabled := ComboProxyMode.ItemIndex > 1;
+  ComboProxyType.Enabled := LabelProxyType.Enabled;
+  LabelHost.Enabled := LabelProxyType.Enabled;
+  EditProxyHost.Enabled := LabelProxyType.Enabled;
+  LabelPort.Enabled := LabelProxyType.Enabled;
+  SpinProxyPort.Enabled := LabelProxyType.Enabled;
+  ClbProxiedConfigs.Enabled := ComboProxyMode.ItemIndex > 0;
+
+  // Proxy Auth
   CheckProxyAuthentication.Enabled := ComboProxyMode.ItemIndex > 1;
   EditProxyLogin.Enabled := CheckProxyAuthentication.Checked and (ComboProxyMode.ItemIndex > 1);
-  EditProxyPassword.Enabled := CheckProxyAuthentication.Checked and (ComboProxyMode.ItemIndex > 1);
+  EditProxyPassword.Enabled := EditProxyLogin.Enabled;
+  LabelLogin.Enabled := EditProxyLogin.Enabled;
+  LabelPassword.Enabled := EditProxyLogin.Enabled;
 end;
 
 procedure TformSettingsTrayslate.Apply;
