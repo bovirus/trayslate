@@ -1851,8 +1851,8 @@ end;
 procedure TformTrayslate.aNewTranslateExecute(Sender: TObject);
 begin
   CancelTranslate;
-  MemoSource.Clear;
-  MemoTarget.Clear;
+  MemoSource.ClearWithUndo;
+  MemoTarget.ClearWithUndo;
 end;
 
 procedure TformTrayslate.aTranslateExecute(Sender: TObject);
