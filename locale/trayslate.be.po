@@ -1495,6 +1495,14 @@ msgstr "Аўта-хаваць элементы"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Хаваць элементы акна, калі мыш не над ім"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "Выкарыстоўваць эмуляцыю Insert для капіявання і ўстаўкі"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "Выкарыстоўваць эмуляцыю клавіш Ctrl+Insert і Shift+Insert для капіявання і ўстаўкі тэксту з праграм; у адваротным выпадку выкарыстоўваць Ctrl+C і Ctrl+V."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

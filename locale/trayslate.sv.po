@@ -1495,6 +1495,14 @@ msgstr "Dölj kontroller automatiskt"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Dölj kontroller när musen inte är över popupfönstret"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "Använd Insert-emulering för kopiering och inklistring"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "Använd emulering av tangenterna Ctrl+Insert och Shift+Insert för att kopiera och klistra in text från program; använd annars Ctrl+C och Ctrl+V."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

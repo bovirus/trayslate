@@ -1495,6 +1495,14 @@ msgstr "Automaticky skrýt ovládací prvky"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Skrýt ovládací prvky, když není myš nad vyskakovacím oknem"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "Použít emulaci klávesy Insert pro kopírování a vkládání"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "Použít emulaci kláves Ctrl+Insert a Shift+Insert pro kopírování a vkládání textu z aplikací; jinak použít Ctrl+C a Ctrl+V."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

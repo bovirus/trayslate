@@ -1495,6 +1495,14 @@ msgstr "Bediening automatisch verbergen"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Verberg bediening wanneer de muis niet boven het popupvenster is"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "Insert-emulatie gebruiken voor kopiëren en plakken"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "Gebruik emulatie van de toetsen Ctrl+Insert en Shift+Insert voor het kopiëren en plakken van tekst uit toepassingen; gebruik anders Ctrl+C en Ctrl+V."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

@@ -1495,6 +1495,14 @@ msgstr "Ascunde automat controalele"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Ascunde controalele când mouse-ul nu este deasupra ferestrei popup"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "Utilizați emularea tastei Insert pentru copiere și lipire"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "Utilizați emularea tastelor Ctrl+Insert și Shift+Insert pentru copierea și lipirea textului din aplicații; în caz contrar, utilizați Ctrl+C și Ctrl+V."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

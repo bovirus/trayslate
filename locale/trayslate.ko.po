@@ -1495,6 +1495,14 @@ msgstr "컨트롤 자동 숨기기"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "마우스가 팝업 창 위에 없을 때 컨트롤 숨기기"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "복사 및 붙여넣기에 Insert 키 에뮬레이션 사용"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "애플리케이션에서 텍스트를 복사하고 붙여넣을 때 Ctrl+Insert 및 Shift+Insert 키 에뮬레이션을 사용합니다. 그렇지 않으면 Ctrl+C 및 Ctrl+V를 사용합니다."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

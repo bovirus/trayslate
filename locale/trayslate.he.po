@@ -1495,6 +1495,14 @@ msgstr "הסתרת פקדים אוטומטית"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "הסתר פקדים כאשר העכבר לא מעל החלון הקופץ"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "השתמש בהדמיית Insert להעתקה והדבקה"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "השתמש בהדמיית המקשים Ctrl+Insert ו-Shift+Insert להעתקה והדבקה של טקסט מיישומים; אחרת, השתמש ב-Ctrl+C וב-Ctrl+V."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

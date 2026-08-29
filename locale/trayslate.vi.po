@@ -1500,6 +1500,14 @@ msgstr "Tự động ẩn điều khiển"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Ẩn điều khiển cửa sổ khi chuột không ở trên cửa sổ bật lên"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "Sử dụng mô phỏng phím Insert để sao chép và dán"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "Sử dụng mô phỏng các phím Ctrl+Insert và Shift+Insert để sao chép và dán văn bản từ các ứng dụng; nếu không, sử dụng Ctrl+C và Ctrl+V."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

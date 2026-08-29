@@ -53,6 +53,7 @@ type
     BtnOk: TButton;
     BtnResetPopup: TButton;
     CheckAllowHotkeys: TCheckBox;
+    CheckInsertKey: TCheckBox;
     CheckAutoHeight: TCheckBox;
     CheckBuiltInDetect: TCheckBox;
     CheckCircularIcon: TCheckBox;
@@ -225,6 +226,7 @@ type
     FOriginalEnableMouseMode: boolean;
     FOriginalMouseModeCtrl: boolean;
     FOriginalMouseMode: TMouseMode;
+    FOriginalInsertKey: boolean;
     FOriginalSpellCheck: boolean;
     FOriginalSpellCheckEmptySuggestions: boolean;
     FOriginalVerticalSplit: boolean;
@@ -1767,7 +1769,8 @@ begin
   // SpellCheck
   CheckSpellCheckEmptySuggestions.Enabled := CheckSpellCheck.Checked;
 
-  // Grid HotKeys
+  // Global HotKeys
+  CheckInsertKey.Enabled := CheckAllowHotkeys.Checked;
   GridHotkeys.Enabled := CheckAllowHotkeys.Checked;
   GridHotkeys.Color := ifthen(GridHotkeys.Enabled, clWindow, clBtnFace);
 
@@ -1813,6 +1816,7 @@ begin
     formTrayslate.EnableMouseMode := CheckEnableMouseMode.Checked;
     formTrayslate.MouseModeCtrl := CheckMouseModeCtrl.Checked;
     formTrayslate.MouseMode := TMouseMode(ComboMouseMode.ItemIndex);
+    formTrayslate.InsertKey := CheckInsertKey.Checked;
     formTrayslate.SpellCheck := CheckSpellCheck.Checked;
     formTrayslate.SpellCheckEmptySuggestions := CheckSpellCheckEmptySuggestions.Checked;
     formTrayslate.VerticalSplit := CheckVerticalSplit.Checked;
@@ -1874,6 +1878,7 @@ begin
     formTrayslate.HotKeyTransFromControl := FHotKeyTransFromControl;
     formTrayslate.HotKeyTransControl := FHotKeyTransControl;
     formTrayslate.HotKeyTransControlPopup := FHotKeyTransControlPopup;
+
     // HotKeys Fast Settings
     formTrayslate.HotKeyFastAllowHotKeys := FHotKeyFastAllowHotKeys;
     formTrayslate.HotKeyFastEnableMouseMode := FHotKeyFastEnableMouseMode;
@@ -1886,6 +1891,7 @@ begin
     formTrayslate.HotKeyFastAutoHeight := FHotKeyFastAutoHeight;
     formTrayslate.HotKeyFastHideControls := FHotKeyFastHideControls;
     formTrayslate.HotKeyFastSpellCheck := FHotKeyFastSpellCheck;
+
     // HotKeys Recent Pairs
     formTrayslate.HotKeyRecent1 := FHotKeyRecent1;
     formTrayslate.HotKeyRecent2 := FHotKeyRecent2;
@@ -2028,6 +2034,7 @@ begin
   FOriginalEnableMouseMode := formTrayslate.EnableMouseMode;
   FOriginalMouseModeCtrl := formTrayslate.MouseModeCtrl;
   FOriginalMouseMode := formTrayslate.MouseMode;
+  FOriginalInsertKey := formTrayslate.InsertKey;
   FOriginalSpellCheck := formTrayslate.SpellCheck;
   FOriginalSpellCheckEmptySuggestions := formTrayslate.SpellCheckEmptySuggestions;
   FOriginalVerticalSplit := formTrayslate.VerticalSplit;
@@ -2071,6 +2078,7 @@ begin
   CheckEnableMouseMode.Checked := FOriginalEnableMouseMode;
   CheckMouseModeCtrl.Checked := FOriginalMouseModeCtrl;
   ComboMouseMode.ItemIndex := Ord(FOriginalMouseMode);
+  CheckInsertKey.Checked := FOriginalInsertKey;
   CheckSpellCheck.Checked := FOriginalSpellCheck;
   CheckSpellCheckEmptySuggestions.Checked := FOriginalSpellCheckEmptySuggestions;
   CheckVerticalSplit.Checked := FOriginalVerticalSplit;

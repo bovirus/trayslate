@@ -1495,6 +1495,14 @@ msgstr "إخفاء تلقائي للأدوات"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "إخفاء عناصر التحكم عند عدم مرور الفأرة فوق النافذة"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "استخدم محاكاة مفتاح Insert للنسخ واللصق"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "استخدم محاكاة مفتاحي Ctrl+Insert وShift+Insert لنسخ النص ولصقه من التطبيقات؛ وإلا فاستخدم Ctrl+C وCtrl+V."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

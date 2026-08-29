@@ -1495,6 +1495,14 @@ msgstr "Αυτόματη απόκρυψη χειριστηρίων"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Απόκρυψη χειριστηρίων όταν το ποντίκι δεν είναι πάνω στο αναδυόμενο παράθυρο"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "Χρήση εξομοίωσης του Insert για αντιγραφή και επικόλληση"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "Χρησιμοποιήστε την εξομοίωση των πλήκτρων Ctrl+Insert και Shift+Insert για την αντιγραφή και επικόλληση κειμένου από εφαρμογές· διαφορετικά, χρησιμοποιήστε Ctrl+C και Ctrl+V."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

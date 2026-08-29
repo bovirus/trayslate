@@ -1495,6 +1495,14 @@ msgstr "Piilota ohjaimet automaattisesti"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "Piilota ikkunan ohjaimet, kun hiiri ei ole ponnahdusikkunan päällä"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "Käytä Insert-näppäimen emulointia kopiointiin ja liittämiseen"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "Käytä Ctrl+Insert- ja Shift+Insert-näppäinten emulointia tekstin kopioimiseen ja liittämiseen sovelluksista; muussa tapauksessa käytä Ctrl+C- ja Ctrl+V-näppäinyhdistelmiä."
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"

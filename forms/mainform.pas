@@ -419,6 +419,8 @@ type
     FHint: TOneShotHint;
     FFontPopup: TFont;
     FUnapplyCtrl: boolean;
+    FUnapplyShift: boolean;
+    FUnapplyInsert: boolean;
     FUnapplyC: boolean;
     FUnapplyV: boolean;
     FLastKeyTime: DWORD;
@@ -464,6 +466,7 @@ type
     FPrimaryLang: string;
     FSecondaryLang: string;
     FMouseMode: TMouseMode;
+    FInsertKey: boolean;
     FStayOnTop: boolean;
     FAutoHeightAfter: boolean;
     FMaxHeight: integer;
@@ -577,8 +580,8 @@ type
     function CreateTrayIconLang(const ALang1: string; const ALang2: string = string.Empty): Graphics.TBitmap;
     function CreateTrayIconProgress(AAngle: integer; ABackgroundColor: TColor = clNone; APenColor: TColor = clWhite): Graphics.TBitmap;
 
-    procedure GlobalCtrlC;
-    procedure GlobalCtrlV;
+    procedure GlobalCopy(MouseMode: boolean = False);
+    procedure GlobalPaste;
   protected
     {$IFDEF WINDOWS}
     procedure WMActivate(var Message: TLMActivate); message LM_ACTIVATE;
@@ -710,6 +713,7 @@ type
     property SecondaryLang: string read FSecondaryLang write FSecondaryLang;
     property EnableMouseMode: boolean read FEnableMouseMode write SetEnableMouseMode;
     property MouseModeCtrl: boolean read FMouseModeCtrl write SetMouseModeCtrl;
+    property InsertKey: boolean read FInsertKey write FInsertKey;
     property MouseMode: TMouseMode read FMouseMode write FMouseMode;
     property SpellCheck: boolean read FSpellCheck write SetSpellCheck;
     property SpellCheckEmptySuggestions: boolean read FSpellCheckEmptySuggestions write FSpellCheckEmptySuggestions;
@@ -834,6 +838,8 @@ begin
   FCancelled := False;
   FPopupOpen := False;
   FUnapplyCtrl := False;
+  FUnapplyShift := False;
+  FUnapplyInsert := False;
   FUnapplyC := False;
   FUnapplyV := False;
   FLastKeyTime := 0;
@@ -2736,6 +2742,16 @@ begin
     KeyInput.Unapply([ssCtrl]);
     FUnapplyCtrl := False;
   end;
+  if FUnapplyShift then
+  begin
+    KeyInput.Unapply([ssShift]);
+    FUnapplyShift := False;
+  end;
+  if FUnapplyInsert then
+  begin
+    KeyInput.Up(VK_INSERT);
+    FUnapplyInsert := False;
+  end;
   if FUnapplyC then
   begin
     KeyInput.Up(Ord('C'));
@@ -3672,6 +3688,7 @@ begin
   FEnableMouseMode := False;
   FMouseModeCtrl := False;
   FMouseMode := mmShowTranslateButton;
+  FInsertKey := True;
   FVerticalSplit := False;
   FSpellCheck := True;
   FSpellCheckEmptySuggestions := True;
@@ -5657,29 +5674,40 @@ end;
 
 { Key Press Emulate Methods }
 
-procedure TformTrayslate.GlobalCtrlC;
+procedure TformTrayslate.GlobalCopy(MouseMode: boolean = False);
 var
   ctrl, shift, alt: boolean;
+  Delay: integer = 10;
 begin
+  if MouseMode and (FPrevMouseDown.WindowClass = wckOutlookMain) then
+    Delay := 20;
+
   TimerUnapply.Enabled := False;
   ctrl := GetAsyncKeyState(VK_CONTROL) < 0;
   shift := GetAsyncKeyState(VK_SHIFT) < 0;
   alt := GetAsyncKeyState(VK_MENU) < 0;
 
-  if not ctrl then
-    KeyInput.Apply([ssCtrl]);
-  if shift then
-    KeyInput.Unapply([ssShift]);
   if alt then
     KeyInput.Unapply([ssAlt]);
+  if shift then
+    KeyInput.Unapply([ssShift]);
+  if not ctrl then
+    KeyInput.Apply([ssCtrl]);
 
-  KeyInput.Down(Ord('C'));
+  if FInsertKey then
+    KeyInput.Down(VK_INSERT)
+  else
+    KeyInput.Down(Ord('C'));
+
   Clipboard.AddExcludeFlag;
   TOS.SleepLoop(1, 1);
   Clipboard.AddExcludeFlag;
-  TOS.SleepLoop(9, 1);
+  TOS.SleepLoop(Delay - 1, 1);
 
-  FUnapplyC := True;
+  if (FInsertKey) then
+    FUnapplyInsert := True
+  else
+    FUnapplyC := True;
   if not ctrl then
     FUnapplyCtrl := True;
   TimerUnapply.Enabled := True;
@@ -5690,7 +5718,7 @@ begin
   //  KeyInput.Apply([ssAlt]);
 end;
 
-procedure TformTrayslate.GlobalCtrlV;
+procedure TformTrayslate.GlobalPaste;
 var
   ctrl, shift, alt: boolean;
 begin
@@ -5699,19 +5727,42 @@ begin
   shift := GetAsyncKeyState(VK_SHIFT) < 0;
   alt := GetAsyncKeyState(VK_MENU) < 0;
 
-  if not ctrl then
-    KeyInput.Apply([ssCtrl]);
-  if shift then
-    KeyInput.Unapply([ssShift]);
   if alt then
     KeyInput.Unapply([ssAlt]);
 
-  KeyInput.Down(Ord('V'));
+  if FInsertKey then
+  begin
+    if ctrl then
+      KeyInput.Unapply([ssCtrl]);
+    if not shift then
+      KeyInput.Apply([ssShift]);
+
+    KeyInput.Down(VK_INSERT);
+  end
+  else
+  begin
+    if not ctrl then
+      KeyInput.Apply([ssCtrl]);
+    if shift then
+      KeyInput.Unapply([ssShift]);
+
+    KeyInput.Down(Ord('V'));
+  end;
+
   TOS.SleepLoop(10, 1);
 
-  FUnapplyV := True;
-  if not ctrl then
-    FUnapplyCtrl := True;
+  if FInsertKey then
+  begin
+    FUnapplyInsert := True;
+    if not shift then
+      FUnapplyShift := True;
+  end
+  else
+  begin
+    FUnapplyV := True;
+    if not ctrl then
+      FUnapplyCtrl := True;
+  end;
   TimerUnapply.Enabled := True;
 
   //if shift then
@@ -5755,7 +5806,7 @@ begin
     Clipboard.AddExcludeFlag;
 
     // Copy selection from active window (Ctrl+C)
-    GlobalCtrlC;
+    GlobalCopy;
     SelectedText := Clipboard.AsText;
   finally
     // Restore original clipboard
@@ -5821,7 +5872,7 @@ begin
       Clipboard.AsText := string.Empty;
       Clipboard.AddExcludeFlag;
       // Copy selection from active window (Ctrl+C)
-      GlobalCtrlC;
+      GlobalCopy;
       SelectedText := Clipboard.AsText;
     finally
       // Restore original clipboard
@@ -5842,7 +5893,7 @@ begin
           Clipboard.AddExcludeFlag;
 
           // Paste clipboard to active window (Ctrl+V)
-          GlobalCtrlV;
+          GlobalPaste;
         finally
           // Restore original clipboard
           RestoreClipboard
@@ -5895,7 +5946,7 @@ begin
       TimerTranslate.Enabled := False;
 
     // Copy selection from active window (Ctrl+C)
-    GlobalCtrlC;
+    GlobalCopy;
     SelectedText := Clipboard.AsText;
   finally
     // Restore original clipboard
@@ -5948,7 +5999,7 @@ begin
       Clipboard.AsText := string.Empty;
       Clipboard.AddExcludeFlag;
       // Copy selection from active window (Ctrl+C)
-      GlobalCtrlC;
+      GlobalCopy(True);
       SelectedText := Clipboard.AsText;
     finally
       Ticks := TOS.GetTickCountXp;

@@ -140,6 +140,7 @@ begin
     JSONObj.Add('EnableMouseMode', Form.EnableMouseMode);
     JSONObj.Add('MouseModeCtrl', Form.MouseModeCtrl);
     JSONObj.Add('MouseMode', Ord(Form.MouseMode));
+    JSONObj.Add('InsertKey', Form.InsertKey);
     JSONObj.Add('SpellCheck', Form.SpellCheck);
     JSONObj.Add('SpellCheckEmptySuggestions', Form.SpellCheckEmptySuggestions);
     JSONObj.Add('VerticalSplit', Form.VerticalSplit);
@@ -518,6 +519,9 @@ begin
 
         if (JSONObj.FindPath('MouseMode') <> nil) then
           Form.MouseMode := TMouseMode(JSONObj.FindPath('MouseMode').AsInteger);
+
+        if (JSONObj.FindPath('InsertKey') <> nil) then
+          Form.InsertKey := JSONObj.FindPath('InsertKey').AsBoolean;
 
         if (JSONObj.FindPath('SpellCheck') <> nil) then
           Form.FSpellCheck := JSONObj.FindPath('SpellCheck').AsBoolean;

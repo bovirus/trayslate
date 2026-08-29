@@ -22,11 +22,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
     Top = 5
     Width = 614
     TabStop = False
-    ActivePage = PageGeneral
+    ActivePage = PageHotkeys
     Align = alClient
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
-    TabIndex = 0
+    TabIndex = 3
     TabOrder = 1
     object PageGeneral: TTabSheet
       Caption = 'General'
@@ -894,12 +894,12 @@ object formSettingsTrayslate: TformSettingsTrayslate
         Height = 567
         Top = 0
         Width = 606
-        HorzScrollBar.Increment = 16
-        HorzScrollBar.Page = 166
+        HorzScrollBar.Increment = 25
+        HorzScrollBar.Page = 259
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
-        VertScrollBar.Increment = 12
-        VertScrollBar.Page = 120
+        VertScrollBar.Increment = 15
+        VertScrollBar.Page = 155
         VertScrollBar.Smooth = True
         VertScrollBar.Tracking = True
         Align = alClient
@@ -920,11 +920,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
           TabOrder = 0
           object GridHotkeys: TStringGrid
             Left = 5
-            Height = 497
-            Top = 35
+            Height = 462
+            Top = 70
             Width = 582
             Align = alClient
-            BorderSpacing.Top = 30
+            BorderSpacing.Top = 65
             BorderSpacing.Around = 5
             BorderStyle = bsNone
             ColCount = 4
@@ -979,6 +979,16 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Caption = 'Restore Default Hotkeys'
             TabOrder = 2
             OnClick = BtnDefaultHotkeysClick
+          end
+          object CheckInsertKey: TCheckBox
+            Left = 16
+            Height = 19
+            Hint = 'Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V.'
+            Top = 40
+            Width = 229
+            Caption = 'Use Insert for Copy and Paste Emulation'
+            TabOrder = 3
+            OnChange = SettingChange
           end
         end
       end
@@ -1297,7 +1307,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           )
           ColWidths = (
             200
-            382
+            365
           )
         end
       end

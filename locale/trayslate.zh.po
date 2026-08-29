@@ -1495,6 +1495,14 @@ msgstr "自动隐藏控件"
 msgid "Hide window controls when the mouse is not over the popup window"
 msgstr "当鼠标不在弹出窗口上时隐藏控件"
 
+#: tformsettingstrayslate.checkinsertkey.caption
+msgid "Use Insert for Copy and Paste Emulation"
+msgstr "使用 Insert 模拟进行复制和粘贴"
+
+#: tformsettingstrayslate.checkinsertkey.hint
+msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
+msgstr "使用 Ctrl+Insert 和 Shift+Insert 键模拟从应用程序复制和粘贴文本；否则使用 Ctrl+C 和 Ctrl+V。"
+
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
 msgid "Only When Ctrl Is Pressed"
