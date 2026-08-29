@@ -36,7 +36,7 @@ type
 
 procedure SaveFormSettings(Form: TformTrayslate);
 
-function LoadFormSettings(Form: TformTrayslate): boolean;
+function LoadFormSettings(Form: TformTrayslate; out FirstRun: boolean): boolean;
 
 implementation
 
@@ -294,7 +294,7 @@ begin
   end;
 end;
 
-function LoadFormSettings(Form: TformTrayslate): boolean;
+function LoadFormSettings(Form: TformTrayslate; out FirstRun: boolean): boolean;
 var
   JSONData: TJSONData;
   JSONObj: TJSONObject;
@@ -310,11 +310,16 @@ var
   DPI, i: integer;
 begin
   Result := False;
+  FirstRun := False;
   try
     DPI := Screen.PixelsPerInch;
     FileContent := string.Empty;
     FileName := TOS.GetSettingsDirectory(APP_NAME, 'form_settings.json', 'form_settings.json'); // Get the settings file name
-    if not FileExists(FileName) then Exit(True); // Exit if the file does not exist
+    if not FileExists(FileName) then
+    begin
+      FirstRun := True;
+      Exit(True); // Exit if the file does not exist
+    end;
 
     // Read from file
     FileStream := TFileStream.Create(FileName, fmOpenRead);

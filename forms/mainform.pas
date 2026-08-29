@@ -447,6 +447,7 @@ type
     // Settings
     FFormSettingsLoaded: boolean;
     FPortable: boolean;
+    FFirstRun: boolean;
     FConfigFile: string;
     FConfigFiles: TStringList;
     FConfigTitles: TStringList;
@@ -884,7 +885,7 @@ begin
   FEnabledLanguages := TStringList.Create;
 
   // Load form settings
-  FFormSettingsLoaded := LoadFormSettings(Self);
+  FFormSettingsLoaded := LoadFormSettings(Self, FFirstRun);
 
   // Invert color if mode chanded
   if FLastDarkMode <> TDarkUtils.IsDarkMode then
@@ -994,6 +995,7 @@ begin
     TLangDetect.LoadProfiles;
 
   FTopMost := False;
+  FFirstRun := False;
 end;
 
 procedure TformTrayslate.FormDestroy(Sender: TObject);
@@ -3563,20 +3565,23 @@ begin
         Trans.LangSource := LangSource
       else
       begin
-        if (FLanguages.FindIndex('(' + PrimaryLang + ')', False) >= 0) then
+        // Secondary language
+        if (not FFirstRun) and (FLanguages.FindIndex('(' + SecondaryLang + ')', False) >= 0) then
         begin
-          FTrans.LangSource := PrimaryLang; // Default system language
-          FLangSource := PrimaryLang;
-        end
-        else
-        if (FLanguages.FindIndex('(' + SecondaryLang + ')', False) >= 0) then
-        begin
-          FTrans.LangSource := SecondaryLang; // Default system language
+          FTrans.LangSource := SecondaryLang;
           FLangSource := SecondaryLang;
         end
         else
+        // Primary language
+        if (not FFirstRun) and (FLanguages.FindIndex('(' + PrimaryLang + ')', False) >= 0) then
         begin
-          ComboSource.ItemIndex := 0; // First item as default
+          FTrans.LangSource := PrimaryLang;
+          FLangSource := PrimaryLang;
+        end
+        else
+          // First item as default
+        begin
+          ComboSource.ItemIndex := 0;
           ChangeSourceLang(ComboSource.Text);
         end;
       end;
@@ -3585,18 +3590,20 @@ begin
         Trans.LangTarget := LangTarget
       else
       begin
-        if (((FLanguagesTarget.Count > 0) and (FLanguagesTarget.FindIndex('(' + SecondaryLang + ')', False) >= 0)) or
-          ((FLanguagesTarget.Count = 0) and (FLanguages.FindIndex('(' + SecondaryLang + ')', False) >= 0))) then
-        begin
-          FTrans.LangTarget := SecondaryLang; // Secondary language
-          FLangTarget := SecondaryLang;
-        end
-        else
+        // Primary language
         if (((FLanguagesTarget.Count > 0) and (FLanguagesTarget.FindIndex('(' + PrimaryLang + ')', False) >= 0)) or
           ((FLanguagesTarget.Count = 0) and (FLanguages.FindIndex('(' + PrimaryLang + ')', False) >= 0))) then
         begin
-          FTrans.LangTarget := PrimaryLang; // Secondary language
+          FTrans.LangTarget := PrimaryLang;
           FLangTarget := PrimaryLang;
+        end
+        else
+        // Secondary language
+        if (((FLanguagesTarget.Count > 0) and (FLanguagesTarget.FindIndex('(' + SecondaryLang + ')', False) >= 0)) or
+          ((FLanguagesTarget.Count = 0) and (FLanguages.FindIndex('(' + SecondaryLang + ')', False) >= 0))) then
+        begin
+          FTrans.LangTarget := SecondaryLang;
+          FLangTarget := SecondaryLang;
         end
         else
         // if system language in lists
