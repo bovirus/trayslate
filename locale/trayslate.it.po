@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Trayslate - Italian - 15.08.2026\n"
+"Project-Id-Version: Trayslate - Italian - 30.08.2026\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: bovirus <bovirus@gmail.com>\n"
@@ -1505,11 +1505,11 @@ msgstr "Quando il mouse non si trova sulla finestra popup nascondi controlli fin
 
 #: tformsettingstrayslate.checkinsertkey.caption
 msgid "Use Insert for Copy and Paste Emulation"
-msgstr "Usa l'emulazione di Insert per copiare e incollare"
+msgstr "Per emulazione copia/incolla usa Ins"
 
 #: tformsettingstrayslate.checkinsertkey.hint
 msgid "Use Ctrl+Insert and Shift+Insert key emulation for copying and pasting text from applications; otherwise, use Ctrl+C and Ctrl+V."
-msgstr "Usa l'emulazione dei tasti Ctrl+Insert e Shift+Insert per copiare e incollare testo dalle applicazioni; altrimenti, usa Ctrl+C e Ctrl+V."
+msgstr "Per copiare e incollare testo dalle applicazioni usa l'emulazione dei tasti 'Ctrl+Insert' e 'Maiusc+Ins'; altrimenti, usa 'Ctrl+C' e 'Ctrl+V'."
 
 #: tformsettingstrayslate.checkmousemodectrl.caption
 msgctxt "tformsettingstrayslate.checkmousemodectrl.caption"
@@ -1623,7 +1623,7 @@ msgstr "Colore cornice intorno all'icona quando la modalità mouse è abilitata"
 
 #: tformsettingstrayslate.comboapplang.hint
 msgid "Application interface language"
-msgstr "Lingua dell'interfaccia dell'applicazione"
+msgstr "Lingua interfaccia applicazione"
 
 #: tformsettingstrayslate.comboiconfontname.hint
 msgid "Name of the font used for the tray icon"
@@ -1683,7 +1683,7 @@ msgstr "Tasto rapido"
 
 #: tformsettingstrayslate.groupapplang.caption
 msgid "Application Language"
-msgstr "Lingua dell'applicazione"
+msgstr "Lingua applicazione"
 
 #: tformsettingstrayslate.groupautostart.caption
 msgid "Autostart"
@@ -1695,7 +1695,7 @@ msgstr "Scambio automatico lingue"
 
 #: tformsettingstrayslate.groupenabledlang.caption
 msgid "Enabled Languages (Default: All)"
-msgstr "Lingue abilitate (predefinito: tutte)"
+msgstr "Lingue abilitate (predefinite: tutte)"
 
 #: tformsettingstrayslate.grouplangpairs.caption
 msgctxt "tformsettingstrayslate.grouplangpairs.caption"
@@ -1751,7 +1751,7 @@ msgstr "Parametri utente"
 
 #: tformsettingstrayslate.labelapplang.caption
 msgid "Interface Language"
-msgstr "Lingua dell'interfaccia"
+msgstr "Lingua interfaccia"
 
 #: tformsettingstrayslate.labelconnecttimeout.caption
 msgid "Connection, sec"
