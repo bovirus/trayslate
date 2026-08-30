@@ -137,6 +137,7 @@ Source: "..\libssl-1_1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode; Fl
 #endif
 ; License
 Source: "..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\THIRD_PARTIES"; DestDir: "{app}"; Flags: ignoreversion
 ; Config files in a subfolder
 Source: "..\config\google-get-apis.ini"; DestDir: "{app}\config"; Flags: ignoreversion
 Source: "..\config\google-get-clients5.ini"; DestDir: "{app}\config"; Flags: ignoreversion

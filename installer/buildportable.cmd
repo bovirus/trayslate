@@ -29,14 +29,15 @@ echo.
     "$exe64='%~dp0..\\trayslate.exe';" ^
     "$exe32='%~dp0..\\trayslate32.exe';" ^
     "$settings='%~dp0portable';" ^
-    "$license='%~dp0LICENSE.rtf';" ^
+    "$license='%~dp0\\LICENSE.rtf';" ^
+    "$thirdparties='%~dp0..\\THIRD_PARTIES';" ^
     "$dlls=@('%~dp0..\\libcrypto-1_1-x64.dll','%~dp0..\\libssl-1_1-x64.dll','%~dp0..\\libcrypto-1_1.dll','%~dp0..\\libssl-1_1.dll');" ^
     "$configDir='%~dp0..\\config';" ^
     "$destZip='%~dp0trayslate-%VERSION%-x86-x64-portable.zip';" ^
     "if ((Test-Path $exe64) -and (Test-Path $exe32) -and (Test-Path $configDir)) {" ^
     "  if (Test-Path $tmp) { Remove-Item -Recurse -Force $tmp };" ^
     "  New-Item -ItemType Directory -Path \"$tmp/config\" -Force | Out-Null;" ^
-    "  Copy-Item $exe64, $exe32, $settings, $license -Destination $tmp;" ^
+    "  Copy-Item $exe64, $exe32, $settings, $license, $thirdparties -Destination $tmp;" ^
     "  Copy-Item $dlls -Destination $tmp;" ^
     "  Copy-Item \"$configDir\\*.ini\" -Destination \"$tmp/config\";" ^
     "  Start-Sleep -Seconds 2;" ^

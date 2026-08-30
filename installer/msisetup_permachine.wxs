@@ -76,6 +76,7 @@
 					<Component Id="TrayslateFiles" DiskId="1" Guid="C3D9A1F5-7E2B-4A8C-9F1D-6B0E3C4D7A5F" Win64="$(var.Win64Value)">
 						<File Id="$(var.ExeNameUpper)" Name="$(var.ExeName)" Source="..\$(var.ExeName)" />
 						<File Id="LICENSE" Name="LICENSE" Source="..\LICENSE" />
+						<File Id="THIRD_PARTIES" Name="THIRD_PARTIES" Source="..\THIRD_PARTIES" />
 						<File Id="LIBCRYPTO" Name="$(var.LibCryptoName)" Source="$(var.OpenSslDir)\$(var.LibCryptoName)" />
 						<File Id="LIBSSL" Name="$(var.LibSslName)" Source="$(var.OpenSslDir)\$(var.LibSslName)" />
 						<RegistryValue Root="HKLM" Key="Software\Alexander Tverskoy\Trayslate" Name="InstallPath" Type="string" Value="[INSTALLDIR]" KeyPath="yes" />
