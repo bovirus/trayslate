@@ -480,12 +480,28 @@ msgid "Popup Auto Height"
 msgstr "Автовисота спливного вікна"
 
 #: formsettings.rfastautoheight_default
-msgid "Shift+F9"
-msgstr "Shift+F9"
+msgctxt "formsettings.rfastautoheight_default"
+msgid "Shift+F10"
+msgstr "Shift+F10"
 
 #: formsettings.rfastautoheight_hint
 msgid "Adjust popup height to content automatically"
 msgstr "Автоматично налаштовувати висоту спливного вікна відповідно до вмісту"
+
+#: formsettings.rfastautohidepopup
+msgctxt "formsettings.rfastautohidepopup"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr "Автоматично приховувати спливаюче вікно при кліку за його межами"
+
+#: formsettings.rfastautohidepopup_default
+msgctxt "formsettings.rfastautohidepopup_default"
+msgid "Shift+F9"
+msgstr "Shift+F9"
+
+#: formsettings.rfastautohidepopup_hint
+msgctxt "formsettings.rfastautohidepopup_hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr "Автоматично приховувати спливаюче вікно, коли ви клацаєте в будь-якому місці за його межами"
 
 #: formsettings.rfastautoswap
 msgctxt "formsettings.rfastautoswap"
@@ -512,19 +528,6 @@ msgstr "Shift+F2"
 #: formsettings.rfastenablemousemode_hint
 msgid "Toggle mouse translation mode"
 msgstr "Перемикати режим перекладу мишею"
-
-#: formsettings.rfasthidecontrols
-msgctxt "formsettings.rfasthidecontrols"
-msgid "Auto-Hide Popup Controls"
-msgstr "Автоматично приховувати елементи спливаючого вікна"
-
-#: formsettings.rfasthidecontrols_default
-msgid "Shift+F10"
-msgstr "Shift+F10"
-
-#: formsettings.rfasthidecontrols_hint
-msgid "Hide popup controls when not hovering"
-msgstr "Приховувати елементи керування спливного вікна, коли курсор не наведений на нього"
 
 #: formsettings.rfastmousemodectrl
 msgctxt "formsettings.rfastmousemodectrl"
@@ -1444,6 +1447,16 @@ msgstr "Автоматична висота"
 msgid "Popup window height calculated based on text height"
 msgstr "Висота спливаючого вікна розраховується на основі висоти тексту"
 
+#: tformsettingstrayslate.checkautohidepopup.caption
+msgctxt "tformsettingstrayslate.checkautohidepopup.caption"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr "Автоматично приховувати спливаюче вікно при кліку за його межами"
+
+#: tformsettingstrayslate.checkautohidepopup.hint
+msgctxt "tformsettingstrayslate.checkautohidepopup.hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr "Автоматично приховувати спливаюче вікно, коли ви клацаєте в будь-якому місці за його межами"
+
 #: tformsettingstrayslate.checkautostart.caption
 msgid "Launch At System Startup"
 msgstr "Запуск при старті системи"
@@ -1988,6 +2001,11 @@ msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
 msgstr "Автовисота спливного вікна"
 
+#: tformtrayslate.afastautohidepopup.caption
+msgctxt "tformtrayslate.afastautohidepopup.caption"
+msgid "Auto-Hide Popup"
+msgstr "Автоматично приховувати спливаюче вікно"
+
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
@@ -1997,11 +2015,6 @@ msgstr "Автоматично міняти мовну пару"
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr "Увімкнути режим миші"
-
-#: tformtrayslate.afasthidecontrols.caption
-msgctxt "tformtrayslate.afasthidecontrols.caption"
-msgid "Auto-Hide Popup Controls"
-msgstr "Автоматично приховувати елементи спливаючого вікна"
 
 #: tformtrayslate.afastmousemodectrl.caption
 msgctxt "tformtrayslate.afastmousemodectrl.caption"

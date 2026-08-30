@@ -22,18 +22,6 @@ uses
   Graphics,
   mainform;
 
-type
-  PConfigData = ^TConfigData;
-
-  TConfigData = record
-    Order: integer;
-    PathOnly: string;
-    Name: string;
-    Color: TColor;
-    Visible: boolean;
-    ImageIndex: integer;
-  end;
-
 procedure SaveFormSettings(Form: TformTrayslate);
 
 function LoadFormSettings(Form: TformTrayslate; out FirstRun: boolean): boolean;
@@ -147,6 +135,7 @@ begin
     JSONObj.Add('AutoCopy', Form.AutoCopy);
     JSONObj.Add('StayOnTop', Form.StayOnTop);
     JSONObj.Add('HideControls', Form.HideControls);
+    JSONObj.Add('AutoHidePopup', Form.AutoHidePopup);
     JSONObj.Add('AutoHeight', Form.AutoHeight);
     JSONObj.Add('MaxHeight', Form.MaxHeight);
     JSONObj.Add('OpacityHover', Form.OpacityHover);
@@ -236,8 +225,8 @@ begin
     JSONObj.Add('HotKeyFastAutoHeight_Modifiers', Form.HotKeyFastAutoHeight.Modifiers);
     JSONObj.Add('HotKeyFastAutoHeight_Key', Form.HotKeyFastAutoHeight.Key);
 
-    JSONObj.Add('HotKeyFastHideControls_Modifiers', Form.HotKeyFastHideControls.Modifiers);
-    JSONObj.Add('HotKeyFastHideControls_Key', Form.HotKeyFastHideControls.Key);
+    JSONObj.Add('HotKeyFastHideControls_Modifiers', Form.HotKeyFastAutoHidePopup.Modifiers);
+    JSONObj.Add('HotKeyFastHideControls_Key', Form.HotKeyFastAutoHidePopup.Key);
 
     // Save HotKeys Recent Pairs
     JSONObj.Add('HotKeyRecent1_Modifiers', Form.HotKeyRecent1.Modifiers);
@@ -539,7 +528,10 @@ begin
           Form.StayOnTop := JSONObj.FindPath('StayOnTop').AsBoolean;
 
         if (JSONObj.FindPath('HideControls') <> nil) then
-          Form.FHideControls := JSONObj.FindPath('HideControls').AsBoolean;
+          Form.HideControls := JSONObj.FindPath('HideControls').AsBoolean;
+
+        if (JSONObj.FindPath('AutoHidePopup') <> nil) then
+          Form.FAutoHidePopup := JSONObj.FindPath('AutoHidePopup').AsBoolean;
 
         if (JSONObj.FindPath('AutoHeight') <> nil) then
           Form.AutoHeight := JSONObj.FindPath('AutoHeight').AsBoolean;
@@ -771,12 +763,12 @@ begin
         Form.HotKeyFastAutoHeight := HK;
 
         // HotKeyFastHideControls
-        HK := Form.HotKeyFastHideControls;
+        HK := Form.HotKeyFastAutoHidePopup;
         if JSONObj.FindPath('HotKeyFastHideControls_Modifiers') <> nil then
           HK.Modifiers := JSONObj.FindPath('HotKeyFastHideControls_Modifiers').AsInteger;
         if JSONObj.FindPath('HotKeyFastHideControls_Key') <> nil then
           HK.Key := JSONObj.FindPath('HotKeyFastHideControls_Key').AsInteger;
-        Form.HotKeyFastHideControls := HK;
+        Form.HotKeyFastAutoHidePopup := HK;
 
         // Load HotKeys Recent Pairs
 

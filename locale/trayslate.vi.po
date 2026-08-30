@@ -485,12 +485,28 @@ msgid "Popup Auto Height"
 msgstr "Cửa sổ bật lên chiều cao tự động"
 
 #: formsettings.rfastautoheight_default
-msgid "Shift+F9"
-msgstr "Shift+F9"
+msgctxt "formsettings.rfastautoheight_default"
+msgid "Shift+F10"
+msgstr "Shift+F10"
 
 #: formsettings.rfastautoheight_hint
 msgid "Adjust popup height to content automatically"
 msgstr "Tự động điều chỉnh chiều cao cửa sổ bật lên theo nội dung"
+
+#: formsettings.rfastautohidepopup
+msgctxt "formsettings.rfastautohidepopup"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr "Tự động ẩn cửa sổ bật lên khi nhấp bên ngoài"
+
+#: formsettings.rfastautohidepopup_default
+msgctxt "formsettings.rfastautohidepopup_default"
+msgid "Shift+F9"
+msgstr "Shift+F9"
+
+#: formsettings.rfastautohidepopup_hint
+msgctxt "formsettings.rfastautohidepopup_hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr "Tự động ẩn cửa sổ bật lên khi bạn nhấp vào bất kỳ đâu bên ngoài cửa sổ"
 
 #: formsettings.rfastautoswap
 msgctxt "formsettings.rfastautoswap"
@@ -517,19 +533,6 @@ msgstr "Shift+F2"
 #: formsettings.rfastenablemousemode_hint
 msgid "Toggle mouse translation mode"
 msgstr "Bật hoặc tắt chế độ dịch bằng chuột"
-
-#: formsettings.rfasthidecontrols
-msgctxt "formsettings.rfasthidecontrols"
-msgid "Auto-Hide Popup Controls"
-msgstr "Tự động ẩn điều khiển bật lên"
-
-#: formsettings.rfasthidecontrols_default
-msgid "Shift+F10"
-msgstr "Shift+F10"
-
-#: formsettings.rfasthidecontrols_hint
-msgid "Hide popup controls when not hovering"
-msgstr "Ẩn các điều khiển cửa sổ bật lên khi chuột không di trên đó"
 
 #: formsettings.rfastmousemodectrl
 msgctxt "formsettings.rfastmousemodectrl"
@@ -1449,6 +1452,16 @@ msgstr "Chiều cao tự động"
 msgid "Popup window height calculated based on text height"
 msgstr "Chiều cao cửa sổ bật lên được tính dựa trên chiều cao văn bản"
 
+#: tformsettingstrayslate.checkautohidepopup.caption
+msgctxt "tformsettingstrayslate.checkautohidepopup.caption"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr "Tự động ẩn cửa sổ bật lên khi nhấp bên ngoài"
+
+#: tformsettingstrayslate.checkautohidepopup.hint
+msgctxt "tformsettingstrayslate.checkautohidepopup.hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr "Tự động ẩn cửa sổ bật lên khi bạn nhấp vào bất kỳ đâu bên ngoài cửa sổ"
+
 #: tformsettingstrayslate.checkautostart.caption
 msgid "Launch At System Startup"
 msgstr "Khởi động cùng hệ thống"
@@ -1993,6 +2006,11 @@ msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
 msgstr "Cửa sổ bật lên chiều cao tự động"
 
+#: tformtrayslate.afastautohidepopup.caption
+msgctxt "tformtrayslate.afastautohidepopup.caption"
+msgid "Auto-Hide Popup"
+msgstr "Tự động ẩn cửa sổ bật lên"
+
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
@@ -2002,11 +2020,6 @@ msgstr "Tự động hoán đổi cặp ngôn ngữ"
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr "Bật chế độ chuột"
-
-#: tformtrayslate.afasthidecontrols.caption
-msgctxt "tformtrayslate.afasthidecontrols.caption"
-msgid "Auto-Hide Popup Controls"
-msgstr "Tự động ẩn điều khiển bật lên"
 
 #: tformtrayslate.afastmousemodectrl.caption
 msgctxt "tformtrayslate.afastmousemodectrl.caption"

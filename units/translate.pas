@@ -44,6 +44,17 @@ type
     vtUnit             // units of measure
     );
 
+  PConfigData = ^TConfigData;
+
+  TConfigData = record
+    Order: integer;
+    PathOnly: string;
+    Name: string;
+    Color: TColor;
+    Visible: boolean;
+    ImageIndex: integer;
+  end;
+
   { TTranslate }
   TTranslate = class
   private
@@ -185,10 +196,6 @@ type
     property InitLiveTime: integer read FInitLiveTime write FInitLiveTime;
   end;
 
-type
-  PString = ^string;
-  PBoolean = ^boolean;
-
   { TTranslateThread }
   TTranslateThread = class(TThread)
   private
@@ -221,7 +228,7 @@ const
 
 implementation
 
-uses Consts, mainform, settings, stringshelper, stringhelper, localize, osutils, languages;
+uses Consts, mainform, stringshelper, stringhelper, localize, osutils, languages;
 
   {%Region -fold TTranslate }
 

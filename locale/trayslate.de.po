@@ -480,12 +480,28 @@ msgid "Popup Auto Height"
 msgstr "Automatische Popup-Höhe"
 
 #: formsettings.rfastautoheight_default
-msgid "Shift+F9"
-msgstr "Shift+F9"
+msgctxt "formsettings.rfastautoheight_default"
+msgid "Shift+F10"
+msgstr "Shift+F10"
 
 #: formsettings.rfastautoheight_hint
 msgid "Adjust popup height to content automatically"
 msgstr "Höhe des Popups automatisch an den Inhalt anpassen"
+
+#: formsettings.rfastautohidepopup
+msgctxt "formsettings.rfastautohidepopup"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr "Popup bei Klick außerhalb automatisch ausblenden"
+
+#: formsettings.rfastautohidepopup_default
+msgctxt "formsettings.rfastautohidepopup_default"
+msgid "Shift+F9"
+msgstr "Shift+F9"
+
+#: formsettings.rfastautohidepopup_hint
+msgctxt "formsettings.rfastautohidepopup_hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr "Popup-Fenster automatisch ausblenden, wenn Sie irgendwo außerhalb klicken"
 
 #: formsettings.rfastautoswap
 msgctxt "formsettings.rfastautoswap"
@@ -512,19 +528,6 @@ msgstr "Shift+F2"
 #: formsettings.rfastenablemousemode_hint
 msgid "Toggle mouse translation mode"
 msgstr "Mausübersetzungsmodus umschalten"
-
-#: formsettings.rfasthidecontrols
-msgctxt "formsettings.rfasthidecontrols"
-msgid "Auto-Hide Popup Controls"
-msgstr "Popup-Steuerelemente automatisch ausblenden"
-
-#: formsettings.rfasthidecontrols_default
-msgid "Shift+F10"
-msgstr "Shift+F10"
-
-#: formsettings.rfasthidecontrols_hint
-msgid "Hide popup controls when not hovering"
-msgstr "Popup-Steuerelemente ausblenden, wenn der Mauszeiger nicht darüber bewegt wird"
 
 #: formsettings.rfastmousemodectrl
 msgctxt "formsettings.rfastmousemodectrl"
@@ -1444,6 +1447,16 @@ msgstr "Automatische Höhe"
 msgid "Popup window height calculated based on text height"
 msgstr "Die Höhe des Popup-Fensters wird basierend auf der Texthöhe berechnet"
 
+#: tformsettingstrayslate.checkautohidepopup.caption
+msgctxt "tformsettingstrayslate.checkautohidepopup.caption"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr "Popup bei Klick außerhalb automatisch ausblenden"
+
+#: tformsettingstrayslate.checkautohidepopup.hint
+msgctxt "tformsettingstrayslate.checkautohidepopup.hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr "Popup-Fenster automatisch ausblenden, wenn Sie irgendwo außerhalb klicken"
+
 #: tformsettingstrayslate.checkautostart.caption
 msgid "Launch At System Startup"
 msgstr "Beim Systemstart starten"
@@ -1988,6 +2001,11 @@ msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
 msgstr "Automatische Popup-Höhe"
 
+#: tformtrayslate.afastautohidepopup.caption
+msgctxt "tformtrayslate.afastautohidepopup.caption"
+msgid "Auto-Hide Popup"
+msgstr "Popup automatisch ausblenden"
+
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
@@ -1997,11 +2015,6 @@ msgstr "Sprachpaar automatisch tauschen"
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr "Mausmodus aktivieren"
-
-#: tformtrayslate.afasthidecontrols.caption
-msgctxt "tformtrayslate.afasthidecontrols.caption"
-msgid "Auto-Hide Popup Controls"
-msgstr "Popup-Steuerelemente automatisch ausblenden"
 
 #: tformtrayslate.afastmousemodectrl.caption
 msgctxt "tformtrayslate.afastmousemodectrl.caption"

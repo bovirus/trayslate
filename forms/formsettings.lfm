@@ -22,11 +22,11 @@ object formSettingsTrayslate: TformSettingsTrayslate
     Top = 5
     Width = 614
     TabStop = False
-    ActivePage = PageHotkeys
+    ActivePage = PageGeneral
     Align = alClient
     BorderSpacing.Top = 5
     BorderSpacing.Bottom = 5
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 1
     object PageGeneral: TTabSheet
       Caption = 'General'
@@ -358,8 +358,8 @@ object formSettingsTrayslate: TformSettingsTrayslate
         Height = 567
         Top = 0
         Width = 606
-        HorzScrollBar.Increment = 18
-        HorzScrollBar.Page = 187
+        HorzScrollBar.Increment = 23
+        HorzScrollBar.Page = 234
         HorzScrollBar.Smooth = True
         HorzScrollBar.Tracking = True
         VertScrollBar.Increment = 56
@@ -549,13 +549,13 @@ object formSettingsTrayslate: TformSettingsTrayslate
         end
         object GroupPopup: TGroupBox
           Left = 5
-          Height = 299
+          Height = 331
           Top = 485
           Width = 579
           Align = alTop
           BorderSpacing.Around = 5
           Caption = 'Popup Window'
-          ClientHeight = 279
+          ClientHeight = 311
           ClientWidth = 575
           TabOrder = 3
           object CheckStayOnTop: TCheckBox
@@ -640,7 +640,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Left = 16
             Height = 19
             Hint = 'Hide window controls when the mouse is not over the popup window'
-            Top = 176
+            Top = 208
             Width = 122
             Caption = 'Auto-Hide Controls'
             TabOrder = 8
@@ -684,7 +684,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           object LabelMaxHeight: TLabel
             Left = 8
             Height = 32
-            Top = 240
+            Top = 272
             Width = 136
             Alignment = taRightJustify
             AutoSize = False
@@ -695,7 +695,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Left = 152
             Height = 23
             Hint = 'Set maximum window height for auto-size; 0 indicates limit to screen height'
-            Top = 240
+            Top = 272
             Width = 400
             Anchors = [akTop, akLeft, akRight]
             TabOrder = 10
@@ -706,10 +706,20 @@ object formSettingsTrayslate: TformSettingsTrayslate
             Left = 16
             Height = 19
             Hint = 'Popup window height calculated based on text height'
-            Top = 208
+            Top = 240
             Width = 83
             Caption = 'Auto Height'
             TabOrder = 9
+            OnChange = SettingChange
+          end
+          object CheckAutoHidePopup: TCheckBox
+            Left = 16
+            Height = 19
+            Hint = 'Automatically hide the popup window when you click anywhere outside of it'
+            Top = 176
+            Width = 204
+            Caption = 'Auto-Hide Popup On Outside Click'
+            TabOrder = 11
             OnChange = SettingChange
           end
         end
@@ -1307,7 +1317,7 @@ object formSettingsTrayslate: TformSettingsTrayslate
           )
           ColWidths = (
             200
-            365
+            382
           )
         end
       end

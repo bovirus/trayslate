@@ -138,6 +138,7 @@ type
 
     property SourceText: string read FSourceText write FSourceText;
     property InWindow: boolean read FInWindow;
+    property PopupOpen: boolean read FPopupOpen;
   end;
 
 var

@@ -480,12 +480,28 @@ msgid "Popup Auto Height"
 msgstr "Hauteur automatique de la fenêtre contextuelle"
 
 #: formsettings.rfastautoheight_default
-msgid "Shift+F9"
-msgstr "Shift+F9"
+msgctxt "formsettings.rfastautoheight_default"
+msgid "Shift+F10"
+msgstr "Shift+F10"
 
 #: formsettings.rfastautoheight_hint
 msgid "Adjust popup height to content automatically"
 msgstr "Ajuster automatiquement la hauteur de la fenêtre contextuelle au contenu"
+
+#: formsettings.rfastautohidepopup
+msgctxt "formsettings.rfastautohidepopup"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr "Masquer automatiquement la fenêtre contextuelle lors d'un clic en dehors"
+
+#: formsettings.rfastautohidepopup_default
+msgctxt "formsettings.rfastautohidepopup_default"
+msgid "Shift+F9"
+msgstr "Shift+F9"
+
+#: formsettings.rfastautohidepopup_hint
+msgctxt "formsettings.rfastautohidepopup_hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr "Masquer automatiquement la fenêtre contextuelle lorsque vous cliquez n'importe où en dehors"
 
 #: formsettings.rfastautoswap
 msgctxt "formsettings.rfastautoswap"
@@ -512,19 +528,6 @@ msgstr "Shift+F2"
 #: formsettings.rfastenablemousemode_hint
 msgid "Toggle mouse translation mode"
 msgstr "Activer ou désactiver le mode de traduction à la souris"
-
-#: formsettings.rfasthidecontrols
-msgctxt "formsettings.rfasthidecontrols"
-msgid "Auto-Hide Popup Controls"
-msgstr "Masquer auto les contrôles du popup"
-
-#: formsettings.rfasthidecontrols_default
-msgid "Shift+F10"
-msgstr "Shift+F10"
-
-#: formsettings.rfasthidecontrols_hint
-msgid "Hide popup controls when not hovering"
-msgstr "Masquer les contrôles de la fenêtre contextuelle lorsque le curseur n’est pas dessus"
 
 #: formsettings.rfastmousemodectrl
 msgctxt "formsettings.rfastmousemodectrl"
@@ -1444,6 +1447,16 @@ msgstr "Hauteur automatique"
 msgid "Popup window height calculated based on text height"
 msgstr "La hauteur de la fenêtre contextuelle est calculée en fonction de la hauteur du texte"
 
+#: tformsettingstrayslate.checkautohidepopup.caption
+msgctxt "tformsettingstrayslate.checkautohidepopup.caption"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr "Masquer automatiquement la fenêtre contextuelle lors d'un clic en dehors"
+
+#: tformsettingstrayslate.checkautohidepopup.hint
+msgctxt "tformsettingstrayslate.checkautohidepopup.hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr "Masquer automatiquement la fenêtre contextuelle lorsque vous cliquez n'importe où en dehors"
+
 #: tformsettingstrayslate.checkautostart.caption
 msgid "Launch At System Startup"
 msgstr "Lancer au démarrage du système"
@@ -1988,6 +2001,11 @@ msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
 msgstr "Hauteur automatique de la fenêtre contextuelle"
 
+#: tformtrayslate.afastautohidepopup.caption
+msgctxt "tformtrayslate.afastautohidepopup.caption"
+msgid "Auto-Hide Popup"
+msgstr "Masquer automatiquement la fenêtre contextuelle"
+
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
@@ -1997,11 +2015,6 @@ msgstr "Échanger automatiquement la paire de langues"
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr "Activer le mode souris"
-
-#: tformtrayslate.afasthidecontrols.caption
-msgctxt "tformtrayslate.afasthidecontrols.caption"
-msgid "Auto-Hide Popup Controls"
-msgstr "Masquer auto les contrôles du popup"
 
 #: tformtrayslate.afastmousemodectrl.caption
 msgctxt "tformtrayslate.afastmousemodectrl.caption"

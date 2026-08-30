@@ -53,6 +53,7 @@ type
     BtnOk: TButton;
     BtnResetPopup: TButton;
     CheckAllowHotkeys: TCheckBox;
+    CheckAutoHidePopup: TCheckBox;
     CheckInsertKey: TCheckBox;
     CheckAutoHeight: TCheckBox;
     CheckBuiltInDetect: TCheckBox;
@@ -232,6 +233,7 @@ type
     FOriginalVerticalSplit: boolean;
     FOriginalAutocopy: boolean;
     FOriginalStayOnTop: boolean;
+    FOriginalAutoHidePopup: boolean;
     FOriginalHideControls: boolean;
     FOriginalAutoHeight: boolean;
     FOriginalMaxHeight: integer;
@@ -263,7 +265,7 @@ type
     FOriginalHotKeyFastSpellCheck: THotKeyData;
     FOriginalHotKeyFastVerticalSplit: THotKeyData;
     FOriginalHotKeyFastAutoHeight: THotKeyData;
-    FOriginalHotKeyFastHideControls: THotKeyData;
+    FOriginalHotKeyFastAutoHidePopup: THotKeyData;
     FOriginalHotKeyRecent1: THotKeyData;
     FOriginalHotKeyRecent2: THotKeyData;
     FOriginalHotKeyRecent3: THotKeyData;
@@ -292,7 +294,7 @@ type
     FHotKeyFastSpellCheck: THotKeyData;
     FHotKeyFastVerticalSplit: THotKeyData;
     FHotKeyFastAutoHeight: THotKeyData;
-    FHotKeyFastHideControls: THotKeyData;
+    FHotKeyFastAutoHidePopup: THotKeyData;
     FHotKeyRecent1: THotKeyData;
     FHotKeyRecent2: THotKeyData;
     FHotKeyRecent3: THotKeyData;
@@ -420,13 +422,13 @@ resourcestring
   rfastverticalsplit_hint = 'Switch between vertical and horizontal layout';
   rfastverticalsplit_default = 'Shift+F8';
 
+  rfastautohidepopup = 'Auto-Hide Popup On Outside Click';
+  rfastautohidepopup_hint = 'Automatically hide the popup window when you click anywhere outside of it';
+  rfastautohidepopup_default = 'Shift+F9';
+
   rfastautoheight = 'Popup Auto Height';
   rfastautoheight_hint = 'Adjust popup height to content automatically';
-  rfastautoheight_default = 'Shift+F9';
-
-  rfasthidecontrols = 'Auto-Hide Popup Controls';
-  rfasthidecontrols_hint = 'Hide popup controls when not hovering';
-  rfasthidecontrols_default = 'Shift+F10';
+  rfastautoheight_default = 'Shift+F10';
 
   rfastspellcheck = 'Enable Spell Check';
   rfastspellcheck_hint = 'Enable spell checking in the source text';
@@ -631,8 +633,8 @@ begin
     SetState;
   end
   else
-  if Sender = CheckHideControls then
-    formTrayslate.aFastHideControls.Checked := CheckHideControls.Checked
+  if Sender = CheckAutoHidePopup then
+    formTrayslate.aFastAutoHidePopup.Checked := CheckAutoHidePopup.Checked
   else
   if Sender = CheckMouseModeCtrl then
     formTrayslate.aFastMouseModeCtrl.Checked := CheckMouseModeCtrl.Checked
@@ -1391,8 +1393,8 @@ begin
     16: Result := FHotKeyFastRealTime;
     17: Result := FHotKeyFastAutoCopy;
     18: Result := FHotKeyFastVerticalSplit;
-    19: Result := FHotKeyFastAutoHeight;
-    20: Result := FHotKeyFastHideControls;
+    19: Result := FHotKeyFastAutoHidePopup;
+    20: Result := FHotKeyFastAutoHeight;
     21: Result := FHotKeyFastSpellCheck;
     // Recent HotKeys (rows 22-30, header at row 22)
     23: Result := FHotKeyRecent1;
@@ -1430,8 +1432,8 @@ begin
     16: FHotKeyFastRealTime := HK;
     17: FHotKeyFastAutoCopy := HK;
     18: FHotKeyFastVerticalSplit := HK;
-    19: FHotKeyFastAutoHeight := HK;
-    20: FHotKeyFastHideControls := HK;
+    19: FHotKeyFastAutoHidePopup := HK;
+    20: FHotKeyFastAutoHeight := HK;
     21: FHotKeyFastSpellCheck := HK;
     // Recent HotKeys (rows 22-30, header at row 22)
     23: FHotKeyRecent1 := HK;
@@ -1469,8 +1471,8 @@ begin
     16: Result := FOriginalHotKeyFastRealTime;
     17: Result := FOriginalHotKeyFastAutoCopy;
     18: Result := FOriginalHotKeyFastVerticalSplit;
-    19: Result := FOriginalHotKeyFastAutoHeight;
-    20: Result := FOriginalHotKeyFastHideControls;
+    19: Result := FOriginalHotKeyFastAutoHidePopup;
+    20: Result := FOriginalHotKeyFastAutoHeight;
     21: Result := FOriginalHotKeyFastSpellCheck;
     // Recent HotKeys (rows 22-30, header at row 22)
     23: Result := FOriginalHotKeyRecent1;
@@ -1621,9 +1623,9 @@ begin
   GridHotkeys.InsertRowWithValues(17, [rfastautocopy, FHotKeyFastAutoCopy.ToText, rfastautocopy_hint, rfastautocopy_default]);
   GridHotkeys.InsertRowWithValues(18, [rfastverticalsplit, FHotKeyFastVerticalSplit.ToText, rfastverticalsplit_hint,
     rfastverticalsplit_default]);
-  GridHotkeys.InsertRowWithValues(19, [rfastautoheight, FHotKeyFastAutoHeight.ToText, rfastautoheight_hint, rfastautoheight_default]);
-  GridHotkeys.InsertRowWithValues(20, [rfasthidecontrols, FHotKeyFastHideControls.ToText, rfasthidecontrols_hint,
-    rfasthidecontrols_default]);
+  GridHotkeys.InsertRowWithValues(19, [rfastautohidepopup, FHotKeyFastAutoHidePopup.ToText, rfastautohidepopup,
+    rfastautohidepopup_default]);
+  GridHotkeys.InsertRowWithValues(20, [rfastautoheight, FHotKeyFastAutoHeight.ToText, rfastautoheight_hint, rfastautoheight_default]);
   GridHotkeys.InsertRowWithValues(21, [rfastspellcheck, FHotKeyFastSpellCheck.ToText, rfastspellcheck_hint, rfastspellcheck_default]);
 
   // Row 21: Recent header
@@ -1770,7 +1772,6 @@ begin
   CheckSpellCheckEmptySuggestions.Enabled := CheckSpellCheck.Checked;
 
   // Global HotKeys
-  CheckInsertKey.Enabled := CheckAllowHotkeys.Checked;
   GridHotkeys.Enabled := CheckAllowHotkeys.Checked;
   GridHotkeys.Color := ifthen(GridHotkeys.Enabled, clWindow, clBtnFace);
 
@@ -1823,6 +1824,7 @@ begin
     formTrayslate.AutoCopy := CheckAutoCopy.Checked;
     formTrayslate.StayOnTop := CheckStayOnTop.Checked;
     formTrayslate.HideControls := CheckHideControls.Checked;
+    formTrayslate.AutoHidePopup := CheckAutoHidePopup.Checked;
     formTrayslate.AutoHeight := CheckAutoHeight.Checked;
     formTrayslate.MaxHeight := SpinMaxHeight.Value;
     formTrayslate.OpacityHover := TrackOpacityHover.Position;
@@ -1889,7 +1891,7 @@ begin
     formTrayslate.HotKeyFastAutoCopy := FHotKeyFastAutoCopy;
     formTrayslate.HotKeyFastVerticalSplit := FHotKeyFastVerticalSplit;
     formTrayslate.HotKeyFastAutoHeight := FHotKeyFastAutoHeight;
-    formTrayslate.HotKeyFastHideControls := FHotKeyFastHideControls;
+    formTrayslate.HotKeyFastAutoHidePopup := FHotKeyFastAutoHidePopup;
     formTrayslate.HotKeyFastSpellCheck := FHotKeyFastSpellCheck;
 
     // HotKeys Recent Pairs
@@ -1965,7 +1967,7 @@ begin
   FOriginalHotKeyFastAutoCopy := formTrayslate.HotKeyFastAutoCopy;
   FOriginalHotKeyFastVerticalSplit := formTrayslate.HotKeyFastVerticalSplit;
   FOriginalHotKeyFastAutoHeight := formTrayslate.HotKeyFastAutoHeight;
-  FOriginalHotKeyFastHideControls := formTrayslate.HotKeyFastHideControls;
+  FOriginalHotKeyFastAutoHidePopup := formTrayslate.HotKeyFastAutoHidePopup;
   FOriginalHotKeyFastSpellCheck := formTrayslate.HotKeyFastSpellCheck;
 
   // HotKeys Recent Pairs
@@ -2000,7 +2002,7 @@ begin
   FHotKeyFastAutoCopy := formTrayslate.HotKeyFastAutoCopy;
   FHotKeyFastVerticalSplit := formTrayslate.HotKeyFastVerticalSplit;
   FHotKeyFastAutoHeight := formTrayslate.HotKeyFastAutoHeight;
-  FHotKeyFastHideControls := formTrayslate.HotKeyFastHideControls;
+  FHotKeyFastAutoHidePopup := formTrayslate.HotKeyFastAutoHidePopup;
   FHotKeyFastSpellCheck := formTrayslate.HotKeyFastSpellCheck;
 
   // HotKeys Recent Pairs
@@ -2041,6 +2043,7 @@ begin
   FOriginalAutoCopy := formTrayslate.AutoCopy;
   FOriginalStayOnTop := formTrayslate.StayOnTop;
   FOriginalHideControls := formTrayslate.HideControls;
+  FOriginalAutoHidePopup := formTrayslate.AutoHidePopup;
   FOriginalAutoHeight := formTrayslate.AutoHeight;
   FOriginalMaxHeight := formTrayslate.MaxHeight;
   FOriginalOpacityHover := formTrayslate.OpacityHover;
@@ -2085,6 +2088,7 @@ begin
   CheckAutoCopy.Checked := FOriginalAutoCopy;
   CheckStayOnTop.Checked := FOriginalStayOnTop;
   CheckHideControls.Checked := FOriginalHideControls;
+  CheckAutoHidePopup.Checked := FOriginalAutoHidePopup;
   CheckAutoHeight.Checked := FOriginalAutoHeight;
   SpinMaxHeight.Value := FOriginalMaxHeight;
   TrackOpacityHover.Position := FOriginalOpacityHover;

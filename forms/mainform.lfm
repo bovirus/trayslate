@@ -397,12 +397,12 @@ object formTrayslate: TformTrayslate
         Action = aFastVerticalSplit
         AutoCheck = True
       end
-      object MenuFastAutoHeight: TMenuItem
-        Action = aFastAutoHeight
+      object MenuFastAutoHide: TMenuItem
+        Action = aFastAutoHidePopup
         AutoCheck = True
       end
-      object MenuFastHideControls: TMenuItem
-        Action = aFastHideControls
+      object MenuFastAutoHeight: TMenuItem
+        Action = aFastAutoHeight
         AutoCheck = True
       end
       object Separator16: TMenuItem
@@ -858,11 +858,11 @@ object formTrayslate: TformTrayslate
       Caption = 'Popup Auto Height'
       OnExecute = aFastAutoHeightExecute
     end
-    object aFastHideControls: TAction
+    object aFastAutoHidePopup: TAction
       Category = 'FastSettings'
       AutoCheck = True
-      Caption = 'Auto-Hide Popup Controls'
-      OnExecute = aFastHideControlsExecute
+      Caption = 'Auto-Hide Popup'
+      OnExecute = aFastAutoHidePopupExecute
     end
     object aUndo: TAction
       Category = 'Memo'

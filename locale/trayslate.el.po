@@ -480,12 +480,28 @@ msgid "Popup Auto Height"
 msgstr "Αυτόματο ύψος αναδυόμενου παραθύρου"
 
 #: formsettings.rfastautoheight_default
-msgid "Shift+F9"
-msgstr "Shift+F9"
+msgctxt "formsettings.rfastautoheight_default"
+msgid "Shift+F10"
+msgstr "Shift+F10"
 
 #: formsettings.rfastautoheight_hint
 msgid "Adjust popup height to content automatically"
 msgstr "Αυτόματη προσαρμογή του ύψους του αναδυόμενου παραθύρου στο περιεχόμενο"
+
+#: formsettings.rfastautohidepopup
+msgctxt "formsettings.rfastautohidepopup"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr "Αυτόματη απόκρυψη αναδυόμενου παραθύρου με κλικ εκτός αυτού"
+
+#: formsettings.rfastautohidepopup_default
+msgctxt "formsettings.rfastautohidepopup_default"
+msgid "Shift+F9"
+msgstr "Shift+F9"
+
+#: formsettings.rfastautohidepopup_hint
+msgctxt "formsettings.rfastautohidepopup_hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr "Αυτόματη απόκρυψη του αναδυόμενου παραθύρου όταν κάνετε κλικ οπουδήποτε εκτός αυτού"
 
 #: formsettings.rfastautoswap
 msgctxt "formsettings.rfastautoswap"
@@ -512,19 +528,6 @@ msgstr "Shift+F2"
 #: formsettings.rfastenablemousemode_hint
 msgid "Toggle mouse translation mode"
 msgstr "Εναλλαγή λειτουργίας μετάφρασης με το ποντίκι"
-
-#: formsettings.rfasthidecontrols
-msgctxt "formsettings.rfasthidecontrols"
-msgid "Auto-Hide Popup Controls"
-msgstr "Αυτόματη απόκρυψη στοιχείων αναδυόμενου"
-
-#: formsettings.rfasthidecontrols_default
-msgid "Shift+F10"
-msgstr "Shift+F10"
-
-#: formsettings.rfasthidecontrols_hint
-msgid "Hide popup controls when not hovering"
-msgstr "Απόκρυψη των στοιχείων ελέγχου του αναδυόμενου παραθύρου όταν το ποντίκι δεν βρίσκεται πάνω του"
 
 #: formsettings.rfastmousemodectrl
 msgctxt "formsettings.rfastmousemodectrl"
@@ -1444,6 +1447,16 @@ msgstr "Αυτόματο ύψος"
 msgid "Popup window height calculated based on text height"
 msgstr "Το ύψος του αναδυόμενου παραθύρου υπολογίζεται βάσει του ύψους του κειμένου"
 
+#: tformsettingstrayslate.checkautohidepopup.caption
+msgctxt "tformsettingstrayslate.checkautohidepopup.caption"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr "Αυτόματη απόκρυψη αναδυόμενου παραθύρου με κλικ εκτός αυτού"
+
+#: tformsettingstrayslate.checkautohidepopup.hint
+msgctxt "tformsettingstrayslate.checkautohidepopup.hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr "Αυτόματη απόκρυψη του αναδυόμενου παραθύρου όταν κάνετε κλικ οπουδήποτε εκτός αυτού"
+
 #: tformsettingstrayslate.checkautostart.caption
 msgid "Launch At System Startup"
 msgstr "Εκκίνηση κατά την έναρξη συστήματος"
@@ -1988,6 +2001,11 @@ msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
 msgstr "Αυτόματο ύψος αναδυόμενου παραθύρου"
 
+#: tformtrayslate.afastautohidepopup.caption
+msgctxt "tformtrayslate.afastautohidepopup.caption"
+msgid "Auto-Hide Popup"
+msgstr "Αυτόματη απόκρυψη αναδυόμενου παραθύρου"
+
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
@@ -1997,11 +2015,6 @@ msgstr "Αυτόματη εναλλαγή ζεύγους γλωσσών"
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
 msgstr "Ενεργοποίηση λειτουργίας ποντικιού"
-
-#: tformtrayslate.afasthidecontrols.caption
-msgctxt "tformtrayslate.afasthidecontrols.caption"
-msgid "Auto-Hide Popup Controls"
-msgstr "Αυτόματη απόκρυψη στοιχείων αναδυόμενου"
 
 #: tformtrayslate.afastmousemodectrl.caption
 msgctxt "tformtrayslate.afastmousemodectrl.caption"

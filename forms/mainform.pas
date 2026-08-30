@@ -96,7 +96,7 @@ type
     aFastAutoSwap: TAction;
     aFastRealTime: TAction;
     aFastAutoAddLangPairs: TAction;
-    aFastHideControls: TAction;
+    aFastAutoHidePopup: TAction;
     aFastVerticalSplit: TAction;
     aPopupTranslate: TAction;
     aLangCustom: TAction;
@@ -135,7 +135,7 @@ type
     MenuFastAutoSwap: TMenuItem;
     MenuFastRealTime: TMenuItem;
     MenuFastAutoAddLangPairs: TMenuItem;
-    MenuFastHideControls: TMenuItem;
+    MenuFastAutoHide: TMenuItem;
     MenuItem3: TMenuItem;
     MenuFastAutoHeight: TMenuItem;
     MenuSourceUndo: TMenuItem;
@@ -317,7 +317,7 @@ type
     procedure aFastMouseModeCtrlExecute(Sender: TObject);
     procedure aFastAutoAddLangPairsExecute(Sender: TObject);
     procedure aFastAutoSwapExecute(Sender: TObject);
-    procedure aFastHideControlsExecute(Sender: TObject);
+    procedure aFastAutoHidePopupExecute(Sender: TObject);
     procedure aFastRealTimeExecute(Sender: TObject);
     procedure aFastVerticalSplitExecute(Sender: TObject);
     procedure aFastAutoCopyExecute(Sender: TObject);
@@ -467,6 +467,7 @@ type
     FSecondaryLang: string;
     FMouseMode: TMouseMode;
     FInsertKey: boolean;
+    FHideControls: boolean;
     FStayOnTop: boolean;
     FAutoHeightAfter: boolean;
     FMaxHeight: integer;
@@ -516,7 +517,7 @@ type
     FHotKeyFastAutoCopy: THotKeyData;
     FHotKeyFastVerticalSplit: THotKeyData;
     FHotKeyFastAutoHeight: THotKeyData;
-    FHotKeyFastHideControls: THotKeyData;
+    FHotKeyFastAutoHide: THotKeyData;
     FHotKeyFastSpellCheck: THotKeyData;
     // HotKey Recent Pairs
     FHotKeyRecent1: THotKeyData;
@@ -553,7 +554,7 @@ type
     procedure SetEnableMouseMode(Value: boolean);
     procedure SetMouseModeCtrl(Value: boolean);
     procedure SetAutoHeight(Value: boolean);
-    procedure SetHideControls(Value: boolean);
+    procedure SetAutoHide(Value: boolean);
     procedure SetRealTime(Value: boolean);
     procedure SetSpellCheck(Value: boolean);
     procedure SetVerticalSplit(Value: boolean);
@@ -597,7 +598,7 @@ type
     FVerticalSplit: boolean;
     FAutoCopy: boolean;
     FAutoHeight: boolean;
-    FHideControls: boolean;
+    FAutoHidePopup: boolean;
     FSpellCheck: boolean;
     FSpellCheckEmptySuggestions: boolean;
 
@@ -721,7 +722,8 @@ type
     property AutoCopy: boolean read FAutoCopy write SetAutoCopy;
     property StayOnTop: boolean read FStayOnTop write FStayOnTop;
     property FontPopup: TFont read FFontPopup write FFontPopup;
-    property HideControls: boolean read FHideControls write SetHideControls;
+    property HideControls: boolean read FHideControls write FHideControls;
+    property AutoHidePopup: boolean read FAutoHidePopup write SetAutoHide;
     property AutoHeight: boolean read FAutoHeight write SetAutoHeight;
     property MaxHeight: integer read FMaxHeight write FMaxHeight;
     property OpacityHover: integer read FOpacityHover write FOpacityHover;
@@ -771,7 +773,7 @@ type
     property HotKeyFastAutoCopy: THotKeyData read FHotKeyFastAutoCopy write FHotKeyFastAutoCopy;
     property HotKeyFastVerticalSplit: THotKeyData read FHotKeyFastVerticalSplit write FHotKeyFastVerticalSplit;
     property HotKeyFastAutoHeight: THotKeyData read FHotKeyFastAutoHeight write FHotKeyFastAutoHeight;
-    property HotKeyFastHideControls: THotKeyData read FHotKeyFastHideControls write FHotKeyFastHideControls;
+    property HotKeyFastAutoHidePopup: THotKeyData read FHotKeyFastAutoHide write FHotKeyFastAutoHide;
     property HotKeyFastSpellCheck: THotKeyData read FHotKeyFastSpellCheck write FHotKeyFastSpellCheck;
     // Hotkeys Recent Pairs
     property HotKeyRecent1: THotKeyData read FHotKeyRecent1 write FHotKeyRecent1;
@@ -926,7 +928,7 @@ begin
   aFastMouseModeCtrl.Checked := FMouseModeCtrl;
   aFastSpellCheck.Checked := FSpellCheck;
   aFastVerticalSplit.Checked := FVerticalSplit;
-  aFastHideControls.Checked := FHideControls;
+  aFastAutoHidePopup.Checked := FAutoHidePopup;
   aFastAutoSwap.Checked := FAutoSwap;
   aFastAutoAddLangPairs.Checked := FAutoAddLangPairs;
   aFastRealTime.Checked := FRealTime;
@@ -1403,10 +1405,10 @@ begin
 
       HOTKEY_FAST_HIDE_CONTROLS:
       try
-        aFastHideControls.Execute;
-        ShowCustomHint(rfasthidecontrols + ' - '+ iif(aFastHideControls.Checked, ron, roff));
+        aFastAutoHidePopup.Execute;
+        ShowCustomHint(rfastautohidepopup + ' - '+ iif(aFastAutoHidePopup.Checked, ron, roff));
       finally
-        ReleaseHotKeyModifiers(FHotKeyFastHideControls);
+        ReleaseHotKeyModifiers(FHotKeyFastAutoHide);
       end;
 
       HOTKEY_FAST_SPELL_CHECK:
@@ -1548,7 +1550,27 @@ procedure TFormTrayslate.OnHookLeftDown(Sender: TObject; const Info: TMouseEvent
 var
   TimeDiff: DWORD;
   dx, dy: integer;
+  Pt: TPoint;
+  DetectionRect: TRect;
 begin
+  // Hide popup window if user clicks outside its expanded area
+  if FAutoHidePopup and Assigned(formPopupTrayslate) and formPopupTrayslate.Visible and (not formPopupTrayslate.PopupOpen) then
+  begin
+    Pt := formPopupTrayslate.ScreenToClient(Point(Info.X, Info.Y));
+    DetectionRect := formPopupTrayslate.ClientRect;
+    // Expand detection area to cover title bar and invisible borders
+    DetectionRect.Left := DetectionRect.Left - 15;    // MARGIN_LEFT
+    DetectionRect.Top := DetectionRect.Top - 45;      // MARGIN_TOP
+    DetectionRect.Right := DetectionRect.Right + 10;  // MARGIN_RIGHT
+    DetectionRect.Bottom := DetectionRect.Bottom + 15; // MARGIN_BOTTOM
+
+    if not PtInRect(DetectionRect, Pt) then
+    begin
+      formPopupTrayslate.Hide;
+      Exit;
+    end;
+  end;
+
   // Store current down info for later use in OnHookLeftUp
   FLastMouseInfo := Info;
 
@@ -1684,8 +1706,8 @@ begin
   if FHotKeyFastAutoHeight.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_FAST_AUTO_HEIGHT, FHotKeyFastAutoHeight.Modifiers, FHotKeyFastAutoHeight.Key);
 
-  if FHotKeyFastHideControls.Key <> 0 then
-    RegisterHotKey(Handle, HOTKEY_FAST_HIDE_CONTROLS, FHotKeyFastHideControls.Modifiers, FHotKeyFastHideControls.Key);
+  if FHotKeyFastAutoHide.Key <> 0 then
+    RegisterHotKey(Handle, HOTKEY_FAST_HIDE_CONTROLS, FHotKeyFastAutoHide.Modifiers, FHotKeyFastAutoHide.Key);
 
   if FHotKeyFastSpellCheck.Key <> 0 then
     RegisterHotKey(Handle, HOTKEY_FAST_SPELL_CHECK, FHotKeyFastSpellCheck.Modifiers, FHotKeyFastSpellCheck.Key);
@@ -2252,9 +2274,9 @@ begin
   AutoSwap := aFastAutoSwap.Checked;
 end;
 
-procedure TformTrayslate.aFastHideControlsExecute(Sender: TObject);
+procedure TformTrayslate.aFastAutoHidePopupExecute(Sender: TObject);
 begin
-  HideControls := aFastHideControls.Checked;
+  AutoHidePopup := aFastAutoHidePopup.Checked;
 end;
 
 procedure TformTrayslate.aFastAutoHeightExecute(Sender: TObject);
@@ -3228,16 +3250,16 @@ begin
     FAutoHeight := Value;
 end;
 
-procedure TformTrayslate.SetHideControls(Value: boolean);
+procedure TformTrayslate.SetAutoHide(Value: boolean);
 begin
-  aFastHideControls.Checked := Value;
+  aFastAutoHidePopup.Checked := Value;
   if Assigned(formSettingsTrayslate) and (not formSettingsTrayslate.ApplySettings) then
   begin
-    formSettingsTrayslate.CheckHideControls.Checked := Value;
+    formSettingsTrayslate.CheckAutoHidePopup.Checked := Value;
     formSettingsTrayslate.BringToFront;
   end
   else
-    FHideControls := Value;
+    FAutoHidePopup := Value;
 end;
 
 procedure TformTrayslate.SetRealTime(Value: boolean);
@@ -3694,6 +3716,7 @@ begin
   FSpellCheckEmptySuggestions := True;
   FStayOnTop := True;
   FHideControls := True;
+  FAutoHidePopup := False;
   FAutoHeight := True;
   FMaxHeight := 0;
   FOpacityHover := 70;
@@ -3790,8 +3813,8 @@ begin
   FHotKeyFastAutoHeight.Key := VK_F9;
 
   // Alt+F10
-  FHotKeyFastHideControls.Modifiers := MOD_SHIFT;
-  FHotKeyFastHideControls.Key := VK_F10;
+  FHotKeyFastAutoHide.Modifiers := MOD_SHIFT;
+  FHotKeyFastAutoHide.Key := VK_F10;
 
   // Alt+F11
   FHotKeyFastSpellCheck.Modifiers := MOD_SHIFT;
@@ -4165,7 +4188,7 @@ begin
   aFastAutoCopy.ShortCut := FHotKeyFastAutoCopy.ToShortCut;
   aFastVerticalSplit.ShortCut := FHotKeyFastVerticalSplit.ToShortCut;
   aFastAutoHeight.ShortCut := FHotKeyFastAutoHeight.ToShortCut;
-  aFastHideControls.ShortCut := FHotKeyFastHideControls.ToShortCut;
+  aFastAutoHidePopup.ShortCut := FHotKeyFastAutoHide.ToShortCut;
   aFastSpellCheck.ShortCut := FHotKeyFastSpellCheck.ToShortCut;
 end;
 

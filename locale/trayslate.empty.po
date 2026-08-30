@@ -352,11 +352,27 @@ msgid "Popup Auto Height"
 msgstr ""
 
 #: formsettings.rfastautoheight_default
-msgid "Shift+F9"
+msgctxt "formsettings.rfastautoheight_default"
+msgid "Shift+F10"
 msgstr ""
 
 #: formsettings.rfastautoheight_hint
 msgid "Adjust popup height to content automatically"
+msgstr ""
+
+#: formsettings.rfastautohidepopup
+msgctxt "formsettings.rfastautohidepopup"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr ""
+
+#: formsettings.rfastautohidepopup_default
+msgctxt "formsettings.rfastautohidepopup_default"
+msgid "Shift+F9"
+msgstr ""
+
+#: formsettings.rfastautohidepopup_hint
+msgctxt "formsettings.rfastautohidepopup_hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
 msgstr ""
 
 #: formsettings.rfastautoswap
@@ -383,19 +399,6 @@ msgstr ""
 
 #: formsettings.rfastenablemousemode_hint
 msgid "Toggle mouse translation mode"
-msgstr ""
-
-#: formsettings.rfasthidecontrols
-msgctxt "formsettings.rfasthidecontrols"
-msgid "Auto-Hide Popup Controls"
-msgstr ""
-
-#: formsettings.rfasthidecontrols_default
-msgid "Shift+F10"
-msgstr ""
-
-#: formsettings.rfasthidecontrols_hint
-msgid "Hide popup controls when not hovering"
 msgstr ""
 
 #: formsettings.rfastmousemodectrl
@@ -1284,6 +1287,16 @@ msgstr ""
 msgid "Popup window height calculated based on text height"
 msgstr ""
 
+#: tformsettingstrayslate.checkautohidepopup.caption
+msgctxt "tformsettingstrayslate.checkautohidepopup.caption"
+msgid "Auto-Hide Popup On Outside Click"
+msgstr ""
+
+#: tformsettingstrayslate.checkautohidepopup.hint
+msgctxt "tformsettingstrayslate.checkautohidepopup.hint"
+msgid "Automatically hide the popup window when you click anywhere outside of it"
+msgstr ""
+
 #: tformsettingstrayslate.checkautostart.caption
 msgid "Launch At System Startup"
 msgstr ""
@@ -1824,6 +1837,11 @@ msgctxt "tformtrayslate.afastautoheight.caption"
 msgid "Popup Auto Height"
 msgstr ""
 
+#: tformtrayslate.afastautohidepopup.caption
+msgctxt "tformtrayslate.afastautohidepopup.caption"
+msgid "Auto-Hide Popup"
+msgstr ""
+
 #: tformtrayslate.afastautoswap.caption
 msgctxt "tformtrayslate.afastautoswap.caption"
 msgid "Auto-Swap Language Pair"
@@ -1832,11 +1850,6 @@ msgstr ""
 #: tformtrayslate.afastenablemousemode.caption
 msgctxt "tformtrayslate.afastenablemousemode.caption"
 msgid "Enable Mouse Mode"
-msgstr ""
-
-#: tformtrayslate.afasthidecontrols.caption
-msgctxt "tformtrayslate.afasthidecontrols.caption"
-msgid "Auto-Hide Popup Controls"
 msgstr ""
 
 #: tformtrayslate.afastmousemodectrl.caption
