@@ -225,8 +225,11 @@ begin
     JSONObj.Add('HotKeyFastAutoHeight_Modifiers', Form.HotKeyFastAutoHeight.Modifiers);
     JSONObj.Add('HotKeyFastAutoHeight_Key', Form.HotKeyFastAutoHeight.Key);
 
-    JSONObj.Add('HotKeyFastHideControls_Modifiers', Form.HotKeyFastAutoHidePopup.Modifiers);
-    JSONObj.Add('HotKeyFastHideControls_Key', Form.HotKeyFastAutoHidePopup.Key);
+    JSONObj.Add('HotKeyFastAutoHidePopup_Modifiers', Form.HotKeyFastAutoHidePopup.Modifiers);
+    JSONObj.Add('HotKeyFastAutoHidePopup_Key', Form.HotKeyFastAutoHidePopup.Key);
+
+    JSONObj.Add('HotKeyFastSpellCheck_Modifiers', Form.HotKeyFastSpellCheck.Modifiers);
+    JSONObj.Add('HotKeyFastSpellCheck_Key', Form.HotKeyFastSpellCheck.Key);
 
     // Save HotKeys Recent Pairs
     JSONObj.Add('HotKeyRecent1_Modifiers', Form.HotKeyRecent1.Modifiers);
@@ -762,13 +765,21 @@ begin
           HK.Key := JSONObj.FindPath('HotKeyFastAutoHeight_Key').AsInteger;
         Form.HotKeyFastAutoHeight := HK;
 
-        // HotKeyFastHideControls
+        // HotKeyFastAutoHidePopup
         HK := Form.HotKeyFastAutoHidePopup;
-        if JSONObj.FindPath('HotKeyFastHideControls_Modifiers') <> nil then
-          HK.Modifiers := JSONObj.FindPath('HotKeyFastHideControls_Modifiers').AsInteger;
-        if JSONObj.FindPath('HotKeyFastHideControls_Key') <> nil then
-          HK.Key := JSONObj.FindPath('HotKeyFastHideControls_Key').AsInteger;
+        if JSONObj.FindPath('HotKeyFastAutoHidePopup_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastAutoHidePopup_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastAutoHidePopup_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastAutoHidePopup_Key').AsInteger;
         Form.HotKeyFastAutoHidePopup := HK;
+
+        // HotKeyFastSpellCheck
+        HK := Form.HotKeyFastSpellCheck;
+        if JSONObj.FindPath('HotKeyFastSpellCheck_Modifiers') <> nil then
+          HK.Modifiers := JSONObj.FindPath('HotKeyFastSpellCheck_Modifiers').AsInteger;
+        if JSONObj.FindPath('HotKeyFastSpellCheck_Key') <> nil then
+          HK.Key := JSONObj.FindPath('HotKeyFastSpellCheck_Key').AsInteger;
+        Form.HotKeyFastSpellCheck := HK;
 
         // Load HotKeys Recent Pairs
 

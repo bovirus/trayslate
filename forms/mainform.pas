@@ -3809,12 +3809,12 @@ begin
   FHotKeyFastVerticalSplit.Key := VK_F8;
 
   // Alt+F9
-  FHotKeyFastAutoHeight.Modifiers := MOD_SHIFT;
-  FHotKeyFastAutoHeight.Key := VK_F9;
+  FHotKeyFastAutoHide.Modifiers := MOD_SHIFT;
+  FHotKeyFastAutoHide.Key := VK_F9;
 
   // Alt+F10
-  FHotKeyFastAutoHide.Modifiers := MOD_SHIFT;
-  FHotKeyFastAutoHide.Key := VK_F10;
+  FHotKeyFastAutoHeight.Modifiers := MOD_SHIFT;
+  FHotKeyFastAutoHeight.Key := VK_F10;
 
   // Alt+F11
   FHotKeyFastSpellCheck.Modifiers := MOD_SHIFT;
