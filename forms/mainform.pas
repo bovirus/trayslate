@@ -1553,6 +1553,9 @@ var
   Pt: TPoint;
   DetectionRect: TRect;
 begin
+  // Store current down info for later use in OnHookLeftUp
+  FLastMouseInfo := Info;
+
   // Hide popup window if user clicks outside its expanded area
   if FAutoHidePopup and Assigned(formPopupTrayslate) and formPopupTrayslate.Visible and (not formPopupTrayslate.PopupOpen) then
   begin
@@ -1570,9 +1573,6 @@ begin
       Exit;
     end;
   end;
-
-  // Store current down info for later use in OnHookLeftUp
-  FLastMouseInfo := Info;
 
   // Click sequence detection
   TimeDiff := Info.Time - FPrevMouseDown.Time;
