@@ -1350,6 +1350,11 @@ msgstr "Gửi nguồn và bản dịch tới cửa sổ chính"
 msgid "Swap Language Pair"
 msgstr "Hoán đổi cặp ngôn ngữ"
 
+#: tformpopuptrayslate.atranslate.caption
+msgctxt "tformpopuptrayslate.atranslate.caption"
+msgid "Translate"
+msgstr "Dịch"
+
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"

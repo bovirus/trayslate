@@ -1345,6 +1345,11 @@ msgstr "Odeslat zdroj a překlad do hlavního okna"
 msgid "Swap Language Pair"
 msgstr "Prohodit jazykovou dvojici"
 
+#: tformpopuptrayslate.atranslate.caption
+msgctxt "tformpopuptrayslate.atranslate.caption"
+msgid "Translate"
+msgstr "Přeložit"
+
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"

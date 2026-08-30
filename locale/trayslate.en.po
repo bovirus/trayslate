@@ -1349,6 +1349,11 @@ msgstr "Send source and translation to main window"
 msgid "Swap Language Pair"
 msgstr "Swap Language Pair"
 
+#: tformpopuptrayslate.atranslate.caption
+msgctxt "tformpopuptrayslate.atranslate.caption"
+msgid "Translate"
+msgstr "Translate"
+
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"

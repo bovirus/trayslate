@@ -1345,6 +1345,11 @@ msgstr "Bron en vertaling naar hoofdvenster sturen"
 msgid "Swap Language Pair"
 msgstr "Taalpaar omwisselen"
 
+#: tformpopuptrayslate.atranslate.caption
+msgctxt "tformpopuptrayslate.atranslate.caption"
+msgid "Translate"
+msgstr "Vertalen"
+
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"

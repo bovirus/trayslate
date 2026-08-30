@@ -1345,6 +1345,11 @@ msgstr "Адправіць зыходны і пераклад у галоўна�
 msgid "Swap Language Pair"
 msgstr "Памяняць моўную пару"
 
+#: tformpopuptrayslate.atranslate.caption
+msgctxt "tformpopuptrayslate.atranslate.caption"
+msgid "Translate"
+msgstr "Перакласці"
+
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"

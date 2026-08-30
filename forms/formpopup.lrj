@@ -5,11 +5,6 @@
 {"hash":58166910,"name":"tformpopuptrayslate.acopytarget.hint","sourcebytes":[67,111,112,121,32,84,114,97,110,115,108,97,116,105,111,110],"value":"Copy Translation"},
 {"hash":83874688,"name":"tformpopuptrayslate.atranslatefromcontrolpopup.caption","sourcebytes":[84,114,97,110,115,108,97,116,101,32,83,101,108,101,99,116,101,100,32,84,111,32,80,111,112,117,112],"value":"Translate Selected To Popup"},
 {"hash":63419285,"name":"tformpopuptrayslate.atranslatecontrol.caption","sourcebytes":[82,101,112,108,97,99,101,32,83,101,108,101,99,116,101,100,32,87,105,116,104,32,84,114,97,110,115,108,97,116,101],"value":"Replace Selected With Translate"},
-{"hash":177999650,"name":"tformpopuptrayslate.aswappair.caption","sourcebytes":[83,119,97,112,32,76,97,110,103,117,97,103,101,32,80,97,105,114],"value":"Swap Language Pair"},
-{"hash":222908775,"name":"tformpopuptrayslate.asendtomainwindow.caption","sourcebytes":[83,101,110,100,32,84,111,32,77,97,105,110,32,87,105,110,100,111,119],"value":"Send To Main Window"},
-{"hash":257587911,"name":"tformpopuptrayslate.asendtomainwindow.hint","sourcebytes":[83,101,110,100,32,115,111,117,114,99,101,32,97,110,100,32,116,114,97,110,115,108,97,116,105,111,110,32,116,111,32,109,97,105,110,32,119,105,110,100,111,119],"value":"Send source and translation to main window"},
-{"hash":267076564,"name":"tformpopuptrayslate.aapplyautoheight.caption","sourcebytes":[65,112,112,108,121,32,65,117,116,111,32,72,101,105,103,104,116],"value":"Apply Auto Height"},
-{"hash":79209508,"name":"tformpopuptrayslate.afastautoheight.caption","sourcebytes":[76,111,99,107,32,72,101,105,103,104,116],"value":"Lock Height"},
 {"hash":378031,"name":"tformpopuptrayslate.aundo.caption","sourcebytes":[85,110,100,111],"value":"Undo"},
 {"hash":19140,"name":"tformpopuptrayslate.acut.caption","sourcebytes":[67,117,116],"value":"Cut"},
 {"hash":304761,"name":"tformpopuptrayslate.acopy.caption","sourcebytes":[67,111,112,121],"value":"Copy"},
@@ -17,5 +12,11 @@
 {"hash":4860802,"name":"tformpopuptrayslate.aclear.caption","sourcebytes":[67,108,101,97,114],"value":"Clear"},
 {"hash":195288076,"name":"tformpopuptrayslate.aselectall.caption","sourcebytes":[83,101,108,101,99,116,32,65,108,108],"value":"Select All"},
 {"hash":205357346,"name":"tformpopuptrayslate.abidirighttoleft.caption","sourcebytes":[82,105,103,104,116,45,84,111,45,76,101,102,116,32,82,101,97,100,105,110,103,32,79,114,100,101,114],"value":"Right-To-Left Reading Order"},
-{"hash":131063453,"name":"tformpopuptrayslate.adefaultzoom.caption","sourcebytes":[68,101,102,97,117,108,116,32,90,111,111,109],"value":"Default Zoom"}
+{"hash":131063453,"name":"tformpopuptrayslate.adefaultzoom.caption","sourcebytes":[68,101,102,97,117,108,116,32,90,111,111,109],"value":"Default Zoom"},
+{"hash":140145445,"name":"tformpopuptrayslate.atranslate.caption","sourcebytes":[84,114,97,110,115,108,97,116,101],"value":"Translate"},
+{"hash":177999650,"name":"tformpopuptrayslate.aswappair.caption","sourcebytes":[83,119,97,112,32,76,97,110,103,117,97,103,101,32,80,97,105,114],"value":"Swap Language Pair"},
+{"hash":222908775,"name":"tformpopuptrayslate.asendtomainwindow.caption","sourcebytes":[83,101,110,100,32,84,111,32,77,97,105,110,32,87,105,110,100,111,119],"value":"Send To Main Window"},
+{"hash":257587911,"name":"tformpopuptrayslate.asendtomainwindow.hint","sourcebytes":[83,101,110,100,32,115,111,117,114,99,101,32,97,110,100,32,116,114,97,110,115,108,97,116,105,111,110,32,116,111,32,109,97,105,110,32,119,105,110,100,111,119],"value":"Send source and translation to main window"},
+{"hash":267076564,"name":"tformpopuptrayslate.aapplyautoheight.caption","sourcebytes":[65,112,112,108,121,32,65,117,116,111,32,72,101,105,103,104,116],"value":"Apply Auto Height"},
+{"hash":79209508,"name":"tformpopuptrayslate.afastautoheight.caption","sourcebytes":[76,111,99,107,32,72,101,105,103,104,116],"value":"Lock Height"}
 ]}

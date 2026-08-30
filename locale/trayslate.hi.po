@@ -1345,6 +1345,11 @@ msgstr "मुख्य विंडो में स्रोत और अन�
 msgid "Swap Language Pair"
 msgstr "भाषा युग्म बदलें"
 
+#: tformpopuptrayslate.atranslate.caption
+msgctxt "tformpopuptrayslate.atranslate.caption"
+msgid "Translate"
+msgstr "अनुवाद करें"
+
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"

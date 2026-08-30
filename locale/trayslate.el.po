@@ -1345,6 +1345,11 @@ msgstr "Αποστολή πηγής και μετάφρασης στο κύρι�
 msgid "Swap Language Pair"
 msgstr "Εναλλαγή ζεύγους γλωσσών"
 
+#: tformpopuptrayslate.atranslate.caption
+msgctxt "tformpopuptrayslate.atranslate.caption"
+msgid "Translate"
+msgstr "Μετάφραση"
+
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"

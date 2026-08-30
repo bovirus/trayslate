@@ -1345,6 +1345,11 @@ msgstr "원문과 번역을 메인 창으로 보내기"
 msgid "Swap Language Pair"
 msgstr "언어 쌍 전환"
 
+#: tformpopuptrayslate.atranslate.caption
+msgctxt "tformpopuptrayslate.atranslate.caption"
+msgid "Translate"
+msgstr "번역"
+
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"

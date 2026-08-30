@@ -1345,6 +1345,11 @@ msgstr "Kaynak ve çeviriyi ana pencereye gönder"
 msgid "Swap Language Pair"
 msgstr "Dil çiftini değiştir"
 
+#: tformpopuptrayslate.atranslate.caption
+msgctxt "tformpopuptrayslate.atranslate.caption"
+msgid "Translate"
+msgstr "Çevir"
+
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"

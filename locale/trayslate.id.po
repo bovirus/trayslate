@@ -1346,6 +1346,11 @@ msgstr "Kirim sumber dan terjemahan ke jendela utama"
 msgid "Swap Language Pair"
 msgstr "Tukar pasangan bahasa"
 
+#: tformpopuptrayslate.atranslate.caption
+msgctxt "tformpopuptrayslate.atranslate.caption"
+msgid "Translate"
+msgstr "Terjemahkan"
+
 #: tformpopuptrayslate.atranslatecontrol.caption
 msgctxt "tformpopuptrayslate.atranslatecontrol.caption"
 msgid "Replace Selected With Translate"

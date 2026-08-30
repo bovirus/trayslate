@@ -43,6 +43,7 @@ type
     aCopy: TAction;
     aClear: TAction;
     aBidiRightToLeft: TAction;
+    aTranslate: TAction;
     aDefaultZoom: TAction;
     aSelectAll: TAction;
     aPaste: TAction;
@@ -63,6 +64,7 @@ type
     MenuFastAutoHeight: TMenuItem;
     MenuApplyAutoHeight: TMenuItem;
     MenuDefaultZoom: TMenuItem;
+    MenuTranslate: TMenuItem;
     MenuUndo: TMenuItem;
     MenuCut: TMenuItem;
     MenuCopy: TMenuItem;
@@ -105,6 +107,7 @@ type
     procedure aSelectAllExecute(Sender: TObject);
     procedure aSendToMainWindowExecute(Sender: TObject);
     procedure aSwapPairExecute(Sender: TObject);
+    procedure aTranslateExecute(Sender: TObject);
     procedure aTranslateFromControlPopupExecute(Sender: TObject);
     procedure aTranslateControlExecute(Sender: TObject);
     procedure aUndoExecute(Sender: TObject);
@@ -273,6 +276,12 @@ procedure TformPopupTrayslate.aSwapPairExecute(Sender: TObject);
 begin
   if Assigned(formTrayslate) then
     formTrayslate.aSwap.Execute;
+end;
+
+procedure TformPopupTrayslate.aTranslateExecute(Sender: TObject);
+begin
+  if Assigned(formTrayslate) then
+    formTrayslate.aTranslate.Execute;
 end;
 
 procedure TformPopupTrayslate.aTranslateFromControlPopupExecute(Sender: TObject);
