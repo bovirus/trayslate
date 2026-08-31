@@ -2,6 +2,7 @@
 """
 Adds entries to CHANGELOG.md for merged pull requests that modified files
 inside the 'locale/' directory. Uses GitHub API with the provided token.
+Groups PRs by author and set of changed files to avoid duplicate lines.
 """
 
 import os
@@ -63,7 +64,8 @@ cmd = ["curl", "-s", *headers, "-G", url, *params]
 response = subprocess.run(cmd, capture_output=True, text=True, check=True)
 pulls = json.loads(response.stdout)
 
-localization_prs = []
+# Group PRs by (set of files, author)
+groups = {}
 for pr in pulls:
     merged_at = pr.get("merged_at")
     if not merged_at or merged_at <= prev_date:
@@ -79,15 +81,31 @@ for pr in pulls:
     if changed_locale_files:
         author = pr["user"]["login"]
         pr_html_url = pr["html_url"]
-        files_str = ", ".join(changed_locale_files)
-        line = f"- {files_str} by @{author} in [#{pr_number}]({pr_html_url})"
-        localization_prs.append(line)
+        files_tuple = tuple(changed_locale_files)
+        key = (files_tuple, author)
+        if key not in groups:
+            groups[key] = []
+        groups[key].append((pr_number, pr_html_url))
 
-if not localization_prs:
+if not groups:
     print("No PRs modified locale/, nothing to add.")
     sys.exit(0)
 
-print(f"Found {len(localization_prs)} localization PR(s).")
+# Build lines for each group
+localization_prs = []
+# Sort groups by the highest PR number in each group (descending)
+groups_items = sorted(groups.items(), key=lambda item: max(pr[0] for pr in item[1]), reverse=True)
+
+for (files_tuple, author), pr_list in groups_items:
+    # Sort PR numbers descending within the group
+    pr_list_sorted = sorted(pr_list, key=lambda x: x[0], reverse=True)
+    files_str = ", ".join(files_tuple)
+    pr_links = " ".join(f"[#{num}]({url})" for num, url in pr_list_sorted)
+    line = f"- {files_str} by @{author} in {pr_links}"
+    localization_prs.append(line)
+
+insert_block = "\n".join(localization_prs)
+print(f"Found {len(groups)} localization group(s).")
 
 # Insert into CHANGELOG.md
 changelog_path = "CHANGELOG.md"
@@ -101,7 +119,6 @@ else:
     content = ""
 
 localization_header = "### 🌐 Localization"
-insert_block = "\n".join(localization_prs)
 
 if localization_header in content:
     pattern = re.compile(
