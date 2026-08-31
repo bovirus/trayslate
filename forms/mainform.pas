@@ -413,6 +413,7 @@ type
     FPrevTargetText: string;
     FUserParameters: TStringList;
     FLangPairs: TStringList;
+    FLangPairsHint: TStringList;
     FMouseHook: TGlobalMouseHook;
     FKeyHook: TGlobalKeyboardHook;
     FPopupOpen: boolean;
@@ -699,6 +700,7 @@ type
     property LangSource: string read FLangSource write FLangSource;
     property LangTarget: string read FLangTarget write FLangTarget;
     property LangPairs: TStringList read FLangPairs write FLangPairs;
+    property LangPairsHint: TStringList read FLangPairsHint write FLangPairsHint;
     property EnabledLanguages: TStringList read FEnabledLanguages write FEnabledLanguages;
     property UserParameters: TStringList read FUserParameters write FUserParameters;
     property MaxLangPairs: integer read FMaxLangPairs write FMaxLangPairs;
@@ -888,6 +890,7 @@ begin
   FLanguages := TStringList.Create;
   FLanguagesTarget := TStringList.Create;
   FLangPairs := TStringList.Create;
+  FLangPairsHint := TStringList.Create;
   FUserParameters := TStringList.Create;
   FProxiedConfigs := TStringList.Create;
   FEnabledLanguages := TStringList.Create;
@@ -1078,6 +1081,7 @@ begin
     WaitForThreads;
 
     FreeAndNil(FLangPairs);
+    FreeAndNil(FLangPairsHint);
     FreeAndNil(FUserParameters);
     FreeAndNil(FProxiedConfigs);
     FreeAndNil(FEnabledLanguages);
@@ -1969,6 +1973,7 @@ begin
     Exit;
 
   FLangPairs.Delete(Index);
+  FLangPairsHint.Delete(Index);
 
   // Rebuild panel
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
@@ -2011,6 +2016,7 @@ begin
   while Index > 0 do
   begin
     FLangPairs.Exchange(Index, Index - 1);
+    FLangPairsHint.Exchange(Index, Index - 1);
     Dec(Index);
   end;
 
@@ -2032,6 +2038,7 @@ begin
   while Index < FLangPairs.Count - 1 do
   begin
     FLangPairs.Exchange(Index, Index + 1);
+    FLangPairsHint.Exchange(Index, Index + 1);
     Inc(Index);
   end;
 
@@ -2051,7 +2058,10 @@ begin
     Exit;
 
   if Index > 0 then
+  begin
     FLangPairs.Exchange(Index, Index - 1);
+    FLangPairsHint.Exchange(Index, Index - 1);
+  end;
 
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
 end;
@@ -2069,7 +2079,10 @@ begin
     Exit;
 
   if Index < FLangPairs.Count - 1 then
+  begin
     FLangPairs.Exchange(Index, Index + 1);
+    FLangPairsHint.Exchange(Index, Index + 1);
+  end;
 
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);
 end;
@@ -4005,7 +4018,7 @@ procedure TformTrayslate.RebuildLangPairsPanel(Data: PtrInt);
         btn.Alignment := taCenter;
         btn.Transparent := False;
         btn.Caption := FLangPairs.ValueFromIndex[i];
-        btn.Hint := FConfigTitles.Values[FLangPairs.Names[i]];
+        btn.Hint := FConfigTitles.Values[FLangPairs.Names[i]] + iif(FLangPairsHint[i] = string.Empty, '', ' - ' + FLangPairsHint[i]);
         btn.ShowHint := True;
         btn.PopupMenu := PopupRecentPair;
 
@@ -4862,9 +4875,10 @@ end;
 procedure TformTrayslate.AddLangPair(const Pair: string; ToEnd: boolean = True);
 var
   idx: integer;
-  RealPair: string;
+  RealPair, PairHint: string;
 begin
   RealPair := UpdatePairLanguage(Pair);
+  PairHint := LongestString(Pair.SplitIntoTwoParts(':', True), MAX_LANG_LENGTH);
 
   // Remove if already exists
   idx := FLangPairs.IndexOf(FConfigFile + '=' + RealPair);
@@ -4872,15 +4886,24 @@ begin
     FLangPairs.Delete(idx);
 
   if ToEnd then
+  begin
     // Add to end
-    FLangPairs.Add(FConfigFile + '=' + RealPair)
+    FLangPairs.Add(FConfigFile + '=' + RealPair);
+    FLangPairsHint.Add(PairHint);
+  end
   else
+  begin
     // Insert as first
     FLangPairs.Insert(0, FConfigFile + '=' + RealPair);
+    FLangPairsHint.Insert(0, PairHint);
+  end;
 
-  // Limit to 10 items
+  // Limit to FMaxLangPairs count
   while FLangPairs.Count > FMaxLangPairs do
+  begin
     FLangPairs.Delete(0);
+    FLangPairsHint.Delete(0);
+  end;
 end;
 
 procedure TformTrayslate.SelectPair(const Pair: string; RunTranslate: boolean = True);
@@ -5011,14 +5034,16 @@ end;
 
 procedure TformTrayslate.MoveButtonTo(AFromIndex, AToIndex: integer);
 var
-  Pair: string;
+  Pair, PairHint: string;
 begin
   if (AFromIndex < 0) or (AFromIndex >= FLangPairs.Count) or (AToIndex < 0) or (AToIndex > FLangPairs.Count) then Exit;
   if AFromIndex = AToIndex then Exit;
 
   // Remove the dragged pair from its current position
   Pair := FLangPairs[AFromIndex];
+  PairHint := FLangPairsHint[AFromIndex];
   FLangPairs.Delete(AFromIndex);
+  FLangPairsHint.Delete(AFromIndex);
 
   // Adjust target index because the list shifted after deletion
   if AToIndex > AFromIndex then
@@ -5026,6 +5051,7 @@ begin
 
   // Insert the pair at the target position
   FLangPairs.Insert(AToIndex, Pair);
+  FLangPairsHint.Insert(AToIndex, PairHint);
 
   FDragBtnIndex := AToIndex;
   Application.QueueAsyncCall(@RebuildLangPairsPanel, 0);

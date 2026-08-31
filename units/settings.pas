@@ -256,6 +256,11 @@ begin
       arrPairs.Add(Form.LangPairs[i]);
     JSONObj.Add('RecentLangPairs', arrPairs);
 
+    arrPairs := TJSONArray.Create;
+    for i := 0 to Form.LangPairsHint.Count - 1 do
+      arrPairs.Add(Form.LangPairsHint[i]);
+    JSONObj.Add('RecentLangPairsHint', arrPairs);
+
     arrParams := TJSONArray.Create;
     for i := 0 to Form.UserParameters.Count - 1 do
       arrParams.Add(Form.UserParameters[i]);
@@ -863,6 +868,19 @@ begin
           for i := 0 to arrPairs.Count - 1 do
             Form.LangPairs.Add(arrPairs.Items[i].AsString);
         end;
+
+        // Load recent language pairs hint
+        Form.LangPairsHint.Clear;
+        if JSONObj.FindPath('RecentLangPairsHint') <> nil then
+        begin
+          arrPairs := JSONObj.FindPath('RecentLangPairsHint') as TJSONArray;
+          for i := 0 to arrPairs.Count - 1 do
+            Form.LangPairsHint.Add(arrPairs.Items[i].AsString);
+        end;
+
+        // Fill missing hints with empty strings
+        while Form.LangPairsHint.Count < Form.LangPairs.Count do
+          Form.LangPairsHint.Add(string.Empty);
 
         // Load user parameters
         Form.UserParameters.Clear;
